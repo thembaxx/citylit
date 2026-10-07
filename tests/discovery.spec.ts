@@ -187,7 +187,7 @@ test("fullscreen chapters fit compact and landscape phones, with category naviga
     await expect(page).toHaveURL(/view=places/);
     await expect(page.locator(".place-card")).toHaveCount(2);
     await page.goBack();
-    await expect(page.locator(".places-sheet")).toHaveCount(0);
+    await expect(page.locator(".category-page")).toHaveCount(0);
   }
 });
 
@@ -315,4 +315,34 @@ test("linked breadcrumbs, two-line introductions and province chooser", async ({
   expect(height.height).toBeLessThanOrEqual(height.line * 2 + 1);
   await trail.getByRole("link", { name: "South Africa", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
+});
+
+test("opened category is a themed field guide with persistent tabs and search", async ({
+  page,
+}) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/johannesburg/lodging?view=places");
+  await expect(page.locator("h1")).toHaveText("Lodging");
+  await expect(page.locator(".category-page-model .three-view")).toBeVisible();
+  await expect(page.locator(".place-card")).toHaveCount(2);
+  await expect(page.getByRole("button", { name: "Lodging", exact: true })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await page.getByRole("button", { name: "Entertainment", exact: true }).click();
+  await expect(page).toHaveURL(/johannesburg\/entertainment\?view=places$/);
+  await expect(page.locator("h1")).toHaveText("Entertainment");
+  await expect(page.locator(".place-card")).toHaveCount(6);
+  await page.getByPlaceholder("Search places").fill("Apartheid");
+  await expect(page.locator(".place-card")).toHaveCount(1);
+  await page.getByRole("button", { name: "Clear search", exact: true }).click();
+  await expect(page.locator(".place-card")).toHaveCount(6);
+  await expect(page).toHaveURL(/view=places$/);
+  await page.getByRole("button", { name: "Switch to day theme", exact: true }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "day");
+  await expect(page.locator(".category-page-tabs")).toBeVisible();
+  await expect(page.locator("canvas")).toHaveCount(1);
+  await page.getByRole("button", { name: "Back to categories", exact: true }).click();
+  await expect(page).toHaveURL(/johannesburg\/entertainment$/);
+  await expect(page.locator(".category-page")).toHaveCount(0);
 });

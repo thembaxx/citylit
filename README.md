@@ -28,7 +28,7 @@ Open http://localhost:3000. For production, run `pnpm build && pnpm start`.
 
 Country, city and category chapters occupy one non-scrollable viewport. City, category and place pages have linked breadcrumbs; main headings have short introductions limited to two lines. Condensed ivory headings, roman numerals, violet controls and quiet floating shards follow the supplied references. Johannesburg has an amber glow, Cape Town an ocean-blue glow, and Durban a teal glow. Existing 3D illustrations are preserved. A top icon switches between deep-indigo night and warm daylight themes, remembered locally. Sound starts muted every session; enable it for quiet synthesized notes. Touch feedback is on where supported and can be disabled in How to explore. No sound files or third-party audio are loaded.
 
-Swipe landmarks, then choose **Explore city**. Swipe categories or use the bottom glyph bar; **Open category** reveals an internally scrollable places sheet. Search also opens this sheet. The `?view=places` URL preserves its state through browser navigation. Place details scroll within their own screen.
+Swipe landmarks, then choose **Explore city**. Swipe categories or use the bottom glyph bar; **Open category** opens an editorial field-guide page inspired by the linked Citylit lodging page: a large category headline beside its interactive 3D model, icon tabs, search and bordered place cards. On phones the hero stacks above the cards; on desktop the hero is split and cards form two columns. This page scrolls inside the app viewport and uses the active theme. Search also opens this page. The `?view=places` URL preserves its state through browser navigation; switching its tabs keeps the page open. Place details scroll within their own screen.
 
 ## Stack
 

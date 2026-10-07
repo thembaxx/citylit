@@ -869,121 +869,6 @@
           }
         ]
       },
-      "74892916": {
-        "pageid": 74892916,
-        "ns": 6,
-        "title": "File:Artscape Theatre Centre, Cape Town (2017).jpg",
-        "imagerepository": "local",
-        "imageinfo": [
-          {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/1280px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 1000,
-            "thumbheight": 662,
-            "responsiveUrls": {
-              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/3840px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
-            },
-            "thumbattribs": {
-              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/1280px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-              "decoding": "async",
-              "loading": "lazy",
-              "width": 1000,
-              "height": 662,
-              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/3840px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
-            },
-            "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Artscape_Theatre_Centre,_Cape_Town_(2017).jpg",
-            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=74892916",
-            "extmetadata": {
-              "DateTime": {
-                "value": "2018-12-06 17:05:01",
-                "source": "mediawiki-metadata",
-                "hidden": ""
-              },
-              "ObjectName": {
-                "value": "Artscape Theatre Centre, Cape Town (2017)",
-                "source": "mediawiki-metadata"
-              },
-              "CommonsMetadataExtension": {
-                "value": 1.2,
-                "source": "extension",
-                "hidden": ""
-              },
-              "Categories": {
-                "value": "Self-published work|January 2017 South Africa photographs|Files with coordinates missing SDC location of creation|South Africa photographs taken on 2017-01-02|Artscape Theatre Centre",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "Assessments": {
-                "value": "",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "GPSLatitude": {
-                "value": "-33.919819",
-                "source": "commons-desc-page"
-              },
-              "GPSLongitude": {
-                "value": "18.429226",
-                "source": "commons-desc-page"
-              },
-              "GPSMapDatum": {
-                "value": "WGS-84",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "ImageDescription": {
-                "value": "<i>Artscape Theatre Centre</i> in Cape Town (2017)",
-                "source": "commons-desc-page"
-              },
-              "DateTimeOriginal": {
-                "value": "2017-01-02 16:00:37",
-                "source": "commons-desc-page"
-              },
-              "Credit": {
-                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
-                "source": "commons-desc-page"
-              },
-              "Artist": {
-                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Olga_Ernst\" title=\"User:Olga Ernst\">Olga Ernst</a>",
-                "source": "commons-desc-page"
-              },
-              "LicenseShortName": {
-                "value": "CC BY-SA 4.0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "UsageTerms": {
-                "value": "Creative Commons Attribution-Share Alike 4.0",
-                "source": "commons-desc-page"
-              },
-              "AttributionRequired": {
-                "value": "true",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "LicenseUrl": {
-                "value": "https://creativecommons.org/licenses/by-sa/4.0",
-                "source": "commons-desc-page"
-              },
-              "Copyrighted": {
-                "value": "True",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "Restrictions": {
-                "value": "",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "License": {
-                "value": "cc-by-sa-4.0",
-                "source": "commons-templates",
-                "hidden": ""
-              }
-            }
-          }
-        ]
-      },
       "55992554": {
         "pageid": 55992554,
         "ns": 6,
@@ -1079,113 +964,6 @@
               },
               "License": {
                 "value": "cc-by-2.0",
-                "source": "commons-templates",
-                "hidden": ""
-              }
-            }
-          }
-        ]
-      },
-      "72561774": {
-        "pageid": 72561774,
-        "ns": 6,
-        "title": "File:Bahía de Smitswinkel, Sudáfrica, 2018-07-23, DD 49.jpg",
-        "imagerepository": "local",
-        "imageinfo": [
-          {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/1280px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 1000,
-            "thumbheight": 647,
-            "responsiveUrls": {
-              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/3840px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
-            },
-            "thumbattribs": {
-              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/1280px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-              "decoding": "async",
-              "loading": "lazy",
-              "width": 1000,
-              "height": 647,
-              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/3840px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
-            },
-            "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Bah%C3%ADa_de_Smitswinkel,_Sud%C3%A1frica,_2018-07-23,_DD_49.jpg",
-            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=72561774",
-            "extmetadata": {
-              "DateTime": {
-                "value": "2018-11-09 18:30:41",
-                "source": "mediawiki-metadata",
-                "hidden": ""
-              },
-              "ObjectName": {
-                "value": "Bahía de Smitswinkel, Sudáfrica, 2018-07-23, DD 49",
-                "source": "mediawiki-metadata"
-              },
-              "CommonsMetadataExtension": {
-                "value": 1.2,
-                "source": "extension",
-                "hidden": ""
-              },
-              "Categories": {
-                "value": "Taken with Canon EOS 5DS R|Smitswinkel Bay|Images by User:Poco a poco|Images of South Africa by User:Poco a poco|July 2018 South Africa photographs|Images by User:Poco a poco taken in 2018",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "Assessments": {
-                "value": "quality",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "ImageDescription": {
-                "value": "Smitswinkel Bay, South Africa",
-                "source": "commons-desc-page"
-              },
-              "DateTimeOriginal": {
-                "value": "2018-07-23 11:41:45",
-                "source": "commons-desc-page"
-              },
-              "Credit": {
-                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
-                "source": "commons-desc-page"
-              },
-              "Artist": {
-                "value": "<bdi><a href=\"https://www.wikidata.org/wiki/Q28147777\" class=\"extiw\" title=\"d:Q28147777\"><span title=\"Spanish photographer\">Diego Delso</span></a></bdi>",
-                "source": "commons-desc-page"
-              },
-              "LicenseShortName": {
-                "value": "CC BY-SA 4.0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "UsageTerms": {
-                "value": "Creative Commons Attribution-Share Alike 4.0",
-                "source": "commons-desc-page"
-              },
-              "AttributionRequired": {
-                "value": "true",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "Attribution": {
-                "value": "Diego Delso",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "LicenseUrl": {
-                "value": "https://creativecommons.org/licenses/by-sa/4.0",
-                "source": "commons-desc-page"
-              },
-              "Copyrighted": {
-                "value": "True",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "Restrictions": {
-                "value": "",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "License": {
-                "value": "cc-by-sa-4.0",
                 "source": "commons-templates",
                 "hidden": ""
               }
@@ -1308,108 +1086,6 @@
           }
         ]
       },
-      "100216332": {
-        "pageid": 100216332,
-        "ns": 6,
-        "title": "File:Blue Wall of Sandy Bay.jpg",
-        "imagerepository": "local",
-        "imageinfo": [
-          {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/1280px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 1000,
-            "thumbheight": 664,
-            "responsiveUrls": {
-              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/3840px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
-            },
-            "thumbattribs": {
-              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/1280px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-              "decoding": "async",
-              "loading": "lazy",
-              "width": 1000,
-              "height": 664,
-              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/3840px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
-            },
-            "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Blue_Wall_of_Sandy_Bay.jpg",
-            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=100216332",
-            "extmetadata": {
-              "DateTime": {
-                "value": "2021-02-22 16:14:50",
-                "source": "mediawiki-metadata",
-                "hidden": ""
-              },
-              "ObjectName": {
-                "value": "Blue Wall of Sandy Bay",
-                "source": "mediawiki-metadata"
-              },
-              "CommonsMetadataExtension": {
-                "value": 1.2,
-                "source": "extension",
-                "hidden": ""
-              },
-              "Categories": {
-                "value": "Surfing in South Africa|Images from Wiki Loves Africa 2021|Self-published work|Images from Wiki Loves Africa 2021 to check|Uploaded via Campaign:wlafrica|Images from Wiki Loves Africa 2021 in South Africa",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "Assessments": {
-                "value": "",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "ImageDescription": {
-                "value": "This is an image with the theme \"<i>Health and Wellness in Africa</i>\" from:",
-                "source": "commons-desc-page"
-              },
-              "DateTimeOriginal": {
-                "value": "2020-11-26 18:00:03",
-                "source": "commons-desc-page"
-              },
-              "Credit": {
-                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
-                "source": "commons-desc-page"
-              },
-              "Artist": {
-                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Salotte&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Salotte (page does not exist)\">Stephanie Martin</a>",
-                "source": "commons-desc-page"
-              },
-              "LicenseShortName": {
-                "value": "CC BY-SA 4.0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "UsageTerms": {
-                "value": "Creative Commons Attribution-Share Alike 4.0",
-                "source": "commons-desc-page"
-              },
-              "AttributionRequired": {
-                "value": "true",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "LicenseUrl": {
-                "value": "https://creativecommons.org/licenses/by-sa/4.0",
-                "source": "commons-desc-page"
-              },
-              "Copyrighted": {
-                "value": "True",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "Restrictions": {
-                "value": "",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "License": {
-                "value": "cc-by-sa-4.0",
-                "source": "commons-templates",
-                "hidden": ""
-              }
-            }
-          }
-        ]
-      },
       "50450153": {
         "pageid": 50450153,
         "ns": 6,
@@ -1451,108 +1127,6 @@
               },
               "Categories": {
                 "value": "Bo-Kaap|Self-published work|Images with extracted images|WFA 2016",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "Assessments": {
-                "value": "",
-                "source": "commons-categories",
-                "hidden": ""
-              },
-              "ImageDescription": {
-                "value": "The iconic tourist attraction Bo-Kaap houses.",
-                "source": "commons-desc-page"
-              },
-              "DateTimeOriginal": {
-                "value": "2015-12-01",
-                "source": "commons-desc-page"
-              },
-              "Credit": {
-                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
-                "source": "commons-desc-page"
-              },
-              "Artist": {
-                "value": "<a href=\"//commons.wikimedia.org/wiki/User:SkyPixels\" title=\"User:SkyPixels\">SkyPixels</a>",
-                "source": "commons-desc-page"
-              },
-              "LicenseShortName": {
-                "value": "CC BY-SA 4.0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "UsageTerms": {
-                "value": "Creative Commons Attribution-Share Alike 4.0",
-                "source": "commons-desc-page"
-              },
-              "AttributionRequired": {
-                "value": "true",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "LicenseUrl": {
-                "value": "https://creativecommons.org/licenses/by-sa/4.0",
-                "source": "commons-desc-page"
-              },
-              "Copyrighted": {
-                "value": "True",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "Restrictions": {
-                "value": "",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "License": {
-                "value": "cc-by-sa-4.0",
-                "source": "commons-templates",
-                "hidden": ""
-              }
-            }
-          }
-        ]
-      },
-      "191084922": {
-        "pageid": 191084922,
-        "ns": 6,
-        "title": "File:Boe-Kaap (cropped 3).jpg",
-        "imagerepository": "local",
-        "imageinfo": [
-          {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Boe-Kaap_%28cropped_3%29.jpg/1280px-Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 1000,
-            "thumbheight": 610,
-            "responsiveUrls": {
-              "2": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
-            },
-            "thumbattribs": {
-              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Boe-Kaap_%28cropped_3%29.jpg/1280px-Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-              "decoding": "async",
-              "loading": "lazy",
-              "width": 1000,
-              "height": 610,
-              "srcset": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
-            },
-            "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Boe-Kaap_(cropped_3).jpg",
-            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=191084922",
-            "extmetadata": {
-              "DateTime": {
-                "value": "2026-05-03 13:40:23",
-                "source": "mediawiki-metadata",
-                "hidden": ""
-              },
-              "ObjectName": {
-                "value": "Boe-Kaap (cropped 3)",
-                "source": "mediawiki-metadata"
-              },
-              "CommonsMetadataExtension": {
-                "value": 1.2,
-                "source": "extension",
-                "hidden": ""
-              },
-              "Categories": {
-                "value": "Bo-Kaap|Self-published work|Extracted images|WFA 2016",
                 "source": "commons-categories",
                 "hidden": ""
               },
@@ -1709,6 +1283,121 @@
               },
               "License": {
                 "value": "cc-by-sa-2.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "73105624": {
+        "pageid": 73105624,
+        "ns": 6,
+        "title": "File:Castle of Good Hope, Cape Town 01.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Castle_of_Good_Hope%2C_Cape_Town_01.jpg/1280px-Castle_of_Good_Hope%2C_Cape_Town_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1000,
+            "thumbheight": 667,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Castle_of_Good_Hope%2C_Cape_Town_01.jpg/3840px-Castle_of_Good_Hope%2C_Cape_Town_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Castle_of_Good_Hope%2C_Cape_Town_01.jpg/1280px-Castle_of_Good_Hope%2C_Cape_Town_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 667,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Castle_of_Good_Hope%2C_Cape_Town_01.jpg/3840px-Castle_of_Good_Hope%2C_Cape_Town_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Castle_of_Good_Hope%2C_Cape_Town_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Castle_of_Good_Hope,_Cape_Town_01.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=73105624",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2018-09-26 21:49:38",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "Castle of Good Hope, Cape Town 01",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "GFDL|Castle of Good Hope|License migration redundant|CC-BY-SA-4.0,3.0,2.5,2.0,1.0|Self-published work|Images with extracted images|Files with coordinates missing SDC location of creation",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "quality",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "-33.925492",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "18.427161",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "Entrance of Castle of Good Hope, Cape Town, South Africa",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2017-11-06",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Bgag\" title=\"User:Bgag\">Bernard Gagnon</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
                 "source": "commons-templates",
                 "hidden": ""
               }
@@ -2689,6 +2378,104 @@
           }
         ]
       },
+      "1619552": {
+        "pageid": 1619552,
+        "ns": 6,
+        "title": "File:Mandela museum soweto.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Mandela_museum_soweto.jpg/1280px-Mandela_museum_soweto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1000,
+            "thumbheight": 746,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/9/90/Mandela_museum_soweto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Mandela_museum_soweto.jpg/1280px-Mandela_museum_soweto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 746,
+              "srcset": "https://upload.wikimedia.org/wikipedia/commons/9/90/Mandela_museum_soweto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Mandela_museum_soweto.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Mandela_museum_soweto.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=1619552",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2007-01-31 04:17:40",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "Mandela museum soweto",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "GFDL|Files with no machine-readable source|Mandela House|License migration completed|Self-published work|Assumed own work",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "Nelson Mandela's former house, now Mandela Family Museum, Soweto, Johannesburg.",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "No machine-readable source provided. Own work assumed (based on copyright claims).",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "No machine-readable author provided. <a href=\"//commons.wikimedia.org/wiki/User:Moongateclimber\" title=\"User:Moongateclimber\">Moongateclimber</a> assumed (based on copyright claims).",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 3.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://creativecommons.org/licenses/by-sa/3.0/",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-3.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
       "178960007": {
         "pageid": 178960007,
         "ns": 6,
@@ -2993,6 +2780,121 @@
               },
               "License": {
                 "value": "cc-by-2.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "4880302": {
+        "pageid": 4880302,
+        "ns": 6,
+        "title": "File:South-Africa Johannesburg Botanical Garden-005.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/South-Africa_Johannesburg_Botanical_Garden-005.jpg/1280px-South-Africa_Johannesburg_Botanical_Garden-005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1000,
+            "thumbheight": 750,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/5/53/South-Africa_Johannesburg_Botanical_Garden-005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/South-Africa_Johannesburg_Botanical_Garden-005.jpg/1280px-South-Africa_Johannesburg_Botanical_Garden-005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 750,
+              "srcset": "https://upload.wikimedia.org/wikipedia/commons/5/53/South-Africa_Johannesburg_Botanical_Garden-005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/South-Africa_Johannesburg_Botanical_Garden-005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:South-Africa_Johannesburg_Botanical_Garden-005.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=4880302",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2008-09-28 19:25:53",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "South-Africa Johannesburg Botanical Garden-005",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "GFDL|Taken with Konica Minolta Dimage A200|License migration redundant|Johannesburg Botanical Garden|Self-published work|Files by User:NJR ZA|Files with coordinates missing SDC location of creation|South Africa photographs taken on 2008-09-28|Trees in flower in South Africa",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "-26.153000",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "28.000000",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "Portion of the Rose Gardens in the  Johannesburg Botanical Garden.",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2008-09-28",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:NJR_ZA\" title=\"User:NJR ZA\">NJR ZA</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 3.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/3.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-3.0",
                 "source": "commons-templates",
                 "hidden": ""
               }
@@ -3628,6 +3530,122 @@
               },
               "License": {
                 "value": "cc-by-2.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "42542000": {
+        "pageid": 42542000,
+        "ns": 6,
+        "title": "File:The grand Norfolk Pine in Arderne Gardens.JPG",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/7/75/The_grand_Norfolk_Pine_in_Arderne_Gardens.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 1000,
+            "thumbheight": 666,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/7/75/The_grand_Norfolk_Pine_in_Arderne_Gardens.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 666
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/The_grand_Norfolk_Pine_in_Arderne_Gardens.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:The_grand_Norfolk_Pine_in_Arderne_Gardens.JPG",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=42542000",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2015-08-21 15:43:52",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "The grand Norfolk Pine in Arderne Gardens",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Self-published work|South Africa Heritage Resources with known IDs|Uploaded via Campaign:wlm-za|Files with coordinates missing SDC location of creation|South Africa Heritage Resources missing SDC location of creation|Arderne Pine Tree|Medic Tree Mapping in South Africa on WED 2025",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "-33.986999",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "18.465510",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "Norfolk Pine in Arderne Gardens, Cape Town, South Africa",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2012-09-01",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Marie.frei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Marie.frei (page does not exist)\">Marie Frei</a>",
+                "source": "commons-desc-page"
+              },
+              "Permission": {
+                "value": "You must give appropriate credit, provide a link to the license, and indicate if changes were made.",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
                 "source": "commons-templates",
                 "hidden": ""
               }
@@ -4496,6 +4514,228 @@
           }
         ]
       },
+      "74892916": {
+        "pageid": 74892916,
+        "ns": 6,
+        "title": "File:Artscape Theatre Centre, Cape Town (2017).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/1280px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1000,
+            "thumbheight": 662,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/3840px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/1280px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 662,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg/3840px-Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Artscape_Theatre_Centre%2C_Cape_Town_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Artscape_Theatre_Centre,_Cape_Town_(2017).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=74892916",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2018-12-06 17:05:01",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "Artscape Theatre Centre, Cape Town (2017)",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Self-published work|January 2017 South Africa photographs|Files with coordinates missing SDC location of creation|South Africa photographs taken on 2017-01-02|Artscape Theatre Centre",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "-33.919819",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "18.429226",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "<i>Artscape Theatre Centre</i> in Cape Town (2017)",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2017-01-02 16:00:37",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Olga_Ernst\" title=\"User:Olga Ernst\">Olga Ernst</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "72561774": {
+        "pageid": 72561774,
+        "ns": 6,
+        "title": "File:Bahía de Smitswinkel, Sudáfrica, 2018-07-23, DD 49.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/1280px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1000,
+            "thumbheight": 647,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/3840px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/1280px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 647,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg/3840px-Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Bah%C3%ADa_de_Smitswinkel%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_49.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Bah%C3%ADa_de_Smitswinkel,_Sud%C3%A1frica,_2018-07-23,_DD_49.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=72561774",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2018-11-09 18:30:41",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "Bahía de Smitswinkel, Sudáfrica, 2018-07-23, DD 49",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Taken with Canon EOS 5DS R|Smitswinkel Bay|Images by User:Poco a poco|Images of South Africa by User:Poco a poco|July 2018 South Africa photographs|Images by User:Poco a poco taken in 2018",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "quality",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "Smitswinkel Bay, South Africa",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2018-07-23 11:41:45",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<bdi><a href=\"https://www.wikidata.org/wiki/Q28147777\" class=\"extiw\" title=\"d:Q28147777\"><span title=\"Spanish photographer\">Diego Delso</span></a></bdi>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "Diego Delso",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
       "4927405": {
         "pageid": 4927405,
         "ns": 6,
@@ -4592,6 +4832,210 @@
               },
               "License": {
                 "value": "pd",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "100216332": {
+        "pageid": 100216332,
+        "ns": 6,
+        "title": "File:Blue Wall of Sandy Bay.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/1280px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1000,
+            "thumbheight": 664,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/3840px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/1280px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 664,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Blue_Wall_of_Sandy_Bay.jpg/3840px-Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Blue_Wall_of_Sandy_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Blue_Wall_of_Sandy_Bay.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=100216332",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2021-02-22 16:14:50",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "Blue Wall of Sandy Bay",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Surfing in South Africa|Images from Wiki Loves Africa 2021|Self-published work|Images from Wiki Loves Africa 2021 to check|Uploaded via Campaign:wlafrica|Images from Wiki Loves Africa 2021 in South Africa",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "This is an image with the theme \"<i>Health and Wellness in Africa</i>\" from:",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2020-11-26 18:00:03",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Salotte&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Salotte (page does not exist)\">Stephanie Martin</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "191084922": {
+        "pageid": 191084922,
+        "ns": 6,
+        "title": "File:Boe-Kaap (cropped 3).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Boe-Kaap_%28cropped_3%29.jpg/1280px-Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1000,
+            "thumbheight": 610,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Boe-Kaap_%28cropped_3%29.jpg/1280px-Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1000,
+              "height": 610,
+              "srcset": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Boe-Kaap_%28cropped_3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Boe-Kaap_(cropped_3).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=191084922",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2026-05-03 13:40:23",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "Boe-Kaap (cropped 3)",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Bo-Kaap|Self-published work|Extracted images|WFA 2016",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "The iconic tourist attraction Bo-Kaap houses.",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2015-12-01",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:SkyPixels\" title=\"User:SkyPixels\">SkyPixels</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
                 "source": "commons-templates",
                 "hidden": ""
               }

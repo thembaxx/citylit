@@ -22,7 +22,7 @@ Open http://localhost:3000. For production, run `pnpm build && pnpm start`.
 - Nine detailed procedural landmarks: Ponte City, Nelson Mandela Bridge, Orlando Towers, Table Mountain, Bo-Kaap, Cape Point, Moses Mabhida Stadium, uShaka Marine World and Umhlanga Lighthouse.
 - Shared category dioramas: turning Ferris wheel, a bed with floating stars, a theatre stage, a giraffe and acacia, and a rotating disco ball.
 - Drag to rotate, pinch or scroll to zoom, reset the view, pause ambient motion, swipe landmark captions, or use arrow buttons/keys.
-- Forty-one sourced places across five categories; fuzzy search spans the selected city. Save places locally and revisit them through the header.
+- Fifty-six sourced places across five categories; fuzzy search spans the selected city. Save places locally and revisit them through the header.
 - Detail screens show credited local photos, a swipeable/pinchable fullscreen gallery, source links, Wikipedia where available, lazy-loaded street maps and Google Maps directions.
 - Deep links and browser back/forward navigation work. Invalid city/category/place combinations return 404.
 
@@ -52,7 +52,7 @@ Playwright checks theme persistence, text contrast, optional sound/haptics, comp
 
 ## Source data
 
-Data was retrieved and checked on **7 October 2026**. Thirty-six official catalog pages were crawlable; unavailable responses are recorded rather than treated as successful checks. Secondary Wikipedia and tourism sources supplement them. Coordinates have per-place provenance and an explicit accuracy field; unavailable venue pins remain labelled city reference points. Photos without a venue match are labelled city atmosphere, not venue images. Hours, prices and event schedules are linked to the venue rather than fabricated.
+Data was retrieved and checked on **7 October 2026**. 47 catalog source pages were crawlable; unavailable responses are recorded rather than treated as successful checks. Secondary Wikipedia and tourism sources supplement them. Coordinates have per-place provenance and an explicit accuracy field; unavailable venue pins remain labelled city reference points. Photos without a venue match are labelled city atmosphere, not venue images. Hours, prices and event schedules are linked to the venue rather than fabricated.
 
 See [ATTRIBUTIONS.md](ATTRIBUTIONS.md) for image authors, licenses, geographic provenance, fonts and source links. Models are illustrative rather than architecturally exact. The province dataset represents 2020 boundaries, simplified while preserving shared topology and the Lesotho exclusion.
 
@@ -73,3 +73,7 @@ Crawling is a build-time maintenance task. Wikipedia and Commons requests are ba
 Deploy as a standard Next.js application on a compatible Node.js host. There is no server-side user account or database: saved discoveries stay in the current browser. No hosted deployment is claimed by this repository.
 
 Original source code is MIT licensed; photos, fonts and geographic data retain their own documented licenses.
+
+Category navigation uses relevant Hugeicons and a Motion shared-layout glass pill, with keyboard selection and reduced-motion support. All inputs use 16px text. Cards, galleries, street maps and detail facts use CSS squircle corners when supported, with border-radius fallbacks. 39 locally cached, credited images are included.
+
+Place details include expandable About introductions, attributed Wikipedia links, source-linked Good to know facts and same-location cards when a shared site is confirmed. Unknown payment/accessibility facts remain unconfirmed. Refresh About excerpts with `python3 scripts/research-detail-facts.py`.

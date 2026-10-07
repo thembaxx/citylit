@@ -2,23 +2,13 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Heart,
-  Search,
-  MapPin,
-  Ticket,
-  BedDouble,
-  Drama,
-  Trees,
-  Music,
-  X,
-} from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Heart, Search, MapPin, X } from "lucide-react";
 import { useEffect, useRef, type RefObject } from "react";
+import CategoryNav from "./CategoryNav";
+import CategoryIcon from "./CategoryIcon";
 import { categories, categorySlug, cities, type Place } from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), { ssr: false });
-const icons = [Ticket, BedDouble, Drama, Trees, Music];
+
 type Props = {
   city: number;
   category: number;
@@ -105,22 +95,7 @@ export default function CategoryPlaces(props: Props) {
           </div>
         </div>
       </section>
-      <nav className="category-page-tabs" aria-label="Attraction categories">
-        {categories.map((name, i) => {
-          const Icon = icons[i];
-          return (
-            <button
-              key={name}
-              aria-label={name}
-              aria-current={i === props.category ? "page" : undefined}
-              onClick={() => props.onCategory(i)}
-            >
-              <Icon size={17} strokeWidth={1.5} />
-              {name}
-            </button>
-          );
-        })}
-      </nav>
+      <CategoryNav selected={props.category} onSelect={props.onCategory} />
       <section id="category-results" className="category-page-results" aria-label="Places">
         <div className="category-results-toolbar">
           <h2>
@@ -148,7 +123,6 @@ export default function CategoryPlaces(props: Props) {
         </p>
         <div className="category-place-grid">
           {props.places.map((place, index) => {
-            const Icon = icons[categories.indexOf(place.category)];
             const saved = props.saved.includes(place.id);
             return (
               <motion.article
@@ -162,7 +136,7 @@ export default function CategoryPlaces(props: Props) {
                 }}
               >
                 <div className="place-icon">
-                  <Icon size={27} strokeWidth={1.3} />
+                  <CategoryIcon index={categories.indexOf(place.category)} size={27} />
                 </div>
                 <button className="place-open" onClick={() => props.onPlace(place)}>
                   <span className="tiny-label">{place.category}</span>

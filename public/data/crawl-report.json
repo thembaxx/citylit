@@ -127,6 +127,14 @@
       "pageid": 4500041,
       "ns": 0,
       "title": "Artscape Theatre Centre",
+      "coordinates": [
+        {
+          "lat": -33.92,
+          "lon": 18.4305,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
       "thumbnail": {
         "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Artscape_Theatre_Centre_%2828522803654%29.jpg/1280px-Artscape_Theatre_Centre_%2828522803654%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "width": 1000,
@@ -264,6 +272,14 @@
       "pageid": 12413503,
       "ns": 0,
       "title": "Nelson Mandela Bridge",
+      "coordinates": [
+        {
+          "lat": -26.1967,
+          "lon": 28.0342,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
       "thumbnail": {
         "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg/1280px-South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "width": 1000,
@@ -275,6 +291,14 @@
       "pageid": 24665036,
       "ns": 0,
       "title": "Orlando Power Station",
+      "coordinates": [
+        {
+          "lat": -26.25388889,
+          "lon": 27.925,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
       "thumbnail": {
         "source": "https://upload.wikimedia.org/wikipedia/commons/0/08/Soweto_Cooling_Towers.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "width": 1280,
@@ -305,6 +329,14 @@
       "pageid": 4784114,
       "ns": 0,
       "title": "Bo-Kaap",
+      "coordinates": [
+        {
+          "lat": -33.92083333,
+          "lon": 18.41527778,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
       "thumbnail": {
         "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Boe-Kaap.jpg/1280px-Boe-Kaap.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "width": 1000,
@@ -589,6 +621,81 @@
         "height": 556
       },
       "pageimage": "Suncoast_logo.jpg"
+    },
+    "Mandela House": {
+      "pageid": 18488142,
+      "ns": 0,
+      "title": "Mandela House",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Mandela_museum_soweto.jpg/1280px-Mandela_museum_soweto.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 746
+      },
+      "pageimage": "Mandela_museum_soweto.jpg"
+    },
+    "Soweto Theatre": {
+      "ns": 0,
+      "title": "Soweto Theatre",
+      "missing": ""
+    },
+    "Johannesburg Botanical Garden": {
+      "pageid": 19511579,
+      "ns": 0,
+      "title": "Johannesburg Botanical Garden",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/South-Africa_Johannesburg_Botanical_Garden-005.jpg/1280px-South-Africa_Johannesburg_Botanical_Garden-005.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "South-Africa_Johannesburg_Botanical_Garden-005.jpg"
+    },
+    "Castle of Good Hope": {
+      "pageid": 3865017,
+      "ns": 0,
+      "title": "Castle of Good Hope",
+      "coordinates": [
+        {
+          "lat": -33.9259,
+          "lon": 18.4278,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Castle_of_Good_Hope%2C_Cape_Town_01.jpg/1280px-Castle_of_Good_Hope%2C_Cape_Town_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 667
+      },
+      "pageimage": "Castle_of_Good_Hope,_Cape_Town_01.jpg"
+    },
+    "Cape Grace": {
+      "ns": 0,
+      "title": "Cape Grace",
+      "missing": ""
+    },
+    "Arderne Gardens": {
+      "pageid": 46316550,
+      "ns": 0,
+      "title": "Arderne Gardens",
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/7/75/The_grand_Norfolk_Pine_in_Arderne_Gardens.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 739,
+        "height": 492
+      },
+      "pageimage": "The_grand_Norfolk_Pine_in_Arderne_Gardens.JPG"
+    },
+    "Kenneth Stainbank Nature Reserve": {
+      "pageid": 51016246,
+      "ns": 0,
+      "title": "Kenneth Stainbank Nature Reserve",
+      "coordinates": [
+        {
+          "lat": -29.9071758,
+          "lon": 30.9340303,
+          "primary": "",
+          "globe": "earth"
+        }
+      ]
     }
   },
   "official": [
@@ -818,12 +925,6 @@
       "status": "fetched"
     },
     {
-      "url": "https://www.capetown.gov.za/",
-      "title": "Home | City of Cape Town",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
-    },
-    {
       "url": "https://www.durban.gov.za/",
       "title": "KwaMuhle Museum",
       "fetchedAt": "2026-10-07",
@@ -847,6 +948,99 @@
     {
       "url": "https://www.suncoastcasino.co.za/",
       "title": "Suncoast - Suncoast Casino",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.mandelahouse.com/",
+      "title": "Mandela House – 8115 Vilakazi St, orlando West, Soweto",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.saxon.co.za/contact/",
+      "title": "Contact | Saxon Hotel",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.sowetotheatre.com/contact-us/",
+      "title": "Contact Us – Soweto Theatre",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.jhbcityparksandzoo.com/services-facilities/botanical-gardens/about",
+      "title": "Johannesburg Botanical Garden",
+      "fetchedAt": "2026-10-07",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.sognage.com/contact",
+      "title": "CONTACT | Sognage",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.castleofgoodhope.co.za/",
+      "title": "Home",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.capegrace.com/contact-us/",
+      "title": "Cape Grace",
+      "fetchedAt": "2026-10-07",
+      "status": "unavailable",
+      "error": "HTTP Error 301: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Permanently"
+    },
+    {
+      "url": "https://www.themasque.co.za/",
+      "title": "The Masque Theatre | Live theatre Cape Town | 37 Main Road, Muizenberg, Cape Town, South Africa",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.ardernegardens.org.za/location",
+      "title": "Location / Contact",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.harringtonstreet.co.za/harringtons",
+      "title": "Harringtons Cape Town",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://phansi.online/about/",
+      "title": "Phansi Museum",
+      "fetchedAt": "2026-10-07",
+      "status": "unavailable",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "url": "https://www.southernsun.com/southern-sun-elangeni-maharani/contact-us",
+      "title": "Southern Sun Elangeni & Maharani | Durban North Beach",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://events.durbantheatre.com/",
+      "title": "Durban Theatre",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://visitdurban.travel/space/kenneth-stainbank-nature-reserve",
+      "title": "Kenneth Stainbank Nature Reserve - Durban Tourism",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.tigertiger.durban/contact-us/",
+      "title": "Contact Us – Tiger Tiger Durban | Premier Nightclub & Events in Durban",
       "fetchedAt": "2026-10-07",
       "status": "fetched"
     }

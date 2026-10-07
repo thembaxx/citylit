@@ -55,6 +55,11 @@ export type Place = {
   city: string;
   category: (typeof categories)[number];
   description: string;
+  about?: string;
+  aboutSource?: string;
+  aboutLicense?: string;
+  locationGroup?: string;
+  goodToKnow?: { label: string; icon: "wifi" | "pool" | "fitness" | "info"; source: string }[];
   address: string;
   coords: number[];
   coordinateAccuracy: "venue" | "city";

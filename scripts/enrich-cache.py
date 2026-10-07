@@ -67,7 +67,7 @@ json.dump(places,open(OUT/'places.json','w'),ensure_ascii=False,indent=2)
 landmark_titles=['Ponte City Apartments','Nelson Mandela Bridge','Orlando Power Station','Table Mountain','Bo-Kaap','Cape Point','Moses Mabhida Stadium','UShaka Marine World','Umhlanga Lighthouse']
 landmarks=json.load(open(OUT/'landmarks.json'))
 for row,title in zip(landmarks,landmark_titles):
- p=pages.get(title,{});row['wikipedia']='https://en.wikipedia.org/wiki/'+urllib.parse.quote(p.get('title',title).replace(' ','_'));row['images']=images(p,2)
+ p=pages.get(title,{});row['wikipedia']='https://en.wikipedia.org/wiki/'+urllib.parse.quote(p.get('title',title).replace(' ','_'));row['images']=list({i['src']:i for i in images(p,2)+row.get('images',[])}.values())[:6]
 landmarks[-1]['wikipedia']='https://en.wikipedia.org/wiki/Umhlanga,_KwaZulu-Natal'
 json.dump(landmarks,open(OUT/'landmarks.json','w'),ensure_ascii=False,indent=2);json.dump(city_images,open(OUT/'city-images.json','w'),ensure_ascii=False,indent=2)
 credits=list({i['src']:i for p in places for i in p['images']}.values());credits+=list({i['src']:i for p in landmarks for i in p['images'] if i['src'] not in {x['src'] for x in credits}}.values());json.dump(credits,open(OUT/'image-credits.json','w'),ensure_ascii=False,indent=2)

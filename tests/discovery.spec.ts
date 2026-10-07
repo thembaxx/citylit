@@ -19,7 +19,7 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   await page.getByRole("button", { name: "Explore Cape Town", exact: true }).click();
   await expect(page.locator(".place-card")).toHaveCount(0);
   await page.getByRole("button", { name: "Open Entertainment", exact: true }).click();
-  await expect(page.locator(".place-card")).toHaveCount(4);
+  await expect(page.locator(".place-card")).toHaveCount(5);
   await page.getByPlaceholder("Search places").fill("Kirstenbosch");
   await expect(page.locator(".place-card")).toHaveCount(1);
   await page.locator(".place-open").click();
@@ -185,7 +185,7 @@ test("fullscreen chapters fit compact and landscape phones, with category naviga
     );
     await page.getByRole("button", { name: "Open Clubs", exact: true }).click();
     await expect(page).toHaveURL(/view=places/);
-    await expect(page.locator(".place-card")).toHaveCount(2);
+    await expect(page.locator(".place-card")).toHaveCount(3);
     await page.goBack();
     await expect(page.locator(".category-page")).toHaveCount(0);
   }
@@ -324,7 +324,7 @@ test("opened category is a themed field guide with persistent tabs and search", 
   await page.goto("/johannesburg/lodging?view=places");
   await expect(page.locator("h1")).toHaveText("Lodging");
   await expect(page.locator(".category-page-model .three-view")).toBeVisible();
-  await expect(page.locator(".place-card")).toHaveCount(2);
+  await expect(page.locator(".place-card")).toHaveCount(3);
   await expect(page.getByRole("button", { name: "Lodging", exact: true })).toHaveAttribute(
     "aria-current",
     "page",
@@ -332,17 +332,62 @@ test("opened category is a themed field guide with persistent tabs and search", 
   await page.getByRole("button", { name: "Entertainment", exact: true }).click();
   await expect(page).toHaveURL(/johannesburg\/entertainment\?view=places$/);
   await expect(page.locator("h1")).toHaveText("Entertainment");
-  await expect(page.locator(".place-card")).toHaveCount(6);
+  await expect(page.locator(".place-card")).toHaveCount(7);
   await page.getByPlaceholder("Search places").fill("Apartheid");
   await expect(page.locator(".place-card")).toHaveCount(1);
   await page.getByRole("button", { name: "Clear search", exact: true }).click();
-  await expect(page.locator(".place-card")).toHaveCount(6);
+  await expect(page.locator(".place-card")).toHaveCount(7);
   await expect(page).toHaveURL(/view=places$/);
   await page.getByRole("button", { name: "Switch to day theme", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "day");
-  await expect(page.locator(".category-page-tabs")).toBeVisible();
+  await expect(page.locator(".glass-category-tabs")).toBeVisible();
   await expect(page.locator("canvas")).toHaveCount(1);
   await page.getByRole("button", { name: "Back to categories", exact: true }).click();
   await expect(page).toHaveURL(/johannesburg\/entertainment$/);
   await expect(page.locator(".category-page")).toHaveCount(0);
+});
+
+test("glass category selector keeps icons upright and inputs at 16px", async ({ page }) => {
+  await page.goto("/durban/entertainment");
+  const nav = page.locator(".glass-category-compact");
+  await expect(nav.locator("[data-category-icon]")).toHaveCount(5);
+  await expect(nav.locator(".glass-active-pill")).toHaveCount(1);
+  await expect(page.getByPlaceholder("Search places")).toHaveCSS("font-size", "16px");
+  const lodging = nav.getByRole("button", { name: "Lodging", exact: true });
+  await lodging.click();
+  await expect(page).toHaveURL(/durban\/lodging$/);
+  await expect(lodging).toHaveAttribute("aria-current", "page");
+  await expect(lodging.locator(".glass-category-icon")).toHaveCSS("transform", "none");
+  await lodging.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page).toHaveURL(/durban\/theatres$/);
+  await page.goto("/durban/theatres?view=places");
+  await expect(page.getByPlaceholder("Search places")).toHaveCSS("font-size", "16px");
+  await expect(page.locator(".glass-category-tabs .glass-active-pill")).toHaveCount(1);
+});
+
+test("place context expands attributed about copy and links confirmed facts and shared sites", async ({
+  page,
+}) => {
+  await page.goto("/cape-town/lodging/the-silo-hotel");
+  await expect(page.getByRole("heading", { name: "About", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Good to know", exact: true })).toBeVisible();
+  await page.getByRole("link", { name: /Zeitz MOCAA/ }).click();
+  await expect(page).toHaveURL(/cape-town\/entertainment\/zeitz-mocaa$/);
+  const more = page.getByRole("button", { name: "More", exact: true });
+  await more.click();
+  await expect(page.getByRole("button", { name: "Less", exact: true })).toHaveAttribute(
+    "aria-expanded",
+    "true",
+  );
+  await expect(page.locator(".context-license")).toHaveAttribute(
+    "href",
+    "https://creativecommons.org/licenses/by-sa/4.0/",
+  );
+  await page.goto("/durban/lodging/southern-sun-elangeni-maharani");
+  await expect(page.getByRole("link", { name: "Free unlimited Wi-Fi" })).toHaveAttribute(
+    "href",
+    "https://www.southernsun.com/southern-sun-elangeni-maharani",
+  );
+  await expect(page.locator(".venue-facts li")).toHaveCount(3);
 });

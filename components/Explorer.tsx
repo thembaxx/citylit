@@ -24,7 +24,9 @@ import {
 } from "lucide-react";
 import MiniSearch from "minisearch";
 import Gallery from "./Gallery";
+import PlaceContext from "./PlaceContext";
 import CategoryPlaces from "./CategoryPlaces";
+import CategoryNav from "./CategoryNav";
 import { useDelight } from "./useDelight";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import { cities, categories, places, categorySlug, landmarkSources } from "../lib/data";
@@ -45,7 +47,6 @@ const cityDescriptions = [
   "Western Cape. Between mountain and sea, find your own adventure.",
   "KwaZulu-Natal. Ocean air, colourful streets and a warmer rhythm.",
 ];
-const glyphs = ["★", "⌂", "◐", "♣", "♪"];
 const themes = [
   { name: "gold", glow: "169,112,40" },
   { name: "ocean", glow: "46,111,160" },
@@ -632,20 +633,7 @@ export default function Explorer() {
                   </button>
                   <span className="category-count">{cat + 1} / 5</span>
                 </div>
-                <nav className="category-glyphs" aria-label="Attraction categories">
-                  {categories.map((c, i) => (
-                    <button
-                      key={c}
-                      className={i === cat ? "active" : ""}
-                      aria-label={c}
-                      aria-current={i === cat ? "page" : undefined}
-                      onClick={() => chooseCategory(i)}
-                    >
-                      <span aria-hidden="true">{glyphs[i]}</span>
-                      <span className="glyph-tooltip">{c}</span>
-                    </button>
-                  ))}
-                </nav>
+                <CategoryNav selected={cat} onSelect={chooseCategory} compact />
               </>
             )}
           </footer>
@@ -671,7 +659,22 @@ export default function Explorer() {
               <p className="detail-address">
                 {place.address} · {city.name}
               </p>
+              <motion.dl className="detail-facts" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <div>
+                  <dt>Experience</dt>
+                  <dd>{place.category}</dd>
+                </div>
+                <div>
+                  <dt>City</dt>
+                  <dd>{city.name}</dd>
+                </div>
+                <div className="fact-address">
+                  <dt>Find it</dt>
+                  <dd>{place.address}</dd>
+                </div>
+              </motion.dl>
               <Gallery images={place.images} context={place.imageContext} name={place.name} />
+              <PlaceContext key={place.id} place={place} />
               <PlaceMap
                 coords={place.coords}
                 name={place.name}

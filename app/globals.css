@@ -2354,3 +2354,292 @@ h3 {
 .canvas-root:has(.has-results) > .persistent-canvas {
   clip-path: inset(var(--category-page-top, 116px) 0 0);
 }
+
+/* Accessible type and restrained, shared-layout Liquid Glass-inspired selection. */
+input,
+select,
+textarea {
+  font-size: 16px !important;
+}
+.glass-category-nav {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  border-radius: 30px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  box-shadow:
+    inset 0 1px 0 #ffffff18,
+    0 5px 18px #0000000b;
+  isolation: isolate;
+}
+.glass-category-nav button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 11px 18px;
+  border-radius: 24px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 11px;
+  flex-shrink: 0;
+  transition: color 0.18s;
+}
+.glass-category-nav button[aria-current="page"] {
+  color: var(--accent-ink);
+}
+.glass-category-nav button:hover {
+  color: var(--ink);
+}
+.glass-active-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(155deg, #ffffff24, #ffffff08 48%, #ffffff14);
+  border: 1px solid #ffffff28;
+  box-shadow:
+    inset 0 1px 0 #ffffff30,
+    inset 0 -1px 0 #ffffff10,
+    0 2px 8px #0002;
+  pointer-events: none;
+  z-index: -1;
+}
+:root[data-theme="day"] .glass-active-pill {
+  background: linear-gradient(155deg, #fffffff5, #ffffff80 50%, #ffffffd9);
+  border-color: #ffffffed;
+  box-shadow:
+    inset 0 1px 0 white,
+    0 2px 10px #17223c12;
+}
+.glass-category-icon,
+.glass-category-name {
+  position: relative;
+  z-index: 1;
+}
+.glass-category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+}
+.glass-category-compact {
+  max-width: 530px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+}
+.glass-category-compact button {
+  min-width: 0;
+  padding: 8px 3px;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 58px;
+}
+.glass-category-compact .glass-category-name {
+  font-size: 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.glass-category-tabs {
+  margin: 15px 0 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  width: max-content;
+  max-width: 100%;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-category-nav {
+    background: var(--surface);
+  }
+}
+@media (max-width: 450px) {
+  .glass-category-nav button {
+    padding: 11px 13px;
+    font-size: 10px;
+  }
+  .glass-category-compact button {
+    padding: 8px 2px;
+  }
+  .glass-category-compact .glass-category-name {
+    font-size: 7px;
+  }
+}
+@media (max-height: 700px) {
+  .glass-category-compact button {
+    min-height: 49px;
+    gap: 3px;
+  }
+}
+@media (max-height: 480px) and (min-width: 640px) {
+  .glass-category-compact button {
+    min-height: 45px;
+    flex-direction: row;
+  }
+  .glass-category-compact .glass-category-name {
+    display: none;
+  }
+}
+
+/* Rounded corners remain the baseline when corner-shape is unavailable. */
+.place-card,
+.gallery-hero,
+.gallery-empty,
+.source-details,
+.street-map,
+.detail-facts {
+  border-radius: 24px;
+}
+@supports (corner-shape: squircle) {
+  .place-card,
+  .gallery-hero,
+  .gallery-empty,
+  .source-details,
+  .street-map,
+  .detail-facts,
+  .search-box,
+  .modal-panel {
+    corner-shape: squircle;
+    border-radius: 28px;
+  }
+}
+.detail-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 20px;
+  margin: 0 0 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.detail-facts dt {
+  color: var(--muted);
+  font: 11px var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.detail-facts dd {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.detail-facts .fact-address {
+  grid-column: 1 / -1;
+}
+.place-context {
+  margin: 30px 0;
+}
+.place-context section + section {
+  margin-top: 30px;
+}
+.place-context h2 {
+  font-size: 21px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  letter-spacing: -0.025em;
+}
+.about-container {
+  overflow: hidden;
+}
+.about-copy {
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+  color: var(--ink);
+}
+.about-collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.about-more {
+  font: 12px var(--font-mono);
+  text-transform: uppercase;
+  min-height: 44px;
+  padding: 10px 0;
+  color: var(--accent-ink);
+}
+.context-source {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--accent-ink);
+}
+.context-license {
+  display: block;
+  font: 10px var(--font-mono);
+  line-height: 1.7;
+  color: var(--muted);
+}
+.venue-facts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.venue-facts li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 16px;
+}
+.venue-facts a {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 32px;
+}
+.facts-unconfirmed {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.facts-unconfirmed a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent-ink);
+  min-height: 44px;
+}
+.same-location-rail {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+}
+.location-card {
+  flex: 0 0 230px;
+  padding: 24px;
+  border-radius: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  scroll-snap-align: start;
+  transition: border-color 0.2s;
+}
+.location-card:hover {
+  border-color: var(--accent-ink);
+}
+.location-card h3 {
+  margin: 20px 0;
+  font-size: 18px;
+}
+.location-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+@supports (corner-shape: squircle) {
+  .location-card {
+    corner-shape: squircle;
+  }
+}

@@ -1,0 +1,1319 @@
+[
+  {
+    "name": "Gold Reef City",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Gold Reef City",
+    "website": "https://www.goldreefcity.co.za/",
+    "address": "Northern Parkway & Data Crescent, Ormonde",
+    "description": "Roller coasters and gold-rush streets built around a historic Johannesburg mine.",
+    "id": "gold-reef-city",
+    "sources": [
+      {
+        "url": "https://www.goldreefcity.co.za/",
+        "title": "Gold Reef City - Theme Park in Johannesburg South Africa",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Gold_Reef_City",
+        "title": "Gold Reef City",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Gold_Reef_City",
+    "coords": [
+      28.01222222,
+      -26.23611111
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Gold_Reef_City",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Gold Reef City - View from Giant Wheel to Jozi Express and Johannesburg in the background",
+        "author": "CMallwitz (talk)",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:20080216_97_Johannesburg_Gold_Reef_City.jpg",
+        "filename": "20080216 97 Johannesburg Gold Reef City.jpg",
+        "src": "/images/86f6d1c67849.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Constitution Hill",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Constitution Hill, Johannesburg",
+    "website": "https://www.constitutionhill.org.za/",
+    "address": "11 Kotze Street, Braamfontein",
+    "description": "A former prison complex turned living museum and home of South Africa’s Constitutional Court.",
+    "id": "constitution-hill",
+    "sources": [
+      {
+        "url": "https://www.constitutionhill.org.za/",
+        "title": "Constitution Hill",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Constitution_Hill%2C_Johannesburg",
+        "title": "Constitution Hill, Johannesburg",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Constitution_Hill%2C_Johannesburg",
+    "coords": [
+      28.04277778,
+      -26.18861111
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Constitution_Hill%2C_Johannesburg",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference Johannesburg in South AFrica.",
+        "author": "ConstHill",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Constitution_Square_at_Constitution_Hill.jpg",
+        "filename": "Constitution Square at Constitution Hill.jpg",
+        "src": "/images/c7bb2f4d8b58.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "The Houghton Hotel",
+    "city": "johannesburg",
+    "category": "Lodging",
+    "website": "https://thehoughtonhotel.com/",
+    "address": "Lloys Ellis Avenue, Houghton Estate",
+    "description": "Contemporary suites, leafy golf-course views and a quiet retreat in Houghton.",
+    "id": "the-houghton-hotel",
+    "sources": [
+      {
+        "url": "https://thehoughtonhotel.com/",
+        "title": "The Houghton Hotel, an SLH Hotel",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      28.0473,
+      -26.2041
+    ],
+    "coordinateSource": "City centre reference",
+    "coordinateAccuracy": "city",
+    "images": [
+      {
+        "alt": "Johannesburg South Africa",
+        "author": "Mark Hillary",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+        "filename": "Johannesburg skyline 2017.jpg",
+        "src": "/images/7b5b146710e3.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "54 on Bath",
+    "city": "johannesburg",
+    "category": "Lodging",
+    "website": "https://www.southernsun.com/54-on-bath",
+    "address": "54 Bath Avenue, Rosebank",
+    "description": "A boutique-style Rosebank stay with garden terraces and city shopping close by.",
+    "id": "54-on-bath",
+    "sources": [
+      {
+        "url": "https://www.southernsun.com/54-on-bath",
+        "title": "Boutique Luxury Hotel Rosebank, Johannesburg | 54 on Bath",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      28.0406942,
+      -26.145571
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/way/237588423",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Johannesburg South Africa",
+        "author": "Mark Hillary",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+        "filename": "Johannesburg skyline 2017.jpg",
+        "src": "/images/7b5b146710e3.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Market Theatre",
+    "city": "johannesburg",
+    "category": "Theatres",
+    "wiki": "Market Theatre",
+    "website": "https://markettheatre.co.za/",
+    "address": "56 Margaret Mcingana Street, Newtown",
+    "description": "Newtown’s landmark theatre, known for South African storytelling and a history of protest performance.",
+    "id": "market-theatre",
+    "sources": [
+      {
+        "url": "https://markettheatre.co.za/",
+        "title": "Market Theatre – Home of live theatre shows – Theatres in Johannesburg",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Market_Theatre",
+        "title": "Market Theatre",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Market_Theatre",
+    "coords": [
+      28.0322385,
+      -26.2013566
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/node/7138650728",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Johannesburg South Africa",
+        "author": "Mark Hillary",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+        "filename": "Johannesburg skyline 2017.jpg",
+        "src": "/images/7b5b146710e3.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Joburg Theatre",
+    "city": "johannesburg",
+    "category": "Theatres",
+    "wiki": "Joburg Theatre",
+    "website": "https://www.joburgtheatre.com/",
+    "address": "163 Civic Boulevard, Braamfontein",
+    "description": "A multi-stage performing arts complex for ballet, musicals and local productions.",
+    "id": "joburg-theatre",
+    "sources": [
+      {
+        "url": "https://www.joburgtheatre.com/",
+        "title": "Home - Joburg Theatre",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Joburg_Theatre",
+        "title": "Joburg Theatre",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Joburg_Theatre",
+    "coords": [
+      28.0392289,
+      -26.1916312
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/way/739514556",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Johannesburg  Civic Theater, Loveday Street, Braamfontein, Johannesburg",
+        "author": "NJR ZA",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:South_Africa-Johannesburg-Johannesburg_Civic_Theatre01.jpg",
+        "filename": "South Africa-Johannesburg-Johannesburg Civic Theatre01.jpg",
+        "src": "/images/e2d055aa4c3a.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Johannesburg Zoo",
+    "city": "johannesburg",
+    "category": "Parks & zoos",
+    "wiki": "Johannesburg Zoo",
+    "website": "https://www.jhbcityparksandzoo.com/",
+    "address": "Jan Smuts Avenue, Parkview",
+    "description": "A leafy urban zoo with walking paths, animal habitats and space for a family day out.",
+    "id": "johannesburg-zoo",
+    "sources": [
+      {
+        "url": "https://www.jhbcityparksandzoo.com/",
+        "title": "Johannesburg Zoo",
+        "fetchedAt": "2026-10-07",
+        "status": "unavailable"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Johannesburg_Zoo",
+        "title": "Johannesburg Zoo",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Johannesburg_Zoo",
+    "coords": [
+      28.038186,
+      -26.166375
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Johannesburg_Zoo",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "White/Arabian Oryx (Oryx leucoryx) at the Johannesburg Zoo, Gauteng, South Africa",
+        "author": "NJR ZA",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg_zoo-White_Oryx-001.jpg",
+        "filename": "Johannesburg zoo-White Oryx-001.jpg",
+        "src": "/images/3a50116314f0.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Walter Sisulu Botanical Garden",
+    "city": "johannesburg",
+    "category": "Parks & zoos",
+    "wiki": "Walter Sisulu National Botanical Garden",
+    "website": "https://www.sanbi.org/gardens/walter-sisulu/",
+    "address": "Malcolm Road, Poortview, Roodepoort",
+    "description": "Indigenous gardens, rocky trails and the dramatic Witpoortjie waterfall on the city’s western edge.",
+    "id": "walter-sisulu-botanical-garden",
+    "sources": [
+      {
+        "url": "https://www.sanbi.org/gardens/walter-sisulu/",
+        "title": "Walter Sisulu - SANBI",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Walter_Sisulu_National_Botanical_Garden",
+        "title": "Walter Sisulu National Botanical Garden",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Walter_Sisulu_National_Botanical_Garden",
+    "coords": [
+      27.84472222,
+      -26.08888889
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Walter_Sisulu_National_Botanical_Garden",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Northeastward view over the Walter Sisulu National Botanical Garden in western Roodepoort, Gauteng, showing the vicinity of the reception area and the sprawling lawns flanking the ",
+        "author": "JMK",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Walter_Sisulu_Nasionale_Botaniese_Tuin,_uitsig_a.jpg",
+        "filename": "Walter Sisulu Nasionale Botaniese Tuin, uitsig a.jpg",
+        "src": "/images/f7a1081276c6.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "The Living Room",
+    "city": "johannesburg",
+    "category": "Clubs",
+    "website": "https://livingroomjozi.co.za/contact-us/",
+    "address": "5th Floor, Main Change Building, 20 Kruger Street, Maboneng",
+    "description": "A plant-filled Maboneng rooftop with skyline views, sundowners and curated music events.",
+    "id": "the-living-room",
+    "sources": [
+      {
+        "url": "https://livingroomjozi.co.za/contact-us/",
+        "title": "Contact Us – The Living Room Jozi",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      28.0593121,
+      -26.2043946
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/node/3784986818",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Johannesburg South Africa",
+        "author": "Mark Hillary",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+        "filename": "Johannesburg skyline 2017.jpg",
+        "src": "/images/7b5b146710e3.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "And Club",
+    "city": "johannesburg",
+    "category": "Clubs",
+    "website": "https://andclub.co.za/contact/",
+    "address": "39 Gwigwi Mrwebi Street, Newtown",
+    "description": "An intimate Newtown dance floor dedicated to underground electronic music.",
+    "id": "and-club",
+    "sources": [
+      {
+        "url": "https://andclub.co.za/contact/",
+        "title": "Contact - AndClub",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      28.0473,
+      -26.2041
+    ],
+    "coordinateSource": "City centre reference",
+    "coordinateAccuracy": "city",
+    "images": [
+      {
+        "alt": "Johannesburg South Africa",
+        "author": "Mark Hillary",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+        "filename": "Johannesburg skyline 2017.jpg",
+        "src": "/images/7b5b146710e3.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Two Oceans Aquarium",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "Two Oceans Aquarium",
+    "website": "https://www.aquarium.co.za/",
+    "address": "Dock Road, V&A Waterfront",
+    "description": "Meet the marine life of the Atlantic and Indian oceans in the heart of the Waterfront.",
+    "id": "two-oceans-aquarium",
+    "sources": [
+      {
+        "url": "https://www.aquarium.co.za/",
+        "title": "Explore, Experience and Engage | Two Oceans Aquarium",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Two_Oceans_Aquarium",
+        "title": "Two Oceans Aquarium",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      18.4175,
+      -33.90805556
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Two_Oceans_Aquarium",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Looking south at aquarium, late morning. EXIF time is for New York.",
+        "author": "Jim.henderson",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Two_Oceans_Aquarium_CT_jeh.jpg",
+        "filename": "Two Oceans Aquarium CT jeh.jpg",
+        "src": "/images/dfb86abce7b1.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07",
+    "wikipedia": "https://en.wikipedia.org/wiki/Two_Oceans_Aquarium"
+  },
+  {
+    "name": "Zeitz MOCAA",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "Zeitz Museum of Contemporary Art Africa",
+    "website": "https://zeitzmocaa.museum/",
+    "address": "Silo District, South Arm Road, V&A Waterfront",
+    "description": "Contemporary African art inside a spectacularly transformed grain silo.",
+    "id": "zeitz-mocaa",
+    "sources": [
+      {
+        "url": "https://zeitzmocaa.museum/",
+        "title": "Zeitz MOCAA - Museum of Contemporary Art - Zeitz MOCAA",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Zeitz_Museum_of_Contemporary_Art_Africa",
+        "title": "Zeitz Museum of Contemporary Art Africa",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Zeitz_Museum_of_Contemporary_Art_Africa",
+    "coords": [
+      18.423,
+      -33.9084
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Zeitz_Museum_of_Contemporary_Art_Africa",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Zeitz Museum of Contemporary Art Africa, Cape Town",
+        "author": "Matti Blume",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zeitz_Museum_of_Contemporary_Art_Africa,_Cape_Town_(_1050775).jpg",
+        "filename": "Zeitz Museum of Contemporary Art Africa, Cape Town ( 1050775).jpg",
+        "src": "/images/094b2b841d14.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "The Silo Hotel",
+    "city": "cape-town",
+    "category": "Lodging",
+    "wiki": "The Silo Hotel",
+    "website": "https://www.theroyalportfolio.com/the-silo-hotel/",
+    "address": "Silo Square, V&A Waterfront",
+    "description": "A design-led hotel above the grain silo, with sculptural windows and harbour views.",
+    "id": "the-silo-hotel",
+    "sources": [
+      {
+        "url": "https://www.theroyalportfolio.com/the-silo-hotel/",
+        "title": "The Silo Hotel",
+        "fetchedAt": "2026-10-07",
+        "status": "search-verified"
+      }
+    ],
+    "coords": [
+      18.423,
+      -33.9084
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Zeitz_Museum_of_Contemporary_Art_Africa",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Zeitz Museum of Contemporary Art Africa, Cape Town",
+        "author": "Matti Blume",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zeitz_Museum_of_Contemporary_Art_Africa,_Cape_Town_(_1050775).jpg",
+        "filename": "Zeitz Museum of Contemporary Art Africa, Cape Town ( 1050775).jpg",
+        "src": "/images/094b2b841d14.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Mount Nelson",
+    "city": "cape-town",
+    "category": "Lodging",
+    "wiki": "Mount Nelson Hotel",
+    "website": "https://www.belmond.com/hotels/africa/south-africa/cape-town/belmond-mount-nelson-hotel/",
+    "address": "76 Orange Street, Gardens",
+    "description": "Cape Town’s pink hotel, set in gardens beneath Table Mountain.",
+    "id": "mount-nelson",
+    "sources": [
+      {
+        "url": "https://www.belmond.com/hotels/africa/south-africa/cape-town/belmond-mount-nelson-hotel/",
+        "title": "Mount Nelson, A Belmond Hotel | Best Hotel Cape Town Africa",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Belmond_Mount_Nelson_Hotel",
+        "title": "Belmond Mount Nelson Hotel",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Belmond_Mount_Nelson_Hotel",
+    "coords": [
+      18.41166556,
+      -33.93209237
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Belmond_Mount_Nelson_Hotel",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Mount Nelson Hotel",
+        "author": "Geoffrey Hancock",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mount_Nelson_Hotel_(3464448937).jpg",
+        "filename": "Mount Nelson Hotel (3464448937).jpg",
+        "src": "/images/267c5799e743.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Artscape Theatre",
+    "city": "cape-town",
+    "category": "Theatres",
+    "wiki": "Artscape Theatre Centre",
+    "website": "https://www.artscape.co.za/",
+    "address": "D.F. Malan Street, Foreshore",
+    "description": "Opera, dance, drama and new South African work in a major city arts centre.",
+    "id": "artscape-theatre",
+    "sources": [
+      {
+        "url": "https://www.artscape.co.za/",
+        "title": "Artscape Theatre Centre – Cape Town",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Artscape_Theatre_Centre",
+        "title": "Artscape Theatre Centre",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Artscape_Theatre_Centre",
+    "coords": [
+      18.4305,
+      -33.92
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Artscape_Theatre_Centre",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Artscape Theatre Centre",
+        "author": "Adamina",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Artscape_Theatre_Centre_(28522803654).jpg",
+        "filename": "Artscape Theatre Centre (28522803654).jpg",
+        "src": "/images/4b6ea9f9c87b.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "The Baxter Theatre",
+    "city": "cape-town",
+    "category": "Theatres",
+    "wiki": "Baxter Theatre Centre",
+    "website": "https://baxter.uct.ac.za/",
+    "address": "Main Road, Rondebosch",
+    "description": "An acclaimed theatre at the University of Cape Town, with a lively programme of local performance.",
+    "id": "the-baxter-theatre",
+    "sources": [
+      {
+        "url": "https://baxter.uct.ac.za/",
+        "title": "Home | Baxter Theatre Centre",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Baxter_Theatre_Centre",
+        "title": "Baxter Theatre Centre",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      18.4241,
+      -33.9249
+    ],
+    "coordinateSource": "City centre reference",
+    "coordinateAccuracy": "city",
+    "images": [
+      {
+        "alt": "The Baxter Theatre in Cape Town, South Africa",
+        "author": "Zaian",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baxter_Theatre.JPG",
+        "filename": "Baxter Theatre.JPG",
+        "src": "/images/d0651448fcbc.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07",
+    "wikipedia": "https://en.wikipedia.org/wiki/Baxter_Theatre_Centre"
+  },
+  {
+    "name": "Kirstenbosch",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "wiki": "Kirstenbosch National Botanical Garden",
+    "website": "https://www.sanbi.org/gardens/kirstenbosch/",
+    "address": "Rhodes Drive, Newlands",
+    "description": "Indigenous plants, mountain paths and a treetop walkway beneath Table Mountain.",
+    "id": "kirstenbosch",
+    "sources": [
+      {
+        "url": "https://www.sanbi.org/gardens/kirstenbosch/",
+        "title": "Kirstenbosch - SANBI",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Kirstenbosch_National_Botanical_Garden",
+        "title": "Kirstenbosch National Botanical Garden",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Kirstenbosch_National_Botanical_Garden",
+    "coords": [
+      18.4325,
+      -33.9875
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Kirstenbosch_National_Botanical_Garden",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Kirstenbosch National Botanical Garden in October 2024",
+        "author": "Discott",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kirstenbosch_National_Botanical_Garden_2024_7th_batch_09.jpg",
+        "filename": "Kirstenbosch National Botanical Garden 2024 7th batch 09.jpg",
+        "src": "/images/10ecdb2c6937.jpg"
+      },
+      {
+        "alt": "Kirstenbosch Botanical Garden, Cape Town, South Africa. View towards the eastern slope of Table mountain.",
+        "author": "Frode Inge Helland",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:2006_02_Kirstenbosch_01.JPG",
+        "filename": "2006 02 Kirstenbosch 01.JPG",
+        "src": "/images/b4ce334d69e1.jpg"
+      },
+      {
+        "alt": "Kirstenbosch Botanical Garden, Aloe species, Cape Town, South Africa.",
+        "author": "Britt Storlykken Helland",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:2006_02_Kirstenbosch_03.JPG",
+        "filename": "2006 02 Kirstenbosch 03.JPG",
+        "src": "/images/a098df5c84f3.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Green Point Urban Park",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "wiki": "Green Point Urban Park",
+    "website": "https://www.capetown.travel/",
+    "address": "1 Fritz Sonnenberg Road, Green Point",
+    "description": "A relaxed city park with biodiversity gardens, play areas and picnic lawns.",
+    "id": "green-point-urban-park",
+    "sources": [
+      {
+        "url": "https://www.capetown.travel/",
+        "title": "Cape Town Tourism",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      18.4241,
+      -33.9249
+    ],
+    "coordinateSource": "City centre reference",
+    "coordinateAccuracy": "city",
+    "images": [
+      {
+        "alt": "Cape Town",
+        "author": "Der Berzerker from Washington, DC, USA",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Camps_bay_(53460319478)_(cropped).jpg",
+        "filename": "Camps bay (53460319478) (cropped).jpg",
+        "src": "/images/839f94111c3b.jpg"
+      },
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 0000000000.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:00000-St_Georges_Cathedral-Cape_Town-s.jpg",
+        "filename": "00000-St Georges Cathedral-Cape Town-s.jpg",
+        "src": "/images/5f04302287fb.jpg"
+      },
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 9/2/018/0234.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:9_2_018_0234-Houses_of_Parliament-The_Cape-s.jpg",
+        "filename": "9 2 018 0234-Houses of Parliament-The Cape-s.jpg",
+        "src": "/images/f6b926bbfbbc.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Modular",
+    "city": "cape-town",
+    "category": "Clubs",
+    "website": "https://modularclub.com/about/",
+    "address": "34 Riebeek Street, Cape Town City Centre",
+    "description": "An underground electronic music venue focused on sound, dancing and a camera-free floor.",
+    "id": "modular",
+    "sources": [
+      {
+        "url": "https://modularclub.com/about/",
+        "title": "About - Modular",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      18.4217119,
+      -33.9184587
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/node/5722968224",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Cape Town",
+        "author": "Der Berzerker from Washington, DC, USA",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Camps_bay_(53460319478)_(cropped).jpg",
+        "filename": "Camps bay (53460319478) (cropped).jpg",
+        "src": "/images/839f94111c3b.jpg"
+      },
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 0000000000.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:00000-St_Georges_Cathedral-Cape_Town-s.jpg",
+        "filename": "00000-St Georges Cathedral-Cape Town-s.jpg",
+        "src": "/images/5f04302287fb.jpg"
+      },
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 9/2/018/0234.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:9_2_018_0234-Houses_of_Parliament-The_Cape-s.jpg",
+        "filename": "9 2 018 0234-Houses of Parliament-The Cape-s.jpg",
+        "src": "/images/f6b926bbfbbc.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Cabo Beach Club",
+    "city": "cape-town",
+    "category": "Clubs",
+    "website": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
+    "address": "12 South Arm Road, V&A Waterfront",
+    "description": "Poolside dining and music events beside the harbour, with an open-air beach-club atmosphere.",
+    "id": "cabo-beach-club",
+    "sources": [
+      {
+        "url": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
+        "title": "Cabo Beach Club | V&A Waterfront Cape Town",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      18.4292907,
+      -33.9038149
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/way/307915921",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Cape Town",
+        "author": "Der Berzerker from Washington, DC, USA",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Camps_bay_(53460319478)_(cropped).jpg",
+        "filename": "Camps bay (53460319478) (cropped).jpg",
+        "src": "/images/839f94111c3b.jpg"
+      },
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 0000000000.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:00000-St_Georges_Cathedral-Cape_Town-s.jpg",
+        "filename": "00000-St Georges Cathedral-Cape Town-s.jpg",
+        "src": "/images/5f04302287fb.jpg"
+      },
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 9/2/018/0234.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:9_2_018_0234-Houses_of_Parliament-The_Cape-s.jpg",
+        "filename": "9 2 018 0234-Houses of Parliament-The Cape-s.jpg",
+        "src": "/images/f6b926bbfbbc.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "uShaka Marine World",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "UShaka Marine World",
+    "website": "https://ushakamarine.com/",
+    "address": "1 King Shaka Avenue, Point",
+    "description": "A beachfront marine park with an aquarium, water attractions and ocean encounters.",
+    "id": "ushaka-marine-world",
+    "sources": [
+      {
+        "url": "https://ushakamarine.com/",
+        "title": "uShaka Marine World",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/UShaka_Marine_World",
+        "title": "UShaka Marine World",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      31.045915,
+      -29.867443
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/UShaka_Marine_World",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Eingang uShaka Marine World, Durban",
+        "author": "Bgabel",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZA-Durban-shaka-m-eing.jpg",
+        "filename": "ZA-Durban-shaka-m-eing.jpg",
+        "src": "/images/fe65d470dcda.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07",
+    "wikipedia": "https://en.wikipedia.org/wiki/UShaka_Marine_World"
+  },
+  {
+    "name": "Moses Mabhida Stadium",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "Moses Mabhida Stadium",
+    "website": "https://www.mmstadium.com/",
+    "address": "44 Isaiah Ntshangase Road, Stamford Hill",
+    "description": "Durban’s soaring stadium arch and a landmark of the city’s coastal skyline.",
+    "id": "moses-mabhida-stadium",
+    "sources": [
+      {
+        "url": "https://www.mmstadium.com/",
+        "title": "Home - Welcome to Moses Mabhida Stadium",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
+        "title": "Moses Mabhida Stadium",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      31.0303,
+      -29.829
+    ],
+    "coordinateSource": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "World-class stadium",
+        "author": "Blastworlddbn",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moses_Mabhida_stadium_in_Durban.jpg",
+        "filename": "Moses Mabhida stadium in Durban.jpg",
+        "src": "/images/1e5e6c83d25f.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07",
+    "wikipedia": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium"
+  },
+  {
+    "name": "The Oyster Box",
+    "city": "durban",
+    "category": "Lodging",
+    "wiki": "The Oyster Box",
+    "website": "https://oysterboxhotel.com/",
+    "address": "2 Lighthouse Road, Umhlanga",
+    "description": "A coastal hotel overlooking Umhlanga’s lighthouse and the Indian Ocean.",
+    "id": "the-oyster-box",
+    "sources": [
+      {
+        "url": "https://oysterboxhotel.com/",
+        "title": "The Oyster Box, Luxury Hotel Umhlanga, KwaZulu-Natal, South Africa",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/The_Oyster_Box",
+        "title": "The Oyster Box",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      31.0871965,
+      -29.728337
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/way/313961238",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Durban from the Balcony",
+        "author": "Dennis Sylvester Hurd",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
+        "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
+        "src": "/images/c4266986faf9.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07",
+    "wikipedia": "https://en.wikipedia.org/wiki/The_Oyster_Box"
+  },
+  {
+    "name": "Beverly Hills",
+    "city": "durban",
+    "category": "Lodging",
+    "wiki": "Beverly Hills Hotel (Umhlanga)",
+    "website": "https://www.southernsun.com/beverly-hills",
+    "address": "1 Lighthouse Road, Umhlanga",
+    "description": "An oceanfront Umhlanga stay with sea-facing rooms and a classic resort feel.",
+    "id": "beverly-hills",
+    "sources": [
+      {
+        "url": "https://www.southernsun.com/beverly-hills",
+        "title": "Luxury uMhlanga Rocks Hotel | Beverly Hills | Best Rates",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      31.0875639,
+      -29.7275585
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/way/637896307",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Durban from the Balcony",
+        "author": "Dennis Sylvester Hurd",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
+        "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
+        "src": "/images/c4266986faf9.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "The Playhouse",
+    "city": "durban",
+    "category": "Theatres",
+    "wiki": "Playhouse Company",
+    "website": "https://playhousecompany.com/",
+    "address": "231 Anton Lembede Street, Durban Central",
+    "description": "Historic stages in central Durban hosting drama, dance, opera and music.",
+    "id": "the-playhouse",
+    "sources": [
+      {
+        "url": "https://playhousecompany.com/",
+        "title": "The Playhouse",
+        "fetchedAt": "2026-10-07",
+        "status": "unavailable"
+      }
+    ],
+    "coords": [
+      31.0218,
+      -29.8587
+    ],
+    "coordinateSource": "City centre reference",
+    "coordinateAccuracy": "city",
+    "images": [
+      {
+        "alt": "Durban from the Balcony",
+        "author": "Dennis Sylvester Hurd",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
+        "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
+        "src": "/images/c4266986faf9.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Elizabeth Sneddon Theatre",
+    "city": "durban",
+    "category": "Theatres",
+    "wiki": "Elizabeth Sneddon Theatre",
+    "website": "https://sneddontheatre.co.za/",
+    "address": "UKZN Howard College Campus, Mazisi Kunene Road, Glenwood",
+    "description": "An intimate university theatre with local productions, dance and comedy.",
+    "id": "elizabeth-sneddon-theatre",
+    "sources": [
+      {
+        "url": "https://sneddontheatre.co.za/",
+        "title": "Home",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
+        "title": "Elizabeth Sneddon Theatre contact",
+        "fetchedAt": "2026-10-07",
+        "status": "search-verified"
+      },
+      {
+        "url": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
+        "title": "Elizabeth Sneddon Theatre contact",
+        "fetchedAt": "2026-10-07",
+        "status": "search-verified"
+      }
+    ],
+    "coords": [
+      31.0218,
+      -29.8587
+    ],
+    "coordinateSource": "City centre reference",
+    "coordinateAccuracy": "city",
+    "images": [
+      {
+        "alt": "Durban from the Balcony",
+        "author": "Dennis Sylvester Hurd",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
+        "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
+        "src": "/images/c4266986faf9.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Durban Botanic Gardens",
+    "city": "durban",
+    "category": "Parks & zoos",
+    "wiki": "Durban Botanic Gardens",
+    "website": "https://durbanbotanicgardens.org.za/",
+    "address": "9A John Zikhali Road, Berea",
+    "description": "Historic subtropical gardens with palms, cycads and tranquil paths through the city.",
+    "id": "durban-botanic-gardens",
+    "sources": [
+      {
+        "url": "https://durbanbotanicgardens.org.za/",
+        "title": "Durban Botanic Gardens - Africa's Oldest Surviving Botanic Garden",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Durban_Botanic_Gardens",
+        "title": "Durban Botanic Gardens",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      31.0066516,
+      -29.8469089
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/way/1168490191",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "New entrance of Durban Botanic Garden, South Africa.",
+        "author": "Purves, M.",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_Botanic_Gardens_new_entrance_04_09_2010.JPG",
+        "filename": "Durban Botanic Gardens new entrance 04 09 2010.JPG",
+        "src": "/images/b44801345ef7.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07",
+    "wikipedia": "https://en.wikipedia.org/wiki/Durban_Botanic_Gardens"
+  },
+  {
+    "name": "Umgeni River Bird Park",
+    "city": "durban",
+    "category": "Parks & zoos",
+    "wiki": "Umgeni River Bird Park",
+    "website": "https://www.umgeniriverbirdpark.co.za/",
+    "address": "490 Riverside Road, Durban North",
+    "description": "A riverside bird park with aviaries, waterfalls and colourful species from around the world.",
+    "id": "umgeni-river-bird-park",
+    "sources": [
+      {
+        "url": "https://www.umgeniriverbirdpark.co.za/",
+        "title": "Umgeni River Bird Park",
+        "fetchedAt": "2026-10-07",
+        "status": "unavailable"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Umgeni_River_Bird_Park",
+        "title": "Umgeni River Bird Park",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      31.0177024,
+      -29.8079649
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/way/749193458",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Demoiselle Crane in Umgeni River Bird Park, South-Africa.",
+        "author": "China Crisis",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:UmgeniRiverBirdPark.DemoiselleCrane.jpg",
+        "filename": "UmgeniRiverBirdPark.DemoiselleCrane.jpg",
+        "src": "/images/bb5c7439c9aa.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-07",
+    "wikipedia": "https://en.wikipedia.org/wiki/Umgeni_River_Bird_Park"
+  },
+  {
+    "name": "Origin / CRCL",
+    "id": "origin",
+    "city": "durban",
+    "category": "Clubs",
+    "website": "https://www.theorigin.co.za/contact",
+    "address": "9 Clark Road, Bulwer",
+    "description": "A multi-floor Durban nightlife venue with electronic music and changing event lineups.",
+    "sources": [
+      {
+        "url": "https://www.theorigin.co.za/contact",
+        "title": "Origin Nightclub, South Africa",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      }
+    ],
+    "coords": [
+      31.004271,
+      -29.8622514
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/node/11215538532",
+    "coordinateAccuracy": "venue",
+    "images": [
+      {
+        "alt": "Durban from the Balcony",
+        "author": "Dennis Sylvester Hurd",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
+        "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
+        "src": "/images/c4266986faf9.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  },
+  {
+    "name": "Cubaña Durban",
+    "city": "durban",
+    "category": "Clubs",
+    "website": "https://cubana.co.za/",
+    "address": "128 Florida Road, Morningside",
+    "description": "A Florida Road lounge for cocktails, music and an evening in Durban’s dining district.",
+    "id": "cuba-a-durban",
+    "sources": [
+      {
+        "url": "https://cubana.co.za/",
+        "title": "Cubaña – Come see…and be seen!",
+        "fetchedAt": "2026-10-07",
+        "status": "fetched"
+      },
+      {
+        "url": "https://cubana.co.za/pages/contact/",
+        "title": "Cubaña contact",
+        "fetchedAt": "2026-10-07",
+        "status": "search-verified"
+      },
+      {
+        "url": "https://cubana.co.za/pages/contact/",
+        "title": "Cubaña contact",
+        "fetchedAt": "2026-10-07",
+        "status": "search-verified"
+      }
+    ],
+    "coords": [
+      31.0218,
+      -29.8587
+    ],
+    "coordinateSource": "City centre reference",
+    "coordinateAccuracy": "city",
+    "images": [
+      {
+        "alt": "Durban from the Balcony",
+        "author": "Dennis Sylvester Hurd",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
+        "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
+        "src": "/images/c4266986faf9.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-07"
+  }
+]

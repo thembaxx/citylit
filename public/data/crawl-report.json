@@ -1,0 +1,1065 @@
+{
+  "fetchedAt": "2026-10-07",
+  "wikipedia": {
+    "Gold Reef City": {
+      "pageid": 2244517,
+      "ns": 0,
+      "title": "Gold Reef City",
+      "coordinates": [
+        {
+          "lat": -26.23611111,
+          "lon": 28.01222222,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/20080216_97_Johannesburg_Gold_Reef_City.jpg/1280px-20080216_97_Johannesburg_Gold_Reef_City.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "20080216_97_Johannesburg_Gold_Reef_City.jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:19 D class info board.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:20080216 97 Johannesburg Gold Reef City.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Commons-logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Gold-reef-city-gold-bar-being-made-johannesburg.JPG"
+        },
+        {
+          "ns": 6,
+          "title": "File:Gold Reef City 001.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Gold Reef City 002.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Gold Reef City 003.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Gold Reef City 004.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Gold Reef City 005.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Gold Reef City 006.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Pouring Liquid Gold.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol category class.svg"
+        }
+      ]
+    },
+    "Constitution Hill, Johannesburg": {
+      "pageid": 1468287,
+      "ns": 0,
+      "title": "Constitution Hill, Johannesburg",
+      "coordinates": [
+        {
+          "lat": -26.18861111,
+          "lon": 28.04277778,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Constitution_Square_at_Constitution_Hill.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 992,
+        "height": 661
+      },
+      "pageimage": "Constitution_Square_at_Constitution_Hill.jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Commons-logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:ConstitutionHill.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Constitution Hill logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Constitution Square at Constitution Hill.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:ConstitutionalCourtofSouthAfrica-table-20070412.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Flame of democracy.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Isolation Cells at Number 4.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:OOjs UI icon edit-ltr-progressive.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Old Fort Entrance (from the inside).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol category class.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Women's Gaol Isolation Cells.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Womens Gaol, Constitution Hill, Johannesburg.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Womens Gaol, Constitution Hill, Johannesburg12.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Womens Gaol, Constitution Hill, Johannesburg14.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Womens Gaol, Constitution Hill, Johannesburg 10.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Womens Gaol, Constitution Hill, Johannesburg 8.jpg"
+        }
+      ]
+    },
+    "Market Theatre": {
+      "pageid": 26421835,
+      "ns": 0,
+      "title": "Market Theatre",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Disambig gray.svg"
+        }
+      ]
+    },
+    "Joburg Theatre": {
+      "pageid": 48762755,
+      "ns": 0,
+      "title": "Joburg Theatre",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/South_Africa-Johannesburg-Johannesburg_Civic_Theatre01.jpg/1280px-South_Africa-Johannesburg-Johannesburg_Civic_Theatre01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 1333
+      },
+      "pageimage": "South_Africa-Johannesburg-Johannesburg_Civic_Theatre01.jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:South Africa-Johannesburg-Johannesburg Civic Theatre01.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol category class.svg"
+        }
+      ]
+    },
+    "Johannesburg Zoo": {
+      "pageid": 2244869,
+      "ns": 0,
+      "title": "Johannesburg Zoo",
+      "coordinates": [
+        {
+          "lat": -26.166375,
+          "lon": 28.038186,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Johannesburg_zoo-White_Oryx-001.jpg/1280px-Johannesburg_zoo-White_Oryx-001.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Johannesburg_zoo-White_Oryx-001.jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Caribou from Wagon Trails.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Commons-logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Flag of South Africa.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Johannesburg Zoo logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Johannesburg zoo-White Oryx-001.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:OOjs UI icon edit-ltr-progressive.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol category class.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Wapiti from Wagon Trails.jpg"
+        }
+      ]
+    },
+    "Walter Sisulu National Botanical Garden": {
+      "pageid": 19311983,
+      "ns": 0,
+      "title": "Walter Sisulu National Botanical Garden",
+      "coordinates": [
+        {
+          "lat": -26.08888889,
+          "lon": 27.84472222,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Walter_Sisulu_Nasionale_Botaniese_Tuin%2C_uitsig_a.jpg/1280px-Walter_Sisulu_Nasionale_Botaniese_Tuin%2C_uitsig_a.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Walter_Sisulu_Nasionale_Botaniese_Tuin,_uitsig_a.jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Commons-logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Greater Johannesburg OpenStreetMap small.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:OOjs UI icon edit-ltr-progressive.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Question book-new.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Red pog.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol category class.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol list class.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Walter Sisulu Nasionale Botaniese Tuin, uitsig a.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Waterfall, Witwatersrand National Botanical Gardens.jpg"
+        }
+      ]
+    },
+    "Two Oceans Aquarium": {
+      "pageid": 5544643,
+      "ns": 0,
+      "title": "Two Oceans Aquarium",
+      "coordinates": [
+        {
+          "lat": -33.90805556,
+          "lon": 18.4175,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Two_Oceans_Aquarium_CT_jeh.jpg/1280px-Two_Oceans_Aquarium_CT_jeh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 666
+      },
+      "pageimage": "Two_Oceans_Aquarium_CT_jeh.jpg"
+    },
+    "Zeitz Museum of Contemporary Art Africa": {
+      "pageid": 54866317,
+      "ns": 0,
+      "title": "Zeitz Museum of Contemporary Art Africa",
+      "coordinates": [
+        {
+          "lat": -33.9084,
+          "lon": 18.423,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Zeitz_Museum_of_Contemporary_Art_Africa%2C_Cape_Town_%28_1050775%29.jpg/1280px-Zeitz_Museum_of_Contemporary_Art_Africa%2C_Cape_Town_%28_1050775%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 1250
+      },
+      "pageimage": "Zeitz_Museum_of_Contemporary_Art_Africa,_Cape_Town_(_1050775).jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Commons-logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Global thinking.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:OOjs UI icon edit-ltr-progressive.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Silo at the Port of Cape Town 1.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:The Victoria and Alfred Waterfront, Cape Town, South Africa.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Zeitz Museum of Contemporary Art Africa, Cape Town ( 1050775).jpg"
+        }
+      ]
+    },
+    "The Silo Hotel": {
+      "ns": 0,
+      "title": "The Silo Hotel",
+      "missing": ""
+    },
+    "Mount Nelson Hotel": {
+      "pageid": 43481442,
+      "ns": 0,
+      "title": "Belmond Mount Nelson Hotel",
+      "coordinates": [
+        {
+          "lat": -33.93209237,
+          "lon": 18.41166556,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Mount_Nelson_Hotel_%283464448937%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 1024,
+        "height": 683
+      },
+      "pageimage": "Mount_Nelson_Hotel_(3464448937).jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Belmond Mount Nelson Hotel Logo.png"
+        },
+        {
+          "ns": 6,
+          "title": "File:Global thinking.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Mount Nelson Hotel (3464448937).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:The National Archives UK - CO 1069-214-204.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:The National Archives UK - CO 1069-214-205.jpg"
+        }
+      ]
+    },
+    "Artscape Theatre Centre": {
+      "pageid": 4500041,
+      "ns": 0,
+      "title": "Artscape Theatre Centre",
+      "coordinates": [
+        {
+          "lat": -33.92,
+          "lon": 18.4305,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Artscape_Theatre_Centre_%2828522803654%29.jpg/1280px-Artscape_Theatre_Centre_%2828522803654%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 801
+      },
+      "pageimage": "Artscape_Theatre_Centre_(28522803654).jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Artscape Theatre Centre (28522803654).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Global thinking.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:OOjs UI icon edit-ltr-progressive.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:OpenStreetMap central Cape Town small.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Red pog.svg"
+        }
+      ]
+    },
+    "Baxter Theatre Centre": {
+      "pageid": 5198803,
+      "ns": 0,
+      "title": "Baxter Theatre Centre",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Baxter_Theatre.JPG/1280px-Baxter_Theatre.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 1333
+      },
+      "pageimage": "Baxter_Theatre.JPG"
+    },
+    "Kirstenbosch National Botanical Garden": {
+      "pageid": 974882,
+      "ns": 0,
+      "title": "Kirstenbosch National Botanical Garden",
+      "coordinates": [
+        {
+          "lat": -33.9875,
+          "lon": 18.4325,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Kirstenbosch_National_Botanical_Garden_2024_7th_batch_09.jpg/1280px-Kirstenbosch_National_Botanical_Garden_2024_7th_batch_09.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Kirstenbosch_National_Botanical_Garden_2024_7th_batch_09.jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:2006 02 Kirstenbosch 01.JPG"
+        },
+        {
+          "ns": 6,
+          "title": "File:2006 02 Kirstenbosch 03.JPG"
+        },
+        {
+          "ns": 6,
+          "title": "File:2006 02 Kirstenbosch 12.JPG"
+        },
+        {
+          "ns": 6,
+          "title": "File:Arthur Fata - Wild Seed Pod.JPG"
+        },
+        {
+          "ns": 6,
+          "title": "File:Boomslang Kirstenbosch 1.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Cape Skink Flowers.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Castle Rock from Kirstenbosch.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Commons-logo.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Global thinking.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Henry Harold Welch Pearson - resting.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch, Botanischer Garten Kapstadt (2017).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch Botanical Garden-.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch Botanical Garden-3236.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch National Botanical Garden, Cape Town ( 1060044).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch National Botanical Garden (2933133471).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch National Botanical Garden 2024 7th batch 09.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch National Botanical Garden by ArmAg (21).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosch sculpture 20250304.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosh 1.JPG"
+        },
+        {
+          "ns": 6,
+          "title": "File:Kirstenbosh 2.JPG"
+        },
+        {
+          "ns": 6,
+          "title": "File:OOjs UI icon edit-ltr-progressive.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Question book-new.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Strelitzia juncea, Kirstenbosch National Botanical Garden.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol category class.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Symbol list class.svg"
+        },
+        {
+          "ns": 6,
+          "title": "File:The Botanical Society Conservatory.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Wikimania by Rehman - 2018-07-19 - C006 - Botanical Garden.jpg"
+        }
+      ]
+    },
+    "Green Point Urban Park": {
+      "ns": 0,
+      "title": "Green Point Urban Park",
+      "missing": ""
+    },
+    "UShaka Marine World": {
+      "pageid": 1441303,
+      "ns": 0,
+      "title": "UShaka Marine World",
+      "coordinates": [
+        {
+          "lat": -29.867443,
+          "lon": 31.045915,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/2/2a/ZA-Durban-shaka-m-eing.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 1215,
+        "height": 807
+      },
+      "pageimage": "ZA-Durban-shaka-m-eing.jpg"
+    },
+    "Moses Mabhida Stadium": {
+      "pageid": 5067841,
+      "ns": 0,
+      "title": "Moses Mabhida Stadium",
+      "coordinates": [
+        {
+          "lat": -29.829,
+          "lon": 31.0303,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/9/91/Moses_Mabhida_stadium_in_Durban.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 607,
+        "height": 455
+      },
+      "pageimage": "Moses_Mabhida_stadium_in_Durban.jpg"
+    },
+    "The Oyster Box": {
+      "pageid": 32317545,
+      "ns": 0,
+      "title": "The Oyster Box"
+    },
+    "Beverly Hills Hotel (Umhlanga)": {
+      "ns": 0,
+      "title": "Beverly Hills Hotel (Umhlanga)",
+      "missing": ""
+    },
+    "Playhouse Company": {
+      "ns": 0,
+      "title": "Playhouse Company",
+      "missing": ""
+    },
+    "Elizabeth Sneddon Theatre": {
+      "ns": 0,
+      "title": "Elizabeth Sneddon Theatre",
+      "missing": ""
+    },
+    "Durban Botanic Gardens": {
+      "pageid": 26295444,
+      "ns": 0,
+      "title": "Durban Botanic Gardens",
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/8/85/Durban_Botanic_Gardens_new_entrance_04_09_2010.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 530,
+        "height": 717
+      },
+      "pageimage": "Durban_Botanic_Gardens_new_entrance_04_09_2010.JPG"
+    },
+    "Umgeni River Bird Park": {
+      "pageid": 28201016,
+      "ns": 0,
+      "title": "Umgeni River Bird Park",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/UmgeniRiverBirdPark.DemoiselleCrane.jpg/1280px-UmgeniRiverBirdPark.DemoiselleCrane.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 1333
+      },
+      "pageimage": "UmgeniRiverBirdPark.DemoiselleCrane.jpg"
+    },
+    "Ponte City Apartments": {
+      "pageid": 2179694,
+      "ns": 0,
+      "title": "Ponte City",
+      "coordinates": [
+        {
+          "lat": -26.19055556,
+          "lon": 28.05708333,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/en/4/43/Ponte_City_Apartments_%283464450399%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 387,
+        "height": 565
+      },
+      "pageimage": "Ponte_City_Apartments_(3464450399).jpg"
+    },
+    "Nelson Mandela Bridge": {
+      "pageid": 12413503,
+      "ns": 0,
+      "title": "Nelson Mandela Bridge",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg/1280px-South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg"
+    },
+    "Orlando Power Station": {
+      "pageid": 24665036,
+      "ns": 0,
+      "title": "Orlando Power Station",
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/0/08/Soweto_Cooling_Towers.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 1280,
+        "height": 960
+      },
+      "pageimage": "Soweto_Cooling_Towers.JPG"
+    },
+    "Table Mountain": {
+      "pageid": 88611,
+      "ns": 0,
+      "title": "Table Mountain",
+      "coordinates": [
+        {
+          "lat": -33.96218,
+          "lon": 18.409883,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Table_Mountain_DanieVDM.jpg/1280px-Table_Mountain_DanieVDM.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 654
+      },
+      "pageimage": "Table_Mountain_DanieVDM.jpg"
+    },
+    "Bo-Kaap": {
+      "pageid": 4784114,
+      "ns": 0,
+      "title": "Bo-Kaap",
+      "coordinates": [
+        {
+          "lat": -33.92083333,
+          "lon": 18.41527778,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Boe-Kaap.jpg/1280px-Boe-Kaap.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 408
+      },
+      "pageimage": "Boe-Kaap.jpg"
+    },
+    "Cape Point": {
+      "pageid": 652573,
+      "ns": 0,
+      "title": "Cape Point",
+      "coordinates": [
+        {
+          "lat": -34.35722222,
+          "lon": 18.4975,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/7/78/Goodhope2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 1167,
+        "height": 780
+      },
+      "pageimage": "Goodhope2.jpg"
+    },
+    "Umhlanga Lighthouse": {
+      "ns": 0,
+      "title": "Umhlanga Lighthouse",
+      "missing": ""
+    },
+    "Johannesburg": {
+      "pageid": 58893,
+      "ns": 0,
+      "title": "Johannesburg",
+      "coordinates": [
+        {
+          "lat": -26.20444444,
+          "lon": 28.04555556,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Johannesburg_skyline_2017.jpg/1280px-Johannesburg_skyline_2017.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 391
+      },
+      "pageimage": "Johannesburg_skyline_2017.jpg"
+    },
+    "Cape Town": {
+      "pageid": 6653,
+      "ns": 0,
+      "title": "Cape Town",
+      "coordinates": [
+        {
+          "lat": -33.92527778,
+          "lon": 18.42388889,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Camps_bay_%2853460319478%29_%28cropped%29.jpg/1280px-Camps_bay_%2853460319478%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 578
+      },
+      "pageimage": "Camps_bay_(53460319478)_(cropped).jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:00000-St Georges Cathedral-Cape Town-s.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:9 2 018 0234-Houses of Parliament-The Cape-s.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Adderley Street, Cape Town, looking NE - ca. 1897.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Africa relief location map.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Airlink at Cape Town International Airport.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Artscape Theatre Centre, Cape Town (2017).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Bahía de Smitswinkel, Sudáfrica, 2018-07-23, DD 49.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Blue Wall of Sandy Bay.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Boe-Kaap (cropped 3).jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Boulders Beach 2019 2.jpg"
+        }
+      ]
+    },
+    "Durban": {
+      "pageid": 313650,
+      "ns": 0,
+      "title": "Durban",
+      "coordinates": [
+        {
+          "lat": -29.88333333,
+          "lon": 31.05,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Durban_from_the_Balcony_%28Dennis_Sylvester_Hurd%29_1.jpg/1280px-Durban_from_the_Balcony_%28Dennis_Sylvester_Hurd%29_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 563
+      },
+      "pageimage": "Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg"
+    }
+  },
+  "official": [
+    {
+      "url": "https://www.goldreefcity.co.za/",
+      "title": "Gold Reef City - Theme Park in Johannesburg South Africa",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.constitutionhill.org.za/",
+      "title": "Constitution Hill",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://thehoughtonhotel.com/",
+      "title": "The Houghton Hotel, an SLH Hotel",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.southernsun.com/54-on-bath",
+      "title": "Boutique Luxury Hotel Rosebank, Johannesburg | 54 on Bath",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://markettheatre.co.za/",
+      "title": "Market Theatre – Home of live theatre shows – Theatres in Johannesburg",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.joburgtheatre.com/",
+      "title": "Home - Joburg Theatre",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.jhbcityparksandzoo.com/",
+      "title": "Johannesburg Zoo",
+      "fetchedAt": "2026-10-07",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.sanbi.org/gardens/walter-sisulu/",
+      "title": "Walter Sisulu - SANBI",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://livingroomjozi.co.za/contact-us/",
+      "title": "Contact Us – The Living Room Jozi",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://andclub.co.za/contact/",
+      "title": "Contact - AndClub",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.aquarium.co.za/",
+      "title": "Explore, Experience and Engage | Two Oceans Aquarium",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://zeitzmocaa.museum/",
+      "title": "Zeitz MOCAA - Museum of Contemporary Art - Zeitz MOCAA",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.theroyalportfolio.com/the-silo/",
+      "title": "The Silo Hotel",
+      "fetchedAt": "2026-10-07",
+      "status": "unavailable",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://www.belmond.com/hotels/africa/south-africa/cape-town/belmond-mount-nelson-hotel/",
+      "title": "Mount Nelson, A Belmond Hotel | Best Hotel Cape Town Africa",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.artscape.co.za/",
+      "title": "Artscape Theatre Centre – Cape Town",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://baxter.uct.ac.za/",
+      "title": "Home | Baxter Theatre Centre",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.sanbi.org/gardens/kirstenbosch/",
+      "title": "Kirstenbosch - SANBI",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.capetown.travel/",
+      "title": "Cape Town Tourism",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://modularclub.com/about/",
+      "title": "About - Modular",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
+      "title": "Cabo Beach Club | V&A Waterfront Cape Town",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://ushakamarine.com/",
+      "title": "uShaka Marine World",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.mmstadium.com/",
+      "title": "Home - Welcome to Moses Mabhida Stadium",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://oysterboxhotel.com/",
+      "title": "The Oyster Box, Luxury Hotel Umhlanga, KwaZulu-Natal, South Africa",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.southernsun.com/beverly-hills",
+      "title": "Luxury uMhlanga Rocks Hotel | Beverly Hills | Best Rates",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://playhousecompany.com/",
+      "title": "The Playhouse",
+      "fetchedAt": "2026-10-07",
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://sneddontheatre.co.za/",
+      "title": "Home",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://durbanbotanicgardens.org.za/",
+      "title": "Durban Botanic Gardens - Africa's Oldest Surviving Botanic Garden",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://www.umgeniriverbirdpark.co.za/",
+      "title": "Umgeni River Bird Park",
+      "fetchedAt": "2026-10-07",
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://www.theorigin.co.za/contact",
+      "title": "Origin Nightclub, South Africa",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    },
+    {
+      "url": "https://cubana.co.za/",
+      "title": "Cubaña – Come see…and be seen!",
+      "fetchedAt": "2026-10-07",
+      "status": "fetched"
+    }
+  ]
+}

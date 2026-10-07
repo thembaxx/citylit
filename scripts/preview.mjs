@@ -1,0 +1,13 @@
+import { chromium } from '@playwright/test';
+const browser=await chromium.launch({headless:true,args:['--no-sandbox','--enable-unsafe-swiftshader']});
+const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true});
+page.on('pageerror',e=>console.log('PAGE ERROR',e.message));
+page.on('console',m=>{if(m.type()==='error')console.log('CONSOLE',m.text().slice(0,300))});
+await page.goto('http://localhost:3000',{waitUntil:'networkidle'});
+await page.screenshot({path:'/workspace/citylit-mobile.png',fullPage:true});
+console.log('canvas count',await page.locator('canvas').count(),'pin count',await page.getByRole('button',{name:'Explore Cape Town',exact:true}).count());
+await page.getByRole('button',{name:'Explore Cape Town',exact:true}).click();
+await page.waitForTimeout(1800);
+await page.screenshot({path:'/workspace/citylit-city-mobile.png',fullPage:true});
+console.log('city',await page.locator('h1').innerText());
+await browser.close();

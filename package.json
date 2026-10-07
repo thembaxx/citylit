@@ -1,0 +1,57 @@
+{
+  "name": "citylit",
+  "version": "1.0.0",
+  "description": "A mobile-first 3D discovery game for South African cities",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "lint": "oxlint app components lib tests next.config.ts playwright.config.ts",
+    "format": "oxfmt app components lib tests next.config.ts playwright.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "sources:refresh": "python3 scripts/crawl-sources.py",
+    "sources:geocode": "python3 scripts/geocode-venues.py",
+    "geo:refresh": "python3 scripts/fetch-geography.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "@use-gesture/react": "^10.3.1",
+    "d3-geo": "^3.1.1",
+    "gsap": "^3.15.0",
+    "lucide-react": "^1.52.0",
+    "maplibre-gl": "^6.13.0",
+    "minisearch": "^7.2.0",
+    "motion": "^14.0.0",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/d3-geo": "^3.1.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "mapshaper": "^0.7.79",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  },
+  "packageManager": "pnpm@12.10.1",
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

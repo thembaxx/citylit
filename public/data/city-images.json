@@ -1,0 +1,53 @@
+{
+  "johannesburg": [
+    {
+      "alt": "Johannesburg South Africa",
+      "author": "Mark Hillary",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg_skyline_2017.jpg",
+      "filename": "Johannesburg skyline 2017.jpg",
+      "src": "/images/7b5b146710e3.jpg"
+    }
+  ],
+  "cape-town": [
+    {
+      "alt": "Cape Town",
+      "author": "Der Berzerker from Washington, DC, USA",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Camps_bay_(53460319478)_(cropped).jpg",
+      "filename": "Camps bay (53460319478) (cropped).jpg",
+      "src": "/images/839f94111c3b.jpg"
+    },
+    {
+      "alt": "This media shows a South African Protected Site with SAHRA file reference 0000000000.",
+      "author": "Janek Szymanowski",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:00000-St_Georges_Cathedral-Cape_Town-s.jpg",
+      "filename": "00000-St Georges Cathedral-Cape Town-s.jpg",
+      "src": "/images/5f04302287fb.jpg"
+    },
+    {
+      "alt": "This media shows a South African Protected Site with SAHRA file reference 9/2/018/0234.",
+      "author": "Janek Szymanowski",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:9_2_018_0234-Houses_of_Parliament-The_Cape-s.jpg",
+      "filename": "9 2 018 0234-Houses of Parliament-The Cape-s.jpg",
+      "src": "/images/f6b926bbfbbc.jpg"
+    }
+  ],
+  "durban": [
+    {
+      "alt": "Durban from the Balcony",
+      "author": "Dennis Sylvester Hurd",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
+      "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
+      "src": "/images/c4266986faf9.jpg"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+[
+  {
+    "name": "Ponte City",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ponte_City",
+    "images": []
+  },
+  {
+    "name": "Nelson Mandela Bridge",
+    "wikipedia": "https://en.wikipedia.org/wiki/Nelson_Mandela_Bridge",
+    "images": [
+      {
+        "alt": "Nelson Mandela Bridge",
+        "author": "NJR ZA",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg",
+        "filename": "South Africa-Johannesburg-Nelson Mandela Bridge001.jpg",
+        "src": "/images/14620741eafe.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Orlando Towers",
+    "wikipedia": "https://en.wikipedia.org/wiki/Orlando_Power_Station",
+    "images": [
+      {
+        "alt": "Orlando Power Station Cooling Towers, Soweto",
+        "author": "Tim giddings",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Soweto_Cooling_Towers.JPG",
+        "filename": "Soweto Cooling Towers.JPG",
+        "src": "/images/5adfc56f38e2.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Table Mountain",
+    "wikipedia": "https://en.wikipedia.org/wiki/Table_Mountain",
+    "images": [
+      {
+        "alt": "Taffelberget och Kapstaden i Sydafrika, sett från en strand vid stadsdelen Bloubergstrand",
+        "author": "Danie van der Merwe from Cape Town, South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_Mountain_DanieVDM.jpg",
+        "filename": "Table Mountain DanieVDM.jpg",
+        "src": "/images/d93b06e34d54.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Bo-Kaap",
+    "wikipedia": "https://en.wikipedia.org/wiki/Bo-Kaap",
+    "images": [
+      {
+        "alt": "The iconic tourist attraction Bo-Kaap houses.",
+        "author": "SkyPixels",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boe-Kaap.jpg",
+        "filename": "Boe-Kaap.jpg",
+        "src": "/images/4c1bb8adbf4f.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Cape Point",
+    "wikipedia": "https://en.wikipedia.org/wiki/Cape_Point",
+    "images": [
+      {
+        "alt": "Kap vun der Gudder Hoffnung",
+        "author": "Ernmuhl at lb.wikipedia",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Goodhope2.jpg",
+        "filename": "Goodhope2.jpg",
+        "src": "/images/dac0aa2e81c2.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Moses Mabhida",
+    "wikipedia": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
+    "images": [
+      {
+        "alt": "World-class stadium",
+        "author": "Blastworlddbn",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moses_Mabhida_stadium_in_Durban.jpg",
+        "filename": "Moses Mabhida stadium in Durban.jpg",
+        "src": "/images/1e5e6c83d25f.jpg"
+      }
+    ]
+  },
+  {
+    "name": "uShaka Marine World",
+    "wikipedia": "https://en.wikipedia.org/wiki/UShaka_Marine_World",
+    "images": [
+      {
+        "alt": "Eingang uShaka Marine World, Durban",
+        "author": "Bgabel",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZA-Durban-shaka-m-eing.jpg",
+        "filename": "ZA-Durban-shaka-m-eing.jpg",
+        "src": "/images/fe65d470dcda.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Umhlanga Lighthouse",
+    "wikipedia": "https://en.wikipedia.org/wiki/Umhlanga,_KwaZulu-Natal",
+    "images": []
+  }
+]

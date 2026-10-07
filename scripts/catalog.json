@@ -1,0 +1,265 @@
+[
+  {
+    "name": "Gold Reef City",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Gold Reef City",
+    "website": "https://www.goldreefcity.co.za/",
+    "address": "Northern Parkway & Data Crescent, Ormonde",
+    "description": "Roller coasters and gold-rush streets built around a historic Johannesburg mine."
+  },
+  {
+    "name": "Constitution Hill",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Constitution Hill, Johannesburg",
+    "website": "https://www.constitutionhill.org.za/",
+    "address": "11 Kotze Street, Braamfontein",
+    "description": "A former prison complex turned living museum and home of South Africa’s Constitutional Court."
+  },
+  {
+    "name": "The Houghton Hotel",
+    "city": "johannesburg",
+    "category": "Lodging",
+    "website": "https://thehoughtonhotel.com/",
+    "address": "Lloys Ellis Avenue, Houghton Estate",
+    "description": "Contemporary suites, leafy golf-course views and a quiet retreat in Houghton."
+  },
+  {
+    "name": "54 on Bath",
+    "city": "johannesburg",
+    "category": "Lodging",
+    "website": "https://www.southernsun.com/54-on-bath",
+    "address": "54 Bath Avenue, Rosebank",
+    "description": "A boutique-style Rosebank stay with garden terraces and city shopping close by."
+  },
+  {
+    "name": "Market Theatre",
+    "city": "johannesburg",
+    "category": "Theatres",
+    "wiki": "Market Theatre",
+    "website": "https://markettheatre.co.za/",
+    "address": "56 Margaret Mcingana Street, Newtown",
+    "description": "Newtown’s landmark theatre, known for South African storytelling and a history of protest performance."
+  },
+  {
+    "name": "Joburg Theatre",
+    "city": "johannesburg",
+    "category": "Theatres",
+    "wiki": "Joburg Theatre",
+    "website": "https://www.joburgtheatre.com/",
+    "address": "163 Civic Boulevard, Braamfontein",
+    "description": "A multi-stage performing arts complex for ballet, musicals and local productions."
+  },
+  {
+    "name": "Johannesburg Zoo",
+    "city": "johannesburg",
+    "category": "Parks & zoos",
+    "wiki": "Johannesburg Zoo",
+    "website": "https://www.jhbcityparksandzoo.com/",
+    "address": "Jan Smuts Avenue, Parkview",
+    "description": "A leafy urban zoo with walking paths, animal habitats and space for a family day out."
+  },
+  {
+    "name": "Walter Sisulu Botanical Garden",
+    "city": "johannesburg",
+    "category": "Parks & zoos",
+    "wiki": "Walter Sisulu National Botanical Garden",
+    "website": "https://www.sanbi.org/gardens/walter-sisulu/",
+    "address": "Malcolm Road, Poortview, Roodepoort",
+    "description": "Indigenous gardens, rocky trails and the dramatic Witpoortjie waterfall on the city’s western edge."
+  },
+  {
+    "name": "The Living Room",
+    "city": "johannesburg",
+    "category": "Clubs",
+    "website": "https://livingroomjozi.co.za/contact-us/",
+    "address": "5th Floor, Main Change Building, 20 Kruger Street, Maboneng",
+    "description": "A plant-filled Maboneng rooftop with skyline views, sundowners and curated music events."
+  },
+  {
+    "name": "And Club",
+    "city": "johannesburg",
+    "category": "Clubs",
+    "website": "https://andclub.co.za/contact/",
+    "address": "39 Gwigwi Mrwebi Street, Newtown",
+    "description": "An intimate Newtown dance floor dedicated to underground electronic music."
+  },
+  {
+    "name": "Two Oceans Aquarium",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "Two Oceans Aquarium",
+    "website": "https://www.aquarium.co.za/",
+    "address": "Dock Road, V&A Waterfront",
+    "description": "Meet the marine life of the Atlantic and Indian oceans in the heart of the Waterfront."
+  },
+  {
+    "name": "Zeitz MOCAA",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "Zeitz Museum of Contemporary Art Africa",
+    "website": "https://zeitzmocaa.museum/",
+    "address": "Silo District, South Arm Road, V&A Waterfront",
+    "description": "Contemporary African art inside a spectacularly transformed grain silo."
+  },
+  {
+    "name": "The Silo Hotel",
+    "city": "cape-town",
+    "category": "Lodging",
+    "wiki": "The Silo Hotel",
+    "website": "https://www.theroyalportfolio.com/the-silo-hotel/",
+    "address": "Silo Square, V&A Waterfront",
+    "description": "A design-led hotel above the grain silo, with sculptural windows and harbour views."
+  },
+  {
+    "name": "Mount Nelson",
+    "city": "cape-town",
+    "category": "Lodging",
+    "wiki": "Mount Nelson Hotel",
+    "website": "https://www.belmond.com/hotels/africa/south-africa/cape-town/belmond-mount-nelson-hotel/",
+    "address": "76 Orange Street, Gardens",
+    "description": "Cape Town’s pink hotel, set in gardens beneath Table Mountain."
+  },
+  {
+    "name": "Artscape Theatre",
+    "city": "cape-town",
+    "category": "Theatres",
+    "wiki": "Artscape Theatre Centre",
+    "website": "https://www.artscape.co.za/",
+    "address": "D.F. Malan Street, Foreshore",
+    "description": "Opera, dance, drama and new South African work in a major city arts centre."
+  },
+  {
+    "name": "The Baxter Theatre",
+    "city": "cape-town",
+    "category": "Theatres",
+    "wiki": "Baxter Theatre Centre",
+    "website": "https://baxter.uct.ac.za/",
+    "address": "Main Road, Rondebosch",
+    "description": "An acclaimed theatre at the University of Cape Town, with a lively programme of local performance."
+  },
+  {
+    "name": "Kirstenbosch",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "wiki": "Kirstenbosch National Botanical Garden",
+    "website": "https://www.sanbi.org/gardens/kirstenbosch/",
+    "address": "Rhodes Drive, Newlands",
+    "description": "Indigenous plants, mountain paths and a treetop walkway beneath Table Mountain."
+  },
+  {
+    "name": "Green Point Urban Park",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "wiki": "Green Point Urban Park",
+    "website": "https://www.capetown.travel/",
+    "address": "1 Fritz Sonnenberg Road, Green Point",
+    "description": "A relaxed city park with biodiversity gardens, play areas and picnic lawns."
+  },
+  {
+    "name": "Modular",
+    "city": "cape-town",
+    "category": "Clubs",
+    "website": "https://modularclub.com/about/",
+    "address": "34 Riebeek Street, Cape Town City Centre",
+    "description": "An underground electronic music venue focused on sound, dancing and a camera-free floor."
+  },
+  {
+    "name": "Cabo Beach Club",
+    "city": "cape-town",
+    "category": "Clubs",
+    "website": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
+    "address": "12 South Arm Road, V&A Waterfront",
+    "description": "Poolside dining and music events beside the harbour, with an open-air beach-club atmosphere."
+  },
+  {
+    "name": "uShaka Marine World",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "UShaka Marine World",
+    "website": "https://ushakamarine.com/",
+    "address": "1 King Shaka Avenue, Point",
+    "description": "A beachfront marine park with an aquarium, water attractions and ocean encounters."
+  },
+  {
+    "name": "Moses Mabhida Stadium",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "Moses Mabhida Stadium",
+    "website": "https://www.mmstadium.com/",
+    "address": "44 Isaiah Ntshangase Road, Stamford Hill",
+    "description": "Durban’s soaring stadium arch and a landmark of the city’s coastal skyline."
+  },
+  {
+    "name": "The Oyster Box",
+    "city": "durban",
+    "category": "Lodging",
+    "wiki": "The Oyster Box",
+    "website": "https://oysterboxhotel.com/",
+    "address": "2 Lighthouse Road, Umhlanga",
+    "description": "A coastal hotel overlooking Umhlanga’s lighthouse and the Indian Ocean."
+  },
+  {
+    "name": "Beverly Hills",
+    "city": "durban",
+    "category": "Lodging",
+    "wiki": "Beverly Hills Hotel (Umhlanga)",
+    "website": "https://www.southernsun.com/beverly-hills",
+    "address": "1 Lighthouse Road, Umhlanga",
+    "description": "An oceanfront Umhlanga stay with sea-facing rooms and a classic resort feel."
+  },
+  {
+    "name": "The Playhouse",
+    "city": "durban",
+    "category": "Theatres",
+    "wiki": "Playhouse Company",
+    "website": "https://playhousecompany.com/",
+    "address": "231 Anton Lembede Street, Durban Central",
+    "description": "Historic stages in central Durban hosting drama, dance, opera and music."
+  },
+  {
+    "name": "Elizabeth Sneddon Theatre",
+    "city": "durban",
+    "category": "Theatres",
+    "wiki": "Elizabeth Sneddon Theatre",
+    "website": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
+    "address": "UKZN Howard College Campus, Mazisi Kunene Road, Glenwood",
+    "description": "An intimate university theatre with local productions, dance and comedy."
+  },
+  {
+    "name": "Durban Botanic Gardens",
+    "city": "durban",
+    "category": "Parks & zoos",
+    "wiki": "Durban Botanic Gardens",
+    "website": "https://durbanbotanicgardens.org.za/",
+    "address": "9A John Zikhali Road, Berea",
+    "description": "Historic subtropical gardens with palms, cycads and tranquil paths through the city."
+  },
+  {
+    "name": "Umgeni River Bird Park",
+    "city": "durban",
+    "category": "Parks & zoos",
+    "wiki": "Umgeni River Bird Park",
+    "website": "https://www.umgeniriverbirdpark.co.za/",
+    "address": "490 Riverside Road, Durban North",
+    "description": "A riverside bird park with aviaries, waterfalls and colourful species from around the world."
+  },
+  {
+    "name": "Origin / CRCL",
+    "id": "origin",
+    "city": "durban",
+    "category": "Clubs",
+    "website": "https://www.theorigin.co.za/contact",
+    "address": "9 Clark Road, Bulwer",
+    "description": "A multi-floor Durban nightlife venue with electronic music and changing event lineups."
+  },
+  {
+    "name": "Cubaña Durban",
+    "city": "durban",
+    "category": "Clubs",
+    "website": "https://cubana.co.za/pages/contact/",
+    "address": "128 Florida Road, Morningside",
+    "description": "A Florida Road lounge for cocktails, music and an evening in Durban’s dining district."
+  }
+]

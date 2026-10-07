@@ -97,7 +97,7 @@ function World({
       <group
         ref={group}
         onClick={(e) => {
-          if (mode === "city" && e.delta < 5) {
+          if ((mode === "city" || mode === "category") && e.delta < 5) {
             e.stopPropagation();
             onSelect();
           }

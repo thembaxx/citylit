@@ -1519,3 +1519,267 @@ h3 {
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* Night garden and daylight: all interactive text uses semantic contrast tokens. */
+:root,
+:root[data-theme="night"] {
+  color-scheme: dark;
+  --bg: #080f20;
+  --ink: #f1f3ff;
+  --muted: #b0b9d1;
+  --accent: #7361ed;
+  --line: #34425e;
+  --surface: #101b32;
+  --surface-glass: #101b32f5;
+}
+:root[data-theme="day"] {
+  color-scheme: light;
+  --bg: #f6f3ed;
+  --ink: #17223c;
+  --muted: #505d74;
+  --accent: #5b45c9;
+  --line: #b7becb;
+  --surface: #fffdf8;
+  --surface-glass: #fffdf8f5;
+}
+.game-atmosphere {
+  background: var(--bg);
+  transition: background-color 0.45s;
+}
+.dreamscape-view {
+  z-index: 1;
+}
+.ambient-glow {
+  background: radial-gradient(ellipse at 50% 51%, rgba(var(--city-glow), 0.19), transparent 72%);
+}
+.game-back svg,
+.icon-button,
+.province-subtitle,
+.map-hint,
+.swipe-hint,
+.landmark-wiki,
+.landmark-copy p,
+.category-counter,
+.source-credit,
+.city-shortcuts button,
+.place-open p,
+.place-open small,
+.place-address,
+.detail-address,
+.coordinates,
+.photo-caption,
+.detail-disclaimer,
+.search-wrap input::placeholder,
+.search-wrap svg {
+  color: var(--muted);
+}
+.search-wrap,
+.search-field {
+  background: var(--surface-glass);
+  border-color: var(--line);
+}
+.search-wrap input {
+  color: var(--ink);
+}
+.places-sheet,
+.modal,
+.gallery-dialog,
+.lightbox {
+  background: var(--surface);
+  color: var(--ink);
+}
+.place-card,
+.detail-panel,
+.sources-details {
+  border-color: var(--line);
+}
+.province {
+  color: #f4f6ff;
+  background: #111c33;
+  border: 1px solid var(--province-color);
+  padding: 3px 5px;
+  border-radius: 5px;
+  text-shadow: none;
+}
+.province-active {
+  border-width: 2px;
+  box-shadow: 0 0 0 1px #111c33;
+}
+.province-active::before {
+  content: "• ";
+  color: var(--province-color);
+}
+.map-pin {
+  width: 40px;
+  height: 40px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  background: #513dc0;
+  border: 2px solid #e7e3ff;
+  box-shadow: 0 0 22px #9982ff50;
+}
+.map-pin::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid #b6a5ff70;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pin-tooltip {
+  color: #f5f4ff;
+  background: #111c33;
+}
+.game-nav .utility-nav {
+  gap: 0;
+}
+.icon-button {
+  transition:
+    transform 0.22s cubic-bezier(0.2, 1.8, 0.4, 1),
+    color 0.2s,
+    background 0.2s;
+}
+.icon-button:hover {
+  transform: translateY(-2px) rotate(-5deg);
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.icon-button:active {
+  transform: scale(0.86);
+}
+.pill,
+.category-glyphs button,
+.landmark-open,
+.place-open,
+.city-shortcuts button {
+  transition:
+    transform 0.22s cubic-bezier(0.2, 1.8, 0.4, 1),
+    background 0.2s,
+    box-shadow 0.2s;
+}
+.pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px #7361ed35;
+}
+.pill:active,
+.category-glyphs button:active,
+.place-open:active {
+  transform: scale(0.96);
+}
+.category-glyphs button[aria-current="page"] {
+  color: var(--ink);
+}
+.category-glyphs button:hover {
+  transform: translateY(-3px) rotate(-8deg);
+}
+.delight-notice {
+  position: fixed;
+  z-index: 110;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 30px);
+  pointer-events: none;
+  background: var(--surface-glass);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 11px 17px;
+  font: 10px var(--font-mono);
+  box-shadow: 0 5px 30px #0003;
+}
+.delight-notice:empty {
+  display: none;
+}
+.haptics-toggle {
+  display: block;
+  margin: 16px 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--muted);
+  font: 10px var(--font-mono);
+}
+@media (max-width: 450px) {
+  .game-nav {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .game-nav .icon-button {
+    width: 32px;
+    height: 44px;
+  }
+  .game-back {
+    font-size: 9px;
+    gap: 5px;
+  }
+  .wordmark {
+    font-size: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.game-search {
+  background: var(--surface-glass);
+  border-color: var(--line);
+  color: var(--muted);
+}
+.game-search input::placeholder,
+.category-glyphs button,
+.tiny-label,
+.address,
+.place-introduction {
+  color: var(--muted);
+}
+.pill-cream {
+  color: var(--bg);
+}
+.glyph-tooltip,
+.explore-modal,
+.gallery-empty {
+  background: var(--surface);
+  color: var(--ink);
+}
+.glyph-tooltip {
+  border: 1px solid var(--line);
+}
+.photo-link,
+.source-details a {
+  color: #c4b7ff;
+}
+:root[data-theme="day"] .photo-link,
+:root[data-theme="day"] .source-details a {
+  color: #5b45c9;
+}
+.round {
+  border-color: var(--line);
+}
+.ivory-button {
+  color: var(--bg);
+}
+.roman-chapter,
+.modal p {
+  color: var(--muted);
+}
+[aria-label="Saved to discoveries"] svg {
+  animation: treasure-pop 0.4s cubic-bezier(0.2, 1.8, 0.4, 1);
+}
+@keyframes treasure-pop {
+  0% {
+    transform: scale(0.65) rotate(-15deg);
+  }
+  65% {
+    transform: scale(1.2) rotate(8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}

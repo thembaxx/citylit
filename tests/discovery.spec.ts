@@ -19,7 +19,7 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   await page.getByRole("button", { name: "Explore Cape Town", exact: true }).click();
   await expect(page.locator(".place-card")).toHaveCount(0);
   await page.getByRole("button", { name: "Open Entertainment", exact: true }).click();
-  await expect(page.locator(".place-card")).toHaveCount(2);
+  await expect(page.locator(".place-card")).toHaveCount(4);
   await page.getByPlaceholder("Search places").fill("Kirstenbosch");
   await expect(page.locator(".place-card")).toHaveCount(1);
   await page.locator(".place-open").click();
@@ -189,4 +189,92 @@ test("fullscreen chapters fit compact and landscape phones, with category naviga
     await page.goBack();
     await expect(page.locator(".places-sheet")).toHaveCount(0);
   }
+});
+
+test("themes persist, contrast is readable, and feedback is optional", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
+  await page.addInitScript(() => {
+    const scope = window as typeof window & { audioStarts: number; vibrations: number };
+    scope.audioStarts = 0;
+    scope.vibrations = 0;
+    const NativeAudio = window.AudioContext;
+    window.AudioContext = class extends NativeAudio {
+      constructor() {
+        super();
+        scope.audioStarts++;
+      }
+    };
+    Object.defineProperty(navigator, "vibrate", {
+      configurable: true,
+      value: () => {
+        scope.vibrations++;
+        return false;
+      },
+    });
+  });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
+  await expect(page.locator(".wordmark")).toHaveText("citylit");
+  await expect(page.locator(".wordmark svg, .wordmark span")).toHaveCount(0);
+  await expect(page.locator(".map-pin")).toHaveCount(3);
+  await expect(page.locator(".map-pin").first()).toHaveCSS("font-size", "14px");
+  expect(
+    await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
+  ).toBe(0);
+  for (const theme of ["night", "day"]) {
+    if (theme === "day") await page.getByRole("button", { name: "Switch to day theme" }).click();
+    const ratios = await page.evaluate(() => {
+      const css = getComputedStyle(document.documentElement);
+      const luminance = (hex: string) => {
+        const c = hex
+          .trim()
+          .slice(1)
+          .match(/.{2}/g)!
+          .map((v) => parseInt(v, 16) / 255)
+          .map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+        return c[0] * 0.2126 + c[1] * 0.7152 + c[2] * 0.0722;
+      };
+      const ratio = (a: string, b: string) => {
+        const x = luminance(a),
+          y = luminance(b);
+        return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+      };
+      return [
+        ratio(css.getPropertyValue("--ink"), css.getPropertyValue("--bg")),
+        ratio(css.getPropertyValue("--muted"), css.getPropertyValue("--bg")),
+        ratio("#ffffff", css.getPropertyValue("--accent")),
+        ratio("#f4f6ff", "#111c33"),
+      ];
+    });
+    for (const ratio of ratios) expect(ratio).toBeGreaterThanOrEqual(4.5);
+  }
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "day");
+  await page.getByRole("button", { name: "Enable sounds", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Mute sounds", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  expect(
+    await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
+  ).toBe(1);
+  await page.getByRole("button", { name: "How to explore", exact: true }).click();
+  await page.getByRole("button", { name: /Touch feedback on/ }).click();
+  await expect(page.getByRole("button", { name: /Touch feedback off/ })).toHaveAttribute(
+    "aria-pressed",
+    "false",
+  );
+  const vibrations = await page.evaluate(
+    () => (window as typeof window & { vibrations: number }).vibrations,
+  );
+  await page.getByRole("button", { name: "Close", exact: true }).click();
+  await page.getByRole("button", { name: "Switch to night theme" }).click();
+  expect(
+    await page.evaluate(() => (window as typeof window & { vibrations: number }).vibrations),
+  ).toBe(vibrations);
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Enable sounds", exact: true })).toBeVisible();
+  expect(
+    await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
+  ).toBe(0);
 });

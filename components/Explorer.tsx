@@ -22,9 +22,15 @@ import {
   RotateCcw,
   Pause,
   Play,
+  Sun,
+  Moon,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import MiniSearch from "minisearch";
 import Gallery from "./Gallery";
+import { useDelight } from "./useDelight";
+const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import { cities, categories, places, categorySlug, landmarkSources } from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
@@ -72,6 +78,37 @@ export default function Explorer() {
   const place = places.find((p) => p.id === parts[2] && p.city === city.slug);
   const mode =
     parts.length === 0 ? "map" : parts.length === 1 ? "city" : place ? "place" : "category";
+  const [night, setNight] = useState(true);
+  const [notice, setNotice] = useState("");
+  const { sound, haptics, feedback, toggleSound, toggleHaptics } = useDelight();
+  useEffect(() => {
+    try {
+      const selected = localStorage.getItem("citylit-theme");
+      setNight(
+        selected
+          ? selected === "night"
+          : !window.matchMedia("(prefers-color-scheme: light)").matches,
+      );
+    } catch {}
+  }, []);
+  useEffect(() => {
+    document.documentElement.dataset.theme = night ? "night" : "day";
+    return () => {
+      delete document.documentElement.dataset.theme;
+    };
+  }, [night]);
+  useEffect(() => {
+    if (!notice) return;
+    const timer = window.setTimeout(() => setNotice(""), 1800);
+    return () => clearTimeout(timer);
+  }, [notice]);
+  const switchTheme = () => {
+    setNight(!night);
+    setNotice(night ? "A little sunshine." : "Welcome to the night garden.");
+    try {
+      localStorage.setItem("citylit-theme", night ? "day" : "night");
+    } catch {}
+  };
   const [index, setIndex] = useState(0),
     [query, setQuery] = useState(""),
     [saved, setSaved] = useState<string[]>([]);
@@ -134,7 +171,11 @@ export default function Explorer() {
       before?.focus();
     };
   }, [showSaved, help]);
-  const toggle = (id: string) =>
+  const toggle = (id: string) => {
+    feedback("save");
+    setNotice(
+      saved.includes(id) ? "Released back into the wild." : "A little treasure, collected.",
+    );
     setSaved((prev) => {
       const next = prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id];
       try {
@@ -142,7 +183,11 @@ export default function Explorer() {
       } catch {}
       return next;
     });
-  const goCity = (i: number) => router.push("/" + cities[i].slug);
+  };
+  const goCity = (i: number) => {
+    feedback("tap");
+    router.push("/" + cities[i].slug);
+  };
   const next = (direction: number) => setIndex((v) => (v + direction + 3) % 3);
   const chooseCategory = (i: number) => {
     setQuery("");
@@ -151,6 +196,7 @@ export default function Explorer() {
   const bind = useDrag(
     ({ last, swipe: [x], movement: [mx] }) => {
       if (last && (x || Math.abs(mx) > 55)) {
+        feedback("swipe");
         const d = (x || mx) > 0 ? -1 : 1;
         if (mode === "city") next(d);
         else chooseCategory((cat + d + 5) % 5);
@@ -172,7 +218,10 @@ export default function Explorer() {
   const visible = places.filter(
     (p) => p.city === city.slug && (ids ? ids.includes(p.id) : p.category === categories[cat]),
   );
-  const openPlaces = () => router.push(`${categoryPath}?view=places`, { scroll: false });
+  const openPlaces = () => {
+    feedback("tap");
+    router.push(`${categoryPath}?view=places`, { scroll: false });
+  };
   const closePlaces = () => {
     setQuery("");
     router.replace(categoryPath, { scroll: false });
@@ -202,19 +251,30 @@ export default function Explorer() {
     <main
       ref={screenRef}
       tabIndex={-1}
+      onClickCapture={(event) => {
+        const target = (event.target as HTMLElement).closest("button,a");
+        if (
+          target &&
+          !target.getAttribute("aria-label")?.startsWith("Save") &&
+          !target.classList.contains("sound-toggle")
+        )
+          feedback("tap");
+      }}
       className={`game-screen game-${mode} theme-${theme.name} ${listing ? "has-results" : ""}`}
       style={{ "--city-glow": theme.glow } as CSSProperties}
     >
+      <Atmosphere
+        mode={mode}
+        city={ci}
+        category={cat}
+        night={night}
+        animate={animate && !listing && !help && !showSaved}
+      />
       <div className="game-atmosphere" aria-hidden="true">
         <div className="ambient-glow" />
-        {mode !== "map" &&
-          Array.from({ length: 10 }, (_, i) => (
-            <span
-              key={i}
-              className={`ambient-shard shard-${i}`}
-              style={{ "--delay": `${i * -1.7}s` } as CSSProperties}
-            />
-          ))}
+      </div>
+      <div className="delight-notice" role="status" aria-live="polite">
+        {notice}
       </div>
       <nav className="game-nav" aria-label="Page navigation">
         <button
@@ -223,9 +283,7 @@ export default function Explorer() {
           aria-label={navLabel}
         >
           {mode === "map" ? (
-            <span className="wordmark">
-              citylit<span>↗</span>
-            </span>
+            <span className="wordmark">citylit</span>
           ) : (
             <>
               <ArrowLeft size={15} />
@@ -234,6 +292,24 @@ export default function Explorer() {
           )}
         </button>
         <div className="utility-nav">
+          <button
+            className="icon-button"
+            aria-label={night ? "Switch to day theme" : "Switch to night theme"}
+            onClick={switchTheme}
+          >
+            {night ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
+          <button
+            className="icon-button sound-toggle"
+            aria-label={sound ? "Mute sounds" : "Enable sounds"}
+            aria-pressed={sound}
+            onClick={() => {
+              toggleSound();
+              setNotice(sound ? "Quiet magic." : "Sound on. Tiny notes of wonder.");
+            }}
+          >
+            {sound ? <Volume2 size={16} /> : <VolumeX size={16} />}
+          </button>
           <button
             className="icon-button"
             aria-label={`Your discoveries ${saved.length}`}
@@ -251,15 +327,15 @@ export default function Explorer() {
               >
                 <RotateCcw size={16} />
               </button>
-              <button
-                className="icon-button"
-                aria-label={animate ? "Pause animations" : "Play animations"}
-                onClick={() => setAnimate((v) => !v)}
-              >
-                {animate ? <Pause size={15} /> : <Play size={15} />}
-              </button>
             </>
           )}
+          <button
+            className="icon-button"
+            aria-label={animate ? "Pause animations" : "Play animations"}
+            onClick={() => setAnimate((v) => !v)}
+          >
+            {animate ? <Pause size={15} /> : <Play size={15} />}
+          </button>
           <button className="icon-button" aria-label="How to explore" onClick={() => setHelp(true)}>
             <Compass size={17} />
           </button>
@@ -324,7 +400,12 @@ export default function Explorer() {
                 animate={animate && !listing && !help && !showSaved}
                 onCity={goCity}
                 onSelect={
-                  mode === "city" ? () => router.push(`/${city.slug}/entertainment`) : openPlaces
+                  mode === "city"
+                    ? () => {
+                        feedback("tap");
+                        router.push(`/${city.slug}/entertainment`);
+                      }
+                    : openPlaces
                 }
               />
             </div>
@@ -636,6 +717,11 @@ export default function Explorer() {
               </button>
               <span className="tiny-label">YOUR OWN LITTLE ADVENTURE</span>
               <h2>{help ? "Stay curious." : "Your discoveries."}</h2>
+              {help && (
+                <button className="haptics-toggle" aria-pressed={haptics} onClick={toggleHaptics}>
+                  Touch feedback {haptics ? "on" : "off"} · where supported
+                </button>
+              )}
               {help ? (
                 <>
                   <p>Drag the map or landmark to give it a spin. Pinch or scroll to get closer.</p>

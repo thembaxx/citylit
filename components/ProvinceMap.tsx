@@ -4,6 +4,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { geoMercator } from "d3-geo";
 import * as THREE from "three";
 import gsap from "gsap";
+import { provinceColors } from "../lib/province-colors";
 import { cities } from "../lib/data";
 import boundaries from "../public/data/provinces.json";
 export const provinceLabels = boundaries.features.map((f) => ({
@@ -52,13 +53,11 @@ const labelCoords: Record<string, number[]> = {
 };
 function Province({
   feature,
-  index,
   onCity,
   reduced,
   labels,
 }: {
   feature: (typeof boundaries.features)[number];
-  index: number;
   onCity: (i: number) => void;
   reduced: boolean;
   labels: LabelRefs;
@@ -124,13 +123,9 @@ function Province({
       {geometry.map((g, i) => (
         <mesh key={i} geometry={g}>
           <meshStandardMaterial
-            color={
-              active
-                ? hover
-                  ? "#6482ff"
-                  : "#3454ee"
-                : ["#c6cead", "#d2d7b8", "#c0cba9"][index % 3]
-            }
+            color={provinceColors[code]}
+            emissive={provinceColors[code]}
+            emissiveIntensity={hover && active ? 0.25 : 0.04}
             flatShading
             roughness={0.9}
           />
@@ -151,11 +146,10 @@ export default function ProvinceMap({
 }) {
   return (
     <group rotation={[-Math.PI / 2, 0, 0]}>
-      {boundaries.features.map((f, i) => (
+      {boundaries.features.map((f) => (
         <Province
           key={f.properties.shapeISO}
           feature={f}
-          index={i}
           onCity={onCity}
           reduced={reduced}
           labels={labels}

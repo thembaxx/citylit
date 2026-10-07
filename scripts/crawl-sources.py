@@ -28,7 +28,7 @@ try:
    if aliases.get(title,title) in pages:report['wikipedia'][title]=pages[aliases.get(title,title)]
  with ThreadPoolExecutor(max_workers=3) as pool:report['official']=list(pool.map(official,catalog))
  report['fetchedAt']=DATE;json.dump(report,open(report_path,'w'),ensure_ascii=False,indent=2)
- files=list(dict.fromkeys('File:'+p['pageimage'] for p in report['wikipedia'].values() if p.get('pageimage')));meta={'query':{'pages':{}}}
+ files=list(dict.fromkeys(['File:'+p['pageimage'] for p in report['wikipedia'].values() if p.get('pageimage')]+[i['title'] for p in report['wikipedia'].values() for i in p.get('images',[]) if re.search(r'\.(jpg|jpeg|png)$',i['title'],re.I)][:150]));meta={'query':{'pages':{}}}
  for start in range(0,len(files),40):
   data=api('commons.wikimedia.org',action='query',titles='|'.join(files[start:start+40]),prop='imageinfo',iiprop='url|extmetadata',iiurlwidth=1000);meta['query']['pages'].update(data['query']['pages'])
  json.dump(meta,open(OUT/'commons-batch.json','w'),ensure_ascii=False,indent=2)

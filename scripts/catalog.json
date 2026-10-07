@@ -261,5 +261,104 @@
     "website": "https://cubana.co.za/pages/contact/",
     "address": "128 Florida Road, Morningside",
     "description": "A Florida Road lounge for cocktails, music and an evening in Durban’s dining district."
+  },
+  {
+    "name": "Apartheid Museum",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Apartheid Museum",
+    "website": "https://www.apartheidmuseum.org/",
+    "address": "Northern Parkway & Gold Reef Road, Ormonde",
+    "description": "Exhibitions trace apartheid and the struggle for democracy through powerful personal stories."
+  },
+  {
+    "name": "Wits Art Museum",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Wits Art Museum",
+    "website": "https://www.wits.ac.za/wam/",
+    "address": "Corner Jan Smuts Avenue & Jorissen Street, Braamfontein",
+    "description": "Explore an extensive collection of African art on the edge of the Wits campus."
+  },
+  {
+    "name": "Johannesburg Art Gallery",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Johannesburg Art Gallery",
+    "website": "https://joburg.org.za/",
+    "address": "Joubert Park, Klein Street",
+    "description": "A historic city gallery holding South African and international works; check access before visiting."
+  },
+  {
+    "name": "Sci-Bono Discovery Centre",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Sci-Bono Discovery Centre",
+    "website": "https://www.sci-bono.co.za/",
+    "address": "Corner Miriam Makeba & Helen Joseph Streets, Newtown",
+    "description": "Hands-on science exhibits inside a former power station make discovery a playful experiment."
+  },
+  {
+    "name": "Iziko South African Museum",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "South African Museum",
+    "website": "https://www.iziko.org.za/museums/south-african-museum/",
+    "address": "25 Queen Victoria Street, Gardens",
+    "description": "Natural history, fossils and biodiversity collections beside the Company’s Garden."
+  },
+  {
+    "name": "Robben Island Museum",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "Robben Island",
+    "website": "https://www.robben-island.org.za/",
+    "address": "Nelson Mandela Gateway, V&A Waterfront (ferry departure)",
+    "description": "Travel by ferry to the island whose former prison tells a central story of South African history."
+  },
+  {
+    "name": "Company’s Garden",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "wiki": "Company's Garden",
+    "website": "https://www.capetown.travel/",
+    "address": "Queen Victoria Street, Cape Town City Centre",
+    "description": "A leafy historic garden with shaded paths, monuments and museums around its edges."
+  },
+  {
+    "name": "KwaMuhle Museum",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "KwaMuhle Museum",
+    "website": "https://www.durban.gov.za/",
+    "address": "130 Bram Fischer Road, Durban Central",
+    "description": "A museum of Durban’s social history housed in the former Native Administration building."
+  },
+  {
+    "name": "Durban Natural Science Museum",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "Durban Natural Science Museum",
+    "website": "https://www.durban.gov.za/",
+    "address": "Durban City Hall, 234 Anton Lembede Street",
+    "description": "Explore natural history displays and regional biodiversity inside Durban’s City Hall."
+  },
+  {
+    "name": "Mitchell Park Zoo",
+    "city": "durban",
+    "category": "Parks & zoos",
+    "wiki": "Mitchell Park Zoo",
+    "website": "https://www.durban.gov.za/",
+    "address": "10 Ferndale Road, Morningside",
+    "description": "A small zoo and shaded gardens with family walking paths in Morningside."
+  },
+  {
+    "name": "Suncoast",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "Suncoast Casino and Entertainment World",
+    "website": "https://www.suncoastcasino.co.za/",
+    "address": "Suncoast Boulevard, Golden Mile",
+    "description": "A beachfront entertainment complex with dining, cinema and casino spaces; age restrictions apply."
   }
 ]

@@ -37,8 +37,9 @@ def images(page,limit=2):
   if im and not any(x["src"]==im["src"] for x in output):output.append(im)
   if len(output)>=limit:break
  return output
+previous_city_images=json.load(open(OUT/'city-images.json'))
 city_images={}
-for name,slug in [('Johannesburg','johannesburg'),('Cape Town','cape-town'),('Durban','durban')]:city_images[slug]=images(pages.get(name,{}),3)
+for name,slug in [('Johannesburg','johannesburg'),('Cape Town','cape-town'),('Durban','durban')]:city_images[slug]=list({i['src']:i for i in images(pages.get(name,{}),3)+previous_city_images.get(slug,[])}.values())[:5]
 places=json.load(open(OUT/'places.json'));catalog=json.load(open(ROOT/'scripts/catalog.json'))
 for row,seed in zip(places,catalog):
  row.update({k:seed[k] for k in ['website','address','description']});row['checkedAt']=DATE;source=next((s for s in r['official'] if s['url']==seed['website']),None)
@@ -49,7 +50,9 @@ for row,seed in zip(places,catalog):
   row['wikipedia']='https://en.wikipedia.org/wiki/'+urllib.parse.quote(p['title'].replace(' ','_'))
   if not any(s['url']==row['wikipedia'] for s in row['sources']):row['sources'].append({'url':row['wikipedia'],'title':p['title'],'fetchedAt':DATE,'status':'fetched'})
  own=images(p,3)
- if own:row['images']=own;row['imageContext']='venue'
+ if own:
+  prior=row['images'] if row['imageContext']=='venue' else []
+  row['images']=list({i['src']:i for i in own+prior}.values())[:6];row['imageContext']='venue'
  elif row['imageContext']!='venue':row['images']=city_images[row['city']];row['imageContext']='city'
  if row['name']=='The Silo Hotel':row['website']='https://www.theroyalportfolio.com/the-silo-hotel/';row['sources'][0]['url']=row['website'];row['sources'][0]['status']='search-verified'
  if row['name']=='Elizabeth Sneddon Theatre':row['address']='UKZN Howard College Campus, Mazisi Kunene Road, Glenwood';row['sources'].append({'url':'https://www.sneddontheatre.co.za/contact-us/contact-us.html','title':'Elizabeth Sneddon Theatre contact','fetchedAt':DATE,'status':'search-verified'})
@@ -58,6 +61,7 @@ for row,seed in zip(places,catalog):
  if row['name']=='The Silo Hotel':
   z=next(p for p in places if p['name']=='Zeitz MOCAA')
   if z['images'] and z['imageContext']=='venue':row['images']=z['images'];row['imageContext']='venue';row['coords']=z['coords'];row['coordinateAccuracy']='venue';row['coordinateSource']=z['coordinateSource']
+ row['sources']=list({source['url']:source for source in row['sources']}.values())
  print(row['name'],row['coordinateAccuracy'],len(row['images']),flush=True)
 json.dump(places,open(OUT/'places.json','w'),ensure_ascii=False,indent=2)
 landmark_titles=['Ponte City Apartments','Nelson Mandela Bridge','Orlando Power Station','Table Mountain','Bo-Kaap','Cape Point','Moses Mabhida Stadium','UShaka Marine World','Umhlanga Lighthouse']

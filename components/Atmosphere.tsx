@@ -15,15 +15,16 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
   const root = useRef<THREE.Group>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const elapsed = useRef(0);
+  const parallax = useRef({ x: 0, y: 0 });
   const palette = palettes[city];
-  const count = mode === "map" ? 32 : mode === "city" ? 14 : mode === "category" ? 18 : 24;
+  const count = mode === "map" ? 18 : mode === "city" ? 10 : mode === "category" ? 12 : 14;
   const objects = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
-        x: Math.sin(i * 2.399) * (0.25 + (i % 7) * 0.1),
-        y: Math.cos(i * 2.399) * (0.3 + (i % 5) * 0.13),
+        x: (i % 2 === 0 ? -1 : 1) * (0.8 + (i % 3) * 0.05),
+        y: -0.8 + (i / Math.max(count - 1, 1)) * 1.6,
         phase: i * 1.73,
-        size: mode === "map" ? 0.018 + (i % 3) * 0.009 : 0.1 + (i % 4) * 0.06,
+        size: mode === "map" || mode === "place" ? 0.015 + (i % 3) * 0.007 : 0.07 + (i % 4) * 0.035,
       })),
     [mode, count],
   );
@@ -46,22 +47,29 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
   }, [animate, invalidate]);
   useFrame((_, delta) => {
     if (!root.current) return;
-    if (animate) elapsed.current += Math.min(delta, 0.08);
+    if (animate) {
+      elapsed.current += Math.min(delta, 0.08);
+      const smooth = 1 - Math.exp(-delta * 2);
+      parallax.current.x += (pointer.current.x - parallax.current.x) * smooth;
+      parallax.current.y += (pointer.current.y - parallax.current.y) * smooth;
+    }
     const time = elapsed.current;
+    const speed = mode === "map" ? 0.08 : mode === "place" ? 0.13 : 0.1;
     root.current.children.forEach((node, i) => {
       const p = objects[i];
       if (!p) return;
+      // Keep the central reading area clear; wide, slow paths stay near the edges.
       node.position.x =
         (p.x * viewport.width) / 2 +
-        Math.sin(time * 0.2 + p.phase) * 0.12 +
-        pointer.current.x * 0.12;
+        Math.sin(time * speed + p.phase) * 0.07 +
+        parallax.current.x * 0.05;
       node.position.y =
         (p.y * viewport.height) / 2 +
-        Math.cos(time * 0.17 + p.phase) * 0.15 -
-        pointer.current.y * 0.12;
-      node.rotation.x = p.phase + time * 0.035;
-      node.rotation.y = p.phase * 0.5 + time * 0.055;
-      node.rotation.z = p.phase + time * (mode === "category" ? 0.07 : 0.025);
+        Math.cos(time * speed * 0.8 + p.phase) * 0.13 -
+        parallax.current.y * 0.05;
+      node.rotation.x = p.phase + time * 0.012;
+      node.rotation.y = p.phase * 0.5 + time * 0.018;
+      node.rotation.z = p.phase + time * (mode === "category" ? 0.02 : 0.012);
     });
   });
   return (
@@ -94,7 +102,7 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
             <meshBasicMaterial
               color={palette[i % 3]}
               transparent
-              opacity={night ? (mode === "map" ? 0.5 : 0.25) : 0.4}
+              opacity={night ? (mode === "map" || mode === "place" ? 0.28 : 0.13) : 0.2}
               depthWrite={false}
             />
           </mesh>

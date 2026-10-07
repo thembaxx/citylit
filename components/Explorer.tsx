@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useEffect, useState, useMemo, useRef, type CSSProperties } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -38,6 +39,18 @@ const Scene = dynamic(() => import("./Scene"), {
 });
 const PlaceMap = dynamic(() => import("./PlaceMap"), { ssr: false });
 const icons = [Ticket, BedDouble, Drama, Trees, Music];
+const categoryDescriptions = [
+  "Big thrills, curious museums and unexpected ways to spend a day.",
+  "Find a place to rest, from city hideaways to coastal escapes.",
+  "Step into a story. Discover local stages and live performances.",
+  "Slow down among gardens, wildlife and a little more green.",
+  "Follow the music. Find a dance floor and a new city rhythm.",
+];
+const cityDescriptions = [
+  "Gauteng. Big energy, bold ideas and a city that keeps becoming.",
+  "Western Cape. Between mountain and sea, find your own adventure.",
+  "KwaZulu-Natal. Ocean air, colourful streets and a warmer rhythm.",
+];
 const glyphs = ["★", "⌂", "◐", "♣", "♪"];
 const themes = [
   { name: "gold", glow: "169,112,40" },
@@ -80,6 +93,7 @@ export default function Explorer() {
     parts.length === 0 ? "map" : parts.length === 1 ? "city" : place ? "place" : "category";
   const [night, setNight] = useState(true);
   const [notice, setNotice] = useState("");
+  const [showProvinces, setShowProvinces] = useState(false);
   const { sound, haptics, feedback, toggleSound, toggleHaptics } = useDelight();
   useEffect(() => {
     try {
@@ -131,8 +145,17 @@ export default function Explorer() {
     } catch {}
   }, []);
   useEffect(() => {
+    if (!showProvinces) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setShowProvinces(false);
+    };
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, [showProvinces]);
+  useEffect(() => {
     setIndex(0);
     setQuery("");
+    setShowProvinces(false);
   }, [pathname]);
   useEffect(() => {
     if (mode !== "place") screenRef.current?.focus({ preventScroll: true });
@@ -341,6 +364,34 @@ export default function Explorer() {
           </button>
         </div>
       </nav>
+      {mode !== "map" && (
+        <nav className="chapter-breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="/">South Africa</Link>
+            </li>
+            <li>
+              <Link href={`/${city.slug}`} aria-current={mode === "city" ? "page" : undefined}>
+                {city.name}
+              </Link>
+            </li>
+            {mode !== "city" && (
+              <li>
+                <Link href={categoryPath} aria-current={mode === "category" ? "page" : undefined}>
+                  {categories[cat]}
+                </Link>
+              </li>
+            )}
+            {place && (
+              <li>
+                <Link href={pathname} aria-current="page">
+                  {place.name}
+                </Link>
+              </li>
+            )}
+          </ol>
+        </nav>
+      )}
       <header className="game-heading">
         <motion.div
           key={mode + city.slug}
@@ -366,8 +417,15 @@ export default function Explorer() {
               place?.name
             )}
           </h1>
-          {mode === "city" && <p className="province-subtitle">{city.province}</p>}
-          {mode === "place" && <p className="place-introduction">{place?.description}</p>}
+          <p className="heading-description">
+            {mode === "map"
+              ? "Three cities. Endless possibilities. Turn the map and follow your curiosity."
+              : mode === "city"
+                ? cityDescriptions[ci]
+                : mode === "category"
+                  ? `A new side of ${city.short}. Swipe a chapter and find somewhere worth exploring.`
+                  : place?.description}
+          </p>
         </motion.div>
         {mode === "category" && (
           <label className="game-search">
@@ -413,23 +471,44 @@ export default function Explorer() {
           <footer className="game-controls">
             {mode === "map" ? (
               <>
-                <p className="map-hint">Tap a numbered pin. Drag the map to turn it.</p>
-                <div className="city-shortcuts" aria-label="Cities">
-                  {cities.map((c, i) => (
-                    <button key={c.slug} onClick={() => goCity(i)}>
-                      <span>{i + 1}</span>
-                      {c.short}
-                    </button>
-                  ))}
-                </div>
+                <p className="map-hint">Tap a colored province. Drag the map to turn it.</p>
                 <div className="map-legend">
-                  <span>
+                  <button
+                    className="available-legend"
+                    aria-expanded={showProvinces}
+                    aria-controls="province-picker"
+                    onClick={() => setShowProvinces(!showProvinces)}
+                  >
                     <i />3 provinces ready to explore
-                  </span>
-                  <button onClick={() => setHelp(true)}>
-                    Map & source credits <ArrowUpRight size={10} />
                   </button>
+                  <span className="coming-legend">
+                    <i />
+                    More chapters coming
+                  </span>
                 </div>
+                {showProvinces && (
+                  <nav
+                    id="province-picker"
+                    className="province-picker"
+                    aria-label="Available provinces"
+                  >
+                    {cities.map((c, i) => (
+                      <Link key={c.slug} href={`/${c.slug}`}>
+                        <i style={{ background: ["#edb94c", "#5eaff1", "#4ed3b8"][i] }} />
+                        {c.province}
+                        <span>{c.short}</span>
+                      </Link>
+                    ))}
+                  </nav>
+                )}
+                <a
+                  className="geography-credit"
+                  href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Map: geoBoundaries / OCHA / MDB · adapted · CC BY 3.0 IGO
+                </a>
               </>
             ) : mode === "city" ? (
               <>
@@ -526,6 +605,7 @@ export default function Explorer() {
                       {categories[cat]}
                     </motion.h2>
                   </AnimatePresence>
+                  <p className="category-description">{categoryDescriptions[cat]}</p>
                   <button className="pill-button" onClick={openPlaces}>
                     Open {categories[cat]}
                   </button>

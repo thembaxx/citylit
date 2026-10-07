@@ -216,8 +216,8 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
   await expect(page.locator(".wordmark")).toHaveText("citylit");
   await expect(page.locator(".wordmark svg, .wordmark span")).toHaveCount(0);
-  await expect(page.locator(".map-pin")).toHaveCount(3);
-  await expect(page.locator(".map-pin").first()).toHaveCSS("font-size", "14px");
+  await expect(page.locator(".map-pin")).toHaveCount(0);
+  await expect(page.locator("button.province-active")).toHaveCount(3);
   expect(
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);
@@ -277,4 +277,42 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   expect(
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);
+});
+
+test("linked breadcrumbs, two-line introductions and province chooser", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByText("More chapters coming", { exact: true })).toBeVisible();
+  await expect(page.locator(".map-pin")).toHaveCount(0);
+  await page.getByRole("button", { name: "3 provinces ready to explore", exact: true }).click();
+  await page
+    .getByRole("navigation", { name: "Available provinces" })
+    .getByRole("link", { name: /Western Cape/ })
+    .click();
+  await expect(page).toHaveURL(/cape-town$/);
+  const trail = page.getByRole("navigation", { name: "Breadcrumb", exact: true });
+  await expect(trail.getByRole("link", { name: "Cape Town", exact: true })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await page.getByRole("button", { name: "Explore Cape Town", exact: true }).click();
+  await expect(trail.getByRole("link", { name: "Entertainment", exact: true })).toHaveAttribute(
+    "href",
+    "/cape-town/entertainment",
+  );
+  await page.getByPlaceholder("Search places").fill("Kirstenbosch");
+  await page.locator(".place-open").click();
+  await expect(trail.getByRole("link", { name: "Kirstenbosch", exact: true })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await trail.getByRole("link", { name: "Parks & zoos", exact: true }).click();
+  await expect(page).toHaveURL(/cape-town\/parks-zoos$/);
+  const description = page.locator(".heading-description");
+  const height = await description.evaluate((el) => ({
+    height: el.getBoundingClientRect().height,
+    line: parseFloat(getComputedStyle(el).lineHeight),
+  }));
+  expect(height.height).toBeLessThanOrEqual(height.line * 2 + 1);
+  await trail.getByRole("link", { name: "South Africa", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
 });

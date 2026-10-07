@@ -19,7 +19,7 @@ class WebGLBoundary extends Component<{ children: ReactNode }, { failed: boolean
   render() {
     return this.state.failed ? (
       <div className="webgl-fallback" role="status">
-        3D is unavailable on this device. Explore using the city shortcuts below.
+        3D is unavailable on this device. Explore using the province links in the map legend.
       </div>
     ) : (
       this.props.children
@@ -40,7 +40,11 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
           frameloop="demand"
           dpr={[1, 1.5]}
           gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-          fallback={<div className="webgl-fallback">Explore using the city shortcuts below.</div>}
+          fallback={
+            <div className="webgl-fallback">
+              Explore using the province links in the map legend.
+            </div>
+          }
         >
           <FrameClear />
           <View.Port />

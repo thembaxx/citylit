@@ -6,7 +6,7 @@ import { useReducedMotion } from "motion/react";
 import * as THREE from "three";
 import gsap from "gsap";
 import ProvinceMap, { provinceLabels, type LabelRefs } from "./ProvinceMap";
-import { provinceColors } from "../lib/province-colors";
+import { provinceColors, availableProvinces } from "../lib/province-colors";
 import { cities } from "../lib/data";
 import { Landmark, CategoryModel } from "./Models";
 type Props = {
@@ -172,30 +172,20 @@ export default function Scene(props: Props) {
               className="projected-label"
               style={{ "--province-color": provinceColors[p.code] } as React.CSSProperties}
             >
-              <span
-                data-available={["GT", "WC", "KZ"].includes(p.code)}
-                className={`province ${["GT", "WC", "KZ"].includes(p.code) ? "province-active" : ""}`}
-              >
-                {p.name.toUpperCase()}
-              </span>
-            </div>
-          ))}
-          {cities.map((city, i) => (
-            <div
-              key={city.slug}
-              ref={(element) => {
-                labels.current["city-" + i] = element;
-              }}
-              className="projected-label pin-label"
-            >
-              <button
-                className="map-pin"
-                onClick={() => props.onCity(i)}
-                aria-label={`Explore ${city.name}`}
-              >
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                <span className="pin-tooltip">{city.name}</span>
-              </button>
+              {availableProvinces[p.code] !== undefined ? (
+                <button
+                  data-available="true"
+                  className="province province-active"
+                  aria-label={`Explore ${cities[availableProvinces[p.code]].name}`}
+                  onClick={() => props.onCity(availableProvinces[p.code])}
+                >
+                  {p.name.toUpperCase()}
+                </button>
+              ) : (
+                <span data-available="false" className="province">
+                  {p.name.toUpperCase()}
+                </span>
+              )}
             </div>
           ))}
         </div>

@@ -14,10 +14,8 @@ The custom wordmark has a diamond-shaped first “i” dot. The app icon is Khwe
 
 The vectors originate in the React component. To regenerate the static exports after changing a vector:
 
-    pnpm build
-    pnpm start
     pnpm brand:export
 
-The export command reads the local `/brand` reference, then uses the Sharp version bundled with Next to rasterize PNGs. Restart the server after exporting newly created public paths. Check the face at favicon size and the maskable safe area. Check the live `/brand` model separately from the vector references. Do not hand-edit generated PNGs. The exports are original Citylit artwork; font licenses remain under `public/fonts`.
+The export command compiles the vector component to a temporary local module, renders it with React and uses the Sharp version bundled with Next to rasterize PNGs. It needs no network connection or running app; the temporary module is removed after rendering. Check the face at favicon size and the maskable safe area. Check the live `/brand` model separately from the vector references. Do not hand-edit generated PNGs. The exports are original Citylit artwork; font licenses remain under `public/fonts`.
 
 Brand colours: ivory `#F3EFE3`, ink `#17243C`, electric `#6558F5`, blush `#E9B2BA`, lantern amber `#F3C975`. Existing day/night tokens select accessible text and interactive colours; decorative character colours do not replace those tokens. Saved sparks pick up the active destination's accent while the character's body stays consistent.

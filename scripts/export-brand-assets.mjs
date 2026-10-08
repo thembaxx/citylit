@@ -1,20 +1,50 @@
-// Run against a local production server. The React vectors remain the source of truth.
-import { mkdir, writeFile } from "node:fs/promises";
+// Render the authored React vectors locally; no HTTP source or running app is needed.
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 const require = createRequire(import.meta.url);
 const sharp = createRequire(require.resolve("next/package.json"))("sharp");
-const base = new URL(process.argv[2] || "http://localhost:3000");
-if (!["localhost", "127.0.0.1"].includes(base.hostname) || !base.href.startsWith(`${base.origin}/`))
-  throw new Error("Export assets from your local Citylit server.");
-const response = await fetch(new URL("/brand", base), { signal: AbortSignal.timeout(15000) });
-if (!response.ok) throw new Error("Start the production server before exporting brand assets.");
-const html = await response.text();
+const root = fileURLToPath(new URL("../", import.meta.url));
+// Keep the temporary module under the project so its React imports resolve normally.
+const temporary = await mkdtemp(`${root}.citylit-brand-`);
+let KhweziMark;
+try {
+  const compiler = fileURLToPath(
+    new URL("bin/tsc", pathToFileURL(require.resolve("typescript/package.json"))),
+  );
+  execFileSync(
+    process.execPath,
+    [
+      compiler,
+      "--ignoreConfig",
+      "--jsx",
+      "react-jsx",
+      "--module",
+      "esnext",
+      "--moduleResolution",
+      "bundler",
+      "--target",
+      "ES2022",
+      "--skipLibCheck",
+      "--rootDir",
+      root,
+      "--outDir",
+      temporary,
+      `${root}components/KhweziMark.tsx`,
+    ],
+    { cwd: root, stdio: "inherit" },
+  );
+  KhweziMark = (await import(pathToFileURL(`${temporary}/components/KhweziMark.js`).href)).default;
+} finally {
+  await rm(temporary, { recursive: true, force: true });
+}
 const directory = new URL("../public/brand/", import.meta.url);
 await mkdir(directory, { recursive: true });
 function vector(pose) {
-  const svg = html.match(new RegExp(`<svg\\b[^>]*data-pose="${pose}"[^>]*>[\\s\\S]*?</svg>`))?.[0];
-  if (!svg) throw new Error(`Missing ${pose} reference vector on the concept page.`);
-  return svg
+  return renderToStaticMarkup(createElement(KhweziMark, { pose }))
     .replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')
     .replace(/ aria-hidden="true"/g, "")
     .replace(/var\(--khwezi-spark, #6558F5\)/g, "#6558F5");

@@ -1,4 +1,6 @@
 import { test, expect } from "@playwright/test";
+import { readFileSync } from "node:fs";
+import { runInNewContext } from "node:vm";
 
 test("Khwezi welcomes once, teaches gestures and keeps a single canvas", async ({ page }) => {
   const errors: string[] = [];
@@ -163,4 +165,33 @@ test("empty searches introduce Khwezi; downloaded offline guides retain the masc
     )
     .toBeGreaterThan(0);
   await context.setOffline(false);
+});
+
+test("offline downloads reject messages from foreign or missing origins", () => {
+  let message: (event: { origin: string; data: { type: string }; waitUntil: () => void }) => void;
+  let downloads = 0;
+  runInNewContext(readFileSync(new URL("../public/sw.js", import.meta.url), "utf8"), {
+    self: {
+      location: { origin: "https://citylit.vercel.app" },
+      addEventListener: (name: string, handler: typeof message) => {
+        if (name === "message") message = handler;
+      },
+    },
+    caches: {
+      open: () => {
+        downloads++;
+        return Promise.resolve({});
+      },
+    },
+  });
+  for (const origin of ["https://other.example", "", "https://citylit.vercel.app.other.example"]) {
+    message!({
+      origin,
+      data: { type: "SAVE_GUIDE" },
+      waitUntil: () => {
+        downloads++;
+      },
+    });
+  }
+  expect(downloads).toBe(0);
 });

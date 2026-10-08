@@ -33,7 +33,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
 });
 self.addEventListener('message', event => {
-  if (event.data?.type !== 'SAVE_GUIDE') return;
+  if (event.origin !== self.location.origin || event.data?.type !== 'SAVE_GUIDE') return;
   event.waitUntil((async () => {
     let ok = true;
     const cache = await caches.open(CACHE);

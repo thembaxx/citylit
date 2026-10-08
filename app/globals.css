@@ -3271,3 +3271,747 @@ button:disabled {
   min-height: 44px;
   color: var(--accent-ink);
 }
+
+/* Citylit identity — warmth, a diamond of light, and room for curiosity. */
+.brand-world {
+  height: 100%;
+  --khwezi-spark: var(--accent);
+}
+.wordmark > .wordmark-letters {
+  color: inherit;
+  padding: 0;
+}
+.wordmark-i {
+  position: relative;
+  display: inline-block;
+}
+.wordmark-spark {
+  position: absolute;
+  top: 0.07em;
+  left: 50%;
+  width: 0.17em;
+  height: 0.17em;
+  background: var(--accent);
+  transform: translateX(-50%) rotate(45deg);
+  border-radius: 1px;
+}
+.game-nav .utility-nav {
+  gap: 4px;
+}
+.game-nav .utility-nav .icon-button {
+  width: 40px;
+  min-width: 40px;
+  height: 44px;
+}
+.game-nav .utility-nav .icon-button:hover {
+  transform: translateY(-1px);
+}
+.khwezi-mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.khwezi-body {
+  transform-origin: 90px 180px;
+}
+.khwezi-ear-left {
+  transform-origin: 70px 92px;
+}
+.khwezi-ear-right {
+  transform-origin: 110px 92px;
+}
+.khwezi-mark[data-pose="gesture"] .khwezi-ear {
+  animation: khwezi-listen 1.8s ease-in-out 2;
+}
+.khwezi-mark[data-pose="saved"] .khwezi-body {
+  animation: khwezi-hop 0.8s cubic-bezier(0.2, 0.8, 0.3, 1) 1;
+}
+.khwezi-mark[data-pose="saved"] .khwezi-orbit-spark {
+  animation: khwezi-catch 1.4s ease-in-out 1 forwards;
+}
+.khwezi-mark[data-pose="loading"] .khwezi-orbit-spark {
+  animation: khwezi-orbit 2.6s ease-in-out infinite;
+}
+.khwezi-mark[data-pose="search"] .khwezi-prop {
+  transform-origin: 118px 116px;
+  animation: khwezi-search 1.8s ease-in-out 1;
+}
+.khwezi-mark[data-pose="offline"] .khwezi-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleY(0.15);
+}
+.khwezi-mark[data-pose="offline"] .khwezi-ear-left {
+  transform: rotate(-14deg);
+}
+.khwezi-mark[data-pose="offline"] .khwezi-ear-right {
+  transform: rotate(12deg);
+}
+@keyframes khwezi-listen {
+  50% {
+    transform: rotate(-8deg);
+  }
+}
+@keyframes khwezi-hop {
+  45% {
+    transform: translateY(-12px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(2px);
+  }
+}
+@keyframes khwezi-catch {
+  to {
+    transform: translate(-50px, 76px) scale(0.25);
+    opacity: 0;
+  }
+}
+@keyframes khwezi-search {
+  50% {
+    transform: rotate(-10deg);
+  }
+}
+.brand-world[data-khwezi-motion="still"] .khwezi-mark *,
+.brand-world[data-khwezi-motion="still"] .gesture-demo i {
+  animation: none !important;
+}
+.khwezi-view {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  touch-action: none;
+}
+.khwezi-three-view {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.khwezi-view-fallback {
+  position: absolute;
+  inset: 0;
+}
+.khwezi-view[data-ready="true"] .khwezi-view-fallback {
+  opacity: 0;
+}
+.khwezi-turn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+  border-radius: 24px;
+}
+.khwezi-turn:active {
+  cursor: grabbing;
+}
+.khwezi-welcome {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  height: 94px;
+  min-height: 94px;
+  margin: 8px auto 0;
+  z-index: 3;
+}
+.khwezi-welcome-portrait {
+  width: 88px;
+  height: 100px;
+  flex-shrink: 0;
+}
+.khwezi-welcome-copy {
+  padding: 8px 22px 8px 0;
+}
+.khwezi-welcome-copy strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.khwezi-welcome-copy p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 3px 0 5px;
+}
+.khwezi-welcome-copy button {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: var(--accent);
+  font: 10px var(--font-mono);
+  min-height: 28px;
+  padding: 0;
+}
+.khwezi-dismiss {
+  position: absolute;
+  right: -5px;
+  top: 8px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--muted);
+  border-radius: 50%;
+}
+.khwezi-dismiss:hover {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.khwezi-moment {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 450px;
+  text-align: left;
+}
+.khwezi-moment > .khwezi-mark {
+  width: 92px;
+  height: 110px;
+  flex-shrink: 0;
+}
+.khwezi-moment strong {
+  font: 700 24px/1.1 var(--font-heading);
+  display: block;
+}
+.khwezi-moment p {
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+.khwezi-moment-compact {
+  gap: 12px;
+}
+.khwezi-moment-compact > .khwezi-mark {
+  width: 62px;
+  height: 80px;
+}
+.khwezi-moment-compact strong {
+  font-size: 19px;
+}
+.khwezi-moment-compact p {
+  font: 10px/1.6 var(--font-mono);
+  letter-spacing: 0;
+}
+.khwezi-toast {
+  position: fixed;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  right: 18px;
+  z-index: 115;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 330px;
+  max-width: calc(100vw - 32px);
+  padding: 12px 18px 12px 8px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 35px #0002;
+  pointer-events: none;
+}
+.khwezi-toast .khwezi-mark {
+  width: 68px;
+  height: 82px;
+  flex-shrink: 0;
+}
+.khwezi-toast strong {
+  font: 700 25px/1.1 var(--font-heading);
+}
+.khwezi-toast p {
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 5px 0 0;
+  color: var(--muted);
+}
+.khwezi-toast a {
+  display: block;
+  font: 10px/1.5 var(--font-mono);
+  color: var(--accent);
+  margin-top: 8px;
+  pointer-events: auto;
+}
+.experience-settings {
+  display: grid;
+  gap: 12px;
+}
+.experience-settings > p {
+  margin: 0 0 6px;
+}
+.preference-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 15px;
+  min-height: 58px;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--ink) 3%, transparent);
+  font-size: 13px;
+}
+.preference-button small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.preference-button[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+}
+.preference-button:hover {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.experience-settings .setting-row {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 3px 0;
+}
+.brand-link {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font: 10px/1.6 var(--font-mono);
+  color: var(--muted);
+  padding-top: 4px;
+}
+.gesture-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  min-height: 48px;
+  color: var(--muted);
+}
+.gesture-demo i {
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border-radius: 7px;
+  animation: gesture-nudge 2.2s ease-in-out 2;
+}
+@keyframes gesture-nudge {
+  25% {
+    transform: translateX(-25px) rotate(-10deg);
+  }
+  75% {
+    transform: translateX(25px) rotate(10deg);
+  }
+}
+.gesture-demo[data-moving="false"] i {
+  animation: none;
+}
+.brand-route-loading {
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.empty .khwezi-moment {
+  margin: 0 auto 22px;
+}
+.brand-page {
+  height: 100dvh;
+  overflow: auto;
+  padding: 24px clamp(20px, 5vw, 80px) 60px;
+  scrollbar-gutter: stable;
+  position: relative;
+}
+.brand-page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+  gap: 20px;
+  padding-bottom: 36px;
+  max-width: 1100px;
+  margin: auto;
+}
+.brand-page-nav > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.brand-page-nav > div > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 11px var(--font-mono);
+}
+.brand-heading,
+.brand-character,
+.brand-section,
+.brand-downloads {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.brand-heading {
+  position: relative;
+  z-index: 3;
+  margin-bottom: 42px;
+}
+.brand-heading h1 {
+  font-size: clamp(65px, 12vw, 130px);
+  margin: 18px 0;
+  text-wrap: balance;
+}
+.brand-heading > p {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 540px;
+  color: var(--muted);
+}
+.brand-character {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 5vw, 70px);
+  align-items: center;
+  margin-bottom: 64px;
+}
+.brand-character-stage {
+  height: 430px;
+  position: relative;
+  z-index: 3;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--accent) 8%, transparent),
+    transparent 70%
+  );
+}
+.brand-stage-caption {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font: 10px/1.6 var(--font-mono);
+  color: var(--muted);
+}
+.brand-character-story {
+  position: relative;
+  z-index: 3;
+}
+.brand-character-story h2,
+.brand-section h2,
+.brand-downloads h2 {
+  font-size: clamp(34px, 5vw, 54px);
+  margin: 14px 0 20px;
+}
+.brand-character-story > p,
+.brand-section > p,
+.brand-downloads p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 680px;
+}
+.brand-pose-picker,
+.brand-view-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+.brand-pose-picker button,
+.brand-view-picker button {
+  padding: 10px 14px;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  font: 11px var(--font-mono);
+  text-transform: capitalize;
+}
+.brand-pose-picker button[aria-pressed="true"],
+.brand-view-picker button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.brand-view-picker button {
+  font-size: 10px;
+  border: 0;
+  color: var(--muted);
+}
+.brand-glow-picker {
+  display: grid;
+  gap: 9px;
+  margin-top: 24px;
+  font: 11px var(--font-mono);
+  color: var(--muted);
+}
+.brand-glow-picker select {
+  width: 100%;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.brand-section {
+  padding: 38px 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 3;
+}
+.brand-turnarounds {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.brand-turnarounds figure {
+  margin: 0;
+  text-align: center;
+}
+.brand-turnarounds .khwezi-view,
+.brand-icon-example {
+  height: 220px;
+  display: grid;
+  place-items: center;
+}
+.brand-turnarounds figcaption {
+  font: 10px/1.6 var(--font-mono);
+  color: var(--muted);
+  padding-top: 14px;
+}
+.brand-swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin: 28px 0;
+}
+.brand-swatches i {
+  display: block;
+  height: 70px;
+  border: 1px solid #80808033;
+  border-radius: 18px;
+  margin-bottom: 14px;
+}
+.brand-swatches strong {
+  display: block;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.brand-swatches code {
+  font: 10px/2 var(--font-mono);
+  color: var(--muted);
+}
+.brand-theme-examples {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 30px;
+}
+.brand-theme-examples > div {
+  padding: 26px;
+  border-radius: 26px;
+  border: 1px solid #80808033;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.brand-theme-examples .khwezi-mark {
+  height: 155px;
+  width: 140px;
+  align-self: center;
+  margin: 18px 0;
+}
+.brand-theme-examples strong {
+  font: 700 28px/1.2 var(--font-heading);
+}
+.brand-theme-examples p {
+  font-size: 12px;
+  line-height: 1.7;
+  opacity: 0.8;
+  margin: 8px 0 0;
+}
+.brand-day-example {
+  background: #f5f3eb;
+  color: #17243c;
+}
+.brand-night-example {
+  background: #091323;
+  color: #f3efe3;
+}
+.brand-ui-moments {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 26px 0;
+}
+.brand-ui-moments .khwezi-moment {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+}
+.brand-ui-moments .khwezi-moment > .khwezi-mark {
+  height: 100px;
+  width: 90px;
+}
+.brand-downloads {
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 3;
+}
+.brand-downloads > div {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+.brand-downloads a,
+.brand-downloads button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  font: 11px/1.6 var(--font-mono);
+}
+@supports (corner-shape: squircle) {
+  .preference-button,
+  .khwezi-toast,
+  .brand-ui-moments .khwezi-moment,
+  .brand-theme-examples > div,
+  .brand-swatches i {
+    corner-shape: squircle;
+  }
+}
+@media (max-width: 700px) {
+  .brand-character {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-bottom: 42px;
+  }
+  .brand-character-stage {
+    height: 300px;
+  }
+  .brand-turnarounds {
+    gap: 8px;
+  }
+  .brand-turnarounds .khwezi-view,
+  .brand-icon-example {
+    height: 150px;
+  }
+  .brand-icon-example img {
+    width: 78px;
+    height: 78px;
+  }
+  .brand-turnarounds figcaption {
+    font-size: 8px;
+  }
+  .brand-ui-moments {
+    grid-template-columns: 1fr;
+  }
+  .brand-ui-moments .khwezi-moment {
+    flex-direction: row;
+    align-items: center;
+  }
+  .brand-theme-examples > div {
+    padding: 18px;
+  }
+  .brand-theme-examples strong {
+    font-size: 23px;
+  }
+  .brand-swatches {
+    gap: 8px;
+  }
+  .brand-swatches i {
+    height: 48px;
+    border-radius: 12px;
+  }
+  .brand-swatches code {
+    font-size: 8px;
+  }
+  .brand-page-nav > div > a {
+    font-size: 9px;
+  }
+}
+@media (max-height: 700px) {
+  .khwezi-welcome {
+    height: 78px;
+    min-height: 78px;
+    margin-top: 0;
+  }
+  .khwezi-welcome-portrait {
+    height: 82px;
+    width: 70px;
+  }
+}
+@media (max-height: 480px) {
+  .khwezi-welcome {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .khwezi-mark *,
+  .gesture-demo i {
+    animation: none !important;
+  }
+  .khwezi-view-fallback {
+    transition: none;
+  }
+}
+@media print {
+  html,
+  body,
+  .canvas-root,
+  .brand-world,
+  .brand-page {
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff;
+    color: #17243c;
+  }
+  .persistent-canvas,
+  .brand-page-nav,
+  .brand-pose-picker,
+  .brand-view-picker,
+  .brand-glow-picker,
+  .brand-downloads > div,
+  .khwezi-turn {
+    display: none !important;
+  }
+  .khwezi-view-fallback {
+    opacity: 1 !important;
+  }
+  .brand-section,
+  .brand-character {
+    break-inside: avoid;
+  }
+  .brand-heading h1 {
+    font-size: 70px;
+  }
+  .brand-character-stage {
+    height: 260px;
+  }
+}
+.khwezi-orbit-spark {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes khwezi-orbit {
+  25% {
+    transform: translate(-20px, -14px) rotate(10deg);
+  }
+  50% {
+    transform: translate(-40px, 0);
+  }
+  75% {
+    transform: translate(-20px, 14px) rotate(-10deg);
+  }
+}

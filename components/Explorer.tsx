@@ -10,7 +10,7 @@ import {
   ArrowLeft,
   ChevronLeft,
   ChevronRight,
-  Compass,
+  Vibrate,
   Map,
   Search,
   Heart,
@@ -22,6 +22,7 @@ import {
   Moon,
   Volume2,
   VolumeX,
+  Settings2,
 } from "lucide-react";
 import MiniSearch from "minisearch";
 import Gallery from "./Gallery";
@@ -31,12 +32,20 @@ import CategoryNav from "./CategoryNav";
 import { useDiscovery } from "./useDiscovery";
 import PlaceActions from "./PlaceActions";
 import { provinceColors, availableProvinces } from "../lib/province-colors";
-import { useDelight } from "./useDelight";
+import { useKhwezi } from "./KhweziProvider";
+import BrandWordmark from "./BrandWordmark";
+import KhweziWelcome from "./KhweziWelcome";
+import KhweziMoment from "./KhweziMoment";
+import { brand } from "../lib/brand";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import { cities, categories, places, categorySlug, landmarkSources } from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
-  loading: () => <div className="scene-loading">ASSEMBLING YOUR ADVENTURE…</div>,
+  loading: () => (
+    <div className="scene-loading">
+      <KhweziMoment pose="loading" compact />
+    </div>
+  ),
 });
 const PlaceMap = dynamic(() => import("./PlaceMap"), { ssr: false });
 const categoryDescriptions = [
@@ -97,7 +106,17 @@ export default function Explorer() {
   const [night, setNight] = useState(true);
   const [notice, setNotice] = useState("");
   const [showProvinces, setShowProvinces] = useState(false);
-  const { sound, haptics, feedback, toggleSound, toggleHaptics } = useDelight();
+  const {
+    sound,
+    haptics,
+    feedback,
+    toggleSound,
+    toggleHaptics,
+    animations: animate,
+    toggleAnimations,
+    dismissWelcome,
+    moving,
+  } = useKhwezi();
   useEffect(() => {
     try {
       const selected = localStorage.getItem("citylit-theme");
@@ -127,8 +146,9 @@ export default function Explorer() {
     [query, setQuery] = useState(params.get("q") || "");
   const [showSaved, setShowSaved] = useState(false),
     [help, setHelp] = useState(false),
-    [reset, setReset] = useState(0),
-    [animate, setAnimate] = useState(true);
+    [showSettings, setShowSettings] = useState(false),
+    [reset, setReset] = useState(0);
+  const panelOpen = showSaved || help || showSettings;
   const modalRef = useRef<HTMLDivElement>(null),
     searchRef = useRef<HTMLInputElement>(null),
     screenRef = useRef<HTMLElement>(null);
@@ -173,7 +193,7 @@ export default function Explorer() {
     if (mode !== "place") screenRef.current?.focus({ preventScroll: true });
   }, [mode, city.slug]);
   useEffect(() => {
-    if (!showSaved && !help) return;
+    if (!panelOpen) return;
     const before = document.activeElement as HTMLElement | null;
     requestAnimationFrame(() =>
       modalRef.current?.querySelector<HTMLButtonElement>("button")?.focus(),
@@ -182,6 +202,7 @@ export default function Explorer() {
       if (e.key === "Escape") {
         setShowSaved(false);
         setHelp(false);
+        setShowSettings(false);
       }
       if (e.key === "Tab") {
         const elements = modalRef.current?.querySelectorAll<HTMLElement>(
@@ -205,12 +226,9 @@ export default function Explorer() {
       document.removeEventListener("keydown", onKey);
       before?.focus();
     };
-  }, [showSaved, help]);
+  }, [panelOpen]);
   const toggle = (id: string) => {
-    feedback("save");
-    setNotice(
-      saved.includes(id) ? "Released back into the wild." : "A little treasure, collected.",
-    );
+    if (saved.includes(id)) setNotice("Released back into the wild.");
     setSaved((prev) => {
       const next = prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id];
       try {
@@ -221,6 +239,7 @@ export default function Explorer() {
   };
   const goCity = (i: number) => {
     feedback("tap");
+    dismissWelcome();
     router.push("/" + cities[i].slug);
   };
   const selectLandmark = (v: number) => {
@@ -303,19 +322,26 @@ export default function Explorer() {
         if (
           target &&
           !target.getAttribute("aria-label")?.startsWith("Save") &&
+          !target.classList.contains("detail-save") &&
           !target.classList.contains("sound-toggle")
         )
           feedback("tap");
       }}
       className={`game-screen game-${mode} theme-${theme.name} ${listing ? "has-results" : ""}`}
-      style={{ "--city-glow": theme.glow } as CSSProperties}
+      style={
+        {
+          "--city-glow": theme.glow,
+          "--city-color": mode === "map" ? brand.colors.electric : city.accentColor,
+          "--khwezi-spark": mode === "map" ? brand.colors.electric : city.accentColor,
+        } as CSSProperties
+      }
     >
       <Atmosphere
         mode={mode}
         city={ci}
         category={cat}
         night={night}
-        animate={animate && !discovery.essential && !help && !showSaved}
+        animate={animate && !discovery.essential && !panelOpen}
       />
       <div className="game-atmosphere" aria-hidden="true">
         <div className="ambient-glow" />
@@ -330,7 +356,7 @@ export default function Explorer() {
           aria-label={navLabel}
         >
           {mode === "map" ? (
-            <span className="wordmark">citylit</span>
+            <BrandWordmark />
           ) : (
             <>
               <ArrowLeft size={15} />
@@ -354,17 +380,6 @@ export default function Explorer() {
             {night ? <Sun size={17} /> : <Moon size={17} />}
           </button>
           <button
-            className="icon-button sound-toggle"
-            aria-label={sound ? "Mute sounds" : "Enable sounds"}
-            aria-pressed={sound}
-            onClick={() => {
-              toggleSound();
-              setNotice(sound ? "Quiet magic." : "Sound on. Tiny notes of wonder.");
-            }}
-          >
-            {sound ? <Volume2 size={16} /> : <VolumeX size={16} />}
-          </button>
-          <button
             className="icon-button"
             aria-label={`Your discoveries ${saved.length}`}
             onClick={() => setShowSaved(true)}
@@ -372,26 +387,13 @@ export default function Explorer() {
             <Heart size={17} />
             {saved.length > 0 && <span className="save-count">{saved.length}</span>}
           </button>
-          {mode !== "place" && (
-            <>
-              <button
-                className="icon-button"
-                aria-label="Reset 3D view"
-                onClick={() => setReset((v) => v + 1)}
-              >
-                <RotateCcw size={16} />
-              </button>
-            </>
-          )}
           <button
             className="icon-button"
-            aria-label={animate ? "Pause animations" : "Play animations"}
-            onClick={() => setAnimate((v) => !v)}
+            aria-label="Experience settings"
+            aria-haspopup="dialog"
+            onClick={() => setShowSettings(true)}
           >
-            {animate ? <Pause size={15} /> : <Play size={15} />}
-          </button>
-          <button className="icon-button" aria-label="How to explore" onClick={() => setHelp(true)}>
-            <Compass size={17} />
+            <Settings2 size={18} />
           </button>
         </div>
       </nav>
@@ -451,7 +453,7 @@ export default function Explorer() {
             </h1>
             <p className="heading-description">
               {mode === "map"
-                ? "Twelve destinations. Nine provinces. Turn the map and follow your curiosity."
+                ? "Every city has a spark. Twelve destinations. Nine provinces. Follow a little curiosity."
                 : mode === "city"
                   ? cityDescriptions[ci] || city.intro
                   : mode === "category"
@@ -485,6 +487,7 @@ export default function Explorer() {
           )}
         </header>
       )}
+      {mode === "map" && <KhweziWelcome onHelp={() => setHelp(true)} />}
       {listing ? (
         <CategoryPlaces
           key={city.slug + cat}
@@ -494,7 +497,7 @@ export default function Explorer() {
           query={query}
           saved={saved}
           reset={reset}
-          animate={animate && !discovery.essential && !help && !showSaved}
+          animate={animate && !discovery.essential && !panelOpen}
           searchRef={searchRef}
           onQuery={changeQuery}
           onCategory={chooseCategory}
@@ -512,7 +515,7 @@ export default function Explorer() {
                 index={index}
                 category={cat}
                 reset={reset}
-                animate={animate && !discovery.essential && !help && !showSaved}
+                animate={animate && !discovery.essential && !panelOpen}
                 onCity={goCity}
                 onSelect={
                   mode === "city"
@@ -786,7 +789,7 @@ export default function Explorer() {
         )
       )}
       <AnimatePresence>
-        {(showSaved || help) && (
+        {panelOpen && (
           <motion.div
             className="modal-backdrop"
             initial={{ opacity: 0 }}
@@ -795,6 +798,7 @@ export default function Explorer() {
             onClick={() => {
               setShowSaved(false);
               setHelp(false);
+              setShowSettings(false);
             }}
           >
             <motion.div
@@ -805,7 +809,9 @@ export default function Explorer() {
               transition={{ duration: reduced ? 0 : 0.2 }}
               role="dialog"
               aria-modal="true"
-              aria-label={help ? "How to explore" : "Your discoveries"}
+              aria-label={
+                showSettings ? "Experience settings" : help ? "How to explore" : "Your discoveries"
+              }
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -813,70 +819,152 @@ export default function Explorer() {
                 onClick={() => {
                   setShowSaved(false);
                   setHelp(false);
+                  setShowSettings(false);
                 }}
                 aria-label="Close"
               >
                 <X />
               </button>
               <span className="tiny-label">YOUR OWN LITTLE ADVENTURE</span>
-              <h2>{help ? "Stay curious." : "Your discoveries."}</h2>
-              {help && (
-                <button className="haptics-toggle" aria-pressed={haptics} onClick={toggleHaptics}>
-                  Touch feedback {haptics ? "on" : "off"} · where supported
-                </button>
-              )}
-              {help && (
-                <label className="setting-row">
-                  <input
-                    type="checkbox"
-                    checked={discovery.essential}
-                    onChange={(e) => updateDiscovery({ essential: e.target.checked })}
-                  />
-                  Essential motion: keep transitions, stop continuous movement
-                </label>
-              )}
-              {help ? (
-                <>
-                  <p>Drag the map or landmark to give it a spin. Pinch or scroll to get closer.</p>
-                  <p>
-                    Choose a colored province, swipe its landmark captions, then explore one
-                    category at a time. Open a category to browse its places.
-                  </p>
-                  <p>Tap a heart to keep a discovery for later.</p>
-                  <a
-                    className="photo-link"
-                    href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
-                    target="_blank"
-                    rel="noreferrer"
+              <h2>
+                {showSettings
+                  ? "Your kind of magic."
+                  : help
+                    ? "Follow a little curiosity."
+                    : "Your discoveries."}
+              </h2>
+              {showSettings ? (
+                <div className="experience-settings">
+                  <p>A little delight, on your terms.</p>
+                  <button
+                    className="preference-button sound-toggle"
+                    aria-label={sound ? "Mute sounds" : "Enable sounds"}
+                    aria-pressed={sound}
+                    onClick={toggleSound}
                   >
-                    Map: geoBoundaries / OCHA / MDB · adapted · CC BY 3.0 IGO{" "}
-                    <ArrowUpRight size={13} />
-                  </a>
-                  <button className="pill-button" onClick={() => setHelp(false)}>
-                    Let’s explore
+                    {sound ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                    <span>
+                      Quiet sound effects
+                      <small>
+                        {sound ? "On · two little notes" : "Off · always quiet on reload"}
+                      </small>
+                    </span>
                   </button>
-                </>
-              ) : saved.length ? (
-                places
-                  .filter((p) => saved.includes(p.id))
-                  .map((p) => (
+                  <button
+                    className="preference-button"
+                    aria-label={animate ? "Pause animations" : "Play animations"}
+                    aria-pressed={!animate}
+                    onClick={toggleAnimations}
+                  >
+                    {animate ? <Pause size={18} /> : <Play size={18} />}
+                    <span>
+                      {animate ? "Pause animations" : "Play animations"}
+                      <small>Applies to the map, landmarks and Khwezi</small>
+                    </span>
+                  </button>
+                  <button
+                    className="preference-button"
+                    aria-pressed={haptics}
+                    onClick={toggleHaptics}
+                  >
+                    <Vibrate size={18} />
+                    <span>
+                      Touch feedback {haptics ? "on" : "off"}
+                      <small>Where your device supports vibration</small>
+                    </span>
+                  </button>
+                  <label className="setting-row">
+                    <input
+                      type="checkbox"
+                      checked={discovery.essential}
+                      onChange={(e) => updateDiscovery({ essential: e.target.checked })}
+                    />
+                    Essential motion: keep transitions, stop continuous movement
+                  </label>
+                  {reduced && <p>Your device’s reduced-motion preference is respected.</p>}
+                  {mode !== "place" && (
                     <button
-                      className="saved-row"
-                      key={p.id}
-                      onClick={() => {
-                        setShowSaved(false);
-                        router.push(`/${p.city}/${categorySlug(p.category)}/${p.id}`);
-                      }}
+                      className="preference-button"
+                      aria-label="Reset 3D view"
+                      onClick={() => setReset((v) => v + 1)}
                     >
-                      {p.name}
-                      <ArrowUpRight size={18} />
+                      <RotateCcw size={18} />
+                      <span>
+                        Reset illustration<small>Return to its original view</small>
+                      </span>
                     </button>
-                  ))
-              ) : (
-                <p>
-                  A blank page, full of possibilities. Tap a heart on any place to start your
-                  collection.
-                </p>
+                  )}
+                  <button
+                    className="pill-button"
+                    onClick={() => {
+                      setShowSettings(false);
+                      setHelp(true);
+                    }}
+                  >
+                    How to explore <ArrowUpRight size={14} />
+                  </button>
+                  <Link className="brand-link" href="/brand">
+                    Meet Khwezi & the Citylit story <ArrowUpRight size={14} />
+                  </Link>
+                </div>
+              ) : help ? (
+                <KhweziMoment pose="gesture" />
+              ) : !saved.length ? (
+                <KhweziMoment pose="welcome" />
+              ) : null}
+              {!showSettings && (
+                <>
+                  {help ? (
+                    <>
+                      <div className="gesture-demo" data-moving={moving} aria-hidden="true">
+                        <span>←</span>
+                        <i />
+                        <span>→</span>
+                      </div>
+                      <p>
+                        Drag the map or landmark to give it a spin. Pinch or scroll to get closer.
+                      </p>
+                      <p>
+                        Choose a colored province, swipe its landmark captions, then explore one
+                        category at a time. Open a category to browse its places.
+                      </p>
+                      <p>Tap a heart to keep a discovery for later.</p>
+                      <a
+                        className="photo-link"
+                        href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Map: geoBoundaries / OCHA / MDB · adapted · CC BY 3.0 IGO{" "}
+                        <ArrowUpRight size={13} />
+                      </a>
+                      <button className="pill-button" onClick={() => setHelp(false)}>
+                        Let’s explore
+                      </button>
+                    </>
+                  ) : saved.length ? (
+                    places
+                      .filter((p) => saved.includes(p.id))
+                      .map((p) => (
+                        <button
+                          className="saved-row"
+                          key={p.id}
+                          onClick={() => {
+                            setShowSaved(false);
+                            router.push(`/${p.city}/${categorySlug(p.category)}/${p.id}`);
+                          }}
+                        >
+                          {p.name}
+                          <ArrowUpRight size={18} />
+                        </button>
+                      ))
+                  ) : (
+                    <p>
+                      A blank page, full of possibilities. Tap a heart on any place to start your
+                      collection.
+                    </p>
+                  )}
+                </>
               )}
             </motion.div>
           </motion.div>

@@ -38,11 +38,7 @@ export function useDelight() {
           if (ctx.state !== "running") return;
           const start = ctx.currentTime;
           const notes =
-            kind === "save"
-              ? [523.25, 659.25, 783.99]
-              : kind === "swipe"
-                ? [392, 523.25]
-                : [523.25];
+            kind === "save" ? [523.25, 783.99] : kind === "swipe" ? [392, 523.25] : [523.25];
           notes.forEach((frequency, i) => {
             const oscillator = ctx.createOscillator(),
               gain = ctx.createGain();

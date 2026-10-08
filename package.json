@@ -2,31 +2,32 @@
   "name": "citylit",
   "version": "1.0.0",
   "description": "A mobile-first 3D discovery game for South African cities",
-  "main": "index.js",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
   "directories": {
     "lib": "lib"
   },
+  "type": "module",
+  "main": "index.js",
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
-    "lint": "oxlint app components lib tests next.config.ts playwright.config.ts",
-    "format": "oxfmt app components lib tests next.config.ts playwright.config.ts .github .coderabbit.yaml vercel.json",
+    "lint": "oxlint app components lib tests next.config.ts playwright.config.ts scripts/export-brand-assets.mjs",
+    "format": "oxfmt app components lib tests next.config.ts playwright.config.ts .github .coderabbit.yaml vercel.json scripts/export-brand-assets.mjs",
     "typecheck": "tsc --noEmit",
     "test": "playwright test",
     "sources:refresh": "python3 scripts/crawl-sources.py",
     "sources:geocode": "python3 scripts/geocode-venues.py",
     "geo:refresh": "python3 scripts/fetch-geography.py",
     "data:audit": "python3 scripts/audit-data.py",
-    "format:check": "oxfmt --check app components lib tests next.config.ts playwright.config.ts .github .coderabbit.yaml vercel.json",
+    "format:check": "oxfmt --check app components lib tests next.config.ts playwright.config.ts .github .coderabbit.yaml vercel.json scripts/export-brand-assets.mjs",
     "security:audit": "pnpm audit --audit-level=high",
     "security:scan": ".ci-bin/gitleaks git --redact --exit-code 1",
-    "ci:workflows": ".ci-bin/actionlint"
+    "ci:workflows": ".ci-bin/actionlint",
+    "brand:export": "node scripts/export-brand-assets.mjs"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "type": "module",
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.3.5",
     "@hugeicons/react": "^1.1.10",
@@ -57,8 +58,8 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@12.10.1",
   "engines": {
     "node": ">=22.0.0"
-  }
+  },
+  "packageManager": "pnpm@12.10.1"
 }

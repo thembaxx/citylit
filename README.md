@@ -100,3 +100,7 @@ The pinned-action weekly GitHub workflow refreshes metadata, introductions and l
 GitHub Actions validates formatting, source data, TypeScript, the production build and browser flows. Security workflows add dependency review/auditing, CodeQL, redacted Gitleaks history scanning, Actionlint and Zizmor. The existing CodeRabbit and GitGuardian integrations are configured for the repository. Dependabot opens reviewed dependency updates, and Vercel deployments receive public HTTP smoke checks.
 
 See [repository automation](docs/repository-automation.md) for main protection, owner setup, merge order and deployment behavior. The current coding integration lacks GitHub administration permission; the main rulesets and native security switches require the owner setup command before they are active.
+
+## Brand and Khwezi
+
+Citylit’s promise is “Every city has a spark.” Khwezi, an original low-poly springhare, introduces gestures, catches newly saved discoveries and accompanies search and offline moments. `/brand` provides an interactive character reference, day/night examples and downloadable icons, wordmark and concept sheet. The mascot shares the existing WebGL canvas and respects pause, essential motion and system reduced motion. See [the brand guide](docs/brand-identity.md) for artwork sources and `pnpm brand:export`.

@@ -57,6 +57,8 @@ export function useDiscovery() {
     try {
       localStorage.setItem(key, JSON.stringify(next));
       localStorage.setItem("mzansi-saved", JSON.stringify(next.saved));
+      if (next.saved.some((id) => !state.saved.includes(id)))
+        window.dispatchEvent(new CustomEvent("citylit:spark-saved"));
     } catch {}
     listeners.forEach((l) => l());
   };

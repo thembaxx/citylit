@@ -1,3 +1,6 @@
+import { createHash } from "node:crypto";
+import { recoveryThemeScript } from "./recovery-theme";
+const recoveryThemeHash = createHash("sha256").update(recoveryThemeScript).digest("base64");
 /** CSP permits the app's local assets, animated styles and OSM tiles, not arbitrary scripts. */
 export function contentSecurityPolicy({
   nonce,
@@ -8,6 +11,7 @@ export function contentSecurityPolicy({
 } = {}) {
   const scripts = [
     "'self'",
+    `'sha256-${recoveryThemeHash}'`,
     ...(nonce ? [`'nonce-${nonce}'`, "'strict-dynamic'"] : []),
     ...(development ? ["'unsafe-eval'"] : []),
   ];

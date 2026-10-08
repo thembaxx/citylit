@@ -7,11 +7,29 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:3000",
     trace: "retain-on-failure",
-    launchOptions: { args: ["--enable-unsafe-swiftshader"] },
   },
   projects: [
-    { name: "mobile-chromium", use: { ...devices["Pixel 7"] } },
-    { name: "desktop-chromium", use: { viewport: { width: 1440, height: 1000 } } },
+    {
+      name: "mobile-chromium",
+      use: { ...devices["Pixel 7"], launchOptions: { args: ["--enable-unsafe-swiftshader"] } },
+    },
+    {
+      name: "desktop-chromium",
+      use: {
+        viewport: { width: 1440, height: 1000 },
+        launchOptions: { args: ["--enable-unsafe-swiftshader"] },
+      },
+    },
+    {
+      name: "mobile-webkit-theme",
+      testMatch: "theme.spec.ts",
+      use: { ...devices["iPhone 13"], defaultBrowserType: "webkit" },
+    },
+    {
+      name: "desktop-firefox-theme",
+      testMatch: "theme.spec.ts",
+      use: { browserName: "firefox", viewport: { width: 1440, height: 1000 } },
+    },
   ],
   webServer: {
     command: "pnpm start",

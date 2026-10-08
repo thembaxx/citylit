@@ -1,24 +1,11 @@
 /* Offline content is text, known catalog IDs and local photos; never executable source markup. */
 const root = document.documentElement;
-function setTheme(theme) {
-  root.dataset.theme = theme === "day" ? "day" : "night";
-  document.querySelector('meta[name="theme-color"]').content =
-    theme === "day" ? "#f6f3ed" : "#080f20";
-}
-try {
-  setTheme(
-    localStorage.getItem("citylit-theme") ||
-      (matchMedia("(prefers-color-scheme: light)").matches ? "day" : "night"),
-  );
-} catch {
-  setTheme("night");
-}
 document.getElementById("theme").onclick = () => {
-  const theme = root.dataset.theme === "day" ? "night" : "day";
-  setTheme(theme);
-  try {
-    localStorage.setItem("citylit-theme", theme);
-  } catch {}
+  document.dispatchEvent(
+    new CustomEvent("citylit-theme-preference", {
+      detail: root.dataset.theme === "day" ? "night" : "day",
+    }),
+  );
 };
 let places = [],
   saved = [],
@@ -408,7 +395,7 @@ fetch("/data/places.json")
       option.value = value;
       city.append(option);
     }
-    for (const value of [...new Set(places.map((p) => p.category))]) {
+    for (const value of new Set(places.map((p) => p.category))) {
       const option = element("option", value);
       option.value = slug(value);
       category.append(option);

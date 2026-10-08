@@ -101,25 +101,6 @@ export default function PwaProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener("beforeinstallprompt", beforeInstall);
     window.addEventListener("appinstalled", didInstall);
-    const syncTheme = () => {
-      const day = document.documentElement.dataset.theme === "day";
-      document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => {
-        meta.content = day ? "#f6f3ed" : "#080f20";
-        meta.removeAttribute("media");
-      });
-      document.documentElement.style.colorScheme = day ? "light" : "dark";
-    };
-    try {
-      document.documentElement.dataset.theme =
-        localStorage.getItem("citylit-theme") ||
-        (matchMedia("(prefers-color-scheme: light)").matches ? "day" : "night");
-    } catch {}
-    syncTheme();
-    const themeObserver = new MutationObserver(syncTheme);
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
     const internalOfflineClick = (event: MouseEvent) => {
       if (
         navigator.onLine ||
@@ -226,7 +207,6 @@ export default function PwaProvider({ children }: { children: ReactNode }) {
       window.removeEventListener("beforeinstallprompt", beforeInstall);
       window.removeEventListener("appinstalled", didInstall);
       document.removeEventListener("click", internalOfflineClick, true);
-      themeObserver.disconnect();
       navigator.serviceWorker?.removeEventListener("controllerchange", controllerChanged);
       registration.current?.removeEventListener("updatefound", foundUpdate);
       observedWorker?.removeEventListener("statechange", workerChanged);

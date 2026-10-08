@@ -30,6 +30,7 @@ import PlaceContext from "./PlaceContext";
 import CategoryPlaces from "./CategoryPlaces";
 import CategoryNav from "./CategoryNav";
 import { useDiscovery } from "./useDiscovery";
+import useTheme from "./useTheme";
 import PlaceActions from "./PlaceActions";
 import { useNativeRouter } from "./useNativeRouter";
 import PwaPanel from "./PwaPanel";
@@ -105,7 +106,7 @@ export default function Explorer() {
   const saved = discovery.saved;
   const setSaved = (change: string[] | ((previous: string[]) => string[])) =>
     updateDiscovery({ saved: typeof change === "function" ? change(discovery.saved) : change });
-  const [night, setNight] = useState(true);
+  const { night, toggleTheme } = useTheme();
   const [notice, setNotice] = useState("");
   const [showProvinces, setShowProvinces] = useState(false);
   const {
@@ -120,29 +121,13 @@ export default function Explorer() {
     moving,
   } = useKhwezi();
   useEffect(() => {
-    try {
-      const selected = localStorage.getItem("citylit-theme");
-      setNight(
-        selected
-          ? selected === "night"
-          : !window.matchMedia("(prefers-color-scheme: light)").matches,
-      );
-    } catch {}
-  }, []);
-  useEffect(() => {
-    document.documentElement.dataset.theme = night ? "night" : "day";
-  }, [night]);
-  useEffect(() => {
     if (!notice) return;
     const timer = window.setTimeout(() => setNotice(""), 1800);
     return () => clearTimeout(timer);
   }, [notice]);
   const switchTheme = () => {
-    setNight(!night);
+    toggleTheme();
     setNotice(night ? "A little sunshine." : "Welcome to the night garden.");
-    try {
-      localStorage.setItem("citylit-theme", night ? "day" : "night");
-    } catch {}
   };
   const [index, setIndex] = useState(0),
     [query, setQuery] = useState(params.get("q") || "");

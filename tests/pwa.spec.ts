@@ -281,7 +281,7 @@ test("native chrome follows theme and hidden apps pause continuous scenery", asy
   await page.goto("/");
   await page.getByRole("button", { name: /Switch to .* theme/ }).click();
   await expect
-    .poll(() => page.locator('meta[name="theme-color"]').getAttribute("content"))
+    .poll(() => page.locator('meta[name="theme-color"]').first().getAttribute("content"))
     .toBe(
       await page.evaluate(() =>
         document.documentElement.dataset.theme === "day" ? "#f6f3ed" : "#080f20",

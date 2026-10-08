@@ -1,26 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
+import useTheme from "./useTheme";
 export default function ThemeToggle({ onChange }: { onChange?: (night: boolean) => void }) {
-  const [night, setNight] = useState(true);
+  const { night, toggleTheme } = useTheme();
   useEffect(() => {
-    const selected = document.documentElement.dataset.theme !== "day";
-    setNight(selected);
-    onChange?.(selected);
-  }, [onChange]);
+    onChange?.(night);
+  }, [night, onChange]);
   return (
     <button
       className="icon-button"
       aria-label={night ? "Switch to day theme" : "Switch to night theme"}
-      onClick={() => {
-        const next = !night;
-        setNight(next);
-        onChange?.(next);
-        document.documentElement.dataset.theme = next ? "night" : "day";
-        try {
-          localStorage.setItem("citylit-theme", next ? "night" : "day");
-        } catch {}
-      }}
+      onClick={toggleTheme}
     >
       {night ? <Sun size={17} /> : <Moon size={17} />}
     </button>

@@ -5,6 +5,8 @@ const CORE = [
   "/offline.html",
   "/offline.js",
   "/offline.css",
+  "/theme.css",
+  "/theme.js",
   "/manifest.webmanifest",
   "/data/places.json",
   "/data/cities.json",

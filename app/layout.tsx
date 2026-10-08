@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import "./globals.css";
 import PwaProvider from "../components/PwaProvider";
 import AppStatus from "../components/AppStatus";
@@ -11,7 +12,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   interactiveWidget: "resizes-content",
-  themeColor: "#080f20",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f3ed" },
+    { media: "(prefers-color-scheme: dark)", color: "#080f20" },
+  ],
   colorScheme: "dark light",
 };
 export const metadata: Metadata = {
@@ -45,9 +49,15 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", images: ["/brand/social-card.png"] },
 };
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const nonce = (await headers()).get("x-nonce") || undefined;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="stylesheet" href="/theme.css" />
+        {/* Deliberately parser-blocking: a deferred script cannot prevent a wrong-theme paint. */}
+        <script nonce={nonce} src="/theme.js" />
+      </head>
       <body>
         <JsonLd value={websiteSchema()} />
         <PwaProvider>

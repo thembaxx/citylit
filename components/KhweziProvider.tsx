@@ -37,7 +37,14 @@ export default function KhweziProvider({ children }: { children: ReactNode }) {
   const [animations, setAnimations] = useState(true);
   const [welcome, setWelcome] = useState(false);
   const [moment, setMoment] = useState<Moment | null>(null);
-  const moving = animations && !state.essential && !reduced;
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const changed = () => setVisible(document.visibilityState === "visible");
+    changed();
+    document.addEventListener("visibilitychange", changed);
+    return () => document.removeEventListener("visibilitychange", changed);
+  }, []);
+  const moving = animations && !state.essential && !reduced && visible;
   const toggleAnimations = useCallback(() => setAnimations((value) => !value), []);
   useEffect(() => {
     try {
@@ -73,15 +80,6 @@ export default function KhweziProvider({ children }: { children: ReactNode }) {
     window.addEventListener("citylit:spark-saved", saved);
     return () => window.removeEventListener("citylit:spark-saved", saved);
   }, [delight.feedback, celebrate]);
-  useEffect(() => {
-    const offline = () =>
-      celebrate(
-        "offline",
-        "The signal wandered off. Open your downloaded guide to keep exploring.",
-      );
-    window.addEventListener("offline", offline);
-    return () => window.removeEventListener("offline", offline);
-  }, [celebrate]);
   useEffect(() => {
     if (!moment) return;
     const timer = window.setTimeout(() => setMoment(null), 3600);

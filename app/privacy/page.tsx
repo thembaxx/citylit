@@ -19,7 +19,9 @@ export default function PrivacyPage() {
           Saved places, visits, itineraries, correction drafts, theme, touch-feedback preferences
           and welcome dismissal use browser storage. They are not synced to a Citylit account or
           database. Sound starts off on every reload. The service worker stores public guide text
-          and downloaded photographs for offline use.
+          and downloaded photographs for offline use. App installation does not create an account.
+          You can remove only downloaded photos in app settings, or explicitly ask the browser to
+          keep downloads. The browser decides whether to grant persistent storage.
         </p>
         <p>
           You can remove these records using your browser’s site-data controls for
@@ -47,7 +49,10 @@ export default function PrivacyPage() {
           Opening Google Maps, Apple Maps, Waze, Wikipedia, official venue websites or GitHub takes
           you to services with their own privacy policies. Itinerary share links contain public
           place identifiers and a destination. Share them only if you want those choices to be
-          visible.
+          visible. On supported installed apps, incoming shared venue links are resolved against the
+          public catalog on your device without fetching unknown URLs. Their URL parameters can
+          appear in hosting request logs. Push subscriptions and notification delivery are not
+          configured.
         </p>
       </section>
       <section>

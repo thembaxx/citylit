@@ -1,11 +1,22 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import OfflineSupport from "../components/OfflineSupport";
+import PwaProvider from "../components/PwaProvider";
+import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";
 import KhweziProvider from "../components/KhweziProvider";
 import JsonLd from "../components/JsonLd";
 import { SITE_URL, websiteSchema, isPreview } from "../lib/seo";
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  interactiveWidget: "resizes-content",
+  themeColor: "#080f20",
+  colorScheme: "dark light",
+};
 export const metadata: Metadata = {
+  appleWebApp: { capable: true, title: "Citylit", statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
   metadataBase: new URL(SITE_URL),
   applicationName: "Citylit",
   robots: { index: !isPreview, follow: !isPreview },
@@ -39,10 +50,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <JsonLd value={websiteSchema()} />
-        <OfflineSupport />
-        <SceneCanvas>
-          <KhweziProvider>{children}</KhweziProvider>
-        </SceneCanvas>
+        <PwaProvider>
+          <SceneCanvas>
+            <KhweziProvider>
+              {children}
+              <AppStatus />
+            </KhweziProvider>
+          </SceneCanvas>
+        </PwaProvider>
       </body>
     </html>
   );

@@ -16,7 +16,8 @@ export default function PlaceActions({ place }: { place: Place }) {
       if (navigator.share) await navigator.share({ title: place.name, url: location.href });
       else await navigator.clipboard.writeText(location.href);
       setMessage("Discovery shared.");
-    } catch {
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") return;
       setMessage(location.href);
     }
   };

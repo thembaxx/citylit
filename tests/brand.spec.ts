@@ -64,7 +64,13 @@ test("the brand cache upgrade preserves previously downloaded venue photos", asy
   await expect
     .poll(() =>
       page.evaluate(async () => {
-        const updated = await caches.open("citylit-field-guide-v4");
+        const name = (await caches.keys()).find(
+          (key) =>
+            key.startsWith("citylit-field-guide-") &&
+            !["citylit-field-guide-v3", "citylit-field-guide-v4"].includes(key),
+        );
+        if (!name) return;
+        const updated = await caches.open(name);
         return (await updated.match("/images/migration-check.jpg"))?.text();
       }),
     )
@@ -229,7 +235,7 @@ test("photo migration keeps its old cache and activates when storage is full", a
         },
       },
       caches: {
-        keys: async () => ["citylit-field-guide-v3", "citylit-field-guide-v4"],
+        keys: async () => ["citylit-field-guide-v3", "citylit-field-guide-v5"],
         open: async (key: string) => (key.endsWith("v3") ? old : current),
         delete: async (key: string) => {
           deleted.push(key);

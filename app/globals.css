@@ -4181,3 +4181,299 @@ button:disabled {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Native app chrome: retain text zoom and selection, keep touch controls clear of cutouts. */
+html,
+body {
+  overscroll-behavior: none;
+}
+.game-nav {
+  height: calc(62px + env(safe-area-inset-top));
+  min-height: calc(62px + env(safe-area-inset-top));
+  padding-top: calc(14px + env(safe-area-inset-top));
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+.field-guide {
+  padding-top: calc(28px + env(safe-area-inset-top));
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.category-editorial,
+.detail-content,
+.reading-page {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+button {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.pill-button,
+.icon-button,
+.preference-button {
+  transition:
+    background-color 0.16s,
+    opacity 0.12s;
+}
+.pill-button:active,
+.icon-button:active,
+.preference-button:active {
+  opacity: 0.72;
+}
+.pwa-panel {
+  margin: 22px 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.pwa-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.pwa-panel-heading img {
+  border-radius: 14px;
+  flex: none;
+}
+.pwa-panel-heading strong {
+  display: block;
+  font:
+    600 17px/1.35 "DM Sans",
+    sans-serif;
+}
+.pwa-panel-heading span {
+  display: block;
+  margin-top: 5px;
+  font: 11px/1.5 var(--font-mono);
+  color: var(--muted);
+}
+.pwa-primary,
+.pwa-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 12px 17px;
+  border-radius: 17px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+.pwa-panel p {
+  line-height: 1.65;
+  margin: 14px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.pwa-guide-status {
+  font-family: var(--font-mono);
+  font-size: 11px !important;
+}
+.pwa-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 18px 0 8px;
+}
+.pwa-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent-ink);
+  font-size: 13px;
+}
+.pwa-storage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 14px;
+}
+.pwa-storage-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: left;
+}
+.pwa-panel button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.pwa-installed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-ink) !important;
+}
+.pwa-install-help {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-left: 2px solid var(--accent);
+  padding: 8px 14px;
+  margin-top: 18px;
+}
+.pwa-install-help svg {
+  flex: none;
+  margin-top: 5px;
+}
+.pwa-install-help p {
+  margin: 0;
+}
+.pwa-message {
+  margin-bottom: 0 !important;
+  color: var(--accent-ink) !important;
+}
+.pwa-message:empty {
+  display: none;
+}
+.pwa-status {
+  position: fixed;
+  z-index: 95;
+  bottom: calc(112px + env(safe-area-inset-bottom));
+  left: 16px;
+  right: 16px;
+  margin-inline: auto;
+  width: min(390px, calc(100vw - 32px));
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 17px 52px 17px 18px;
+  border: 1px solid var(--line);
+  border-radius: 25px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 12px 42px #0002;
+}
+.pwa-status > svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--accent-ink);
+}
+.pwa-status strong {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.pwa-status p {
+  margin: 6px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.pwa-status a,
+.pwa-status div > button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent-ink);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pwa-status-close {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+.pwa-status button:disabled {
+  opacity: 0.5;
+}
+@supports (backdrop-filter: blur(1px)) {
+  .pwa-status {
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+  }
+}
+@supports (corner-shape: squircle) {
+  .pwa-panel,
+  .pwa-primary,
+  .pwa-panel-heading img,
+  .pwa-status {
+    corner-shape: squircle;
+  }
+}
+@media (pointer: coarse) {
+  .icon-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+@media (max-height: 500px) {
+  .pwa-status {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pill-button,
+  .icon-button,
+  .preference-button {
+    transition: none;
+  }
+}
+.modal-backdrop:has(.modal) {
+  background: transparent;
+  backdrop-filter: none;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: calc(100vw - 40px);
+}
+.modal::backdrop {
+  background: #0008;
+  backdrop-filter: blur(12px);
+}
+@media (max-width: 600px) {
+  .modal {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - env(safe-area-inset-top) - 24px);
+    padding-bottom: calc(30px + env(safe-area-inset-bottom));
+  }
+}
+.incoming-discovery {
+  margin: 28px 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--surface);
+  max-width: 760px;
+}
+.incoming-discovery h2 {
+  margin: 16px 0 12px;
+}
+.incoming-discovery p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.gallery-dialog {
+  padding-top: calc(55px + env(safe-area-inset-top));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+}
+.lightbox-close {
+  top: calc(15px + env(safe-area-inset-top));
+  right: max(20px, env(safe-area-inset-right));
+}
+.lightbox-image-area {
+  height: calc(100dvh - 170px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}

@@ -10,3 +10,5 @@ playwright-report/
 __pycache__/
 *.pyc
 .ci-bin/
+
+public/pwa-release.js

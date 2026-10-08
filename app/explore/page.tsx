@@ -9,7 +9,12 @@ export async function generateMetadata({ searchParams }: Props) {
     "Plan a day in South Africa",
     "Find a little adventure, collect discoveries and plan a day across twelve South African destinations. Saved plans stay in your browser.",
     "/explore",
-    !query.trip && !query.q,
+    !query.trip &&
+      !query.q &&
+      !query.tab &&
+      !query["shared-url"] &&
+      !query["shared-text"] &&
+      !query["shared-title"],
   );
 }
 export default async function Page({ searchParams }: Props) {

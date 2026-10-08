@@ -4,8 +4,8 @@
 
 | Automation                  | Behavior                                                                                                                                                                                                            |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CI / verify                 | Frozen install, formatting, catalog audit, lint, strict TypeScript, Python syntax, production build and mobile/desktop browser tests. Failure traces are retained for seven days.                                   |
-| Security / security         | Gates the dependency audit/review, complete-history redacted Gitleaks scan, Actionlint, Zizmor and CodeQL for TypeScript/JavaScript and Python. Scheduled checks catch newly disclosed advisories.                  |
+| CI / verify                 | Frozen install, formatting, catalog audit, lint, strict TypeScript, Python syntax, hash-verified Pillow installation, ingestion/image security tests, production build and mobile/desktop browser tests. Failure traces are retained for seven days.                                   |
+| Security / security         | Gates Node and hash-pinned Python advisory audits, dependency review, complete-history redacted Gitleaks scan, Actionlint, Zizmor and CodeQL for TypeScript/JavaScript and Python. Scheduled checks catch newly disclosed advisories.                  |
 | GitGuardian Security Checks | Existing installed GitGuardian app scans commits and PRs. No duplicate API-key workflow is needed.                                                                                                                  |
 | CodeRabbit                  | Existing installed app gets project-specific review instructions, incremental reviews on all base branches and a stable legacy CodeRabbit status. Binary assets/generated cache reports are omitted from review.    |
 | Vercel                      | Existing Git integration publishes previews and production from its configured production branch. Frozen installation/build commands are checked in.                                                                |
@@ -65,3 +65,5 @@ Useful local checks:
     pnpm security:audit
 
 The pinned tool archives target Linux x64. Use platform-specific official releases for local checks on other systems.
+
+See the [security audit](security-audit-2026-10-08.md) for the assessed trust boundaries and remaining operator work. Python requirements include reviewed distribution hashes; maintain those hashes with version updates.

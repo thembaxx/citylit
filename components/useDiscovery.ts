@@ -1,20 +1,9 @@
 "use client";
 import { useMemo, useSyncExternalStore } from "react";
 const key = "citylit-discovery-v2";
-export type Discovery = {
-  saved: string[];
-  visited: string[];
-  itinerary: string[];
-  passport: boolean;
-  essential: boolean;
-};
-const fallback: Discovery = {
-  saved: [],
-  visited: [],
-  itinerary: [],
-  passport: true,
-  essential: false,
-};
+export type { Discovery } from "../lib/client-data";
+import { normalizeDiscovery, type Discovery } from "../lib/client-data";
+const fallback = normalizeDiscovery(null);
 const listeners = new Set<() => void>();
 let listening = false;
 function subscribe(fn: () => void) {
@@ -38,22 +27,16 @@ export function useDiscovery() {
   const raw = useSyncExternalStore(subscribe, snapshot, () => "{}");
   const state = useMemo<Discovery>(() => {
     try {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed))
-        return { ...fallback, saved: parsed.filter((v) => typeof v === "string") };
-      return {
-        ...fallback,
-        ...parsed,
-        saved: Array.isArray(parsed.saved) ? parsed.saved : [],
-        visited: Array.isArray(parsed.visited) ? parsed.visited : [],
-        itinerary: Array.isArray(parsed.itinerary) ? parsed.itinerary : [],
-      };
+      return raw.length <= 200000 ? normalizeDiscovery(JSON.parse(raw)) : fallback;
     } catch {
       return fallback;
     }
   }, [raw]);
   const update = (change: Partial<Discovery> | ((previous: Discovery) => Partial<Discovery>)) => {
-    const next = { ...state, ...(typeof change === "function" ? change(state) : change) };
+    const next = normalizeDiscovery({
+      ...state,
+      ...(typeof change === "function" ? change(state) : change),
+    });
     try {
       localStorage.setItem(key, JSON.stringify(next));
       localStorage.setItem("mzansi-saved", JSON.stringify(next.saved));

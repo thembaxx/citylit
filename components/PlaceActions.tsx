@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Check, Plus, Share2, Flag, ArrowUpRight } from "lucide-react";
 import { type Place, places } from "../lib/data";
+import { normalizeCorrections, readCorrections, publicHttpsUrl } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 export default function PlaceActions({ place }: { place: Place }) {
   const { state, update } = useDiscovery();
@@ -130,26 +131,29 @@ export default function PlaceActions({ place }: { place: Place }) {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
             const source = String(data.get("source"));
-            let url: URL;
-            try {
-              url = new URL(source);
-              if (!["http:", "https:"].includes(url.protocol)) throw new Error();
-            } catch {
-              setMessage("Use an http or https source link.");
+            if (!publicHttpsUrl(source)) {
+              setMessage("Use a public https source link without embedded credentials.");
               return;
             }
             try {
-              const queue = JSON.parse(localStorage.getItem("citylit-corrections") || "[]");
+              const queue = readCorrections();
+              if (queue.length >= 100) {
+                setMessage("Your review queue is full. Export it before adding more drafts.");
+                return;
+              }
               queue.push({
                 id: crypto.randomUUID(),
                 placeId: place.id,
-                field: data.get("field"),
-                value: data.get("value"),
+                field: String(data.get("field") || ""),
+                value: String(data.get("value") || ""),
                 source,
                 createdAt: new Date().toISOString(),
                 status: "needs-review",
               });
-              localStorage.setItem("citylit-corrections", JSON.stringify(queue));
+              localStorage.setItem(
+                "citylit-corrections",
+                JSON.stringify(normalizeCorrections(queue)),
+              );
               setMessage(
                 "Draft saved on this device for review. It has not changed the public listing.",
               );
@@ -176,7 +180,7 @@ export default function PlaceActions({ place }: { place: Place }) {
           </label>
           <label>
             Supporting source
-            <input type="url" name="source" required placeholder="https://" />
+            <input type="url" name="source" required maxLength={2048} placeholder="https://" />
           </label>
           <p className="planning-note">
             Drafts stay on your device. Review and export them from the data quality page before

@@ -114,7 +114,7 @@ export default function BrandStudio() {
         </div>
       </section>
       <section className="brand-section" aria-labelledby="brand-colour">
-        <span className="tiny-label">III / DAYLIGHT & LITTLE NIGHT ADVENTURES</span>
+        <span className="tiny-label">III / DAYLIGHT &amp; LITTLE NIGHT ADVENTURES</span>
         <h2 id="brand-colour">Our kind of light.</h2>
         <p>
           Ivory and ink give the stories room. Electric blue means an invitation; blush adds warmth.

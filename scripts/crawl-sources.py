@@ -2,24 +2,26 @@
 No crawling occurs at app runtime. Wikimedia requests are batched and 429 stops
 the refresh. Run with --force to fetch new data. Review changes before committing.
 """
-import datetime,json,pathlib,urllib.request,urllib.parse,urllib.error,sys,re,html,subprocess
+import datetime,json,pathlib,urllib.parse,urllib.error,sys,re,html,subprocess
+from safe_fetch import fetch_json, fetch_bytes, public_host, WIKIMEDIA_HOSTS
 from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parent.parent;OUT=ROOT/'public/data';TODAY=datetime.datetime.now(datetime.timezone.utc).date();DATE=TODAY.isoformat();HEADERS={'User-Agent':'Citylit/1.0 (https://github.com/thembaxx/citylit) city discovery source refresh'}
 def api(host,**params):
  url='https://'+host+'/w/api.php?'+urllib.parse.urlencode({'format':'json',**params})
- with urllib.request.urlopen(urllib.request.Request(url,headers=HEADERS),timeout=25) as response:return json.load(response)
+ return fetch_json(url, allowed_hosts=WIKIMEDIA_HOSTS)
 catalog=json.load(open(ROOT/'scripts/catalog.json'));report_path=OUT/'crawl-report.json';report=json.load(open(report_path)) if report_path.exists() else {'wikipedia':{},'official':[]}
 if '--force' not in sys.argv and report.get('fetchedAt') and (TODAY-datetime.date.fromisoformat(report['fetchedAt'])).days<7:
  print('Source cache is current. Use --force to refresh.');sys.exit(0)
 def official(row):
  result={'url':row['website'],'title':row['name'],'fetchedAt':DATE}
  try:
-  with urllib.request.urlopen(urllib.request.Request(row['website'],headers=HEADERS),timeout=20) as response:
-   text=response.read(1000000).decode('utf-8','replace');match=re.search(r'<title[^>]*>(.*?)</title>',text,re.S|re.I)
-   if match:result['title']=html.unescape(re.sub('<[^>]*>','',match.group(1))).strip()[:180]
-   result['status']='fetched';result['resolvedUrl']=response.url;result['httpStatus']=response.status
-   description=re.search(r'<meta[^>]+name=[\"\']description[\"\'][^>]+content=[\"\']([^\"\']*)',text,re.I)
-   if description:result['description']=html.unescape(description.group(1))[:300]
+  host=public_host(row['website']);root=host.removeprefix('www.')
+  response=fetch_bytes(row['website'], allowed_hosts={root, 'www.'+root}, max_bytes=1000000, timeout=20, allow_prefix=True)
+  text=response.body.decode('utf-8','replace');match=re.search(r'<title[^>]*>(.*?)</title>',text,re.S|re.I)
+  if match:result['title']=html.unescape(re.sub('<[^>]*>','',match.group(1))).strip()[:180]
+  result['status']='fetched';result['resolvedUrl']=response.url;result['httpStatus']=response.status
+  description=re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']*)',text,re.I)
+  if description:result['description']=html.unescape(description.group(1))[:300]
  except Exception as e:result.update(status='unavailable',error=str(e))
  return result
 try:

@@ -35,7 +35,7 @@ export default function GuideContent({ route }: { route: DiscoveryRoute }) {
       <nav className="reading-links" aria-label="Guide navigation">
         <Link href="/destinations">All destinations</Link>
         <Link href="/about">About the research</Link>
-        <Link href="/privacy">Privacy & data</Link>
+        <Link href="/privacy">Privacy &amp; data</Link>
       </nav>
       <p>{evidenceNote}</p>
       {city ? (

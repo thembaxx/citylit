@@ -1,8 +1,15 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { guideRoute, routeTitle, sharePhoto } from "../../../lib/seo";
+import { allDiscoveryRoutes, guideRoute, routeTitle, sharePhoto } from "../../../lib/seo";
 export const runtime = "nodejs";
+export const dynamic = "force-static";
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return allDiscoveryRoutes().map((route) => ({
+    path: route.path.slice(1).split("/").filter(Boolean),
+  }));
+}
 export async function GET(_request: Request, { params }: { params: Promise<{ path?: string[] }> }) {
   const route = guideRoute((await params).path);
   if (!route) return new Response("Share image not found", { status: 404 });

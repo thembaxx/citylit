@@ -773,7 +773,7 @@ export default function Explorer() {
                 )}
               </div>
               <details className="source-details">
-                <summary>Behind this discovery · sources & credits</summary>
+                <summary>Behind this discovery · sources &amp; credits</summary>
                 <p>
                   Source pages checked {place.checkedAt}. Hours and event programmes can change.
                 </p>
@@ -914,11 +914,11 @@ export default function Explorer() {
                     How to explore <ArrowUpRight size={14} />
                   </button>
                   <Link className="brand-link" href="/brand">
-                    Meet Khwezi & the Citylit story <ArrowUpRight size={14} />
+                    Meet Khwezi &amp; the Citylit story <ArrowUpRight size={14} />
                   </Link>
                   <div className="settings-information">
-                    <Link href="/about">About & sources</Link>
-                    <Link href="/privacy">Privacy & data</Link>
+                    <Link href="/about">About &amp; sources</Link>
+                    <Link href="/privacy">Privacy &amp; data</Link>
                   </div>
                 </div>
               ) : help ? (

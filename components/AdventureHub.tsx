@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { parseSharedTrip } from "../lib/client-data";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
@@ -52,12 +53,8 @@ export default function AdventureHub() {
   const reduced = useReducedMotion();
   const [variant, setVariant] = useState(0);
   const [night, setNight] = useState(true);
-  const [shared, setShared] = useState<string[]>(
-    () =>
-      params
-        .get("trip")
-        ?.split(",")
-        .filter((id) => places.some((p) => p.id === id)) || [],
+  const [shared, setShared] = useState<string[]>(() =>
+    parseSharedTrip(params.get("trip"), initialCity),
   );
   const local = places.filter((p) => p.city === city);
   const picked = suggestions(city, mood, time, budget, variant);
@@ -267,7 +264,7 @@ export default function AdventureHub() {
                 <label>
                   Mood
                   <select value={mood} onChange={(e) => setMood(e.target.value)}>
-                    <option value="culture">Art & stories</option>
+                    <option value="culture">Art &amp; stories</option>
                     <option value="nature">Fresh air</option>
                     <option value="night">A night on stage</option>
                     <option value="surprise">Surprise me</option>
@@ -350,7 +347,7 @@ export default function AdventureHub() {
                     {places.find((p) => p.id === e.placeId)!.name}
                   </Link>
                   <a href={e.source} target="_blank" rel="noreferrer">
-                    Programme & tickets <ArrowUpRight size={14} />
+                    Programme &amp; tickets <ArrowUpRight size={14} />
                   </a>
                   <p className="planning-note">
                     Checked {e.checkedAt}. Confirm availability with the venue.
@@ -600,7 +597,7 @@ export default function AdventureHub() {
         )}
       </motion.div>
       <footer className="field-guide-footer">
-        <Link href="/editorial">Data quality & correction review</Link>
+        <Link href="/editorial">Data quality &amp; correction review</Link>
         <p>
           Your saves, passport and itinerary live in this browser. Shared links contain only place
           IDs.

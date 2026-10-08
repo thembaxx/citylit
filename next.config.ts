@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { contentSecurityPolicy } from "./lib/security-policy";
 const releaseSha = process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA || "";
 const config: NextConfig = {
   // A public commit identifier, never a credential; compiled into the release being checked.
@@ -7,6 +8,13 @@ const config: NextConfig = {
     "/share/\\[\\[\\.\\.\\.path\\]\\]": ["./public/images/*.jpg", "./public/app-icon.svg"],
   },
   poweredByHeader: false,
+  images: {
+    localPatterns: [{ pathname: "/images/*", search: "" }],
+    remotePatterns: [],
+    maximumRedirects: 0,
+    dangerouslyAllowSVG: false,
+    dangerouslyAllowLocalIP: false,
+  },
   async headers() {
     return [
       {
@@ -17,10 +25,14 @@ const config: NextConfig = {
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'self'; object-src 'none'; base-uri 'self'",
+            value: contentSecurityPolicy(),
           },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(self)" },
         ],
+      },
+      {
+        source: "/sw.js",
+        headers: [{ key: "Cache-Control", value: "no-cache, no-store, must-revalidate" }],
       },
     ];
   },

@@ -37,8 +37,9 @@ export default function Gallery({
   useGesture(
     {
       onPinch: ({ offset: [s] }) => setScale(s),
-      onDrag: ({ offset: [x, y], last, swipe: [swipe] }) => {
+      onDrag: ({ offset: [x, y], movement: [mx, my], last, swipe: [swipe] }) => {
         if (scale > 1) setOffset([x, y]);
+        else if (last && my > 100 && my > Math.abs(mx) * 1.5) setOpen(false);
         else if (last && swipe) select(swipe > 0 ? -1 : 1);
       },
     },
@@ -98,6 +99,8 @@ export default function Gallery({
       </p>
       <dialog
         ref={dialog}
+        closedby="any"
+        onClose={() => setOpen(false)}
         className="gallery-dialog"
         aria-label={`${name} photograph gallery`}
         onCancel={() => setOpen(false)}
@@ -118,7 +121,7 @@ export default function Gallery({
             animate={{ scale, x: offset[0], y: offset[1] }}
             transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 30 }}
           >
-            <Image src={image.src} alt={image.alt} fill sizes="90vw" />
+            <Image src={image.src} alt={image.alt} fill sizes="90vw" draggable={false} />
           </motion.div>
         </div>
         <div className="lightbox-controls">
@@ -127,7 +130,7 @@ export default function Gallery({
           </button>
           <div>
             <span>
-              {index + 1} / {images.length} · PINCH TO ZOOM
+              {index + 1} / {images.length} · PINCH TO ZOOM · SWIPE DOWN TO CLOSE
             </span>
             <a href={image.sourceUrl} target="_blank" rel="noreferrer">
               {image.author} · {image.license}

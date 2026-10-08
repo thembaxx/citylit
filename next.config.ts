@@ -31,8 +31,11 @@ const config: NextConfig = {
         ],
       },
       {
-        source: "/sw.js",
-        headers: [{ key: "Cache-Control", value: "no-cache, no-store, must-revalidate" }],
+        source: "/:worker(sw.js|pwa-release.js)",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Service-Worker-Allowed", value: "/" },
+        ],
       },
     ];
   },

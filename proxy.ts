@@ -19,6 +19,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   // HTML only. Public catalog, Markdown, static images and optimization remain cacheable.
   matcher: [
-    "/((?!api(?:/|$)|_next/|guides(?:/|$)|share(?:/|$)|data/|images/|brand/|.*\\.(?:txt|xml|html|js|svg|png|jpg|ico|webmanifest)$).*)",
+    "/((?!api(?:/|$)|_next/|guides(?:/|$)|share(?:/|$)|data/|images/|brand/|fonts/|.*\\.(?:txt|xml|html|js|css|woff2|svg|png|jpg|ico|webmanifest)$).*)",
   ],
 };

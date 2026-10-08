@@ -39,3 +39,7 @@ Accessibility automation covers selected representative flows; it does not repla
 ## Browser and ingestion security
 
 HTML uses a fresh server-owned CSP nonce and private/no-store caching; inline event handlers and production eval are disallowed. Public data, local photos, scripts, Markdown and sharing cards retain caching. Animated inline styles remain allowed for the interaction libraries. Maintenance fetches validate public destinations and redirects, enforce byte/pixel limits and use hash-locked Pillow. See the [security audit](security-audit-2026-10-08.md) for verification, performance tradeoffs and operator requirements.
+
+## Installed app and offline acceptance
+
+See [PWA and native experience](pwa-native-experience.md) for the install/update lifecycle and cache policy. Standard `pnpm build` generates the deployment-versioned worker import; deploy that output together with the application. The reader supports cold offline launches, search and local saves/day edits; live 3D and street maps remain online. Before release, install on a real iPhone/iPad and Android device and verify system back/dismissal, task switching, home indicators, storage reclamation and assistive technology. Push notifications require a separate delivery service and are not configured.

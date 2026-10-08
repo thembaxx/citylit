@@ -32,16 +32,29 @@ import {
 import ThemeToggle from "./ThemeToggle";
 import { useKhwezi } from "./KhweziProvider";
 
+import PwaPanel from "./PwaPanel";
+import { sharedPlace } from "../lib/pwa-share";
+import { readyWorker, workerRequest } from "../lib/pwa";
+import { usePwa } from "./PwaProvider";
 import { useDiscovery } from "./useDiscovery";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 export default function AdventureHub() {
   const { feedback, sound, haptics, toggleSound, toggleHaptics, celebrate, moving } = useKhwezi();
+  const pwa = usePwa();
   const params = useSearchParams();
+  const incoming = sharedPlace(params.get("shared-url") || params.get("shared-text"));
+  const hasIncoming = params.has("shared-url") || params.has("shared-text");
   const initialCity = cities.some((c) => c.slug === params.get("city"))
     ? params.get("city")!
     : cities[0].slug;
   const [city, setCity] = useState(initialCity),
-    [tab, setTab] = useState(params.get("trip") ? "day" : "discover"),
+    [tab, setTab] = useState(
+      params.get("trip")
+        ? "day"
+        : ["day", "passport"].includes(params.get("tab") || "")
+          ? params.get("tab")!
+          : "discover",
+    ),
     [mood, setMood] = useState("culture"),
     [time, setTime] = useState(180),
     [budget, setBudget] = useState("any"),
@@ -93,7 +106,8 @@ export default function AdventureHub() {
         await navigator.clipboard.writeText(url);
         setMessage("Link copied.");
       }
-    } catch {
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") return;
       setMessage(url);
     }
   };
@@ -118,38 +132,38 @@ export default function AdventureHub() {
     );
   };
   const download = async () => {
+    if (pwa.waiting || pwa.reloadReady) {
+      setMessage("Update Citylit in app settings before preparing the latest guide.");
+      return;
+    }
+    setMessage("Saving your field guide…");
     try {
-      if (!("serviceWorker" in navigator)) throw new Error();
-      const registration = await Promise.race([
-        navigator.serviceWorker.ready,
-        new Promise<never>((_, reject) =>
-          window.setTimeout(() => reject(new Error("Service worker unavailable")), 5000),
-        ),
-      ]);
-      const target = registration.active;
-      if (!target) throw new Error();
-      const channel = new MessageChannel();
-      channel.port1.onmessage = (e) => {
-        setMessage(
-          e.data.ok
-            ? "Field guide ready for offline use."
-            : e.data.textSaved
-              ? "Some images were unavailable; text is saved."
-              : "The guide could not be saved. Connect and try again.",
+      const response = await workerRequest(
+        await readyWorker(),
+        "SAVE_GUIDE",
+        Array.from(new Set([...state.saved, ...state.itinerary])),
+      );
+      setMessage(
+        response.ok
+          ? "Field guide ready for offline use."
+          : response.textSaved
+            ? "Some images were unavailable; text is saved."
+            : "The guide could not be saved. Connect and try again.",
+      );
+      await pwa.refreshStatus();
+      if (response.textSaved)
+        celebrate(
+          "offline",
+          response.ok
+            ? "Your field guide is downloaded and ready to travel."
+            : "Your text guide is downloaded. Some photos could not be saved.",
         );
-        if (e.data.textSaved)
-          celebrate(
-            "offline",
-            e.data.ok
-              ? "Your field guide is downloaded and ready to travel."
-              : "Your text guide is downloaded. Some photos could not be saved.",
-          );
-        channel.port1.close();
-      };
-      target.postMessage({ type: "SAVE_GUIDE", ids: state.saved }, [channel.port2]);
-      setMessage("Saving your field guide…");
-    } catch {
-      setMessage("Offline saving needs a secure browser with service workers.");
+    } catch (error) {
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Offline saving needs a secure browser with service workers.",
+      );
     }
   };
   const card = (p: Place, near = false) => (
@@ -215,6 +229,37 @@ export default function AdventureHub() {
       <p className="field-guide-intro">
         Find your next little adventure. Collect a few sparks and make a day of it.
       </p>
+      {hasIncoming && (
+        <section className="incoming-discovery" aria-label="Shared discovery">
+          <span className="tiny-label">A SPARK SHARED WITH YOU</span>
+          {incoming ? (
+            <>
+              <h2>{incoming.name}</h2>
+              <p>{incoming.description}</p>
+              <div className="pwa-actions">
+                <Link href={placePath(incoming)}>Open discovery ↗</Link>
+                <button
+                  aria-pressed={state.saved.includes(incoming.id)}
+                  onClick={() =>
+                    update({
+                      saved: state.saved.includes(incoming.id)
+                        ? state.saved.filter((id) => id !== incoming.id)
+                        : [...state.saved, incoming.id],
+                    })
+                  }
+                >
+                  {state.saved.includes(incoming.id) ? "Saved discovery" : "Save shared discovery"}
+                </button>
+              </div>
+            </>
+          ) : (
+            <p>
+              This link isn’t in the catalog yet. Choose a destination below to find a little
+              adventure.
+            </p>
+          )}
+        </section>
+      )}
       <label className="select-city">
         Destination
         <select
@@ -517,6 +562,7 @@ export default function AdventureHub() {
         {tab === "passport" && (
           <section className="adventure-section">
             <h2>Your discovery passport</h2>
+            <PwaPanel />
             <div className="passport-settings" role="group" aria-label="Passport preferences">
               <label className="setting-row">
                 <input

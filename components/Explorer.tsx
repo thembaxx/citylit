@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState, useMemo, useRef, type CSSProperties } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useDrag } from "@use-gesture/react";
 import {
@@ -31,6 +31,8 @@ import CategoryPlaces from "./CategoryPlaces";
 import CategoryNav from "./CategoryNav";
 import { useDiscovery } from "./useDiscovery";
 import PlaceActions from "./PlaceActions";
+import { useNativeRouter } from "./useNativeRouter";
+import PwaPanel from "./PwaPanel";
 import { provinceColors, availableProvinces } from "../lib/province-colors";
 import { useKhwezi } from "./KhweziProvider";
 import BrandWordmark from "./BrandWordmark";
@@ -84,7 +86,7 @@ const landmarkDescriptions = [
 ];
 export default function Explorer() {
   const pathname = usePathname(),
-    router = useRouter(),
+    router = useNativeRouter(),
     params = useSearchParams();
   const parts = pathname.split("/").filter(Boolean),
     ci = Math.max(
@@ -149,7 +151,7 @@ export default function Explorer() {
     [showSettings, setShowSettings] = useState(false),
     [reset, setReset] = useState(0);
   const panelOpen = showSaved || help || showSettings;
-  const modalRef = useRef<HTMLDivElement>(null),
+  const modalRef = useRef<HTMLDialogElement>(null),
     searchRef = useRef<HTMLInputElement>(null),
     screenRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion(),
@@ -195,9 +197,10 @@ export default function Explorer() {
   useEffect(() => {
     if (!panelOpen) return;
     const before = document.activeElement as HTMLElement | null;
-    requestAnimationFrame(() =>
-      modalRef.current?.querySelector<HTMLButtonElement>("button")?.focus(),
-    );
+    const frame = requestAnimationFrame(() => {
+      if (modalRef.current && !modalRef.current.open) modalRef.current.showModal();
+      modalRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setShowSaved(false);
@@ -223,6 +226,7 @@ export default function Explorer() {
     };
     document.addEventListener("keydown", onKey);
     return () => {
+      cancelAnimationFrame(frame);
       document.removeEventListener("keydown", onKey);
       before?.focus();
     };
@@ -811,7 +815,18 @@ export default function Explorer() {
               setShowSettings(false);
             }}
           >
-            <motion.div
+            <motion.dialog
+              closedby="any"
+              onClose={() => {
+                setShowSaved(false);
+                setHelp(false);
+                setShowSettings(false);
+              }}
+              onCancel={() => {
+                setShowSaved(false);
+                setHelp(false);
+                setShowSettings(false);
+              }}
               ref={modalRef}
               className="modal"
               initial={{ y: 20 }}
@@ -846,6 +861,7 @@ export default function Explorer() {
               {showSettings ? (
                 <div className="experience-settings">
                   <p>A little delight, on your terms.</p>
+                  <PwaPanel />
                   <button
                     className="preference-button sound-toggle"
                     aria-label={sound ? "Mute sounds" : "Enable sounds"}
@@ -980,7 +996,7 @@ export default function Explorer() {
                   )}
                 </>
               )}
-            </motion.div>
+            </motion.dialog>
           </motion.div>
         )}
       </AnimatePresence>

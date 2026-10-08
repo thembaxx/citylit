@@ -1,0 +1,23 @@
+name: Place data correction
+description: Suggest a sourced change to a place, pin, photo or practical fact.
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Citylit place URL
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should change?
+      description: State the field, corrected value and when it was checked.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Supporting source URL
+      description: Prefer the venue, municipality or operator.
+    validations:
+      required: true

@@ -1,0 +1,108 @@
+name: Deployment smoke
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      deployment_url:
+        description: Public Citylit Vercel deployment URL
+        required: true
+        default: https://citylit.vercel.app
+permissions: {}
+concurrency:
+  group: deployment-smoke-${{ github.event.deployment.id || github.run_id }}
+  cancel-in-progress: false
+jobs:
+  deployment-smoke:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.creator.login == 'vercel[bot]' &&
+       (github.event.deployment.environment == 'Preview' || github.event.deployment.environment == 'Production'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      statuses: write
+    steps:
+      # No checkout or application code executes with this write token.
+      - name: Validate the deployed app and publish its smoke status
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          DEPLOYMENT_URL: ${{ github.event.deployment_status.environment_url || github.event.deployment_status.target_url || inputs.deployment_url }}
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        with:
+          script: |
+            const deployment = context.payload.deployment;
+            const sha = deployment?.sha;
+            if (sha && !/^[a-f0-9]{40}$/.test(sha)) throw new Error("Invalid deployment commit.");
+            const report = async (state, description) => {
+              if (!sha) return;
+              await github.rest.repos.createCommitStatus({
+                ...context.repo, sha, state,
+                context: "Deployment smoke",
+                description,
+                target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              });
+            };
+            const validateUrl = value => {
+              const url = new URL(value);
+              // Canonical authority must contain neither credentials nor a custom port.
+              if (url.protocol !== "https:" || url.origin !== `https://${url.hostname}` ||
+                  !url.href.startsWith(`${url.origin}/`) ||
+                  !(url.hostname === "citylit.vercel.app" || /^citylit-[a-z0-9-]+-thembaxxs-projects\.vercel\.app$/.test(url.hostname))) {
+                throw new Error("Smoke checks accept only HTTPS Vercel deployments.");
+              }
+              return url;
+            };
+            try {
+              const base = validateUrl(process.env.DEPLOYMENT_URL);
+              const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+              await report("pending", "Checking deployed routes and public data.");
+              const routes = [
+                ["/", 200, /citylit/i],
+                ["/explore", 200, /citylit/i],
+                ["/johannesburg/lodging?view=places", 200, /citylit/i],
+                ["/cape-town/parks-zoos/kirstenbosch", 200, /citylit/i],
+                ["/api/health", 200, null],
+                ["/manifest.webmanifest", 200, null],
+                ["/data/places.json", 200, null],
+                ["/not-a-city", 404, null],
+              ];
+              for (const [path, status, content] of routes) {
+                let url = new URL(path, base);
+                let response;
+                for (let hop = 0; hop < 4; hop++) {
+                  response = await fetch(validateUrl(url.href), {
+                    redirect: "manual", signal: AbortSignal.timeout(15000),
+                    headers: bypass && url.origin === base.origin ? { "x-vercel-protection-bypass": bypass } : {},
+                  });
+                  if (![301, 302, 303, 307, 308].includes(response.status)) break;
+                  const location = response.headers.get("location");
+                  if (!location) throw new Error("Redirect without a location.");
+                  const destination = new URL(location, url);
+                  if (destination.origin === "https://vercel.com" && destination.pathname === "/sso-api") {
+                    throw new Error("Protected Vercel preview: configure VERCEL_AUTOMATION_BYPASS_SECRET in repository Actions secrets.");
+                  }
+                  url = validateUrl(new URL(location, url).href);
+                }
+                if (response.status !== status) throw new Error(`${path}: expected ${status}, got ${response.status}`);
+                const text = await response.text();
+                if (content && !content.test(text)) throw new Error(`${path}: missing expected content.`);
+                if (path === "/") {
+                  // Client-rendered chapters ship a shell; also verify a referenced JS asset.
+                  const asset = text.match(/<script[^>]+src="(\/_next\/static\/[^"]+\.js[^"]*)"/);
+                  if (!asset) throw new Error("Application bootstrap asset is missing.");
+                  routes.push([asset[1].replaceAll("&amp;", "&"), 200, /./s]);
+                }
+                if (path.startsWith("/_next/static/") && !response.headers.get("content-type")?.includes("javascript")) {
+                  throw new Error("Application bootstrap asset has the wrong content type.");
+                }
+                if (path === "/api/health" && JSON.parse(text).status !== "ok") throw new Error("Health response failed.");
+                if (path === "/data/places.json" && !Array.isArray(JSON.parse(text))) throw new Error("Catalog response failed.");
+                if (path === "/manifest.webmanifest" && !JSON.parse(text).name) throw new Error("Manifest response failed.");
+                core.info(`Passed ${path}`);
+              }
+              await report("success", "Deployed routes, health and public data passed.");
+            } catch (error) {
+              await report("failure", "Deployment smoke failed; inspect the workflow log.");
+              throw error;
+            }

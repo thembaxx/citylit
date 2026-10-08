@@ -2,3 +2,14 @@ allowBuilds:
   better-sqlite3: false
   msgpackr-extract: false
   sharp: true
+
+minimumReleaseAgeExclude:
+  - '@ngageoint/geopackage@4.2.10'
+
+overrides:
+  'adm-zip@<0.6.1': 0.6.1
+  'fflate@<0.8.3': 0.8.3
+  '@ngageoint/geopackage@<4.2.10': 4.2.10
+
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true

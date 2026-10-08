@@ -1,0 +1,8 @@
+# Approvals are optional while there is one maintainer.
+* @thembaxx
+/.github/ @thembaxx
+/.coderabbit.yaml @thembaxx
+/pnpm-workspace.yaml @thembaxx
+/next.config.ts @thembaxx
+/scripts/ @thembaxx
+/public/data/ @thembaxx

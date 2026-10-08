@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-ZA
+tone_instructions: Be concise and specific. Prioritize correctness, mobile usability, accessibility, performance and security. Explain concrete risks and avoid stylistic noise.
+reviews:
+  profile: chill
+  request_changes_workflow: true
+  allow_author_approval: false
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  review_status: true
+  review_progress: false
+  commit_status: true
+  fail_commit_status: true
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    base_branches: [".*"]
+    ignore_usernames: []
+  path_filters:
+    - "!public/images/**"
+    - "!public/fonts/**"
+    - "!public/data/commons-batch.json"
+    - "!public/data/crawl-report.json"
+    - "!pnpm-lock.yaml"
+  path_instructions:
+    - path: "components/**"
+      instructions: Preserve the single shared Three.js canvas, original city models and upright category icons. Check gesture conflicts, keyboard/touch navigation, animation cleanup, reduced/essential motion, empty states, 16px inputs and mobile spacing.
+    - path: "app/**"
+      instructions: Verify App Router APIs against the installed Next.js documentation. Country/city/category chapters fit one viewport; listings/details can scroll internally. Preserve contrasting day/night themes and squircle fallbacks.
+    - path: "lib/**"
+      instructions: Unknown practical facts must never become confirmed facts. Distinguish city reference from venue/entrance coordinates, estimates from verified data, and saved from visited state. Validate imported itinerary IDs and deep links.
+    - path: "public/data/**"
+      instructions: Check source URLs, per-fact confidence/check dates, image licenses/context, expiry of event dates and unique identities. A crawl must not silently reverify practical facts.
+    - path: ".github/**"
+      instructions: Require pinned actions, minimal token permissions, credential-free fork checks, safe environment passing and no execution of untrusted PR code with a write token. Main receives code only through pull requests.
+    - path: "scripts/**"
+      instructions: Check HTTP timeouts, source authenticity, checksums for downloaded tooling, safe archive handling, rate limits and prevention of default-branch writes.
+chat:
+  auto_reply: true

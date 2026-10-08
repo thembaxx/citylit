@@ -3,7 +3,7 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
-  await expect(page.getByRole("button", { name: "Explore Cape Town", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Explore Cape Town", exact: true })).toBeVisible();
   await expect(page.locator('[data-available="true"]')).toHaveCount(9);
   await expect(page.getByText("9 provinces ready to explore")).toBeVisible();
   await expect(page.locator("canvas")).toHaveCount(1);
@@ -11,14 +11,14 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
     (window as typeof window & { originalCanvas?: HTMLCanvasElement }).originalCanvas =
       document.querySelector("canvas")!;
   });
-  await page.getByRole("button", { name: "Explore Cape Town", exact: true }).click();
+  await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
   await expect(page).toHaveURL(/\/cape-town$/);
   await expect(page.locator(".landmark-open h3")).toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Next landmark", exact: true }).click();
   await expect(page.locator(".landmark-open h3")).toHaveText("Bo-Kaap");
-  await page.getByRole("button", { name: "Explore Cape Town", exact: true }).click();
+  await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
   await expect(page.locator(".place-card")).toHaveCount(0);
-  await page.getByRole("button", { name: "Open Entertainment", exact: true }).click();
+  await page.getByRole("link", { name: "Open Entertainment", exact: true }).click();
   await expect(page.locator(".place-card")).toHaveCount(5);
   await page.getByPlaceholder("Search places").fill("Kirstenbosch");
   await expect(page.locator(".place-card")).toHaveCount(1);
@@ -59,14 +59,14 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
 });
 test("one WebGL canvas persists through city and category routes", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("button", { name: "Explore Durban", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Explore Durban", exact: true })).toBeVisible();
   await page.evaluate(() => {
     (window as typeof window & { originalCanvas?: HTMLCanvasElement }).originalCanvas =
       document.querySelector("canvas")!;
   });
-  await page.getByRole("button", { name: "Explore Durban", exact: true }).click();
+  await page.getByRole("link", { name: "Explore Durban", exact: true }).click();
   await expect(page).toHaveURL(/\/durban$/);
-  await page.getByRole("button", { name: "Explore Durban", exact: true }).click();
+  await page.getByRole("link", { name: "Explore Durban", exact: true }).click();
   await page.getByRole("button", { name: "Clubs", exact: true }).click();
   await expect(page).toHaveURL(/\/durban\/clubs$/);
   expect(
@@ -191,7 +191,7 @@ test("fullscreen chapters fit compact and landscape phones, with category naviga
       "aria-current",
       "page",
     );
-    await page.getByRole("button", { name: "Open Clubs", exact: true }).click();
+    await page.getByRole("link", { name: "Open Clubs", exact: true }).click();
     await expect(page).toHaveURL(/view=places/);
     await expect(page.locator(".place-card")).toHaveCount(3);
     await page.goBack();
@@ -225,7 +225,7 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   await expect(page.locator(".wordmark")).toHaveAccessibleName("citylit");
   await expect(page.locator(".wordmark svg, .wordmark img")).toHaveCount(0);
   await expect(page.locator(".map-pin")).toHaveCount(0);
-  await expect(page.locator("button.province-active")).toHaveCount(9);
+  await expect(page.locator("a.province-active")).toHaveCount(9);
   expect(
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);
@@ -290,7 +290,7 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
 
 test("linked breadcrumbs, two-line introductions and province chooser", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("More chapters coming", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Browse city guides ↗", exact: true })).toBeVisible();
   await expect(page.locator(".map-pin")).toHaveCount(0);
   await page.getByRole("button", { name: "9 provinces ready to explore", exact: true }).click();
   await page
@@ -304,7 +304,7 @@ test("linked breadcrumbs, two-line introductions and province chooser", async ({
     "aria-current",
     "page",
   );
-  await page.getByRole("button", { name: "Explore Cape Town", exact: true }).click();
+  await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
   await expect(trail.getByRole("link", { name: "Entertainment", exact: true })).toHaveAttribute(
     "href",
     "/cape-town/entertainment",

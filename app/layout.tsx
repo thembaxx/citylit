@@ -3,8 +3,12 @@ import "./globals.css";
 import OfflineSupport from "../components/OfflineSupport";
 import SceneCanvas from "../components/SceneCanvas";
 import KhweziProvider from "../components/KhweziProvider";
+import JsonLd from "../components/JsonLd";
+import { SITE_URL, websiteSchema, isPreview } from "../lib/seo";
 export const metadata: Metadata = {
-  metadataBase: new URL("https://citylit.vercel.app"),
+  metadataBase: new URL(SITE_URL),
+  applicationName: "Citylit",
+  robots: { index: !isPreview, follow: !isPreview },
   title: "Citylit — Every city has a spark.",
   description:
     "Play your way through South Africa. Discover twelve South African destinations in an interactive 3D atlas and build your own day.",
@@ -34,6 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <JsonLd value={websiteSchema()} />
         <OfflineSupport />
         <SceneCanvas>
           <KhweziProvider>{children}</KhweziProvider>

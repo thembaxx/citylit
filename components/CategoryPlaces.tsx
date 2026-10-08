@@ -230,7 +230,15 @@ export default function CategoryPlaces(props: Props) {
                 <div className="place-icon">
                   <CategoryIcon index={categories.indexOf(place.category)} size={27} />
                 </div>
-                <button className="place-open" onClick={() => props.onPlace(place)}>
+                <Link
+                  className="place-open"
+                  href={`/${place.city}/${categorySlug(place.category)}/${place.id}`}
+                  prefetch={false}
+                  onNavigate={(event) => {
+                    event.preventDefault();
+                    props.onPlace(place);
+                  }}
+                >
                   <span className="tiny-label">{place.category}</span>
                   <h3>{place.name}</h3>
                   <p>{place.description}</p>
@@ -238,7 +246,7 @@ export default function CategoryPlaces(props: Props) {
                     <MapPin size={11} />
                     {place.address}
                   </span>
-                </button>
+                </Link>
                 <button
                   className="save-icon"
                   onClick={() => props.onSave(place.id)}

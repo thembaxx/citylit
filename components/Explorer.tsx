@@ -547,10 +547,10 @@ export default function Explorer() {
                     <i />
                     {Object.keys(availableProvinces).length} provinces ready to explore
                   </button>
-                  <span className="coming-legend">
+                  <Link className="coming-legend" href="/destinations">
                     <i />
-                    More chapters coming
-                  </span>
+                    Browse city guides ↗
+                  </Link>
                 </div>
                 {showProvinces && (
                   <nav
@@ -604,12 +604,13 @@ export default function Explorer() {
                       exit={{ opacity: 0, x: reduced ? 0 : direction * -15 }}
                       transition={{ duration: reduced ? 0 : 0.18 }}
                     >
-                      <button
+                      <Link
                         className="landmark-open"
-                        onClick={() => router.push(`/${city.slug}/entertainment`)}
+                        href={`/${city.slug}/entertainment`}
+                        prefetch={false}
                       >
                         <h3>{city.landmarks[index]}</h3>
-                      </button>
+                      </Link>
                       <p>{landmarkDescriptions[ci]?.[index] || city.descriptions[index]}</p>
                     </motion.div>
                   </AnimatePresence>
@@ -633,12 +634,13 @@ export default function Explorer() {
                   ))}
                 </div>
                 <p className="swipe-hint">Swipe the caption for more. Drag the model to rotate.</p>
-                <button
+                <Link
                   className="pill-button ivory-button"
-                  onClick={() => router.push(`/${city.slug}/entertainment`)}
+                  href={`/${city.slug}/entertainment`}
+                  prefetch={false}
                 >
                   Explore {city.short}
-                </button>
+                </Link>
                 <a
                   className="landmark-wiki"
                   href={
@@ -676,9 +678,17 @@ export default function Explorer() {
                     </motion.h2>
                   </AnimatePresence>
                   <p className="category-description">{categoryDescriptions[cat]}</p>
-                  <button className="pill-button" onClick={openPlaces}>
+                  <Link
+                    className="pill-button"
+                    href={`/${city.slug}/${categorySlug(categories[cat])}?view=places`}
+                    prefetch={false}
+                    onNavigate={(event) => {
+                      event.preventDefault();
+                      openPlaces();
+                    }}
+                  >
                     Open {categories[cat]}
-                  </button>
+                  </Link>
                   <span className="category-count">{cat + 1} / 5</span>
                 </div>
                 <CategoryNav selected={cat} onSelect={chooseCategory} compact />
@@ -906,6 +916,10 @@ export default function Explorer() {
                   <Link className="brand-link" href="/brand">
                     Meet Khwezi & the Citylit story <ArrowUpRight size={14} />
                   </Link>
+                  <div className="settings-information">
+                    <Link href="/about">About & sources</Link>
+                    <Link href="/privacy">Privacy & data</Link>
+                  </div>
                 </div>
               ) : help ? (
                 <KhweziMoment pose="gesture" />

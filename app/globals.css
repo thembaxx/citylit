@@ -1,10 +1,5 @@
 @import "tailwindcss";
 :root {
-  --bg: #111113;
-  --ink: #f1f0e7;
-  --muted: #98979d;
-  --accent: #796aff;
-  --line: #38363d;
   --font-heading: "Barlow Condensed", Impact, sans-serif;
   --font-mono: "Space Mono", monospace;
 }
@@ -50,6 +45,8 @@ a {
   touch-action: manipulation;
 }
 .canvas-root {
+  background: var(--bg);
+  height: 100vh;
   height: 100dvh;
   overflow: hidden;
 }
@@ -57,11 +54,13 @@ a {
   position: fixed !important;
   inset: 0 !important;
   width: 100vw !important;
+  height: 100vh !important;
   height: 100dvh !important;
   pointer-events: none !important;
   z-index: 2 !important;
 }
 .game-screen {
+  height: 100vh;
   height: 100dvh;
   max-width: none;
   width: 100%;
@@ -79,7 +78,7 @@ a {
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: #111113;
+  background: var(--bg);
 }
 .ambient-glow {
   position: absolute;
@@ -1521,31 +1520,9 @@ h3 {
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Night garden and daylight: all interactive text uses semantic contrast tokens. */
-:root,
-:root[data-theme="night"] {
-  color-scheme: dark;
-  --bg: #080f20;
-  --ink: #f1f3ff;
-  --muted: #b0b9d1;
-  --accent: #7361ed;
-  --line: #34425e;
-  --surface: #101b32;
-  --surface-glass: #101b32f5;
-}
-:root[data-theme="day"] {
-  color-scheme: light;
-  --bg: #f6f3ed;
-  --ink: #17223c;
-  --muted: #505d74;
-  --accent: #5b45c9;
-  --line: #b7becb;
-  --surface: #fffdf8;
-  --surface-glass: #fffdf8f5;
-}
+/* Match the root paint immediately; animate city glows rather than the base color. */
 .game-atmosphere {
   background: var(--bg);
-  transition: background-color 0.45s;
 }
 .dreamscape-view {
   z-index: 1;
@@ -1896,6 +1873,10 @@ h3 {
 }
 .game-map .game-controls {
   position: relative;
+}
+.game-map .game-controls:has(.province-picker) {
+  /* Keep the picker above projected map labels, including WebKit's composited layers. */
+  z-index: 6;
 }
 .province-picker {
   position: absolute;
@@ -2335,12 +2316,6 @@ h3 {
   .category-page h1 {
     font-size: 62px;
   }
-}
-:root {
-  --accent-ink: #b4a5ff;
-}
-:root[data-theme="day"] {
-  --accent-ink: #5b45c9;
 }
 .category-page h1,
 .category-page-tabs button[aria-current="page"] {
@@ -3609,10 +3584,14 @@ button:disabled {
   animation: none;
 }
 .brand-route-loading {
+  height: 100vh;
   height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
 }
 .empty .khwezi-moment {
   margin: 0 auto 22px;
@@ -3836,12 +3815,12 @@ button:disabled {
   margin: 8px 0 0;
 }
 .brand-day-example {
-  background: #f5f3eb;
-  color: #17243c;
+  background: var(--day-bg);
+  color: var(--day-ink);
 }
 .brand-night-example {
-  background: #091323;
-  color: #f3efe3;
+  background: var(--night-bg);
+  color: var(--night-ink);
 }
 .brand-ui-moments {
   display: grid;

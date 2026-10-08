@@ -6,17 +6,23 @@ export default function GlobalError({
   retry: () => void;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>Let’s regroup | Citylit</title>
         <meta name="robots" content="noindex" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="color-scheme" content="dark light" />
+        <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#080f20" media="(prefers-color-scheme: dark)" />
+        <link rel="stylesheet" href="/theme.css" />
       </head>
       <body
         style={{
           margin: 0,
-          padding: "max(32px, env(safe-area-inset-top)) 24px",
-          background: "#091323",
-          color: "#F3EFE3",
+          padding:
+            "max(32px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left))",
+          background: "var(--bg, #080f20)",
+          color: "var(--ink, #f1f3ff)",
           fontFamily: "system-ui, sans-serif",
           minHeight: "100vh",
           overflow: "auto",
@@ -34,8 +40,8 @@ export default function GlobalError({
               font: "inherit",
               fontSize: 16,
               padding: "14px 20px",
-              background: "#F3EFE3",
-              color: "#17243C",
+              background: "var(--ink, #f1f3ff)",
+              color: "var(--bg, #080f20)",
               borderRadius: 20,
               border: 0,
             }}
@@ -43,11 +49,11 @@ export default function GlobalError({
             Try again
           </button>
           <p>
-            <a href="/" style={{ color: "#C7C0FF" }}>
+            <a href="/" style={{ color: "var(--accent-ink, #b4a5ff)" }}>
               Return to Citylit
             </a>{" "}
             ·{" "}
-            <a href="/offline.html" style={{ color: "#C7C0FF" }}>
+            <a href="/offline.html" style={{ color: "var(--accent-ink, #b4a5ff)" }}>
               Downloaded guide
             </a>
           </p>

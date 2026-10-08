@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import AdventureHub from "../../components/AdventureHub";
-import KhweziMoment from "../../components/KhweziMoment";
+import RouteLoading from "../../components/RouteLoading";
 import { metadataForPage } from "../../lib/seo";
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 export async function generateMetadata({ searchParams }: Props) {
@@ -21,13 +21,7 @@ export default async function Page({ searchParams }: Props) {
   // Resolve query state before streaming so the planner also has useful server HTML.
   await searchParams;
   return (
-    <Suspense
-      fallback={
-        <div className="brand-route-loading" role="status">
-          <KhweziMoment pose="loading" />
-        </div>
-      }
-    >
+    <Suspense fallback={<RouteLoading />}>
       <AdventureHub />
     </Suspense>
   );

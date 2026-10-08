@@ -1,0 +1,70 @@
+/* Shared by the live app, loading/recovery screens and downloaded guide. */
+:root {
+  --night-bg: #080f20;
+  --day-bg: #f6f3ed;
+  --night-ink: #f1f3ff;
+  --day-ink: #17223c;
+  --night-muted: #b0b9d1;
+  --day-muted: #505d74;
+  --night-accent: #7361ed;
+  --day-accent: #5b45c9;
+  --night-accent-ink: #b4a5ff;
+  --day-accent-ink: #5b45c9;
+  --night-line: #34425e;
+  --day-line: #b7becb;
+  --night-surface: #101b32;
+  --day-surface: #fffdf8;
+  --night-surface-glass: #101b32f5;
+  --day-surface-glass: #fffdf8f5;
+  color-scheme: dark;
+  --bg: var(--night-bg);
+  --ink: var(--night-ink);
+  --muted: var(--night-muted);
+  --accent: var(--night-accent);
+  --accent-ink: var(--night-accent-ink);
+  --line: var(--night-line);
+  --surface: var(--night-surface);
+  --surface-glass: var(--night-surface-glass);
+}
+/* An OS-aware first paint also works when JavaScript or storage is unavailable. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) {
+    color-scheme: light;
+    --bg: var(--day-bg);
+    --ink: var(--day-ink);
+    --muted: var(--day-muted);
+    --accent: var(--day-accent);
+    --accent-ink: var(--day-accent-ink);
+    --line: var(--day-line);
+    --surface: var(--day-surface);
+    --surface-glass: var(--day-surface-glass);
+  }
+}
+:root[data-theme="day"] {
+  color-scheme: light;
+  --bg: var(--day-bg);
+  --ink: var(--day-ink);
+  --muted: var(--day-muted);
+  --accent: var(--day-accent);
+  --accent-ink: var(--day-accent-ink);
+  --line: var(--day-line);
+  --surface: var(--day-surface);
+  --surface-glass: var(--day-surface-glass);
+}
+html,
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+}
+html {
+  min-height: 100%;
+  accent-color: var(--accent);
+}
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+::selection {
+  background: var(--accent);
+  color: #fff;
+}

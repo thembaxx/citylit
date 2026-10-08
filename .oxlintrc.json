@@ -1,1 +1,1 @@
-{"ignorePatterns":["node_modules/**",".next/**","public/**"],"rules":{"no-unused-vars":"error"}}
+{"ignorePatterns":["node_modules/**",".next/**"],"rules":{"no-unused-vars":"error"}}

@@ -35,7 +35,7 @@ jobs:
       - name: Ingestion and image security regression tests
         run: python3 -m unittest discover -s scripts/tests -v
       - run: pnpm build
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
       - name: Mobile and desktop browser regression tests
         run: pnpm test
       - name: Preserve browser failure diagnostics

@@ -1,7 +1,8 @@
 """Resolve missing venue pins, respecting Nominatim's one-request-per-second policy.
 Accept only matching venue names and nearby coordinates, never street/city results.
 """
-import json,pathlib,urllib.request,urllib.parse,time,re,unicodedata,math
+import json,pathlib,urllib.parse,time,re,unicodedata,math
+from safe_fetch import fetch_json
 ROOT=pathlib.Path(__file__).resolve().parent.parent;p=ROOT/'public/data/places.json';rows=json.load(open(p));cities={c['slug']:c['short'] for c in json.load(open(ROOT/'public/data/cities.json'))}
 def tokens(s):return {x for x in re.sub(r'[^a-z0-9 ]',' ',unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()).split() if x not in {'the','of','national','city','and','centre','center'}}
 for row in rows:
@@ -9,7 +10,7 @@ for row in rows:
  name='Origin' if row['id']=='origin' else row['name'];url='https://nominatim.openstreetmap.org/search?'+urllib.parse.urlencode({'q':name+' '+cities[row['city']],'format':'json','limit':3,'namedetails':1,'countrycodes':'za'})
  time.sleep(1.2)
  try:
-  response=json.load(urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Citylit/1.0 (github.com/thembaxx/citylit) source verification'}),timeout=20))
+  response=fetch_json(url, allowed_hosts={'nominatim.openstreetmap.org'}, max_bytes=1024*1024, timeout=20)
   for match in response:
    found=' '.join(match.get('namedetails',{}).values()) or match.get('name','');required=tokens(name)
    if not required.issubset(tokens(found)):continue

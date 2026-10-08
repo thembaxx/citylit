@@ -7,15 +7,7 @@ import { cities, places } from "../lib/data";
 import { placePath, activeEvents } from "../lib/adventure";
 import ThemeToggle from "./ThemeToggle";
 import { qualityIssues } from "../lib/quality";
-type Correction = {
-  id: string;
-  placeId: string;
-  field: string;
-  value: string;
-  source: string;
-  createdAt: string;
-  status: string;
-};
+import { readCorrections, publicHttpsUrl, type Correction } from "../lib/client-data";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 export default function EditorialDashboard() {
   const { state } = useDiscovery();
@@ -25,7 +17,7 @@ export default function EditorialDashboard() {
     [duplicates, setDuplicates] = useState<string[]>([]);
   useEffect(() => {
     try {
-      setQueue(JSON.parse(localStorage.getItem("citylit-corrections") || "[]"));
+      setQueue(readCorrections());
     } catch {}
     const seen = new Set<string>();
     setDuplicates(
@@ -43,7 +35,9 @@ export default function EditorialDashboard() {
   const update = (id: string, status: string) => {
     const next = queue.map((row) => (row.id === id ? { ...row, status } : row));
     setQueue(next);
-    localStorage.setItem("citylit-corrections", JSON.stringify(next));
+    try {
+      localStorage.setItem("citylit-corrections", JSON.stringify(next));
+    } catch {}
   };
   const download = () => {
     const url = URL.createObjectURL(
@@ -93,7 +87,7 @@ export default function EditorialDashboard() {
               {row.field}: {row.value}
             </p>
             <a
-              href={/^https?:\/\//.test(row.source) ? row.source : "#"}
+              href={publicHttpsUrl(row.source) ? row.source : "#"}
               target="_blank"
               rel="noreferrer"
             >

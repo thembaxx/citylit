@@ -110,3 +110,5 @@ Citylit’s promise is “Every city has a spark.” Khwezi, an original low-pol
 Citylit includes canonical metadata, structured data, `/sitemap.xml`, `/robots.txt`, credited sharing cards, a crawlable `/destinations` directory, province guides, and JavaScript-free discovery guides. AI-readable source-aware content lives at `/llms.txt`, `/llms-full.txt` and `/guides/...`.
 
 See [production readiness](docs/production-readiness.md) for validation, release identity checks and owner setup still required for search verification, monitoring, legal contact details and repository protection.
+
+See the [security audit](docs/security-audit-2026-10-08.md) for browser CSP, bounded source ingestion, dependency/secret scan results and remaining owner setup.

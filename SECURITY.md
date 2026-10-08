@@ -6,6 +6,8 @@ Report vulnerabilities privately at https://github.com/thembaxx/citylit/security
 
 Never include active credentials in a public issue or PR. GitGuardian and the independent Gitleaks history scan detect committed secrets; GitHub native push protection is part of the owner setup. Revoke a leaked credential before removing it from history.
 
-CI checks dependency advisories, source analysis with CodeQL, workflow security and browser regressions. Source crawling does not verify every venue fact; practical information keeps independent provenance and check dates.
+CI checks Node and hash-pinned Python dependency advisories, bounded-ingestion security regressions, source analysis with CodeQL, workflow security and browser regressions. Source crawling does not verify every venue fact; practical information keeps independent provenance and check dates.
 
 See [repository automation](docs/repository-automation.md) for the enforced checks, owner setup and deployment process.
+
+See the [8 October 2026 security audit](docs/security-audit-2026-10-08.md) for findings, scanner triage, browser/ingestion controls and unresolved owner settings. A checked-in ruleset is not proof that GitHub enforces it.

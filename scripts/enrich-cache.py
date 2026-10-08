@@ -1,6 +1,7 @@
 """Build app data from cached crawl results and batch Commons metadata."""
-import json,pathlib,urllib.request,urllib.parse,re,html,datetime,time,io
-from PIL import Image
+import json,pathlib,urllib.parse,re,html,datetime,time,io
+from safe_fetch import fetch_bytes, WIKIMEDIA_HOSTS
+from safe_images import save_photo
 ROOT=pathlib.Path(__file__).resolve().parent.parent;OUT=ROOT/'public/data';IMG=ROOT/'public/images';DATE=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
 def clean(s):return html.unescape(re.sub('<[^>]*>','',s or '')).strip()
 r=json.load(open(OUT/'crawl-report.json'));batch=json.load(open(OUT/'commons-batch.json'));records={}
@@ -9,6 +10,11 @@ for p in batch.get('query',{}).get('pages',{}).values():
  i=p['imageinfo'][0];m=i.get('extmetadata',{});license=clean(m.get('LicenseShortName',{}).get('value',''))
  if not any(s in license.lower() for s in ['cc by','cc0','public domain']):continue
  name=p['title'].removeprefix('File:');records[name.replace('_',' ') ]={'remote':i.get('thumburl',i['url']),'alt':clean(m.get('ImageDescription',{}).get('value',''))[:180] or name,'author':clean(m.get('Artist',{}).get('value',''))[:200],'license':license,'licenseUrl':m.get('LicenseUrl',{}).get('value',''),'sourceUrl':i['descriptionurl'],'filename':name}
+# Creative Commons' legacy HTTP license URIs have canonical HTTPS equivalents.
+for record in records.values():
+ parsed=urllib.parse.urlsplit(record['licenseUrl'])
+ if parsed.scheme=='http' and parsed.hostname in ('creativecommons.org','www.creativecommons.org'):
+  record['licenseUrl']=urllib.parse.urlunsplit(parsed._replace(scheme='https'))
 cache={};rate_limited=False
 def photo(name):
  global rate_limited
@@ -21,8 +27,8 @@ def photo(name):
  try:
   if not dest.exists():
    time.sleep(.6)
-   request=urllib.request.Request(item['remote'],headers={'User-Agent':'Citylit/1.0 open-source South African discovery atlas'})
-   raw=urllib.request.urlopen(request,timeout=25).read();im=Image.open(io.BytesIO(raw)).convert('RGB');im.thumbnail((1200,1200));im.save(dest,quality=83,optimize=True)
+   raw=fetch_bytes(item['remote'], allowed_hosts=WIKIMEDIA_HOSTS, max_bytes=12*1024*1024).body
+   save_photo(raw, dest)
   result={k:v for k,v in item.items() if k!='remote'};result['src']='/images/'+filename;cache[name]=result;print('Photo saved:',name,flush=True);return result
  except Exception as e:
   if getattr(e,'code',None)==429:rate_limited=True

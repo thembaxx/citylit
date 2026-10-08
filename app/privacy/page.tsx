@@ -9,7 +9,7 @@ export default function PrivacyPage() {
   return (
     <ReadingPage>
       <span className="tiny-label">YOUR ADVENTURE / YOUR DEVICE</span>
-      <h1>Privacy & data.</h1>
+      <h1>Privacy &amp; data.</h1>
       <p className="reading-intro">
         Your discoveries belong to you. Here’s how the app handles them.
       </p>

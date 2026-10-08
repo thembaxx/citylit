@@ -18,8 +18,8 @@ export default function ReadingPage({ children }: { children: ReactNode }) {
         {children}
         <footer className="reading-footer">
           <Link href="/destinations">City guides</Link>
-          <Link href="/about">About & sources</Link>
-          <Link href="/privacy">Privacy & data</Link>
+          <Link href="/about">About &amp; sources</Link>
+          <Link href="/privacy">Privacy &amp; data</Link>
           <a href="https://github.com/thembaxx/citylit/issues/new/choose">Report an issue</a>
         </footer>
       </div>

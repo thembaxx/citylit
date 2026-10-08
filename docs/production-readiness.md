@@ -4,8 +4,8 @@ Citylit serves its interactive atlas at **https://citylit.vercel.app**. Its craw
 
 ## Search engines and sharing
 
-- Country, city, category and place pages have unique titles, descriptions, canonical production URLs and contextual Open Graph/Twitter cards. `/share/...` generates a credited image from the local catalog, never arbitrary remote content.
-- `/sitemap.xml` includes populated, canonical destination pages and public information pages. Empty categories, filters, private editorial tools, invalid routes and shared trip parameters are excluded. Filtered pages have `noindex, follow`; `view=places` canonicalizes to its category. Source-check dates inform `lastmod`, rather than a fabricated rebuild date.
+- Country, city, category and place pages have unique titles, descriptions, canonical production URLs and contextual Open Graph/Twitter cards. `/share/...` serves a precomputed credited image from the local catalog, never arbitrary remote content.
+- `/sitemap.xml` includes populated, canonical destination pages and public information pages. Empty categories, filters, browser-local editorial tools, invalid routes and shared trip parameters are excluded. Filtered pages have `noindex, follow`; `view=places` canonicalizes to its category. Source-check dates inform `lastmod`, rather than a fabricated rebuild date.
 - `/robots.txt` advertises the sitemap. Vercel previews disallow crawling and page metadata uses `noindex`. Preview protection remains enabled.
 - JSON-LD describes the website, breadcrumbs, collections and places. It does not invent ratings, opening hours, prices or accessibility claims. City-reference coordinates and city-atmosphere images are excluded from venue schema.
 - Real destination, category and place links support browser-native navigation and modifiers. JavaScript-free visitors get readable source-linked guides inside `noscript`.
@@ -35,3 +35,7 @@ These steps require service ownership or legal decisions and cannot be completed
 7. Choose a custom domain when ready and update `SITE_URL`, crawler/sitemap URLs, social cards, deployment allowlists and identity tests together. Add redirects from the Vercel hostname to avoid duplicate indexing.
 
 Accessibility automation covers selected representative flows; it does not replace manual keyboard, VoiceOver/TalkBack, reduced-motion and device testing. The street map uses OpenStreetMap public tiles; respect their usage policy and choose a suitable tile service before traffic outgrows that policy.
+
+## Browser and ingestion security
+
+HTML uses a fresh server-owned CSP nonce and private/no-store caching; inline event handlers and production eval are disallowed. Public data, local photos, scripts, Markdown and sharing cards retain caching. Animated inline styles remain allowed for the interaction libraries. Maintenance fetches validate public destinations and redirects, enforce byte/pixel limits and use hash-locked Pillow. See the [security audit](security-audit-2026-10-08.md) for verification, performance tradeoffs and operator requirements.

@@ -29,11 +29,12 @@ import {
   tripLink,
 } from "../lib/adventure";
 import ThemeToggle from "./ThemeToggle";
-import { useDelight } from "./useDelight";
+import { useKhwezi } from "./KhweziProvider";
+
 import { useDiscovery } from "./useDiscovery";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 export default function AdventureHub() {
-  const { feedback, sound, haptics, toggleSound, toggleHaptics } = useDelight();
+  const { feedback, sound, haptics, toggleSound, toggleHaptics, celebrate, moving } = useKhwezi();
   const params = useSearchParams();
   const initialCity = cities.some((c) => c.slug === params.get("city"))
     ? params.get("city")!
@@ -131,7 +132,7 @@ export default function AdventureHub() {
       const target = registration.active;
       if (!target) throw new Error();
       const channel = new MessageChannel();
-      channel.port1.onmessage = (e) =>
+      channel.port1.onmessage = (e) => {
         setMessage(
           e.data.ok
             ? "Field guide ready for offline use."
@@ -139,6 +140,15 @@ export default function AdventureHub() {
               ? "Some images were unavailable; text is saved."
               : "The guide could not be saved. Connect and try again.",
         );
+        if (e.data.textSaved)
+          celebrate(
+            "offline",
+            e.data.ok
+              ? "Your field guide is downloaded and ready to travel."
+              : "Your text guide is downloaded. Some photos could not be saved.",
+          );
+        channel.port1.close();
+      };
       target.postMessage({ type: "SAVE_GUIDE", ids: state.saved }, [channel.port2]);
       setMessage("Saving your field guide…");
     } catch {
@@ -181,7 +191,8 @@ export default function AdventureHub() {
     <main
       className="field-guide"
       onClickCapture={(event) => {
-        if ((event.target as HTMLElement).closest("button")) feedback("tap");
+        const button = (event.target as HTMLElement).closest("button");
+        if (button && !button.getAttribute("aria-label")?.startsWith("Save")) feedback("tap");
       }}
     >
       <Atmosphere
@@ -192,7 +203,7 @@ export default function AdventureHub() {
         )}
         category={0}
         night={night}
-        animate={!state.essential}
+        animate={moving}
       />
       <header className="field-guide-header">
         <ThemeToggle onChange={setNight} />
@@ -202,10 +213,10 @@ export default function AdventureHub() {
           Offline guide
         </Link>
       </header>
-      <span className="tiny-label">A LITTLE CURIOSITY. A WHOLE DAY.</span>
+      <span className="tiny-label">EVERY CITY HAS A SPARK.</span>
       <h1>Your next chapter.</h1>
       <p className="field-guide-intro">
-        Find a small adventure, collect a few discoveries, and make a day of it.
+        Find your next little adventure. Collect a few sparks and make a day of it.
       </p>
       <label className="select-city">
         Destination

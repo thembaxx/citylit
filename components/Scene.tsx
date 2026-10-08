@@ -1,7 +1,7 @@
 "use client";
 import { useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, View, PerformanceMonitor } from "@react-three/drei";
-import { useEffect, useRef, useState, type ComponentRef } from "react";
+import { useCallback, useEffect, useRef, useState, type ComponentRef } from "react";
 import { useReducedMotion } from "motion/react";
 import * as THREE from "three";
 import gsap from "gsap";
@@ -44,7 +44,8 @@ function World({
   visible,
   labels,
   spin,
-}: Props & { visible: boolean; labels: LabelRefs; spin: number }) {
+  controlsElement,
+}: Props & { visible: boolean; labels: LabelRefs; spin: number; controlsElement: HTMLElement }) {
   const { camera, invalidate, setDpr, size } = useThree();
   const reduced = useReducedMotion();
   const group = useRef<THREE.Group>(null);
@@ -139,6 +140,12 @@ function World({
       <group
         ref={group}
         onClick={(e) => {
+          if (
+            (e.nativeEvent.target as HTMLElement)?.closest(
+              "button,a,input,select,label,.modal-backdrop",
+            )
+          )
+            return;
           if ((mode === "city" || mode === "category") && e.delta < 5) {
             e.stopPropagation();
             onSelect();
@@ -161,6 +168,7 @@ function World({
       </mesh>
       <OrbitControls
         ref={controls}
+        domElement={controlsElement}
         makeDefault
         onEnd={() => viewMemory.set(memoryKey, camera.position.toArray())}
         enabled={!travel}
@@ -183,6 +191,10 @@ export default function Scene(props: Props) {
   const labels = useRef<Record<string, HTMLDivElement | null>>({});
   const [visible, setVisible] = useState(true);
   const [spin, setSpin] = useState(0);
+  const [controlsElement, setControlsElement] = useState<HTMLElement | null>(null);
+  const trackControls = useCallback((element: HTMLElement | THREE.Group | null) => {
+    setControlsElement(element instanceof HTMLElement ? element : null);
+  }, []);
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
       threshold: 0.05,
@@ -201,8 +213,16 @@ export default function Scene(props: Props) {
       className="scene-view"
       aria-label="Interactive 3D illustration: drag to rotate, pinch to zoom"
     >
-      <View index={2} className="three-view" frames={Infinity}>
-        <World {...props} visible={visible} labels={labels} spin={spin} />
+      <View ref={trackControls} index={2} className="three-view" frames={Infinity}>
+        {controlsElement && (
+          <World
+            {...props}
+            visible={visible}
+            labels={labels}
+            spin={spin}
+            controlsElement={controlsElement}
+          />
+        )}
       </View>
       {props.mode !== "map" && (
         <button

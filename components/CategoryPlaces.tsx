@@ -7,8 +7,12 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 import { useSearchParams } from "next/navigation";
 import CategoryNav from "./CategoryNav";
 import CategoryIcon from "./CategoryIcon";
+import KhweziMoment from "./KhweziMoment";
 import { categories, categorySlug, cities, type Place } from "../lib/data";
-const Scene = dynamic(() => import("./Scene"), { ssr: false });
+const Scene = dynamic(() => import("./Scene"), {
+  ssr: false,
+  loading: () => <KhweziMoment pose="loading" compact />,
+});
 
 type Props = {
   city: number;
@@ -250,6 +254,7 @@ export default function CategoryPlaces(props: Props) {
         </div>
         {!filterPlaces.length && (
           <div className="empty">
+            <KhweziMoment pose="search" />
             <h3>{unseeded ? "A chapter taking shape." : "A little detour."}</h3>
             <p>
               {unseeded

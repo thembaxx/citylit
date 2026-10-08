@@ -37,7 +37,7 @@
     "name": "Market Theatre",
     "city": "johannesburg",
     "category": "Theatres",
-    "wiki": "Market Theatre",
+    "wiki": "Market Theatre (Johannesburg)",
     "website": "https://markettheatre.co.za/",
     "address": "56 Margaret Mcingana Street, Newtown",
     "description": "Newtown’s landmark theatre, known for South African storytelling and a history of protest performance."
@@ -261,5 +261,231 @@
     "website": "https://cubana.co.za/pages/contact/",
     "address": "128 Florida Road, Morningside",
     "description": "A Florida Road lounge for cocktails, music and an evening in Durban’s dining district."
+  },
+  {
+    "name": "Apartheid Museum",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Apartheid Museum",
+    "website": "https://www.apartheidmuseum.org/",
+    "address": "Northern Parkway & Gold Reef Road, Ormonde",
+    "description": "Exhibitions trace apartheid and the struggle for democracy through powerful personal stories."
+  },
+  {
+    "name": "Wits Art Museum",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Wits Art Museum",
+    "website": "https://www.wits.ac.za/wam/",
+    "address": "Corner Jan Smuts Avenue & Jorissen Street, Braamfontein",
+    "description": "Explore an extensive collection of African art on the edge of the Wits campus."
+  },
+  {
+    "name": "Johannesburg Art Gallery",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Johannesburg Art Gallery",
+    "website": "https://joburg.org.za/",
+    "address": "Joubert Park, Klein Street",
+    "description": "A historic city gallery holding South African and international works; check access before visiting."
+  },
+  {
+    "name": "Sci-Bono Discovery Centre",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "wiki": "Sci-Bono Discovery Centre",
+    "website": "https://www.sci-bono.co.za/",
+    "address": "Corner Miriam Makeba & Helen Joseph Streets, Newtown",
+    "description": "Hands-on science exhibits inside a former power station make discovery a playful experiment."
+  },
+  {
+    "name": "Iziko South African Museum",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "South African Museum",
+    "website": "https://www.iziko.org.za/museums/south-african-museum/",
+    "address": "25 Queen Victoria Street, Gardens",
+    "description": "Natural history, fossils and biodiversity collections beside the Company’s Garden."
+  },
+  {
+    "name": "Robben Island Museum",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "wiki": "Robben Island",
+    "website": "https://www.robben-island.org.za/",
+    "address": "Nelson Mandela Gateway, V&A Waterfront (ferry departure)",
+    "description": "Travel by ferry to the island whose former prison tells a central story of South African history."
+  },
+  {
+    "name": "Company’s Garden",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "wiki": "Company's Garden",
+    "website": "https://www.capetown.travel/",
+    "address": "Queen Victoria Street, Cape Town City Centre",
+    "description": "A leafy historic garden with shaded paths, monuments and museums around its edges."
+  },
+  {
+    "name": "KwaMuhle Museum",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "KwaMuhle Museum",
+    "website": "https://www.durban.gov.za/",
+    "address": "130 Bram Fischer Road, Durban Central",
+    "description": "A museum of Durban’s social history housed in the former Native Administration building."
+  },
+  {
+    "name": "Durban Natural Science Museum",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "Durban Natural Science Museum",
+    "website": "https://www.durban.gov.za/",
+    "address": "Durban City Hall, 234 Anton Lembede Street",
+    "description": "Explore natural history displays and regional biodiversity inside Durban’s City Hall."
+  },
+  {
+    "name": "Mitchell Park Zoo",
+    "city": "durban",
+    "category": "Parks & zoos",
+    "wiki": "Mitchell Park Zoo",
+    "website": "https://www.durban.gov.za/",
+    "address": "10 Ferndale Road, Morningside",
+    "description": "A small zoo and shaded gardens with family walking paths in Morningside."
+  },
+  {
+    "name": "Suncoast",
+    "city": "durban",
+    "category": "Entertainment",
+    "wiki": "Suncoast Casino and Entertainment World",
+    "website": "https://www.suncoastcasino.co.za/",
+    "address": "Suncoast Boulevard, Golden Mile",
+    "description": "A beachfront entertainment complex with dining, cinema and casino spaces; age restrictions apply."
+  },
+  {
+    "name": "Mandela House",
+    "city": "johannesburg",
+    "category": "Entertainment",
+    "website": "https://www.mandelahouse.com/",
+    "address": "8115 Vilakazi Street, Orlando West, Soweto",
+    "description": "Step inside Mandela’s former family home, with photographs and personal objects tracing a remarkable life.",
+    "wiki": "Mandela House"
+  },
+  {
+    "name": "Saxon Hotel, Villas & Spa",
+    "city": "johannesburg",
+    "category": "Lodging",
+    "website": "https://www.saxon.co.za/contact/",
+    "address": "36 Saxon Road, Sandhurst",
+    "description": "A garden-lined Sandhurst retreat with suites, villas and a spa."
+  },
+  {
+    "name": "Soweto Theatre",
+    "city": "johannesburg",
+    "category": "Theatres",
+    "website": "https://www.sowetotheatre.com/contact-us/",
+    "address": "Corner Bolani Road and Bolani Link, Jabulani, Soweto",
+    "description": "Colourful performance spaces hosting theatre, music and community storytelling.",
+    "wiki": "Soweto Theatre"
+  },
+  {
+    "name": "Johannesburg Botanical Garden",
+    "city": "johannesburg",
+    "category": "Parks & zoos",
+    "website": "https://www.jhbcityparksandzoo.com/services-facilities/botanical-gardens/about",
+    "address": "Olifants Road, Emmarentia",
+    "description": "Wander rose gardens, open lawns and tree-lined paths beside Emmarentia Dam.",
+    "wiki": "Johannesburg Botanical Garden"
+  },
+  {
+    "name": "Sognage",
+    "city": "johannesburg",
+    "category": "Clubs",
+    "website": "https://www.sognage.com/contact",
+    "address": "Gate 2, 304 Tungsten Road, Strijdompark",
+    "description": "An independent live-music and late-night events space for discovering local artists."
+  },
+  {
+    "name": "Castle of Good Hope",
+    "city": "cape-town",
+    "category": "Entertainment",
+    "website": "https://www.castleofgoodhope.co.za/",
+    "address": "Corner Darling Street and Buitenkant Street, Cape Town",
+    "description": "Explore a historic stone fortress, its courtyards and museum collections.",
+    "wiki": "Castle of Good Hope"
+  },
+  {
+    "name": "Cape Grace",
+    "city": "cape-town",
+    "category": "Lodging",
+    "website": "https://www.capegrace.com/contact-us/",
+    "address": "West Quay Road, V&A Waterfront",
+    "description": "A waterfront hotel on its own quay, framed by harbour views and Table Mountain.",
+    "wiki": "Cape Grace"
+  },
+  {
+    "name": "The Masque",
+    "city": "cape-town",
+    "category": "Theatres",
+    "website": "https://www.themasque.co.za/",
+    "address": "37 Main Road, Muizenberg",
+    "description": "An intimate community theatre presenting plays, music and local creative talent."
+  },
+  {
+    "name": "Arderne Gardens",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "website": "https://www.ardernegardens.org.za/location",
+    "address": "Main Road, Claremont",
+    "description": "A peaceful arboretum with towering heritage trees and shaded garden paths.",
+    "wiki": "Arderne Gardens"
+  },
+  {
+    "name": "Harringtons",
+    "city": "cape-town",
+    "category": "Clubs",
+    "website": "https://www.harringtonstreet.co.za/harringtons",
+    "address": "61B Harrington Street, Cape Town",
+    "description": "An upstairs cocktail lounge where live performances and DJ nights meet."
+  },
+  {
+    "name": "Phansi Museum",
+    "city": "durban",
+    "category": "Entertainment",
+    "website": "https://phansi.online/about/",
+    "address": "500 Esther Roberts Road, Glenwood",
+    "description": "Discover Southern African beadwork, textiles and ceremonial art in a historic home."
+  },
+  {
+    "name": "Southern Sun Elangeni & Maharani",
+    "city": "durban",
+    "category": "Lodging",
+    "website": "https://www.southernsun.com/southern-sun-elangeni-maharani/contact-us",
+    "address": "63 Snell Parade, North Beach",
+    "description": "A beachfront stay overlooking the Indian Ocean, steps from Durban’s promenade."
+  },
+  {
+    "name": "Rhumbelow Theatre",
+    "city": "durban",
+    "category": "Theatres",
+    "website": "https://events.durbantheatre.com/",
+    "address": "42 Cunningham Road, Umbilo",
+    "description": "A relaxed neighbourhood stage with live music, comedy and cabaret evenings."
+  },
+  {
+    "name": "Kenneth Stainbank Nature Reserve",
+    "city": "durban",
+    "category": "Parks & zoos",
+    "website": "https://visitdurban.travel/space/kenneth-stainbank-nature-reserve",
+    "address": "Coedmore Avenue, Yellow Wood Park",
+    "description": "Follow woodland trails through a city-edge reserve with grasslands and wildlife.",
+    "wiki": "Kenneth Stainbank Nature Reserve"
+  },
+  {
+    "name": "Tiger Tiger Durban",
+    "city": "durban",
+    "category": "Clubs",
+    "website": "https://www.tigertiger.durban/contact-us/",
+    "address": "Isaiah Ntshangase Road, Durban",
+    "description": "A long-running dance venue with DJ-led nights near Durban’s stadium precinct."
   }
 ]

@@ -4,7 +4,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { geoMercator } from "d3-geo";
 import * as THREE from "three";
 import gsap from "gsap";
-import { cities } from "../lib/data";
+import { provinceColors, availableProvinces } from "../lib/province-colors";
 import boundaries from "../public/data/provinces.json";
 export const provinceLabels = boundaries.features.map((f) => ({
   code: f.properties.shapeISO,
@@ -38,7 +38,6 @@ function point(coord: number[]): [number, number] {
   const p = project([coord[0], coord[1]])!;
   return [p[0], -p[1]];
 }
-const available: Record<string, number> = { GT: 0, WC: 1, KZ: 2 };
 const labelCoords: Record<string, number[]> = {
   EC: [26, -32],
   FS: [26.7, -28.4],
@@ -52,13 +51,11 @@ const labelCoords: Record<string, number[]> = {
 };
 function Province({
   feature,
-  index,
   onCity,
   reduced,
   labels,
 }: {
   feature: (typeof boundaries.features)[number];
-  index: number;
   onCity: (i: number) => void;
   reduced: boolean;
   labels: LabelRefs;
@@ -67,7 +64,7 @@ function Province({
   const [hover, setHover] = useState(false);
   const { invalidate } = useThree();
   const code = feature.properties.shapeISO,
-    city = available[code],
+    city = availableProvinces[code],
     active = city !== undefined;
   const geometry = useMemo(() => {
     const polygons =
@@ -93,6 +90,8 @@ function Province({
       });
   }, [feature, active]);
   useEffect(() => {
+    const label = labels.current[code];
+    if (label) label.dataset.hovered = String(hover);
     if (!ref.current) return;
     const tween = gsap.to(ref.current.position, {
       z: hover && active ? 0.08 : 0,
@@ -103,7 +102,7 @@ function Province({
     return () => {
       tween.kill();
     };
-  }, [hover, active, reduced, invalidate]);
+  }, [hover, active, reduced, invalidate, labels, code]);
   useEffect(() => () => geometry.forEach((g) => g.dispose()), [geometry]);
   const [x, y] = point(labelCoords[code]);
   return (
@@ -124,13 +123,9 @@ function Province({
       {geometry.map((g, i) => (
         <mesh key={i} geometry={g}>
           <meshStandardMaterial
-            color={
-              active
-                ? hover
-                  ? "#6482ff"
-                  : "#3454ee"
-                : ["#c6cead", "#d2d7b8", "#c0cba9"][index % 3]
-            }
+            color={provinceColors[code]}
+            emissive={provinceColors[code]}
+            emissiveIntensity={hover && active ? 0.25 : 0.04}
             flatShading
             roughness={0.9}
           />
@@ -151,28 +146,15 @@ export default function ProvinceMap({
 }) {
   return (
     <group rotation={[-Math.PI / 2, 0, 0]}>
-      {boundaries.features.map((f, i) => (
+      {boundaries.features.map((f) => (
         <Province
           key={f.properties.shapeISO}
           feature={f}
-          index={i}
           onCity={onCity}
           reduced={reduced}
           labels={labels}
         />
       ))}
-      {cities.map((c, i) => {
-        const [x, y] = point(c.coords);
-        return (
-          <group key={c.slug} position={[x, y, 0.48]}>
-            <mesh rotation={[Math.PI / 2, 0, 0]}>
-              <cylinderGeometry args={[0.025, 0.025, 0.38, 6]} />
-              <meshStandardMaterial color="#213de4" />
-            </mesh>
-            <ProjectedLabel label={"city-" + i} p={[0, 0, 0.14]} labels={labels} />
-          </group>
-        );
-      })}
     </group>
   );
 }

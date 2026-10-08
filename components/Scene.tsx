@@ -6,6 +6,7 @@ import { useReducedMotion } from "motion/react";
 import * as THREE from "three";
 import gsap from "gsap";
 import ProvinceMap, { provinceLabels, type LabelRefs } from "./ProvinceMap";
+import { provinceColors, availableProvinces } from "../lib/province-colors";
 import { cities } from "../lib/data";
 import { Landmark, CategoryModel } from "./Models";
 type Props = {
@@ -30,7 +31,7 @@ function World({
   visible,
   labels,
 }: Props & { visible: boolean; labels: LabelRefs }) {
-  const { camera, invalidate, setDpr } = useThree();
+  const { camera, invalidate, setDpr, size } = useThree();
   const reduced = useReducedMotion();
   const group = useRef<THREE.Group>(null);
   const controls = useRef<ComponentRef<typeof OrbitControls>>(null);
@@ -41,7 +42,9 @@ function World({
     const changed = previousMode.current !== mode;
     previousMode.current = mode;
     setTravel(true);
-    const target = mode === "map" ? { x: 4.6, y: 6.2, z: 6.5 } : { x: 3.8, y: 2.9, z: 5.4 };
+    const fit = Math.min(1.45, Math.max(1, 1.2 / (size.width / Math.max(size.height, 1))));
+    const target =
+      mode === "map" ? { x: 4.6 * fit, y: 6.2 * fit, z: 6.5 * fit } : { x: 3.8, y: 2.9, z: 5.4 };
     const tween = gsap.to(camera.position, {
       ...target,
       duration: reduced ? 0 : changed ? 1.15 : 0.7,
@@ -59,7 +62,7 @@ function World({
     return () => {
       tween.kill();
     };
-  }, [camera, mode, reset, reduced, invalidate]);
+  }, [camera, mode, reset, reduced, invalidate, size.width, size.height]);
   useEffect(() => {
     if (!group.current) return;
     const node = group.current;
@@ -126,7 +129,7 @@ function World({
         zoomSpeed={0.7}
         target={[0, mode === "map" ? 0 : 0.55, 0]}
         minDistance={mode === "map" ? 6 : 3.4}
-        maxDistance={mode === "map" ? 12 : 8}
+        maxDistance={mode === "map" ? 17 : 8}
         minPolarAngle={0.2}
         maxPolarAngle={Math.PI / 2.15}
       />
@@ -155,7 +158,7 @@ export default function Scene(props: Props) {
       className="scene-view"
       aria-label="Interactive 3D illustration: drag to rotate, pinch to zoom"
     >
-      <View className="three-view" frames={Infinity}>
+      <View index={2} className="three-view" frames={Infinity}>
         <World {...props} visible={visible} labels={labels} />
       </View>
       {props.mode === "map" && (
@@ -167,31 +170,22 @@ export default function Scene(props: Props) {
                 labels.current[p.code] = element;
               }}
               className="projected-label"
+              style={{ "--province-color": provinceColors[p.code] } as React.CSSProperties}
             >
-              <span
-                data-available={["GT", "WC", "KZ"].includes(p.code)}
-                className={`province ${["GT", "WC", "KZ"].includes(p.code) ? "province-active" : ""}`}
-              >
-                {p.name.toUpperCase()}
-              </span>
-            </div>
-          ))}
-          {cities.map((city, i) => (
-            <div
-              key={city.slug}
-              ref={(element) => {
-                labels.current["city-" + i] = element;
-              }}
-              className="projected-label pin-label"
-            >
-              <button
-                className="map-pin"
-                onClick={() => props.onCity(i)}
-                aria-label={`Explore ${city.name}`}
-              >
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                <span className="pin-tooltip">{city.name}</span>
-              </button>
+              {availableProvinces[p.code] !== undefined ? (
+                <button
+                  data-available="true"
+                  className="province province-active"
+                  aria-label={`Explore ${cities[availableProvinces[p.code]].name}`}
+                  onClick={() => props.onCity(availableProvinces[p.code])}
+                >
+                  {p.name.toUpperCase()}
+                </button>
+              ) : (
+                <span data-available="false" className="province">
+                  {p.name.toUpperCase()}
+                </span>
+              )}
             </div>
           ))}
         </div>

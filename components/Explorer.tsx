@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useEffect, useState, useMemo, useRef, type CSSProperties } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -10,29 +11,42 @@ import {
   ChevronLeft,
   ChevronRight,
   Compass,
-  MapPin,
   Search,
   Heart,
   X,
-  Ticket,
-  BedDouble,
-  Drama,
-  Trees,
-  Music,
   RotateCcw,
   Pause,
   Play,
+  Sun,
+  Moon,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import MiniSearch from "minisearch";
 import Gallery from "./Gallery";
+import PlaceContext from "./PlaceContext";
+import CategoryPlaces from "./CategoryPlaces";
+import CategoryNav from "./CategoryNav";
+import { useDelight } from "./useDelight";
+const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import { cities, categories, places, categorySlug, landmarkSources } from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
   loading: () => <div className="scene-loading">ASSEMBLING YOUR ADVENTURE…</div>,
 });
 const PlaceMap = dynamic(() => import("./PlaceMap"), { ssr: false });
-const icons = [Ticket, BedDouble, Drama, Trees, Music];
-const glyphs = ["★", "⌂", "◐", "♣", "♪"];
+const categoryDescriptions = [
+  "Big thrills, curious museums and unexpected ways to spend a day.",
+  "Find a place to rest, from city hideaways to coastal escapes.",
+  "Step into a story. Discover local stages and live performances.",
+  "Slow down among gardens, wildlife and a little more green.",
+  "Follow the music. Find a dance floor and a new city rhythm.",
+];
+const cityDescriptions = [
+  "Gauteng. Big energy, bold ideas and a city that keeps becoming.",
+  "Western Cape. Between mountain and sea, find your own adventure.",
+  "KwaZulu-Natal. Ocean air, colourful streets and a warmer rhythm.",
+];
 const themes = [
   { name: "gold", glow: "169,112,40" },
   { name: "ocean", glow: "46,111,160" },
@@ -72,6 +86,38 @@ export default function Explorer() {
   const place = places.find((p) => p.id === parts[2] && p.city === city.slug);
   const mode =
     parts.length === 0 ? "map" : parts.length === 1 ? "city" : place ? "place" : "category";
+  const [night, setNight] = useState(true);
+  const [notice, setNotice] = useState("");
+  const [showProvinces, setShowProvinces] = useState(false);
+  const { sound, haptics, feedback, toggleSound, toggleHaptics } = useDelight();
+  useEffect(() => {
+    try {
+      const selected = localStorage.getItem("citylit-theme");
+      setNight(
+        selected
+          ? selected === "night"
+          : !window.matchMedia("(prefers-color-scheme: light)").matches,
+      );
+    } catch {}
+  }, []);
+  useEffect(() => {
+    document.documentElement.dataset.theme = night ? "night" : "day";
+    return () => {
+      delete document.documentElement.dataset.theme;
+    };
+  }, [night]);
+  useEffect(() => {
+    if (!notice) return;
+    const timer = window.setTimeout(() => setNotice(""), 1800);
+    return () => clearTimeout(timer);
+  }, [notice]);
+  const switchTheme = () => {
+    setNight(!night);
+    setNotice(night ? "A little sunshine." : "Welcome to the night garden.");
+    try {
+      localStorage.setItem("citylit-theme", night ? "day" : "night");
+    } catch {}
+  };
   const [index, setIndex] = useState(0),
     [query, setQuery] = useState(""),
     [saved, setSaved] = useState<string[]>([]);
@@ -94,8 +140,20 @@ export default function Explorer() {
     } catch {}
   }, []);
   useEffect(() => {
+    if (listing && query.trim()) searchRef.current?.focus({ preventScroll: false });
+  }, [listing]);
+  useEffect(() => {
+    if (!showProvinces) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setShowProvinces(false);
+    };
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, [showProvinces]);
+  useEffect(() => {
     setIndex(0);
     setQuery("");
+    setShowProvinces(false);
   }, [pathname]);
   useEffect(() => {
     if (mode !== "place") screenRef.current?.focus({ preventScroll: true });
@@ -134,7 +192,11 @@ export default function Explorer() {
       before?.focus();
     };
   }, [showSaved, help]);
-  const toggle = (id: string) =>
+  const toggle = (id: string) => {
+    feedback("save");
+    setNotice(
+      saved.includes(id) ? "Released back into the wild." : "A little treasure, collected.",
+    );
     setSaved((prev) => {
       const next = prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id];
       try {
@@ -142,15 +204,22 @@ export default function Explorer() {
       } catch {}
       return next;
     });
-  const goCity = (i: number) => router.push("/" + cities[i].slug);
+  };
+  const goCity = (i: number) => {
+    feedback("tap");
+    router.push("/" + cities[i].slug);
+  };
   const next = (direction: number) => setIndex((v) => (v + direction + 3) % 3);
   const chooseCategory = (i: number) => {
     setQuery("");
-    router.replace(`/${city.slug}/${categorySlug(categories[i])}`, { scroll: false });
+    router.replace(`/${city.slug}/${categorySlug(categories[i])}${listing ? "?view=places" : ""}`, {
+      scroll: false,
+    });
   };
   const bind = useDrag(
     ({ last, swipe: [x], movement: [mx] }) => {
       if (last && (x || Math.abs(mx) > 55)) {
+        feedback("swipe");
         const d = (x || mx) > 0 ? -1 : 1;
         if (mode === "city") next(d);
         else chooseCategory((cat + d + 5) % 5);
@@ -172,7 +241,10 @@ export default function Explorer() {
   const visible = places.filter(
     (p) => p.city === city.slug && (ids ? ids.includes(p.id) : p.category === categories[cat]),
   );
-  const openPlaces = () => router.push(`${categoryPath}?view=places`, { scroll: false });
+  const openPlaces = () => {
+    feedback("tap");
+    router.push(`${categoryPath}?view=places`, { scroll: false });
+  };
   const closePlaces = () => {
     setQuery("");
     router.replace(categoryPath, { scroll: false });
@@ -202,19 +274,30 @@ export default function Explorer() {
     <main
       ref={screenRef}
       tabIndex={-1}
+      onClickCapture={(event) => {
+        const target = (event.target as HTMLElement).closest("button,a");
+        if (
+          target &&
+          !target.getAttribute("aria-label")?.startsWith("Save") &&
+          !target.classList.contains("sound-toggle")
+        )
+          feedback("tap");
+      }}
       className={`game-screen game-${mode} theme-${theme.name} ${listing ? "has-results" : ""}`}
       style={{ "--city-glow": theme.glow } as CSSProperties}
     >
+      <Atmosphere
+        mode={mode}
+        city={ci}
+        category={cat}
+        night={night}
+        animate={animate && !help && !showSaved}
+      />
       <div className="game-atmosphere" aria-hidden="true">
         <div className="ambient-glow" />
-        {mode !== "map" &&
-          Array.from({ length: 10 }, (_, i) => (
-            <span
-              key={i}
-              className={`ambient-shard shard-${i}`}
-              style={{ "--delay": `${i * -1.7}s` } as CSSProperties}
-            />
-          ))}
+      </div>
+      <div className="delight-notice" role="status" aria-live="polite">
+        {notice}
       </div>
       <nav className="game-nav" aria-label="Page navigation">
         <button
@@ -223,9 +306,7 @@ export default function Explorer() {
           aria-label={navLabel}
         >
           {mode === "map" ? (
-            <span className="wordmark">
-              citylit<span>↗</span>
-            </span>
+            <span className="wordmark">citylit</span>
           ) : (
             <>
               <ArrowLeft size={15} />
@@ -234,6 +315,24 @@ export default function Explorer() {
           )}
         </button>
         <div className="utility-nav">
+          <button
+            className="icon-button"
+            aria-label={night ? "Switch to day theme" : "Switch to night theme"}
+            onClick={switchTheme}
+          >
+            {night ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
+          <button
+            className="icon-button sound-toggle"
+            aria-label={sound ? "Mute sounds" : "Enable sounds"}
+            aria-pressed={sound}
+            onClick={() => {
+              toggleSound();
+              setNotice(sound ? "Quiet magic." : "Sound on. Tiny notes of wonder.");
+            }}
+          >
+            {sound ? <Volume2 size={16} /> : <VolumeX size={16} />}
+          </button>
           <button
             className="icon-button"
             aria-label={`Your discoveries ${saved.length}`}
@@ -251,67 +350,124 @@ export default function Explorer() {
               >
                 <RotateCcw size={16} />
               </button>
-              <button
-                className="icon-button"
-                aria-label={animate ? "Pause animations" : "Play animations"}
-                onClick={() => setAnimate((v) => !v)}
-              >
-                {animate ? <Pause size={15} /> : <Play size={15} />}
-              </button>
             </>
           )}
+          <button
+            className="icon-button"
+            aria-label={animate ? "Pause animations" : "Play animations"}
+            onClick={() => setAnimate((v) => !v)}
+          >
+            {animate ? <Pause size={15} /> : <Play size={15} />}
+          </button>
           <button className="icon-button" aria-label="How to explore" onClick={() => setHelp(true)}>
             <Compass size={17} />
           </button>
         </div>
       </nav>
-      <header className="game-heading">
-        <motion.div
-          key={mode + city.slug}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reduced ? 0 : 0.35 }}
-        >
-          <span className="roman-chapter">
-            {mode === "map" ? "I" : mode === "city" ? "II" : mode === "category" ? "III" : "V"}
-          </span>
-          <h1>
-            {mode === "map" ? (
-              <>
-                Discover
-                <br />
-                South Africa
-              </>
-            ) : mode === "city" ? (
-              city.name
-            ) : mode === "category" ? (
-              "Explore"
-            ) : (
-              place?.name
+      {mode !== "map" && (
+        <nav className="chapter-breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="/">South Africa</Link>
+            </li>
+            <li>
+              <Link href={`/${city.slug}`} aria-current={mode === "city" ? "page" : undefined}>
+                {city.name}
+              </Link>
+            </li>
+            {mode !== "city" && (
+              <li>
+                <Link href={categoryPath} aria-current={mode === "category" ? "page" : undefined}>
+                  {categories[cat]}
+                </Link>
+              </li>
             )}
-          </h1>
-          {mode === "city" && <p className="province-subtitle">{city.province}</p>}
-          {mode === "place" && <p className="place-introduction">{place?.description}</p>}
-        </motion.div>
-        {mode === "category" && (
-          <label className="game-search">
-            <Search size={17} />
-            <input
-              ref={searchRef}
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search places"
-              aria-label={`Search ${city.short} places`}
-            />
-            {query && (
-              <button onClick={() => setQuery("")} aria-label="Clear search">
-                <X size={17} />
-              </button>
+            {place && (
+              <li>
+                <Link href={pathname} aria-current="page">
+                  {place.name}
+                </Link>
+              </li>
             )}
-          </label>
-        )}
-      </header>
-      {mode !== "place" ? (
+          </ol>
+        </nav>
+      )}
+      {!listing && (
+        <header className="game-heading">
+          <motion.div
+            key={mode + city.slug}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduced ? 0 : 0.35 }}
+          >
+            <span className="roman-chapter">
+              {mode === "map" ? "I" : mode === "city" ? "II" : mode === "category" ? "III" : "V"}
+            </span>
+            <h1>
+              {mode === "map" ? (
+                <>
+                  Discover
+                  <br />
+                  South Africa
+                </>
+              ) : mode === "city" ? (
+                city.name
+              ) : mode === "category" ? (
+                "Explore"
+              ) : (
+                place?.name
+              )}
+            </h1>
+            <p className="heading-description">
+              {mode === "map"
+                ? "Three cities. Endless possibilities. Turn the map and follow your curiosity."
+                : mode === "city"
+                  ? cityDescriptions[ci]
+                  : mode === "category"
+                    ? `A new side of ${city.short}. Swipe a chapter and find somewhere worth exploring.`
+                    : place?.description}
+            </p>
+          </motion.div>
+          {mode === "category" && (
+            <label className="game-search">
+              <Search size={17} />
+              <input
+                ref={searchRef}
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  if (e.target.value.trim())
+                    router.push(`${categoryPath}?view=places`, { scroll: false });
+                }}
+                placeholder="Search places"
+                aria-label={`Search ${city.short} places`}
+              />
+              {query && (
+                <button onClick={() => setQuery("")} aria-label="Clear search">
+                  <X size={17} />
+                </button>
+              )}
+            </label>
+          )}
+        </header>
+      )}
+      {listing ? (
+        <CategoryPlaces
+          city={ci}
+          category={cat}
+          places={visible}
+          query={query}
+          saved={saved}
+          reset={reset}
+          animate={animate && !help && !showSaved}
+          searchRef={searchRef}
+          onQuery={setQuery}
+          onCategory={chooseCategory}
+          onSave={toggle}
+          onPlace={(p) => router.push(`/${city.slug}/${categorySlug(p.category)}/${p.id}`)}
+          onHelp={() => setHelp(true)}
+        />
+      ) : mode !== "place" ? (
         <>
           <div className="game-stage">
             <div className="scene">
@@ -321,10 +477,15 @@ export default function Explorer() {
                 index={index}
                 category={cat}
                 reset={reset}
-                animate={animate && !listing && !help && !showSaved}
+                animate={animate && !help && !showSaved}
                 onCity={goCity}
                 onSelect={
-                  mode === "city" ? () => router.push(`/${city.slug}/entertainment`) : openPlaces
+                  mode === "city"
+                    ? () => {
+                        feedback("tap");
+                        router.push(`/${city.slug}/entertainment`);
+                      }
+                    : openPlaces
                 }
               />
             </div>
@@ -332,23 +493,44 @@ export default function Explorer() {
           <footer className="game-controls">
             {mode === "map" ? (
               <>
-                <p className="map-hint">Tap a numbered pin. Drag the map to turn it.</p>
-                <div className="city-shortcuts" aria-label="Cities">
-                  {cities.map((c, i) => (
-                    <button key={c.slug} onClick={() => goCity(i)}>
-                      <span>{i + 1}</span>
-                      {c.short}
-                    </button>
-                  ))}
-                </div>
+                <p className="map-hint">Tap a colored province. Drag the map to turn it.</p>
                 <div className="map-legend">
-                  <span>
+                  <button
+                    className="available-legend"
+                    aria-expanded={showProvinces}
+                    aria-controls="province-picker"
+                    onClick={() => setShowProvinces(!showProvinces)}
+                  >
                     <i />3 provinces ready to explore
-                  </span>
-                  <button onClick={() => setHelp(true)}>
-                    Map & source credits <ArrowUpRight size={10} />
                   </button>
+                  <span className="coming-legend">
+                    <i />
+                    More chapters coming
+                  </span>
                 </div>
+                {showProvinces && (
+                  <nav
+                    id="province-picker"
+                    className="province-picker"
+                    aria-label="Available provinces"
+                  >
+                    {cities.map((c, i) => (
+                      <Link key={c.slug} href={`/${c.slug}`}>
+                        <i style={{ background: ["#edb94c", "#5eaff1", "#4ed3b8"][i] }} />
+                        {c.province}
+                        <span>{c.short}</span>
+                      </Link>
+                    ))}
+                  </nav>
+                )}
+                <a
+                  className="geography-credit"
+                  href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Map: geoBoundaries / OCHA / MDB · adapted · CC BY 3.0 IGO
+                </a>
               </>
             ) : mode === "city" ? (
               <>
@@ -445,92 +627,16 @@ export default function Explorer() {
                       {categories[cat]}
                     </motion.h2>
                   </AnimatePresence>
+                  <p className="category-description">{categoryDescriptions[cat]}</p>
                   <button className="pill-button" onClick={openPlaces}>
                     Open {categories[cat]}
                   </button>
                   <span className="category-count">{cat + 1} / 5</span>
                 </div>
-                <nav className="category-glyphs" aria-label="Attraction categories">
-                  {categories.map((c, i) => (
-                    <button
-                      key={c}
-                      className={i === cat ? "active" : ""}
-                      aria-label={c}
-                      aria-current={i === cat ? "page" : undefined}
-                      onClick={() => chooseCategory(i)}
-                    >
-                      <span aria-hidden="true">{glyphs[i]}</span>
-                      <span className="glyph-tooltip">{c}</span>
-                    </button>
-                  ))}
-                </nav>
+                <CategoryNav selected={cat} onSelect={chooseCategory} compact />
               </>
             )}
           </footer>
-          <AnimatePresence>
-            {listing && (
-              <motion.section
-                className="places-sheet"
-                key="places"
-                initial={{ opacity: 0, y: 35 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 25 }}
-                transition={{ duration: reduced ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
-                aria-label="Places"
-              >
-                <div className="sheet-header">
-                  <div>
-                    <span className="roman-chapter">IV</span>
-                    <h2>{query ? "Your discoveries" : categories[cat]}</h2>
-                  </div>
-                  <button className="icon-button" aria-label="Close places" onClick={closePlaces}>
-                    <X size={21} />
-                  </button>
-                </div>
-                <p className="result-count">
-                  {visible.length} places in {city.short}
-                  {query ? " · across all categories" : ""}
-                </p>
-                <div className="places-scroll">
-                  {visible.map((p) => {
-                    const Icon = icons[categories.indexOf(p.category)];
-                    return (
-                      <motion.article key={p.id} className="place-card" layout>
-                        <div className="place-icon">
-                          <Icon size={23} strokeWidth={1.3} />
-                        </div>
-                        <button
-                          className="place-open"
-                          onClick={() =>
-                            router.push(`/${city.slug}/${categorySlug(p.category)}/${p.id}`)
-                          }
-                        >
-                          <span className="tiny-label">{p.category}</span>
-                          <h3>{p.name}</h3>
-                          <p>{p.description}</p>
-                          <span className="address">
-                            <MapPin size={11} />
-                            {p.address}
-                          </span>
-                        </button>
-                        <button
-                          className="save-icon"
-                          onClick={() => toggle(p.id)}
-                          aria-label={`Save ${p.name}`}
-                        >
-                          <Heart size={17} fill={saved.includes(p.id) ? "currentColor" : "none"} />
-                        </button>
-                        <ArrowUpRight size={17} />
-                      </motion.article>
-                    );
-                  })}
-                  {!visible.length && (
-                    <p className="empty">No places found. Try another name or category.</p>
-                  )}
-                </div>
-              </motion.section>
-            )}
-          </AnimatePresence>
         </>
       ) : (
         place && (
@@ -553,7 +659,22 @@ export default function Explorer() {
               <p className="detail-address">
                 {place.address} · {city.name}
               </p>
+              <motion.dl className="detail-facts" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <div>
+                  <dt>Experience</dt>
+                  <dd>{place.category}</dd>
+                </div>
+                <div>
+                  <dt>City</dt>
+                  <dd>{city.name}</dd>
+                </div>
+                <div className="fact-address">
+                  <dt>Find it</dt>
+                  <dd>{place.address}</dd>
+                </div>
+              </motion.dl>
               <Gallery images={place.images} context={place.imageContext} name={place.name} />
+              <PlaceContext key={place.id} place={place} />
               <PlaceMap
                 coords={place.coords}
                 name={place.name}
@@ -636,6 +757,11 @@ export default function Explorer() {
               </button>
               <span className="tiny-label">YOUR OWN LITTLE ADVENTURE</span>
               <h2>{help ? "Stay curious." : "Your discoveries."}</h2>
+              {help && (
+                <button className="haptics-toggle" aria-pressed={haptics} onClick={toggleHaptics}>
+                  Touch feedback {haptics ? "on" : "off"} · where supported
+                </button>
+              )}
               {help ? (
                 <>
                   <p>Drag the map or landmark to give it a spin. Pinch or scroll to get closer.</p>

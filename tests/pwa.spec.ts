@@ -249,6 +249,7 @@ test("waiting worker updates only after consent and reload preserves saved place
             postMessage: (message: { type: string }) => {
               if (message.type !== "SKIP_WAITING") throw new Error("Wrong message");
               localStorage.setItem("pwa-updated", "yes");
+              sw.controller = registration.waiting!;
               registration.waiting = null;
               sw.dispatchEvent(new Event("controllerchange"));
             },
@@ -436,4 +437,68 @@ test("quota-retained caches provide photos without overriding the current offlin
     respondWith: (value: Promise<Response>) => (reply = value),
   });
   expect(await (await reply!).text()).toBe("retained photo");
+});
+
+test("slow requested activation clears its error without accepting an unrelated controller", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      "pwa-test-loads",
+      String(Number(localStorage.getItem("pwa-test-loads") || 0) + 1),
+    );
+    const active = {
+      postMessage: (_message: unknown, ports: MessagePort[]) =>
+        ports[0].postMessage({ ok: true, textSaved: true, photoCount: 0 }),
+    };
+    const requested = { postMessage: () => {} };
+    const unrelated = {};
+    const registration = Object.assign(new EventTarget(), {
+      active,
+      installing: null,
+      waiting: requested as object | null,
+      update: async () => {},
+    });
+    const sw = Object.assign(new EventTarget(), {
+      controller: active as object,
+      register: async () => registration,
+    });
+    Object.defineProperty(navigator, "serviceWorker", { value: sw, configurable: true });
+    Object.assign(window, {
+      finishPwaActivation: (matches: boolean) => {
+        sw.controller = matches ? requested : unrelated;
+        if (matches) registration.waiting = null;
+        sw.dispatchEvent(new Event("controllerchange"));
+      },
+    });
+  });
+  await page.goto("/cape-town");
+  await expect(page.getByRole("button", { name: "Update now", exact: true })).toBeVisible();
+  await page.clock.install();
+  await page.getByRole("button", { name: "Update now", exact: true }).click();
+  const activate = (matches: boolean) =>
+    page.evaluate(
+      (value) =>
+        (
+          window as unknown as { finishPwaActivation: (matches: boolean) => void }
+        ).finishPwaActivation(value),
+      matches,
+    );
+  await activate(false);
+  await expect(page.getByRole("button", { name: "Updating…", exact: true })).toBeDisabled();
+  expect(await page.evaluate(() => localStorage.getItem("pwa-test-loads"))).toBe("1");
+  await page.clock.fastForward(12001);
+  await expect(
+    page.getByText("The update did not finish. Try again when your connection is ready."),
+  ).toBeVisible();
+  await activate(false);
+  await expect(
+    page.getByText("The update did not finish. Try again when your connection is ready."),
+  ).toBeVisible();
+  await activate(true);
+  await expect(
+    page.getByText("The update did not finish. Try again when your connection is ready."),
+  ).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Update now", exact: true })).toBeEnabled();
+  expect(await page.evaluate(() => localStorage.getItem("pwa-test-loads"))).toBe("1");
 });

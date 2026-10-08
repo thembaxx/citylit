@@ -51,6 +51,7 @@ export default function PwaProvider({ children }: { children: ReactNode }) {
   const installEvent = useRef<InstallEvent | null>(null),
     registration = useRef<ServiceWorkerRegistration | null>(null),
     wantsReload = useRef(false),
+    requestedUpdateWorker = useRef<ServiceWorker | null>(null),
     updateTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const refreshStatus = useCallback(async () => {
     const worker = registration.current?.active;
@@ -147,9 +148,20 @@ export default function PwaProvider({ children }: { children: ReactNode }) {
     let hadController = Boolean(navigator.serviceWorker?.controller);
     const controllerChanged = () => {
       if (disposed) return;
-      if (wantsReload.current) {
-        location.reload();
-        return;
+      const updateFinished =
+        requestedUpdateWorker.current !== null &&
+        navigator.serviceWorker.controller === requestedUpdateWorker.current;
+      if (updateFinished) {
+        if (updateTimer.current) clearTimeout(updateTimer.current);
+        updateTimer.current = null;
+        requestedUpdateWorker.current = null;
+        setReloading(false);
+        setUpdateError("");
+        if (wantsReload.current) {
+          wantsReload.current = false;
+          location.reload();
+          return;
+        }
       }
       if (hadController) setReloadReady(true);
       hadController = true;
@@ -220,6 +232,8 @@ export default function PwaProvider({ children }: { children: ReactNode }) {
       observedWorker?.removeEventListener("statechange", workerChanged);
       document.removeEventListener("visibilitychange", checkUpdate);
       if (updateTimer.current) clearTimeout(updateTimer.current);
+      updateTimer.current = null;
+      requestedUpdateWorker.current = null;
     };
   }, [refreshStatus]);
   const install = useCallback(async () => {
@@ -248,17 +262,23 @@ export default function PwaProvider({ children }: { children: ReactNode }) {
     setReloading(true);
     setUpdateError("");
     wantsReload.current = true;
+    requestedUpdateWorker.current = worker;
+    if (updateTimer.current) clearTimeout(updateTimer.current);
     updateTimer.current = setTimeout(() => {
       wantsReload.current = false;
+      updateTimer.current = null;
       setReloading(false);
+      // Keep the worker identity so a late successful activation can clear this error.
       setUpdateError("The update did not finish. Try again when your connection is ready.");
     }, 12000);
     try {
       worker.postMessage({ type: "SKIP_WAITING" });
     } catch {
       wantsReload.current = false;
+      requestedUpdateWorker.current = null;
       setReloading(false);
       if (updateTimer.current) clearTimeout(updateTimer.current);
+      updateTimer.current = null;
       setUpdateError("Could not apply the update. Try again.");
     }
   }, [reloadReady]);

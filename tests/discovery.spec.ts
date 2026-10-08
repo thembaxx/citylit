@@ -16,12 +16,11 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   await expect(page.locator(".landmark-open h3")).toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Next landmark", exact: true }).click();
   await expect(page.locator(".landmark-open h3")).toHaveText("Bo-Kaap");
-  await page
-    .locator(".category-grid")
-    .getByRole("button", { name: "Entertainment", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Explore Cape Town", exact: true }).click();
+  await expect(page.locator(".place-card")).toHaveCount(0);
+  await page.getByRole("button", { name: "Open Entertainment", exact: true }).click();
   await expect(page.locator(".place-card")).toHaveCount(2);
-  await page.getByPlaceholder("Search Cape Town…").fill("Kirstenbosch");
+  await page.getByPlaceholder("Search places").fill("Kirstenbosch");
   await expect(page.locator(".place-card")).toHaveCount(1);
   await page.locator(".place-open").click();
   await expect(page.locator("h1")).toHaveText("Kirstenbosch");
@@ -47,7 +46,10 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   await expect(
     page.getByRole("button", { name: "Saved to discoveries", exact: true }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Citylit home", exact: true }).click();
+  await page.getByRole("button", { name: "Back to places", exact: true }).click();
+  await page.getByRole("button", { name: "Back to categories", exact: true }).click();
+  await page.getByRole("button", { name: "Back to Cape Town", exact: true }).click();
+  await page.getByRole("button", { name: "Back to map", exact: true }).click();
   await expect(page.locator("canvas")).toHaveCount(1);
   await expect(page.locator("body")).toHaveJSProperty(
     "scrollWidth",
@@ -64,7 +66,8 @@ test("one WebGL canvas persists through city and category routes", async ({ page
   });
   await page.getByRole("button", { name: "Explore Durban", exact: true }).click();
   await expect(page).toHaveURL(/\/durban$/);
-  await page.locator(".category-grid").getByRole("button", { name: "Clubs", exact: true }).click();
+  await page.getByRole("button", { name: "Explore Durban", exact: true }).click();
+  await page.getByRole("button", { name: "Clubs", exact: true }).click();
   await expect(page).toHaveURL(/\/durban\/clubs$/);
   expect(
     await page.evaluate(
@@ -155,4 +158,35 @@ test("touch swipe changes landmarks; drag and pinch manipulate 3D without naviga
   expect(before.equals(after)).toBe(false);
   await expect(page).toHaveURL(/\/cape-town$/);
   expect(errors).toEqual([]);
+});
+
+test("fullscreen chapters fit compact and landscape phones, with category navigation", async ({
+  page,
+}) => {
+  for (const viewport of [
+    { width: 360, height: 640 },
+    { width: 844, height: 390 },
+  ]) {
+    await page.setViewportSize(viewport);
+    for (const route of ["/", "/durban", "/durban/entertainment"]) {
+      await page.goto(route);
+      await expect(page.locator(".three-view")).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(
+        viewport.height,
+      );
+      const stage = (await page.locator(".three-view").boundingBox())!;
+      expect(stage.height).toBeGreaterThan(100);
+      expect(stage.y + stage.height).toBeLessThanOrEqual(viewport.height);
+    }
+    await page.getByRole("button", { name: "Clubs", exact: true }).click();
+    await expect(page.getByRole("button", { name: "Clubs", exact: true })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    await page.getByRole("button", { name: "Open Clubs", exact: true }).click();
+    await expect(page).toHaveURL(/view=places/);
+    await expect(page.locator(".place-card")).toHaveCount(2);
+    await page.goBack();
+    await expect(page.locator(".places-sheet")).toHaveCount(0);
+  }
 });

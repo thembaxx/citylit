@@ -26,6 +26,10 @@ Open http://localhost:3000. For production, run `pnpm build && pnpm start`.
 - Detail screens show credited local photos, a swipeable/pinchable fullscreen gallery, source links, Wikipedia where available, lazy-loaded street maps and Google Maps directions.
 - Deep links and browser back/forward navigation work. Invalid city/category/place combinations return 404.
 
+Country, city and category chapters occupy one non-scrollable viewport. Condensed ivory headings, roman numerals, violet controls and quiet floating shards follow the supplied references. Johannesburg has an amber glow, Cape Town an ocean-blue glow, and Durban a teal glow. Existing 3D illustrations are preserved.
+
+Swipe landmarks, then choose **Explore city**. Swipe categories or use the bottom glyph bar; **Open category** reveals an internally scrollable places sheet. Search also opens this sheet. The `?view=places` URL preserves its state through browser navigation. Place details scroll within their own screen.
+
 ## Stack
 
 Latest stable package releases checked with the registry and `pnpm update --latest`: Next.js 16.4, React 19.3, strict TypeScript 7, Tailwind CSS 4, Three.js, React Three Fiber, drei, d3-geo, GSAP, Motion, use-gesture, MiniSearch, MapLibre, Lucide, Oxlint, Oxfmt and Playwright. Exact resolved versions are in `pnpm-lock.yaml`; `packageManager` pins pnpm.

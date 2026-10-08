@@ -65,7 +65,7 @@ export function routeTitle(route: DiscoveryRoute): string {
   if (route.kind === "province") return `Explore ${route.province.name}`;
   if (route.kind === "place") return `${route.place.name} in ${route.city.name}`;
   if (route.kind === "category")
-    return `${route.category.replace("&", "and")} in ${route.city.name}`;
+    return `${route.category.replaceAll("&", "and")} in ${route.city.name}`;
   return `Things to do in ${route.city.name}`;
 }
 export function routeDescription(route: DiscoveryRoute): string {

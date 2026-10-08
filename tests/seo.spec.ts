@@ -197,7 +197,7 @@ test("street-map failures retain a usable map link and named gallery", async ({ 
   await expect(page.locator(".map-fallback")).toContainText("couldn’t load");
   await expect(page.getByRole("link", { name: "Open street map ↗", exact: true })).toHaveAttribute(
     "href",
-    /^https:\/\/www.openstreetmap.org\/\?mlat=/,
+    /^https:\/\/www\.openstreetmap\.org\/\?mlat=/,
   );
   await page.getByRole("button", { name: "Open venue photo gallery" }).click();
   await expect(page.getByRole("dialog", { name: "Kirstenbosch photograph gallery" })).toBeVisible();

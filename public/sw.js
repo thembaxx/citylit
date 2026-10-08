@@ -11,13 +11,17 @@ self.addEventListener('activate', event => {
     // A new identity must not discard a traveller's already-downloaded venue photos.
     for (const key of previous) {
       const old = await caches.open(key);
+      let copied = true;
       for (const request of await old.keys()) {
         const url = new URL(request.url);
         if (url.origin !== self.location.origin || !url.pathname.startsWith('/images/')) continue;
-        const photo = await old.match(request);
-        if (photo && !(await current.match(request))) await current.put(request, photo);
+        try {
+          const photo = await old.match(request);
+          if (photo && !(await current.match(request))) await current.put(request, photo);
+        } catch { copied = false; }
       }
-      await caches.delete(key);
+      // Keep the old cache as a fallback if storage cannot fit a copy.
+      if (copied) await caches.delete(key);
     }
     await self.clients.claim();
   })());

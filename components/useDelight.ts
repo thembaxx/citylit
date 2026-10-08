@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 type Feedback = "tap" | "swipe" | "save";
 export function useDelight() {
   const [sound, setSound] = useState(false);
@@ -69,15 +69,18 @@ export function useDelight() {
     },
     [sound, haptics],
   );
-  const toggleSound = () => {
+  const toggleSound = useCallback(() => {
     setSound(!sound);
     if (!sound) feedback("save", true);
-  };
-  const toggleHaptics = () => {
+  }, [sound, feedback]);
+  const toggleHaptics = useCallback(() => {
     setHaptics(!haptics);
     try {
       localStorage.setItem("citylit-haptics", haptics ? "off" : "on");
     } catch {}
-  };
-  return { sound, haptics, feedback, toggleSound, toggleHaptics };
+  }, [haptics]);
+  return useMemo(
+    () => ({ sound, haptics, feedback, toggleSound, toggleHaptics }),
+    [sound, haptics, feedback, toggleSound, toggleHaptics],
+  );
 }

@@ -195,3 +195,56 @@ test("offline downloads reject messages from foreign or missing origins", () => 
   }
   expect(downloads).toBe(0);
 });
+
+test("photo migration keeps its old cache and activates when storage is full", async () => {
+  const source = readFileSync(new URL("../public/sw.js", import.meta.url), "utf8");
+  for (const full of [false, true]) {
+    let activate: (event: { waitUntil: (promise: Promise<void>) => void }) => void;
+    let activation: Promise<void> | undefined;
+    let claimed = false;
+    const deleted: string[] = [],
+      copied: string[] = [];
+    const requests = ["one", "two"].map((name) => ({
+      url: `https://citylit.vercel.app/images/${name}.jpg`,
+    }));
+    const old = { keys: async () => requests, match: async () => new Response("photo") };
+    const current = {
+      match: async () => undefined,
+      put: async (request: { url: string }) => {
+        if (full && request === requests[0]) throw new Error("QuotaExceededError");
+        copied.push(request.url);
+      },
+    };
+    runInNewContext(source, {
+      URL,
+      self: {
+        location: { origin: "https://citylit.vercel.app" },
+        clients: {
+          claim: async () => {
+            claimed = true;
+          },
+        },
+        addEventListener: (name: string, handler: typeof activate) => {
+          if (name === "activate") activate = handler;
+        },
+      },
+      caches: {
+        keys: async () => ["citylit-field-guide-v3", "citylit-field-guide-v4"],
+        open: async (key: string) => (key.endsWith("v3") ? old : current),
+        delete: async (key: string) => {
+          deleted.push(key);
+          return true;
+        },
+      },
+    });
+    activate!({
+      waitUntil: (promise) => {
+        activation = promise;
+      },
+    });
+    await activation;
+    expect(claimed).toBe(true);
+    expect(copied).toHaveLength(full ? 1 : 2);
+    expect(deleted).toEqual(full ? [] : ["citylit-field-guide-v3"]);
+  }
+});

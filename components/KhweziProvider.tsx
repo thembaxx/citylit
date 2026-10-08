@@ -38,6 +38,7 @@ export default function KhweziProvider({ children }: { children: ReactNode }) {
   const [welcome, setWelcome] = useState(false);
   const [moment, setMoment] = useState<Moment | null>(null);
   const moving = animations && !state.essential && !reduced;
+  const toggleAnimations = useCallback(() => setAnimations((value) => !value), []);
   useEffect(() => {
     try {
       setWelcome(localStorage.getItem("citylit-khwezi-met") !== "yes");
@@ -91,12 +92,12 @@ export default function KhweziProvider({ children }: { children: ReactNode }) {
       ...delight,
       moving,
       animations,
-      toggleAnimations: () => setAnimations((v) => !v),
+      toggleAnimations,
       welcome,
       dismissWelcome,
       celebrate,
     }),
-    [delight, moving, animations, welcome, dismissWelcome, celebrate],
+    [delight, moving, animations, toggleAnimations, welcome, dismissWelcome, celebrate],
   );
   return (
     <Context.Provider value={value}>

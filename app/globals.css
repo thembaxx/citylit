@@ -2745,13 +2745,34 @@ textarea {
   border-color: var(--accent-ink);
 }
 .hub-message {
-  min-height: 26px;
+  margin: 20px 0 0;
   color: var(--accent-ink);
   font-size: 14px;
   overflow-wrap: anywhere;
 }
+.hub-message:empty,
+.adventure-grid:empty,
+.adventure-section > p:empty,
+.trip-stops:empty,
+.passport-stamps:empty {
+  display: none;
+}
 .adventure-section {
-  padding: 15px 0 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  padding: 32px 0 40px;
+}
+.adventure-section + .adventure-section {
+  border-top: 1px solid var(--line);
+}
+.adventure-section > .pill-button {
+  align-self: flex-start;
+}
+.adventure-section > h2,
+.adventure-section > p {
+  margin: 0;
 }
 .adventure-section > p {
   color: var(--muted);
@@ -2760,7 +2781,7 @@ textarea {
 .preference-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 20px;
 }
 .planning-note {
   font-size: 12px;
@@ -2770,8 +2791,8 @@ textarea {
 .adventure-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 18px 0;
+  gap: 20px;
+  margin: 0;
 }
 .adventure-card,
 .collection-card,
@@ -2783,6 +2804,32 @@ textarea {
   border-radius: 26px;
   padding: 24px;
   overflow: hidden;
+}
+.adventure-card,
+.collection-card,
+.event-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.adventure-card > a,
+.event-card > a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.adventure-card > a > *,
+.collection-card > h3,
+.collection-card > p,
+.event-card > h3,
+.event-card > p {
+  margin: 0;
+}
+.event-card > a {
+  flex-direction: row;
+  align-items: center;
+  min-height: 32px;
 }
 .adventure-card p,
 .collection-card p {
@@ -2798,17 +2845,34 @@ textarea {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 16px;
-}
-.adventure-card a:focus-visible {
-  display: block;
+  margin-top: auto;
+  padding-top: 4px;
 }
 .collection-card ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
   padding-left: 18px;
-  line-height: 2;
+  line-height: 1.65;
 }
-.collection-card button {
-  margin-top: 12px;
+.collection-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.shared-trip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+.shared-trip p {
+  margin: 0;
 }
 .day-actions {
   display: flex;
@@ -2820,7 +2884,11 @@ button:disabled {
   opacity: 0.5;
   cursor: default;
 }
+.adventure-section > .day-actions {
+  padding: 0;
+}
 .trip-stops {
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -2834,17 +2902,26 @@ button:disabled {
 .trip-stops li > div:nth-child(2) {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
-.trip-stops h3 {
-  margin: 0 0 8px;
+.trip-stops h3,
+.trip-stops p {
+  margin: 0;
 }
 .trip-stops p {
   font-size: 13px;
   color: var(--muted);
 }
 .trip-stops a {
-  display: block;
-  padding: 8px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.trip-stops a[target] {
+  min-height: 44px;
 }
 .stop-number {
   color: var(--accent-ink);
@@ -2873,11 +2950,15 @@ button:disabled {
   width: 20px;
   height: 20px;
 }
+.passport-settings {
+  display: grid;
+  gap: 8px;
+}
 .passport-stamps {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  margin: 24px 0;
+  gap: 16px;
+  margin: 0;
 }
 .passport-stamp {
   width: 150px;
@@ -2895,6 +2976,9 @@ button:disabled {
 }
 .passport-stamp span {
   font: 10px var(--font-mono);
+}
+.field-guide-footer p {
+  margin: 12px 0 0;
 }
 .field-guide-footer {
   border-top: 1px solid var(--line);
@@ -2927,6 +3011,7 @@ button:disabled {
   min-height: 32px;
 }
 .practical-details dl {
+  margin: 16px 0;
   display: grid;
   gap: 14px;
 }
@@ -2970,6 +3055,7 @@ button:disabled {
   resize: vertical;
 }
 .quality-summary {
+  margin-top: 24px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -2982,8 +3068,18 @@ button:disabled {
 .quality-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin: 20px 0;
+  gap: 20px;
+  margin: 0;
+}
+.quality-list article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.quality-list h3,
+.quality-list p,
+.quality-list ul {
+  margin: 0;
 }
 .quality-list li {
   font-size: 12px;
@@ -2991,19 +3087,24 @@ button:disabled {
   color: var(--muted);
 }
 .correction-review {
-  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.correction-review h3,
+.correction-review p {
+  margin: 0;
 }
 .correction-review p {
   overflow-wrap: anywhere;
 }
-.event-card {
-  margin: 15px 0;
-}
+
 .event-card a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin: 8px 16px 8px 0;
+  margin: 0;
   color: var(--accent-ink);
 }
 .place-filters {

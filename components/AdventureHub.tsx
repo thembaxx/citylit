@@ -373,24 +373,26 @@ export default function AdventureHub() {
                         );
                       })}
                     </ol>
-                    <button
-                      onClick={() => {
-                        if (trip.length && trip[0].city !== city) {
-                          setMessage("Clear the current day before adding a different city.");
+                    <div className="collection-card-actions">
+                      <button
+                        onClick={() => {
+                          if (trip.length && trip[0].city !== city) {
+                            setMessage("Clear the current day before adding a different city.");
+                            setTab("day");
+                            return;
+                          }
+                          update({
+                            itinerary: Array.from(new Set([...state.itinerary, ...c.placeIds])),
+                          });
                           setTab("day");
-                          return;
-                        }
-                        update({
-                          itinerary: Array.from(new Set([...state.itinerary, ...c.placeIds])),
-                        });
-                        setTab("day");
-                      }}
-                    >
-                      Make this my day <ArrowUpRight size={15} />
-                    </button>
-                    <button onClick={() => share(c.placeIds)}>
-                      Share collection <Share2 size={15} />
-                    </button>
+                        }}
+                      >
+                        Make this my day <ArrowUpRight size={15} />
+                      </button>
+                      <button onClick={() => share(c.placeIds)}>
+                        Share collection <Share2 size={15} />
+                      </button>
+                    </div>
                   </article>
                 ))}
             </div>
@@ -507,30 +509,32 @@ export default function AdventureHub() {
         {tab === "passport" && (
           <section className="adventure-section">
             <h2>Your discovery passport</h2>
-            <label className="setting-row">
-              <input
-                type="checkbox"
-                checked={state.passport}
-                onChange={(e) => update({ passport: e.target.checked })}
-              />
-              Collect illustrated stamps
-            </label>
-            <label className="setting-row">
-              <input
-                type="checkbox"
-                checked={state.essential}
-                onChange={(event) => update({ essential: event.target.checked })}
-              />
-              Essential motion
-            </label>
-            <label className="setting-row">
-              <input type="checkbox" checked={sound} onChange={toggleSound} />
-              Quiet sound effects
-            </label>
-            <label className="setting-row">
-              <input type="checkbox" checked={haptics} onChange={toggleHaptics} />
-              Touch feedback where supported
-            </label>
+            <div className="passport-settings" role="group" aria-label="Passport preferences">
+              <label className="setting-row">
+                <input
+                  type="checkbox"
+                  checked={state.passport}
+                  onChange={(e) => update({ passport: e.target.checked })}
+                />
+                Collect illustrated stamps
+              </label>
+              <label className="setting-row">
+                <input
+                  type="checkbox"
+                  checked={state.essential}
+                  onChange={(event) => update({ essential: event.target.checked })}
+                />
+                Essential motion
+              </label>
+              <label className="setting-row">
+                <input type="checkbox" checked={sound} onChange={toggleSound} />
+                Quiet sound effects
+              </label>
+              <label className="setting-row">
+                <input type="checkbox" checked={haptics} onChange={toggleHaptics} />
+                Touch feedback where supported
+              </label>
+            </div>
             <p>
               {state.saved.length} discovered · {state.visited.length} marked visited. Saved places
               and visits are separate.

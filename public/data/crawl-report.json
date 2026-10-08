@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-07",
+  "fetchedAt": "2026-10-08",
   "wikipedia": {
     "Gold Reef City": {
       "pageid": 2244517,
@@ -253,14 +253,6 @@
       "pageid": 2179694,
       "ns": 0,
       "title": "Ponte City",
-      "coordinates": [
-        {
-          "lat": -26.19055556,
-          "lon": 28.05708333,
-          "primary": "",
-          "globe": "earth"
-        }
-      ],
       "thumbnail": {
         "source": "https://upload.wikimedia.org/wikipedia/en/4/43/Ponte_City_Apartments_%283464450399%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "width": 387,
@@ -272,14 +264,6 @@
       "pageid": 12413503,
       "ns": 0,
       "title": "Nelson Mandela Bridge",
-      "coordinates": [
-        {
-          "lat": -26.1967,
-          "lon": 28.0342,
-          "primary": "",
-          "globe": "earth"
-        }
-      ],
       "thumbnail": {
         "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg/1280px-South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "width": 1000,
@@ -291,14 +275,6 @@
       "pageid": 24665036,
       "ns": 0,
       "title": "Orlando Power Station",
-      "coordinates": [
-        {
-          "lat": -26.25388889,
-          "lon": 27.925,
-          "primary": "",
-          "globe": "earth"
-        }
-      ],
       "thumbnail": {
         "source": "https://upload.wikimedia.org/wikipedia/commons/0/08/Soweto_Cooling_Towers.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "width": 1280,
@@ -329,14 +305,6 @@
       "pageid": 4784114,
       "ns": 0,
       "title": "Bo-Kaap",
-      "coordinates": [
-        {
-          "lat": -33.92083333,
-          "lon": 18.41527778,
-          "primary": "",
-          "globe": "earth"
-        }
-      ],
       "thumbnail": {
         "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Boe-Kaap.jpg/1280px-Boe-Kaap.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "width": 1000,
@@ -348,14 +316,6 @@
       "pageid": 652573,
       "ns": 0,
       "title": "Cape Point",
-      "coordinates": [
-        {
-          "lat": -34.35722222,
-          "lon": 18.4975,
-          "primary": "",
-          "globe": "earth"
-        }
-      ],
       "thumbnail": {
         "source": "https://upload.wikimedia.org/wikipedia/commons/7/78/Goodhope2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "width": 1167,
@@ -429,22 +389,6 @@
         {
           "ns": 6,
           "title": "File:Artscape Theatre Centre, Cape Town (2017).jpg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Bahía de Smitswinkel, Sudáfrica, 2018-07-23, DD 49.jpg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Blue Wall of Sandy Bay.jpg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Boe-Kaap (cropped 3).jpg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Boulders Beach 2019 2.jpg"
         }
       ]
     },
@@ -560,22 +504,6 @@
         {
           "ns": 6,
           "title": "File:Flag of South Africa.svg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Global thinking.svg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Icône Ile.svg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Kathrada Obama Robben island.jpg"
-        },
-        {
-          "ns": 6,
-          "title": "File:Maximum Security Prison, Robben Island (01).jpg"
         }
       ]
     },
@@ -687,362 +615,1022 @@
     "Kenneth Stainbank Nature Reserve": {
       "pageid": 51016246,
       "ns": 0,
-      "title": "Kenneth Stainbank Nature Reserve",
+      "title": "Kenneth Stainbank Nature Reserve"
+    },
+    "Market Theatre (Johannesburg)": {
+      "pageid": 1420578,
+      "ns": 0,
+      "title": "Market Theatre (Johannesburg)",
       "coordinates": [
         {
-          "lat": -29.9071758,
-          "lon": 30.9340303,
+          "lat": -26.201654,
+          "lon": 28.032389,
           "primary": "",
           "globe": "earth"
         }
-      ]
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/The_Markert_Theatre_%28_John_Kani_Theatre%29_3.jpg/1280px-The_Markert_Theatre_%28_John_Kani_Theatre%29_3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 1333
+      },
+      "pageimage": "The_Markert_Theatre_(_John_Kani_Theatre)_3.jpg"
+    },
+    "Freedom Park (South Africa)": {
+      "pageid": 21552514,
+      "ns": 0,
+      "title": "Freedom Park (South Africa)",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Isivivani.jpg/1280px-Isivivani.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Isivivani.jpg"
+    },
+    "Pretoria National Botanical Garden": {
+      "pageid": 19306662,
+      "ns": 0,
+      "title": "Pretoria National Botanical Garden",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Broodboomtuin%2C_a%2C_Pretoria_Nasionale_Botaniese_Tuin.jpg/1280px-Broodboomtuin%2C_a%2C_Pretoria_Nasionale_Botaniese_Tuin.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Broodboomtuin,_a,_Pretoria_Nasionale_Botaniese_Tuin.jpg"
+    },
+    "State Theatre (Pretoria)": {
+      "ns": 0,
+      "title": "State Theatre (Pretoria)",
+      "missing": ""
+    },
+    "Stellenbosch Museum": {
+      "pageid": 39325568,
+      "ns": 0,
+      "title": "Stellenbosch Museum",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Bletterman_House.JPG/1280px-Bletterman_House.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Bletterman_House.JPG"
+    },
+    "Stellenbosch University Botanical Garden": {
+      "pageid": 37982150,
+      "ns": 0,
+      "title": "Stellenbosch University Botanical Garden",
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Stellenbosch_University_Botanical_Garden_-_garden.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 1230,
+        "height": 880
+      },
+      "pageimage": "Stellenbosch_University_Botanical_Garden_-_garden.jpg"
+    },
+    "Tatham Art Gallery": {
+      "ns": 0,
+      "title": "Tatham Art Gallery",
+      "missing": ""
+    },
+    "KwaZulu-Natal National Botanical Garden": {
+      "pageid": 33331504,
+      "ns": 0,
+      "title": "KwaZulu-Natal National Botanical Garden",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Ontvangs%2C_KZN_NBT%2C_b.jpg/1280px-Ontvangs%2C_KZN_NBT%2C_b.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Ontvangs,_KZN_NBT,_b.jpg"
+    },
+    "Donkin Reserve": {
+      "ns": 0,
+      "title": "Donkin Reserve",
+      "missing": ""
+    },
+    "Bayworld": {
+      "ns": 0,
+      "title": "Bayworld",
+      "missing": ""
+    },
+    "Oliewenhuis Art Museum": {
+      "ns": 0,
+      "title": "Oliewenhuis Art Museum",
+      "missing": ""
+    },
+    "Free State National Botanical Garden": {
+      "pageid": 38030668,
+      "ns": 0,
+      "title": "Free State National Botanical Garden",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Free_State_Botanical_Gardens.jpg/1280px-Free_State_Botanical_Gardens.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Free_State_Botanical_Gardens.jpg"
+    },
+    "Sand du Plessis Theatre": {
+      "pageid": 61139129,
+      "ns": 0,
+      "title": "Sand du Plessis Theatre"
+    },
+    "Lowveld National Botanical Garden": {
+      "pageid": 38030804,
+      "ns": 0,
+      "title": "Lowveld National Botanical Garden",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Lowveld_National_Botanical_Garden_1.jpg/1280px-Lowveld_National_Botanical_Garden_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 563
+      },
+      "pageimage": "Lowveld_National_Botanical_Garden_1.jpg"
+    },
+    "Sudwala Caves": {
+      "pageid": 6554010,
+      "ns": 0,
+      "title": "Sudwala Caves",
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Screaming_monster_main_cavern.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 825,
+        "height": 500
+      },
+      "pageimage": "Screaming_monster_main_cavern.jpg"
+    },
+    "Bakone Malapa": {
+      "ns": 0,
+      "title": "Bakone Malapa",
+      "missing": ""
+    },
+    "Big Hole": {
+      "pageid": 5166546,
+      "ns": 0,
+      "title": "Big Hole",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Open_pit_mine.jpg/1280px-Open_pit_mine.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 751
+      },
+      "pageimage": "Open_pit_mine.jpg"
+    },
+    "McGregor Museum": {
+      "pageid": 7991579,
+      "ns": 0,
+      "title": "McGregor Museum",
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/0/06/McGregor_Museum%2C_Kimberley_%284527868638%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 1024,
+        "height": 683
+      },
+      "pageimage": "McGregor_Museum,_Kimberley_(4527868638).jpg"
+    },
+    "Mafikeng Museum": {
+      "ns": 0,
+      "title": "Mafikeng Museum",
+      "missing": ""
+    },
+    "Mafikeng Game Reserve": {
+      "pageid": 42818817,
+      "ns": 0,
+      "title": "Mafikeng Game Reserve"
+    },
+    "Pretoria": {
+      "pageid": 25002,
+      "ns": 0,
+      "title": "Pretoria",
+      "coordinates": [
+        {
+          "lat": -25.74611111,
+          "lon": 28.18805556,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Uniegebou.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "width": 787,
+        "height": 514
+      },
+      "pageimage": "Uniegebou.jpg"
+    },
+    "Stellenbosch": {
+      "pageid": 452252,
+      "ns": 0,
+      "title": "Stellenbosch",
+      "coordinates": [
+        {
+          "lat": -33.93666667,
+          "lon": 18.86138889,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Stellenbosch_aerial_photo_from_north-west_2024-01.jpg/1280px-Stellenbosch_aerial_photo_from_north-west_2024-01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 750
+      },
+      "pageimage": "Stellenbosch_aerial_photo_from_north-west_2024-01.jpg"
+    },
+    "Pietermaritzburg": {
+      "pageid": 364786,
+      "ns": 0,
+      "title": "Pietermaritzburg",
+      "coordinates": [
+        {
+          "lat": -29.61666667,
+          "lon": 30.38333333,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/00000-St_Peters_Church2-Pietermaritzburg-s.jpg/1280px-00000-St_Peters_Church2-Pietermaritzburg-s.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 748
+      },
+      "pageimage": "00000-St_Peters_Church2-Pietermaritzburg-s.jpg"
+    },
+    "Gqeberha": {
+      "pageid": 2013184,
+      "ns": 0,
+      "title": "Gqeberha",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/City_Hall_Port_Elizabeth-003.jpg/1280px-City_Hall_Port_Elizabeth-003.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 667
+      },
+      "pageimage": "City_Hall_Port_Elizabeth-003.jpg"
+    },
+    "Bloemfontein": {
+      "pageid": 44552,
+      "ns": 0,
+      "title": "Bloemfontein",
+      "coordinates": [
+        {
+          "lat": -29.11666667,
+          "lon": 26.21666667,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Bloemfontein%2C_Free_State%2C_South_Africa_%2820349855518%29.jpg/1280px-Bloemfontein%2C_Free_State%2C_South_Africa_%2820349855518%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 668
+      },
+      "pageimage": "Bloemfontein,_Free_State,_South_Africa_(20349855518).jpg"
+    },
+    "Mbombela": {
+      "pageid": 509924,
+      "ns": 0,
+      "title": "Mbombela",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/NelspruitPanorama.JPG/1280px-NelspruitPanorama.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 605
+      },
+      "pageimage": "NelspruitPanorama.JPG"
+    },
+    "Polokwane": {
+      "pageid": 44680,
+      "ns": 0,
+      "title": "Polokwane",
+      "coordinates": [
+        {
+          "lat": -23.9,
+          "lon": 29.45,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Polokwane%2C_Limpopo%2C_South_Africa_%282417714241%29.jpg/1280px-Polokwane%2C_Limpopo%2C_South_Africa_%282417714241%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 667
+      },
+      "pageimage": "Polokwane,_Limpopo,_South_Africa_(2417714241).jpg"
+    },
+    "Kimberley": {
+      "pageid": 332956,
+      "ns": 0,
+      "title": "Kimberley"
+    },
+    "Mahikeng": {
+      "pageid": 44514,
+      "ns": 0,
+      "title": "Mafikeng",
+      "coordinates": [
+        {
+          "lat": -25.86555556,
+          "lon": 25.64361111,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Mafikeng%2C_North_West%2C_South_Africa_%2820506154516%29.jpg/1280px-Mafikeng%2C_North_West%2C_South_Africa_%2820506154516%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 666
+      },
+      "pageimage": "Mafikeng,_North_West,_South_Africa_(20506154516).jpg"
     }
   },
   "official": [
     {
       "url": "https://www.goldreefcity.co.za/",
       "title": "Gold Reef City - Theme Park in Johannesburg South Africa",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.tsogosun.com/casino/gold-reef-city/",
+      "httpStatus": 200,
+      "description": "Experience the ultimate thrill at Gold Reef City Theme Park in Johannesburg! Discover over 30 exhilarating rides, family-friendly attractions..."
     },
     {
       "url": "https://www.constitutionhill.org.za/",
       "title": "Constitution Hill",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.constitutionhill.org.za/",
+      "httpStatus": 200,
+      "description": "Constitution Hill is a former prison complex that bears testament to South Africa’s turbulent past and is today a museum and home to the the country’s Constitutional Court."
     },
     {
       "url": "https://thehoughtonhotel.com/",
       "title": "The Houghton Hotel, an SLH Hotel",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://thehoughtonhotel.com/",
+      "httpStatus": 200,
+      "description": "A 5-star luxury hotel in Houghton, Johannesburg with suites, penthouses, fine dining, a spa, golf course and conference facilities. Book direct today."
     },
     {
       "url": "https://www.southernsun.com/54-on-bath",
       "title": "Boutique Luxury Hotel Rosebank, Johannesburg | 54 on Bath",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.southernsun.com/54-on-bath",
+      "httpStatus": 200,
+      "description": "54 on Bath Official Site. Signature luxury and service in a leafy Johannesburg suburb at the boutique 54 on Bath hotel in Rosebank. Book here for best rates."
     },
     {
       "url": "https://markettheatre.co.za/",
       "title": "Market Theatre – Home of live theatre shows – Theatres in Johannesburg",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://markettheatre.co.za/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.joburgtheatre.com/",
       "title": "Home - Joburg Theatre",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.joburgtheatre.com/",
+      "httpStatus": 200,
+      "description": "[vc_column"
     },
     {
       "url": "https://www.jhbcityparksandzoo.com/",
       "title": "Johannesburg Zoo",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.sanbi.org/gardens/walter-sisulu/",
       "title": "Walter Sisulu - SANBI",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sanbi.org/gardens/walter-sisulu/",
+      "httpStatus": 200,
+      "description": "This Botanical Garden was founded in 1982, but has been a popular venue for outings since the 1800's."
     },
     {
       "url": "https://livingroomjozi.co.za/contact-us/",
       "title": "Contact Us – The Living Room Jozi",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://livingroomjozi.co.za/contact-us/",
+      "httpStatus": 200
     },
     {
       "url": "https://andclub.co.za/contact/",
       "title": "Contact - AndClub",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://andclub.co.za/contact/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.aquarium.co.za/",
       "title": "Explore, Experience and Engage | Two Oceans Aquarium",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.aquarium.co.za/",
+      "httpStatus": 200,
+      "description": "Experience the incredible diversity of the Indian and Atlantic Oceans at one of Cape Town's top tourist attractions, the Two Oceans Aquarium."
     },
     {
       "url": "https://zeitzmocaa.museum/",
       "title": "Zeitz MOCAA - Museum of Contemporary Art - Zeitz MOCAA",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://zeitzmocaa.museum/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.theroyalportfolio.com/the-silo-hotel/",
       "title": "The Silo Hotel | Luxury Cape Town Hotel | The Royal Portfolio",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.theroyalportfolio.com/the-silo-hotel/",
+      "httpStatus": 200,
+      "description": "The Silo Hotel is a luxury hotel in Cape Town towering above the V&A Waterfront offering five-star accommodation, art, dining, and experiences. Enquire Now."
     },
     {
       "url": "https://www.belmond.com/hotels/africa/south-africa/cape-town/belmond-mount-nelson-hotel/",
       "title": "Mount Nelson, A Belmond Hotel | Best Hotel Cape Town Africa",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.belmond.com/en/hotels/africa/south-africa/mount-nelson-cape-town",
+      "httpStatus": 200,
+      "description": "One of the top luxury resorts in South Africa, stay at Mount Nelson, the best five-star hotel in Cape Town. Famous for our iconic Afternoon Tea and 125-year history."
     },
     {
       "url": "https://www.artscape.co.za/",
       "title": "Artscape Theatre Centre – Cape Town",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.artscape.co.za/",
+      "httpStatus": 200
     },
     {
       "url": "https://baxter.uct.ac.za/",
-      "title": "Home | Baxter Theatre Centre",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "title": "The Baxter Theatre",
+      "fetchedAt": "2026-10-08",
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "url": "https://www.sanbi.org/gardens/kirstenbosch/",
       "title": "Kirstenbosch - SANBI",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sanbi.org/gardens/kirstenbosch/",
+      "httpStatus": 200,
+      "description": "Kirstenbosch National Botanical Garden is acclaimed as one of the great botanic gardens of the world."
     },
     {
       "url": "https://www.capetown.travel/",
       "title": "Cape Town Tourism",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.capetown.travel/",
+      "httpStatus": 200,
+      "description": "EXPLORE TRAVEL IDEAS WELCOME TO THE MOTHER CITY Cape Town is one of the most beautiful cities in the world, and there are plenty of reasons to visit. The city offers spectacular views of Table Mountain and the surrounding coastline. Cape Town is also home to some of the best beaches in South Africa,"
     },
     {
       "url": "https://modularclub.com/about/",
       "title": "About - Modular",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://modularclub.com/about/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
       "title": "Cabo Beach Club | V&A Waterfront Cape Town",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
+      "httpStatus": 200,
+      "description": "Cabo Beach Club at the V&A Waterfront brings a beachside vibe to Cape Town's harbour — cocktails, fresh food and a relaxed atmosphere in a stunning setting."
     },
     {
       "url": "https://ushakamarine.com/",
       "title": "uShaka Marine World",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://ushakamarine.com/",
+      "httpStatus": 200,
+      "description": "A world class entertainment theme park & tourism destination located on Durban’s Golden Mile. Looking for things to do in Durban, South Africa? We bring together cultures, like no other place in Africa–into a safe, secure & clean environment."
     },
     {
       "url": "https://www.mmstadium.com/",
       "title": "Home - Welcome to Moses Mabhida Stadium",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.mmstadium.com/",
+      "httpStatus": 200,
+      "description": "Move to the heartbeat of Durban. Moses Mabhida Stadium — home to major sports events, live entertainment, and iconic attractions on the coast."
     },
     {
       "url": "https://oysterboxhotel.com/",
       "title": "The Oyster Box, Luxury Hotel Umhlanga, KwaZulu-Natal, South Africa",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://oysterboxhotel.com/",
+      "httpStatus": 200,
+      "description": "The Oyster Box is an award-winning 5-star luxury boutique hotel and spa and member of Leading Hotels of the World in Umhlanga, KwaZulu-Natal, South Africa."
     },
     {
       "url": "https://www.southernsun.com/beverly-hills",
       "title": "Luxury uMhlanga Rocks Hotel | Beverly Hills | Best Rates",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.southernsun.com/beverly-hills",
+      "httpStatus": 200,
+      "description": "Beverly Hills Official Site. Award-winning beachfront luxury, spa & pool, romantic dining, and a glamorous history at our luxury uMhlanga Rocks hotel."
     },
     {
       "url": "https://playhousecompany.com/",
       "title": "The Playhouse",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "url": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
       "title": "Contact Us - Elizabeth Sneddon Theatre",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
+      "httpStatus": 200,
+      "description": ""
     },
     {
       "url": "https://durbanbotanicgardens.org.za/",
       "title": "Durban Botanic Gardens - Africa's Oldest Surviving Botanic Garden",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://durbanbotanicgardens.org.za/",
+      "httpStatus": 200,
+      "description": "The Durban Botanic Gardens (Est. 1849) is currently Africa’s oldest surviving botanic garden and remains a national and local City asset..."
     },
     {
       "url": "https://www.umgeniriverbirdpark.co.za/",
       "title": "Umgeni River Bird Park",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "url": "https://www.theorigin.co.za/contact",
       "title": "Origin Nightclub, South Africa",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.theorigin.co.za/contact",
+      "httpStatus": 200,
+      "description": "Origin Nightclub, South Africa"
     },
     {
       "url": "https://cubana.co.za/pages/contact/",
       "title": "Contact – Cubaña",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://cubana.co.za/pages/contact/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.apartheidmuseum.org/",
       "title": "Apartheid Museum",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.apartheidmuseum.org/",
+      "httpStatus": 200,
+      "description": "The Apartheid Museum opened in 2001 and is acknowledged as the pre-eminent museum in the world dealing with 20th century South Africa, at the heart of which is the aparth"
     },
     {
       "url": "https://www.wits.ac.za/wam/",
       "title": "Wits Art Museum - Wits University",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.wits.ac.za/wam/",
+      "httpStatus": 200,
+      "description": ""
     },
     {
       "url": "https://joburg.org.za/",
       "title": "City of Johannesburg",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://joburg.org.za/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.sci-bono.co.za/",
       "title": "Home",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sci-bono.co.za/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.iziko.org.za/museums/south-african-museum/",
       "title": "The Iziko South African Museum – Iziko Museums",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.iziko.org.za/museums/south-african-museum/",
+      "httpStatus": 200,
+      "description": "The South African Museum, founded in 1825 and situated in the historic Company’s Gardens, has seen millions of visitors, attracted by the vast historical collection the museum has to offer, ranging from fossils to ancient insects and historical tools. A visit to this museum is not only culturally en"
     },
     {
       "url": "https://www.robben-island.org.za/",
       "title": "Home - Robben Island Museum",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.robben-island.org.za/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.capetown.travel/",
       "title": "Cape Town Tourism",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.capetown.travel/",
+      "httpStatus": 200,
+      "description": "EXPLORE TRAVEL IDEAS WELCOME TO THE MOTHER CITY Cape Town is one of the most beautiful cities in the world, and there are plenty of reasons to visit. The city offers spectacular views of Table Mountain and the surrounding coastline. Cape Town is also home to some of the best beaches in South Africa,"
     },
     {
       "url": "https://www.durban.gov.za/",
       "title": "KwaMuhle Museum",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "url": "https://www.durban.gov.za/",
       "title": "Durban Natural Science Museum",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "url": "https://www.durban.gov.za/",
       "title": "Mitchell Park Zoo",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "url": "https://www.suncoastcasino.co.za/",
       "title": "Suncoast - Suncoast Casino",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.tsogosun.com/casino/suncoast-home/",
+      "httpStatus": 200,
+      "description": "Suncoast, Durban’s Most Loved Entertainment Destination, Where There’s No Shortage of Family Fun, Events, Dining, & Gaming Thrills on Durban’s Golden Mile.Tsogo Sun"
     },
     {
       "url": "https://www.mandelahouse.com/",
       "title": "Mandela House – 8115 Vilakazi St, orlando West, Soweto",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.mandelahouse.com/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.saxon.co.za/contact/",
       "title": "Contact | Saxon Hotel",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.saxon.co.za/contact/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.sowetotheatre.com/contact-us/",
       "title": "Contact Us – Soweto Theatre",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sowetotheatre.com/contact-us/",
+      "httpStatus": 200,
+      "description": "\r\nAddress:\r\nGPS: -26.249266, 27.860302\r\nCnr. Bolani Rd and Bolani Link\r"
     },
     {
       "url": "https://www.jhbcityparksandzoo.com/services-facilities/botanical-gardens/about",
       "title": "Johannesburg Botanical Garden",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.sognage.com/contact",
       "title": "CONTACT | Sognage",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sognage.com/contact",
+      "httpStatus": 200,
+      "description": "Contact us for events, studio time or queries around our custom-built electronics. "
     },
     {
       "url": "https://www.castleofgoodhope.co.za/",
       "title": "Home",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.castleofgoodhope.co.za/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.capegrace.com/contact-us/",
       "title": "Cape Grace",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 301: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Permanently"
     },
     {
       "url": "https://www.themasque.co.za/",
       "title": "The Masque Theatre | Live theatre Cape Town | 37 Main Road, Muizenberg, Cape Town, South Africa",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.themasque.co.za/",
+      "httpStatus": 200,
+      "description": "The Masque Theatre in the heart of Muizenberg, Cape Town, brings stories to life with captivating live shows and inspiring theatre classes. Whether you’re enjoying a performance or learning the art of acting, we offer a creative space for audiences and students of all ages to explore, perform, and g"
     },
     {
       "url": "https://www.ardernegardens.org.za/location",
       "title": "Location / Contact",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.ardernegardens.org.za/location",
+      "httpStatus": 200,
+      "description": " Open from 8:00h to 18:00h daily "
     },
     {
       "url": "https://www.harringtonstreet.co.za/harringtons",
       "title": "Harringtons Cape Town",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.harringtonstreet.co.za/harringtons",
+      "httpStatus": 200
     },
     {
       "url": "https://phansi.online/about/",
       "title": "Phansi Museum",
-      "fetchedAt": "2026-10-07",
+      "fetchedAt": "2026-10-08",
       "status": "unavailable",
       "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "url": "https://www.southernsun.com/southern-sun-elangeni-maharani/contact-us",
       "title": "Southern Sun Elangeni & Maharani | Durban North Beach",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.southernsun.com/southern-sun-elangeni-maharani/contact-us",
+      "httpStatus": 200,
+      "description": "We look forward to hearing from you and welcoming you in person to our landmark hotel on Durban’s North Beach – the Southern Sun Elangeni and Maharani."
     },
     {
       "url": "https://events.durbantheatre.com/",
       "title": "Durban Theatre",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://events.durbantheatre.com/",
+      "httpStatus": 200
     },
     {
       "url": "https://visitdurban.travel/space/kenneth-stainbank-nature-reserve",
       "title": "Kenneth Stainbank Nature Reserve - Durban Tourism",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://visitdurban.travel/space/kenneth-stainbank-nature-reserve",
+      "httpStatus": 200,
+      "description": "Kenneth Stainbank&rsquo;s father, a Scot, built Coedmore Castle in 1875 with the help of Scottish stonemasons. Set in 600 acres/253 hectares, it was an attempt..."
     },
     {
       "url": "https://www.tigertiger.durban/contact-us/",
       "title": "Contact Us – Tiger Tiger Durban | Premier Nightclub & Events in Durban",
-      "fetchedAt": "2026-10-07",
-      "status": "fetched"
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.tigertiger.durban/contact-us/",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://www.freedompark.co.za/",
+      "title": "Freedom Park Heritage Site",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.freedompark.co.za/",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://www.sanbi.org/gardens/pretoria/",
+      "title": "Pretoria - SANBI",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sanbi.org/gardens/pretoria/",
+      "httpStatus": 200,
+      "description": "This 76 ha urban oasis is a pristine getaway situated in the eastern suburbs of South Africa's administrative capital, Pretoria."
+    },
+    {
+      "url": "https://www.statetheatre.co.za/ticket-loyalties/contact-us/",
+      "title": "Contact Us – State Theatre",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.statetheatre.co.za/ticket-loyalties/contact-us/",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://stelmus.co.za/",
+      "title": "Stellenbosch Museum | Stellenbosch Museum",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://stelmus.co.za/",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://www.sun.ac.za/english/entities/botanical-garden",
+      "title": "Stellenbosch University | Forward Together",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.su.ac.za/en",
+      "httpStatus": 200,
+      "description": "Stellenbosch University is a leading research institution driving knowledge, innovation and transformation through excellence, inclusivity and impact."
+    },
+    {
+      "url": "https://www.marriott.com/en-us/hotels/cptst-protea-hotel-stellenbosch/overview/",
+      "title": "Protea Hotel Stellenbosch and Conference Centre | Locally Inspired Hotel",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.marriott.com/en-us/hotels/cptst-protea-hotel-stellenbosch/overview/",
+      "httpStatus": 200,
+      "description": "Book your stay at Protea Hotel Stellenbosch and Conference Centre. Enjoy comfortable accommodations & convenient amenities for business & leisure travelers."
+    },
+    {
+      "url": "https://www.tathamartgallery.org.za/visit",
+      "title": "Tatham Art Gallery",
+      "fetchedAt": "2026-10-08",
+      "status": "unavailable",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://www.sanbi.org/gardens/kwazulu-natal/",
+      "title": "KwaZulu-Natal - SANBI",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sanbi.org/gardens/kwazulu-natal/",
+      "httpStatus": 200,
+      "description": "The beautiful and tranquil KwaZulu-Natal National Botanical Garden specialises in the conservation of plants from the eastern."
+    },
+    {
+      "url": "https://www.southernsun.com/golden-horse-hotel",
+      "title": "Southern Sun | Hotels, Dining, Events | Best Rates Direct",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.southernsun.com/",
+      "httpStatus": 200,
+      "description": "Southern Sun Official Site. Southern Africa"
+    },
+    {
+      "url": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
+      "title": "Donkin Reserve - Pyramid and Lighthouse -  Nelson Mandela Bay (Port Elizabeth)",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
+      "httpStatus": 200,
+      "description": "The Donkin Reserve is one of Gqeberha’s (formerly Port Elizabeth’s) most iconic and historically significant landmarks, offering breathtaking views of the city, the harbour,"
+    },
+    {
+      "url": "https://www.bayworld.co.za/",
+      "title": "Bayworld  | Port Elizabeth",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.bayworld.co.za/",
+      "httpStatus": 200,
+      "description": "One of the leading tourist attractions in Nelson Mandela Bay, Bayworld is unique in Southern Africa. "
+    },
+    {
+      "url": "https://www.suninternational.com/luxury-collection/boardwalk",
+      "title": "Boardwalk | Luxury Hotel in Gqeberha - Sun International",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.suninternational.com/luxury-collection/boardwalk",
+      "httpStatus": 200,
+      "description": "Stay at The Boardwalk, a vibrant coastal escape in Gqeberha. Enjoy beachfront accommodation, ocean views, fine dining, and premium entertainment in the Eastern Cape."
+    },
+    {
+      "url": "https://nationalmuseum.co.za/visitor-information/",
+      "title": "Oliewenhuis Art Museum - Visitor Information | National Museum",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://nationalmuseum.co.za/visitor-information/",
+      "httpStatus": 200,
+      "description": "Oliewenhuis Art Museum 16 Harry Smith Street Bloemfontein Free State South Africa. +27 (0) 51 011 0525 (ext 200). oliewen@nationalmuseum.co.za"
+    },
+    {
+      "url": "https://www.sanbi.org/gardens/free-state/",
+      "title": "Free State - SANBI",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sanbi.org/gardens/free-state/",
+      "httpStatus": 200,
+      "description": "This garden on the outskirts of Bloemfontein spans a valley between picturesque dolerite koppies."
+    },
+    {
+      "url": "https://pacofs.co.za/",
+      "title": "PACOFS",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://pacofs.co.za/",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://www.sanbi.org/gardens/lowveld/",
+      "title": "Lowveld - SANBI",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.sanbi.org/gardens/lowveld/",
+      "httpStatus": 200,
+      "description": "The character of the Garden is shaped by the two main rivers that cut across it, namely the Crocodile and Nels Rivers."
+    },
+    {
+      "url": "https://sudwalacaves.com/",
+      "title": "Sudwala Caves",
+      "fetchedAt": "2026-10-08",
+      "status": "unavailable",
+      "error": "HTTP Error 406: Not Acceptable"
+    },
+    {
+      "url": "https://www.southernsun.com/stayeasy-mbombela",
+      "title": "Mbombela Budget-Friendly Hotel | StayEasy Mbombela",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.southernsun.com/stayeasy-mbombela",
+      "httpStatus": 200,
+      "description": "StayEasy Mbombela Official Site. Great-value, pool, free WiFi, free breakfast, business services, and more at our Mbombela hotel. Get the best rates direct."
+    },
+    {
+      "url": "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
+      "title": "Bakone Malapa Open-Air Museum, Polokwane | Radisson Hotels",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
+      "httpStatus": 200,
+      "description": "This living museum explains the traditions of the Northern Sotho tribe. Learn how they make fire, grind maize and brew beer from the tribe themselves."
+    },
+    {
+      "url": "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
+      "title": "Polokwane Art Museum",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://www.suninternational.com/meropa/hotel/",
+      "title": "Sun International",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.suninternational.com/meropa/hotel",
+      "httpStatus": 200,
+      "description": "Sun International offers premier hotels, casinos and entertainment destinations across South Africa. Explore properties, loyalty rewards and experiences.\n"
+    },
+    {
+      "url": "https://thebighole.com/visitors-info/",
+      "title": "The Big Hole Official Site | Tourist Attractions in Kimberley",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://thebighole.com/visitors-info/",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://www.museumsnc.co.za/",
+      "title": "McGregor Museum",
+      "fetchedAt": "2026-10-08",
+      "status": "unavailable",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://www.marriott.com/en-us/hotels/kimki-protea-hotel-kimberley/overview/",
+      "title": "Protea Hotel Kimberley | Locally Inspired Hotel",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.marriott.com/en-us/hotels/kimki-protea-hotel-kimberley/overview/",
+      "httpStatus": 200,
+      "description": "Book your stay at Protea Hotel Kimberley. Enjoy comfortable accommodations & convenient amenities for business & leisure travelers."
+    },
+    {
+      "url": "https://www.nwgov.co.za/tourism",
+      "title": "North West Government Online™ | Tourism",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://www.nwgov.co.za/tourism",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://mmabathopalms.co.za/nearby-attractions/",
+      "title": "Nearby Attractions | Mmabatho Palms",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://mmabathopalms.co.za/nearby-attractions/",
+      "httpStatus": 200,
+      "description": "Nearby Attractions - Mmabatho Palms Casino Resort is surrounded by the rich heritage of the Mahikeng district."
+    },
+    {
+      "url": "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
+      "title": "Mmabatho Palms Hotel | 4-Star Luxury Villas in Mahikeng",
+      "fetchedAt": "2026-10-08",
+      "status": "fetched",
+      "resolvedUrl": "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
+      "httpStatus": 200,
+      "description": "Book Mmabatho Palms Hotel Executive Villa's in Mahikeng. Private patios, a 4-star reputation, casino, golf and pool access, all in one luxurious stay."
     }
   ]
 }

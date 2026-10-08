@@ -6,6 +6,7 @@ import { Component, useRef, type ReactNode } from "react";
 function FrameClear() {
   useFrame(({ gl }) => {
     gl.setScissorTest(false);
+    gl.setClearColor(0x000000, 0);
     gl.clear(true, true, true);
   }, -100);
   useFrame(({ gl }) => gl.clearDepth(), 1.5);

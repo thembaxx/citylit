@@ -4,6 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import * as THREE from "three";
+import { cities } from "../lib/data";
 type Props = { mode: string; city: number; category: number; night: boolean; animate: boolean };
 const palettes = [
   ["#edb94c", "#b69bff", "#f391b5"],
@@ -16,17 +17,36 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
   const pointer = useRef({ x: 0, y: 0 });
   const elapsed = useRef(0);
   const parallax = useRef({ x: 0, y: 0 });
-  const palette = palettes[city];
-  const count = mode === "map" ? 18 : mode === "city" ? 10 : mode === "category" ? 12 : 14;
+  const palette =
+    city < 3
+      ? palettes[city]
+      : [
+          cities[city].accentColor,
+          palettes[city % palettes.length][1],
+          palettes[(city + 1) % palettes.length][2],
+        ];
+  const reading = ["map", "place", "guide", "editorial"].includes(mode);
+  const count =
+    mode === "map"
+      ? 18
+      : mode === "city"
+        ? 10
+        : mode === "category"
+          ? 12
+          : mode === "guide"
+            ? 10
+            : mode === "editorial"
+              ? 8
+              : 14;
   const objects = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
         x: (i % 2 === 0 ? -1 : 1) * (0.8 + (i % 3) * 0.05),
         y: -0.8 + (i / Math.max(count - 1, 1)) * 1.6,
-        phase: i * 1.73,
-        size: mode === "map" || mode === "place" ? 0.015 + (i % 3) * 0.007 : 0.07 + (i % 4) * 0.035,
+        phase: i * 1.73 + city * 0.17,
+        size: reading ? 0.015 + (i % 3) * 0.007 : 0.07 + (i % 4) * 0.035,
       })),
-    [mode, count],
+    [mode, count, reading, city],
   );
   useEffect(() => {
     if (!animate) return;
@@ -54,7 +74,14 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
       parallax.current.y += (pointer.current.y - parallax.current.y) * smooth;
     }
     const time = elapsed.current;
-    const speed = mode === "map" ? 0.08 : mode === "place" ? 0.13 : 0.1;
+    const speed =
+      mode === "map"
+        ? 0.08
+        : mode === "place"
+          ? 0.13
+          : mode === "guide" || mode === "editorial"
+            ? 0.05
+            : 0.1;
     root.current.children.forEach((node, i) => {
       const p = objects[i];
       if (!p) return;
@@ -82,11 +109,11 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
             position={[(p.x * viewport.width) / 2, (p.y * viewport.height) / 2, -2]}
             raycast={() => {}}
           >
-            {mode === "map" || mode === "place" ? (
+            {reading ? (
               <icosahedronGeometry args={[p.size, 0]} />
-            ) : mode === "city" && city === 0 ? (
+            ) : mode === "city" && city % 3 === 0 ? (
               <octahedronGeometry args={[p.size, 0]} />
-            ) : mode === "city" && city === 2 ? (
+            ) : mode === "city" && city % 3 === 2 ? (
               <torusGeometry args={[p.size * 1.8, 0.012, 4, 32, Math.PI * 1.5]} />
             ) : mode === "category" && category === 0 ? (
               <sphereGeometry args={[p.size, 8, 6]} />
@@ -102,7 +129,7 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
             <meshBasicMaterial
               color={palette[i % 3]}
               transparent
-              opacity={night ? (mode === "map" || mode === "place" ? 0.28 : 0.13) : 0.2}
+              opacity={night ? (reading ? 0.22 : 0.13) : 0.2}
               depthWrite={false}
             />
           </mesh>

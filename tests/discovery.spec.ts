@@ -4,8 +4,8 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
   await expect(page.getByRole("button", { name: "Explore Cape Town", exact: true })).toBeVisible();
-  await expect(page.locator('[data-available="true"]')).toHaveCount(3);
-  await expect(page.getByText("3 provinces ready to explore")).toBeVisible();
+  await expect(page.locator('[data-available="true"]')).toHaveCount(9);
+  await expect(page.getByText("9 provinces ready to explore")).toBeVisible();
   await expect(page.locator("canvas")).toHaveCount(1);
   await page.evaluate(() => {
     (window as typeof window & { originalCanvas?: HTMLCanvasElement }).originalCanvas =
@@ -217,7 +217,7 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   await expect(page.locator(".wordmark")).toHaveText("citylit");
   await expect(page.locator(".wordmark svg, .wordmark span")).toHaveCount(0);
   await expect(page.locator(".map-pin")).toHaveCount(0);
-  await expect(page.locator("button.province-active")).toHaveCount(3);
+  await expect(page.locator("button.province-active")).toHaveCount(9);
   expect(
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);
@@ -283,10 +283,11 @@ test("linked breadcrumbs, two-line introductions and province chooser", async ({
   await page.goto("/");
   await expect(page.getByText("More chapters coming", { exact: true })).toBeVisible();
   await expect(page.locator(".map-pin")).toHaveCount(0);
-  await page.getByRole("button", { name: "3 provinces ready to explore", exact: true }).click();
+  await page.getByRole("button", { name: "9 provinces ready to explore", exact: true }).click();
   await page
     .getByRole("navigation", { name: "Available provinces" })
     .getByRole("link", { name: /Western Cape/ })
+    .first()
     .click();
   await expect(page).toHaveURL(/cape-town$/);
   const trail = page.getByRole("navigation", { name: "Breadcrumb", exact: true });

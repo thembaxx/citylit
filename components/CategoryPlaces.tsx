@@ -3,7 +3,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowUpRight, Heart, Search, MapPin, X } from "lucide-react";
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import { useSearchParams } from "next/navigation";
 import CategoryNav from "./CategoryNav";
 import CategoryIcon from "./CategoryIcon";
 import { categories, categorySlug, cities, type Place } from "../lib/data";
@@ -29,6 +30,52 @@ export default function CategoryPlaces(props: Props) {
     category = categories[props.category];
   const reduced = useReducedMotion();
   const pageRef = useRef<HTMLDivElement>(null);
+  const params = useSearchParams();
+  const [district, setDistrict] = useState(params.get("district") || "");
+  const filters = (params.get("filters") || "").split(",").filter(Boolean);
+  const filterPlaces = props.places.filter(
+    (p) =>
+      (!district || p.district === district) &&
+      filters.every((filter) =>
+        filter === "free"
+          ? p.facts?.admission?.value === "free" && p.facts.admission.confidence === "verified"
+          : filter === "indoors"
+            ? ["indoor", "mixed"].includes(String(p.facts?.environment?.value))
+            : filter === "family"
+              ? p.facts?.family?.value === true && p.facts.family.confidence === "verified"
+              : p.facts?.stepFreeEntrance?.value === true &&
+                p.facts.stepFreeEntrance.confidence === "verified",
+      ),
+  );
+  const unseeded = !props.places.length && !props.query && !filters.length && !district;
+  const setFilter = (filter: string) => {
+    const search = new URLSearchParams(params);
+    const next = filters.includes(filter)
+      ? filters.filter((v) => v !== filter)
+      : [...filters, filter];
+    if (next.length) search.set("filters", next.join(","));
+    else search.delete("filters");
+    window.history.replaceState(null, "", location.pathname + "?" + search);
+  };
+  useEffect(() => {
+    const element = pageRef.current;
+    if (!element) return;
+    const key = "citylit-scroll-" + city.slug + "-" + category;
+    try {
+      const top = Number(sessionStorage.getItem(key) || 0);
+      requestAnimationFrame(() => {
+        element.scrollTop = top;
+      });
+    } catch {}
+    const remember = () => {
+      try {
+        sessionStorage.setItem(key, String(element.scrollTop));
+      } catch {}
+    };
+    element.addEventListener("scroll", remember, { passive: true });
+    return () => element.removeEventListener("scroll", remember);
+  }, [city.slug, category]);
+
   useEffect(() => {
     const element = pageRef.current;
     if (!element) return;
@@ -117,12 +164,53 @@ export default function CategoryPlaces(props: Props) {
             )}
           </label>
         </div>
+        <div className="place-filters" aria-label="Practical place filters">
+          {[
+            ["free", "Free entry"],
+            ["indoors", "Indoors"],
+            ["family", "Family-friendly"],
+            ["access", "Step-free entrance"],
+          ].map(([id, label]) => (
+            <button key={id} aria-pressed={filters.includes(id)} onClick={() => setFilter(id)}>
+              {label}
+            </button>
+          ))}
+          <details>
+            <summary>More filters</summary>
+            <label>
+              District
+              <select
+                value={district}
+                onChange={(e) => {
+                  setDistrict(e.target.value);
+                  const search = new URLSearchParams(params);
+                  if (e.target.value) search.set("district", e.target.value);
+                  else search.delete("district");
+                  window.history.replaceState(null, "", location.pathname + "?" + search);
+                }}
+              >
+                <option value="">All districts</option>
+                {Array.from(new Set(props.places.map((p) => p.district).filter(Boolean))).map(
+                  (d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ),
+                )}
+              </select>
+            </label>
+          </details>
+        </div>
+        <p className="planning-note">
+          Free, family and access filters use confirmed facts. Setting and visit duration may be
+          editorial estimates; unknown details are excluded.
+        </p>
         <p className="result-count" aria-live="polite">
-          {props.places.length} {props.places.length === 1 ? "place" : "places"} in {city.short}
+          {filterPlaces.length} {filterPlaces.length === 1 ? "place" : "places"} in {city.short}
           {props.query ? " · across all categories" : ""}
         </p>
         <div className="category-place-grid">
-          {props.places.map((place, index) => {
+          {filterPlaces.map((place, index) => {
             const saved = props.saved.includes(place.id);
             return (
               <motion.article
@@ -160,12 +248,26 @@ export default function CategoryPlaces(props: Props) {
             );
           })}
         </div>
-        {!props.places.length && (
+        {!filterPlaces.length && (
           <div className="empty">
-            <h3>A little detour.</h3>
-            <p>No places found. Try another name or explore a different category.</p>
-            <button className="pill-button" onClick={() => props.onQuery("")}>
-              Clear search
+            <h3>{unseeded ? "A chapter taking shape." : "A little detour."}</h3>
+            <p>
+              {unseeded
+                ? `We haven’t researched ${category.toLowerCase()} in ${city.short} yet. Explore the places we have verified in another category.`
+                : "No matching places yet. Try clearing filters or choose another category; unconfirmed details are excluded."}
+            </p>
+            <button
+              className="pill-button"
+              onClick={() => {
+                if (unseeded) props.onCategory(0);
+                else {
+                  props.onQuery("");
+                  setDistrict("");
+                  window.history.replaceState(null, "", location.pathname + "?view=places");
+                }
+              }}
+            >
+              {unseeded ? "Explore entertainment" : "Clear search and filters"}
             </button>
           </div>
         )}

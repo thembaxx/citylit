@@ -1,0 +1,373 @@
+[
+  {
+    "id": "johannesburg-stories",
+    "city": "johannesburg",
+    "title": "Joburg through art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "wits-art-museum",
+      "constitution-hill",
+      "market-theatre"
+    ]
+  },
+  {
+    "id": "johannesburg-green",
+    "city": "johannesburg",
+    "title": "A greener kind of Joburg",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "johannesburg-botanical-garden",
+      "johannesburg-zoo",
+      "walter-sisulu-botanical-garden"
+    ]
+  },
+  {
+    "id": "johannesburg-first",
+    "city": "johannesburg",
+    "title": "Meet the city of gold",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "apartheid-museum",
+      "mandela-house",
+      "gold-reef-city"
+    ]
+  },
+  {
+    "id": "cape-town-stories",
+    "city": "cape-town",
+    "title": "Cape Town through art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "zeitz-mocaa",
+      "iziko-south-african-museum",
+      "the-baxter-theatre"
+    ]
+  },
+  {
+    "id": "cape-town-green",
+    "city": "cape-town",
+    "title": "Between gardens & mountain",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "kirstenbosch",
+      "company-s-garden",
+      "arderne-gardens"
+    ]
+  },
+  {
+    "id": "cape-town-first",
+    "city": "cape-town",
+    "title": "Your first Cape Town chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "two-oceans-aquarium",
+      "zeitz-mocaa",
+      "castle-of-good-hope"
+    ]
+  },
+  {
+    "id": "durban-stories",
+    "city": "durban",
+    "title": "Durban through art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "kwamuhle-museum",
+      "phansi-museum",
+      "the-playhouse"
+    ]
+  },
+  {
+    "id": "durban-green",
+    "city": "durban",
+    "title": "Slow down in Durban",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "durban-botanic-gardens",
+      "umgeni-river-bird-park",
+      "mitchell-park-zoo"
+    ]
+  },
+  {
+    "id": "durban-first",
+    "city": "durban",
+    "title": "Meet the seaside city",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "ushaka-marine-world",
+      "moses-mabhida-stadium",
+      "suncoast"
+    ]
+  },
+  {
+    "id": "pretoria-stories",
+    "city": "pretoria",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "freedom-park",
+      "south-african-state-theatre"
+    ]
+  },
+  {
+    "id": "pretoria-green",
+    "city": "pretoria",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "pretoria-national-botanical-garden",
+      "freedom-park"
+    ]
+  },
+  {
+    "id": "pretoria-first",
+    "city": "pretoria",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "freedom-park",
+      "pretoria-national-botanical-garden"
+    ]
+  },
+  {
+    "id": "stellenbosch-stories",
+    "city": "stellenbosch",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "stellenbosch-village-museum"
+    ]
+  },
+  {
+    "id": "stellenbosch-green",
+    "city": "stellenbosch",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "stellenbosch-university-botanical-garden",
+      "stellenbosch-village-museum"
+    ]
+  },
+  {
+    "id": "stellenbosch-first",
+    "city": "stellenbosch",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "stellenbosch-village-museum",
+      "stellenbosch-university-botanical-garden",
+      "protea-hotel-stellenbosch"
+    ]
+  },
+  {
+    "id": "pietermaritzburg-stories",
+    "city": "pietermaritzburg",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "tatham-art-gallery"
+    ]
+  },
+  {
+    "id": "pietermaritzburg-green",
+    "city": "pietermaritzburg",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "kwazulu-natal-national-botanical-garden",
+      "tatham-art-gallery"
+    ]
+  },
+  {
+    "id": "pietermaritzburg-first",
+    "city": "pietermaritzburg",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "tatham-art-gallery",
+      "kwazulu-natal-national-botanical-garden",
+      "golden-horse-hotel"
+    ]
+  },
+  {
+    "id": "gqeberha-stories",
+    "city": "gqeberha",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "bayworld"
+    ]
+  },
+  {
+    "id": "gqeberha-green",
+    "city": "gqeberha",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "donkin-reserve",
+      "bayworld"
+    ]
+  },
+  {
+    "id": "gqeberha-first",
+    "city": "gqeberha",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "bayworld",
+      "donkin-reserve",
+      "boardwalk-hotel"
+    ]
+  },
+  {
+    "id": "bloemfontein-stories",
+    "city": "bloemfontein",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "oliewenhuis-art-museum",
+      "sand-du-plessis-theatre"
+    ]
+  },
+  {
+    "id": "bloemfontein-green",
+    "city": "bloemfontein",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "free-state-national-botanical-garden",
+      "oliewenhuis-art-museum"
+    ]
+  },
+  {
+    "id": "bloemfontein-first",
+    "city": "bloemfontein",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "oliewenhuis-art-museum",
+      "free-state-national-botanical-garden"
+    ]
+  },
+  {
+    "id": "mbombela-stories",
+    "city": "mbombela",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "sudwala-caves"
+    ]
+  },
+  {
+    "id": "mbombela-green",
+    "city": "mbombela",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "lowveld-national-botanical-garden",
+      "sudwala-caves"
+    ]
+  },
+  {
+    "id": "mbombela-first",
+    "city": "mbombela",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "sudwala-caves",
+      "lowveld-national-botanical-garden",
+      "stayeasy-mbombela"
+    ]
+  },
+  {
+    "id": "polokwane-stories",
+    "city": "polokwane",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "bakone-malapa-open-air-museum",
+      "polokwane-art-museum"
+    ]
+  },
+  {
+    "id": "polokwane-green",
+    "city": "polokwane",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "bakone-malapa-open-air-museum",
+      "polokwane-art-museum"
+    ]
+  },
+  {
+    "id": "polokwane-first",
+    "city": "polokwane",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "bakone-malapa-open-air-museum",
+      "polokwane-art-museum",
+      "meropa-hotel"
+    ]
+  },
+  {
+    "id": "kimberley-stories",
+    "city": "kimberley",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "the-big-hole",
+      "mcgregor-museum"
+    ]
+  },
+  {
+    "id": "kimberley-green",
+    "city": "kimberley",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "the-big-hole",
+      "mcgregor-museum"
+    ]
+  },
+  {
+    "id": "kimberley-first",
+    "city": "kimberley",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "the-big-hole",
+      "mcgregor-museum",
+      "protea-hotel-kimberley"
+    ]
+  },
+  {
+    "id": "mahikeng-stories",
+    "city": "mahikeng",
+    "title": "Art & stories",
+    "description": "Meet the places that tell this destination’s story.",
+    "placeIds": [
+      "mahikeng-museum"
+    ]
+  },
+  {
+    "id": "mahikeng-green",
+    "city": "mahikeng",
+    "title": "Take the slow path",
+    "description": "Find gardens and quieter corners; check access before setting off.",
+    "placeIds": [
+      "mafikeng-game-reserve",
+      "mahikeng-museum"
+    ]
+  },
+  {
+    "id": "mahikeng-first",
+    "city": "mahikeng",
+    "title": "Your first chapter",
+    "description": "A small introduction to the destination, with a place to pause.",
+    "placeIds": [
+      "mahikeng-museum",
+      "mafikeng-game-reserve",
+      "mmabatho-palms-hotel"
+    ]
+  }
+]

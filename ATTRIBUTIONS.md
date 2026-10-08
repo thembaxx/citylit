@@ -31,3 +31,7 @@ All 3D landmarks and category objects are original procedural models made for Ci
 [Hugeicons free icons](https://github.com/hugeicons/hugeicons-react) use the MIT license. Category symbols represent admission tickets, lodging, theatre masks, trees and music. Copyright © Hugeicons.
 
 Wikipedia introductions are excerpts attributed to the linked article and Wikipedia contributors under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Excerpts and their source/license are cached per place.
+
+## Expanded destinations and practical facts
+
+Additional source pages include SANBI national garden listings, Visit Stellenbosch, Tatham Art Gallery, Nelson Mandela Bay Tourism, National Museum/Oliewenhuis, PACOFS, municipal tourism guides, hotel operators and the Big Hole visitor information. Every place retains its own source URLs and fetch outcomes. Practical facts distinguish verified information, editorial planning estimates and unknown values. Event dates link directly to Market Theatre and PACOFS programmes and disappear after expiry. City chapters use visitor-destination boundaries; outlying venues are labelled in their address. The nine additional city miniatures are original procedural illustrations, not architectural reconstructions.

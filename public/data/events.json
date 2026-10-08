@@ -1,0 +1,20 @@
+[
+  {
+    "id": "shockwave-2026",
+    "placeId": "market-theatre",
+    "title": "Shockwave",
+    "start": "2026-10-15",
+    "end": "2026-11-08",
+    "source": "https://markettheatre.co.za/",
+    "checkedAt": "2026-10-08"
+  },
+  {
+    "id": "classical-contrasts-2026",
+    "placeId": "sand-du-plessis-theatre",
+    "title": "Classical Contrasts — Rhapsody Orchestra",
+    "start": "2026-10-24",
+    "end": "2026-10-24",
+    "source": "https://pacofs.co.za/whats-on/",
+    "checkedAt": "2026-10-08"
+  }
+]

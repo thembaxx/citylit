@@ -1,0 +1,58 @@
+name: Refresh public catalog for review
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * 1"
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: catalog-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "24"
+      - name: Install tooling
+        run: |
+          npm install --global pnpm@12.10.1
+          pnpm install --frozen-lockfile
+          python3 -m pip install -r scripts/requirements.txt
+      - name: Refresh public sources and licensed images
+        run: |
+          pnpm sources:refresh
+          python3 scripts/research-detail-facts.py
+          pnpm data:audit
+          pnpm typecheck
+          pnpm build
+      - name: Open a review PR without writing to the default branch
+        if: github.ref_name == github.event.repository.default_branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          refresh_branch="automation/catalog-$(date -u +%Y-%m-%d)"
+          git add public/data public/images
+          if git diff --cached --quiet; then exit 0; fi
+          if test -n "$(git ls-remote --heads origin "refs/heads/$refresh_branch")"; then
+            echo "A refresh branch already exists for today; review that PR first."
+            exit 0
+          fi
+          git switch -c "$refresh_branch"
+          git config user.name "Citylit catalog bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh public catalog sources for review"
+          git push origin "HEAD:$refresh_branch"
+          cat > /tmp/catalog-pr-body.md <<'BODY'
+          Refreshes cached public source metadata, attributed Wikipedia introductions and licensed imagery.
+
+          Venue descriptions, prices, access claims and event dates still require editorial review; a crawl does not reverify every practical fact. Please inspect redirects, image context and quality-report flags before merging.
+
+          Validation: catalog audit, strict TypeScript and production build.
+          BODY
+          gh pr create --base "$BASE_BRANCH" --head "$refresh_branch" --title "Review weekly catalog refresh" --body-file /tmp/catalog-pr-body.md

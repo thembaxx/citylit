@@ -2,7 +2,7 @@
 Accept only matching venue names and nearby coordinates, never street/city results.
 """
 import json,pathlib,urllib.request,urllib.parse,time,re,unicodedata,math
-ROOT=pathlib.Path(__file__).resolve().parent.parent;p=ROOT/'public/data/places.json';rows=json.load(open(p));cities={'johannesburg':'Johannesburg','cape-town':'Cape Town','durban':'Durban'}
+ROOT=pathlib.Path(__file__).resolve().parent.parent;p=ROOT/'public/data/places.json';rows=json.load(open(p));cities={c['slug']:c['short'] for c in json.load(open(ROOT/'public/data/cities.json'))}
 def tokens(s):return {x for x in re.sub(r'[^a-z0-9 ]',' ',unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()).split() if x not in {'the','of','national','city','and','centre','center'}}
 for row in rows:
  if row['coordinateAccuracy']=='venue':continue

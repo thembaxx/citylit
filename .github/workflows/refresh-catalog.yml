@@ -4,8 +4,7 @@ on:
   schedule:
     - cron: "0 7 * * 1"
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 concurrency:
   group: catalog-refresh
   cancel-in-progress: false
@@ -15,23 +14,51 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@f520eceda224fe1a4aed5a2a27a194379a409996 # v6
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
-          node-version: "24"
+          node-version: 24
+          cache: pnpm
       - name: Install tooling
         run: |
-          npm install --global pnpm@12.10.1
           pnpm install --frozen-lockfile
           python3 -m pip install -r scripts/requirements.txt
-      - name: Refresh public sources and licensed images
+      - name: Refresh and validate public sources
         run: |
           pnpm sources:refresh
           python3 scripts/research-detail-facts.py
           pnpm data:audit
           pnpm typecheck
           pnpm build
+      - name: Save reviewed candidate files for isolated publishing
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: catalog-candidate
+          path: |
+            public/data/
+            public/images/
+          retention-days: 3
+          if-no-files-found: error
+  publish:
+    needs: refresh
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: catalog-candidate
+          path: public
       - name: Open a review PR without writing to the default branch
-        if: github.ref_name == github.event.repository.default_branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASE_BRANCH: ${{ github.event.repository.default_branch }}
@@ -47,12 +74,16 @@ jobs:
           git config user.name "Citylit catalog bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Refresh public catalog sources for review"
+          gh auth setup-git
           git push origin "HEAD:$refresh_branch"
           cat > /tmp/catalog-pr-body.md <<'BODY'
           Refreshes cached public source metadata, attributed Wikipedia introductions and licensed imagery.
 
-          Venue descriptions, prices, access claims and event dates still require editorial review; a crawl does not reverify every practical fact. Please inspect redirects, image context and quality-report flags before merging.
+          Venue descriptions, prices, access claims and event dates require editorial review; a crawl does not reverify every practical fact. Inspect redirects, image context and quality-report flags before merging.
 
           Validation: catalog audit, strict TypeScript and production build.
           BODY
           gh pr create --base "$BASE_BRANCH" --head "$refresh_branch" --title "Review weekly catalog refresh" --body-file /tmp/catalog-pr-body.md
+          # GITHUB_TOKEN-created PRs do not trigger Actions PR workflows automatically.
+          gh workflow run ci.yml --ref "$refresh_branch"
+          gh workflow run security.yml --ref "$refresh_branch"

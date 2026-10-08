@@ -1,0 +1,16 @@
+name: Feature idea
+description: Suggest a useful discovery experience.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would this help someone do?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposed experience
+      description: Describe the interaction, including its mobile behavior.
+    validations:
+      required: true

@@ -1,0 +1,26 @@
+name: Bug report
+description: Report a broken flow, gesture or layout.
+labels: [bug]
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Include the page URL, expected behavior and what you saw.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      placeholder: iPhone 15, Safari, portrait, night theme
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or recording

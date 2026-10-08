@@ -93,3 +93,10 @@ Offline guides use a service worker and a standalone fallback page. Passport →
 Run `pnpm data:audit` to verify unique identities, bounds, image files and credit metadata, and regenerate `public/data/quality-report.json`. Practical facts should be reviewed every 30 days, events weekly (and hidden after expiry), and historical context every 180 days. Source status reflects the last crawl, not real-time availability.
 
 The pinned-action weekly GitHub workflow refreshes metadata, introductions and licensed photos, validates the catalog/build, and opens an `automation/catalog-*` review PR. It never pushes to the default branch. Scheduled publishing starts only after the workflow is merged to the default branch; GitHub Actions must be allowed to create PRs in repository settings. Practical fact dates remain independent of source crawl dates. New events and changed prices/access information need editorial review.
+
+
+## Repository checks and delivery
+
+GitHub Actions validates formatting, source data, TypeScript, the production build and browser flows. Security workflows add dependency review/auditing, CodeQL, redacted Gitleaks history scanning, Actionlint and Zizmor. The existing CodeRabbit and GitGuardian integrations are configured for the repository. Dependabot opens reviewed dependency updates, and Vercel deployments receive public HTTP smoke checks.
+
+See [repository automation](docs/repository-automation.md) for main protection, owner setup, merge order and deployment behavior. The current coding integration lacks GitHub administration permission; the main rulesets and native security switches require the owner setup command before they are active.

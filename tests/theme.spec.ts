@@ -1,5 +1,27 @@
 import { test, expect, type Page } from "@playwright/test";
 import { createServer, type Server } from "node:http";
+import { createElement, type ReactNode, type Key } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import GlobalError from "../app/global-error";
+// Playwright serializes imported JSX for component fixtures. Restore native elements
+// so React's server renderer can render the actual recovery document, not a copied template.
+function recoveryElement(value: unknown): ReactNode {
+  if (Array.isArray(value)) return value.map(recoveryElement);
+  if (value && typeof value === "object" && "__pw_type" in value) {
+    const node = value as {
+      __pw_type: unknown;
+      type?: unknown;
+      props?: Record<string, unknown>;
+      key?: Key;
+    };
+    if (typeof node.type !== "string" || !node.props)
+      throw new Error("Expected native recovery elements");
+    const { children, ...props } = node.props;
+    const content = Array.isArray(children) ? children : [children];
+    return createElement(node.type, { ...props, key: node.key }, ...content.map(recoveryElement));
+  }
+  return value as ReactNode;
+}
 const colors = {
   day: { css: "rgb(246, 243, 237)", hex: "#f6f3ed", scheme: "light" },
   night: { css: "rgb(8, 15, 32)", hex: "#080f20", scheme: "dark" },
@@ -18,6 +40,43 @@ async function matchesTheme(page: Page, theme: keyof typeof colors) {
 }
 
 for (const theme of ["day", "night"] as const) {
+  test(`initial root recovery paints saved ${theme} with the regular bootstrap delayed`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme: theme === "day" ? "dark" : "light" });
+    await page.addInitScript((selected) => localStorage.setItem("citylit-theme", selected), theme);
+    const markup = renderToStaticMarkup(
+      recoveryElement(GlobalError({ error: new Error("Fixture"), retry: () => {} })),
+    );
+    await page.route("**/__root-error-fixture", async (route) => {
+      // Render the real fallback component under a real fresh production response policy.
+      const response = await route.fetch();
+      await route.fulfill({
+        status: 500,
+        contentType: "text/html",
+        headers: {
+          "Content-Security-Policy": response.headers()["content-security-policy"],
+        },
+        body: `<!doctype html>${markup}`,
+      });
+    });
+    let release!: () => void;
+    const paused = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await page.route("**/theme.js", async (route) => {
+      await paused;
+      await route.continue();
+    });
+    try {
+      await page.goto("/__root-error-fixture", { waitUntil: "commit" });
+      await expect(page.getByRole("heading", { name: "A spark went astray." })).toBeVisible();
+      await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+      await matchesTheme(page, theme);
+    } finally {
+      release();
+    }
+  });
   test(`saved ${theme} paints before delayed hydration and stays consistent afterwards`, async ({
     page,
   }) => {

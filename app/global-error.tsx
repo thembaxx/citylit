@@ -1,4 +1,5 @@
 "use client";
+import { recoveryThemeScript } from "../lib/recovery-theme";
 export default function GlobalError({
   retry,
 }: {
@@ -14,6 +15,10 @@ export default function GlobalError({
         <meta name="color-scheme" content="dark light" />
         <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#080f20" media="(prefers-color-scheme: dark)" />
+        <script
+          data-citylit-recovery-theme
+          dangerouslySetInnerHTML={{ __html: recoveryThemeScript }}
+        />
         <link rel="stylesheet" href="/theme.css" />
       </head>
       <body

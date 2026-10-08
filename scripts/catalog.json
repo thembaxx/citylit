@@ -487,5 +487,240 @@
     "website": "https://www.tigertiger.durban/contact-us/",
     "address": "Isaiah Ntshangase Road, Durban",
     "description": "A long-running dance venue with DJ-led nights near Durban’s stadium precinct."
+  },
+  {
+    "city": "pretoria",
+    "name": "Freedom Park",
+    "category": "Entertainment",
+    "website": "https://www.freedompark.co.za/",
+    "address": "Corner Koch Street and 7th Avenue, Salvokop",
+    "description": "A hillside memorial and museum exploring South Africa’s heritage and struggle for freedom.",
+    "wiki": "Freedom Park (South Africa)"
+  },
+  {
+    "city": "pretoria",
+    "name": "Pretoria National Botanical Garden",
+    "category": "Parks & zoos",
+    "website": "https://www.sanbi.org/gardens/pretoria/",
+    "address": "2 Cussonia Avenue, Brummeria",
+    "description": "Indigenous gardens, woodland paths and a rocky ridge east of the city.",
+    "wiki": "Pretoria National Botanical Garden"
+  },
+  {
+    "city": "pretoria",
+    "name": "South African State Theatre",
+    "category": "Theatres",
+    "website": "https://www.statetheatre.co.za/ticket-loyalties/contact-us/",
+    "address": "320 Pretorius Street, Pretoria Central",
+    "description": "A performing arts complex presenting theatre, dance and music in the capital.",
+    "wiki": "State Theatre (Pretoria)"
+  },
+  {
+    "city": "stellenbosch",
+    "name": "Stellenbosch Village Museum",
+    "category": "Entertainment",
+    "website": "https://stelmus.co.za/",
+    "address": "37 Ryneveld Street, Stellenbosch",
+    "description": "Restored period homes telling stories of the town’s changing domestic life.",
+    "wiki": "Stellenbosch Museum"
+  },
+  {
+    "city": "stellenbosch",
+    "name": "Stellenbosch University Botanical Garden",
+    "category": "Parks & zoos",
+    "website": "https://www.sun.ac.za/english/entities/botanical-garden",
+    "address": "Corner Neethling and Van Riebeeck Streets",
+    "description": "Plant collections, shaded paths and quiet corners in a compact university garden.",
+    "wiki": "Stellenbosch University Botanical Garden"
+  },
+  {
+    "city": "stellenbosch",
+    "name": "Protea Hotel Stellenbosch",
+    "category": "Lodging",
+    "website": "https://www.marriott.com/en-us/hotels/cptst-protea-hotel-stellenbosch/overview/",
+    "address": "Techno Avenue, Technopark",
+    "description": "A hotel base above the town with access to the surrounding winelands."
+  },
+  {
+    "city": "pietermaritzburg",
+    "name": "Tatham Art Gallery",
+    "category": "Entertainment",
+    "website": "https://www.tathamartgallery.org.za/visit",
+    "address": "Chief Albert Luthuli Road, opposite City Hall",
+    "description": "South African and international art in a historic building overlooking City Hall.",
+    "wiki": "Tatham Art Gallery"
+  },
+  {
+    "city": "pietermaritzburg",
+    "name": "KwaZulu-Natal National Botanical Garden",
+    "category": "Parks & zoos",
+    "website": "https://www.sanbi.org/gardens/kwazulu-natal/",
+    "address": "2 Zwartkop Road, Prestbury",
+    "description": "Tree-lined walks and indigenous plant collections below a green hillside.",
+    "wiki": "KwaZulu-Natal National Botanical Garden"
+  },
+  {
+    "city": "pietermaritzburg",
+    "name": "Golden Horse Hotel",
+    "category": "Lodging",
+    "website": "https://www.southernsun.com/golden-horse-hotel",
+    "address": "45 New England Road, Scottsville",
+    "description": "A Scottsville hotel beside the racecourse and entertainment complex."
+  },
+  {
+    "city": "gqeberha",
+    "name": "Donkin Reserve",
+    "category": "Parks & zoos",
+    "website": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
+    "address": "Belmont Terrace, Central",
+    "description": "A hilltop public space with a lighthouse, stone pyramid and views across the bay.",
+    "wiki": "Donkin Reserve"
+  },
+  {
+    "city": "gqeberha",
+    "name": "Bayworld",
+    "category": "Entertainment",
+    "website": "https://www.bayworld.co.za/",
+    "address": "Beach Road, Humewood",
+    "description": "Regional natural and cultural history in a museum complex near the beachfront.",
+    "wiki": "Bayworld"
+  },
+  {
+    "city": "gqeberha",
+    "name": "Boardwalk Hotel",
+    "category": "Lodging",
+    "website": "https://www.suninternational.com/luxury-collection/boardwalk",
+    "address": "2nd Avenue, Summerstrand",
+    "description": "A beachfront hotel in the Boardwalk precinct near the bay’s coastal attractions."
+  },
+  {
+    "city": "bloemfontein",
+    "name": "Oliewenhuis Art Museum",
+    "category": "Entertainment",
+    "website": "https://nationalmuseum.co.za/visitor-information/",
+    "address": "16 Harry Smith Street, Waverley",
+    "description": "Art collections and a sculpture garden in a former presidential residence.",
+    "wiki": "Oliewenhuis Art Museum"
+  },
+  {
+    "city": "bloemfontein",
+    "name": "Free State National Botanical Garden",
+    "category": "Parks & zoos",
+    "website": "https://www.sanbi.org/gardens/free-state/",
+    "address": "Rayton Road, off Dan Pienaar Drive",
+    "description": "A valley garden with indigenous trees, koppies and walking trails.",
+    "wiki": "Free State National Botanical Garden"
+  },
+  {
+    "city": "bloemfontein",
+    "name": "Sand du Plessis Theatre",
+    "category": "Theatres",
+    "website": "https://pacofs.co.za/",
+    "address": "12 First Avenue, Bloemfontein Central",
+    "description": "A performing arts landmark hosting orchestral concerts, theatre and dance.",
+    "wiki": "Sand du Plessis Theatre"
+  },
+  {
+    "city": "mbombela",
+    "name": "Lowveld National Botanical Garden",
+    "category": "Parks & zoos",
+    "website": "https://www.sanbi.org/gardens/lowveld/",
+    "address": "R40 Riverside, Mbombela",
+    "description": "River walks, waterfalls and a forest canopy through the Lowveld’s plant life.",
+    "wiki": "Lowveld National Botanical Garden"
+  },
+  {
+    "city": "mbombela",
+    "name": "Sudwala Caves",
+    "category": "Entertainment",
+    "website": "https://sudwalacaves.com/",
+    "address": "R539, Sudwala, outside Mbombela",
+    "description": "Ancient limestone chambers on a guided cave visit west of Mbombela.",
+    "wiki": "Sudwala Caves"
+  },
+  {
+    "city": "mbombela",
+    "name": "StayEasy Mbombela",
+    "category": "Lodging",
+    "website": "https://www.southernsun.com/stayeasy-mbombela",
+    "address": "White River Road and Government Boulevard, Riverside Park",
+    "description": "A practical Lowveld base beside Riverside Mall and the Emnotweni precinct."
+  },
+  {
+    "city": "polokwane",
+    "name": "Bakone Malapa Open-Air Museum",
+    "category": "Entertainment",
+    "website": "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
+    "address": "R37 Burgersfort Road, approximately 9 km outside Polokwane",
+    "description": "A living heritage site introducing Northern Sotho traditions and everyday practices.",
+    "wiki": "Bakone Malapa"
+  },
+  {
+    "city": "polokwane",
+    "name": "Polokwane Art Museum",
+    "category": "Entertainment",
+    "website": "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
+    "address": "Library Gardens, Schoeman Street, Polokwane",
+    "description": "A municipal collection of paintings, sculpture and works by South African artists."
+  },
+  {
+    "city": "polokwane",
+    "name": "Meropa Hotel",
+    "category": "Lodging",
+    "website": "https://www.suninternational.com/meropa/hotel/",
+    "address": "Plot 59, Sterkloop, Roodepoort Road",
+    "description": "A hotel retreat in the Meropa entertainment precinct outside the city centre."
+  },
+  {
+    "city": "kimberley",
+    "name": "The Big Hole",
+    "category": "Entertainment",
+    "website": "https://thebighole.com/visitors-info/",
+    "address": "Tucker Street, Kimberley",
+    "description": "A viewing platform, museum and reconstructed mining town around the historic excavation.",
+    "wiki": "Big Hole"
+  },
+  {
+    "city": "kimberley",
+    "name": "McGregor Museum",
+    "category": "Entertainment",
+    "website": "https://www.museumsnc.co.za/",
+    "address": "Atlas Street, Belgravia, Kimberley",
+    "description": "Natural history and the stories of the Northern Cape in a historic building.",
+    "wiki": "McGregor Museum"
+  },
+  {
+    "city": "kimberley",
+    "name": "Protea Hotel Kimberley",
+    "category": "Lodging",
+    "website": "https://www.marriott.com/en-us/hotels/kimki-protea-hotel-kimberley/overview/",
+    "address": "The Kimberley Big Hole, West Circular Road",
+    "description": "A hotel beside the Big Hole and Mining Village with heritage on its doorstep."
+  },
+  {
+    "city": "mahikeng",
+    "name": "Mahikeng Museum",
+    "category": "Entertainment",
+    "website": "https://www.nwgov.co.za/tourism",
+    "address": "Martin Street, Mahikeng",
+    "description": "Regional history and the stories surrounding the historic town.",
+    "wiki": "Mafikeng Museum"
+  },
+  {
+    "city": "mahikeng",
+    "name": "Mafikeng Game Reserve",
+    "category": "Parks & zoos",
+    "website": "https://mmabathopalms.co.za/nearby-attractions/",
+    "address": "Main gate off Jacaranda Drive, Mahikeng",
+    "description": "Grassland scenery and wildlife on the city edge; confirm access before travelling.",
+    "wiki": "Mafikeng Game Reserve"
+  },
+  {
+    "city": "mahikeng",
+    "name": "Mmabatho Palms Hotel",
+    "category": "Lodging",
+    "website": "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
+    "address": "Nelson Mandela Drive, Mahikeng",
+    "description": "A hotel and villa retreat beside the Leopard Park golf course."
   }
 ]

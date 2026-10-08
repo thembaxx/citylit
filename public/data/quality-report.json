@@ -1,0 +1,598 @@
+{
+  "generatedAt": "2026-10-08",
+  "places": 83,
+  "cities": 12,
+  "venuePins": 52,
+  "images": 53,
+  "errors": [],
+  "issues": [
+    {
+      "id": "gold-reef-city",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "constitution-hill",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "the-houghton-hotel",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "54-on-bath",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "market-theatre",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "joburg-theatre",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "johannesburg-zoo",
+      "needs": [
+        "entrance verification",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "walter-sisulu-botanical-garden",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "the-living-room",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "and-club",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "two-oceans-aquarium",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "zeitz-mocaa",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "the-silo-hotel",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "mount-nelson",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "artscape-theatre",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "the-baxter-theatre",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "kirstenbosch",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "green-point-urban-park",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "modular",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "cabo-beach-club",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "ushaka-marine-world",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "moses-mabhida-stadium",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "the-oyster-box",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "beverly-hills",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "the-playhouse",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "elizabeth-sneddon-theatre",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "durban-botanic-gardens",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "umgeni-river-bird-park",
+      "needs": [
+        "entrance verification",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "origin",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "cuba-a-durban",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "apartheid-museum",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "wits-art-museum",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "johannesburg-art-gallery",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "sci-bono-discovery-centre",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "iziko-south-african-museum",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "robben-island-museum",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "company-s-garden",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "kwamuhle-museum",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "durban-natural-science-museum",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "mitchell-park-zoo",
+      "needs": [
+        "entrance verification",
+        "venue photographs",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "suncoast",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "mandela-house",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "saxon-hotel-villas-spa",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "soweto-theatre",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "johannesburg-botanical-garden",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "sognage",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "castle-of-good-hope",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "cape-grace",
+      "needs": [
+        "entrance verification",
+        "venue photographs",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "the-masque",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "arderne-gardens",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "harringtons",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "phansi-museum",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "southern-sun-elangeni-maharani",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "rhumbelow-theatre",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "kenneth-stainbank-nature-reserve",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "tiger-tiger-durban",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "freedom-park",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "pretoria-national-botanical-garden",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "south-african-state-theatre",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "stellenbosch-village-museum",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "stellenbosch-university-botanical-garden",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "protea-hotel-stellenbosch",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "tatham-art-gallery",
+      "needs": [
+        "entrance verification",
+        "venue photographs",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "kwazulu-natal-national-botanical-garden",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "golden-horse-hotel",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "donkin-reserve",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "bayworld",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "boardwalk-hotel",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "oliewenhuis-art-museum",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "free-state-national-botanical-garden",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "sand-du-plessis-theatre",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "lowveld-national-botanical-garden",
+      "needs": [
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "sudwala-caves",
+      "needs": [
+        "entrance verification",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "stayeasy-mbombela",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "bakone-malapa-open-air-museum",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "polokwane-art-museum",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "meropa-hotel",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "the-big-hole",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "mcgregor-museum",
+      "needs": [
+        "entrance verification",
+        "source fetch"
+      ]
+    },
+    {
+      "id": "protea-hotel-kimberley",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "mahikeng-museum",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "mafikeng-game-reserve",
+      "needs": [
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "mmabatho-palms-hotel",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    }
+  ]
+}

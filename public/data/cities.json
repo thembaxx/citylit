@@ -1,0 +1,350 @@
+[
+  {
+    "slug": "johannesburg",
+    "name": "Johannesburg",
+    "short": "Joburg",
+    "province": "Gauteng",
+    "tag": "The city of gold",
+    "intro": "Big energy. Bold ideas. A city that never stops becoming.",
+    "coords": [
+      28.0473,
+      -26.2041
+    ],
+    "landmarks": [
+      "Ponte City",
+      "Nelson Mandela Bridge",
+      "Orlando Towers"
+    ],
+    "provinceCode": "GT",
+    "scope": "Visitor destination and surrounding districts",
+    "model": "original",
+    "descriptions": [],
+    "accentColor": "#edb94c",
+    "landmarkLinks": []
+  },
+  {
+    "slug": "cape-town",
+    "name": "Cape Town",
+    "short": "Cape Town",
+    "province": "Western Cape",
+    "tag": "Between mountain & sea",
+    "intro": "Follow the mountain. Find your own kind of adventure.",
+    "coords": [
+      18.4241,
+      -33.9249
+    ],
+    "landmarks": [
+      "Table Mountain",
+      "Bo-Kaap",
+      "Cape Point"
+    ],
+    "provinceCode": "WC",
+    "scope": "Visitor destination and surrounding districts",
+    "model": "original",
+    "descriptions": [],
+    "accentColor": "#5eaff1",
+    "landmarkLinks": []
+  },
+  {
+    "slug": "durban",
+    "name": "Durban",
+    "short": "Durban",
+    "province": "KwaZulu-Natal",
+    "tag": "Always a little warmer",
+    "intro": "Ocean air, colourful streets, and a rhythm all its own.",
+    "coords": [
+      31.0218,
+      -29.8587
+    ],
+    "landmarks": [
+      "Moses Mabhida",
+      "uShaka Marine World",
+      "Umhlanga Lighthouse"
+    ],
+    "provinceCode": "KZ",
+    "scope": "Visitor destination and surrounding districts",
+    "model": "original",
+    "descriptions": [],
+    "accentColor": "#4ed3b8",
+    "landmarkLinks": []
+  },
+  {
+    "slug": "pretoria",
+    "name": "Pretoria / Tshwane",
+    "short": "Pretoria",
+    "province": "Gauteng",
+    "provinceCode": "GT",
+    "coords": [
+      28.2293,
+      -25.7479
+    ],
+    "landmarks": [
+      "Freedom Park",
+      "Union Buildings",
+      "State Theatre"
+    ],
+    "intro": "Jacaranda streets, living history and a stage for new stories.",
+    "tag": "Jacaranda streets, living history and a stage for new stories.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "monument",
+    "descriptions": [
+      "A hillside memorial celebrating heritage, remembrance and freedom.",
+      "Sandstone wings above terraced gardens, overlooking the administrative capital.",
+      "Drama, dance and music in a major performing arts complex."
+    ],
+    "accentColor": "#b3a5ef",
+    "landmarkLinks": [
+      "https://www.freedompark.co.za/",
+      "https://en.wikipedia.org/wiki/Union_Buildings",
+      "https://www.statetheatre.co.za/"
+    ]
+  },
+  {
+    "slug": "stellenbosch",
+    "name": "Stellenbosch",
+    "short": "Stellenbosch",
+    "province": "Western Cape",
+    "provinceCode": "WC",
+    "coords": [
+      18.8602,
+      -33.9321
+    ],
+    "landmarks": [
+      "Village Museum",
+      "Botanical Garden",
+      "Dorp Street"
+    ],
+    "intro": "Oak-lined streets, garden paths and the stories behind the gables.",
+    "tag": "Oak-lined streets, garden paths and the stories behind the gables.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "gables",
+    "descriptions": [
+      "Restored period houses tracing centuries of everyday life.",
+      "A compact university garden with plant collections and quiet paths.",
+      "Oak-lined streets framed by historic Cape Dutch gables."
+    ],
+    "accentColor": "#80b9d8",
+    "landmarkLinks": [
+      "https://stelmus.co.za/",
+      "https://www.sun.ac.za/english/entities/botanical-garden",
+      "https://www.visitstellenbosch.org/"
+    ]
+  },
+  {
+    "slug": "pietermaritzburg",
+    "name": "Pietermaritzburg",
+    "short": "Pietermaritzburg",
+    "province": "KwaZulu-Natal",
+    "provinceCode": "KZ",
+    "coords": [
+      30.3798,
+      -29.6006
+    ],
+    "landmarks": [
+      "City Hall",
+      "Tatham Art Gallery",
+      "Botanical Garden"
+    ],
+    "intro": "A garden city where red-brick landmarks meet a rich art collection.",
+    "tag": "A garden city where red-brick landmarks meet a rich art collection.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "hall",
+    "descriptions": [
+      "Red brick, a clock tower and the landmark heart of the city.",
+      "South African and international art, opposite City Hall.",
+      "Indigenous plants and tree-lined walks below a green hillside."
+    ],
+    "accentColor": "#e6a487",
+    "landmarkLinks": [
+      "https://en.wikipedia.org/wiki/Pietermaritzburg",
+      "https://www.tathamartgallery.org.za/visit",
+      "https://www.sanbi.org/gardens/kwazulu-natal/"
+    ]
+  },
+  {
+    "slug": "gqeberha",
+    "name": "Gqeberha",
+    "short": "Gqeberha",
+    "province": "Eastern Cape",
+    "provinceCode": "EC",
+    "coords": [
+      25.6022,
+      -33.9608
+    ],
+    "landmarks": [
+      "Donkin Reserve",
+      "Bayworld",
+      "Boardwalk"
+    ],
+    "intro": "Coastal light, public art and unexpected stories beside the bay.",
+    "tag": "Coastal light, public art and unexpected stories beside the bay.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "pyramid",
+    "descriptions": [
+      "A stone pyramid and lighthouse on a hill overlooking the bay.",
+      "A museum exploring regional natural and cultural history.",
+      "A beachfront hotel and entertainment precinct at Summerstrand."
+    ],
+    "accentColor": "#b8c9aa",
+    "landmarkLinks": [
+      "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
+      "https://www.bayworld.co.za/",
+      "https://www.suninternational.com/luxury-collection/boardwalk"
+    ]
+  },
+  {
+    "slug": "bloemfontein",
+    "name": "Bloemfontein",
+    "short": "Bloemfontein",
+    "province": "Free State",
+    "provinceCode": "FS",
+    "coords": [
+      26.2041,
+      -29.0852
+    ],
+    "landmarks": [
+      "Oliewenhuis",
+      "Botanical Garden",
+      "Sand du Plessis Theatre"
+    ],
+    "intro": "Art-filled gardens and open skies in the heart of the Free State.",
+    "tag": "Art-filled gardens and open skies in the heart of the Free State.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "gallery",
+    "descriptions": [
+      "Art collections and sculptures around a historic residence.",
+      "A valley garden with indigenous trees and rocky koppies.",
+      "A performing arts venue for theatre, dance and music."
+    ],
+    "accentColor": "#e1b55f",
+    "landmarkLinks": [
+      "https://nationalmuseum.co.za/visitor-information/",
+      "https://www.sanbi.org/gardens/free-state/",
+      "https://pacofs.co.za/"
+    ]
+  },
+  {
+    "slug": "mbombela",
+    "name": "Mbombela",
+    "short": "Mbombela",
+    "province": "Mpumalanga",
+    "provinceCode": "MP",
+    "coords": [
+      30.9853,
+      -25.4658
+    ],
+    "landmarks": [
+      "Lowveld Botanical Garden",
+      "Sudwala Caves",
+      "Mbombela Stadium"
+    ],
+    "intro": "Follow river paths, ancient stone and the warmth of the Lowveld.",
+    "tag": "Follow river paths, ancient stone and the warmth of the Lowveld.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "waterfall",
+    "descriptions": [
+      "Rivers, waterfalls and a canopy of Lowveld plant life.",
+      "Ancient limestone chambers and sculpted rock formations.",
+      "A football stadium with distinctive giraffe-inspired supports."
+    ],
+    "accentColor": "#88c9b4",
+    "landmarkLinks": [
+      "https://www.sanbi.org/gardens/lowveld/",
+      "https://sudwalacaves.com/",
+      "https://en.wikipedia.org/wiki/Mbombela_Stadium"
+    ]
+  },
+  {
+    "slug": "polokwane",
+    "name": "Polokwane",
+    "short": "Polokwane",
+    "province": "Limpopo",
+    "provinceCode": "LI",
+    "coords": [
+      29.4689,
+      -23.9045
+    ],
+    "landmarks": [
+      "Bakone Malapa",
+      "Art Museum",
+      "Meropa"
+    ],
+    "intro": "Northern Sotho heritage, local art and a gateway to Limpopo.",
+    "tag": "Northern Sotho heritage, local art and a gateway to Limpopo.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "village",
+    "descriptions": [
+      "A living heritage site sharing Northern Sotho traditions.",
+      "Local paintings and sculpture in a municipal art collection.",
+      "A hotel and entertainment retreat outside the city centre."
+    ],
+    "accentColor": "#dfa8c2",
+    "landmarkLinks": [
+      "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
+      "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
+      "https://www.suninternational.com/meropa/hotel/"
+    ]
+  },
+  {
+    "slug": "kimberley",
+    "name": "Kimberley",
+    "short": "Kimberley",
+    "province": "Northern Cape",
+    "provinceCode": "NC",
+    "coords": [
+      24.7623,
+      -28.7282
+    ],
+    "landmarks": [
+      "The Big Hole",
+      "McGregor Museum",
+      "William Humphreys Art Gallery"
+    ],
+    "intro": "Look beyond the diamond story to art, archives and desert light.",
+    "tag": "Look beyond the diamond story to art, archives and desert light.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "mine",
+    "descriptions": [
+      "A historic excavation surrounded by mining stories and a museum.",
+      "Natural history and regional archives in a historic building.",
+      "A gallery connecting South African art with international collections."
+    ],
+    "accentColor": "#9ea9e7",
+    "landmarkLinks": [
+      "https://thebighole.com/",
+      "https://www.museumsnc.co.za/",
+      "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery"
+    ]
+  },
+  {
+    "slug": "mahikeng",
+    "name": "Mahikeng",
+    "short": "Mahikeng",
+    "province": "North West",
+    "provinceCode": "NW",
+    "coords": [
+      25.6442,
+      -25.8652
+    ],
+    "landmarks": [
+      "Mahikeng Museum",
+      "Game Reserve",
+      "Mmabatho Palms"
+    ],
+    "intro": "Meet the stories, grasslands and heritage of the North West.",
+    "tag": "Meet the stories, grasslands and heritage of the North West.",
+    "scope": "Visitor destination; outlying attractions are labelled in their address",
+    "model": "grassland",
+    "descriptions": [
+      "Regional collections and the stories of the historic town.",
+      "Grassland, wildlife and a quieter edge to the city.",
+      "A hotel and villa retreat beside Leopard Park."
+    ],
+    "accentColor": "#d2bf8d",
+    "landmarkLinks": [
+      "https://www.nwgov.co.za/tourism",
+      "https://mmabathopalms.co.za/nearby-attractions/",
+      "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/"
+    ]
+  }
+]

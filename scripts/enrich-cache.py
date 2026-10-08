@@ -39,7 +39,8 @@ def images(page,limit=2):
  return output
 previous_city_images=json.load(open(OUT/'city-images.json'))
 city_images={}
-for name,slug in [('Johannesburg','johannesburg'),('Cape Town','cape-town'),('Durban','durban')]:city_images[slug]=list({i['src']:i for i in images(pages.get(name,{}),3)+previous_city_images.get(slug,[])}.values())[:5]
+for city in json.load(open(OUT/'cities.json')):
+ name=city['name'].split(' /')[0];slug=city['slug'];city_images[slug]=list({i['src']:i for i in images(pages.get(name,{}),3)+previous_city_images.get(slug,[])}.values())[:5]
 places=json.load(open(OUT/'places.json'));catalog=json.load(open(ROOT/'scripts/catalog.json'))
 for row,seed in zip(places,catalog):
  row.update({k:seed[k] for k in ['website','address','description']});row['checkedAt']=DATE;source=next((s for s in r['official'] if s['url']==seed['website']),None)

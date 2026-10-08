@@ -49,5 +49,94 @@
       "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
       "src": "/images/c4266986faf9.jpg"
     }
+  ],
+  "pretoria": [
+    {
+      "alt": "The Union Buildings in Pretoria: seat of the South African government.",
+      "author": "Davinci77",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Uniegebou.jpg",
+      "filename": "Uniegebou.jpg",
+      "src": "/images/21fdadf83ed7.jpg"
+    }
+  ],
+  "stellenbosch": [
+    {
+      "alt": "Stellenbosch aerial photo from north-west 2024-01",
+      "author": "CJJ2501",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stellenbosch_aerial_photo_from_north-west_2024-01.jpg",
+      "filename": "Stellenbosch aerial photo from north-west 2024-01.jpg",
+      "src": "/images/960a1e9c3a1b.jpg"
+    }
+  ],
+  "pietermaritzburg": [
+    {
+      "alt": "This media shows a South African Protected Site with SAHRA file reference 0000000000.",
+      "author": "Janek Szymanowski",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:00000-St_Peters_Church2-Pietermaritzburg-s.jpg",
+      "filename": "00000-St Peters Church2-Pietermaritzburg-s.jpg",
+      "src": "/images/ac7b8675d09c.jpg"
+    }
+  ],
+  "gqeberha": [
+    {
+      "alt": "City Hall, Market Square, Port Elizabeth",
+      "author": "Leo za1",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:City_Hall_Port_Elizabeth-003.jpg",
+      "filename": "City Hall Port Elizabeth-003.jpg",
+      "src": "/images/0e33f1d0fa3f.jpg"
+    }
+  ],
+  "bloemfontein": [
+    {
+      "alt": "Vue du Free State en Afrique du Sud.",
+      "author": "South African Tourism from South Africa",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein,_Free_State,_South_Africa_(20349855518).jpg",
+      "filename": "Bloemfontein, Free State, South Africa (20349855518).jpg",
+      "src": "/images/77657b7bb74d.jpg"
+    }
+  ],
+  "mbombela": [
+    {
+      "alt": "Panoramic view of Nelspruit, South Africa",
+      "author": "Wernermeiringvdm at English Wikipedia",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:NelspruitPanorama.JPG",
+      "filename": "NelspruitPanorama.JPG",
+      "src": "/images/48984d3b45aa.jpg"
+    }
+  ],
+  "polokwane": [
+    {
+      "alt": "Vue du Limpopo en Afrique du Sud.",
+      "author": "South African Tourism from South Africa",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polokwane,_Limpopo,_South_Africa_(2417714241).jpg",
+      "filename": "Polokwane, Limpopo, South Africa (2417714241).jpg",
+      "src": "/images/980bb25306f7.jpg"
+    }
+  ],
+  "kimberley": [],
+  "mahikeng": [
+    {
+      "alt": "Mahikeng town.",
+      "author": "South African Tourism from South Africa",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mafikeng,_North_West,_South_Africa_(20506154516).jpg",
+      "filename": "Mafikeng, North West, South Africa (20506154516).jpg",
+      "src": "/images/ca5c02e8fc23.jpg"
+    }
   ]
 }

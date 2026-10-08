@@ -16,7 +16,8 @@
     "test": "playwright test",
     "sources:refresh": "python3 scripts/crawl-sources.py",
     "sources:geocode": "python3 scripts/geocode-venues.py",
-    "geo:refresh": "python3 scripts/fetch-geography.py"
+    "geo:refresh": "python3 scripts/fetch-geography.py",
+    "data:audit": "python3 scripts/audit-data.py"
   },
   "keywords": [],
   "author": "",

@@ -177,27 +177,54 @@ test("viewport metadata replacements and compact landscape leave no background s
 
 test("a cold cached-guide launch keeps the saved background before the guide hydrates", async ({
   page,
-  baseURL,
+  request,
 }) => {
   // Test real connection loss. WebKit's offline emulation bypasses even local SW responses:
   // https://github.com/microsoft/playwright/issues/42775
-  const server = createServer(async (incoming, outgoing) => {
-    try {
-      const target = new URL(incoming.url || "/", baseURL);
-      if (target.origin !== new URL(baseURL!).origin) {
-        outgoing.writeHead(400).end();
-        return;
-      }
-      const response = await fetch(target);
-      const headers = Object.fromEntries(response.headers);
-      // Node fetch decompresses the body. Let the proxy frame its uncompressed response.
-      for (const name of ["content-encoding", "content-length", "transfer-encoding", "connection"])
-        delete headers[name];
-      outgoing.writeHead(response.status, headers);
-      outgoing.end(Buffer.from(await response.arrayBuffer()));
-    } catch {
-      if (!outgoing.destroyed) outgoing.writeHead(502).end();
+  // Snapshot only known public responses. The isolated origin cannot proxy arbitrary requests.
+  const paths = [
+    "/offline.html",
+    "/offline.js",
+    "/offline.css",
+    "/theme.js",
+    "/theme.css",
+    "/sw.js",
+    "/pwa-release.js",
+    "/manifest.webmanifest",
+    "/data/places.json",
+    "/data/cities.json",
+    "/app-icon.svg",
+    "/brand/khwezi-offline.svg",
+    "/brand/apple-touch-icon.png",
+    "/brand/app-icon-192.png",
+    "/brand/app-icon-512.png",
+    "/brand/app-icon-maskable.png",
+  ];
+  const assets = new Map(
+    await Promise.all(
+      paths.map(async (path) => {
+        const response = await request.get(path);
+        expect(response.status(), path).toBe(200);
+        const headers = response.headers();
+        // APIResponse.body() is decompressed. Let the isolated server frame its response.
+        for (const name of [
+          "content-encoding",
+          "content-length",
+          "transfer-encoding",
+          "connection",
+        ])
+          delete headers[name];
+        return [path, { headers, body: await response.body() }] as const;
+      }),
+    ),
+  );
+  const server = createServer((incoming, outgoing) => {
+    const asset = assets.get(incoming.url || "");
+    if (!asset) {
+      outgoing.writeHead(404).end();
+      return;
     }
+    outgoing.writeHead(200, asset.headers).end(asset.body);
   });
   await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
   const address = server.address();
@@ -213,8 +240,9 @@ test("a cold cached-guide launch keeps the saved background before the guide hyd
     await page.addInitScript(() => {
       if (!localStorage.getItem("citylit-theme")) localStorage.setItem("citylit-theme", "day");
     });
-    await page.goto(origin);
+    await page.goto(`${origin}/offline.html`);
     await page.evaluate(async () => {
+      await navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" });
       await navigator.serviceWorker.ready;
       if (!navigator.serviceWorker.controller)
         await new Promise<void>((resolve) =>

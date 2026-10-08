@@ -12,7 +12,7 @@ The offline worker caches both shared theme assets and includes them in the buil
 
 `pnpm build && CI=1 pnpm test tests/theme.spec.ts` exercises delayed React bundles, opposite saved/device preferences, JavaScript-free shells, denied or malformed storage, OS and cross-tab changes, route metadata replacement, compact portrait/landscape and cold offline launches. CI runs these checks in mobile/desktop Chromium, iPhone-sized WebKit and desktop Firefox. The broader suite retains CSP, HTTP status, accessibility, gestures and discovery checks.
 
-The cold-launch check stops an isolated local origin after the real app worker has downloaded its assets, then opens a place URL and reloads the guide. This verifies cached recovery on all three engines without relying on WebKit's [broken offline emulation](https://github.com/microsoft/playwright/issues/42775). Opening the province picker also verifies that map labels cannot intercept its links.
+The cold-launch check serves an allowlisted snapshot of the app's public reader/worker responses on an isolated local origin, registers the real worker and stops that origin after its assets download. It then opens a place URL and reloads the guide. This verifies cached recovery on all three engines without relying on WebKit's [broken offline emulation](https://github.com/microsoft/playwright/issues/42775). Opening the province picker also verifies that map labels cannot intercept its links.
 
 ## Platform limits
 

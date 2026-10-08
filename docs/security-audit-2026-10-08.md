@@ -43,7 +43,7 @@ GitHub returned `protected: false` for main and an empty ruleset list on the aud
 
 Use an owner-authorized local `gh` login and [the existing setup helper](../scripts/configure-github.py). Review `--phase bootstrap` and apply the appropriate phase with `--apply`; move to `steady` only once all required checks can pass. See [repository automation](repository-automation.md). Add an independent reviewer before requiring independent human approval. Verify the resulting live ruleset, not just the file.
 
-The repository response returned `security_and_analysis: null`; this is insufficient visibility to determine whether native secret scanning, push protection or private reporting are enabled. Owner verification remains necessary. Installed GitGuardian and repository Gitleaks checks are separate controls.
+The repository code-scanning alert API returned HTTP 403, so the integration cannot enumerate security alerts; visible PR annotations/checks and workflow logs can still be reviewed. CodeQL analysis-job success alone does not certify that no alert exists. The repository response returned `security_and_analysis: null`; this is insufficient visibility to determine whether native secret scanning, push protection or private reporting are enabled. Owner verification remains necessary. Installed GitGuardian and repository Gitleaks checks are separate controls.
 
 ### SEC-02: isolate maintenance fetch destinations and redirects
 
@@ -111,6 +111,7 @@ Remaining scanner findings were reviewed rather than suppressed:
 
 - `scripts/install-ci-tools.py:29`: Semgrep dynamic-urllib and Bandit B310. Its URL comes from two fixed HTTPS release URLs selected by argparse choices, not untrusted source data. Downloads are bounded and must match a pinned SHA-256 before any execution. The tar reader reads one named regular binary with a size bound and never extracts arbitrary archive paths. No exploitable arbitrary-file read or code execution was established.
 - Bandit B404/B603/B607 in `configure-github.py`, `crawl-sources.py`, `fetch-geography.py`: subprocess imports/calls and PATH lookup. Calls use argument arrays, not a shell; repository identifiers are validated, catalog data does not become executable shell text, and tool names/arguments are controlled. They trust the maintenance runner's executable PATH, as documented by their use of installed `gh`, `node` and `pnpm` tooling. No command injection was established.
+- CodeQL PR analysis flagged a case-sensitive script-tag inspection regex in the new regression test. It was an inspection assertion, not an HTML sanitizer or production sink; making tag inspection case-insensitive addresses the warning without a suppression.
 - Initial scans had 16 Bandit findings and seven Semgrep findings. Ingestion refactoring removed the unchecked URL callsites; a production geography assertion became an explicit runtime check. No security-rule blanket suppression was added.
 
 Reproduce locally after a frozen install; use an isolated Python environment for audit tools:

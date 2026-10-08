@@ -73,7 +73,7 @@ test("HTML uses fresh server-owned nonces and cannot be cached across visitors",
     expect(policy).toContain("script-src-attr 'none'");
     expect(response.headers()["cache-control"]).toContain("no-store");
     const html = await response.text();
-    const scripts = Array.from(html.matchAll(/<script\b([^>]*)>/g), (match) => match[1]);
+    const scripts = Array.from(html.matchAll(/<script\b([^>]*)>/gi), (match) => match[1]);
     expect(scripts.length).toBeGreaterThan(1);
     for (const attributes of scripts) expect(attributes).toContain(`nonce="${nonce}"`);
   }

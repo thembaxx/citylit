@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, View, PerformanceMonitor } from "@react-three/drei";
 import { useCallback, useEffect, useRef, useState, type ComponentRef } from "react";
@@ -259,12 +260,15 @@ export default function Scene(props: Props) {
                 <line x1="0" y1="0" x2={labelOffsets[p.code][0]} y2={labelOffsets[p.code][1]} />
               </svg>
               {availableProvinces[p.code] !== undefined ? (
-                <button
+                <Link
+                  href={`/${cities[availableProvinces[p.code]].slug}`}
+                  prefetch={false}
                   data-available="true"
                   className="province province-active"
                   aria-label={`Explore ${cities[availableProvinces[p.code]].name}`}
-                  onClickCapture={(event) => {
-                    event.stopPropagation();
+                  onClick={(event) => event.stopPropagation()}
+                  onNavigate={(event) => {
+                    event.preventDefault();
                     props.onCity(availableProvinces[p.code]);
                   }}
                   onPointerDownCapture={(event) => event.stopPropagation()}
@@ -273,7 +277,7 @@ export default function Scene(props: Props) {
                   <small className="province-city-name">
                     {cities[availableProvinces[p.code]].short}
                   </small>
-                </button>
+                </Link>
               ) : (
                 <span data-available="false" className="province">
                   {p.name.toUpperCase()}

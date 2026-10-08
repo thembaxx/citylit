@@ -99,6 +99,7 @@ export default function Gallery({
       <dialog
         ref={dialog}
         className="gallery-dialog"
+        aria-label={`${name} photograph gallery`}
         onCancel={() => setOpen(false)}
         onClick={(e) => {
           if (e.target === dialog.current) setOpen(false);

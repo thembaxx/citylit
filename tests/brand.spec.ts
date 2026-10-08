@@ -87,7 +87,7 @@ test("settings trap focus, pause every mascot and persist preferences across rou
   await page.keyboard.press("Escape");
   await expect(settings).not.toBeVisible();
   await expect(trigger).toBeFocused();
-  await page.getByRole("button", { name: "Explore Durban", exact: true }).click();
+  await page.getByRole("link", { name: "Explore Durban", exact: true }).click();
   await trigger.click();
   await expect(
     settings.getByRole("button", { name: "Play animations", exact: true }),

@@ -11,12 +11,17 @@ const script = workflow
   .map((line) => line.replace(/^ {12}/, ""))
   .join("\n");
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-function smoke(fetcher: typeof fetch, url = "https://citylit.vercel.app", bypass?: string) {
+function smoke(
+  fetcher: typeof fetch,
+  url = "https://citylit.vercel.app",
+  bypass?: string,
+  environment = "Preview",
+) {
   const states: string[] = [];
   const run = new AsyncFunction("context", "github", "core", "fetch", "process", script)(
     {
       repo: { owner: "thembaxx", repo: "citylit" },
-      payload: { deployment: { sha: "a".repeat(40) } },
+      payload: { deployment: { sha: "a".repeat(40), environment } },
       runId: 1,
     },
     {
@@ -120,10 +125,48 @@ test("deployment smoke blocks redirects away from the allowed host boundary", as
 test("health and security headers preserve opt-in location discovery", async ({ request }) => {
   const response = await request.get("/api/health");
   expect(response.status()).toBe(200);
-  expect(await response.json()).toEqual({ status: "ok" });
+  expect(await response.json()).toMatchObject({ status: "ok" });
   expect(response.headers()["cache-control"]).toBe("no-store");
   expect(response.headers()["x-content-type-options"]).toBe("nosniff");
   expect(response.headers()["permissions-policy"]).toContain("geolocation=(self)");
   expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'self'");
   expect(response.headers()["x-powered-by"]).toBeUndefined();
+});
+
+test("production smoke rejects an older public release before checking its routes", async () => {
+  const urls: string[] = [];
+  const result = smoke(
+    async (input) => {
+      urls.push(String(input));
+      return Response.json({ status: "ok", revision: "b".repeat(40) });
+    },
+    "https://citylit-release-thembaxxs-projects.vercel.app",
+    undefined,
+    "Production",
+  );
+  await expect(result.run).rejects.toThrow("not serving this deployment's commit");
+  expect(urls).toEqual(["https://citylit.vercel.app/api/health"]);
+  expect(result.states).toEqual(["pending", "failure"]);
+});
+
+test("production smoke uses the public alias only after verifying its exact commit", async ({
+  baseURL,
+}) => {
+  const origins: string[] = [];
+  const result = smoke(
+    async (input, init) => {
+      const url = new URL(String(input));
+      origins.push(url.origin);
+      // Fixture represents the deployed commit while route bodies come from the real build.
+      if (url.pathname === "/api/health")
+        return Response.json({ status: "ok", revision: "a".repeat(40) });
+      return fetch(new URL(url.pathname + url.search, baseURL), init);
+    },
+    "https://citylit-release-thembaxxs-projects.vercel.app",
+    undefined,
+    "Production",
+  );
+  await result.run;
+  expect(new Set(origins)).toEqual(new Set(["https://citylit.vercel.app"]));
+  expect(result.states).toEqual(["pending", "success"]);
 });

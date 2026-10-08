@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
 import BrandStudio from "../../components/BrandStudio";
-export const metadata: Metadata = {
-  title: "Meet Khwezi — Citylit brand field notes",
-  description: "The Citylit identity, a curious springhare and little moments of discovery.",
-};
+import { metadataForPage } from "../../lib/seo";
+export const metadata = metadataForPage(
+  "Meet Khwezi — brand field notes",
+  "The Citylit identity, a curious springhare and little moments of discovery.",
+  "/brand",
+);
 export default function Page() {
   return <BrandStudio />;
 }

@@ -54,9 +54,23 @@ jobs:
               return url;
             };
             try {
-              const base = validateUrl(process.env.DEPLOYMENT_URL);
+              let base = validateUrl(process.env.DEPLOYMENT_URL);
               const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
               await report("pending", "Checking deployed routes and public data.");
+              // Production aliases are public while unique Vercel URLs can be protected.
+              // Only use the alias after proving it serves this deployment's exact commit.
+              if (deployment?.environment === "Production") {
+                const canonical = new URL("https://citylit.vercel.app");
+                const identity = await fetch(new URL("/api/health", canonical), {
+                  redirect: "manual", signal: AbortSignal.timeout(15000), cache: "no-store",
+                });
+                if (!identity.ok) throw new Error("Public production health is unavailable.");
+                const health = await identity.json();
+                if (health.status !== "ok" || !sha || health.revision !== sha) {
+                  throw new Error("Production alias is not serving this deployment's commit.");
+                }
+                base = canonical;
+              }
               const routes = [
                 ["/", 200, /citylit/i],
                 ["/explore", 200, /citylit/i],
@@ -65,6 +79,10 @@ jobs:
                 ["/api/health", 200, null],
                 ["/manifest.webmanifest", 200, null],
                 ["/data/places.json", 200, null],
+                ["/destinations", 200, /Find your next chapter/i],
+                ["/robots.txt", 200, /sitemap.xml/i],
+                ["/sitemap.xml", 200, /<urlset/],
+                ["/llms.txt", 200, /Citylit/],
                 ["/not-a-city", 404, null],
               ];
               for (const [path, status, content] of routes) {
@@ -96,7 +114,13 @@ jobs:
                 if (path.startsWith("/_next/static/") && !response.headers.get("content-type")?.includes("javascript")) {
                   throw new Error("Application bootstrap asset has the wrong content type.");
                 }
-                if (path === "/api/health" && JSON.parse(text).status !== "ok") throw new Error("Health response failed.");
+                if (path === "/api/health") {
+                  const health = JSON.parse(text);
+                  if (health.status !== "ok") throw new Error("Health response failed.");
+                  if (deployment?.environment === "Production" && health.revision !== sha) {
+                    throw new Error("Production release changed during smoke checks.");
+                  }
+                }
                 if (path === "/data/places.json" && !Array.isArray(JSON.parse(text))) throw new Error("Catalog response failed.");
                 if (path === "/manifest.webmanifest" && !JSON.parse(text).name) throw new Error("Manifest response failed.");
                 core.info(`Passed ${path}`);

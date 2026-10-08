@@ -1,7 +1,20 @@
 import { Suspense } from "react";
 import AdventureHub from "../../components/AdventureHub";
 import KhweziMoment from "../../components/KhweziMoment";
-export default function Page() {
+import { metadataForPage } from "../../lib/seo";
+type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
+export async function generateMetadata({ searchParams }: Props) {
+  const query = await searchParams;
+  return metadataForPage(
+    "Plan a day in South Africa",
+    "Find a little adventure, collect discoveries and plan a day across twelve South African destinations. Saved plans stay in your browser.",
+    "/explore",
+    !query.trip && !query.q,
+  );
+}
+export default async function Page({ searchParams }: Props) {
+  // Resolve query state before streaming so the planner also has useful server HTML.
+  await searchParams;
   return (
     <Suspense
       fallback={

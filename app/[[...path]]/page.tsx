@@ -1,17 +1,34 @@
 import { notFound } from "next/navigation";
 import Explorer from "../../components/Explorer";
-import { cities, categories, categorySlug, places } from "../../lib/data";
-export default async function Page({ params }: { params: Promise<{ path?: string[] }> }) {
+import type { Metadata } from "next";
+import { discoveryRoute, discoveryMetadata, discoverySchema } from "../../lib/seo";
+import JsonLd from "../../components/JsonLd";
+import GuideContent from "../../components/GuideContent";
+type Props = {
+  params: Promise<{ path?: string[] }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const route = discoveryRoute((await params).path);
+  if (!route) notFound();
+  const query = await searchParams;
+  const filtered = ["q", "filters", "district", "trip"].some((key) => Boolean(query[key]?.length));
+  return discoveryMetadata(route, filtered);
+}
+export default async function Page({ params }: Props) {
   const { path = [] } = await params;
-  if (
-    path.length > 3 ||
-    (path[0] && !cities.some((c) => c.slug === path[0])) ||
-    (path[1] && !categories.some((c) => categorySlug(c) === path[1])) ||
-    (path[2] &&
-      !places.some(
-        (p) => p.id === path[2] && p.city === path[0] && categorySlug(p.category) === path[1],
-      ))
-  )
-    notFound();
-  return <Explorer />;
+  const route = discoveryRoute(path);
+  if (!route) notFound();
+  return (
+    <>
+      <JsonLd value={discoverySchema(route)} />
+      <Explorer />
+      <noscript>
+        <style>{".game-screen { display: none !important; }"}</style>
+        <div className="no-script-guide">
+          <GuideContent route={route} />
+        </div>
+      </noscript>
+    </>
+  );
 }

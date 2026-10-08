@@ -386,6 +386,7 @@ h3 {
   min-width: 0;
 }
 .landmark-open {
+  display: block;
   width: 100%;
   padding: 0;
   min-height: 34px;
@@ -4014,4 +4015,169 @@ button:disabled {
   75% {
     transform: translate(-20px, 14px) rotate(-10deg);
   }
+}
+
+/* Readable field guides, progressive enhancement and branded recovery. */
+.reading-page,
+.no-script-guide,
+.recovery-page {
+  position: relative;
+  z-index: 3;
+  height: 100dvh;
+  overflow: auto;
+  padding: max(24px, env(safe-area-inset-top)) 22px max(32px, env(safe-area-inset-bottom));
+  background: var(--bg);
+  color: var(--ink);
+}
+.reading-container,
+.guide-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.reading-nav,
+.reading-nav > div,
+.reading-links,
+.reading-footer,
+.settings-information {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.reading-nav {
+  justify-content: space-between;
+  margin-bottom: clamp(48px, 7vh, 84px);
+  gap: 24px;
+}
+.reading-nav > div,
+.reading-links,
+.reading-footer,
+.text-guide-link,
+.settings-information {
+  font: 12px/1.6 var(--font-mono);
+}
+.reading-page h1,
+.guide-content h1,
+.recovery-page h1 {
+  font: 800 clamp(52px, 8vw, 100px)/0.98 var(--font-heading);
+  text-transform: uppercase;
+  margin: 22px 0;
+  text-wrap: balance;
+}
+.reading-page h2,
+.guide-content h2 {
+  font: 700 clamp(28px, 4vw, 42px)/1.1 var(--font-heading);
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+.reading-page p,
+.guide-content p,
+.recovery-page p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 72ch;
+  margin: 16px 0 24px;
+}
+.reading-page .reading-intro,
+.guide-content .reading-intro {
+  font-size: clamp(18px, 2.5vw, 25px);
+  margin-bottom: 40px;
+}
+.reading-page section,
+.reading-place {
+  margin-top: 44px;
+}
+.reading-page p a,
+.guide-content a,
+.reading-links a,
+.reading-footer a,
+.text-guide-link,
+.settings-information a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: 20px;
+}
+.destination-card {
+  padding: 26px;
+  background: var(--surface-glass);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  corner-shape: squircle;
+}
+.destination-card h3 {
+  font: 700 32px/1.1 var(--font-heading);
+  margin: 20px 0 16px;
+  text-transform: uppercase;
+}
+.destination-card > span:last-of-type {
+  display: block;
+  margin: 20px 0 16px;
+  font: 11px/1.5 var(--font-mono);
+  color: var(--muted);
+}
+.reading-footer {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.no-script-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+.guide-content li {
+  margin: 16px 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.guide-content .wordmark {
+  display: inline-block;
+  margin-bottom: 30px;
+}
+.guide-content > h2 {
+  margin-top: 40px;
+}
+.recovery-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: max(24px, calc((100vw - 760px) / 2));
+}
+.recovery-page .khwezi-moment {
+  margin: 0 0 24px;
+}
+.recovery-page .pill-button {
+  text-decoration: none;
+}
+.settings-information {
+  padding-top: 20px;
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 380px) {
+  .reading-nav > div {
+    gap: 10px;
+    font-size: 10px;
+  }
+}
+
+.street-map-link,
+.map-fallback {
+  display: block;
+  margin: 12px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.street-map-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

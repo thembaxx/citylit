@@ -8,7 +8,7 @@ import ArrowRight01Icon from "@hugeicons/core-free-icons/ArrowRight01Icon";
 import RotateClockwiseIcon from "@hugeicons/core-free-icons/RotateClockwiseIcon";
 import FavouriteIcon from "@hugeicons/core-free-icons/FavouriteIcon";
 import Sun03Icon from "@hugeicons/core-free-icons/Sun03Icon";
-import Compass01Icon from "@hugeicons/core-free-icons/Compass01Icon";
+import DiscoverCircleIcon from "@hugeicons/core-free-icons/DiscoverCircleIcon";
 const icons = {
   "arrow-up-right": ArrowUpRight01Icon,
   "arrow-left": ArrowLeft01Icon,
@@ -16,7 +16,7 @@ const icons = {
   rotate: RotateClockwiseIcon,
   heart: FavouriteIcon,
   sun: Sun03Icon,
-  compass: Compass01Icon,
+  compass: DiscoverCircleIcon,
 };
 const sprite = renderToStaticMarkup(
   createElement(

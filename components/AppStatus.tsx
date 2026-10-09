@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { RefreshCw, X, WifiOff } from "lucide-react";
@@ -32,7 +33,9 @@ export default function AppStatus() {
                     ? "Offline · your pocket guide is ready"
                     : "Offline · connect once to prepare your guide"}
                 </p>
-                <a href="/offline.html">Open pocket guide ↗</a>
+                <a href="/offline.html">
+                  Open pocket guide <UiIcon name="arrow-up-right" />
+                </a>
               </div>
             </>
           ) : (

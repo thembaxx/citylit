@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { parseSharedTrip } from "../lib/client-data";
@@ -218,7 +219,9 @@ export default function AdventureHub() {
       />
       <header className="field-guide-header">
         <ThemeToggle onChange={setNight} />
-        <Link href="/">← Back to the map</Link>
+        <Link href="/">
+          <UiIcon name="arrow-left" /> Back to the map
+        </Link>
         <Link href="/offline.html">
           <Download size={16} />
           Offline guide
@@ -237,7 +240,9 @@ export default function AdventureHub() {
               <h2>{incoming.name}</h2>
               <p>{incoming.description}</p>
               <div className="pwa-actions">
-                <Link href={placePath(incoming)}>Open discovery ↗</Link>
+                <Link href={placePath(incoming)}>
+                  Open discovery <UiIcon name="arrow-up-right" />
+                </Link>
                 <button
                   aria-pressed={state.saved.includes(incoming.id)}
                   onClick={() =>
@@ -386,7 +391,7 @@ export default function AdventureHub() {
                 <article className="event-card" key={e.id}>
                   <h3>{e.title}</h3>
                   <p>
-                    {e.start} → {e.end}
+                    {e.start} to {e.end}
                   </p>
                   <Link href={placePath(places.find((p) => p.id === e.placeId)!)}>
                     {places.find((p) => p.id === e.placeId)!.name}

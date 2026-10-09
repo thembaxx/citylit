@@ -1,3 +1,4 @@
+import UiIcon from "../../components/UiIcon";
 import Link from "next/link";
 import ReadingPage from "../../components/ReadingPage";
 import JsonLd from "../../components/JsonLd";
@@ -27,14 +28,18 @@ export default function DestinationsPage() {
       {provinces.map((province) => (
         <section className="province-guide-section" key={province.slug}>
           <h2>
-            <Link href={`/provinces/${province.slug}`}>{province.name} ↗</Link>
+            <Link href={`/provinces/${province.slug}`}>
+              {province.name} <UiIcon name="arrow-up-right" />
+            </Link>
           </h2>
           <div className="destination-grid">
             {province.cities.map((city) => (
               <article className="destination-card" key={city.slug}>
                 <span className="tiny-label">{city.tag}</span>
                 <h3>
-                  <Link href={`/${city.slug}`}>{city.name} ↗</Link>
+                  <Link href={`/${city.slug}`}>
+                    {city.name} <UiIcon name="arrow-up-right" />
+                  </Link>
                 </h3>
                 <p>{city.intro}</p>
                 <span>{cityPlaces(city).length} researched discoveries</span>

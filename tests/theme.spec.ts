@@ -158,7 +158,7 @@ test("system changes and cross-tab choices update the UI; explicit choices survi
   await matchesTheme(page, "day");
   await expect(page.getByRole("button", { name: "Switch to night theme" })).toBeVisible();
   await page.emulateMedia({ colorScheme: "dark" });
-  await page.getByRole("button", { name: "Choose from 12 destinations ↗" }).click();
+  await page.getByRole("button", { name: "Choose from 12 destinations" }).click();
   await page
     .getByRole("navigation", { name: "Available provinces" })
     .locator('a[href="/durban"]')
@@ -247,6 +247,7 @@ test("a cold cached-guide launch keeps the saved background before the guide hyd
     "/offline.css",
     "/theme.js",
     "/theme.css",
+    "/icons/ui.svg",
     "/sw.js",
     "/pwa-release.js",
     "/manifest.webmanifest",
@@ -315,6 +316,16 @@ test("a cold cached-guide launch keeps the saved background before the guide hyd
     expect(response?.fromServiceWorker()).toBe(true);
     await matchesTheme(page, "day");
     await expect(page.locator(".offline-top")).toBeVisible();
+    // The referenced Hugeicons artwork must paint with the origin unavailable, not just exist.
+    await expect
+      .poll(() =>
+        page
+          .locator(".offline-tabs svg")
+          .evaluateAll((icons) =>
+            icons.every((icon) => (icon as SVGGraphicsElement).getBBox().width > 0),
+          ),
+      )
+      .toBe(true);
     await page.getByRole("button", { name: "Switch theme", exact: true }).click();
     await matchesTheme(page, "night");
     await page.reload();

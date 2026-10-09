@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import { useState } from "react";
 import { Check, Download, RefreshCw, Share2, Smartphone, HardDrive, Trash2 } from "lucide-react";
 import { usePwa } from "./PwaProvider";
@@ -108,7 +109,9 @@ export default function PwaPanel() {
           <Download size={16} />
           {busy ? "Working…" : "Download photos"}
         </button>
-        <a href="/offline.html">Open pocket guide ↗</a>
+        <a href="/offline.html">
+          Open pocket guide <UiIcon name="arrow-up-right" />
+        </a>
       </div>
       {(pwa.waiting || pwa.reloadReady) && (
         <button

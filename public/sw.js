@@ -7,6 +7,7 @@ const CORE = [
   "/offline.css",
   "/theme.css",
   "/theme.js",
+  "/icons/ui.svg",
   "/manifest.webmanifest",
   "/data/places.json",
   "/data/cities.json",

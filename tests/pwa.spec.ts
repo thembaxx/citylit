@@ -127,10 +127,10 @@ test("cold offline city launch keeps route context, search, saves, day editing a
   await page.getByRole("button", { name: "Browse cached places", exact: true }).click();
   await page.getByPlaceholder("Search places").fill("Kirstenbosch");
   await expect(page.locator("article")).toHaveCount(1);
-  await page.getByRole("link", { name: "Open discovery ↗", exact: true }).click();
+  await page.getByRole("link", { name: "Open discovery", exact: true }).click();
   await expect(page.getByRole("heading", { name: "About", exact: true })).toBeVisible();
   await page.goBack();
-  await expect(page.getByRole("link", { name: "Open discovery ↗", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open discovery", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "My day", exact: true }).click();
   await expect(page.locator("article")).toHaveCount(1);
   const saved = await page.evaluate(() =>

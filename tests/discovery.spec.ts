@@ -290,7 +290,7 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
 
 test("linked breadcrumbs, two-line introductions and province chooser", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Browse city guides ↗", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Browse city guides", exact: true })).toBeVisible();
   await expect(page.locator(".map-pin")).toHaveCount(0);
   await page.getByRole("button", { name: "9 provinces ready to explore", exact: true }).click();
   await page

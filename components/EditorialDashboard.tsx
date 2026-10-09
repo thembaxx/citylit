@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useDiscovery } from "./useDiscovery";
@@ -57,7 +58,9 @@ export default function EditorialDashboard() {
       <Atmosphere mode="editorial" city={0} category={0} night={night} animate={!state.essential} />
       <header className="field-guide-header">
         <ThemeToggle onChange={setNight} />
-        <Link href="/explore">← Back to the field guide</Link>
+        <Link href="/explore">
+          <UiIcon name="arrow-left" /> Back to the field guide
+        </Link>
         <Link href="/">Map</Link>
       </header>
       <h1>Care for the catalog.</h1>

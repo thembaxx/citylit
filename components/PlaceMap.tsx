@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import { useEffect, useRef, useState } from "react";
 import "maplibre-gl/dist/maplibre-gl.css";
 export default function PlaceMap({
@@ -81,7 +82,8 @@ export default function PlaceMap({
         </p>
       )}
       <a className="street-map-link" href={external} target="_blank" rel="noreferrer">
-        {accuracy === "venue" ? "Open street map ↗" : "Open city reference map ↗"}
+        {accuracy === "venue" ? "Open street map" : "Open city reference map"}{" "}
+        <UiIcon name="arrow-up-right" />
       </a>
     </div>
   );

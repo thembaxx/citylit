@@ -28,7 +28,7 @@ All 3D landmarks and category objects are original procedural models made for Ci
 
 ## Category icons
 
-[Hugeicons free icons](https://github.com/hugeicons/hugeicons-react) use the MIT license. Category symbols represent admission tickets, lodging, theatre masks, trees and music. Copyright © Hugeicons.
+[Hugeicons free icons](https://github.com/hugeicons/hugeicons-react) use the MIT license. Category symbols represent admission tickets, lodging, theatre masks, trees and music. Navigation, saved discoveries, day plans and browse controls also use Hugeicons Free SVGs, exported locally for offline use. Copyright © Hugeicons.
 
 Wikipedia introductions are excerpts attributed to the linked article and Wikipedia contributors under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Excerpts and their source/license are cached per place.
 

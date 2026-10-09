@@ -14,6 +14,7 @@ for (const path of [
   "public/offline.css",
   "public/theme.css",
   "public/theme.js",
+  "public/icons/ui.svg",
   "public/data/places.json",
   "public/data/cities.json",
 ])

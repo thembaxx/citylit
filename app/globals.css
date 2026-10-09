@@ -3165,6 +3165,8 @@ button:disabled {
   color: var(--ink);
 }
 .model-spin {
+  display: grid;
+  place-items: center;
   position: absolute;
   bottom: 4px;
   right: 8px;
@@ -3176,6 +3178,11 @@ button:disabled {
   background: color-mix(in srgb, var(--surface) 85%, transparent);
   color: var(--muted);
   font-size: 22px;
+}
+.ui-symbol {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.15em;
 }
 .visit-note {
   font-size: 14px;

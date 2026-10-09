@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import {
   createContext,
   useCallback,
@@ -118,7 +119,11 @@ export default function KhweziProvider({ children }: { children: ReactNode }) {
               <div>
                 <strong>{moment.title}</strong>
                 <p>{moment.text}</p>
-                {moment.pose === "offline" && <a href="/offline.html">Open offline guide ↗</a>}
+                {moment.pose === "offline" && (
+                  <a href="/offline.html">
+                    Open offline guide <UiIcon name="arrow-up-right" />
+                  </a>
+                )}
               </div>
             </motion.aside>
           )}

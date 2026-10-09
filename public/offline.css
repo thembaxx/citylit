@@ -17,6 +17,25 @@ main {
 a {
   color: var(--accent-ink);
 }
+.ui-symbol {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.15em;
+}
+a .ui-symbol {
+  margin-left: 0.3em;
+}
+.offline-top a,
+.offline-detail-back {
+  gap: 8px;
+}
+.offline-detail-back {
+  display: inline-flex;
+  align-items: center;
+}
+.offline-top a .ui-symbol {
+  margin-left: 0;
+}
 h1 {
   font-size: clamp(29px, 6vw, 42px);
   line-height: 1.05;
@@ -178,11 +197,9 @@ article p {
   background: var(--accent-ink);
   color: var(--bg);
 }
-.offline-tabs span {
+.offline-tabs .ui-symbol {
   display: block;
-  font-size: 21px;
-  line-height: 1.15;
-  margin-bottom: 4px;
+  margin: 0 auto 4px;
 }
 .offline-detail-back {
   margin-bottom: 18px;

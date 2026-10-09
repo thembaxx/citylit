@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState, useMemo, useRef, type CSSProperties } from "react";
@@ -522,7 +523,7 @@ export default function Explorer() {
               <>
                 <p className="map-hint">
                   <button onClick={() => setShowProvinces(true)}>
-                    Choose from {cities.length} destinations ↗
+                    Choose from {cities.length} destinations <UiIcon name="arrow-up-right" />
                   </button>{" "}
                   · Drag the map to turn it.
                 </p>
@@ -538,7 +539,7 @@ export default function Explorer() {
                   </button>
                   <Link className="coming-legend" href="/destinations">
                     <i />
-                    Browse city guides ↗
+                    Browse city guides <UiIcon name="arrow-up-right" />
                   </Link>
                 </div>
                 {showProvinces && (
@@ -932,9 +933,13 @@ export default function Explorer() {
                   {help ? (
                     <>
                       <div className="gesture-demo" data-moving={moving} aria-hidden="true">
-                        <span>←</span>
+                        <span>
+                          <UiIcon name="arrow-left" size={24} />
+                        </span>
                         <i />
-                        <span>→</span>
+                        <span>
+                          <UiIcon name="arrow-right" size={24} />
+                        </span>
                       </div>
                       <p>
                         Drag the map or landmark to give it a spin. Pinch or scroll to get closer.

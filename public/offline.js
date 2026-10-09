@@ -25,6 +25,23 @@ const element = (tag, text) => {
   node.textContent = text;
   return node;
 };
+// Use the same local Hugeicons artwork as the online app, without inserting HTML strings.
+const withIcon = (node, name = "arrow-up-right", before = false) => {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("width", "18");
+  svg.setAttribute("height", "18");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  svg.classList.add("ui-symbol");
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  use.setAttribute("href", "/icons/ui.svg#" + name);
+  svg.append(use);
+  if (before) node.prepend(svg);
+  else node.append(svg);
+  return node;
+};
 const cityName = (value) =>
   value
     .split("-")
@@ -198,7 +215,7 @@ function card(place, detail) {
     }),
   );
   if (!detail) {
-    const open = element("a", "Open discovery ↗");
+    const open = withIcon(element("a", "Open discovery"));
     open.href = "#" + encodeURIComponent(place.id);
     open.onclick = (event) => {
       event.preventDefault();
@@ -217,7 +234,7 @@ function card(place, detail) {
     if (typeof place.about === "string")
       article.append(element("h3", "About"), element("p", place.about));
     if (publicUrl(place.wikipedia)) {
-      const wiki = element("a", "More on Wikipedia ↗");
+      const wiki = withIcon(element("a", "More on Wikipedia"));
       wiki.href = place.wikipedia;
       article.append(wiki);
     }
@@ -247,14 +264,14 @@ function card(place, detail) {
       ),
     );
     if (publicUrl(place.website)) {
-      const link = element("a", "Venue website ↗");
+      const link = withIcon(element("a", "Venue website"));
       link.href = place.website;
       article.append(element("p", "Live links need a connection."), link);
     }
     if (Array.isArray(place.sources))
       for (const source of place.sources.slice(0, 6)) {
         if (!publicUrl(source?.url)) continue;
-        const link = element("a", source.title || "Source ↗");
+        const link = withIcon(element("a", source.title || "Source"));
         link.href = source.url;
         const paragraph = element("p", "");
         paragraph.append(link);
@@ -304,11 +321,15 @@ function show() {
   if (mode === "day") list.sort((a, b) => itinerary.indexOf(a.id) - itinerary.indexOf(b.id));
   status.textContent = list.length + " cached discoveries";
   if (selected) {
-    const back = button("← Back to discoveries", () => {
-      selected = "";
-      syncUrl();
-      show();
-    });
+    const back = withIcon(
+      button("Back to discoveries", () => {
+        selected = "";
+        syncUrl();
+        show();
+      }),
+      "arrow-left",
+      true,
+    );
     back.className = "offline-detail-back";
     container.append(back);
   }

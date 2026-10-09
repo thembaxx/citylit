@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import Link from "next/link";
 import { useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, View, PerformanceMonitor } from "@react-three/drei";
@@ -235,7 +236,7 @@ export default function Scene(props: Props) {
           }}
           onPointerDownCapture={(event) => event.stopPropagation()}
         >
-          ↻
+          <UiIcon name="rotate" size={22} />
         </button>
       )}
       {props.mode === "map" && (

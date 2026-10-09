@@ -1,3 +1,4 @@
+import UiIcon from "../../components/UiIcon";
 import Link from "next/link";
 import ReadingPage from "../../components/ReadingPage";
 import { metadataForPage, latestCheck, provinces } from "../../lib/seo";
@@ -79,7 +80,7 @@ export default function AboutPage() {
         </p>
       </section>
       <Link href="/brand" className="text-guide-link">
-        Meet Khwezi and the Citylit identity ↗
+        Meet Khwezi and the Citylit identity <UiIcon name="arrow-up-right" />
       </Link>
     </ReadingPage>
   );

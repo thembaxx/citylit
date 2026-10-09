@@ -1,3 +1,4 @@
+import UiIcon from "../../../components/UiIcon";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReadingPage from "../../../components/ReadingPage";
@@ -42,7 +43,9 @@ export default async function ProvincePage(props: Props) {
           <article className="destination-card" key={city.slug}>
             <span className="tiny-label">{city.tag}</span>
             <h2>
-              <Link href={`/${city.slug}`}>{city.name} ↗</Link>
+              <Link href={`/${city.slug}`}>
+                {city.name} <UiIcon name="arrow-up-right" />
+              </Link>
             </h2>
             <p>{city.intro}</p>
             <nav className="reading-links" aria-label={`Available ${city.name} categories`}>

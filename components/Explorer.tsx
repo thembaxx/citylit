@@ -36,6 +36,7 @@ import BrandWordmark from "./BrandWordmark";
 import KhweziWelcome from "./KhweziWelcome";
 import KhweziMoment from "./KhweziMoment";
 import LandmarkSheet from "./LandmarkSheet";
+import LandmarkDetail from "./LandmarkDetail";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import {
   cities,
@@ -211,9 +212,12 @@ export default function Explorer() {
   }, [pathname, params]);
   useEffect(() => {
     try {
-      setIndex(Number(sessionStorage.getItem("citylit-landmark-" + city.slug) || 0) % 3);
+      setIndex(
+        Number(sessionStorage.getItem("citylit-landmark-" + city.slug) || 0) %
+          Math.max(city.landmarks.length, 1),
+      );
     } catch {}
-  }, [city.slug]);
+  }, [city.slug, city.landmarks.length]);
   const changeQuery = (value: string) => {
     setQuery(value);
     const search = new URLSearchParams(params);
@@ -286,17 +290,12 @@ export default function Explorer() {
   const [direction, setDirection] = useState(1);
   const openLandmark = (i: number) => {
     feedback("tap");
-    const name = city.landmarks[i];
-    const venue = findVenue(city.slug, name);
-    if (venue) {
-      router.push(`/${city.slug}/${categorySlug(venue.category)}/${venue.id}`);
-      return;
-    }
     setSpot(i);
   };
   const next = (step: number) => {
     setDirection(step);
-    selectLandmark((index + step + 3) % 3);
+    const count = Math.max(city.landmarks.length, 1);
+    selectLandmark((index + step + count) % count);
   };
   const chooseCategory = (i: number) => {
     setQuery("");
@@ -342,7 +341,18 @@ export default function Explorer() {
     router.replace(categoryPath, { scroll: false });
     searchRef.current?.blur();
   };
+  const landmarkSlug = params.get("landmark");
+  const landmarkIndex =
+    mode === "city" ? city.landmarks.findIndex((name) => categorySlug(name) === landmarkSlug) : -1;
+  const landmark =
+    landmarkIndex >= 0
+      ? landmarkSources.find((source) => source.name === city.landmarks[landmarkIndex])
+      : undefined;
   const back = () => {
+    if (landmarkIndex >= 0) {
+      router.push(`/${city.slug}`);
+      return;
+    }
     if (listing) closePlaces();
     else
       router.push(
@@ -353,15 +363,18 @@ export default function Explorer() {
             : "/",
       );
   };
-  const navLabel = listing
-    ? "Back to categories"
-    : mode === "city"
-      ? "Back to map"
-      : mode === "category"
-        ? `Back to ${city.short}`
-        : mode === "place"
-          ? "Back to places"
-          : "Citylit home";
+  const navLabel =
+    landmarkIndex >= 0
+      ? `Back to ${city.short}`
+      : listing
+        ? "Back to categories"
+        : mode === "city"
+          ? "Back to map"
+          : mode === "category"
+            ? `Back to ${city.short}`
+            : mode === "place"
+              ? "Back to places"
+              : "Citylit home";
   return (
     <main
       ref={screenRef}
@@ -474,7 +487,7 @@ export default function Explorer() {
           </ol>
         </nav>
       )}
-      {!listing && (
+      {!listing && landmarkIndex < 0 && (
         <header className="game-heading">
           <motion.div
             key={mode + city.slug}
@@ -549,6 +562,24 @@ export default function Explorer() {
           onCategory={chooseCategory}
           onSave={toggle}
           onPlace={(p) => router.push(`/${city.slug}/${categorySlug(p.category)}/${p.id}`)}
+        />
+      ) : landmarkIndex >= 0 ? (
+        <LandmarkDetail
+          city={city.short}
+          province={city.province}
+          name={city.landmarks[landmarkIndex]}
+          description={
+            city.descriptions[landmarkIndex] ||
+            landmarkDescriptions[ci]?.[landmarkIndex] ||
+            city.intro
+          }
+          about={landmark?.about}
+          aboutHref={landmark?.aboutSource}
+          facts={landmark?.facts}
+          photos={landmark?.images || []}
+          video={landmark?.video}
+          href={landmark?.wikipedia || city.landmarkLinks[landmarkIndex]}
+          onBack={() => router.push(`/${city.slug}`)}
         />
       ) : mode !== "place" ? (
         <>
@@ -815,6 +846,16 @@ export default function Explorer() {
               landmarkSources.find((source) => source.name === city.landmarks[spot])?.wikipedia ||
               city.landmarkLinks[spot] ||
               undefined
+            }
+            detailsHref={(() => {
+              const name = city.landmarks[spot];
+              const venue = findVenue(city.slug, name);
+              return venue
+                ? `/${city.slug}/${categorySlug(venue.category)}/${venue.id}`
+                : `/${city.slug}?landmark=${categorySlug(name)}`;
+            })()}
+            detailsLabel={
+              findVenue(city.slug, city.landmarks[spot]) ? "Open this place" : "Open the full story"
             }
             onClose={() => setSpot(null)}
           />

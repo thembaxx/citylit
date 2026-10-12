@@ -1,7 +1,15 @@
 "use client";
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Check, Plus, ShareNetwork, Flag, ArrowUpRight } from "@phosphor-icons/react";
+import {
+  Check,
+  Plus,
+  ShareNetwork,
+  Flag,
+  ArrowUpRight,
+  CaretDown,
+  Path,
+} from "@phosphor-icons/react";
 import { type Place, places } from "../lib/data";
 import { normalizeCorrections, readCorrections, publicHttpsUrl } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
@@ -21,6 +29,36 @@ export default function PlaceActions({ place }: { place: Place }) {
       setMessage(location.href);
     }
   };
+  const factLabel: Record<string, string> = {
+    admission: "Entry",
+    entryPriceZAR: "Standard adult entry (ZAR)",
+    price: "Ticket rates",
+    openingHours: "Opening hours",
+    accessNotes: "Access notes",
+    paymentMethods: "Payment methods",
+    booking: "Booking",
+    stepFreeEntrance: "Step-free entrance",
+    accessibleToilets: "Accessible toilets",
+    parking: "Parking",
+    publicTransport: "Public transport",
+    family: "Family suitability",
+    environment: "Setting",
+    durationMinutes: "Visit duration",
+  };
+  const factText = (key: string, value: string | number | boolean | null) =>
+    value === null
+      ? "Not confirmed"
+      : typeof value === "boolean"
+        ? value
+          ? "Confirmed available"
+          : "Confirmed unavailable"
+        : `${value}${key === "durationMinutes" ? " minutes" : ""}`;
+  const previewKey = ["openingHours", "admission", "durationMinutes", "publicTransport"].find(
+    (key) => place.facts?.[key]?.value != null,
+  );
+  const preview = previewKey
+    ? `${factLabel[previewKey]} · ${factText(previewKey, place.facts![previewKey].value)}`
+    : "Hours, access, and what to bring";
   return (
     <section className="place-planning" aria-label="Plan this discovery">
       {place.visitNote && <p className="visit-note">{place.visitNote}</p>}
@@ -70,37 +108,23 @@ export default function PlaceActions({ place }: { place: Place }) {
           Passport stamped · {place.name}
         </motion.div>
       )}
-      <details className="practical-details">
-        <summary>Plan your visit</summary>
+      <details className="practical-details visit-plan">
+        <summary>
+          <span className="visit-plan-mark" aria-hidden="true">
+            <Path size={18} weight="bold" />
+          </span>
+          <span>
+            <strong>Plan your visit</strong>
+            <small>{preview}</small>
+          </span>
+          <CaretDown className="visit-plan-caret" size={16} weight="bold" aria-hidden="true" />
+        </summary>
         <dl>
           {Object.entries(place.facts || {}).map(([key, fact]) => (
             <div key={key}>
-              <dt>
-                {{
-                  admission: "Entry",
-                  entryPriceZAR: "Standard adult entry (ZAR)",
-                  price: "Ticket rates",
-                  openingHours: "Opening hours",
-                  accessNotes: "Access notes",
-                  paymentMethods: "Payment methods",
-                  booking: "Booking",
-                  stepFreeEntrance: "Step-free entrance",
-                  accessibleToilets: "Accessible toilets",
-                  parking: "Parking",
-                  publicTransport: "Public transport",
-                  family: "Family suitability",
-                  environment: "Setting",
-                  durationMinutes: "Visit duration",
-                }[key] || key}
-              </dt>
+              <dt>{factLabel[key] || key}</dt>
               <dd>
-                {fact.value === null
-                  ? "Not confirmed"
-                  : typeof fact.value === "boolean"
-                    ? fact.value
-                      ? "Confirmed available"
-                      : "Confirmed unavailable"
-                    : `${fact.value}${key === "durationMinutes" ? " minutes" : ""}`}
+                {factText(key, fact.value)}
                 {fact.value !== null && (
                   <small>
                     {fact.confidence === "editorial-estimate" ? "Editorial estimate" : "Verified"} ·{" "}

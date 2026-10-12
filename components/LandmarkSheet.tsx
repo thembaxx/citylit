@@ -1,6 +1,7 @@
 "use client";
 import { ArrowUpRight, X } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import type { Photo } from "../lib/data";
 
@@ -24,6 +25,8 @@ type Props = {
   photos?: Photo[];
   video?: LandmarkVideo;
   href?: string;
+  detailsHref: string;
+  detailsLabel: string;
   onClose: () => void;
 };
 
@@ -37,6 +40,8 @@ export default function LandmarkSheet({
   photos = [],
   video,
   href,
+  detailsHref,
+  detailsLabel,
   onClose,
 }: Props) {
   const reduced = useReducedMotion();
@@ -80,6 +85,9 @@ export default function LandmarkSheet({
         <p className="spot-kicker">{city}</p>
         <h2>{name}</h2>
         <p className="spot-lead">{description}</p>
+        <Link className="pill-button ivory-button spot-open" href={detailsHref}>
+          {detailsLabel} <ArrowUpRight size={16} weight="bold" />
+        </Link>
         {!!facts?.length && (
           <ul className="spot-facts">
             {facts.map((fact) => (

@@ -58,6 +58,7 @@ a {
   height: 100dvh !important;
   pointer-events: none !important;
   z-index: 2 !important;
+  background: transparent !important;
 }
 .game-screen {
   height: 100vh;
@@ -223,6 +224,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--bg);
   font-family: var(--font-mono);
   font-size: 8px;
   letter-spacing: 1px;
@@ -769,7 +771,7 @@ h3 {
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
-  scrollbar-color: #4d465e transparent;
+  scrollbar-color: var(--line) transparent;
   min-height: 0;
   flex: 1;
 }
@@ -872,15 +874,35 @@ h3 {
   color: #ddd9e2;
 }
 .detail-scroll {
+  background: var(--bg);
   overflow-y: auto;
   overscroll-behavior: contain;
   min-height: 0;
   flex: 1;
   width: 100%;
   scrollbar-width: thin;
-  scrollbar-color: #4d465e transparent;
+  scrollbar-color: var(--line) transparent;
   position: relative;
   z-index: 3;
+}
+.landmark-detail h1 {
+  font-size: clamp(40px, 10vw, 72px);
+  margin: 8px 0 10px;
+}
+.landmark-detail .detail-lead {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 13px;
 }
 .place-detail {
   max-width: 760px;
@@ -1238,10 +1260,10 @@ h3 {
   bottom: 20px;
   z-index: 20;
   max-width: 330px;
-  background: #25202f;
+  background: var(--surface);
   color: var(--ink);
-  border: 1px solid #463f53;
-  border-radius: 10px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
   padding: 18px;
   font-size: 12px;
 }
@@ -3118,15 +3140,63 @@ button:disabled {
 .practical-details {
   margin: 16px 0;
   border: 1px solid var(--line);
-  padding: 16px;
-  border-radius: 22px;
+  padding: 0;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--surface) 88%, var(--bg));
+  overflow: hidden;
 }
-.practical-details summary {
+.visit-plan summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  padding: 12px 14px;
   cursor: pointer;
-  min-height: 32px;
+  list-style: none;
+}
+.visit-plan summary::-webkit-details-marker {
+  display: none;
+}
+.visit-plan summary strong {
+  display: block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.visit-plan summary small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.visit-plan-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 16%, var(--bg));
+  color: var(--accent-ink);
+}
+.visit-plan summary > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.visit-plan-caret {
+  flex: none;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+}
+.visit-plan[open] .visit-plan-caret {
+  transform: rotate(180deg);
 }
 .practical-details dl {
-  margin: 16px 0;
+  margin: 0;
+  padding: 0 16px 8px;
   display: grid;
   gap: 14px;
 }
@@ -3149,6 +3219,9 @@ button:disabled {
   gap: 5px;
   align-items: center;
   margin-left: 8px;
+}
+.practical-details .planning-note {
+  margin: 0 16px 16px;
 }
 .correction-toggle {
   display: flex;
@@ -4743,6 +4816,12 @@ button {
   color: var(--ink) !important;
   font-size: 16px !important;
   line-height: 1.45 !important;
+}
+.spot-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0 14px;
 }
 .spot-about {
   color: var(--ink) !important;

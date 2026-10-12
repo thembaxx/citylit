@@ -303,7 +303,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Contemporary suites, leafy golf-course views and a quiet retreat in Houghton. It is a northern-suburbs stay beside Houghton’s golf course, quieter than the inner city."
   },
   {
     "name": "54 on Bath",
@@ -397,7 +398,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A boutique-style Rosebank stay with garden terraces and city shopping close by. Rosebank’s shops, galleries and the Gautrain are close when you want the neighbourhood instead of a long transfer."
   },
   {
     "name": "Market Theatre",
@@ -921,7 +923,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A plant-filled Maboneng rooftop with skyline views, sundowners and curated music events. The rooftop sits in Maboneng, a good perch for the skyline before the streets get loud."
   },
   {
     "name": "And Club",
@@ -1015,7 +1018,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "An intimate Newtown dance floor dedicated to underground electronic music. The room is small on purpose: a Newtown floor for underground electronic nights rather than a big commercial club."
   },
   {
     "name": "Two Oceans Aquarium",
@@ -1324,7 +1328,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A design-led hotel above the grain silo, with sculptural windows and harbour views. The rooms sit in the same grain-silo complex as Zeitz MOCAA, so the museum is in the same building."
   },
   {
     "name": "Mount Nelson",
@@ -1915,7 +1920,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A relaxed city park with biodiversity gardens, play areas and picnic lawns. It links the stadium precinct toward the sea, with biodiversity gardens and lawns made for a slow afternoon."
   },
   {
     "name": "Modular",
@@ -2027,7 +2033,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "An underground electronic music venue focused on sound, dancing and a camera-free floor. Expect a dark room, a serious sound system and a dance floor that asks you to put the phone away."
   },
   {
     "name": "Cabo Beach Club",
@@ -2139,7 +2146,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Poolside dining and music events beside the harbour, with an open-air beach-club atmosphere. It faces the Waterfront harbour: more pool-and-music afternoon than late basement club."
   },
   {
     "name": "uShaka Marine World",
@@ -2552,7 +2560,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "An oceanfront Umhlanga stay with sea-facing rooms and a classic resort feel. The hotel looks onto the same Umhlanga rocks as the lighthouse."
   },
   {
     "name": "The Playhouse",
@@ -2647,7 +2656,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Historic stages in central Durban hosting drama, dance, opera and music. The complex keeps several historic stages in the city centre for drama, dance, opera and music."
   },
   {
     "name": "Elizabeth Sneddon Theatre",
@@ -2742,7 +2752,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "An intimate university theatre with local productions, dance and comedy. It belongs to the university and stays intimate: local plays, dance and comedy rather than arena shows."
   },
   {
     "name": "Durban Botanic Gardens",
@@ -3048,7 +3059,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A multi-floor Durban nightlife venue with electronic music and changing event lineups. Several rooms, changing lineups, and a focus on electronic nights in town."
   },
   {
     "name": "Cubaña Durban",
@@ -3142,7 +3154,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A Florida Road lounge for cocktails, music and an evening in Durban’s dining district. Florida Road is the dining strip; this is the lounge you drift into after dinner."
   },
   {
     "id": "apartheid-museum",
@@ -3341,7 +3354,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Explore an extensive collection of African art on the edge of the Wits campus. The collection is strong on African art and sits on the university’s city edge, easy to pair with Braamfontein."
   },
   {
     "id": "johannesburg-art-gallery",
@@ -3547,7 +3561,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Hands-on science exhibits inside a former power station make discovery a playful experiment. The building was part of a power station; inside, the exhibits are hands-on science for a curious afternoon."
   },
   {
     "id": "iziko-south-african-museum",
@@ -3974,7 +3989,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A museum of Durban’s social history housed in the former Native Administration building. The rooms occupy the old Native Administration building and tell Durban’s social history without softening it."
   },
   {
     "id": "durban-natural-science-museum",
@@ -4068,7 +4084,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Explore natural history displays and regional biodiversity inside Durban’s City Hall. It shares the City Hall, and the displays lean into regional natural history."
   },
   {
     "id": "mitchell-park-zoo",
@@ -4478,7 +4495,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A garden-lined Sandhurst retreat with suites, villas and a spa. The gardens are a Sandhurst hideaway of suites, villas and a spa, long associated with quiet city retreats."
   },
   {
     "name": "Soweto Theatre",
@@ -4573,7 +4591,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Colourful performance spaces hosting theatre, music and community storytelling. The coloured boxes in Jabulani are performance spaces for theatre, music and community work."
   },
   {
     "name": "Johannesburg Botanical Garden",
@@ -4773,7 +4792,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "An independent live-music and late-night events space for discovering local artists. An independent room for live music and late shows, closer to a listening night than a mega-club."
   },
   {
     "name": "Castle of Good Hope",
@@ -4992,7 +5012,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A waterfront hotel on its own quay, framed by harbour views and Table Mountain. The hotel has its own quay on the V&A Waterfront, with Table Mountain in the view."
   },
   {
     "name": "The Masque",
@@ -5104,7 +5125,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "An intimate community theatre presenting plays, music and local creative talent. A small community stage for plays, music and local companies, not a civic mega-theatre."
   },
   {
     "name": "Arderne Gardens",
@@ -5322,7 +5344,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "An upstairs cocktail lounge where live performances and DJ nights meet. An upstairs cocktail room for live sets and DJ nights in the east city."
   },
   {
     "name": "Phansi Museum",
@@ -5417,7 +5440,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Discover Southern African beadwork, textiles and ceremonial art in a historic home. Beadwork, textiles and ceremonial objects fill a historic house; the collection is the reason to go."
   },
   {
     "name": "Southern Sun Elangeni & Maharani",
@@ -5534,7 +5558,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A beachfront stay overlooking the Indian Ocean, steps from Durban’s promenade. Beachfront towers on the Golden Mile, close enough to the promenade to hear the sea."
   },
   {
     "name": "Rhumbelow Theatre",
@@ -5628,7 +5653,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A relaxed neighbourhood stage with live music, comedy and cabaret evenings. A neighbourhood stage for music, comedy and cabaret, often as a dinner-and-show evening."
   },
   {
     "name": "Kenneth Stainbank Nature Reserve",
@@ -5828,7 +5854,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A long-running dance venue with DJ-led nights near Durban’s stadium precinct. A long-running dance club near the stadium precinct, built for DJ nights rather than a quiet drink."
   },
   {
     "city": "pretoria",
@@ -6135,7 +6162,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A performing arts complex presenting theatre, dance and music in the capital. The capital’s main stages for theatre, dance and music, within reach of the city’s ceremonial centre."
   },
   {
     "city": "stellenbosch",
@@ -6441,7 +6469,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A hotel base above the town with access to the surrounding winelands. A practical base above the oak-lined centre, with the winelands a short drive out."
   },
   {
     "city": "pietermaritzburg",
@@ -6549,7 +6578,8 @@
         "icon": "info",
         "source": "https://www.tathamartgallery.org.za/visit"
       }
-    ]
+    ],
+    "about": "South African and international art in a historic building overlooking City Hall. The galleries face City Hall and mix South African work with pieces from further afield."
   },
   {
     "city": "pietermaritzburg",
@@ -6749,7 +6779,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A Scottsville hotel beside the racecourse and entertainment complex. It sits in Scottsville beside the racecourse, more a local base than a downtown landmark."
   },
   {
     "city": "gqeberha",
@@ -6844,7 +6875,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A hilltop public space with a lighthouse, stone pyramid and views across the bay. Climb the hill for the pyramid, the lighthouse and a wide look over Algoa Bay."
   },
   {
     "city": "gqeberha",
@@ -6939,7 +6971,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Regional natural and cultural history in a museum complex near the beachfront. Regional natural and cultural history sit together near the beachfront."
   },
   {
     "city": "gqeberha",
@@ -7033,7 +7066,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A beachfront hotel in the Boardwalk precinct near the bay’s coastal attractions. The hotel is inside the Boardwalk precinct at Summerstrand, so the beach and the complex are the same outing."
   },
   {
     "city": "bloemfontein",
@@ -7128,7 +7162,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Art collections and a sculpture garden in a former presidential residence. A former residence on Grant’s Hill, now galleries plus a sculpture garden you can walk."
   },
   {
     "city": "bloemfontein",
@@ -7646,7 +7681,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A practical Lowveld base beside Riverside Mall and the Emnotweni precinct. A simple stay by Riverside Mall and Emnotweni, useful when the caves or the stadium are the plan."
   },
   {
     "city": "polokwane",
@@ -7741,7 +7777,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A living heritage site introducing Northern Sotho traditions and everyday practices. Open-air homesteads introduce Northern Sotho building, food and daily practice."
   },
   {
     "city": "polokwane",
@@ -7835,7 +7872,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A municipal collection of paintings, sculpture and works by South African artists. A municipal collection of painting and sculpture, small enough to see properly in one visit."
   },
   {
     "city": "polokwane",
@@ -7929,7 +7967,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A hotel retreat in the Meropa entertainment precinct outside the city centre. The hotel is part of the Meropa complex outside town, a resort base rather than a street-corner inn."
   },
   {
     "city": "kimberley",
@@ -8237,7 +8276,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A hotel beside the Big Hole and Mining Village with heritage on its doorstep. It stands beside the Big Hole, so the excavation is the view and the reason for the address."
   },
   {
     "city": "mahikeng",
@@ -8332,7 +8372,8 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "Regional history and the stories surrounding the historic town. Regional history of the old town, compact enough to start a day before the reserve."
   },
   {
     "city": "mahikeng",
@@ -8532,6 +8573,7 @@
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
       }
-    }
+    },
+    "about": "A hotel and villa retreat beside the Leopard Park golf course. Villas and hotel rooms beside the Leopard Park golf course, on the quieter Mmabatho side."
   }
 ]

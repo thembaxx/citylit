@@ -63,16 +63,19 @@ function World({
     const changed = previousMode.current !== mode;
     previousMode.current = mode;
     setTravel(true);
-    const fit = Math.min(1.2, Math.max(1, 1.1 / (size.width / Math.max(size.height, 1))));
+    const aspect = size.width / Math.max(size.height, 1);
+    const pinch = Math.max(0, 1 - aspect);
+    const fit =
+      mode === "map" ? Math.min(1.68, 1.06 + pinch * 1.15) : Math.min(2.35, 1.1 + pinch * 2.85);
     if (previousReset.current !== reset) viewMemory.delete(memoryKey);
     previousReset.current = reset;
     const remembered = viewMemory.get(memoryKey);
     const target = remembered
       ? { x: remembered[0], y: remembered[1], z: remembered[2] }
       : mode === "map"
-        ? { x: 3.2 * fit, y: 6.4 * fit, z: 5.4 * fit }
-        : { x: 2.65, y: 2.28, z: 4.05 };
-    const lookY = mode === "map" ? 0.2 : 0.55;
+        ? { x: 3.05 * fit, y: 6.85 * fit, z: 5.45 * fit }
+        : { x: 2.72 * fit, y: 2.55 * fit, z: 4.25 * fit };
+    const lookY = mode === "map" ? 0.05 : 0.38;
     const tween = gsap.to(camera.position, {
       ...target,
       duration: reduced ? 0 : changed ? 1.15 : 0.7,
@@ -203,9 +206,9 @@ function World({
         dampingFactor={0.075}
         rotateSpeed={0.7}
         zoomSpeed={0.9}
-        target={[0, mode === "map" ? 0.2 : 0.55, 0]}
-        minDistance={mode === "map" ? 4.2 : 2.35}
-        maxDistance={mode === "map" ? 16 : 9}
+        target={[0, mode === "map" ? 0.05 : 0.38, 0]}
+        minDistance={mode === "map" ? 5.2 : 2.8}
+        maxDistance={mode === "map" ? 22 : 14}
         minPolarAngle={0.2}
         maxPolarAngle={Math.PI / 2.15}
       />

@@ -860,8 +860,8 @@ h3 {
   padding: 15px 24px 10px;
 }
 .game-place .game-heading h1 {
-  font-size: clamp(40px, 9vw, 76px);
-  max-width: 750px;
+  font-size: clamp(32px, 7.4vw, 64px);
+  max-width: 18ch;
 }
 .place-introduction {
   font-family: "DM Sans";
@@ -883,38 +883,115 @@ h3 {
   z-index: 3;
 }
 .place-detail {
-  max-width: 920px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 12px 24px 45px;
+  padding: 4px 20px 56px;
+}
+.place-detail > * {
+  animation: detail-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.place-detail > *:nth-child(2) {
+  animation-delay: 0.04s;
+}
+.place-detail > *:nth-child(3) {
+  animation-delay: 0.08s;
+}
+.place-detail > *:nth-child(4) {
+  animation-delay: 0.12s;
+}
+.place-detail > *:nth-child(5) {
+  animation-delay: 0.16s;
+}
+@keyframes detail-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .place-detail > * {
+    animation: none;
+  }
+}
+.detail-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 4px;
+}
+.detail-chips span {
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 7px 12px;
+  font:
+    650 12px/1.2 "DM Sans",
+    sans-serif;
 }
 .detail-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 10px;
+  margin: 14px 0 6px;
+}
+.detail-save,
+.detail-actions .pill-button {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 12px;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font:
+    650 13px/1.15 "DM Sans",
+    sans-serif;
+  text-align: center;
+}
+@media (max-width: 520px) {
+  .province,
+  .projected-label .province-active {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+  .detail-save,
+  .detail-actions .pill-button {
+    font-size: 12px;
+    white-space: nowrap;
+  }
 }
 .detail-save {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 11px;
-  color: #a99fff;
-  min-height: 44px;
-  padding: 0;
+  color: var(--ink);
+}
+.detail-actions .pill-button {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: transparent;
 }
 .detail-address {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
   color: var(--muted);
-  line-height: 1.7;
-  margin: 0 0 24px;
+  line-height: 1.6;
+  margin: 8px 0 18px;
 }
 .photo-hero {
-  height: 310px;
+  height: min(46vw, 340px);
+  min-height: 210px;
   position: relative;
-  background: #24232a;
+  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
   overflow: hidden;
+  border-radius: 28px;
 }
 .gallery-hero {
   width: 100%;
@@ -2999,7 +3076,33 @@ button:disabled {
   color: var(--muted);
 }
 .place-planning {
-  margin-bottom: 22px;
+  margin: 4px 0 8px;
+}
+.place-planning .day-actions {
+  padding: 4px 0 8px;
+}
+.place-planning .day-actions button,
+.place-planning .correction-toggle {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 88%, var(--bg));
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font:
+    650 13px/1 "DM Sans",
+    sans-serif;
+}
+.place-planning .day-actions button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: transparent;
+}
+.visit-stamp {
+  animation: detail-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .visit-stamp {
   display: flex;

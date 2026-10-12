@@ -18,9 +18,17 @@
     "provinceCode": "GT",
     "scope": "Visitor destination and surrounding districts",
     "model": "original",
-    "descriptions": [],
+    "descriptions": [
+      "A hollow cylindrical tower in Berea, once Africa’s tallest apartment building, and still the most unmistakable shape on the Joburg skyline.",
+      "A cable-stayed bridge linking Newtown and Braamfontein, named for Mandela and lit above the railway tracks at night.",
+      "Soweto’s painted cooling towers, left from a power station and turned into a mural and an adventure jump."
+    ],
     "accentColor": "#edb94c",
-    "landmarkLinks": []
+    "landmarkLinks": [
+      "https://en.wikipedia.org/wiki/Ponte_City",
+      "https://en.wikipedia.org/wiki/Nelson_Mandela_Bridge",
+      "https://en.wikipedia.org/wiki/Orlando_Power_Station"
+    ]
   },
   {
     "slug": "cape-town",
@@ -41,9 +49,17 @@
     "provinceCode": "WC",
     "scope": "Visitor destination and surrounding districts",
     "model": "original",
-    "descriptions": [],
+    "descriptions": [
+      "A flat sandstone summit above the city, often wearing a cloud tablecloth, reached by paths or the cableway.",
+      "Bright houses and Cape Malay history on the slopes above the city bowl, below Signal Hill.",
+      "A rocky headland in Table Mountain National Park, with a lighthouse where the peninsula runs out to sea."
+    ],
     "accentColor": "#5eaff1",
-    "landmarkLinks": []
+    "landmarkLinks": [
+      "https://en.wikipedia.org/wiki/Table_Mountain",
+      "https://en.wikipedia.org/wiki/Bo-Kaap",
+      "https://en.wikipedia.org/wiki/Cape_Point"
+    ]
   },
   {
     "slug": "durban",
@@ -64,9 +80,17 @@
     "provinceCode": "KZ",
     "scope": "Visitor destination and surrounding districts",
     "model": "original",
-    "descriptions": [],
+    "descriptions": [
+      "The stadium arch of the 2010 World Cup, named for Moses Mabhida, with a skywalk and a view along the coast.",
+      "A beachfront marine park of aquariums, wrecks and water play on Durban’s Point.",
+      "The red-and-white beacon on the rocks at Umhlanga, watching the Indian Ocean north of the city."
+    ],
     "accentColor": "#4ed3b8",
-    "landmarkLinks": []
+    "landmarkLinks": [
+      "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
+      "https://en.wikipedia.org/wiki/UShaka_Marine_World",
+      "https://en.wikipedia.org/wiki/Umhlanga,_KwaZulu-Natal"
+    ]
   },
   {
     "slug": "pretoria",
@@ -88,9 +112,9 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "monument",
     "descriptions": [
-      "A hillside memorial celebrating heritage, remembrance and freedom.",
-      "Sandstone wings above terraced gardens, overlooking the administrative capital.",
-      "Drama, dance and music in a major performing arts complex."
+      "A hillside memorial celebrating heritage, remembrance and freedom, with museum spaces above Salvokop.",
+      "Sandstone wings and terraced gardens above the administrative capital, a stage for national gatherings.",
+      "Drama, dance and music in the capital’s major performing-arts complex."
     ],
     "accentColor": "#b3a5ef",
     "landmarkLinks": [
@@ -119,9 +143,9 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "gables",
     "descriptions": [
-      "Restored period houses tracing centuries of everyday life.",
-      "A compact university garden with plant collections and quiet paths.",
-      "Oak-lined streets framed by historic Cape Dutch gables."
+      "Restored period houses that walk you through centuries of everyday Stellenbosch life.",
+      "A compact university garden of plant collections and quiet paths in the middle of town.",
+      "Oak-lined Dorp Street, framed by historic Cape Dutch gables and long town stories."
     ],
     "accentColor": "#80b9d8",
     "landmarkLinks": [
@@ -150,9 +174,9 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "hall",
     "descriptions": [
-      "Red brick, a clock tower and the landmark heart of the city.",
-      "South African and international art, opposite City Hall.",
-      "Indigenous plants and tree-lined walks below a green hillside."
+      "Red brick and a clock tower, the landmark heart of Pietermaritzburg’s centre.",
+      "South African and international art in the building opposite City Hall.",
+      "Indigenous plants and tree-lined walks in the national garden below a green hillside."
     ],
     "accentColor": "#e6a487",
     "landmarkLinks": [
@@ -181,9 +205,9 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "pyramid",
     "descriptions": [
-      "A stone pyramid and lighthouse on a hill overlooking the bay.",
-      "A museum exploring regional natural and cultural history.",
-      "A beachfront hotel and entertainment precinct at Summerstrand."
+      "A stone pyramid and lighthouse on the hill that looks over Algoa Bay.",
+      "A museum of regional natural and cultural history beside the beachfront.",
+      "A hotel and entertainment precinct on the Summerstrand beachfront."
     ],
     "accentColor": "#b8c9aa",
     "landmarkLinks": [
@@ -212,9 +236,9 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "gallery",
     "descriptions": [
-      "Art collections and sculptures around a historic residence.",
-      "A valley garden with indigenous trees and rocky koppies.",
-      "A performing arts venue for theatre, dance and music."
+      "Art collections and outdoor sculpture around a former residence on Grant’s Hill.",
+      "A valley of indigenous trees, rocky koppies and walking trails.",
+      "Theatre, dance and music in Bloemfontein’s landmark performing-arts house."
     ],
     "accentColor": "#e1b55f",
     "landmarkLinks": [
@@ -243,9 +267,9 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "waterfall",
     "descriptions": [
-      "Rivers, waterfalls and a canopy of Lowveld plant life.",
-      "Ancient limestone chambers and sculpted rock formations.",
-      "A football stadium with distinctive giraffe-inspired supports."
+      "Rivers, a waterfall and a canopy of Lowveld plants beside the Crocodile River.",
+      "Ancient limestone chambers and sculpted rock, west of the city.",
+      "A football stadium whose supports echo giraffe necks, built for the 2010 World Cup."
     ],
     "accentColor": "#88c9b4",
     "landmarkLinks": [
@@ -274,9 +298,9 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "village",
     "descriptions": [
-      "A living heritage site sharing Northern Sotho traditions.",
-      "Local paintings and sculpture in a municipal art collection.",
-      "A hotel and entertainment retreat outside the city centre."
+      "A living heritage site where Northern Sotho homes and daily practice are shared outdoors.",
+      "Paintings and sculpture from a municipal collection in the city.",
+      "A hotel and entertainment retreat a short drive from the city centre."
     ],
     "accentColor": "#dfa8c2",
     "landmarkLinks": [
@@ -305,8 +329,8 @@
     "scope": "Visitor destination; outlying attractions are labelled in their address",
     "model": "mine",
     "descriptions": [
-      "A historic excavation surrounded by mining stories and a museum.",
-      "Natural history and regional archives in a historic building.",
+      "The historic diamond excavation, with a museum and a reconstructed mining town around the rim.",
+      "Natural history and Northern Cape archives in a historic Kimberley building.",
       "A gallery connecting South African art with international collections."
     ],
     "accentColor": "#9ea9e7",
@@ -337,8 +361,8 @@
     "model": "grassland",
     "descriptions": [
       "Regional collections and the stories of the historic town.",
-      "Grassland, wildlife and a quieter edge to the city.",
-      "A hotel and villa retreat beside Leopard Park."
+      "Grassland and wildlife on a quieter edge of the city.",
+      "A hotel and villa retreat beside the Leopard Park golf course."
     ],
     "accentColor": "#d2bf8d",
     "landmarkLinks": [

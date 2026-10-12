@@ -37,7 +37,14 @@ import KhweziWelcome from "./KhweziWelcome";
 import KhweziMoment from "./KhweziMoment";
 import LandmarkSheet from "./LandmarkSheet";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
-import { cities, categories, places, categorySlug, landmarkSources } from "../lib/data";
+import {
+  cities,
+  categories,
+  categoryBlurbs,
+  places,
+  categorySlug,
+  landmarkSources,
+} from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
   loading: () => (
@@ -475,7 +482,6 @@ export default function Explorer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: reduced ? 0 : 0.35 }}
           >
-            {mode === "place" && <span className="roman-chapter">V</span>}
             <h1>
               {mode === "map" ? (
                 <>
@@ -496,7 +502,7 @@ export default function Explorer() {
                 {mode === "map"
                   ? "Follow the glow."
                   : mode === "category"
-                    ? `A chapter of ${city.short}.`
+                    ? categoryBlurbs[categories[cat]]
                     : place?.description}
               </p>
             )}
@@ -709,7 +715,12 @@ export default function Explorer() {
         place && (
           <div className="detail-scroll">
             <div className="place-detail">
-              <PlaceActions place={place} />
+              <Gallery images={place.images} context={place.imageContext} name={place.name} />
+              <div className="detail-chips">
+                <span>{place.category}</span>
+                <span>{city.short}</span>
+                {place.district && <span>{place.district}</span>}
+              </div>
               <div className="detail-actions">
                 <button className="detail-save" onClick={() => toggle(place.id)}>
                   <Heart size={18} weight={saved.includes(place.id) ? "fill" : "regular"} />
@@ -724,41 +735,10 @@ export default function Explorer() {
                   Get directions <ArrowUpRight size={17} />
                 </a>
               </div>
-              <details className="navigation-options">
-                <summary>More navigation options</summary>
-                <a
-                  href={`https://maps.apple.com/?daddr=${encodeURIComponent(place.name + " " + place.address + " " + city.name)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Apple Maps <ArrowUpRight size={14} />
-                </a>
-                <a
-                  href={`https://www.waze.com/ul?${place.coordinateAccuracy === "venue" ? `ll=${place.coords[1]},${place.coords[0]}&navigate=yes` : `q=${encodeURIComponent(place.name + " " + place.address + " " + city.name)}`}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Waze <ArrowUpRight size={14} />
-                </a>
-              </details>
+              <PlaceActions place={place} />
               <p className="detail-address">
                 {place.address} · {city.name}
               </p>
-              <motion.dl className="detail-facts" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <div>
-                  <dt>Experience</dt>
-                  <dd>{place.category}</dd>
-                </div>
-                <div>
-                  <dt>City</dt>
-                  <dd>{city.name}</dd>
-                </div>
-                <div className="fact-address">
-                  <dt>Find it</dt>
-                  <dd>{place.address}</dd>
-                </div>
-              </motion.dl>
-              <Gallery images={place.images} context={place.imageContext} name={place.name} />
               <PlaceContext key={place.id} place={place} />
               <PlaceMap
                 coords={place.coords}
@@ -781,6 +761,23 @@ export default function Explorer() {
                   </a>
                 )}
               </div>
+              <details className="navigation-options">
+                <summary>More navigation options</summary>
+                <a
+                  href={`https://maps.apple.com/?daddr=${encodeURIComponent(place.name + " " + place.address + " " + city.name)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Apple Maps <ArrowUpRight size={14} />
+                </a>
+                <a
+                  href={`https://www.waze.com/ul?${place.coordinateAccuracy === "venue" ? `ll=${place.coords[1]},${place.coords[0]}&navigate=yes` : `q=${encodeURIComponent(place.name + " " + place.address + " " + city.name)}`}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Waze <ArrowUpRight size={14} />
+                </a>
+              </details>
               <details className="source-details">
                 <summary>Behind this discovery · sources &amp; credits</summary>
                 <p>
@@ -814,8 +811,8 @@ export default function Explorer() {
             city={city.short}
             name={city.landmarks[spot]}
             description={
-              landmarkDescriptions[ci]?.[spot] ||
               city.descriptions[spot] ||
+              landmarkDescriptions[ci]?.[spot] ||
               cityDescriptions[ci] ||
               city.intro
             }

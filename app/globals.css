@@ -574,7 +574,7 @@ h3 {
 }
 .category-caption h2 {
   font-size: clamp(29px, 7.5vw, 40px);
-  margin: 0 0 13px;
+  margin: 0;
   min-height: 32px;
 }
 .category-count {

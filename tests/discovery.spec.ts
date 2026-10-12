@@ -19,7 +19,7 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   await expect(page.locator(".landmark-open h3")).toHaveText("Bo-Kaap");
   await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
   await expect(page.locator(".place-card")).toHaveCount(0);
-  await page.getByRole("link", { name: "Open Entertainment", exact: true }).click();
+  await page.locator(".three-view").click();
   await expect(page.locator(".place-card")).toHaveCount(5);
   await page.getByPlaceholder("Search places").fill("Kirstenbosch");
   await expect(page.locator(".place-card")).toHaveCount(1);
@@ -188,7 +188,7 @@ test("fullscreen chapters fit compact and landscape phones, with category naviga
       "aria-current",
       "page",
     );
-    await page.getByRole("link", { name: "Open Clubs", exact: true }).click();
+    await page.locator(".three-view").click();
     await expect(page).toHaveURL(/view=places/);
     await expect(page.locator(".place-card")).toHaveCount(3);
     await page.goBack();
@@ -305,7 +305,7 @@ test("province chooser, place trail and a short introduction", async ({ page }) 
     line: parseFloat(getComputedStyle(el).lineHeight),
   }));
   expect(height.height).toBeLessThanOrEqual(height.line * 2 + 1);
-  await page.getByRole("link", { name: "Open Entertainment", exact: true }).click();
+  await page.locator(".three-view").click();
   await page.getByPlaceholder("Search places").fill("Kirstenbosch");
   await page.locator(".place-open").click();
   const trail = page.getByRole("navigation", { name: "Breadcrumb", exact: true });

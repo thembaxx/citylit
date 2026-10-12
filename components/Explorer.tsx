@@ -694,17 +694,6 @@ export default function Explorer() {
                       {categories[cat]}
                     </motion.h2>
                   </AnimatePresence>
-                  <Link
-                    className="pill-button"
-                    href={`/${city.slug}/${categorySlug(categories[cat])}?view=places`}
-                    prefetch={false}
-                    onNavigate={(event) => {
-                      event.preventDefault();
-                      openPlaces();
-                    }}
-                  >
-                    Open {categories[cat]}
-                  </Link>
                 </div>
                 <CategoryNav selected={cat} onSelect={chooseCategory} compact />
               </>

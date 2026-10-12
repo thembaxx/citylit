@@ -26,7 +26,7 @@ export function contentSecurityPolicy({
     `connect-src 'self' https://tile.openstreetmap.org${development ? " ws: wss:" : ""}`,
     "worker-src 'self' blob:",
     "manifest-src 'self'",
-    "media-src 'none'",
+    "media-src 'self'",
     "frame-src 'none'",
     "frame-ancestors 'self'",
     "object-src 'none'",

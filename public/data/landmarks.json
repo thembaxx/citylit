@@ -2,7 +2,43 @@
   {
     "name": "Ponte City",
     "wikipedia": "https://en.wikipedia.org/wiki/Ponte_City",
-    "images": []
+    "images": [
+      {
+        "alt": "en.wikipedia.org/wiki/Ponte_City_Apartments",
+        "author": "Geoffrey Hancock",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ponte_City.jpg",
+        "filename": "Ponte City.jpg",
+        "src": "/images/3a06a8a5a05b.jpg"
+      },
+      {
+        "alt": "en.wikipedia.org/wiki/Ponte_City_Apartments",
+        "author": "Geoffrey Hancock",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ponte_City_(3464447663).jpg",
+        "filename": "Ponte City (3464447663).jpg",
+        "src": "/images/5b556e6ae8bd.jpg"
+      }
+    ],
+    "about": "Ponte City is a skyscraper in the Berea district of Johannesburg, South Africa, just next to Hillbrow. It was built in 1975 to a height of 173 m (567.6 ft).",
+    "aboutSource": "https://en.wikipedia.org/wiki/Ponte_City",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Berea, Johannesburg"
+      },
+      {
+        "label": "Height",
+        "value": "54 storeys"
+      },
+      {
+        "label": "Completed",
+        "value": "1975"
+      }
+    ]
   },
   {
     "name": "Nelson Mandela Bridge",
@@ -16,6 +52,41 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:South_Africa-Johannesburg-Nelson_Mandela_Bridge001.jpg",
         "filename": "South Africa-Johannesburg-Nelson Mandela Bridge001.jpg",
         "src": "/images/14620741eafe.jpg"
+      },
+      {
+        "alt": "This is an image with the theme \"Play\" from: South Africa",
+        "author": "S'busiso siso",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johannesburg,_Nelson_Mandela_Bridge.jpg",
+        "filename": "Johannesburg, Nelson Mandela Bridge.jpg",
+        "src": "/images/c9c8f0aa529a.jpg"
+      },
+      {
+        "alt": "The Nelson Mandela Bridge is a bridge in Johannesburg, South Africa. It was completed in 2003 with an R38 million price tag. The proposal for the bridge was to link up two main bus",
+        "author": "Jorge Láscar from Australia",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nelson_Mandela_Bridge_(4611829625).jpg",
+        "filename": "Nelson Mandela Bridge (4611829625).jpg",
+        "src": "/images/ebe9efe04e77.jpg"
+      }
+    ],
+    "about": "Nelson Mandela Bridge is a bridge in Johannesburg, South Africa. It is the fourth of five bridges which cross the railway lines and sidings located just west of Johannesburg Park Station, the first being the Johan Rissik Bridge adjacent to the station.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Nelson_Mandela_Bridge",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Newtown to Braamfontein"
+      },
+      {
+        "label": "Opened",
+        "value": "2003"
+      },
+      {
+        "label": "Length",
+        "value": "284 metres"
       }
     ]
   },
@@ -31,6 +102,133 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Soweto_Cooling_Towers.JPG",
         "filename": "Soweto Cooling Towers.JPG",
         "src": "/images/5adfc56f38e2.jpg"
+      },
+      {
+        "alt": "Orlando Power Station Towers, Soweto, South Africa",
+        "author": "Anagoria",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:2014-11-20_15h50_Orlando_Power_Station_Soweto_anagoria.JPG",
+        "filename": "2014-11-20 15h50 Orlando Power Station Soweto anagoria.JPG",
+        "src": "/images/3ea3968e30fa.jpg"
+      },
+      {
+        "alt": "Orlando Power Station is a decommissioned coal fired power station in Soweto, South Africa. The power station was commissioned at the end of the Second World War and served Johanne",
+        "author": "Jorge Láscar from Australia",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colourful_cooling_towers_of_the_decommisioned_Orlando_Power_Station_(4612453602).jpg",
+        "filename": "Colourful cooling towers of the decommisioned Orlando Power Station (4612453602).jpg",
+        "src": "/images/e989d38e77ad.jpg"
+      }
+    ],
+    "about": "Orlando Power Station is a decommissioned coal-fired power station in Soweto, South Africa. The power station was commissioned at the end of the Second World War and served Johannesburg for over 50 years.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Orlando_Power_Station",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Soweto"
+      },
+      {
+        "label": "Was",
+        "value": "Orlando Power Station cooling towers"
+      },
+      {
+        "label": "Now",
+        "value": "Murals and an adventure jump"
+      }
+    ]
+  },
+  {
+    "name": "Constitution Hill",
+    "wikipedia": "https://en.wikipedia.org/wiki/Constitution_Hill,_Johannesburg",
+    "images": [
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference Johannesburg in South AFrica.",
+        "author": "ConstHill",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Constitution_Square_at_Constitution_Hill.jpg",
+        "filename": "Constitution Square at Constitution Hill.jpg",
+        "src": "/images/c7bb2f4d8b58.jpg"
+      },
+      {
+        "alt": "Tree- Like Image inside the Constitutional Court, Johannesburg, South Africa, indicating Freedom..",
+        "author": "Olaniyan Olushola",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Constitutional_Court,_Constitution_Hill,_Johannesburg10.jpg",
+        "filename": "Constitutional Court, Constitution Hill, Johannesburg10.jpg",
+        "src": "/images/962c12ab5b7e.jpg"
+      },
+      {
+        "alt": "The uniform worn by black inmates on exhibition at the Womens Gaol, Constitution Hill, Johannesburg",
+        "author": "Islahaddow",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Womens_Gaol,_Constitution_Hill,_Johannesburg_11.jpg",
+        "filename": "Womens Gaol, Constitution Hill, Johannesburg 11.jpg",
+        "src": "/images/813d1c43aeaf.jpg"
+      }
+    ],
+    "about": "The Constitution Hill precinct is the seat of the Constitutional Court of South Africa. It is located in Braamfontein, a suburb of Johannesburg, near the western end of the suburb of Hillbrow.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Constitution_Hill,_Johannesburg",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Hillbrow ridge"
+      },
+      {
+        "label": "Known for",
+        "value": "Old Fort, Number Four and the Constitutional Court"
+      }
+    ]
+  },
+  {
+    "name": "Apartheid Museum",
+    "wikipedia": "https://en.wikipedia.org/wiki/Apartheid_Museum",
+    "images": [
+      {
+        "alt": "Apartheid Museum",
+        "author": "NJR ZA",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:South_Africa-Johannesburg-Apartheid_Museum001.jpg",
+        "filename": "South Africa-Johannesburg-Apartheid Museum001.jpg",
+        "src": "/images/bc860134c8a7.jpg"
+      },
+      {
+        "alt": "A moving experience. Johannesburg, South Africa",
+        "author": "Pia Andrews",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Apartheid_Museum_-_15755983922.jpg",
+        "filename": "Apartheid Museum - 15755983922.jpg",
+        "src": "/images/fc561b5a7aca.jpg"
+      },
+      {
+        "alt": "Outdoor exhibit at the South African Apartheid Museum, Johannesburg",
+        "author": "User:Katangais",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Apartheid_Museum_Gate.JPG",
+        "filename": "Apartheid Museum Gate.JPG",
+        "src": "/images/745d7e99d916.jpg"
+      }
+    ],
+    "about": "The Apartheid Museum is a museum illustrating apartheid and the 20th-century history of South Africa. The museum, part of the Gold Reef City complex located in the south of Johannesburg, was opened in November 2001.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Apartheid_Museum",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Gold Reef City precinct"
+      },
+      {
+        "label": "Opened",
+        "value": "2001"
       }
     ]
   },
@@ -46,6 +244,32 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_Mountain_DanieVDM.jpg",
         "filename": "Table Mountain DanieVDM.jpg",
         "src": "/images/d93b06e34d54.jpg"
+      },
+      {
+        "alt": "Sunrise from Lionshead above the clouds overlooking Table Moutain",
+        "author": "Brendon Wainwright",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:BRENDON_WAINWRIGHT_-_Table_Mountain_1.jpg",
+        "filename": "BRENDON WAINWRIGHT - Table Mountain 1.jpg",
+        "src": "/images/accd276676e3.jpg"
+      }
+    ],
+    "about": "Table Mountain (Khoekhoe: Huriǂoaxa, lit. 'sea-emerging'; Afrikaans: Tafelberg) is a flat-topped mountain forming a prominent landmark overlooking the city of Cape Town in South Africa.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Table_Mountain",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Height",
+        "value": "About 1,085 m"
+      },
+      {
+        "label": "Park",
+        "value": "Table Mountain National Park"
+      },
+      {
+        "label": "Cableway",
+        "value": "Opened 1929"
       }
     ]
   },
@@ -61,6 +285,37 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boe-Kaap.jpg",
         "filename": "Boe-Kaap.jpg",
         "src": "/images/4c1bb8adbf4f.jpg"
+      },
+      {
+        "alt": "15-37 Pentz Street, Bo-Kaap (aka Malay Quarter), Cape Town, South Africa. A former township situated on the slopes of Signal Hill above the city centre and a historical centre of C",
+        "author": "Moheen Reeyad",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:15-37_Pentz_Street,_Bo-Kaap_(01).jpg",
+        "filename": "15-37 Pentz Street, Bo-Kaap (01).jpg",
+        "src": "/images/0f633ec4e66a.jpg"
+      },
+      {
+        "alt": "73, Chiappini Street, Bo-Kaap (fka Malay Quarter), Cape Town, South Africa, A former township, situated on the slopes of Signal Hill above the city centre and a historical centre o",
+        "author": "Moheen Reeyad",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:73,_Chiappini_Street,_Bo-Kaap_(01).jpg",
+        "filename": "73, Chiappini Street, Bo-Kaap (01).jpg",
+        "src": "/images/28537747254b.jpg"
+      }
+    ],
+    "about": "The Bo-Kaap (lit. \"above the Cape\" in Afrikaans) is an area of Cape Town, South Africa, formerly known as the Malay Quarter.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Bo-Kaap",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Slopes of Signal Hill"
+      },
+      {
+        "label": "Known for",
+        "value": "Cape Malay history and painted houses"
       }
     ]
   },
@@ -76,6 +331,119 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Goodhope2.jpg",
         "filename": "Goodhope2.jpg",
         "src": "/images/dac0aa2e81c2.jpg"
+      },
+      {
+        "alt": "Cape Point, South Africa",
+        "author": "Diego Delso",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Point,_Sud%C3%A1frica,_2018-07-23,_DD_105.jpg",
+        "filename": "Cape Point, Sudáfrica, 2018-07-23, DD 105.jpg",
+        "src": "/images/7275621959b4.jpg"
+      },
+      {
+        "alt": "Cape Point sign, Cape Point Nature Reserve, Cape Peninsula National Park, Cape Town, Western Cape, South Africa",
+        "author": "Dietmar Rabich",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Cape_Point_Nature_Reserve,_Cape_Point_--_2024_--_3344.jpg",
+        "filename": "Cape Town (ZA), Cape Point Nature Reserve, Cape Point -- 2024 -- 3344.jpg",
+        "src": "/images/96d11d16ee25.jpg"
+      }
+    ],
+    "about": "Cape Point (Afrikaans: Kaappunt) is a promontory at the southeast corner of the Cape Peninsula, a mountainous and scenic landform that runs north–south for about thirty kilometres (19 mi) at the extreme southwestern tip of the African continent in South Africa. Table Mountain and the city of Cape Town are close to the northern extremity of the same peninsula.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Cape_Point",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Park",
+        "value": "Table Mountain National Park"
+      },
+      {
+        "label": "Known for",
+        "value": "Cliffs, fynbos and the lighthouse"
+      }
+    ],
+    "video": {
+      "src": "/videos/50a83e7753d8.webm",
+      "title": "Cape Point, South Africa.webm",
+      "author": "Paul Keller",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Point,_South_Africa.webm"
+    }
+  },
+  {
+    "name": "Castle of Good Hope",
+    "wikipedia": "https://en.wikipedia.org/wiki/Castle_of_Good_Hope",
+    "images": [
+      {
+        "alt": "Entrance of Castle of Good Hope, Cape Town, South Africa",
+        "author": "Bernard Gagnon",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Castle_of_Good_Hope,_Cape_Town_01.jpg",
+        "filename": "Castle of Good Hope, Cape Town 01.jpg",
+        "src": "/images/a97edd8b0baa.jpg"
+      },
+      {
+        "alt": "Castle of Good Hope, Cape Town, South Africa",
+        "author": "Bernard Gagnon",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Castle_of_Good_Hope,_Cape_Town_02.jpg",
+        "filename": "Castle of Good Hope, Cape Town 02.jpg",
+        "src": "/images/13ccce445379.jpg"
+      }
+    ],
+    "about": "The Castle of Good Hope (Dutch: Kasteel de Goede Hoop; Afrikaans: Kasteel die Goeie Hoop) is a 17th century pentagonal bastion fort in Cape Town, South Africa. Originally located on the coastline of Table Bay, following land reclamation in the Foreshore area, the fort is now located inland.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Castle_of_Good_Hope",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Built",
+        "value": "1666–1679"
+      },
+      {
+        "label": "Known for",
+        "value": "Oldest surviving colonial building in South Africa"
+      }
+    ]
+  },
+  {
+    "name": "Robben Island",
+    "wikipedia": "https://en.wikipedia.org/wiki/Robben_Island",
+    "images": [
+      {
+        "alt": "Some kilometers off the coast of <a href=\"http://www.southafrica.net/sat/content/en/za/full-article?oid=4458&sn=Detail&pid=1\" rel=\"nofollow\">Cape Town</a> lies the famous Robben Is",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Robben_Island_-_Cape_Town,_South_Africa_(3883849594).jpg",
+        "filename": "Robben Island - Cape Town, South Africa (3883849594).jpg",
+        "src": "/images/46e7a8bc7408.jpg"
+      },
+      {
+        "alt": "Blackfoot penguin (Spheniscus demersus) at Robben Island.",
+        "author": "Aart Rietveld",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ASC_Leiden_-_Rietveld_Collection_-_17_-_Blackfoot_penguin_(Spheniscus_demersus)_near_trees_on_Robben_Island_-_2015.jpg",
+        "filename": "ASC Leiden - Rietveld Collection - 17 - Blackfoot penguin (Spheniscus demersus) near trees on Robben Island - 2015.jpg",
+        "src": "/images/2fc1b5f6daa0.jpg"
+      }
+    ],
+    "about": "Robben Island (Afrikaans: Robbeneiland) is an island in Table Bay, 6.9 kilometers (4.3 mi) west of the coast of Bloubergstrand, north of Cape Town, South Africa. It takes its name from the archaic Dutch word for seals (robben), hence the Dutch/Afrikaans name Robbeneiland, which translates to Seal(s) Island.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Robben_Island",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Status",
+        "value": "UNESCO World Heritage Site"
+      },
+      {
+        "label": "Visit",
+        "value": "Ferry from the V&A Waterfront"
       }
     ]
   },
@@ -91,6 +459,41 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moses_Mabhida_stadium_in_Durban.jpg",
         "filename": "Moses Mabhida stadium in Durban.jpg",
         "src": "/images/1e5e6c83d25f.jpg"
+      },
+      {
+        "alt": "Südafrika, Moses Mabhida Stadion",
+        "author": "Hansueli Krapf (User Simisa)",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:2011-06-22_11-37-54_South_Africa_-_Durban_-_Moses_Mabhida_Stadium_Ausschnitt.jpg",
+        "filename": "2011-06-22 11-37-54 South Africa - Durban - Moses Mabhida Stadium Ausschnitt.jpg",
+        "src": "/images/4597f70baa9c.jpg"
+      },
+      {
+        "alt": "Moses Mabhida Stadium under construction, Durban, South Africa",
+        "author": "Utilisateur:Bel Adone",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_Moses_Mabhida_Stadium.JPG",
+        "filename": "Durban Moses Mabhida Stadium.JPG",
+        "src": "/images/ffd1d54acfe1.jpg"
+      }
+    ],
+    "about": "The Moses Mabhida Stadium is a soccer stadium in Durban in the KwaZulu-Natal province of South Africa, named after Moses Mabhida, a former general secretary of the South African Communist Party. A multi-use stadium, it became a venue for several events, like bungee jumping, concerts, cricket, soccer, golf practise, motorsports and rugby union.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Built for",
+        "value": "2010 World Cup"
+      },
+      {
+        "label": "Arch",
+        "value": "106 metres"
+      },
+      {
+        "label": "Visit",
+        "value": "Skywalk and adventure swing"
       }
     ]
   },
@@ -106,12 +509,1794 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZA-Durban-shaka-m-eing.jpg",
         "filename": "ZA-Durban-shaka-m-eing.jpg",
         "src": "/images/fe65d470dcda.jpg"
+      },
+      {
+        "alt": "Vue du KwaZulu-Natal en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:UShaka_Marine_World,_Durban,_KwaZulu-Natal,_South_Africa_(20325379600).jpg",
+        "filename": "UShaka Marine World, Durban, KwaZulu-Natal, South Africa (20325379600).jpg",
+        "src": "/images/2efdb3024122.jpg"
+      },
+      {
+        "alt": "Vue du KwaZulu-Natal en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:UShaka_Marine_World,_Durban,_KwaZulu-Natal,_South_Africa_(20513574435).jpg",
+        "filename": "UShaka Marine World, Durban, KwaZulu-Natal, South Africa (20513574435).jpg",
+        "src": "/images/31cc5ff9189c.jpg"
+      }
+    ],
+    "about": "uShaka Marine World is a 16-hectare (40-acre) theme park that opened on 30 April 2004 in Durban, KwaZulu-Natal, South Africa. It has a total capacity of 4.6 million gallons containing 10,000 animal species.",
+    "aboutSource": "https://en.wikipedia.org/wiki/UShaka_Marine_World",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "The Point, Durban"
+      },
+      {
+        "label": "Opened",
+        "value": "2004"
+      },
+      {
+        "label": "Known for",
+        "value": "Aquarium and water park"
       }
     ]
   },
   {
     "name": "Umhlanga Lighthouse",
-    "wikipedia": "https://en.wikipedia.org/wiki/Umhlanga,_KwaZulu-Natal",
-    "images": []
+    "wikipedia": "https://en.wikipedia.org/wiki/UMhlanga,_KwaZulu-Natal",
+    "images": [
+      {
+        "alt": "Umhlanga Rocks and its pier as viewed from the beachfront",
+        "author": "Andres de Wet",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:UmhlangaKZN-pier.jpg",
+        "filename": "UmhlangaKZN-pier.jpg",
+        "src": "/images/352cbc122285.jpg"
+      },
+      {
+        "alt": "Umhlanga Lighthouse in Kwazulu-Natal",
+        "author": "Martie Swart from Johannesburg, South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Umhlanga_Lighthouse_(30817438183).jpg",
+        "filename": "Umhlanga Lighthouse (30817438183).jpg",
+        "src": "/images/ee76124f7f22.jpg"
+      },
+      {
+        "alt": "The Umhlanga Lighthouse was completed on November 24, 1954 and has since become an area landmark. The circular concrete tower, painted white with a red band at the top, stands 21m ",
+        "author": "Axel Bührmann from Fourways, GAUTENG, South Africa",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Umhlanga_Lighthouse_South_Africa.jpg",
+        "filename": "Umhlanga Lighthouse South Africa.jpg",
+        "src": "/images/d7cf59b5326e.jpg"
+      }
+    ],
+    "about": "uMhlanga, alternatively rendered Umhlanga, is a residential, commercial and resort town north of Durban on the coast of KwaZulu-Natal, South Africa. It is part of the eThekwini Metropolitan Municipality, which was created in 2000 and includes the greater Durban area.",
+    "aboutSource": "https://en.wikipedia.org/wiki/UMhlanga,_KwaZulu-Natal",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Umhlanga Rocks"
+      },
+      {
+        "label": "Built",
+        "value": "1954"
+      },
+      {
+        "label": "Look",
+        "value": "Red-and-white tower on the rocks"
+      }
+    ]
+  },
+  {
+    "name": "Durban Botanic Gardens",
+    "wikipedia": "https://en.wikipedia.org/wiki/Durban_Botanic_Gardens",
+    "images": [
+      {
+        "alt": "New entrance of Durban Botanic Garden, South Africa.",
+        "author": "Purves, M.",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_Botanic_Gardens_new_entrance_04_09_2010.JPG",
+        "filename": "Durban Botanic Gardens new entrance 04 09 2010.JPG",
+        "src": "/images/b44801345ef7.jpg"
+      },
+      {
+        "alt": "Durban, Botanical Gardens",
+        "author": "Frans-Banja Mulder",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban,_Botanical_Gardens_-_panoramio.jpg",
+        "filename": "Durban, Botanical Gardens - panoramio.jpg",
+        "src": "/images/8d441c0269f2.jpg"
+      },
+      {
+        "alt": "Durban Botanic Gardens, to the immediate west of Greyville Racecourse, in Greyville, Durban, eThekwini Municipality",
+        "author": "Planet Labs, Inc.",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban,_South_Africa_by_Planet_Labs,_Durban_Botanic_Gardens.jpg",
+        "filename": "Durban, South Africa by Planet Labs, Durban Botanic Gardens.jpg",
+        "src": "/images/8bad23a1f6e1.jpg"
+      }
+    ],
+    "about": "The Durban Botanic Gardens is situated in the city of Durban, KwaZulu-Natal, South Africa. It is Durban's oldest public institution and Africa's oldest surviving botanical gardens.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Durban_Botanic_Gardens",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Founded",
+        "value": "1849"
+      },
+      {
+        "label": "Known for",
+        "value": "Oldest botanic garden on the African continent"
+      }
+    ]
+  },
+  {
+    "name": "Durban City Hall",
+    "wikipedia": "https://en.wikipedia.org/wiki/Durban_City_Hall",
+    "images": [
+      {
+        "alt": "Durban City Hall",
+        "author": "Mister-E (https://www.flickr.com/photos/mister-e/)",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_TownHall.jpg",
+        "filename": "Durban TownHall.jpg",
+        "src": "/images/09922021637d.jpg"
+      },
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 9/2/407/0010.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:9_2_407_0010-City_Hall-Durban-s.jpg",
+        "filename": "9 2 407 0010-City Hall-Durban-s.jpg",
+        "src": "/images/5de02736da17.jpg"
+      }
+    ],
+    "about": "Durban City Hall is a historic city hall located at Durban in KwaZulu-Natal, South Africa.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Durban_City_Hall",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Opened",
+        "value": "1910"
+      },
+      {
+        "label": "Where",
+        "value": "Francis Farewell Square"
+      }
+    ]
+  },
+  {
+    "name": "Freedom Park",
+    "images": [
+      {
+        "alt": "Isivivani - Freedom Park.  Pretoria, South Africa",
+        "author": "Shosholoza",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Isivivani.jpg",
+        "filename": "Isivivani.jpg",
+        "src": "/images/8657fd977cd8.jpg"
+      },
+      {
+        "alt": "Anfiteatro en Freedom Park",
+        "author": "Shosholoza",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anfiteatro_-_Freedom_Park.jpg",
+        "filename": "Anfiteatro - Freedom Park.jpg",
+        "src": "/images/169682e4a033.jpg"
+      },
+      {
+        "alt": "Freedom Park, Salvokop, Pretoria",
+        "author": "Leo za1",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Freedom_Park-290.jpg",
+        "filename": "Freedom Park-290.jpg",
+        "src": "/images/a463d282a1bb.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Freedom_Park_(South_Africa)",
+    "about": "Freedom Park is a park situated on Salvokop in Pretoria. It includes a memorial with a list of the names of those killed in the South African Wars, World War I, World War II as well as during the apartheid era.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Freedom_Park_(South_Africa)",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Salvokop, Pretoria"
+      },
+      {
+        "label": "Known for",
+        "value": "Garden of Remembrance and //hapo"
+      }
+    ]
+  },
+  {
+    "name": "Union Buildings",
+    "images": [
+      {
+        "alt": "The Union Buildings in Pretoria: seat of the South African government.",
+        "author": "Davinci77",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Uniegebou.jpg",
+        "filename": "Uniegebou.jpg",
+        "src": "/images/21fdadf83ed7.jpg"
+      },
+      {
+        "alt": "Jacaranda trees in Pretoria which covers the city in a purple blanket during October, hence the name- Jacaranda City, with the Union Buildings in the background.",
+        "author": "Hein waschefort",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jacaranda_Trees_Pretoria.jpg",
+        "filename": "Jacaranda Trees Pretoria.jpg",
+        "src": "/images/f2a240a3bfaf.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Union_Buildings",
+    "about": "The Union Buildings (Afrikaans: Uniegebou) form the official seat of the South African Government and also house the offices of the President of South Africa. The imposing buildings are located in Pretoria, atop Meintjeskop at the northern end of Arcadia, close to historic Church Square.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Union_Buildings",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Meintjieskop"
+      },
+      {
+        "label": "Completed",
+        "value": "1913"
+      },
+      {
+        "label": "Designed by",
+        "value": "Herbert Baker"
+      }
+    ]
+  },
+  {
+    "name": "State Theatre",
+    "images": [
+      {
+        "alt": "At State Theatre (Liefling)",
+        "author": "JBB199400",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Liza_Br%C3%B6nner_-_State_Theatre_02.jpg",
+        "filename": "Liza Brönner - State Theatre 02.jpg",
+        "src": "/images/10b3b1dc5cd9.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Pretorius Street"
+      },
+      {
+        "label": "Opened",
+        "value": "1981"
+      },
+      {
+        "label": "Known for",
+        "value": "Opera, dance and drama"
+      }
+    ]
+  },
+  {
+    "name": "Voortrekker Monument",
+    "wikipedia": "https://en.wikipedia.org/wiki/Voortrekker_Monument",
+    "images": [
+      {
+        "alt": "The Voortrekker Monument outside Pretoria was completed in 1949. Inside is a marble frieze containing 27 panels commemorating events of the Great Trek in which farmers of mainly Du",
+        "author": "John Walker, Images of Africa Taken from de-Wikipedia, where it had been uploaded by Head under the same filename.",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voortrekker_Monument.jpg",
+        "filename": "Voortrekker Monument.jpg",
+        "src": "/images/7426d56d3ef4.jpg"
+      },
+      {
+        "alt": "Voortrekker Monument Chapel seen from the north, Pretoria, Gauteng, South Africa",
+        "author": "Ymblanter",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pretoria_Voortrekker_Monument_Chapel_seen_from_the_north.jpg",
+        "filename": "Pretoria Voortrekker Monument Chapel seen from the north.jpg",
+        "src": "/images/aec1a2b9e6eb.jpg"
+      },
+      {
+        "alt": "Vachellia sieberiana next to the chapel, Voortrekker Monument, Pretoria, Gauteng, South Africa",
+        "author": "Ymblanter",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pretoria_Voortrekker_Monument_Vachellia_sieberiana_next_to_the_chapel.jpg",
+        "filename": "Pretoria Voortrekker Monument Vachellia sieberiana next to the chapel.jpg",
+        "src": "/images/39a882b220e1.jpg"
+      }
+    ],
+    "about": "The Voortrekker Monument is located just south of Pretoria in South Africa. The granite structure is located on a hilltop, and was raised to commemorate the Voortrekkers who left the Cape Colony between 1835 and 1854.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Voortrekker_Monument",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Completed",
+        "value": "1949"
+      },
+      {
+        "label": "Where",
+        "value": "Proclamation Hill"
+      }
+    ]
+  },
+  {
+    "name": "Church Square",
+    "wikipedia": "https://en.wikipedia.org/wiki/Church_Square,_Pretoria",
+    "images": [
+      {
+        "alt": "Aerial view of Church Square, Pretoria",
+        "author": "Tyler Yeo",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Church_Square,_Pretoria.jpg",
+        "filename": "Church Square, Pretoria.jpg",
+        "src": "/images/12f928923dc7.jpg"
+      },
+      {
+        "alt": "This 1905 photograph shows Church Square in Pretoria, South Africa, looking east. The cast iron fountain, known as the Sammy Marks Fountain, was imported from Ireland by businessma",
+        "author": "Wikimedia Commons",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Church_Square,_Pretoria,_South_Africa,_1905_WDL3016.png",
+        "filename": "Church Square, Pretoria, South Africa, 1905 WDL3016.png",
+        "src": "/images/9fafdb5db168.jpg"
+      }
+    ],
+    "about": "Church Square (Afrikaans: Kerkplein), originally Market Square (Dutch: Marktplein), is the square at the historic centre of the city of Pretoria, Gauteng, South Africa. The founder of Pretoria, Marthinus Pretorius, determined that the square be used as a market place and church yard.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Church_Square,_Pretoria",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Central Pretoria"
+      },
+      {
+        "label": "Known for",
+        "value": "Kruger statue and the Ou Raadsaal"
+      }
+    ]
+  },
+  {
+    "name": "Village Museum",
+    "images": [
+      {
+        "alt": "Dorp Museum, Stellenbosch",
+        "author": "ECSequeira",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dorp_Museum_14.JPG",
+        "filename": "Dorp Museum 14.JPG",
+        "src": "/images/0546f2bd1904.jpg"
+      },
+      {
+        "alt": "Dorp Museum, Stellenbosch",
+        "author": "ECSequeira",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dorp_Museum_19.JPG",
+        "filename": "Dorp Museum 19.JPG",
+        "src": "/images/9f6d4caa1e68.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Stellenbosch"
+      },
+      {
+        "label": "Known for",
+        "value": "Period houses from four centuries"
+      }
+    ]
+  },
+  {
+    "name": "Stellenbosch Botanical Garden",
+    "images": [
+      {
+        "alt": "Garden in Stellenbosch University Botanical Garden",
+        "author": "Martin F. Smit (talk)",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stellenbosch_University_Botanical_Garden_-_garden.jpg",
+        "filename": "Stellenbosch University Botanical Garden - garden.jpg",
+        "src": "/images/f5ab53d7093a.jpg"
+      },
+      {
+        "alt": "SU Botanical Garden waterlily dams",
+        "author": "Martin F. Smit",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:SU_Botanical_Garden_waterlily_dams.jpg",
+        "filename": "SU Botanical Garden waterlily dams.jpg",
+        "src": "/images/d2fbaee94214.jpg"
+      },
+      {
+        "alt": "Glottiphyllum succulents - specimens in University collection. South Africa.",
+        "author": "Abu Shawka",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Some_Glottiphyllum_specimens_at_Stellenbosch_University.jpg",
+        "filename": "Some Glottiphyllum specimens at Stellenbosch University.jpg",
+        "src": "/images/465c9433db8b.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Stellenbosch_University_Botanical_Garden",
+    "about": "The Stellenbosch University Botanical Garden, located in the historical center of Stellenbosch, is the oldest university botanical garden in South Africa. The Garden is relatively small and houses an enormous diversity of plants, both indigenous to South Africa and introduced species.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Stellenbosch_University_Botanical_Garden",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Kind",
+        "value": "University garden"
+      },
+      {
+        "label": "Known for",
+        "value": "Quiet paths in the middle of town"
+      }
+    ]
+  },
+  {
+    "name": "Dorp Street",
+    "images": [
+      {
+        "alt": "The original part of this historic house dates from the beginning of the nineteenth century and was later adapted to the Georgian style. It forms an integral part of the architectu",
+        "author": "Ossewa",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:108_Dorp_Street,_Stellenbosch.JPG",
+        "filename": "108 Dorp Street, Stellenbosch.JPG",
+        "src": "/images/ca42aa592d8d.jpg"
+      },
+      {
+        "alt": "The original part of this historic house dates from the beginning of the nineteenth century and was later adapted to the Georgian style. It forms an integral part of the architectu",
+        "author": "Ossewa",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:108_Dorp_Street,_Stellenbosch_door.JPG",
+        "filename": "108 Dorp Street, Stellenbosch door.JPG",
+        "src": "/images/0fd686c324c6.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Stellenbosch"
+      },
+      {
+        "label": "Known for",
+        "value": "Oak trees and Cape Dutch gables"
+      }
+    ]
+  },
+  {
+    "name": "Moederkerk",
+    "wikipedia": "https://en.wikipedia.org/wiki/Moederkerk,_Stellenbosch",
+    "images": [
+      {
+        "alt": "Stellenbosch: Voorkant van die Gotiese styl NG Moedergemeente aan die punt van Kerkstraat",
+        "author": "Fmalan at Afrikaans Wikipedia",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:StellenboschMoederKerk.jpg",
+        "filename": "StellenboschMoederKerk.jpg",
+        "src": "/images/953e32754002.jpg"
+      },
+      {
+        "alt": "Dutch Reformed Church, Stellenbosch",
+        "author": "ECSequeira",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dutch_Reformed_Church_(Moederkerk)_19.JPG",
+        "filename": "Dutch Reformed Church (Moederkerk) 19.JPG",
+        "src": "/images/16214bc88dfe.jpg"
+      },
+      {
+        "alt": "Dutch Reformed Church, Stellenbosch",
+        "author": "ECSequeira",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dutch_Reformed_Church_(Moederkerk)_8.JPG",
+        "filename": "Dutch Reformed Church (Moederkerk) 8.JPG",
+        "src": "/images/fe433a4d6c26.jpg"
+      }
+    ],
+    "about": "The Moederkerk (Mother Church) in Stellenbosch is the second oldest congregation of the Dutch Reformed Church in South Africa.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Moederkerk,_Stellenbosch",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Drostdy Street"
+      },
+      {
+        "label": "Known for",
+        "value": "Dutch Reformed landmark of the town"
+      }
+    ]
+  },
+  {
+    "name": "Jonkershoek",
+    "wikipedia": "https://en.wikipedia.org/wiki/Jonkershoek_Nature_Reserve",
+    "images": [
+      {
+        "alt": "Jonkershoek Mountain",
+        "author": "BruceHarryAnderson",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jonkershoek_Mountain_Image_2026-08-20_at_13.13.39.jpg",
+        "filename": "Jonkershoek Mountain Image 2026-08-20 at 13.13.39.jpg",
+        "src": "/images/651cd7b2c0a0.jpg"
+      },
+      {
+        "alt": "Jonkershoek trail just a step outside Stellenbosch before dusk with a capture of the valley including the far peaks of Drakenstein (centre) and the Twins (left). Stellenbosch is on",
+        "author": "Orrling",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jonkershoek.jpg",
+        "filename": "Jonkershoek.jpg",
+        "src": "/images/16df994ec4ef.jpg"
+      },
+      {
+        "alt": "Jonkershoek",
+        "author": "Glany Saldanha",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jonkershoek_-_panoramio.jpg",
+        "filename": "Jonkershoek - panoramio.jpg",
+        "src": "/images/3ce98a8b97d0.jpg"
+      }
+    ],
+    "about": "Jonkershoek Nature Reserve is a CapeNature nature reserve located approximately 10 km (6 mi) south-east of the town of Stellenbosch in the Western Cape province of South Africa. It covers an area of approximately 11,000 hectares (27,000 acres; 110 km2; 42 sq mi).",
+    "aboutSource": "https://en.wikipedia.org/wiki/Jonkershoek_Nature_Reserve",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Hottentots Holland mountains"
+      },
+      {
+        "label": "Good for",
+        "value": "Hiking trails"
+      }
+    ]
+  },
+  {
+    "name": "City Hall",
+    "images": [
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 9/2/436/0002.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:9_2_436_0002-Pietermaritzburg_City_Hall2-KZN-s.jpg",
+        "filename": "9 2 436 0002-Pietermaritzburg City Hall2-KZN-s.jpg",
+        "src": "/images/81a8cb28a36c.jpg"
+      },
+      {
+        "alt": "Vue du Free State en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_City_Hall,_Free_State,_South_Africa_(19916858353).jpg",
+        "filename": "Bloemfontein City Hall, Free State, South Africa (19916858353).jpg",
+        "src": "/images/6505aba93e7c.jpg"
+      },
+      {
+        "alt": "Vue du Free State en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_City_Hall,_Free_State,_South_Africa_(20349643850).jpg",
+        "filename": "Bloemfontein City Hall, Free State, South Africa (20349643850).jpg",
+        "src": "/images/61d92920a221.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Pietermaritzburg_City_Hall",
+    "about": "Pietermaritzburg City Hall (Afrikaans: Pietermaritzburg-stadsaal) is a historic city hall located at Pietermaritzburg in KwaZulu-Natal, South Africa.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Pietermaritzburg_City_Hall",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Pietermaritzburg centre"
+      },
+      {
+        "label": "Known for",
+        "value": "Red brick and a clock tower"
+      }
+    ]
+  },
+  {
+    "name": "Tatham Art Gallery",
+    "images": [
+      {
+        "alt": "John Tatham / by Robert Vaughan / line engraving, mid 17th century / 6 1/2 in. x 4 1/4 in. (165 mm x 109 mm) paper size / Given by the daughter of compiler William Fleming MD, Mary",
+        "author": "Robert Vaughan",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:John_Tatham,_engraving,_mid_17th_century_(by_Robert_Vaughan;_NPG_D29054).png",
+        "filename": "John Tatham, engraving, mid 17th century (by Robert Vaughan; NPG D29054).png",
+        "src": "/images/6680700766c8.jpg"
+      },
+      {
+        "alt": "John Tatham / by Robert Vaughan / line engraving, mid 17th century / 6 1/2 in. x 4 1/4 in. (165 mm x 109 mm) paper size / Given by the daughter of compiler William Fleming MD, Mary",
+        "author": "Robert Vaughan",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:John_Tatham,_engraving,_mid_17th_century_(by_Robert_Vaughan;_NPG_D29054)_(portrait_only).png",
+        "filename": "John Tatham, engraving, mid 17th century (by Robert Vaughan; NPG D29054) (portrait only).png",
+        "src": "/images/dfd57031b350.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Opposite City Hall"
+      },
+      {
+        "label": "Known for",
+        "value": "South African and international art"
+      }
+    ]
+  },
+  {
+    "name": "KZN Botanical Garden",
+    "images": [
+      {
+        "alt": "Exit gate, KwaZulu-Natal National Botanical Garden, Pietermaritzburg",
+        "author": "I created this image. JMK (talk) 20:11, 22 June 2011 (UTC)",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ontvangs,_KZN_NBT,_b.jpg",
+        "filename": "Ontvangs, KZN NBT, b.jpg",
+        "src": "/images/e13d64e38e45.jpg"
+      },
+      {
+        "alt": "A Forest Olive (Olea woodiana) — in the KwaZulu-Natal National Botanical Garden, Pietermaritzburg, South Africa.",
+        "author": "JMK",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Olea_woodiana,_KwaZulu-Natal_NBT,_PMB.jpg",
+        "filename": "Olea woodiana, KwaZulu-Natal NBT, PMB.jpg",
+        "src": "/images/de7be9209af4.jpg"
+      },
+      {
+        "alt": "Century old plane tree avenue in the KwaZulu-Natal National Botanical Garden, Pietermaritzburg. The avenue was planted by the garden's curator, Mr. W.E. Marriott, on 8 November 190",
+        "author": "I created this image. JMK (talk) 15:39, 22 June 2011 (UTC)",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plataanboomlaan,_KZN_NBT,_b.jpg",
+        "filename": "Plataanboomlaan, KZN NBT, b.jpg",
+        "src": "/images/70bf296f90b1.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/KwaZulu-Natal_National_Botanical_Garden",
+    "about": "The KwaZulu-Natal National Botanical Garden is situated along Mayor's Walk, in the western suburbs of Pietermaritzburg, South Africa. The identification code of the KwaZulu-Natal National Botanical Garden as a member of the Botanic Gardens Conservation International (BGCI), as well as the initials of its herbarium is NBGN.",
+    "aboutSource": "https://en.wikipedia.org/wiki/KwaZulu-Natal_National_Botanical_Garden",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Garden",
+        "value": "KwaZulu-Natal National Botanical Garden"
+      },
+      {
+        "label": "Known for",
+        "value": "Indigenous plants and tree-lined walks"
+      }
+    ]
+  },
+  {
+    "name": "KwaZulu-Natal Museum",
+    "wikipedia": "https://en.wikipedia.org/wiki/KwaZulu-Natal_Museum",
+    "images": [
+      {
+        "alt": "This media shows a South African Protected Site with SAHRA file reference 000000000.",
+        "author": "Janek Szymanowski",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:00000-Natal_Museum-237_Jabu_Ndlovu_St_-Pietermaritzburg-s.jpg",
+        "filename": "00000-Natal Museum-237 Jabu Ndlovu St -Pietermaritzburg-s.jpg",
+        "src": "/images/cf8433d5b99e.jpg"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Founded",
+        "value": "1904"
+      },
+      {
+        "label": "Where",
+        "value": "Loop Street"
+      }
+    ]
+  },
+  {
+    "name": "Howick Falls",
+    "wikipedia": "https://en.wikipedia.org/wiki/Howick_Falls",
+    "images": [
+      {
+        "alt": "Howick Falls on the Umgeni River, South Africa, in November after a few days with some fairly heavy rain.",
+        "author": "Bjørn Christian Tørrissen",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Howick-Falls-November-2009.jpg",
+        "filename": "Howick-Falls-November-2009.jpg",
+        "src": "/images/e0686aa7a747.jpg"
+      },
+      {
+        "alt": "The Howick Falls is a large waterfall that occurs when the Umgeni River falls 95 metres (311 feet) over dolerite cliffs on its way to the Indian Ocean. The waterfall was known as k",
+        "author": "Ossewa",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Howick_Falls.jpg",
+        "filename": "Howick Falls.jpg",
+        "src": "/images/49ce72cd1dad.jpg"
+      }
+    ],
+    "about": "Howick Falls is a waterfall in Howick, KwaZulu-Natal Province, South Africa. The waterfall is approximately 95 m in height (310 feet) and lies on the Umgeni River.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Howick_Falls",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Drop",
+        "value": "About 95 metres"
+      },
+      {
+        "label": "River",
+        "value": "uMngeni"
+      }
+    ]
+  },
+  {
+    "name": "Donkin Reserve",
+    "images": [
+      {
+        "alt": "The lighthouse was originally built in 1861 and is located in Nelson Mandela Bay\n\nVue de l'Eastern Cape en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Donkin_Lighthouse_and_Pyramid_(8712774449).jpg",
+        "filename": "Donkin Lighthouse and Pyramid (8712774449).jpg",
+        "src": "/images/9f7f34f1fcbe.jpg"
+      },
+      {
+        "alt": "Donkin Reserve in Port Elizabeth, South Africa",
+        "author": "Portiatn",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Donkin_Reserve_Pyramid_and_Lighthouse.JPG",
+        "filename": "Donkin Reserve Pyramid and Lighthouse.JPG",
+        "src": "/images/ffe4280d5b5b.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Central Gqeberha"
+      },
+      {
+        "label": "Known for",
+        "value": "Stone pyramid and lighthouse"
+      }
+    ]
+  },
+  {
+    "name": "Bayworld",
+    "images": [
+      {
+        "alt": "Dolphins at the Bayworld Dolphinarium in Port Elizabeth, South Africa",
+        "author": "NJR ZA",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bayworld-dolphins-001.jpg",
+        "filename": "Bayworld-dolphins-001.jpg",
+        "src": "/images/485527d89f96.jpg"
+      },
+      {
+        "alt": "View from Bayworld Dolphinarium over Humewood Road, the public pool and King's Beach towards the PE Harbour.",
+        "author": "NJR ZA",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Elizabeth-001.jpg",
+        "filename": "Port Elizabeth-001.jpg",
+        "src": "/images/493e30b91545.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Beachfront"
+      },
+      {
+        "label": "Known for",
+        "value": "Natural and cultural history"
+      }
+    ]
+  },
+  {
+    "name": "Boardwalk",
+    "images": [
+      {
+        "alt": "Part of the Boardwalk mall in Gqeberha",
+        "author": "Nick-D",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Boardwalk_mall_in_Gqeberha_February_2025.jpg",
+        "filename": "Interior of the Boardwalk mall in Gqeberha February 2025.jpg",
+        "src": "/images/7b5999b74792.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Summerstrand"
+      },
+      {
+        "label": "Known for",
+        "value": "Hotels and the beachfront precinct"
+      }
+    ]
+  },
+  {
+    "name": "Nelson Mandela Bay Stadium",
+    "wikipedia": "https://en.wikipedia.org/wiki/Nelson_Mandela_Bay_Stadium",
+    "images": [
+      {
+        "alt": "Stadium Nelson Mandela Bay, in Port Elizabeth, South Africa",
+        "author": "Ngrund",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nelson_Mandela_Stadium_in_Port_Elizabeth_(cropped).jpg",
+        "filename": "Nelson Mandela Stadium in Port Elizabeth (cropped).jpg",
+        "src": "/images/66ac99ce6e59.jpg"
+      },
+      {
+        "alt": "Inside the stadium",
+        "author": "Rasmzet",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nelson_Mandela_Bay_Stadium..jpg",
+        "filename": "Nelson Mandela Bay Stadium..jpg",
+        "src": "/images/0ba55bdb522c.jpg"
+      },
+      {
+        "alt": "Nelson Mandela Bay Stadium",
+        "author": "Ngrund (cropped by Ahmedd)",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nelson_Mandela_Bay_Stadium_-_Port_Elizabeth.jpg",
+        "filename": "Nelson Mandela Bay Stadium - Port Elizabeth.jpg",
+        "src": "/images/58df64b4227f.jpg"
+      }
+    ],
+    "about": "The Nelson Mandela Bay Stadium is a soccer and rugby union stadium in Gqeberha in the Eastern Cape province of South Africa. It hosted 2010 FIFA World Cup matches, including the third-place play off.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Nelson_Mandela_Bay_Stadium",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Opened",
+        "value": "2009"
+      },
+      {
+        "label": "Where",
+        "value": "North End"
+      }
+    ]
+  },
+  {
+    "name": "Route 67",
+    "wikipedia": "https://en.wikipedia.org/wiki/Route_67_(Port_Elizabeth)",
+    "images": [
+      {
+        "alt": "Route 67 is a vehicle for continuing the Urban Renewal of Central Port Elizabeth and simultaneously educating citizens and tourists on our struggle history and the cultural and his",
+        "author": "Suzi-k",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Elizabeth_Route_67_fish_bone.JPG",
+        "filename": "Port Elizabeth Route 67 fish bone.JPG",
+        "src": "/images/05841f4712d1.jpg"
+      },
+      {
+        "alt": "Route 67 is a vehicle for continuing the Urban Renewal of Central Port Elizabeth and simultaneously educating citizens and tourists on our struggle history and the cultural and his",
+        "author": "Suzi-k",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Elizabeth_Route_67_light.JPG",
+        "filename": "Port Elizabeth Route 67 light.JPG",
+        "src": "/images/0bab29cf42e4.jpg"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Route",
+        "value": "Campanile to the Donkin Reserve"
+      },
+      {
+        "label": "Known for",
+        "value": "Outdoor art trail"
+      }
+    ]
+  },
+  {
+    "name": "Oliewenhuis",
+    "images": [
+      {
+        "alt": "The northeastern entrance of Oliewenhuis Art Museum, Bloemfontein, Free State, South Africa",
+        "author": "Ymblanter",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_Oliewenhuis_Art_Museum_northeastern_entrance.jpg",
+        "filename": "Bloemfontein Oliewenhuis Art Museum northeastern entrance.jpg",
+        "src": "/images/c29d70ca97f4.jpg"
+      },
+      {
+        "alt": "Oliewenhuis Art Museum seen from the east, Bloemfontein, Free State, South Africa",
+        "author": "Ymblanter",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_Oliewenhuis_Art_Museum_seen_from_the_east.jpg",
+        "filename": "Bloemfontein Oliewenhuis Art Museum seen from the east.jpg",
+        "src": "/images/419b8b65f9cb.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Grant’s Hill"
+      },
+      {
+        "label": "Known for",
+        "value": "Art collections and outdoor sculpture"
+      }
+    ]
+  },
+  {
+    "name": "Free State Botanical Garden",
+    "images": [
+      {
+        "alt": "The beautiful gardens and walking routes are a must for relaxing and learning about nature in Bloemfontein.",
+        "author": "Luzelle Nel",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Free_State_Botanical_Gardens.jpg",
+        "filename": "Free State Botanical Gardens.jpg",
+        "src": "/images/ff506cb48444.jpg"
+      },
+      {
+        "alt": "A Hadada Ibis at Johannesburg Botanical Garden, South Africa.",
+        "author": "Derek Keats from Johannesburg, South Africa",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bostrychia_hagedash_-Johannesburg_Botanical_Garden,_South_Africa-8.jpg",
+        "filename": "Bostrychia hagedash -Johannesburg Botanical Garden, South Africa-8.jpg",
+        "src": "/images/3ced328cd964.jpg"
+      },
+      {
+        "alt": "An adult female of the Cape francolin at Kirstenbosch National Botanical Garden, South Africa. The female is identified by a lack of spurs, the male having two on each leg.",
+        "author": "Wayne de Villiers from Cape Town, South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Francolinus_capensis_-Kirstenbosch_National_Botanical_Garden,_South_Africa-8,_crop.jpg",
+        "filename": "Francolinus capensis -Kirstenbosch National Botanical Garden, South Africa-8, crop.jpg",
+        "src": "/images/a0701e16235a.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Free_State_National_Botanical_Garden",
+    "about": "The Free State National Botanical Garden, located just outside Bloemfontein covers 70 hectares, and is home to about 400 species of plants, largely native to Free State and Northern Cape Provinces and Lesotho. Near Bain's Vlei, the garden was established in 1965, around 10 km north of downtown between picturesque dolerite rocks.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Free_State_National_Botanical_Garden",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Garden",
+        "value": "Free State National Botanical Garden"
+      },
+      {
+        "label": "Known for",
+        "value": "Indigenous trees, koppies and trails"
+      }
+    ]
+  },
+  {
+    "name": "Sand du Plessis Theatre",
+    "images": [],
+    "wikipedia": "https://en.wikipedia.org/wiki/Sand_du_Plessis_Theatre",
+    "about": "The Sand du Plessis Theatre (Afrikaans: Sand du Plessis-teaterkompleks) is located on Markgraaff Street, Bloemfontein, South Africa. It is a large, multipurpose theater center opened on August 1, 1985 as the home of the Regional Council of Sukovs (Orange Free State Performing Arts Society).",
+    "aboutSource": "https://en.wikipedia.org/wiki/Sand_du_Plessis_Theatre",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Bloemfontein"
+      },
+      {
+        "label": "Known for",
+        "value": "Theatre, dance and music"
+      }
+    ]
+  },
+  {
+    "name": "Naval Hill",
+    "wikipedia": "https://en.wikipedia.org/wiki/Naval_Hill",
+    "images": [
+      {
+        "alt": "The Church Street (Kerkstraat) in Bloemfontein with the 'Tweetoringkerk' (Church with the two towers) on the end of the road. Naval Hill in the background. (photo from the South - ",
+        "author": "Creswicke, Louis.",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein,_from_the_South_-_c1900.JPG",
+        "filename": "Bloemfontein, from the South - c1900.JPG",
+        "src": "/images/66824d22ef6e.jpg"
+      },
+      {
+        "alt": "Naval Hill, Bloemfontein, 9301, South Africa",
+        "author": "Graham Maclachlan",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Naval_Hill,_Bloemfontein,_9301,_South_Africa_-_panoramio.jpg",
+        "filename": "Naval Hill, Bloemfontein, 9301, South Africa - panoramio.jpg",
+        "src": "/images/f643ca0613bc.jpg"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Known for",
+        "value": "Franklin Game Reserve"
+      },
+      {
+        "label": "Also",
+        "value": "Naval Hill Planetarium"
+      }
+    ]
+  },
+  {
+    "name": "Women's Memorial",
+    "wikipedia": "https://en.wikipedia.org/wiki/National_Women%27s_Monument",
+    "images": [
+      {
+        "alt": "\"This obelisk of 36,5 metres high was built of Kroonstad sandstone in memory of the 26 370 Boer women and children who died during the Anglo Boer War(1899 -1902). It was unveiled o",
+        "author": "Carlviloria",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_Women%27s_Memorial_Vil004.jpg",
+        "filename": "Bloemfontein Women's Memorial Vil004.jpg",
+        "src": "/images/727d7b4d5c47.jpg"
+      },
+      {
+        "alt": "Memorial statue that can be found within the Women's Memorial area",
+        "author": "Carlviloria",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_Women%27s_Memorial_Vil005.jpg",
+        "filename": "Bloemfontein Women's Memorial Vil005.jpg",
+        "src": "/images/ace110b2b582.jpg"
+      }
+    ],
+    "about": "The National Women's Monument (Afrikaans: Nasionale Vrouemonument) in Bloemfontein, South Africa, is a monument commemorating the roughly 27,000 Boer women and children who died in British concentration camps during the Second Boer War. The Monument is a Provincial Heritage Site in the Free State.",
+    "aboutSource": "https://en.wikipedia.org/wiki/National_Women%27s_Monument",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Unveiled",
+        "value": "1913"
+      },
+      {
+        "label": "Known for",
+        "value": "Sculpture by Anton van Wouw"
+      }
+    ]
+  },
+  {
+    "name": "Lowveld Botanical Garden",
+    "images": [
+      {
+        "alt": "At the Lowveld National Botanical Garden you will enjoy the tranquility of a spacious pastoral retreat where rivers, waterfalls, forests and native and exotic flowers coexist. The ",
+        "author": "Werner Bayer OR http://www.wbayer.com OR http://www.facebook.com/wbayercom",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lowveld_National_Botanical_Garden_1.jpg",
+        "filename": "Lowveld National Botanical Garden 1.jpg",
+        "src": "/images/ed3740a0972a.jpg"
+      },
+      {
+        "alt": "Crocodile River in flood in January 2026 at the Lowveld Botanical Garden",
+        "author": "MaruAttwood",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Crocodile_River_in_the_Lowveld_Botanical_Garden.jpg",
+        "filename": "Crocodile River in the Lowveld Botanical Garden.jpg",
+        "src": "/images/0339ffb08fc9.jpg"
+      },
+      {
+        "alt": "Lowveld National Botanical Garden. You will enjoy the tranquility of a spacious pastoral retreat where rivers, waterfalls, forests and native and exotic flowers coexist. The Lowvel",
+        "author": "Werner Bayer/http://www.wbayer.com OR http://www.facebook.com/wbayercom",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lowveld_National_Botanical_Garden,_Nelsrivier.jpg",
+        "filename": "Lowveld National Botanical Garden, Nelsrivier.jpg",
+        "src": "/images/41c78388f56d.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Lowveld_National_Botanical_Garden",
+    "about": "The Lowveld National Botanical Garden, one of the nine National Botanical Gardens of South Africa is located just outside Mbombela, Mpumalanga at the confluence of the Crocodile River and Nels River, which are separated by an extensive promontory. A lookout point at the far end of the garden, reached through a rainforest trail (surrounded by clivias, fig trees, and baobab) allows views of the river in the deep gorge.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Lowveld_National_Botanical_Garden",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Beside the Crocodile River"
+      },
+      {
+        "label": "Known for",
+        "value": "Waterfall and Lowveld plants"
+      }
+    ]
+  },
+  {
+    "name": "Sudwala Caves",
+    "images": [
+      {
+        "alt": "first cavern sudwala caves",
+        "author": "Guyermer",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Screaming_monster_main_cavern.jpg",
+        "filename": "Screaming monster main cavern.jpg",
+        "src": "/images/5ad45de72681.jpg"
+      },
+      {
+        "alt": "The entrance chamber.",
+        "author": "Guyermer",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Entrance_to_the_Sudwala_Caves.jpg",
+        "filename": "Entrance to the Sudwala Caves.jpg",
+        "src": "/images/775b204f2410.jpg"
+      },
+      {
+        "alt": "Picture taken by contributor (Claidheamhmor) at the Sudwala Caves on 2006-02-11, with a Canon Powershot A400 digital camera.",
+        "author": "Claidheamhmor at English Wikipedia",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:SudwalaCaves1.jpg",
+        "filename": "SudwalaCaves1.jpg",
+        "src": "/images/97870aa36948.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Sudwala_Caves",
+    "about": "The Sudwala Caves in Mpumalanga, South Africa, are set in Precambrian dolomite rock, which was first laid down about 2.8 billion years ago. The caves themselves formed about 240 million years ago.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Sudwala_Caves",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "West of Mbombela"
+      },
+      {
+        "label": "Known for",
+        "value": "Ancient limestone chambers"
+      }
+    ]
+  },
+  {
+    "name": "Mbombela Stadium",
+    "images": [
+      {
+        "alt": "Stadium Aerial view with Nelspruit in context",
+        "author": "Tadpolefarm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mbombela_Stadium_Aerial_View.jpg",
+        "filename": "Mbombela Stadium Aerial View.jpg",
+        "src": "/images/39825d71521b.jpg"
+      },
+      {
+        "alt": "Mbombela 11 sept 08 from south",
+        "author": "tadpolefarm",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mbombela_11_sept_08_from_south_-_panoramio.jpg",
+        "filename": "Mbombela 11 sept 08 from south - panoramio.jpg",
+        "src": "/images/e67503cc3de7.jpg"
+      },
+      {
+        "alt": "Mbombela Stadium 25Aug08",
+        "author": "tadpolefarm",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mbombela_Stadium_25Aug08_-_panoramio.jpg",
+        "filename": "Mbombela Stadium 25Aug08 - panoramio.jpg",
+        "src": "/images/61fbbd8f5e2a.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Mbombela_Stadium",
+    "about": "The Mbombela Stadium is a football and Rugby union all-seater stadium in Mbombela in the Mpumalanga province of South Africa. It was one of 10 venues for the 2010 FIFA World Cup and one of 5 newly constructed stadiums for the tournament.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Mbombela_Stadium",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Built for",
+        "value": "2010 World Cup"
+      },
+      {
+        "label": "Known for",
+        "value": "Supports shaped like giraffe necks"
+      }
+    ]
+  },
+  {
+    "name": "Kruger National Park",
+    "wikipedia": "https://en.wikipedia.org/wiki/Kruger_National_Park",
+    "images": [
+      {
+        "alt": "Two Chapman's zebra (formerly Burchell's zebra) in the southern Kruger National Park, South Africa",
+        "author": "Nithin bolar k",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kruger_Zebra.JPG",
+        "filename": "Kruger Zebra.JPG",
+        "src": "/images/6a614461e334.jpg"
+      },
+      {
+        "alt": "View on a granite kopje (740m) on the northern slope of Khandzalive (839m, towards left and out of view), near Berg-en-Dal, southwestern Kruger National Park. Malelane Mountain Bus",
+        "author": "Robert Cutts",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_Kruger_landscape.jpg",
+        "filename": "A Kruger landscape.jpg",
+        "src": "/images/40e3d65e7f36.jpg"
+      },
+      {
+        "alt": "African buffalo (Syncerus caffer) in mopane (Colophospermum mopane) shrubland near Mopani Camp, northern Kruger National Park. Habitat west of Mopani Camp is classified as \"mopane-",
+        "author": "Altaileopard",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buffalo_in_Mopane_Shrub_KrugerNP.JPG",
+        "filename": "Buffalo in Mopane Shrub KrugerNP.JPG",
+        "src": "/images/03b624d4e4f6.jpg"
+      }
+    ],
+    "about": "Kruger National Park (Afrikaans: [ˈkry.(j)ər]) is a national park in South Africa covering an area of 19,623 km2 (7,576 sq mi) in the provinces of Limpopo and Mpumalanga in the country's northeast. It extends 360 km (220 mi) from north to south and 65 km (40 mi) from east to west.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Kruger_National_Park",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Scale",
+        "value": "Nearly two million hectares"
+      },
+      {
+        "label": "Gates",
+        "value": "Numbi and Malelane are the closest"
+      }
+    ],
+    "video": {
+      "src": "/videos/3825158f72aa.webm",
+      "title": "Flap-neck Chamaeleon (Chamaeleo dilepis) - Tamboti Camp Access Road, Kruger NP, South Africa.webm",
+      "author": "Bernard DUPONT from FRANCE",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flap-neck_Chamaeleon_(Chamaeleo_dilepis)_-_Tamboti_Camp_Access_Road,_Kruger_NP,_South_Africa.webm"
+    }
+  },
+  {
+    "name": "God's Window",
+    "wikipedia": "https://en.wikipedia.org/wiki/God%27s_Window",
+    "about": "God’s Window is a cliff lookout on the Panorama Route, above the Blyde River Canyon. On a clear day the view runs out over the Lowveld.",
+    "images": [
+      {
+        "alt": "Vue du Mpumalanga.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:God%27s_Window,_Blyde_River_Canyon,_Mpumalanga,_South_Africa_(20327655438).jpg",
+        "filename": "God's Window, Blyde River Canyon, Mpumalanga, South Africa (20327655438).jpg",
+        "src": "/images/b9acc7f44ae5.jpg"
+      },
+      {
+        "alt": "Vue du Mpumalanga.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:God%27s_Window,_Blyde_River_Canyon,_Mpumalanga,_South_Africa_(20328007030).jpg",
+        "filename": "God's Window, Blyde River Canyon, Mpumalanga, South Africa (20328007030).jpg",
+        "src": "/images/39315e9938e6.jpg"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Route",
+        "value": "Panorama Route"
+      },
+      {
+        "label": "Known for",
+        "value": "Blyde River Canyon views"
+      }
+    ]
+  },
+  {
+    "name": "Bakone Malapa",
+    "images": [],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Polokwane"
+      },
+      {
+        "label": "Known for",
+        "value": "Northern Sotho open-air heritage"
+      }
+    ]
+  },
+  {
+    "name": "Polokwane Art Museum",
+    "images": [
+      {
+        "alt": "Vue du Limpopo en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polokwane_Art_Museum,_Limpopo,_South_Africa_(10190436294).jpg",
+        "filename": "Polokwane Art Museum, Limpopo, South Africa (10190436294).jpg",
+        "src": "/images/d01e6c3d9452.jpg"
+      },
+      {
+        "alt": "Vue du Limpopo en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polokwane_Art_Museum,_Limpopo,_South_Africa_(10190537725).jpg",
+        "filename": "Polokwane Art Museum, Limpopo, South Africa (10190537725).jpg",
+        "src": "/images/bafbfec3709e.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Polokwane"
+      },
+      {
+        "label": "Known for",
+        "value": "Municipal paintings and sculpture"
+      }
+    ]
+  },
+  {
+    "name": "Meropa",
+    "images": [],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Just outside Polokwane"
+      },
+      {
+        "label": "Known for",
+        "value": "Hotel and entertainment resort"
+      }
+    ]
+  },
+  {
+    "name": "Peter Mokaba Stadium",
+    "wikipedia": "https://en.wikipedia.org/wiki/Peter_Mokaba_Stadium",
+    "images": [
+      {
+        "alt": "South Africa, city of Polokwane, Peter Mokaba Stadium - France VS MEXICO",
+        "author": "Celso FLORES",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZA_Polokwane-_France_VS_MEXICO.jpg",
+        "filename": "ZA Polokwane- France VS MEXICO.jpg",
+        "src": "/images/5b36cb2881c5.jpg"
+      }
+    ],
+    "about": "The Peter Mokaba Stadium is a football and rugby union stadium in Polokwane (formerly Pietersburg), South Africa, that was used for the 2010 FIFA World Cup. It has a capacity to host 45,500 spectators but for the purposes of the 2010 FIFA World Cup the seating capacity was reduced to 41,733.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Peter_Mokaba_Stadium",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Opened",
+        "value": "2010"
+      },
+      {
+        "label": "Scale",
+        "value": "About 45,000 seats"
+      }
+    ]
+  },
+  {
+    "name": "Mapungubwe",
+    "wikipedia": "https://en.wikipedia.org/wiki/Mapungubwe_National_Park",
+    "images": [
+      {
+        "alt": "Vue du Limpopo en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mapungubwe,_Limpopo,_South_Africa_(20535429052).jpg",
+        "filename": "Mapungubwe, Limpopo, South Africa (20535429052).jpg",
+        "src": "/images/f50f0a0dbea0.jpg"
+      },
+      {
+        "alt": "Vue du Limpopo en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mapungubwe,_Limpopo,_South_Africa_(20356165510).jpg",
+        "filename": "Mapungubwe, Limpopo, South Africa (20356165510).jpg",
+        "src": "/images/16ddbea46d33.jpg"
+      },
+      {
+        "alt": "Vue du Limpopo en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mapungubwe,_Limpopo,_South_Africa_(20356293890).jpg",
+        "filename": "Mapungubwe, Limpopo, South Africa (20356293890).jpg",
+        "src": "/images/7f64602e74b3.jpg"
+      }
+    ],
+    "about": "Mapungubwe National Park is a national park in the Limpopo Province of South Africa. It forms part of the UNESCO Mapungubwe Cultural Landscape and the Greater Mapungubwe Transfrontier Conservation Area, abutting on the border with Botswana and Zimbabwe.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Mapungubwe_National_Park",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Status",
+        "value": "UNESCO World Heritage Site"
+      },
+      {
+        "label": "Where",
+        "value": "Limpopo River confluence"
+      }
+    ]
+  },
+  {
+    "name": "The Big Hole",
+    "images": [
+      {
+        "alt": "Open-pit diamond mine (known as the Big Hole or Kimberley Mine) in Kimberley, South Africa.",
+        "author": "Irene2005",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Open_pit_mine.jpg",
+        "filename": "Open pit mine.jpg",
+        "src": "/images/06322ea2b4fe.jpg"
+      },
+      {
+        "alt": "Vue de Northern Cape en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Big_Hole,_Kimberley,_Northern_Cape,_South_Africa_(20512398316).jpg",
+        "filename": "Big Hole, Kimberley, Northern Cape, South Africa (20512398316).jpg",
+        "src": "/images/3b38df7b6d9f.jpg"
+      },
+      {
+        "alt": "Vue de Northern Cape en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Big_Hole,_Kimberley,_Northern_Cape,_South_Africa_(20512571296).jpg",
+        "filename": "Big Hole, Kimberley, Northern Cape, South Africa (20512571296).jpg",
+        "src": "/images/0d6946a89128.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/Big_Hole",
+    "about": "The Kimberley Mine or Tim Kuilmine (Afrikaans: Groot Gat, lit. 'Big Hole') is an open-pit and underground mine in Kimberley, South Africa.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Big_Hole",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Kimberley"
+      },
+      {
+        "label": "Known for",
+        "value": "Historic diamond excavation and museum town"
+      }
+    ]
+  },
+  {
+    "name": "McGregor Museum",
+    "images": [
+      {
+        "alt": "McGregor Museum, Kimberley",
+        "author": "flowcomm",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:McGregor_Museum,_Kimberley_(4527868638).jpg",
+        "filename": "McGregor Museum, Kimberley (4527868638).jpg",
+        "src": "/images/2004f60205a8.jpg"
+      },
+      {
+        "alt": "Vue de Northern Cape en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:McGregor_Museum,_Kimberley,_Northern_Cape,_South_Africa_(19919425013).jpg",
+        "filename": "McGregor Museum, Kimberley, Northern Cape, South Africa (19919425013).jpg",
+        "src": "/images/eae41faf74cd.jpg"
+      },
+      {
+        "alt": "Vue de Northern Cape en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:McGregor_Museum,_Kimberley,_Northern_Cape,_South_Africa_(19919723834).jpg",
+        "filename": "McGregor Museum, Kimberley, Northern Cape, South Africa (19919723834).jpg",
+        "src": "/images/306fc0461505.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/McGregor_Museum",
+    "about": "The McGregor Museum in Kimberley, South Africa, originally known as the Alexander McGregor Memorial Museum, is a multidisciplinary museum which serves Kimberley and the Northern Cape, established in 1907.",
+    "aboutSource": "https://en.wikipedia.org/wiki/McGregor_Museum",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Kimberley"
+      },
+      {
+        "label": "Known for",
+        "value": "Natural history and Northern Cape archives"
+      }
+    ]
+  },
+  {
+    "name": "William Humphreys Art Gallery",
+    "images": [
+      {
+        "alt": "THE OUTING signed with the artist's monogram; signed on the reverse pen and ink, heightened with gouache 20 x 30cm EXHIBITED Strat Caldecott Exhibition, William Humphreys Art Galle",
+        "author": "Harry Stratford Caldecott (South African 1886-1929)",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Harry_Stratford_Caldecott_(South_African_1886-1929)_The_Outing.jpeg",
+        "filename": "Harry Stratford Caldecott (South African 1886-1929) The Outing.jpeg",
+        "src": "/images/f6f07bb33f46.jpg"
+      }
+    ],
+    "wikipedia": "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery",
+    "about": "The William Humphreys Art Gallery, in Kimberley, South Africa, was opened in 1952 and named after its principal benefactor, William Benbow Humphreys (1889–1965).",
+    "aboutSource": "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Kimberley"
+      },
+      {
+        "label": "Known for",
+        "value": "South African and international art"
+      }
+    ]
+  },
+  {
+    "name": "Wildebeest Kuil",
+    "wikipedia": "https://en.wikipedia.org/wiki/Wildebeest_Kuil_Rock_Art_Centre",
+    "images": [
+      {
+        "alt": "Elephant carving Wildebeest Kuil Rock Art Centre Kimberley South Africa",
+        "author": "amanderson2",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Elephant_carving,_Wildebeest_Kuil_Rock_Art_Centre,_Kimberley,_South_Africa.jpg",
+        "filename": "Elephant carving, Wildebeest Kuil Rock Art Centre, Kimberley, South Africa.jpg",
+        "src": "/images/9c47fac3cd86.jpg"
+      },
+      {
+        "alt": "Engraving of a gemsbok from the Wildebeest Kuil Rock Arts Site outside Kimberley South Africa.  The site is open to the public and is well interpreted.",
+        "author": "Waitabout",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gemsbok_engraving,_Wildebeest_Kuil,_Kimberley,_South_Africa.JPG",
+        "filename": "Gemsbok engraving, Wildebeest Kuil, Kimberley, South Africa.JPG",
+        "src": "/images/aede4b262b5a.jpg"
+      }
+    ],
+    "about": "Wildebeest Kuil Rock Art Centre is a rock engraving site with visitor centre on land owned by the !Xun and Khwe San situated about 16 km from Kimberley, Northern Cape, South Africa. It is a declared Provincial Heritage Site managed by the Northern Cape Rock Art Trust in association with the McGregor Museum.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Wildebeest_Kuil_Rock_Art_Centre",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Known for",
+        "value": "San engravings"
+      },
+      {
+        "label": "Where",
+        "value": "About 15 km from Kimberley"
+      }
+    ]
+  },
+  {
+    "name": "Magersfontein",
+    "wikipedia": "https://en.wikipedia.org/wiki/Battle_of_Magersfontein",
+    "images": [
+      {
+        "alt": "British troops making their way through a Boer barbed wire entaglement at the Battle of Magersfontein, Dec 11, 1899.",
+        "author": "Unknown authorUnknown author",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:British_in_Barbed_Wire_Magersfontein.jpg",
+        "filename": "British in Barbed Wire Magersfontein.jpg",
+        "src": "/images/094f303cdc43.jpg"
+      },
+      {
+        "alt": "Magersfontein Monument dedicated to the fallen Boers during the battle of December 1899",
+        "author": "Pereng051",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Magersfontein_Monument,Northern_Cape_,South_Africa_01.jpg",
+        "filename": "Magersfontein Monument,Northern Cape ,South Africa 01.jpg",
+        "src": "/images/813211826f12.jpg"
+      },
+      {
+        "alt": "Magersfontein Monument dedicated to the fallen Boers during the battle of December 1899",
+        "author": "Pereng051",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Magersfontein_Monument,Northern_Cape_,South_Africa_02.jpg",
+        "filename": "Magersfontein Monument,Northern Cape ,South Africa 02.jpg",
+        "src": "/images/bd89bfaef63f.jpg"
+      }
+    ],
+    "about": "The Battle of Magersfontein ( MAH-khərss-fon-tayn) was fought on 11 December 1899, at Magersfontein, near Kimberley, South Africa, on the borders of the Cape Colony and the independent republic of the Orange Free State (now in Sol Plaatje Local Municipality, Northern Cape). British forces under Lieutenant General Lord Methuen were advancing north along the railway line from the Cape to relieve the siege of Kimberley, but their path was blocked at Magersfontein by a Boer force that was entrenched in the surrounding ",
+    "aboutSource": "https://en.wikipedia.org/wiki/Battle_of_Magersfontein",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "When",
+        "value": "11 December 1899"
+      },
+      {
+        "label": "Where",
+        "value": "South of Kimberley"
+      }
+    ]
+  },
+  {
+    "name": "Mahikeng Museum",
+    "images": [
+      {
+        "alt": "Obelisk commemorating British soldiers who died during the Siege of Mafeking. Located at Mafeking (now Mafikeng) Museum, 6 Martin Street, Mafikeng 2745, South Africa.",
+        "author": "Diverman",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mafeking_Obelisk.jpg",
+        "filename": "Mafeking Obelisk.jpg",
+        "src": "/images/50acb02f1c6d.jpg"
+      },
+      {
+        "alt": "Mahikeng museum",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mafikeng,_North_West,_South_Africa_(20343201878).jpg",
+        "filename": "Mafikeng, North West, South Africa (20343201878).jpg",
+        "src": "/images/303430a97940.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Historic Mahikeng"
+      },
+      {
+        "label": "Known for",
+        "value": "Siege history and regional collections"
+      }
+    ]
+  },
+  {
+    "name": "Game Reserve",
+    "images": [
+      {
+        "alt": "Mafikeng Game Reserve, Mahikeng, North West Province, SOUTH AFRICA",
+        "author": "Bernard DUPONT from FRANCE",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Wildebeest_(Connochaetes_gnou)_hidden_by_tall_grass_..._(55078218950).jpg",
+        "filename": "Black Wildebeest (Connochaetes gnou) hidden by tall grass ... (55078218950).jpg",
+        "src": "/images/33aa0f23917b.jpg"
+      },
+      {
+        "alt": "Mafikeng Game Reserve, Mahikeng, North West Province, SOUTH AFRICA",
+        "author": "Bernard DUPONT from FRANCE",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Wildebeest_and_Blesbok_..._(55076956442).jpg",
+        "filename": "Black Wildebeest and Blesbok ... (55076956442).jpg",
+        "src": "/images/12ff050ca04a.jpg"
+      }
+    ],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Edge of Mahikeng"
+      },
+      {
+        "label": "Known for",
+        "value": "Grassland and wildlife close to town"
+      }
+    ]
+  },
+  {
+    "name": "Mmabatho Palms",
+    "images": [],
+    "wikipedia": "",
+    "facts": [
+      {
+        "label": "Where",
+        "value": "Beside Leopard Park"
+      },
+      {
+        "label": "Known for",
+        "value": "Hotel and golf-course retreat"
+      }
+    ]
+  },
+  {
+    "name": "Lotlamoreng Dam",
+    "wikipedia": "https://en.wikipedia.org/wiki/Lotlamoreng_Dam",
+    "images": [],
+    "facts": [
+      {
+        "label": "Where",
+        "value": "South of the city centre"
+      },
+      {
+        "label": "Known for",
+        "value": "Cultural gatherings beside the water"
+      }
+    ]
+  },
+  {
+    "name": "Botsalano Game Reserve",
+    "wikipedia": "https://en.wikipedia.org/wiki/Botsalano_Game_Reserve",
+    "images": [],
+    "about": "Botsalano Game Reserve is a 5800 hectare game reserve near the City of Mafikeng. It is located on flat land which is Kalahari bushveld and Acacia and Karee woodlands.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Botsalano_Game_Reserve",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "facts": [
+      {
+        "label": "Known for",
+        "value": "Rhino and open grassland"
+      },
+      {
+        "label": "Where",
+        "value": "About 30 km from Mahikeng"
+      }
+    ]
   }
 ]

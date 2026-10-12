@@ -804,9 +804,13 @@ export default function Explorer() {
               cityDescriptions[ci] ||
               city.intro
             }
-            photo={
-              landmarkSources.find((source) => source.name === city.landmarks[spot])?.images?.[0]
+            about={landmarkSources.find((source) => source.name === city.landmarks[spot])?.about}
+            aboutHref={
+              landmarkSources.find((source) => source.name === city.landmarks[spot])?.aboutSource
             }
+            facts={landmarkSources.find((source) => source.name === city.landmarks[spot])?.facts}
+            photos={landmarkSources.find((source) => source.name === city.landmarks[spot])?.images}
+            video={landmarkSources.find((source) => source.name === city.landmarks[spot])?.video}
             href={
               landmarkSources.find((source) => source.name === city.landmarks[spot])?.wikipedia ||
               city.landmarkLinks[spot] ||

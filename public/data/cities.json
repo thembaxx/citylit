@@ -13,7 +13,9 @@
     "landmarks": [
       "Ponte City",
       "Nelson Mandela Bridge",
-      "Orlando Towers"
+      "Orlando Towers",
+      "Constitution Hill",
+      "Apartheid Museum"
     ],
     "provinceCode": "GT",
     "scope": "Visitor destination and surrounding districts",
@@ -21,13 +23,17 @@
     "descriptions": [
       "A hollow cylindrical tower in Berea, once Africa’s tallest apartment building, and still the most unmistakable shape on the Joburg skyline.",
       "A cable-stayed bridge linking Newtown and Braamfontein, named for Mandela and lit above the railway tracks at night.",
-      "Soweto’s painted cooling towers, left from a power station and turned into a mural and an adventure jump."
+      "Soweto’s painted cooling towers, left from a power station and turned into a mural and an adventure jump.",
+      "A former prison fort on the ridge, now a museum of the constitution and the people who were held there.",
+      "A museum south of the city that walks through the apartheid years and the long fight against them."
     ],
     "accentColor": "#edb94c",
     "landmarkLinks": [
       "https://en.wikipedia.org/wiki/Ponte_City",
       "https://en.wikipedia.org/wiki/Nelson_Mandela_Bridge",
-      "https://en.wikipedia.org/wiki/Orlando_Power_Station"
+      "https://en.wikipedia.org/wiki/Orlando_Power_Station",
+      "https://en.wikipedia.org/wiki/Constitution_Hill,_Johannesburg",
+      "https://en.wikipedia.org/wiki/Apartheid_Museum"
     ]
   },
   {
@@ -44,7 +50,9 @@
     "landmarks": [
       "Table Mountain",
       "Bo-Kaap",
-      "Cape Point"
+      "Cape Point",
+      "Castle of Good Hope",
+      "Robben Island"
     ],
     "provinceCode": "WC",
     "scope": "Visitor destination and surrounding districts",
@@ -52,13 +60,17 @@
     "descriptions": [
       "A flat sandstone summit above the city, often wearing a cloud tablecloth, reached by paths or the cableway.",
       "Bright houses and Cape Malay history on the slopes above the city bowl, below Signal Hill.",
-      "A rocky headland in Table Mountain National Park, with a lighthouse where the peninsula runs out to sea."
+      "A rocky headland in Table Mountain National Park, with a lighthouse where the peninsula runs out to sea.",
+      "The star-shaped fort of the Dutch East India Company, still standing in the middle of the city.",
+      "The island prison in Table Bay where Nelson Mandela and other political prisoners were held."
     ],
     "accentColor": "#5eaff1",
     "landmarkLinks": [
       "https://en.wikipedia.org/wiki/Table_Mountain",
       "https://en.wikipedia.org/wiki/Bo-Kaap",
-      "https://en.wikipedia.org/wiki/Cape_Point"
+      "https://en.wikipedia.org/wiki/Cape_Point",
+      "https://en.wikipedia.org/wiki/Castle_of_Good_Hope",
+      "https://en.wikipedia.org/wiki/Robben_Island"
     ]
   },
   {
@@ -75,7 +87,9 @@
     "landmarks": [
       "Moses Mabhida",
       "uShaka Marine World",
-      "Umhlanga Lighthouse"
+      "Umhlanga Lighthouse",
+      "Durban Botanic Gardens",
+      "Durban City Hall"
     ],
     "provinceCode": "KZ",
     "scope": "Visitor destination and surrounding districts",
@@ -83,13 +97,17 @@
     "descriptions": [
       "The stadium arch of the 2010 World Cup, named for Moses Mabhida, with a skywalk and a view along the coast.",
       "A beachfront marine park of aquariums, wrecks and water play on Durban’s Point.",
-      "The red-and-white beacon on the rocks at Umhlanga, watching the Indian Ocean north of the city."
+      "The red-and-white beacon on the rocks at Umhlanga, watching the Indian Ocean north of the city.",
+      "A historic garden of rare plants and shaded walks in the Berea.",
+      "The domed civic hall on Francis Farewell Square, with the natural science museum and art gallery inside."
     ],
     "accentColor": "#4ed3b8",
     "landmarkLinks": [
       "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
       "https://en.wikipedia.org/wiki/UShaka_Marine_World",
-      "https://en.wikipedia.org/wiki/Umhlanga,_KwaZulu-Natal"
+      "https://en.wikipedia.org/wiki/Umhlanga,_KwaZulu-Natal",
+      "https://en.wikipedia.org/wiki/Durban_Botanic_Gardens",
+      "https://en.wikipedia.org/wiki/Durban_City_Hall"
     ]
   },
   {
@@ -105,7 +123,9 @@
     "landmarks": [
       "Freedom Park",
       "Union Buildings",
-      "State Theatre"
+      "State Theatre",
+      "Voortrekker Monument",
+      "Church Square"
     ],
     "intro": "Jacaranda streets, living history and a stage for new stories.",
     "tag": "Jacaranda streets, living history and a stage for new stories.",
@@ -114,13 +134,17 @@
     "descriptions": [
       "A hillside memorial celebrating heritage, remembrance and freedom, with museum spaces above Salvokop.",
       "Sandstone wings and terraced gardens above the administrative capital, a stage for national gatherings.",
-      "Drama, dance and music in the capital’s major performing-arts complex."
+      "Drama, dance and music in the capital’s major performing-arts complex.",
+      "A granite monument on a hill south of the capital, with a long marble frieze inside.",
+      "The historic heart of the capital, ringed by the Palace of Justice, the Ou Raadsaal and Kruger’s statue."
     ],
     "accentColor": "#b3a5ef",
     "landmarkLinks": [
       "https://www.freedompark.co.za/",
       "https://en.wikipedia.org/wiki/Union_Buildings",
-      "https://www.statetheatre.co.za/"
+      "https://www.statetheatre.co.za/",
+      "https://en.wikipedia.org/wiki/Voortrekker_Monument",
+      "https://en.wikipedia.org/wiki/Church_Square,_Pretoria"
     ]
   },
   {
@@ -135,8 +159,10 @@
     ],
     "landmarks": [
       "Village Museum",
-      "Botanical Garden",
-      "Dorp Street"
+      "Stellenbosch Botanical Garden",
+      "Dorp Street",
+      "Moederkerk",
+      "Jonkershoek"
     ],
     "intro": "Oak-lined streets, garden paths and the stories behind the gables.",
     "tag": "Oak-lined streets, garden paths and the stories behind the gables.",
@@ -145,13 +171,17 @@
     "descriptions": [
       "Restored period houses that walk you through centuries of everyday Stellenbosch life.",
       "A compact university garden of plant collections and quiet paths in the middle of town.",
-      "Oak-lined Dorp Street, framed by historic Cape Dutch gables and long town stories."
+      "Oak-lined Dorp Street, framed by historic Cape Dutch gables and long town stories.",
+      "The white church that closes the view down Drostdy Street, a landmark of the oak town.",
+      "A mountain reserve of fynbos, streams and waterfalls at the head of the valley."
     ],
     "accentColor": "#80b9d8",
     "landmarkLinks": [
       "https://stelmus.co.za/",
       "https://www.sun.ac.za/english/entities/botanical-garden",
-      "https://www.visitstellenbosch.org/"
+      "https://www.visitstellenbosch.org/",
+      "https://en.wikipedia.org/wiki/Moederkerk,_Stellenbosch",
+      "https://en.wikipedia.org/wiki/Jonkershoek_Nature_Reserve"
     ]
   },
   {
@@ -167,7 +197,9 @@
     "landmarks": [
       "City Hall",
       "Tatham Art Gallery",
-      "Botanical Garden"
+      "KZN Botanical Garden",
+      "KwaZulu-Natal Museum",
+      "Howick Falls"
     ],
     "intro": "A garden city where red-brick landmarks meet a rich art collection.",
     "tag": "A garden city where red-brick landmarks meet a rich art collection.",
@@ -176,13 +208,17 @@
     "descriptions": [
       "Red brick and a clock tower, the landmark heart of Pietermaritzburg’s centre.",
       "South African and international art in the building opposite City Hall.",
-      "Indigenous plants and tree-lined walks in the national garden below a green hillside."
+      "Indigenous plants and tree-lined walks in the national garden below a green hillside.",
+      "Natural and cultural collections in a city-centre museum, including the famous mammal halls.",
+      "A waterfall of about 95 metres on the uMngeni River, a short drive from the city."
     ],
     "accentColor": "#e6a487",
     "landmarkLinks": [
       "https://en.wikipedia.org/wiki/Pietermaritzburg",
       "https://www.tathamartgallery.org.za/visit",
-      "https://www.sanbi.org/gardens/kwazulu-natal/"
+      "https://www.sanbi.org/gardens/kwazulu-natal/",
+      "https://en.wikipedia.org/wiki/KwaZulu-Natal_Museum",
+      "https://en.wikipedia.org/wiki/Howick_Falls"
     ]
   },
   {
@@ -198,7 +234,9 @@
     "landmarks": [
       "Donkin Reserve",
       "Bayworld",
-      "Boardwalk"
+      "Boardwalk",
+      "Nelson Mandela Bay Stadium",
+      "Route 67"
     ],
     "intro": "Coastal light, public art and unexpected stories beside the bay.",
     "tag": "Coastal light, public art and unexpected stories beside the bay.",
@@ -207,13 +245,17 @@
     "descriptions": [
       "A stone pyramid and lighthouse on the hill that looks over Algoa Bay.",
       "A museum of regional natural and cultural history beside the beachfront.",
-      "A hotel and entertainment precinct on the Summerstrand beachfront."
+      "A hotel and entertainment precinct on the Summerstrand beachfront.",
+      "The 2010 World Cup stadium beside North End Lake.",
+      "A public-art walk of 67 works marking Mandela’s 67 years of public life."
     ],
     "accentColor": "#b8c9aa",
     "landmarkLinks": [
       "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
       "https://www.bayworld.co.za/",
-      "https://www.suninternational.com/luxury-collection/boardwalk"
+      "https://www.suninternational.com/luxury-collection/boardwalk",
+      "https://en.wikipedia.org/wiki/Nelson_Mandela_Bay_Stadium",
+      "https://en.wikipedia.org/wiki/Route_67_(Port_Elizabeth)"
     ]
   },
   {
@@ -228,8 +270,10 @@
     ],
     "landmarks": [
       "Oliewenhuis",
-      "Botanical Garden",
-      "Sand du Plessis Theatre"
+      "Free State Botanical Garden",
+      "Sand du Plessis Theatre",
+      "Naval Hill",
+      "Women's Memorial"
     ],
     "intro": "Art-filled gardens and open skies in the heart of the Free State.",
     "tag": "Art-filled gardens and open skies in the heart of the Free State.",
@@ -238,13 +282,17 @@
     "descriptions": [
       "Art collections and outdoor sculpture around a former residence on Grant’s Hill.",
       "A valley of indigenous trees, rocky koppies and walking trails.",
-      "Theatre, dance and music in Bloemfontein’s landmark performing-arts house."
+      "Theatre, dance and music in Bloemfontein’s landmark performing-arts house.",
+      "A game reserve and lookout on the hill above the city, with a planetarium on the crest.",
+      "The memorial to women and children who died in the camps of the South African War."
     ],
     "accentColor": "#e1b55f",
     "landmarkLinks": [
       "https://nationalmuseum.co.za/visitor-information/",
       "https://www.sanbi.org/gardens/free-state/",
-      "https://pacofs.co.za/"
+      "https://pacofs.co.za/",
+      "https://en.wikipedia.org/wiki/Naval_Hill",
+      "https://en.wikipedia.org/wiki/National_Women%27s_Monument"
     ]
   },
   {
@@ -260,7 +308,9 @@
     "landmarks": [
       "Lowveld Botanical Garden",
       "Sudwala Caves",
-      "Mbombela Stadium"
+      "Mbombela Stadium",
+      "Kruger National Park",
+      "God's Window"
     ],
     "intro": "Follow river paths, ancient stone and the warmth of the Lowveld.",
     "tag": "Follow river paths, ancient stone and the warmth of the Lowveld.",
@@ -269,13 +319,17 @@
     "descriptions": [
       "Rivers, a waterfall and a canopy of Lowveld plants beside the Crocodile River.",
       "Ancient limestone chambers and sculpted rock, west of the city.",
-      "A football stadium whose supports echo giraffe necks, built for the 2010 World Cup."
+      "A football stadium whose supports echo giraffe necks, built for the 2010 World Cup.",
+      "The great Lowveld reserve of bush, rivers and wildlife, reached from the gates near the city.",
+      "A cliff lookout on the escarpment, with a view across the Lowveld on a clear day."
     ],
     "accentColor": "#88c9b4",
     "landmarkLinks": [
       "https://www.sanbi.org/gardens/lowveld/",
       "https://sudwalacaves.com/",
-      "https://en.wikipedia.org/wiki/Mbombela_Stadium"
+      "https://en.wikipedia.org/wiki/Mbombela_Stadium",
+      "https://en.wikipedia.org/wiki/Kruger_National_Park",
+      "https://en.wikipedia.org/wiki/God%27s_Window"
     ]
   },
   {
@@ -290,8 +344,10 @@
     ],
     "landmarks": [
       "Bakone Malapa",
-      "Art Museum",
-      "Meropa"
+      "Polokwane Art Museum",
+      "Meropa",
+      "Peter Mokaba Stadium",
+      "Mapungubwe"
     ],
     "intro": "Northern Sotho heritage, local art and a gateway to Limpopo.",
     "tag": "Northern Sotho heritage, local art and a gateway to Limpopo.",
@@ -300,13 +356,17 @@
     "descriptions": [
       "A living heritage site where Northern Sotho homes and daily practice are shared outdoors.",
       "Paintings and sculpture from a municipal collection in the city.",
-      "A hotel and entertainment retreat a short drive from the city centre."
+      "A hotel and entertainment retreat a short drive from the city centre.",
+      "The city’s 2010 World Cup stadium, named for the struggle activist Peter Mokaba.",
+      "A world-heritage hill kingdom on the Limpopo, older than Great Zimbabwe and a long drive north of the city."
     ],
     "accentColor": "#dfa8c2",
     "landmarkLinks": [
       "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
       "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
-      "https://www.suninternational.com/meropa/hotel/"
+      "https://www.suninternational.com/meropa/hotel/",
+      "https://en.wikipedia.org/wiki/Peter_Mokaba_Stadium",
+      "https://en.wikipedia.org/wiki/Mapungubwe_National_Park"
     ]
   },
   {
@@ -322,7 +382,9 @@
     "landmarks": [
       "The Big Hole",
       "McGregor Museum",
-      "William Humphreys Art Gallery"
+      "William Humphreys Art Gallery",
+      "Wildebeest Kuil",
+      "Magersfontein"
     ],
     "intro": "Look beyond the diamond story to art, archives and desert light.",
     "tag": "Look beyond the diamond story to art, archives and desert light.",
@@ -331,13 +393,17 @@
     "descriptions": [
       "The historic diamond excavation, with a museum and a reconstructed mining town around the rim.",
       "Natural history and Northern Cape archives in a historic Kimberley building.",
-      "A gallery connecting South African art with international collections."
+      "A gallery connecting South African art with international collections.",
+      "A rock-engraving site and interpretation centre just outside the city.",
+      "A battlefield of the South African War, with a hill of trenches south of the diamond city."
     ],
     "accentColor": "#9ea9e7",
     "landmarkLinks": [
       "https://thebighole.com/",
       "https://www.museumsnc.co.za/",
-      "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery"
+      "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery",
+      "https://en.wikipedia.org/wiki/Wildebeest_Kuil_Rock_Art_Centre",
+      "https://en.wikipedia.org/wiki/Battle_of_Magersfontein"
     ]
   },
   {
@@ -353,7 +419,9 @@
     "landmarks": [
       "Mahikeng Museum",
       "Game Reserve",
-      "Mmabatho Palms"
+      "Mmabatho Palms",
+      "Lotlamoreng Dam",
+      "Botsalano Game Reserve"
     ],
     "intro": "Meet the stories, grasslands and heritage of the North West.",
     "tag": "Meet the stories, grasslands and heritage of the North West.",
@@ -362,13 +430,17 @@
     "descriptions": [
       "Regional collections and the stories of the historic town.",
       "Grassland and wildlife on a quieter edge of the city.",
-      "A hotel and villa retreat beside the Leopard Park golf course."
+      "A hotel and villa retreat beside the Leopard Park golf course.",
+      "A dam and cultural ground on the southern edge of the city.",
+      "Open grassland and rhino country near the Botswana border, north-west of the city."
     ],
     "accentColor": "#d2bf8d",
     "landmarkLinks": [
       "https://www.nwgov.co.za/tourism",
       "https://mmabathopalms.co.za/nearby-attractions/",
-      "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/"
+      "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
+      "https://en.wikipedia.org/wiki/Lotlamoreng_Dam",
+      "https://en.wikipedia.org/wiki/Botsalano_Game_Reserve"
     ]
   }
 ]

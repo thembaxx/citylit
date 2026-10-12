@@ -73,7 +73,24 @@ export const places = sourcedPlaces.map(({ facts, ...place }) => ({
   ...place,
   facts: normalizeFacts(facts || {}),
 })) as Place[];
-export const landmarkSources = sourcedLandmarks;
+export type LandmarkRecord = {
+  name: string;
+  wikipedia?: string;
+  images: Photo[];
+  about?: string;
+  aboutSource?: string;
+  aboutLicense?: string;
+  facts?: { label: string; value: string }[];
+  video?: {
+    src: string;
+    title: string;
+    author: string;
+    license: string;
+    licenseUrl?: string;
+    sourceUrl: string;
+  };
+};
+export const landmarkSources = sourcedLandmarks as LandmarkRecord[];
 export const cityImages = sourcedCityImages as Record<string, Photo[]>;
 export const categorySlug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 

@@ -4,16 +4,41 @@ import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
 import type { Photo } from "../lib/data";
 
+export type LandmarkFact = { label: string; value: string };
+export type LandmarkVideo = {
+  src: string;
+  title: string;
+  author: string;
+  license: string;
+  licenseUrl?: string;
+  sourceUrl: string;
+};
+
 type Props = {
   city: string;
   name: string;
   description: string;
-  photo?: Photo;
+  about?: string;
+  aboutHref?: string;
+  facts?: LandmarkFact[];
+  photos?: Photo[];
+  video?: LandmarkVideo;
   href?: string;
   onClose: () => void;
 };
 
-export default function LandmarkSheet({ city, name, description, photo, href, onClose }: Props) {
+export default function LandmarkSheet({
+  city,
+  name,
+  description,
+  about,
+  aboutHref,
+  facts,
+  photos = [],
+  video,
+  href,
+  onClose,
+}: Props) {
   const reduced = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -54,8 +79,45 @@ export default function LandmarkSheet({ city, name, description, photo, href, on
         </button>
         <p className="spot-kicker">{city}</p>
         <h2>{name}</h2>
-        <p>{description}</p>
-        {photo && <img src={photo.src} alt={photo.alt} />}
+        <p className="spot-lead">{description}</p>
+        {!!facts?.length && (
+          <ul className="spot-facts">
+            {facts.map((fact) => (
+              <li key={fact.label}>
+                <span>{fact.label}</span>
+                {fact.value}
+              </li>
+            ))}
+          </ul>
+        )}
+        {!!photos.length && (
+          <div className="spot-gallery">
+            {photos.map((photo) => (
+              <figure key={photo.src}>
+                <img src={photo.src} alt={photo.alt} />
+                <figcaption>
+                  {photo.author} · {photo.license}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+        {about && <p className="spot-about">{about}</p>}
+        {aboutHref && (
+          <a className="photo-link" href={aboutHref} target="_blank" rel="noreferrer">
+            Background from Wikipedia <ArrowUpRight size={14} weight="bold" />
+          </a>
+        )}
+        {video && (
+          <figure className="spot-film">
+            <video controls playsInline preload="metadata" poster={photos[0]?.src}>
+              <source src={video.src} />
+            </video>
+            <figcaption>
+              {video.title} · {video.author} · {video.license}
+            </figcaption>
+          </figure>
+        )}
         {href && (
           <a className="photo-link" href={href} target="_blank" rel="noreferrer">
             The story behind it <ArrowUpRight size={14} weight="bold" />

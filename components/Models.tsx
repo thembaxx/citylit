@@ -651,7 +651,7 @@ export function Landmark({
   index: number;
   reduced: boolean;
 }) {
-  const key = city * 3 + index;
+  const key = city * 3 + (index % 3);
   const accent = city === 1 ? "#8ec8ff" : city === 2 ? "#7ee0c8" : "#ffd27a";
   return (
     <group>

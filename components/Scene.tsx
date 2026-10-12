@@ -64,9 +64,12 @@ function World({
     previousMode.current = mode;
     setTravel(true);
     const aspect = size.width / Math.max(size.height, 1);
-    const pinch = Math.max(0, 1 - aspect);
+    const narrow = Math.max(0, 1 - aspect);
+    const squat = Math.max(0, aspect - 1.05);
     const fit =
-      mode === "map" ? Math.min(1.68, 1.06 + pinch * 1.15) : Math.min(2.35, 1.1 + pinch * 2.85);
+      mode === "map"
+        ? Math.min(2.15, 1.22 + narrow * 1.45 + squat * 0.42)
+        : Math.min(3.25, 1.7 + narrow * 2.35 + squat * 0.7);
     if (previousReset.current !== reset) viewMemory.delete(memoryKey);
     previousReset.current = reset;
     const remembered = viewMemory.get(memoryKey);
@@ -75,7 +78,7 @@ function World({
       : mode === "map"
         ? { x: 3.05 * fit, y: 6.85 * fit, z: 5.45 * fit }
         : { x: 2.72 * fit, y: 2.55 * fit, z: 4.25 * fit };
-    const lookY = mode === "map" ? 0.05 : 0.38;
+    const lookY = mode === "map" ? 0.02 : 0.24;
     const tween = gsap.to(camera.position, {
       ...target,
       duration: reduced ? 0 : changed ? 1.15 : 0.7,
@@ -95,18 +98,22 @@ function World({
     };
   }, [camera, mode, reset, reduced, invalidate, size.width, size.height, memoryKey]);
   useEffect(() => {
-    if (!group.current) return;
+    if (!group.current || size.height < 2) return;
     const node = group.current;
+    const aspect = size.width / Math.max(size.height, 1);
+    const narrow = Math.max(0, 1 - aspect);
+    const fitted =
+      mode === "map" ? Math.max(0.84, 0.96 - narrow * 0.1) : Math.max(0.76, 0.88 - narrow * 0.1);
     const context = gsap.context(() => {
       gsap.fromTo(
         node.scale,
-        { x: 0.72, y: 0.2, z: 0.72 },
+        { x: fitted * 0.72, y: fitted * 0.2, z: fitted * 0.72 },
         {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: reduced ? 0 : 0.95,
-          ease: "back.out(1.6)",
+          x: fitted,
+          y: fitted,
+          z: fitted,
+          duration: reduced ? 0 : 0.85,
+          ease: "power3.out",
           onUpdate: invalidate,
         },
       );
@@ -122,7 +129,7 @@ function World({
       );
     });
     return () => context.revert();
-  }, [mode, city, index, category, reduced, invalidate]);
+  }, [mode, city, index, category, reduced, invalidate, size.width, size.height]);
   useEffect(() => {
     if (!spin || !group.current) return;
     const node = group.current;
@@ -192,7 +199,7 @@ function World({
         ) : city < 3 ? (
           <Landmark city={city} index={index} reduced={gentle} />
         ) : (
-          <ExpandedLandmark city={city} index={index} reduced={gentle} />
+          <ExpandedLandmark city={city} index={index % 3} reduced={gentle} />
         )}
       </group>
       <OrbitControls
@@ -206,7 +213,7 @@ function World({
         dampingFactor={0.075}
         rotateSpeed={0.7}
         zoomSpeed={0.9}
-        target={[0, mode === "map" ? 0.05 : 0.38, 0]}
+        target={[0, mode === "map" ? 0.02 : 0.24, 0]}
         minDistance={mode === "map" ? 5.2 : 2.8}
         maxDistance={mode === "map" ? 22 : 14}
         minPolarAngle={0.2}

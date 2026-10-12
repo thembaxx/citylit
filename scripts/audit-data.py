@@ -17,7 +17,14 @@ for filename in ('city-images.json','landmarks.json','image-credits.json'):
  if filename=='city-images.json':
   for city,images in data.items():check_photos(images,city)
  elif filename=='landmarks.json':
-  for landmark in data:check_photos(landmark.get('images',[]),landmark['name']);check_url(landmark.get('wikipedia'),landmark['name'])
+  for landmark in data:
+   check_photos(landmark.get('images',[]),landmark['name']);check_url(landmark.get('wikipedia'),landmark['name']);check_url(landmark.get('aboutSource'),landmark['name']+'/about');check_url(landmark.get('aboutLicense'),landmark['name']+'/license')
+   video=landmark.get('video')
+   if video:
+    if not re.fullmatch(r'/videos/[a-f0-9]{12}\.(webm|mp4)',video.get('src','')):errors.append('Unsafe video path: '+landmark['name'])
+    elif not (ROOT/('public'+video['src'])).is_file():errors.append('Missing video: '+video['src'])
+    for field in ('sourceUrl','licenseUrl'):check_url(video.get(field),landmark['name']+'/video')
+    if not video.get('license') or not video.get('title'):errors.append('Missing video credit: '+landmark['name'])
  else:check_photos(data,filename)
 for city in cities:
  if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',city['slug']):errors.append('Unsafe city slug')

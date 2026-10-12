@@ -3,16 +3,17 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 import { cities } from "../lib/data";
+import { Alive } from "./Models";
 const colors = [
-  "#b3a5ef",
-  "#80b9d8",
-  "#e6a487",
-  "#b8c9aa",
-  "#e1b55f",
-  "#88c9b4",
-  "#dfa8c2",
-  "#9ea9e7",
-  "#d2bf8d",
+  "#f3c7a6",
+  "#7dce6a",
+  "#ffb15a",
+  "#f48cb6",
+  "#e23d3a",
+  "#c084fc",
+  "#3ec8c2",
+  "#f2d234",
+  "#8fd15a",
 ];
 function Block({
   p = [0, 0, 0],
@@ -215,87 +216,104 @@ export default function ExpandedLandmark({
   const garden = index === 1 && ["gables", "gallery", "waterfall", "grassland"].includes(model);
   const signature = Signature({ model, index, tone });
   return (
-    <group>
-      <mesh position={[0, -0.05, 0]}>
-        <cylinderGeometry args={[1.6, 1.35, 0.28, 8]} />
-        <meshStandardMaterial color="#ebe8d6" flatShading />
-      </mesh>
-      {signature ||
-        (garden ? (
-          <>
-            <mesh position={[0, 0.12, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.85, 10]} />
-              <meshStandardMaterial color="#72adb5" />
-            </mesh>
-            {[-1, 1].map((x) => (
-              <Tree key={x} x={x} z={-0.3} color={tone} />
-            ))}
-            <Block p={[0, 0.2, 0.7]} s={[1, 0.12, 0.2]} color="#b99268" />
-          </>
-        ) : model === "mine" && index === 0 ? (
-          <>
-            <mesh position={[0, 0.15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <ringGeometry args={[0.7, 1.3, 12]} />
-              <meshStandardMaterial color="#b69270" />
-            </mesh>
-            <mesh position={[0, 0.11, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.7, 12]} />
-              <meshStandardMaterial color="#427b93" />
-            </mesh>
-            <Block p={[1, 0.75, 0]} s={[0.13, 1.5, 0.13]} color={tone} />
-            <Block p={[0.5, 1.45, 0]} s={[1, 0.14, 0.14]} color={tone} />
-          </>
-        ) : model === "pyramid" && index === 0 ? (
-          <>
-            <mesh position={[-0.4, 0.65, 0]} rotation={[0, Math.PI / 4, 0]}>
-              <coneGeometry args={[0.75, 1.2, 4]} />
-              <meshStandardMaterial color="#cfa777" flatShading />
-            </mesh>
-            <mesh position={[0.8, 0.9, 0.2]}>
-              <cylinderGeometry args={[0.14, 0.25, 1.7, 8]} />
-              <meshStandardMaterial color="#f1ede0" />
-            </mesh>
-            <mesh position={[0.8, 1.85, 0.2]}>
-              <coneGeometry args={[0.27, 0.27, 8]} />
-              <meshStandardMaterial color={tone} />
-            </mesh>
-          </>
-        ) : model === "waterfall" && index === 0 ? (
-          <>
-            <Block p={[-0.4, 0.65, -0.2]} s={[0.8, 1.3, 0.6]} color="#acbaaa" />
-            <Block p={[0.35, 0.35, 0]} s={[0.6, 0.7, 0.7]} color="#bac9b5" />
-            <Block p={[-0.1, 0.7, 0.16]} s={[0.2, 1.2, 0.13]} color="#83d2e0" />
-            <Tree x={0.9} z={-0.4} color={tone} />
-          </>
-        ) : (
-          <>
-            <Block p={[0, 0.4, 0]} s={[1.8, 0.8, 1]} color={tone} />
-            {[-0.7, 0, 0.7].map((x) => (
-              <Block key={x} p={[x, 0.6, 0.52]} s={[0.13, 0.7, 0.12]} />
-            ))}
-            <Block p={[0, 0.9, 0]} s={[2, 0.15, 1.2]} />
-            {model === "gables" || model === "village" ? (
-              <mesh position={[0, 1.13, 0]} rotation={[0, Math.PI / 4, 0]} scale={[1.4, 1, 0.85]}>
-                <coneGeometry args={[0.8, 0.55, 4]} />
-                <meshStandardMaterial color="#a59687" flatShading />
+    <Alive reduced={reduced}>
+      <group>
+        <mesh position={[0, -0.22, 0]}>
+          <boxGeometry args={[3.3, 0.14, 3.3]} />
+          <meshStandardMaterial color="#6b4128" roughness={0.9} />
+        </mesh>
+        <mesh position={[0, -0.1, 0]}>
+          <boxGeometry args={[3.12, 0.12, 3.12]} />
+          <meshStandardMaterial color="#e6c98a" roughness={0.86} />
+        </mesh>
+        <mesh position={[0, 0.01, 0]}>
+          <boxGeometry args={[2.94, 0.14, 2.94]} />
+          <meshStandardMaterial color="#86d456" roughness={0.78} />
+        </mesh>
+        <Tree x={-1.15} z={1.05} color="#3e9a38" />
+        <Tree x={1.2} z={-1.05} color="#6bc44a" />
+        <Tree x={1.15} z={1.0} color="#9be06a" />
+        {signature ||
+          (garden ? (
+            <>
+              <mesh position={[0, 0.12, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+                <circleGeometry args={[0.85, 10]} />
+                <meshStandardMaterial color="#72adb5" />
               </mesh>
-            ) : (
-              <>
-                <Block p={[0, 1.25, 0]} s={[0.55, 0.6, 0.55]} color={tone} />
-                <mesh position={[0, 1.65, 0]}>
-                  <coneGeometry args={[0.38, 0.35, 8]} />
-                  <meshStandardMaterial color="#e8d5a4" flatShading />
+              {[-1, 1].map((x) => (
+                <Tree key={x} x={x} z={-0.3} color={tone} />
+              ))}
+              <Block p={[0, 0.2, 0.7]} s={[1, 0.12, 0.2]} color="#b99268" />
+            </>
+          ) : model === "mine" && index === 0 ? (
+            <>
+              <mesh position={[0, 0.15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+                <ringGeometry args={[0.7, 1.3, 12]} />
+                <meshStandardMaterial color="#b69270" />
+              </mesh>
+              <mesh position={[0, 0.11, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+                <circleGeometry args={[0.7, 12]} />
+                <meshStandardMaterial color="#427b93" />
+              </mesh>
+              <Block p={[1, 0.75, 0]} s={[0.13, 1.5, 0.13]} color={tone} />
+              <Block p={[0.5, 1.45, 0]} s={[1, 0.14, 0.14]} color={tone} />
+            </>
+          ) : model === "pyramid" && index === 0 ? (
+            <>
+              <mesh position={[-0.4, 0.65, 0]} rotation={[0, Math.PI / 4, 0]}>
+                <coneGeometry args={[0.75, 1.2, 4]} />
+                <meshStandardMaterial color="#cfa777" flatShading />
+              </mesh>
+              <mesh position={[0.8, 0.9, 0.2]}>
+                <cylinderGeometry args={[0.14, 0.25, 1.7, 8]} />
+                <meshStandardMaterial color="#f1ede0" />
+              </mesh>
+              <mesh position={[0.8, 1.85, 0.2]}>
+                <coneGeometry args={[0.27, 0.27, 8]} />
+                <meshStandardMaterial color={tone} />
+              </mesh>
+            </>
+          ) : model === "waterfall" && index === 0 ? (
+            <>
+              <Block p={[-0.4, 0.65, -0.2]} s={[0.8, 1.3, 0.6]} color="#acbaaa" />
+              <Block p={[0.35, 0.35, 0]} s={[0.6, 0.7, 0.7]} color="#bac9b5" />
+              <Block p={[-0.1, 0.7, 0.16]} s={[0.2, 1.2, 0.13]} color="#83d2e0" />
+              <Tree x={0.9} z={-0.4} color={tone} />
+            </>
+          ) : (
+            <>
+              <Block p={[0, 0.48, 0]} s={[1.9, 0.9, 1.05]} color="#f3c7a6" />
+              {[-0.55, 0, 0.55].map((x) => (
+                <Block key={x} p={[x, 0.55, 0.54]} s={[0.18, 0.28, 0.04]} color="#3d7ef0" />
+              ))}
+              <Block p={[0, 1.02, 0]} s={[2.1, 0.14, 1.25]} color="#2f7a45" />
+              {model === "gables" || model === "village" ? (
+                <mesh
+                  position={[0, 1.28, 0]}
+                  rotation={[0, Math.PI / 4, 0]}
+                  scale={[1.2, 0.7, 0.85]}
+                >
+                  <coneGeometry args={[0.7, 0.55, 4]} />
+                  <meshStandardMaterial color="#2f7a45" flatShading />
                 </mesh>
-              </>
-            )}
-            <Tree x={-1.15} z={0.5} color="#adba88" />
-            <Tree x={1.15} z={-0.3} color="#adba88" />
-          </>
-        ))}
-      <mesh ref={ornament} position={[0.9, 1.9, -0.6]}>
-        <octahedronGeometry args={[0.16, 0]} />
-        <meshStandardMaterial color={tone} flatShading />
-      </mesh>
-    </group>
+              ) : (
+                <>
+                  <Block p={[0, 1.35, 0]} s={[0.48, 0.55, 0.48]} color="#fff4e6" />
+                  <mesh position={[0, 1.75, 0]}>
+                    <coneGeometry args={[0.34, 0.32, 8]} />
+                    <meshStandardMaterial color="#e23d3a" flatShading />
+                  </mesh>
+                </>
+              )}
+              <Tree x={-1.15} z={0.5} color="#6bc44a" />
+              <Tree x={1.15} z={-0.3} color="#3e9a38" />
+            </>
+          ))}
+        <mesh ref={ornament} position={[0.9, 1.9, -0.6]}>
+          <octahedronGeometry args={[0.16, 0]} />
+          <meshStandardMaterial color={tone} flatShading />
+        </mesh>
+      </group>
+    </Alive>
   );
 }

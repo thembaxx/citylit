@@ -6,130 +6,102 @@ import { useReducedMotion } from "motion/react";
 import * as THREE from "three";
 import { cities } from "../lib/data";
 type Props = { mode: string; city: number; category: number; night: boolean; animate: boolean };
-const palettes = [
-  ["#edb94c", "#b69bff", "#f391b5"],
-  ["#62baff", "#bfabff", "#8de1d5"],
-  ["#5bdabe", "#89baff", "#f5b897"],
-];
+const ink = ["#ff7a59", "#ffd166", "#8bd450", "#f48cb6", "#c084fc", "#3ec8c2"];
 function Dreamscape({ mode, city, category, night, animate }: Props) {
   const { invalidate, viewport } = useThree();
   const root = useRef<THREE.Group>(null);
   const pointer = useRef({ x: 0, y: 0 });
-  const elapsed = useRef(0);
   const parallax = useRef({ x: 0, y: 0 });
-  const palette =
-    city < 3
-      ? palettes[city]
-      : [
-          cities[city].accentColor,
-          palettes[city % palettes.length][1],
-          palettes[(city + 1) % palettes.length][2],
-        ];
+  const gust = useRef(0);
+  const scroll = useRef(0);
+  const elapsed = useRef(0);
+  const accent = city < cities.length ? cities[city].accentColor : ink[0];
   const reading = ["map", "place", "guide", "editorial"].includes(mode);
-  const count =
-    mode === "map"
-      ? 18
-      : mode === "city"
-        ? 10
-        : mode === "category"
-          ? 12
-          : mode === "guide"
-            ? 10
-            : mode === "editorial"
-              ? 8
-              : 14;
+  const count = mode === "map" ? 14 : mode === "category" ? 16 : reading ? 10 : 12;
   const objects = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
-        x: (i % 2 === 0 ? -1 : 1) * (0.8 + (i % 3) * 0.05),
-        y: -0.8 + (i / Math.max(count - 1, 1)) * 1.6,
-        phase: i * 1.73 + city * 0.17,
-        size: reading ? 0.015 + (i % 3) * 0.007 : 0.07 + (i % 4) * 0.035,
+        x: (i % 2 === 0 ? -1 : 1) * (0.72 + (i % 4) * 0.06),
+        y: -0.85 + (i / Math.max(count - 1, 1)) * 1.7,
+        phase: i * 1.37 + category * 0.2,
+        size: reading ? 0.045 + (i % 3) * 0.012 : 0.08 + (i % 3) * 0.03,
+        kind: i % 4,
+        color: i % 5 === 0 ? accent : ink[(i + category) % ink.length],
       })),
-    [mode, count, reading, city],
+    [mode, count, reading, category, accent],
   );
   useEffect(() => {
     if (!animate) return;
-    // 24fps keeps this decorative layer inexpensive and stops demand rendering when paused.
     const timer = window.setInterval(invalidate, 1000 / 24);
     const move = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse") return;
       pointer.current = {
         x: event.clientX / window.innerWidth - 0.5,
         y: event.clientY / window.innerHeight - 0.5,
       };
     };
+    const wheel = (event: WheelEvent) => {
+      gust.current = THREE.MathUtils.clamp(gust.current + event.deltaY * 0.0016, -1.4, 1.4);
+    };
+    const scrolled = (event: Event) => {
+      const target = event.target;
+      if (target instanceof Element) scroll.current = target.scrollTop;
+    };
     window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("wheel", wheel, { passive: true });
+    document.addEventListener("scroll", scrolled, true);
     return () => {
       clearInterval(timer);
       window.removeEventListener("pointermove", move);
+      window.removeEventListener("wheel", wheel);
+      document.removeEventListener("scroll", scrolled, true);
     };
   }, [animate, invalidate]);
   useFrame((_, delta) => {
     if (!root.current) return;
+    const step = Math.min(delta, 0.08);
     if (animate) {
-      elapsed.current += Math.min(delta, 0.08);
-      const smooth = 1 - Math.exp(-delta * 2);
+      elapsed.current += step;
+      const smooth = 1 - Math.exp(-step * 3);
       parallax.current.x += (pointer.current.x - parallax.current.x) * smooth;
       parallax.current.y += (pointer.current.y - parallax.current.y) * smooth;
+      gust.current *= 0.96;
     }
     const time = elapsed.current;
-    const speed =
-      mode === "map"
-        ? 0.08
-        : mode === "place"
-          ? 0.13
-          : mode === "guide" || mode === "editorial"
-            ? 0.05
-            : 0.1;
+    const drift = scroll.current * 0.0008 + gust.current * 0.35;
     root.current.children.forEach((node, i) => {
       const p = objects[i];
       if (!p) return;
-      // Keep the central reading area clear; wide, slow paths stay near the edges.
-      node.position.x =
-        (p.x * viewport.width) / 2 +
-        Math.sin(time * speed + p.phase) * 0.07 +
-        parallax.current.x * 0.05;
+      const bob = animate ? Math.sin(time * 0.55 + p.phase) : 0;
+      node.position.x = (p.x * viewport.width) / 2 + parallax.current.x * 0.55 + bob * 0.08;
       node.position.y =
-        (p.y * viewport.height) / 2 +
-        Math.cos(time * speed * 0.8 + p.phase) * 0.13 -
-        parallax.current.y * 0.05;
-      node.rotation.x = p.phase + time * 0.012;
-      node.rotation.y = p.phase * 0.5 + time * 0.018;
-      node.rotation.z = p.phase + time * (mode === "category" ? 0.02 : 0.012);
+        (p.y * viewport.height) / 2 - parallax.current.y * 0.4 - drift * (0.4 + (i % 3) * 0.15);
+      node.rotation.z = p.phase + (animate ? time * 0.15 + gust.current : 0);
+      node.rotation.y = parallax.current.x * 0.6;
     });
   });
   return (
     <>
-      <OrthographicCamera makeDefault position={[0, 0, 12]} zoom={75} near={0.1} far={30} />
+      <OrthographicCamera makeDefault position={[0, 0, 12]} zoom={70} near={0.1} far={30} />
       <group ref={root}>
         {objects.map((p, i) => (
           <mesh
-            key={i}
+            key={`${mode}-${i}`}
             position={[(p.x * viewport.width) / 2, (p.y * viewport.height) / 2, -2]}
             raycast={() => {}}
           >
-            {reading ? (
-              <icosahedronGeometry args={[p.size, 0]} />
-            ) : mode === "city" && city % 3 === 0 ? (
-              <octahedronGeometry args={[p.size, 0]} />
-            ) : mode === "city" && city % 3 === 2 ? (
-              <torusGeometry args={[p.size * 1.8, 0.012, 4, 32, Math.PI * 1.5]} />
-            ) : mode === "category" && category === 0 ? (
-              <sphereGeometry args={[p.size, 8, 6]} />
-            ) : mode === "category" && category === 1 ? (
-              <boxGeometry args={[p.size * 1.5, p.size * 0.6, p.size]} />
-            ) : mode === "category" && category === 2 ? (
-              <coneGeometry args={[p.size, p.size * 2, 5]} />
-            ) : mode === "category" && category === 3 ? (
-              <tetrahedronGeometry args={[p.size, 0]} />
+            {p.kind === 0 ? (
+              <boxGeometry args={[p.size * 1.3, p.size * 0.85, p.size * 0.2]} />
+            ) : p.kind === 1 ? (
+              <coneGeometry args={[p.size * 0.7, p.size * 1.4, 5]} />
+            ) : p.kind === 2 ? (
+              <icosahedronGeometry args={[p.size * 0.7, 0]} />
             ) : (
-              <torusGeometry args={[p.size * 1.5, 0.016, 5, 32]} />
+              <octahedronGeometry args={[p.size * 0.65, 0]} />
             )}
             <meshBasicMaterial
-              color={palette[i % 3]}
+              color={p.color}
               transparent
-              opacity={night ? (reading ? 0.22 : 0.13) : 0.2}
+              opacity={night ? 0.16 : 0.28}
               depthWrite={false}
             />
           </mesh>

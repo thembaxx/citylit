@@ -77,7 +77,7 @@ test("the brand cache upgrade preserves previously downloaded venue photos", asy
     .toBe("cached-photograph");
 });
 
-test("settings trap focus, pause every mascot and persist preferences across routes", async ({
+test("settings trap focus, still the mascot and persist preferences across routes", async ({
   page,
 }) => {
   await page.goto("/");
@@ -87,17 +87,15 @@ test("settings trap focus, pause every mascot and persist preferences across rou
   await expect(
     settings.getByRole("button", { name: "Enable sounds", exact: true }),
   ).toHaveAttribute("aria-pressed", "false");
-  await settings.getByRole("button", { name: "Pause animations", exact: true }).click();
-  await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await settings.getByRole("checkbox", { name: /Essential motion/ }).check();
+  await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.keyboard.press("Escape");
   await expect(settings).not.toBeVisible();
   await expect(trigger).toBeFocused();
   await page.getByRole("link", { name: "Explore Durban", exact: true }).click();
   await trigger.click();
-  await expect(
-    settings.getByRole("button", { name: "Play animations", exact: true }),
-  ).toBeVisible();
+  await expect(settings.getByRole("checkbox", { name: /Essential motion/ })).toBeChecked();
+  await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.keyboard.press("Escape");
   await page.goto("/brand");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");

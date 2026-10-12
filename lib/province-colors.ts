@@ -1,14 +1,15 @@
 import { cities, places } from "./data";
+/** Clay-diorama colours matched to the province toy map. */
 const palette: Record<string, string> = {
-  GT: "#edb94c",
-  WC: "#5eaff1",
-  KZ: "#4ed3b8",
-  EC: "#e6a387",
-  FS: "#aab8ff",
-  LI: "#c7aaed",
-  MP: "#97c79d",
-  NW: "#e5ba87",
-  NC: "#e7a9bf",
+  GT: "#e23d3a",
+  WC: "#f48cb6",
+  KZ: "#e45bb5",
+  EC: "#3ec8c2",
+  FS: "#f08a2c",
+  LI: "#f2d234",
+  MP: "#a6d34a",
+  NW: "#8e63d6",
+  NC: "#4aa4ea",
 };
 export const availableProvinces: Record<string, number> = Object.fromEntries(
   [
@@ -24,6 +25,6 @@ export const availableProvinces: Record<string, number> = Object.fromEntries(
 export const provinceColors: Record<string, string> = Object.fromEntries(
   Object.entries(palette).map(([code, color]) => [
     code,
-    availableProvinces[code] === undefined ? "#c4c9b2" : color,
+    availableProvinces[code] === undefined ? "#c5c6c2" : color,
   ]),
 );

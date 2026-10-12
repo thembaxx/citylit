@@ -83,13 +83,12 @@ test("invalid city and cross-category place URLs return 404", async ({ request }
   expect((await request.get("/unknown-city")).status()).toBe(404);
   expect((await request.get("/cape-town/clubs/kirstenbosch")).status()).toBe(404);
 });
-test("reset, pause and reduced motion controls stay usable", async ({ page }) => {
+test("essential motion keeps exploring usable", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/johannesburg");
   await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await page.getByRole("button", { name: "Reset 3D view", exact: true }).click();
-  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Play animations", exact: true })).toBeVisible();
+  await page.getByRole("checkbox", { name: /Essential motion/ }).check();
+  await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.getByRole("button", { name: "Close", exact: true }).click();
   await page.getByRole("button", { name: "Next landmark", exact: true }).click();
   await expect(page.locator(".landmark-open h3")).toHaveText("Nelson Mandela Bridge");
@@ -103,7 +102,7 @@ test("touch swipe changes landmarks; drag and pinch manipulate 3D without naviga
   await page.goto("/cape-town");
   await expect(page.locator(".three-view")).toBeVisible();
   await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
+  await page.getByRole("checkbox", { name: /Essential motion/ }).check();
   await page.getByRole("button", { name: "Close", exact: true }).click();
   await expect(page.getByRole("dialog", { name: "Experience settings" })).toHaveCount(0);
   const cdp = await page.context().newCDPSession(page);

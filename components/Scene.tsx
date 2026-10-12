@@ -14,15 +14,15 @@ import ExpandedLandmark from "./ExpandedLandmark";
 import { Landmark, CategoryModel } from "./Models";
 const viewMemory = new Map<string, number[]>();
 const labelOffsets: Record<string, [number, number]> = {
-  NC: [-18, -7],
-  NW: [-8, -42],
-  GT: [31, -8],
-  LI: [-12, -43],
-  MP: [25, 26],
-  FS: [-20, 12],
-  KZ: [10, 30],
-  WC: [-5, 3],
-  EC: [-8, 25],
+  NC: [0, 0],
+  NW: [0, 0],
+  GT: [0, 0],
+  LI: [0, 0],
+  MP: [0, 0],
+  FS: [0, 0],
+  KZ: [0, 0],
+  WC: [0, 0],
+  EC: [0, 0],
 };
 type Props = {
   mode: string;
@@ -68,14 +68,15 @@ function World({
     const target = remembered
       ? { x: remembered[0], y: remembered[1], z: remembered[2] }
       : mode === "map"
-        ? { x: 4.6 * fit, y: 6.2 * fit, z: 6.5 * fit }
-        : { x: 3.8, y: 2.9, z: 5.4 };
+        ? { x: 3.2 * fit, y: 6.4 * fit, z: 5.4 * fit }
+        : { x: 3.6, y: 3.15, z: 5.2 };
+    const lookY = mode === "map" ? 0.2 : 0.55;
     const tween = gsap.to(camera.position, {
       ...target,
       duration: reduced ? 0 : changed ? 1.15 : 0.7,
       ease: "power3.inOut",
       onUpdate: () => {
-        camera.lookAt(0, mode === "map" ? 0 : 0.55, 0);
+        camera.lookAt(0, lookY, 0);
         invalidate();
       },
       onComplete: () => {
@@ -94,20 +95,25 @@ function World({
     const context = gsap.context(() => {
       gsap.fromTo(
         node.scale,
-        { x: 0.82, y: 0.82, z: 0.82 },
+        { x: 0.72, y: 0.2, z: 0.72 },
         {
           x: 1,
           y: 1,
           z: 1,
-          duration: reduced ? 0 : 0.7,
-          ease: "back.out(1.3)",
+          duration: reduced ? 0 : 0.95,
+          ease: "back.out(1.6)",
           onUpdate: invalidate,
         },
       );
       gsap.fromTo(
+        node.rotation,
+        { y: -0.4 },
+        { y: 0, duration: reduced ? 0 : 1.05, ease: "power3.out", onUpdate: invalidate },
+      );
+      gsap.fromTo(
         node.position,
-        { y: -0.42 },
-        { y: -0.15, duration: reduced ? 0 : 0.7, ease: "power3.out", onUpdate: invalidate },
+        { y: -0.55 },
+        { y: 0, duration: reduced ? 0 : 0.9, ease: "power3.out", onUpdate: invalidate },
       );
     });
     return () => context.revert();
@@ -131,10 +137,11 @@ function World({
   }, [spin, reduced, invalidate]);
   return (
     <>
-      <PerspectiveCamera makeDefault fov={38} position={[4.6, 6.2, 6.5]} />
-      <ambientLight intensity={1.6} />
-      <directionalLight position={[-4, 7, 5]} intensity={3} />
-      <directionalLight position={[4, 2, -4]} intensity={1.5} color="#c3d0ff" />
+      <PerspectiveCamera makeDefault fov={34} position={[3.2, 6.4, 5.4]} />
+      <hemisphereLight args={["#fff8ee", "#c4a27a", 0.72]} />
+      <ambientLight intensity={0.95} />
+      <directionalLight position={[5, 9, 4]} intensity={2.35} color="#fffaf3" />
+      <directionalLight position={[-5, 4, -2]} intensity={0.45} color="#ffe7c4" />
       <PerformanceMonitor
         onDecline={() => setDpr(1)}
         onIncline={() => setDpr(Math.min(window.devicePixelRatio, 1.5))}
@@ -164,10 +171,6 @@ function World({
           <ExpandedLandmark city={city} index={index} reduced={gentle} />
         )}
       </group>
-      <mesh position={[0, -0.48, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[mode === "map" ? 3.2 : 1.8, 64]} />
-        <meshBasicMaterial color="#c9ceba" transparent opacity={0.16} depthWrite={false} />
-      </mesh>
       <OrbitControls
         ref={controls}
         domElement={controlsElement}
@@ -177,11 +180,11 @@ function World({
         enablePan={false}
         enableDamping
         dampingFactor={0.075}
-        rotateSpeed={0.65}
-        zoomSpeed={0.7}
-        target={[0, mode === "map" ? 0 : 0.55, 0]}
-        minDistance={mode === "map" ? 6 : 3.4}
-        maxDistance={mode === "map" ? 17 : 8}
+        rotateSpeed={0.7}
+        zoomSpeed={0.9}
+        target={[0, mode === "map" ? 0.2 : 0.55, 0]}
+        minDistance={mode === "map" ? 4.2 : 2.8}
+        maxDistance={mode === "map" ? 16 : 9}
         minPolarAngle={0.2}
         maxPolarAngle={Math.PI / 2.15}
       />
@@ -213,7 +216,7 @@ export default function Scene(props: Props) {
     <div
       ref={ref}
       className="scene-view"
-      aria-label="Interactive 3D illustration: drag to rotate, pinch to zoom"
+      aria-label="Toy map of South Africa. Drag to spin, scroll or pinch to zoom, hover or hold a province, tap a sign to visit."
     >
       <View ref={trackControls} index={2} className="three-view" frames={Infinity}>
         {controlsElement && (
@@ -240,6 +243,9 @@ export default function Scene(props: Props) {
         </button>
       )}
       {props.mode === "map" && (
+        <p className="scene-hint">Drag to spin · pinch to zoom · poke a province</p>
+      )}
+      {props.mode === "map" && (
         <div className="map-label-layer">
           {provinceLabels.map((p) => (
             <div
@@ -257,9 +263,6 @@ export default function Scene(props: Props) {
                 } as React.CSSProperties
               }
             >
-              <svg className="province-leader" viewBox="-100 -100 200 200" aria-hidden="true">
-                <line x1="0" y1="0" x2={labelOffsets[p.code][0]} y2={labelOffsets[p.code][1]} />
-              </svg>
               {availableProvinces[p.code] !== undefined ? (
                 <Link
                   href={`/${cities[availableProvinces[p.code]].slug}`}
@@ -274,14 +277,11 @@ export default function Scene(props: Props) {
                   }}
                   onPointerDownCapture={(event) => event.stopPropagation()}
                 >
-                  <span>{p.name.toUpperCase()}</span>
-                  <small className="province-city-name">
-                    {cities[availableProvinces[p.code]].short}
-                  </small>
+                  {p.name}
                 </Link>
               ) : (
                 <span data-available="false" className="province">
-                  {p.name.toUpperCase()}
+                  {p.name}
                 </span>
               )}
             </div>

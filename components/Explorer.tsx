@@ -16,9 +16,6 @@ import {
   Search,
   Heart,
   X,
-  RotateCcw,
-  Pause,
-  Play,
   Sun,
   Moon,
   Volume2,
@@ -40,7 +37,6 @@ import { useKhwezi } from "./KhweziProvider";
 import BrandWordmark from "./BrandWordmark";
 import KhweziWelcome from "./KhweziWelcome";
 import KhweziMoment from "./KhweziMoment";
-import { brand } from "../lib/brand";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import { cities, categories, places, categorySlug, landmarkSources } from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), {
@@ -65,9 +61,9 @@ const cityDescriptions = [
   "KwaZulu-Natal. Ocean air, colourful streets and a warmer rhythm.",
 ];
 const themes = [
-  { name: "gold", glow: "169,112,40" },
-  { name: "ocean", glow: "46,111,160" },
-  { name: "coast", glow: "31,128,116" },
+  { name: "gold", glow: "214,140,48" },
+  { name: "ocean", glow: "214,96,72" },
+  { name: "coast", glow: "92,150,78" },
 ];
 const landmarkDescriptions = [
   [
@@ -117,7 +113,6 @@ export default function Explorer() {
     toggleSound,
     toggleHaptics,
     animations: animate,
-    toggleAnimations,
     dismissWelcome,
     moving,
   } = useKhwezi();
@@ -134,8 +129,8 @@ export default function Explorer() {
     [query, setQuery] = useState(params.get("q") || "");
   const [showSaved, setShowSaved] = useState(false),
     [help, setHelp] = useState(false),
-    [showSettings, setShowSettings] = useState(false),
-    [reset, setReset] = useState(0);
+    [showSettings, setShowSettings] = useState(false);
+  const reset = 0;
   const panelOpen = showSaved || help || showSettings;
   const modalRef = useRef<HTMLDialogElement>(null),
     searchRef = useRef<HTMLInputElement>(null),
@@ -143,7 +138,7 @@ export default function Explorer() {
   const reduced = useReducedMotion(),
     listing = mode === "category" && (params.get("view") === "places" || query.trim().length > 0);
   const theme =
-    mode === "map" ? { name: "country", glow: "77,71,110" } : { ...themes[ci % themes.length] };
+    mode === "map" ? { name: "country", glow: "140,138,132" } : { ...themes[ci % themes.length] };
   if (ci >= 3 && mode !== "map") {
     const hex = city.accentColor.slice(1);
     theme.glow = [0, 2, 4].map((start) => parseInt(hex.slice(start, start + 2), 16)).join(",");
@@ -321,8 +316,8 @@ export default function Explorer() {
       style={
         {
           "--city-glow": theme.glow,
-          "--city-color": mode === "map" ? brand.colors.electric : city.accentColor,
-          "--khwezi-spark": mode === "map" ? brand.colors.electric : city.accentColor,
+          "--city-color": mode === "map" ? "#ff6a3d" : city.accentColor,
+          "--khwezi-spark": mode === "map" ? "#ff6a3d" : city.accentColor,
         } as CSSProperties
       }
     >
@@ -864,18 +859,6 @@ export default function Explorer() {
                   </button>
                   <button
                     className="preference-button"
-                    aria-label={animate ? "Pause animations" : "Play animations"}
-                    aria-pressed={!animate}
-                    onClick={toggleAnimations}
-                  >
-                    {animate ? <Pause size={18} /> : <Play size={18} />}
-                    <span>
-                      {animate ? "Pause animations" : "Play animations"}
-                      <small>Applies to the map, landmarks and Khwezi</small>
-                    </span>
-                  </button>
-                  <button
-                    className="preference-button"
                     aria-pressed={haptics}
                     onClick={toggleHaptics}
                   >
@@ -894,18 +877,6 @@ export default function Explorer() {
                     Essential motion: keep transitions, stop continuous movement
                   </label>
                   {reduced && <p>Your device’s reduced-motion preference is respected.</p>}
-                  {mode !== "place" && (
-                    <button
-                      className="preference-button"
-                      aria-label="Reset 3D view"
-                      onClick={() => setReset((v) => v + 1)}
-                    >
-                      <RotateCcw size={18} />
-                      <span>
-                        Reset illustration<small>Return to its original view</small>
-                      </span>
-                    </button>
-                  )}
                   <button
                     className="pill-button"
                     onClick={() => {
@@ -942,11 +913,12 @@ export default function Explorer() {
                         </span>
                       </div>
                       <p>
-                        Drag the map or landmark to give it a spin. Pinch or scroll to get closer.
+                        Drag a landmark to tilt it, scroll or pinch to lean in, and hold to give it
+                        a little squash.
                       </p>
                       <p>
-                        Choose a colored province, swipe its landmark captions, then explore one
-                        category at a time. Open a category to browse its places.
+                        Poke a coloured province, swipe its landmark captions, then wander one
+                        category at a time.
                       </p>
                       <p>Tap a heart to keep a discovery for later.</p>
                       <a

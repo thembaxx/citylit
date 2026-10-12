@@ -61,15 +61,14 @@ function roundedSlab(w: number, d: number, thickness: number, radius: number) {
 
 function blobGeometry(rx: number, rz: number, seed: number, depth: number) {
   const shape = new THREE.Shape();
-  const n = 28;
+  const n = 80;
+  const lobes = 6 + (Math.abs(Math.floor(seed * 2.1)) % 3);
   const ring: [number, number][] = [];
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2;
-    const wobble =
-      1 +
-      0.2 * Math.sin(a * 2 + seed) +
-      0.11 * Math.sin(a * 3 + seed * 1.7) +
-      0.06 * Math.cos(a * 5 + seed * 0.6);
+    const scallop = Math.cos(lobes * a + seed * 1.7);
+    const irregular = 0.07 * Math.sin(a * 3 + seed * 4) + 0.045 * Math.cos(a * 5 + seed);
+    const wobble = 1.05 + 0.16 * scallop + irregular;
     ring.push([Math.cos(a) * rx * wobble, Math.sin(a) * rz * wobble]);
   }
   shape.moveTo(ring[0][0], ring[0][1]);
@@ -78,10 +77,10 @@ function blobGeometry(rx: number, rz: number, seed: number, depth: number) {
   return new THREE.ExtrudeGeometry(shape, {
     depth,
     bevelEnabled: true,
-    bevelThickness: 0.045,
-    bevelSize: 0.04,
-    bevelSegments: 3,
-    curveSegments: 2,
+    bevelThickness: 0.055,
+    bevelSize: 0.07,
+    bevelSegments: 4,
+    curveSegments: 1,
     steps: 1,
   });
 }
@@ -265,6 +264,17 @@ const pieces = [
 ] as const;
 
 const REST_Y = 0.12;
+const signOffset: Record<string, [number, number]> = {
+  LI: [0.04, -0.26],
+  MP: [0.2, -0.18],
+  NW: [-0.16, -0.2],
+  GT: [0.02, -0.06],
+  FS: [-0.1, -0.06],
+  KZ: [0.16, -0.16],
+  NC: [-0.38, -0.04],
+  EC: [0.06, -0.18],
+  WC: [-0.02, 0.22],
+};
 
 function ProvincePiece({
   piece,
@@ -400,15 +410,19 @@ function ProvincePiece({
         {piece.rocks.map(([x, z], i) => (
           <ToyRock key={`r${i}`} p={[x, piece.depth + 0.02, z]} scale={0.9 + i * 0.15} />
         ))}
-        <mesh position={[0, piece.depth + 0.28, 0]}>
+        <mesh position={[signOffset[code][0], piece.depth + 0.28, signOffset[code][1]]}>
           <cylinderGeometry args={[0.018, 0.026, 0.52, 8]} />
           <meshStandardMaterial color="#f4f4f2" roughness={0.45} />
         </mesh>
-        <mesh position={[0, piece.depth + 0.52, 0]}>
+        <mesh position={[signOffset[code][0], piece.depth + 0.52, signOffset[code][1]]}>
           <sphereGeometry args={[0.035, 10, 10]} />
           <meshStandardMaterial color="#ffffff" />
         </mesh>
-        <ProjectedLabel label={code} p={[0, piece.depth + 0.56, 0]} labels={labels} />
+        <ProjectedLabel
+          label={code}
+          p={[signOffset[code][0], piece.depth + 0.56, signOffset[code][1]]}
+          labels={labels}
+        />
       </group>
     </group>
   );

@@ -27,7 +27,7 @@ function Block({
   return (
     <mesh position={p} scale={s}>
       <boxGeometry />
-      <meshStandardMaterial color={color} flatShading />
+      <meshStandardMaterial color={color} roughness={0.62} />
     </mesh>
   );
 }
@@ -37,7 +37,7 @@ function Tree({ x, z, color }: { x: number; z: number; color: string }) {
       <Block p={[0, 0.35, 0]} s={[0.09, 0.7, 0.09]} color="#79634c" />
       <mesh position={[0, 0.85, 0]}>
         <icosahedronGeometry args={[0.36, 0]} />
-        <meshStandardMaterial color={color} flatShading />
+        <meshStandardMaterial color={color} roughness={0.62} />
       </mesh>
     </group>
   );
@@ -56,11 +56,11 @@ function Signature({ model, index, tone }: { model: string; index: number; tone:
         ))}
         <mesh position={[-0.55, 0.85, -0.15]}>
           <cylinderGeometry args={[0.14, 0.2, 1.2, 8]} />
-          <meshStandardMaterial color="#a8855c" flatShading />
+          <meshStandardMaterial color="#a8855c" roughness={0.62} />
         </mesh>
         <mesh position={[-0.55, 1.58, -0.15]}>
           <coneGeometry args={[0.14, 0.4, 5]} />
-          <meshStandardMaterial color="#f3b44c" flatShading />
+          <meshStandardMaterial color="#f3b44c" roughness={0.62} />
         </mesh>
         <Block p={[0.5, 0.65, -0.2]} s={[0.85, 0.6, 0.55]} color="#ebe6d5" />
         {[-0.1, 0.2, 0.5].map((x) => (
@@ -108,7 +108,7 @@ function Signature({ model, index, tone }: { model: string; index: number; tone:
         <Block p={[0.06, 1.7, 0.29]} s={[0.12, 0.025, 0.02]} color="#394959" />
         <mesh position={[0, 2.18, 0]}>
           <coneGeometry args={[0.38, 0.5, 4]} />
-          <meshStandardMaterial color="#72948f" flatShading />
+          <meshStandardMaterial color="#72948f" roughness={0.62} />
         </mesh>
         {[-0.7, -0.35, 0.35, 0.7].map((x) => (
           <Block key={x} p={[x, 0.48, 0.44]} s={[0.1, 0.6, 0.05]} color="#e3d6bd" />
@@ -123,7 +123,7 @@ function Signature({ model, index, tone }: { model: string; index: number; tone:
             <Block p={[0, 0.42, 0]} s={[0.7, 0.8, 0.65]} color={i === 1 ? tone : "#eee7d7"} />
             <mesh position={[0, 0.92, 0]} rotation={[0, Math.PI / 4, 0]} scale={[1, 1, 0.8]}>
               <coneGeometry args={[0.55, 0.45, 4]} />
-              <meshStandardMaterial color="#a69178" flatShading />
+              <meshStandardMaterial color="#a69178" roughness={0.62} />
             </mesh>
             <Block p={[0, 0.24, 0.34]} s={[0.15, 0.42, 0.06]} color="#7c9fa5" />
           </group>
@@ -142,11 +142,11 @@ function Signature({ model, index, tone }: { model: string; index: number; tone:
           <group key={i} position={[x, 0, z]}>
             <mesh position={[0, 0.38, 0]}>
               <cylinderGeometry args={[0.36, 0.39, 0.7, 10]} />
-              <meshStandardMaterial color="#d9b285" flatShading />
+              <meshStandardMaterial color="#d9b285" roughness={0.62} />
             </mesh>
             <mesh position={[0, 0.95, 0]}>
               <coneGeometry args={[0.5, 0.55, 10]} />
-              <meshStandardMaterial color="#b99458" flatShading />
+              <meshStandardMaterial color="#b99458" roughness={0.62} />
             </mesh>
             <Block p={[0, 0.2, 0.38]} s={[0.17, 0.35, 0.025]} color="#796954" />
           </group>
@@ -164,7 +164,7 @@ function Signature({ model, index, tone }: { model: string; index: number; tone:
             scale={[0.65, 0.65, 0.5]}
           >
             <dodecahedronGeometry args={[0.65, 0]} />
-            <meshStandardMaterial color={i % 2 ? "#c1ab94" : "#d6c5af"} flatShading />
+            <meshStandardMaterial color={i % 2 ? "#c1ab94" : "#d6c5af"} roughness={0.62} />
           </mesh>
         ))}
         <mesh position={[0, 0.55, 0.12]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -179,7 +179,7 @@ function Signature({ model, index, tone }: { model: string; index: number; tone:
       <group>
         <mesh position={[0, 0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <torusGeometry args={[0.85, 0.25, 8, 24]} />
-          <meshStandardMaterial color="#eee8d4" flatShading />
+          <meshStandardMaterial color="#eee8d4" roughness={0.62} />
         </mesh>
         <mesh position={[0, 0.15, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <circleGeometry args={[0.65, 20]} />
@@ -262,7 +262,7 @@ export default function ExpandedLandmark({
             <>
               <mesh position={[-0.4, 0.65, 0]} rotation={[0, Math.PI / 4, 0]}>
                 <coneGeometry args={[0.75, 1.2, 4]} />
-                <meshStandardMaterial color="#cfa777" flatShading />
+                <meshStandardMaterial color="#cfa777" roughness={0.62} />
               </mesh>
               <mesh position={[0.8, 0.9, 0.2]}>
                 <cylinderGeometry args={[0.14, 0.25, 1.7, 8]} />
@@ -294,14 +294,14 @@ export default function ExpandedLandmark({
                   scale={[1.2, 0.7, 0.85]}
                 >
                   <coneGeometry args={[0.7, 0.55, 4]} />
-                  <meshStandardMaterial color="#2f7a45" flatShading />
+                  <meshStandardMaterial color="#2f7a45" roughness={0.62} />
                 </mesh>
               ) : (
                 <>
                   <Block p={[0, 1.35, 0]} s={[0.48, 0.55, 0.48]} color="#fff4e6" />
                   <mesh position={[0, 1.75, 0]}>
                     <coneGeometry args={[0.34, 0.32, 8]} />
-                    <meshStandardMaterial color="#e23d3a" flatShading />
+                    <meshStandardMaterial color="#e23d3a" roughness={0.62} />
                   </mesh>
                 </>
               )}
@@ -311,7 +311,7 @@ export default function ExpandedLandmark({
           ))}
         <mesh ref={ornament} position={[0.9, 1.9, -0.6]}>
           <octahedronGeometry args={[0.16, 0]} />
-          <meshStandardMaterial color={tone} flatShading />
+          <meshStandardMaterial color={tone} roughness={0.62} />
         </mesh>
       </group>
     </Alive>

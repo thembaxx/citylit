@@ -1,5 +1,4 @@
 "use client";
-import UiIcon from "./UiIcon";
 import Link from "next/link";
 import { useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, View, PerformanceMonitor } from "@react-three/drei";
@@ -31,6 +30,8 @@ type Props = {
   category: number;
   onCity: (i: number) => void;
   onSelect: () => void;
+  onCycle?: (step: number) => void;
+  onSecret?: () => void;
   reset: number;
   animate: boolean;
 };
@@ -41,6 +42,7 @@ function World({
   category,
   onCity,
   onSelect,
+  onSecret,
   reset,
   animate,
   visible,
@@ -69,7 +71,7 @@ function World({
       ? { x: remembered[0], y: remembered[1], z: remembered[2] }
       : mode === "map"
         ? { x: 3.2 * fit, y: 6.4 * fit, z: 5.4 * fit }
-        : { x: 3.6, y: 3.15, z: 5.2 };
+        : { x: 2.65, y: 2.28, z: 4.05 };
     const lookY = mode === "map" ? 0.2 : 0.55;
     const tween = gsap.to(camera.position, {
       ...target,
@@ -135,26 +137,45 @@ function World({
       tween.kill();
     };
   }, [spin, reduced, invalidate]);
+  const heldLong = useRef(false);
+  const holdTimer = useRef<number | null>(null);
+  const clearHold = () => {
+    if (holdTimer.current) window.clearTimeout(holdTimer.current);
+    holdTimer.current = null;
+  };
   return (
     <>
       <PerspectiveCamera makeDefault fov={34} position={[3.2, 6.4, 5.4]} />
-      <hemisphereLight args={["#fff8ee", "#c4a27a", 0.72]} />
-      <ambientLight intensity={0.95} />
-      <directionalLight position={[5, 9, 4]} intensity={2.35} color="#fffaf3" />
-      <directionalLight position={[-5, 4, -2]} intensity={0.45} color="#ffe7c4" />
+      <hemisphereLight args={["#fff6ea", "#8d7360", 0.8]} />
+      <ambientLight intensity={0.62} />
+      <directionalLight position={[4.2, 8.2, 5]} intensity={2.15} color="#fffaf3" />
+      <directionalLight position={[-4.5, 3.2, -2]} intensity={0.55} color="#ffd0a8" />
+      <pointLight position={[0.4, 2.4, 2.2]} intensity={6} distance={9} color="#ffe3bf" />
       <PerformanceMonitor
         onDecline={() => setDpr(1)}
         onIncline={() => setDpr(Math.min(window.devicePixelRatio, 1.5))}
       />
       <group
         ref={group}
+        onPointerDown={() => {
+          heldLong.current = false;
+          clearHold();
+          if (!onSecret) return;
+          holdTimer.current = window.setTimeout(() => {
+            heldLong.current = true;
+            onSecret();
+          }, 860);
+        }}
+        onPointerUp={clearHold}
+        onPointerLeave={clearHold}
         onClick={(e) => {
           if (
             (e.nativeEvent.target as HTMLElement)?.closest(
-              "button,a,input,select,label,.modal-backdrop",
+              "button,a,input,select,label,.modal-backdrop,.spot-layer",
             )
           )
             return;
+          if (heldLong.current) return;
           if ((mode === "city" || mode === "category") && e.delta < 5) {
             e.stopPropagation();
             onSelect();
@@ -183,7 +204,7 @@ function World({
         rotateSpeed={0.7}
         zoomSpeed={0.9}
         target={[0, mode === "map" ? 0.2 : 0.55, 0]}
-        minDistance={mode === "map" ? 4.2 : 2.8}
+        minDistance={mode === "map" ? 4.2 : 2.35}
         maxDistance={mode === "map" ? 16 : 9}
         minPolarAngle={0.2}
         maxPolarAngle={Math.PI / 2.15}
@@ -195,7 +216,7 @@ export default function Scene(props: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const labels = useRef<Record<string, HTMLDivElement | null>>({});
   const [visible, setVisible] = useState(true);
-  const [spin, setSpin] = useState(0);
+  const [spin] = useState(0);
   const [controlsElement, setControlsElement] = useState<HTMLElement | null>(null);
   const trackControls = useCallback((element: HTMLElement | THREE.Group | null) => {
     setControlsElement(element instanceof HTMLElement ? element : null);
@@ -212,11 +233,25 @@ export default function Scene(props: Props) {
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
+  const gesture = useRef<{ x: number; y: number; t: number } | null>(null);
   return (
     <div
       ref={ref}
       className="scene-view"
-      aria-label="Toy map of South Africa. Drag to spin, scroll or pinch to zoom, hover or hold a province, tap a sign to visit."
+      aria-label="Toy map of South Africa. Drag to spin, scroll or pinch to zoom, swipe to discover, tap a toy to step inside."
+      onPointerDown={(event) => {
+        gesture.current = { x: event.clientX, y: event.clientY, t: performance.now() };
+      }}
+      onPointerUp={(event) => {
+        const start = gesture.current;
+        gesture.current = null;
+        if (!start || props.mode !== "city" || !props.onCycle) return;
+        const dx = event.clientX - start.x;
+        const dy = event.clientY - start.y;
+        const dt = performance.now() - start.t;
+        if (dt < 340 && Math.abs(dx) > 78 && Math.abs(dx) > Math.abs(dy) * 1.7)
+          props.onCycle(dx > 0 ? -1 : 1);
+      }}
     >
       <View ref={trackControls} index={2} className="three-view" frames={Infinity}>
         {controlsElement && (
@@ -229,22 +264,6 @@ export default function Scene(props: Props) {
           />
         )}
       </View>
-      {props.mode !== "map" && (
-        <button
-          className="model-spin"
-          aria-label="Spin illustration"
-          onClickCapture={(event) => {
-            event.stopPropagation();
-            setSpin((v) => v + 1);
-          }}
-          onPointerDownCapture={(event) => event.stopPropagation()}
-        >
-          <UiIcon name="rotate" size={22} />
-        </button>
-      )}
-      {props.mode === "map" && (
-        <p className="scene-hint">Drag to spin · pinch to zoom · poke a province</p>
-      )}
       {props.mode === "map" && (
         <div className="map-label-layer">
           {provinceLabels.map((p) => (

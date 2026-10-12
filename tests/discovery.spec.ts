@@ -14,7 +14,8 @@ test("map to place, sources, photos, saves and back navigation", async ({ page }
   await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
   await expect(page).toHaveURL(/\/cape-town$/);
   await expect(page.locator(".landmark-open h3")).toHaveText("Table Mountain");
-  await page.getByRole("button", { name: "Next landmark", exact: true }).click();
+  await page.locator(".landmark-caption").focus();
+  await page.keyboard.press("ArrowRight");
   await expect(page.locator(".landmark-open h3")).toHaveText("Bo-Kaap");
   await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
   await expect(page.locator(".place-card")).toHaveCount(0);
@@ -90,7 +91,8 @@ test("essential motion keeps exploring usable", async ({ page }) => {
   await page.getByRole("checkbox", { name: /Essential motion/ }).check();
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.getByRole("button", { name: "Close", exact: true }).click();
-  await page.getByRole("button", { name: "Next landmark", exact: true }).click();
+  await page.locator(".landmark-caption").focus();
+  await page.keyboard.press("ArrowRight");
   await expect(page.locator(".landmark-open h3")).toHaveText("Nelson Mandela Bridge");
 });
 test("touch swipe changes landmarks; drag and pinch manipulate 3D without navigating", async ({
@@ -287,7 +289,7 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   ).toBe(0);
 });
 
-test("linked breadcrumbs, two-line introductions and province chooser", async ({ page }) => {
+test("province chooser, place trail and a short introduction", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("link", { name: "Browse city guides", exact: true })).toBeVisible();
   await expect(page.locator(".map-pin")).toHaveCount(0);
@@ -298,31 +300,27 @@ test("linked breadcrumbs, two-line introductions and province chooser", async ({
     .first()
     .click();
   await expect(page).toHaveURL(/cape-town$/);
-  const trail = page.getByRole("navigation", { name: "Breadcrumb", exact: true });
-  await expect(trail.getByRole("link", { name: "Cape Town", exact: true })).toHaveAttribute(
-    "aria-current",
-    "page",
-  );
+  await expect(page.getByRole("navigation", { name: "Breadcrumb", exact: true })).toHaveCount(0);
   await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
-  await expect(trail.getByRole("link", { name: "Entertainment", exact: true })).toHaveAttribute(
-    "href",
-    "/cape-town/entertainment",
-  );
-  await page.getByPlaceholder("Search places").fill("Kirstenbosch");
-  await page.locator(".place-open").click();
-  await expect(trail.getByRole("link", { name: "Kirstenbosch", exact: true })).toHaveAttribute(
-    "aria-current",
-    "page",
-  );
-  await trail.getByRole("link", { name: "Parks & zoos", exact: true }).click();
-  await expect(page).toHaveURL(/cape-town\/parks-zoos$/);
+  await expect(page).toHaveURL(/\/cape-town\/entertainment$/);
   const description = page.locator(".heading-description");
   const height = await description.evaluate((el) => ({
     height: el.getBoundingClientRect().height,
     line: parseFloat(getComputedStyle(el).lineHeight),
   }));
   expect(height.height).toBeLessThanOrEqual(height.line * 2 + 1);
-  await trail.getByRole("link", { name: "South Africa", exact: true }).click();
+  await page.getByRole("link", { name: "Open Entertainment", exact: true }).click();
+  await page.getByPlaceholder("Search places").fill("Kirstenbosch");
+  await page.locator(".place-open").click();
+  const trail = page.getByRole("navigation", { name: "Breadcrumb", exact: true });
+  await expect(trail.getByRole("link", { name: "Kirstenbosch", exact: true })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await trail.getByRole("link", { name: "Parks & zoos", exact: true }).click();
+  await expect(page).toHaveURL(/cape-town\/parks-zoos$/);
+  await page.getByRole("button", { name: "Back to Cape Town", exact: true }).click();
+  await page.getByRole("button", { name: "Back to map", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
 });
 

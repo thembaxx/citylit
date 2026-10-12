@@ -105,7 +105,6 @@ test("nearby search handles location permission and new cities have one 3D canva
   ).toBeVisible();
   await page.goto("/kimberley");
   await expect(page.locator(".landmark-open h3")).toHaveText("The Big Hole");
-  await page.getByRole("button", { name: "Spin illustration", exact: true }).click();
   await expect(page).toHaveURL(/kimberley$/);
   await expect(page.locator("canvas")).toHaveCount(1);
   await page.goto("/mahikeng");

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { useThree } from "@react-three/fiber";
+import { useThree, useFrame } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
@@ -25,7 +25,7 @@ function Box({
   return (
     <mesh position={p} rotation={r}>
       <boxGeometry args={s} />
-      <meshStandardMaterial color={c} flatShading roughness={0.8} />
+      <meshStandardMaterial color={c} roughness={0.8} />
     </mesh>
   );
 }
@@ -43,7 +43,7 @@ function Cylinder({
   return (
     <mesh position={p} rotation={r}>
       <cylinderGeometry args={a} />
-      <meshStandardMaterial color={c} flatShading />
+      <meshStandardMaterial color={c} />
     </mesh>
   );
 }
@@ -90,15 +90,15 @@ function Grove() {
         <group key={i} position={[x, 0.02, z]} scale={0.9 + (i % 3) * 0.15}>
           <mesh position={[0, 0.08, 0]}>
             <cylinderGeometry args={[0.028, 0.04, 0.16, 5]} />
-            <meshStandardMaterial color="#8a5a32" flatShading />
+            <meshStandardMaterial color="#8a5a32" />
           </mesh>
           <mesh position={[0, 0.22, 0]}>
             <icosahedronGeometry args={[0.12, 0]} />
-            <meshStandardMaterial color={i % 2 ? "#6bc44a" : "#3e9a38"} flatShading />
+            <meshStandardMaterial color={i % 2 ? "#6bc44a" : "#3e9a38"} />
           </mesh>
           <mesh position={[0, 0.32, 0]} scale={[0.7, 0.8, 0.7]}>
             <icosahedronGeometry args={[0.09, 0]} />
-            <meshStandardMaterial color="#9be06a" flatShading />
+            <meshStandardMaterial color="#9be06a" />
           </mesh>
         </group>
       ))}
@@ -135,7 +135,7 @@ function Ponte() {
     <>
       <mesh position={[0, 0.16, 0]}>
         <boxGeometry args={[1.15, 0.28, 0.85]} />
-        <meshStandardMaterial color="#f7f6f3" flatShading roughness={0.7} />
+        <meshStandardMaterial color="#f7f6f3" roughness={0.7} />
       </mesh>
       <Cylinder p={[0, 1.25, 0]} a={[0.16, 0.26, 2.15, 20]} c="#f7f7f5" />
       <Cylinder p={[0, 1.95, 0]} a={[0.4, 0.4, 0.2, 24]} c="#5ec8e8" />
@@ -143,6 +143,17 @@ function Ponte() {
       <Cylinder p={[0, 2.28, 0]} a={[0.38, 0.38, 0.16, 24]} c="#5ec8e8" />
       <Cylinder p={[0, 2.55, 0]} a={[0.08, 0.14, 0.42, 12]} c="#f7f7f5" />
       <Cylinder p={[0, 2.82, 0]} a={[0.045, 0.045, 0.16, 8]} c="#e23d3a" />
+      {Array.from({ length: 5 }, (_, i) => (
+        <mesh key={i} position={[0.175, 0.62 + i * 0.34, 0]}>
+          <boxGeometry args={[0.015, 0.12, 0.16]} />
+          <meshStandardMaterial
+            color="#d7f3ff"
+            emissive="#7ec8e8"
+            emissiveIntensity={0.45}
+            roughness={0.28}
+          />
+        </mesh>
+      ))}
       {[-0.42, 0.42].map((x) => (
         <Box key={x} p={[x, 0.22, 0.48]} s={[0.22, 0.16, 0.08]} c={windowBlue} />
       ))}
@@ -220,7 +231,7 @@ function Mountain({ reduced }: { reduced: boolean }) {
   return (
     <>
       <mesh geometry={geometry}>
-        <meshStandardMaterial color="#9caa85" flatShading side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#9caa85" side={THREE.DoubleSide} />
       </mesh>
       {[-0.7, -0.35, 0, 0.35, 0.7].map((x, i) => (
         <Box
@@ -241,7 +252,7 @@ function Mountain({ reduced }: { reduced: boolean }) {
         {[-0.5, -0.2, 0.15, 0.45].map((x) => (
           <mesh key={x} position={[x, 1.35, 0]} scale={[1.6, 0.4, 1]}>
             <icosahedronGeometry args={[0.3, 1]} />
-            <meshStandardMaterial color={cream} flatShading />
+            <meshStandardMaterial color={cream} />
           </mesh>
         ))}
       </Float>
@@ -273,7 +284,7 @@ function Lighthouse({ cape = false, reduced = false }: { cape?: boolean; reduced
       {cape && (
         <mesh position={[0, 0.3, 0]} scale={[1.2, 0.5, 1]}>
           <dodecahedronGeometry args={[0.9, 0]} />
-          <meshStandardMaterial color="#96a586" flatShading />
+          <meshStandardMaterial color="#96a586" />
         </mesh>
       )}
       <group position={[0, cape ? 0.55 : 0, 0]}>
@@ -294,7 +305,7 @@ function Lighthouse({ cape = false, reduced = false }: { cape?: boolean; reduced
         })}
         <mesh position={[0, 1.62, 0]}>
           <coneGeometry args={[0.34, 0.23, 12]} />
-          <meshStandardMaterial color="#e23d3a" flatShading />
+          <meshStandardMaterial color="#e23d3a" />
         </mesh>
         <Cylinder p={[0, 1.8, 0]} a={[0.01, 0.015, 0.18, 6]} c={dark} />
         <Float autoInvalidate={!reduced} speed={reduced ? 0 : 1} floatIntensity={0.08}>
@@ -314,9 +325,14 @@ function Stadium() {
       <Cylinder p={[0, 0.35, 0]} a={[1.05, 1.05, 0.03, 32]} c="#839b78" />
       <Box p={[0, 0.39, 0]} s={[1.1, 0.02, 0.65]} c="#acbc87" />
       <mesh position={[0, 0.34, 0]}>
-        <torusGeometry args={[1.05, 0.075, 6, 40, Math.PI]} />
-        <meshStandardMaterial color="#ff7a59" />
+        <torusGeometry args={[1.05, 0.075, 8, 48, Math.PI]} />
+        <meshStandardMaterial color="#ff7a59" roughness={0.42} />
       </mesh>
+      <mesh position={[0, 1.28, 0]}>
+        <sphereGeometry args={[0.07, 16, 16]} />
+        <meshStandardMaterial color="#fff6ea" roughness={0.35} />
+      </mesh>
+      <Cable from={[0, 1.28, 0]} to={[0, 1.39, 0]} width={0.008} c={dark} />
       {Array.from({ length: 11 }, (_, i) => {
         const a = ((i + 0.5) / 12) * Math.PI;
         return (
@@ -349,7 +365,7 @@ function Ushaka({ reduced }: { reduced: boolean }) {
       <Box p={[0, 0.08, 0]} s={[2.1, 0.16, 1.25]} c="#7aafc3" />
       <mesh position={[0, 0.32, 0]} rotation={[0, 0, Math.PI / 2]} scale={[1, 0.4, 0.6]}>
         <cylinderGeometry args={[0.65, 0.3, 2, 8]} />
-        <meshStandardMaterial color={sand} flatShading />
+        <meshStandardMaterial color={sand} />
       </mesh>
       <Box p={[0, 0.4, 0]} s={[0.65, 0.35, 0.6]} c={cream} />
       <Cylinder p={[0, 0.85, 0]} a={[0.025, 0.025, 0.9, 6]} c={dark} />
@@ -357,7 +373,7 @@ function Ushaka({ reduced }: { reduced: boolean }) {
       <Float autoInvalidate={!reduced} speed={reduced ? 0 : 1.5} floatIntensity={0.1}>
         <mesh position={[0.55, 0.43, 0.53]} rotation={[0, 0, -0.3]} scale={[1, 0.4, 0.35]}>
           <icosahedronGeometry args={[0.34, 1]} />
-          <meshStandardMaterial color="#5383a4" flatShading />
+          <meshStandardMaterial color="#5383a4" />
         </mesh>
       </Float>
     </>
@@ -374,7 +390,7 @@ function Stars({ reduced }: { reduced: boolean }) {
       {[-0.7, 0.2, 0.7].map((x, i) => (
         <mesh key={x} position={[x, 1.25 + (i % 2) * 0.25, -0.2]}>
           <octahedronGeometry args={[0.1, 0]} />
-          <meshStandardMaterial color={i ? windowBlue : "#dbc381"} flatShading />
+          <meshStandardMaterial color={i ? windowBlue : "#dbc381"} />
         </mesh>
       ))}
     </Float>
@@ -444,7 +460,7 @@ function Giraffe() {
       <Cylinder p={[0.75, 0.6, -0.4]} a={[0.055, 0.09, 1.2, 6]} c="#7e7855" />
       <mesh position={[0.75, 1.25, -0.4]} scale={[1.8, 0.4, 1.2]}>
         <icosahedronGeometry args={[0.45, 0]} />
-        <meshStandardMaterial color="#8c9e75" flatShading />
+        <meshStandardMaterial color="#8c9e75" />
       </mesh>
     </>
   );
@@ -490,6 +506,14 @@ export function Alive({ children, reduced }: { children: ReactNode; reduced: boo
   const [hover, setHover] = useState(false);
   const [held, setHeld] = useState(false);
   const primed = useRef(false);
+  useFrame((state, delta) => {
+    const node = ref.current;
+    if (!node || reduced) return;
+    const step = Math.min(delta, 0.05);
+    const bob = held ? 0 : Math.sin(state.clock.elapsedTime * 0.9) * 0.045;
+    node.position.y += (bob - node.position.y) * (1 - Math.exp(-step * 2.4));
+    invalidate();
+  });
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
@@ -547,6 +571,63 @@ export function Alive({ children, reduced }: { children: ReactNode; reduced: boo
     </group>
   );
 }
+function Contact() {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.11, 0]} raycast={() => null}>
+      <circleGeometry args={[1.22, 36]} />
+      <meshBasicMaterial color="#1a140f" transparent opacity={0.2} depthWrite={false} />
+    </mesh>
+  );
+}
+function Spark({ reduced, color }: { reduced: boolean; color: string }) {
+  const ref = useRef<THREE.Group>(null);
+  const { invalidate } = useThree();
+  useFrame((_, delta) => {
+    if (reduced || !ref.current) return;
+    ref.current.rotation.y += Math.min(delta, 0.05) * 0.5;
+    invalidate();
+  });
+  return (
+    <group ref={ref}>
+      <mesh position={[1.22, 1.25, 0]}>
+        <octahedronGeometry args={[0.065, 0]} />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={0.85}
+          roughness={0.28}
+        />
+      </mesh>
+    </group>
+  );
+}
+function Bird({ reduced, color = "#f7f3ea" }: { reduced: boolean; color?: string }) {
+  const ref = useRef<THREE.Group>(null);
+  const { invalidate } = useThree();
+  useFrame((state, delta) => {
+    if (reduced || !ref.current) return;
+    const t = state.clock.elapsedTime;
+    ref.current.position.set(
+      Math.cos(t * 0.55) * 1.2,
+      1.62 + Math.sin(t * 1.5) * 0.07,
+      Math.sin(t * 0.55) * 0.72,
+    );
+    ref.current.rotation.y = -t * 0.55 + Math.PI / 2;
+    if (delta > 0) invalidate();
+  });
+  return (
+    <group ref={ref}>
+      <mesh>
+        <sphereGeometry args={[0.042, 10, 10]} />
+        <meshStandardMaterial color={color} roughness={0.45} />
+      </mesh>
+      <mesh position={[0.055, 0.01, 0]} rotation={[0, 0, 0.5]}>
+        <coneGeometry args={[0.028, 0.07, 6]} />
+        <meshStandardMaterial color={color} roughness={0.45} />
+      </mesh>
+    </group>
+  );
+}
 export function Landmark({
   city,
   index,
@@ -557,71 +638,88 @@ export function Landmark({
   reduced: boolean;
 }) {
   const key = city * 3 + index;
+  const accent = city === 1 ? "#8ec8ff" : city === 2 ? "#7ee0c8" : "#ffd27a";
   return (
-    <Alive reduced={reduced}>
-      <group>
-        <Base ocean={city === 2} />
-        {key === 0 ? (
-          <Ponte />
-        ) : key === 1 ? (
-          <Bridge />
-        ) : key === 2 ? (
-          <Towers />
-        ) : key === 3 ? (
-          <Mountain reduced={reduced} />
-        ) : key === 4 ? (
-          <BoKaap />
-        ) : key === 5 ? (
-          <Lighthouse cape reduced={reduced} />
-        ) : key === 6 ? (
-          <Stadium />
-        ) : key === 7 ? (
-          <Ushaka reduced={reduced} />
-        ) : (
-          <Lighthouse reduced={reduced} />
-        )}
-      </group>
-    </Alive>
+    <group>
+      <Contact />
+      <Alive reduced={reduced}>
+        <group>
+          <Base ocean={city === 2} />
+          {key === 0 ? (
+            <Ponte />
+          ) : key === 1 ? (
+            <Bridge />
+          ) : key === 2 ? (
+            <Towers />
+          ) : key === 3 ? (
+            <Mountain reduced={reduced} />
+          ) : key === 4 ? (
+            <BoKaap />
+          ) : key === 5 ? (
+            <Lighthouse cape reduced={reduced} />
+          ) : key === 6 ? (
+            <Stadium />
+          ) : key === 7 ? (
+            <Ushaka reduced={reduced} />
+          ) : (
+            <Lighthouse reduced={reduced} />
+          )}
+        </group>
+      </Alive>
+      <Spark reduced={reduced} color={accent} />
+      {index === 2 && <Bird reduced={reduced} color={accent} />}
+    </group>
   );
 }
 export function CategoryModel({ index, reduced }: { index: number; reduced: boolean }) {
+  const accent = ["#ff7a59", "#f3c7a6", "#c084fc", "#7dce6a", "#ffd166"][index] || "#ffd166";
   return (
-    <Alive reduced={reduced}>
-      <group>
-        <Base />
-        {index === 0 ? (
-          <Ferris reduced={reduced} />
-        ) : index === 1 ? (
-          <>
-            <Box p={[0, 0.28, 0]} s={[1.55, 0.42, 1.05]} c={peach} />
-            <Box p={[0, 0.56, 0]} s={[1.65, 0.12, 1.15]} c={roof} />
-            <Box p={[-0.7, 0.55, 0]} s={[0.1, 0.9, 1.1]} c={peach} />
-            {[-0.25, 0.25].map((z) => (
-              <Box key={z} p={[-0.44, 0.5, z]} s={[0.28, 0.18, 0.28]} c={windowBlue} />
-            ))}
-            <Box p={[0.35, 0.48, 0.54]} s={[0.22, 0.22, 0.02]} c={windowBlue} />
-            <Stars reduced={reduced} />
-          </>
-        ) : index === 2 ? (
-          <>
-            <Box p={[0, 0.12, 0]} s={[2, 0.22, 1.2]} c={peach} />
-            {[-0.8, 0.8].map((x) => (
-              <Box key={x} p={[x, 0.85, -0.1]} s={[0.35, 1.45, 0.2]} c={peach} />
-            ))}
-            <Box p={[0, 1.55, -0.1]} s={[2.1, 0.16, 0.28]} c={roof} />
-            <Cylinder p={[0, 0.47, 0.1]} a={[0.04, 0.04, 0.7, 8]} c={dark} />
-            <mesh position={[0, 0.83, 0.1]}>
-              <sphereGeometry args={[0.07, 8, 8]} />
-              <meshStandardMaterial color="#d3cdb3" />
-            </mesh>
-            <Stars reduced={reduced} />
-          </>
-        ) : index === 3 ? (
-          <Giraffe />
-        ) : (
-          <Disco reduced={reduced} />
-        )}
-      </group>
-    </Alive>
+    <group>
+      <Contact />
+      <Alive reduced={reduced}>
+        <group>
+          <Base />
+          {index === 0 ? (
+            <Ferris reduced={reduced} />
+          ) : index === 1 ? (
+            <>
+              <Box p={[0, 0.28, 0]} s={[1.55, 0.42, 1.05]} c={peach} />
+              <Box p={[0, 0.56, 0]} s={[1.65, 0.12, 1.15]} c={roof} />
+              <Box p={[-0.7, 0.55, 0]} s={[0.1, 0.9, 1.1]} c={peach} />
+              {[-0.25, 0.25].map((z) => (
+                <Box key={z} p={[-0.44, 0.5, z]} s={[0.28, 0.18, 0.28]} c={windowBlue} />
+              ))}
+              <Box p={[0.35, 0.48, 0.54]} s={[0.22, 0.22, 0.02]} c={windowBlue} />
+              <mesh position={[0.72, 0.08, 0.42]}>
+                <sphereGeometry args={[0.05, 12, 12]} />
+                <meshStandardMaterial color="#ffe7a8" emissive="#ffd166" emissiveIntensity={0.6} />
+              </mesh>
+              <Stars reduced={reduced} />
+            </>
+          ) : index === 2 ? (
+            <>
+              <Box p={[0, 0.12, 0]} s={[2, 0.22, 1.2]} c={peach} />
+              {[-0.8, 0.8].map((x) => (
+                <Box key={x} p={[x, 0.85, -0.1]} s={[0.35, 1.45, 0.2]} c={peach} />
+              ))}
+              <Box p={[0, 1.55, -0.1]} s={[2.1, 0.16, 0.28]} c={roof} />
+              <Cylinder p={[0, 0.47, 0.1]} a={[0.04, 0.04, 0.7, 8]} c={dark} />
+              <mesh position={[0, 0.83, 0.1]}>
+                <sphereGeometry args={[0.07, 12, 12]} />
+                <meshStandardMaterial color="#d3cdb3" roughness={0.4} />
+              </mesh>
+              <Box p={[0, 0.42, 0.62]} s={[0.55, 0.7, 0.04]} c="#6d4c7d" />
+              <Stars reduced={reduced} />
+            </>
+          ) : index === 3 ? (
+            <Giraffe />
+          ) : (
+            <Disco reduced={reduced} />
+          )}
+        </group>
+      </Alive>
+      <Spark reduced={reduced} color={accent} />
+      {index === 3 && <Bird reduced={reduced} color={accent} />}
+    </group>
   );
 }

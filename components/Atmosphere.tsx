@@ -17,14 +17,14 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
   const elapsed = useRef(0);
   const accent = city < cities.length ? cities[city].accentColor : ink[0];
   const reading = ["map", "place", "guide", "editorial"].includes(mode);
-  const count = mode === "map" ? 14 : mode === "category" ? 16 : reading ? 10 : 12;
+  const count = mode === "map" ? 9 : mode === "category" ? 10 : reading ? 7 : 8;
   const objects = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
         x: (i % 2 === 0 ? -1 : 1) * (0.72 + (i % 4) * 0.06),
         y: -0.85 + (i / Math.max(count - 1, 1)) * 1.7,
         phase: i * 1.37 + category * 0.2,
-        size: reading ? 0.045 + (i % 3) * 0.012 : 0.08 + (i % 3) * 0.03,
+        size: reading ? 0.07 + (i % 3) * 0.02 : 0.12 + (i % 3) * 0.045,
         kind: i % 4,
         color: i % 5 === 0 ? accent : ink[(i + category) % ink.length],
       })),
@@ -32,7 +32,6 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
   );
   useEffect(() => {
     if (!animate) return;
-    const timer = window.setInterval(invalidate, 1000 / 24);
     const move = (event: PointerEvent) => {
       pointer.current = {
         x: event.clientX / window.innerWidth - 0.5,
@@ -40,7 +39,7 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
       };
     };
     const wheel = (event: WheelEvent) => {
-      gust.current = THREE.MathUtils.clamp(gust.current + event.deltaY * 0.0016, -1.4, 1.4);
+      gust.current = THREE.MathUtils.clamp(gust.current + event.deltaY * 0.0012, -1.2, 1.2);
     };
     const scrolled = (event: Event) => {
       const target = event.target;
@@ -50,33 +49,35 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
     window.addEventListener("wheel", wheel, { passive: true });
     document.addEventListener("scroll", scrolled, true);
     return () => {
-      clearInterval(timer);
       window.removeEventListener("pointermove", move);
       window.removeEventListener("wheel", wheel);
       document.removeEventListener("scroll", scrolled, true);
     };
-  }, [animate, invalidate]);
+  }, [animate]);
+  const halo = useRef<THREE.Mesh>(null);
   useFrame((_, delta) => {
     if (!root.current) return;
-    const step = Math.min(delta, 0.08);
+    const step = Math.min(delta, 0.05);
     if (animate) {
       elapsed.current += step;
-      const smooth = 1 - Math.exp(-step * 3);
+      const smooth = 1 - Math.exp(-step * 2.4);
       parallax.current.x += (pointer.current.x - parallax.current.x) * smooth;
       parallax.current.y += (pointer.current.y - parallax.current.y) * smooth;
-      gust.current *= 0.96;
+      gust.current *= 0.97;
+      if (halo.current) halo.current.rotation.z += step * 0.08;
+      invalidate();
     }
     const time = elapsed.current;
-    const drift = scroll.current * 0.0008 + gust.current * 0.35;
+    const drift = scroll.current * 0.0008 + gust.current * 0.28;
     root.current.children.forEach((node, i) => {
       const p = objects[i];
       if (!p) return;
-      const bob = animate ? Math.sin(time * 0.55 + p.phase) : 0;
-      node.position.x = (p.x * viewport.width) / 2 + parallax.current.x * 0.55 + bob * 0.08;
+      const bob = animate ? Math.sin(time * 0.42 + p.phase) : 0;
+      node.position.x = (p.x * viewport.width) / 2 + parallax.current.x * 0.7 + bob * 0.12;
       node.position.y =
-        (p.y * viewport.height) / 2 - parallax.current.y * 0.4 - drift * (0.4 + (i % 3) * 0.15);
-      node.rotation.z = p.phase + (animate ? time * 0.15 + gust.current : 0);
-      node.rotation.y = parallax.current.x * 0.6;
+        (p.y * viewport.height) / 2 - parallax.current.y * 0.45 - drift * (0.35 + (i % 3) * 0.12);
+      node.rotation.z = p.phase * 0.2 + (animate ? time * 0.08 : 0);
+      node.rotation.y = parallax.current.x * 0.4;
     });
   });
   return (
@@ -86,27 +87,28 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
         {objects.map((p, i) => (
           <mesh
             key={`${mode}-${i}`}
-            position={[(p.x * viewport.width) / 2, (p.y * viewport.height) / 2, -2]}
+            position={[(p.x * viewport.width) / 2, (p.y * viewport.height) / 2, -2 - (i % 3) * 0.4]}
             raycast={() => {}}
           >
-            {p.kind === 0 ? (
-              <boxGeometry args={[p.size * 1.3, p.size * 0.85, p.size * 0.2]} />
-            ) : p.kind === 1 ? (
-              <coneGeometry args={[p.size * 0.7, p.size * 1.4, 5]} />
-            ) : p.kind === 2 ? (
-              <icosahedronGeometry args={[p.size * 0.7, 0]} />
-            ) : (
-              <octahedronGeometry args={[p.size * 0.65, 0]} />
-            )}
+            <sphereGeometry args={[p.size, 18, 14]} />
             <meshBasicMaterial
               color={p.color}
               transparent
-              opacity={night ? 0.16 : 0.28}
+              opacity={night ? 0.1 + (i % 3) * 0.03 : 0.16 + (i % 3) * 0.04}
               depthWrite={false}
             />
           </mesh>
         ))}
       </group>
+      <mesh ref={halo} position={[0, -0.2, -4]} raycast={() => {}}>
+        <torusGeometry args={[2.4, 0.012, 8, 64]} />
+        <meshBasicMaterial
+          color={accent}
+          transparent
+          opacity={night ? 0.12 : 0.2}
+          depthWrite={false}
+        />
+      </mesh>
     </>
   );
 }

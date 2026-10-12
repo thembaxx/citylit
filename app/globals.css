@@ -3225,6 +3225,9 @@ button:disabled {
   padding: 7px 12px;
   color: #1c1c1e;
 }
+.projected-label .province-active::before {
+  content: none;
+}
 .model-spin {
   display: grid;
   place-items: center;
@@ -4511,4 +4514,213 @@ button {
 }
 .lightbox-image-area {
   height: calc(100dvh - 170px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+.game-city .game-heading,
+.game-category .game-heading,
+.game-map .game-heading {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.game-city .game-heading h1,
+.game-category .game-heading h1 {
+  font-size: clamp(28px, 7vw, 46px);
+}
+.game-map .game-heading h1 {
+  font-size: clamp(42px, 11vw, 72px);
+}
+.game-city .roman-chapter,
+.game-category .roman-chapter,
+.game-map .roman-chapter {
+  display: none;
+}
+.game-city .game-controls,
+.game-category .game-controls {
+  padding-top: 0;
+}
+.landmark-open {
+  background: none;
+}
+.carousel-progress span {
+  width: 16px;
+  height: 4px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ink) 22%, transparent);
+  display: block;
+  transition:
+    width 0.25s ease,
+    background 0.25s ease;
+}
+.carousel-progress .selected,
+.carousel-progress span.selected {
+  width: 28px;
+  background: var(--city-color, var(--accent));
+}
+.ivory-button {
+  background: var(--ink);
+  color: var(--bg);
+}
+.horizon {
+  position: absolute;
+  left: -18%;
+  right: -18%;
+  bottom: -6%;
+  height: 48%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(var(--city-glow), 0.45), transparent 64%);
+  animation: horizon-breathe 9s ease-in-out infinite;
+  pointer-events: none;
+}
+.motes i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(var(--city-glow), 0.9);
+  left: calc(10% + (var(--i) * 12%));
+  bottom: calc(22% + (var(--i) * 5%));
+  opacity: 0.28;
+  animation: mote-drift 12s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -1.5s);
+}
+.fade-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 6;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  color: var(--ink);
+  font:
+    600 12px/1.3 "DM Sans",
+    sans-serif;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: calc(100% - 32px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: hint-life 4.2s ease forwards;
+}
+.spot-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  background: color-mix(in srgb, var(--bg) 28%, transparent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.spot-sheet {
+  position: relative;
+  width: min(560px, 100%);
+  margin: 0 12px max(12px, env(safe-area-inset-bottom));
+  padding: 22px 22px 20px;
+  border-radius: 28px;
+  background: var(--surface-glass);
+  color: var(--ink);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+  text-align: left;
+  max-height: min(72dvh, 560px);
+  overflow: auto;
+}
+.spot-sheet h2 {
+  font-size: clamp(32px, 8vw, 48px);
+  margin: 2px 36px 8px 0;
+}
+.spot-sheet p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 15px;
+}
+.spot-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px !important;
+}
+.spot-sheet img {
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  display: block;
+}
+.spot-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+.settings-play {
+  text-align: left;
+  display: grid;
+  gap: 8px;
+  margin: 8px 0 4px;
+}
+.settings-play p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  font-size: 14px;
+}
+.secret-bloom .ambient-glow {
+  animation: bloom-pulse 1.6s ease;
+}
+@keyframes horizon-breathe {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes mote-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate3d(10px, -22px, 0);
+    opacity: 0.7;
+  }
+}
+@keyframes hint-life {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  12% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bloom-pulse {
+  0%,
+  100% {
+    filter: saturate(1);
+  }
+  45% {
+    filter: saturate(1.5) brightness(1.25);
+  }
+}
+@media (max-width: 420px) {
+  .fade-hint {
+    font-size: 11px;
+    white-space: normal;
+    text-align: center;
+    width: max-content;
+  }
 }

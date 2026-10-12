@@ -7,21 +7,19 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useDrag } from "@use-gesture/react";
 import {
-  ArrowUpRight,
   ArrowLeft,
-  ChevronLeft,
-  ChevronRight,
-  Vibrate,
-  Map,
-  Search,
+  ArrowUpRight,
+  Compass,
+  GearSix,
   Heart,
-  X,
-  Sun,
+  MagnifyingGlass,
   Moon,
-  Volume2,
-  VolumeX,
-  Settings2,
-} from "lucide-react";
+  SpeakerHigh,
+  SpeakerSlash,
+  Sun,
+  Vibrate,
+  X,
+} from "@phosphor-icons/react";
 import MiniSearch from "minisearch";
 import Gallery from "./Gallery";
 import PlaceContext from "./PlaceContext";
@@ -37,6 +35,7 @@ import { useKhwezi } from "./KhweziProvider";
 import BrandWordmark from "./BrandWordmark";
 import KhweziWelcome from "./KhweziWelcome";
 import KhweziMoment from "./KhweziMoment";
+import LandmarkSheet from "./LandmarkSheet";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import { cities, categories, places, categorySlug, landmarkSources } from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), {
@@ -48,13 +47,6 @@ const Scene = dynamic(() => import("./Scene"), {
   ),
 });
 const PlaceMap = dynamic(() => import("./PlaceMap"), { ssr: false });
-const categoryDescriptions = [
-  "Big thrills, curious museums and unexpected ways to spend a day.",
-  "Find a place to rest, from city hideaways to coastal escapes.",
-  "Step into a story. Discover local stages and live performances.",
-  "Slow down among gardens, wildlife and a little more green.",
-  "Follow the music. Find a dance floor and a new city rhythm.",
-];
 const cityDescriptions = [
   "Gauteng. Big energy, bold ideas and a city that keeps becoming.",
   "Western Cape. Between mountain and sea, find your own adventure.",
@@ -82,6 +74,30 @@ const landmarkDescriptions = [
     "A coastal beacon overlooking Umhlanga’s rocky shoreline.",
   ],
 ];
+function findVenue(citySlug: string, landmark: string) {
+  const norm = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  const name = norm(landmark);
+  if (name.length < 4) return;
+  return places.find((place) => {
+    if (place.city !== citySlug) return false;
+    const title = norm(place.name);
+    return title === name || title.includes(name) || (name.includes(title) && title.length > 8);
+  });
+}
+function FadeHint({ children, token }: { children: string; token: string }) {
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    setVisible(true);
+    const timer = window.setTimeout(() => setVisible(false), 4400);
+    return () => window.clearTimeout(timer);
+  }, [token]);
+  if (!visible) return null;
+  return <p className="fade-hint">{children}</p>;
+}
 export default function Explorer() {
   const pathname = usePathname(),
     router = useNativeRouter(),
@@ -129,7 +145,33 @@ export default function Explorer() {
     [query, setQuery] = useState(params.get("q") || "");
   const [showSaved, setShowSaved] = useState(false),
     [help, setHelp] = useState(false),
-    [showSettings, setShowSettings] = useState(false);
+    [showSettings, setShowSettings] = useState(false),
+    [spot, setSpot] = useState<number | null>(null),
+    [bloom, setBloom] = useState(false);
+  useEffect(() => {
+    if (!bloom) return;
+    const timer = window.setTimeout(() => setBloom(false), 1800);
+    return () => clearTimeout(timer);
+  }, [bloom]);
+  useEffect(() => {
+    if (mode !== "city") return;
+    const key = "citylit-skyline-" + city.slug;
+    let seen = new Set<number>();
+    try {
+      const parsed = JSON.parse(sessionStorage.getItem(key) || "[]");
+      if (Array.isArray(parsed))
+        seen = new Set(parsed.filter((value) => typeof value === "number"));
+    } catch {}
+    const before = seen.size;
+    seen.add(index);
+    try {
+      sessionStorage.setItem(key, JSON.stringify([...seen]));
+    } catch {}
+    if (before < city.landmarks.length && seen.size === city.landmarks.length) {
+      setNotice("You found the whole skyline.");
+      setBloom(true);
+    }
+  }, [mode, city.slug, city.landmarks.length, index]);
   const reset = 0;
   const panelOpen = showSaved || help || showSettings;
   const modalRef = useRef<HTMLDialogElement>(null),
@@ -157,6 +199,7 @@ export default function Explorer() {
   }, [showProvinces]);
   useEffect(() => {
     setShowProvinces(false);
+    setSpot(null);
     setQuery(params.get("q") || "");
   }, [pathname, params]);
   useEffect(() => {
@@ -234,6 +277,16 @@ export default function Explorer() {
     } catch {}
   };
   const [direction, setDirection] = useState(1);
+  const openLandmark = (i: number) => {
+    feedback("tap");
+    const name = city.landmarks[i];
+    const venue = findVenue(city.slug, name);
+    if (venue) {
+      router.push(`/${city.slug}/${categorySlug(venue.category)}/${venue.id}`);
+      return;
+    }
+    setSpot(i);
+  };
   const next = (step: number) => {
     setDirection(step);
     selectLandmark((index + step + 3) % 3);
@@ -245,7 +298,11 @@ export default function Explorer() {
     });
   };
   const bind = useDrag(
-    ({ last, swipe: [x], movement: [mx] }) => {
+    ({ last, tap, swipe: [x], movement: [mx] }) => {
+      if (tap) {
+        if (mode === "city") openLandmark(index);
+        return;
+      }
       if (last && (x || Math.abs(mx) > 55)) {
         feedback("swipe");
         const d = (x || mx) > 0 ? -1 : 1;
@@ -312,7 +369,7 @@ export default function Explorer() {
         )
           feedback("tap");
       }}
-      className={`game-screen game-${mode} theme-${theme.name} ${listing ? "has-results" : ""}`}
+      className={`game-screen game-${mode} theme-${theme.name} ${listing ? "has-results" : ""} ${bloom ? "secret-bloom" : ""}`}
       style={
         {
           "--city-glow": theme.glow,
@@ -330,6 +387,12 @@ export default function Explorer() {
       />
       <div className="game-atmosphere" aria-hidden="true">
         <div className="ambient-glow" />
+        <div className="horizon" />
+        <div className="motes">
+          {Array.from({ length: 7 }, (_, i) => (
+            <i key={i} style={{ "--i": String(i) } as CSSProperties} />
+          ))}
+        </div>
       </div>
       <div className="delight-notice" role="status" aria-live="polite">
         {notice}
@@ -344,7 +407,7 @@ export default function Explorer() {
             <BrandWordmark />
           ) : (
             <>
-              <ArrowLeft size={15} />
+              <ArrowLeft size={16} weight="bold" />
               {navLabel}
             </>
           )}
@@ -355,21 +418,21 @@ export default function Explorer() {
             href={`/explore?city=${city.slug}`}
             aria-label="Plan an adventure"
           >
-            <Map size={17} />
+            <Compass size={18} weight="regular" />
           </Link>
           <button
             className="icon-button"
             aria-label={night ? "Switch to day theme" : "Switch to night theme"}
             onClick={switchTheme}
           >
-            {night ? <Sun size={17} /> : <Moon size={17} />}
+            {night ? <Sun size={18} weight="fill" /> : <Moon size={18} weight="fill" />}
           </button>
           <button
             className="icon-button"
             aria-label={`Your discoveries ${saved.length}`}
             onClick={() => setShowSaved(true)}
           >
-            <Heart size={17} />
+            <Heart size={18} weight={saved.length ? "fill" : "regular"} />
             {saved.length > 0 && <span className="save-count">{saved.length}</span>}
           </button>
           <button
@@ -378,28 +441,22 @@ export default function Explorer() {
             aria-haspopup="dialog"
             onClick={() => setShowSettings(true)}
           >
-            <Settings2 size={18} />
+            <GearSix size={18} weight={showSettings ? "fill" : "regular"} />
           </button>
         </div>
       </nav>
-      {mode !== "map" && (
+      {mode === "place" && (
         <nav className="chapter-breadcrumbs" aria-label="Breadcrumb">
           <ol>
             <li>
               <Link href="/">South Africa</Link>
             </li>
             <li>
-              <Link href={`/${city.slug}`} aria-current={mode === "city" ? "page" : undefined}>
-                {city.name}
-              </Link>
+              <Link href={`/${city.slug}`}>{city.name}</Link>
             </li>
-            {mode !== "city" && (
-              <li>
-                <Link href={categoryPath} aria-current={mode === "category" ? "page" : undefined}>
-                  {categories[cat]}
-                </Link>
-              </li>
-            )}
+            <li>
+              <Link href={categoryPath}>{categories[cat]}</Link>
+            </li>
             {place && (
               <li>
                 <Link href={pathname} aria-current="page">
@@ -418,9 +475,7 @@ export default function Explorer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: reduced ? 0 : 0.35 }}
           >
-            <span className="roman-chapter">
-              {mode === "map" ? "I" : mode === "city" ? "II" : mode === "category" ? "III" : "V"}
-            </span>
+            {mode === "place" && <span className="roman-chapter">V</span>}
             <h1>
               {mode === "map" ? (
                 <>
@@ -429,26 +484,26 @@ export default function Explorer() {
                   South Africa
                 </>
               ) : mode === "city" ? (
-                city.name
+                city.short
               ) : mode === "category" ? (
-                "Explore"
+                city.short
               ) : (
                 place?.name
               )}
             </h1>
-            <p className="heading-description">
-              {mode === "map"
-                ? "Every city has a spark. Twelve destinations. Nine provinces. Follow a little curiosity."
-                : mode === "city"
-                  ? cityDescriptions[ci] || city.intro
+            {mode !== "city" && (
+              <p className="heading-description">
+                {mode === "map"
+                  ? "Follow the glow."
                   : mode === "category"
-                    ? `A new side of ${city.short}. Swipe a chapter and find somewhere worth exploring.`
+                    ? `A chapter of ${city.short}.`
                     : place?.description}
-            </p>
+              </p>
+            )}
           </motion.div>
           {mode === "category" && (
             <label className="game-search">
-              <Search size={17} />
+              <MagnifyingGlass size={18} weight="bold" />
               <input
                 ref={searchRef}
                 value={query}
@@ -465,7 +520,7 @@ export default function Explorer() {
               />
               {query && (
                 <button onClick={() => setQuery("")} aria-label="Clear search">
-                  <X size={17} />
+                  <X size={16} weight="bold" />
                 </button>
               )}
             </label>
@@ -502,26 +557,43 @@ export default function Explorer() {
                 reset={reset}
                 animate={animate && !discovery.essential && !panelOpen}
                 onCity={goCity}
-                onSelect={
-                  mode === "city"
-                    ? () => {
-                        feedback("tap");
-                        router.push(`/${city.slug}/entertainment`);
+                onSelect={mode === "city" ? () => openLandmark(index) : openPlaces}
+                onCycle={
+                  mode === "city" && spot === null
+                    ? (step) => {
+                        feedback("swipe");
+                        next(step);
                       }
-                    : openPlaces
+                    : undefined
                 }
+                onSecret={() => {
+                  const lines = [
+                    "It likes you.",
+                    "A small light answered.",
+                    "Khwezi left a spark.",
+                  ];
+                  setNotice(lines[index % lines.length]);
+                  setBloom(true);
+                }}
               />
             </div>
+            {mode === "map" && (
+              <FadeHint token="map">Drag the land. Tap a province that glows.</FadeHint>
+            )}
+            {mode === "city" && (
+              <FadeHint token={city.slug}>
+                Drag to turn. Swipe to discover. Tap to step inside.
+              </FadeHint>
+            )}
+            {mode === "category" && (
+              <FadeHint token={city.slug + "-" + cat}>
+                Swipe a chapter. Tap the toy to open it.
+              </FadeHint>
+            )}
           </div>
           <footer className="game-controls">
             {mode === "map" ? (
               <>
-                <p className="map-hint">
-                  <button onClick={() => setShowProvinces(true)}>
-                    Choose from {cities.length} destinations <UiIcon name="arrow-up-right" />
-                  </button>{" "}
-                  · Drag the map to turn it.
-                </p>
                 <div className="map-legend">
                   <button
                     className="available-legend"
@@ -552,14 +624,6 @@ export default function Explorer() {
                     ))}
                   </nav>
                 )}
-                <a
-                  className="geography-credit"
-                  href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Map: geoBoundaries / OCHA / MDB · adapted · CC BY 3.0 IGO
-                </a>
               </>
             ) : mode === "city" ? (
               <>
@@ -573,13 +637,6 @@ export default function Explorer() {
                   }}
                   aria-label="Landmark carousel. Use arrow keys or swipe."
                 >
-                  <button
-                    className="carousel-arrow"
-                    aria-label="Previous landmark"
-                    onClick={() => next(-1)}
-                  >
-                    <ChevronLeft size={22} />
-                  </button>
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={index}
@@ -589,36 +646,17 @@ export default function Explorer() {
                       exit={{ opacity: 0, x: reduced ? 0 : direction * -15 }}
                       transition={{ duration: reduced ? 0 : 0.18 }}
                     >
-                      <Link
-                        className="landmark-open"
-                        href={`/${city.slug}/entertainment`}
-                        prefetch={false}
-                      >
+                      <button className="landmark-open" onClick={() => openLandmark(index)}>
                         <h3>{city.landmarks[index]}</h3>
-                      </Link>
-                      <p>{landmarkDescriptions[ci]?.[index] || city.descriptions[index]}</p>
+                      </button>
                     </motion.div>
                   </AnimatePresence>
-                  <button
-                    className="carousel-arrow"
-                    aria-label="Next landmark"
-                    onClick={() => next(1)}
-                  >
-                    <ChevronRight size={22} />
-                  </button>
                 </div>
-                <div className="carousel-progress">
+                <div className="carousel-progress" aria-hidden="true">
                   {city.landmarks.map((name, i) => (
-                    <button
-                      key={name}
-                      className={index === i ? "selected" : ""}
-                      aria-label={`Show ${name}`}
-                      aria-current={index === i ? "true" : undefined}
-                      onClick={() => selectLandmark(i)}
-                    />
+                    <span key={name} className={index === i ? "selected" : ""} />
                   ))}
                 </div>
-                <p className="swipe-hint">Swipe the caption for more. Drag the model to rotate.</p>
                 <Link
                   className="pill-button ivory-button"
                   href={`/${city.slug}/entertainment`}
@@ -626,18 +664,6 @@ export default function Explorer() {
                 >
                   Explore {city.short}
                 </Link>
-                <a
-                  className="landmark-wiki"
-                  href={
-                    landmarkSources[ci * 3 + index]?.wikipedia ||
-                    city.landmarkLinks[index] ||
-                    `https://en.wikipedia.org/wiki/${encodeURIComponent(city.short.replace(/ /g, "_"))}`
-                  }
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  The story behind the landmark <ArrowUpRight size={11} />
-                </a>
               </>
             ) : (
               <>
@@ -662,7 +688,6 @@ export default function Explorer() {
                       {categories[cat]}
                     </motion.h2>
                   </AnimatePresence>
-                  <p className="category-description">{categoryDescriptions[cat]}</p>
                   <Link
                     className="pill-button"
                     href={`/${city.slug}/${categorySlug(categories[cat])}?view=places`}
@@ -674,7 +699,6 @@ export default function Explorer() {
                   >
                     Open {categories[cat]}
                   </Link>
-                  <span className="category-count">{cat + 1} / 5</span>
                 </div>
                 <CategoryNav selected={cat} onSelect={chooseCategory} compact />
               </>
@@ -688,7 +712,7 @@ export default function Explorer() {
               <PlaceActions place={place} />
               <div className="detail-actions">
                 <button className="detail-save" onClick={() => toggle(place.id)}>
-                  <Heart size={17} fill={saved.includes(place.id) ? "currentColor" : "none"} />
+                  <Heart size={18} weight={saved.includes(place.id) ? "fill" : "regular"} />
                   {saved.includes(place.id) ? "Saved to discoveries" : "Save this discovery"}
                 </button>
                 <a
@@ -784,6 +808,30 @@ export default function Explorer() {
         )
       )}
       <AnimatePresence>
+        {mode === "city" && spot !== null && (
+          <LandmarkSheet
+            key={city.slug + spot}
+            city={city.short}
+            name={city.landmarks[spot]}
+            description={
+              landmarkDescriptions[ci]?.[spot] ||
+              city.descriptions[spot] ||
+              cityDescriptions[ci] ||
+              city.intro
+            }
+            photo={
+              landmarkSources.find((source) => source.name === city.landmarks[spot])?.images?.[0]
+            }
+            href={
+              landmarkSources.find((source) => source.name === city.landmarks[spot])?.wikipedia ||
+              city.landmarkLinks[spot] ||
+              undefined
+            }
+            onClose={() => setSpot(null)}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
         {panelOpen && (
           <motion.div
             className="modal-backdrop"
@@ -829,7 +877,7 @@ export default function Explorer() {
                 }}
                 aria-label="Close"
               >
-                <X />
+                <X size={18} weight="bold" />
               </button>
               <span className="tiny-label">YOUR OWN LITTLE ADVENTURE</span>
               <h2>
@@ -849,7 +897,11 @@ export default function Explorer() {
                     aria-pressed={sound}
                     onClick={toggleSound}
                   >
-                    {sound ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                    {sound ? (
+                      <SpeakerHigh size={18} weight="fill" />
+                    ) : (
+                      <SpeakerSlash size={18} weight="regular" />
+                    )}
                     <span>
                       Quiet sound effects
                       <small>
@@ -862,7 +914,7 @@ export default function Explorer() {
                     aria-pressed={haptics}
                     onClick={toggleHaptics}
                   >
-                    <Vibrate size={18} />
+                    <Vibrate size={18} weight={haptics ? "fill" : "regular"} />
                     <span>
                       Touch feedback {haptics ? "on" : "off"}
                       <small>Where your device supports vibration</small>
@@ -877,6 +929,29 @@ export default function Explorer() {
                     Essential motion: keep transitions, stop continuous movement
                   </label>
                   {reduced && <p>Your device’s reduced-motion preference is respected.</p>}
+                  <div className="settings-play">
+                    <p className="tiny-label">How the toys work</p>
+                    <p>
+                      Drag a toy to turn it. Pinch or scroll to lean in. A quick swipe finds the
+                      next one.
+                    </p>
+                    <p>
+                      Tap the toy, or its name, to open that place. Explore city is the only door
+                      into the chapters.
+                    </p>
+                    <p>Hold a toy a moment longer. Some of them answer.</p>
+                    <p>
+                      Map geometry: geoBoundaries / OCHA / MDB, adapted,{" "}
+                      <a
+                        href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        CC BY 3.0 IGO
+                      </a>
+                      . Citylit toys are original illustrations.
+                    </p>
+                  </div>
                   <button
                     className="pill-button"
                     onClick={() => {
@@ -913,14 +988,13 @@ export default function Explorer() {
                         </span>
                       </div>
                       <p>
-                        Drag a landmark to tilt it, scroll or pinch to lean in, and hold to give it
-                        a little squash.
+                        Drag a toy to turn it. Pinch or scroll to lean closer. Swipe to find the
+                        next one.
                       </p>
                       <p>
-                        Poke a coloured province, swipe its landmark captions, then wander one
-                        category at a time.
+                        Tap the toy to open that place. Explore city is the door into the chapters.
                       </p>
-                      <p>Tap a heart to keep a discovery for later.</p>
+                      <p>Hold a toy if you are feeling curious. Tap a heart to keep a discovery.</p>
                       <a
                         className="photo-link"
                         href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"

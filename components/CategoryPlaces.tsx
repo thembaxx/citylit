@@ -27,7 +27,6 @@ type Props = {
   onCategory: (index: number) => void;
   onSave: (id: string) => void;
   onPlace: (place: Place) => void;
-  onHelp: () => void;
 };
 export default function CategoryPlaces(props: Props) {
   const city = cities[props.city],
@@ -105,9 +104,6 @@ export default function CategoryPlaces(props: Props) {
     >
       <section className="category-page-hero" aria-labelledby="category-page-title">
         <header className="category-page-heading">
-          <div className="category-page-chapter">
-            <span>IV</span>Follow your curiosity
-          </div>
           <h1 id="category-page-title">{category}</h1>
           <p>{categoryBlurbs[category]}</p>
           <Link className="category-page-back" href={`/${city.slug}`}>
@@ -135,12 +131,6 @@ export default function CategoryPlaces(props: Props) {
                   ?.scrollIntoView({ behavior: reduced ? "instant" : "smooth", block: "start" })
               }
             />
-          </div>
-          <div className="category-page-meta">
-            <span>Drag to rotate · pinch to zoom</span>
-            <button onClick={props.onHelp}>
-              How to play <ArrowUpRight size={11} />
-            </button>
           </div>
         </div>
       </section>

@@ -549,7 +549,6 @@ export default function Explorer() {
           onCategory={chooseCategory}
           onSave={toggle}
           onPlace={(p) => router.push(`/${city.slug}/${categorySlug(p.category)}/${p.id}`)}
-          onHelp={() => setHelp(true)}
         />
       ) : mode !== "place" ? (
         <>

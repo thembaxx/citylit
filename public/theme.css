@@ -63,6 +63,15 @@ html {
   background-color: var(--bg);
   accent-color: var(--accent);
 }
+/* The same colour sits behind overscroll, collapsing toolbars and the first frame. */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--bg);
+  pointer-events: none;
+}
 body {
   min-height: 100vh;
   min-height: 100dvh;

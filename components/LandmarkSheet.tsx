@@ -27,6 +27,7 @@ type Props = {
   href?: string;
   detailsHref: string;
   detailsLabel: string;
+  detailsHint: string;
   onClose: () => void;
 };
 
@@ -42,6 +43,7 @@ export default function LandmarkSheet({
   href,
   detailsHref,
   detailsLabel,
+  detailsHint,
   onClose,
 }: Props) {
   const reduced = useReducedMotion();
@@ -85,8 +87,12 @@ export default function LandmarkSheet({
         <p className="spot-kicker">{city}</p>
         <h2>{name}</h2>
         <p className="spot-lead">{description}</p>
-        <Link className="pill-button ivory-button spot-open" href={detailsHref}>
-          {detailsLabel} <ArrowUpRight size={16} weight="bold" />
+        <Link className="pill-button ivory-button spot-open" href={detailsHref} onClick={onClose}>
+          <span>
+            <strong>{detailsLabel}</strong>
+            <small>{detailsHint}</small>
+          </span>
+          <ArrowUpRight size={18} weight="bold" />
         </Link>
         {!!facts?.length && (
           <ul className="spot-facts">

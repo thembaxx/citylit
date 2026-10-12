@@ -857,6 +857,11 @@ export default function Explorer() {
             detailsLabel={
               findVenue(city.slug, city.landmarks[spot]) ? "Open this place" : "Open the full story"
             }
+            detailsHint={
+              findVenue(city.slug, city.landmarks[spot])
+                ? "Hours, the map, and how to visit"
+                : "Photos, facts, and the longer story"
+            }
             onClose={() => setSpot(null)}
           />
         )}

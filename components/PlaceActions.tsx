@@ -45,20 +45,51 @@ export default function PlaceActions({ place }: { place: Place }) {
     environment: "Setting",
     durationMinutes: "Visit duration",
   };
-  const factText = (key: string, value: string | number | boolean | null) =>
-    value === null
-      ? "Not confirmed"
-      : typeof value === "boolean"
-        ? value
-          ? "Confirmed available"
-          : "Confirmed unavailable"
-        : `${value}${key === "durationMinutes" ? " minutes" : ""}`;
-  const previewKey = ["openingHours", "admission", "durationMinutes", "publicTransport"].find(
-    (key) => place.facts?.[key]?.value != null,
-  );
-  const preview = previewKey
-    ? `${factLabel[previewKey]} · ${factText(previewKey, place.facts![previewKey].value)}`
-    : "Hours, access, and what to bring";
+  const factText = (key: string, value: string | number | boolean | null) => {
+    if (value === null) return "Not confirmed";
+    if (typeof value === "boolean") return value ? "Confirmed available" : "Confirmed unavailable";
+    if (key === "durationMinutes") return `${value} minutes`;
+    if (key === "entryPriceZAR" && typeof value === "number") return `R${value}`;
+    if (key === "admission" && value === "free") return "Free";
+    if (key === "admission" && value === "paid") return "Paid";
+    return `${value}`;
+  };
+  const facts = place.facts || {};
+  const hours = facts.openingHours?.value;
+  const admission = facts.admission?.value;
+  const price = facts.entryPriceZAR?.value;
+  const duration = facts.durationMinutes?.value;
+  const previewBits: string[] = [];
+  if (typeof hours === "string" && hours) previewBits.push(hours.split(";")[0].trim());
+  if (admission === "free") previewBits.push("Free entry");
+  else if (admission === "paid")
+    previewBits.push(typeof price === "number" ? `From R${price}` : "Paid entry");
+  if (typeof duration === "number") previewBits.push(`About ${duration} min`);
+  const preview = previewBits.slice(0, 2).join(" · ") || "Hours, access, and what to bring";
+  const groups = [
+    { title: "Hours", keys: ["openingHours", "durationMinutes"] },
+    {
+      title: "Tickets",
+      keys: ["admission", "entryPriceZAR", "price", "paymentMethods", "booking"],
+    },
+    { title: "Getting there", keys: ["publicTransport", "parking", "accessNotes"] },
+    {
+      title: "While you are there",
+      keys: ["stepFreeEntrance", "accessibleToilets", "family", "environment"],
+    },
+  ];
+  const grouped = new Set(groups.flatMap((group) => group.keys));
+  const extras = Object.keys(facts).filter((key) => !grouped.has(key));
+  const sections = extras.length
+    ? [...groups, { title: "Also worth knowing", keys: extras }]
+    : groups;
+  const knownSections = sections
+    .map((section) => ({
+      ...section,
+      keys: section.keys.filter((key) => facts[key] && facts[key].value !== null),
+    }))
+    .filter((section) => section.keys.length > 0);
+  const unconfirmed = Object.keys(facts).filter((key) => facts[key].value === null);
   return (
     <section className="place-planning" aria-label="Plan this discovery">
       {place.visitNote && <p className="visit-note">{place.visitNote}</p>}
@@ -119,27 +150,41 @@ export default function PlaceActions({ place }: { place: Place }) {
           </span>
           <CaretDown className="visit-plan-caret" size={16} weight="bold" aria-hidden="true" />
         </summary>
-        <dl>
-          {Object.entries(place.facts || {}).map(([key, fact]) => (
-            <div key={key}>
-              <dt>{factLabel[key] || key}</dt>
-              <dd>
-                {factText(key, fact.value)}
-                {fact.value !== null && (
-                  <small>
-                    {fact.confidence === "editorial-estimate" ? "Editorial estimate" : "Verified"} ·{" "}
-                    {fact.checkedAt}
-                    {fact.source.startsWith("https:") && (
-                      <a href={fact.source} target="_blank" rel="noreferrer">
-                        Source <ArrowUpRight size={12} />
-                      </a>
-                    )}
-                  </small>
-                )}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        {knownSections.length > 0 && (
+          <dl>
+            {knownSections.map((section) => (
+              <div key={section.title} className="visit-plan-group">
+                <dt className="visit-plan-label">{section.title}</dt>
+                {section.keys.map((key) => {
+                  const fact = facts[key];
+                  if (!fact) return null;
+                  return (
+                    <dd key={key}>
+                      <span>{factLabel[key] || key}</span>
+                      {factText(key, fact.value)}
+                      <small>
+                        {fact.confidence === "editorial-estimate"
+                          ? "Editorial estimate"
+                          : "Verified"}{" "}
+                        · {fact.checkedAt}
+                        {fact.source.startsWith("https:") && (
+                          <a href={fact.source} target="_blank" rel="noreferrer">
+                            Source <ArrowUpRight size={12} />
+                          </a>
+                        )}
+                      </small>
+                    </dd>
+                  );
+                })}
+              </div>
+            ))}
+          </dl>
+        )}
+        {unconfirmed.length > 0 && (
+          <p className="visit-unconfirmed">
+            Not confirmed yet: {unconfirmed.map((key) => factLabel[key] || key).join(" · ")}
+          </p>
+        )}
         <p className="planning-note">
           A venue pin identifies the site; an entrance pin is shown only when the entrance itself is
           verified. Confirm availability before travelling.

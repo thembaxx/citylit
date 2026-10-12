@@ -241,6 +241,7 @@ export default function Scene(props: Props) {
     <div
       ref={ref}
       className="scene-view"
+      role="region"
       aria-label="Toy map of South Africa. Drag to spin, scroll or pinch to zoom, swipe to discover, tap a toy to step inside."
       onPointerDown={(event) => {
         gesture.current = { x: event.clientX, y: event.clientY, t: performance.now() };

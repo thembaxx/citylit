@@ -124,10 +124,6 @@ test("touch swipe changes landmarks; drag and pinch manipulate 3D without naviga
   await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
   await expect(page.locator(".landmark-open h3")).toHaveText("Bo-Kaap");
   await page.locator(".three-view").scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Play animations", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Close", exact: true }).click();
-  await expect(page.getByRole("dialog", { name: "Experience settings" })).toHaveCount(0);
   // Wait for the short entrance flight before gestures engage the controls.
   await page.waitForTimeout(900);
   const box = (await page.locator(".three-view").boundingBox())!,

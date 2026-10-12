@@ -290,6 +290,20 @@ function ProvincePiece({
   const ref = useRef<THREE.Group>(null);
   const [hover, setHover] = useState(false);
   const [held, setHeld] = useState(false);
+  useEffect(() => {
+    if (!held) return;
+    const release = () => setHeld(false);
+    const cancel = () => {
+      setHeld(false);
+      setHover(false);
+    };
+    window.addEventListener("pointerup", release);
+    window.addEventListener("pointercancel", cancel);
+    return () => {
+      window.removeEventListener("pointerup", release);
+      window.removeEventListener("pointercancel", cancel);
+    };
+  }, [held]);
   const { invalidate } = useThree();
   const code = piece.code;
   const city = availableProvinces[code];

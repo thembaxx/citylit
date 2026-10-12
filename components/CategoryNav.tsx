@@ -1,6 +1,6 @@
 "use client";
 import { LayoutGroup, motion, useReducedMotion } from "motion/react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, type CSSProperties } from "react";
 import { categories } from "../lib/data";
 import CategoryIcon from "./CategoryIcon";
 export default function CategoryNav({
@@ -37,8 +37,14 @@ export default function CategoryNav({
             }}
             aria-label={name}
             aria-current={selected === index ? "page" : undefined}
+            style={
+              {
+                "--cat": ["#ff7a59", "#f3c7a6", "#c084fc", "#7dce6a", "#ffd166"][index],
+              } as CSSProperties
+            }
             onClick={() => onSelect(index)}
-            whileTap={reduced ? undefined : { scale: 0.98 }}
+            whileHover={reduced ? undefined : { y: -3 }}
+            whileTap={reduced ? undefined : { scale: 0.94, y: 1 }}
             onKeyDown={(event) => {
               if (
                 event.key !== "ArrowLeft" &&

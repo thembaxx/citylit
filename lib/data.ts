@@ -5,6 +5,14 @@ export const categories = [
   "Parks & zoos",
   "Clubs",
 ] as const;
+/** Short chapter lines. Original Citylit copy, not a venue listing. */
+export const categoryBlurbs: Record<(typeof categories)[number], string> = {
+  Entertainment: "Museums, play, and the rooms where a city shows off.",
+  Lodging: "Stays worth knowing when the day runs long.",
+  Theatres: "Stages for drama, dance, music and after-dark stories.",
+  "Parks & zoos": "Gardens, reserves and green rooms where a city slows down.",
+  Clubs: "Music, sundowners and a later chapter of the night.",
+};
 import sourcedCities from "../public/data/cities.json" with { type: "json" };
 export const cities = sourcedCities;
 import sourcedPlaces from "../public/data/places.json" with { type: "json" };

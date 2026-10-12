@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Info, Wifi, Waves, Dumbbell } from "lucide-react";
+import { ArrowUpRight, Info, WifiHigh, Waves, Barbell } from "@phosphor-icons/react";
 import { places, categorySlug, type Place } from "../lib/data";
 import CategoryIcon from "./CategoryIcon";
 import { categories } from "../lib/data";
@@ -17,7 +17,7 @@ export default function PlaceContext({ place }: { place: Place }) {
       other.locationGroup === place.locationGroup &&
       other.city === place.city,
   );
-  const icons = { wifi: Wifi, pool: Waves, fitness: Dumbbell, info: Info };
+  const icons = { wifi: WifiHigh, pool: Waves, fitness: Barbell, info: Info };
   return (
     <div className="place-context">
       <section aria-labelledby="about-place">

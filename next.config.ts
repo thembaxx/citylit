@@ -8,6 +8,7 @@ const config: NextConfig = {
     "/share/\\[\\[\\.\\.\\.path\\]\\]": ["./public/images/*.jpg", "./public/app-icon.svg"],
   },
   poweredByHeader: false,
+  allowedDevOrigins: ["127.0.0.1", "localhost"],
   images: {
     localPatterns: [{ pathname: "/images/*", search: "" }],
     remotePatterns: [],

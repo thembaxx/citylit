@@ -1,5 +1,4 @@
 "use client";
-import UiIcon from "./UiIcon";
 import Link from "next/link";
 import { useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, View, PerformanceMonitor } from "@react-three/drei";
@@ -14,15 +13,15 @@ import ExpandedLandmark from "./ExpandedLandmark";
 import { Landmark, CategoryModel } from "./Models";
 const viewMemory = new Map<string, number[]>();
 const labelOffsets: Record<string, [number, number]> = {
-  NC: [-18, -7],
-  NW: [-8, -42],
-  GT: [31, -8],
-  LI: [-12, -43],
-  MP: [25, 26],
-  FS: [-20, 12],
-  KZ: [10, 30],
-  WC: [-5, 3],
-  EC: [-8, 25],
+  NC: [0, 0],
+  NW: [0, 0],
+  GT: [0, 0],
+  LI: [0, 0],
+  MP: [0, 0],
+  FS: [0, 0],
+  KZ: [0, 0],
+  WC: [0, 0],
+  EC: [0, 0],
 };
 type Props = {
   mode: string;
@@ -31,6 +30,8 @@ type Props = {
   category: number;
   onCity: (i: number) => void;
   onSelect: () => void;
+  onCycle?: (step: number) => void;
+  onSecret?: () => void;
   reset: number;
   animate: boolean;
 };
@@ -41,6 +42,7 @@ function World({
   category,
   onCity,
   onSelect,
+  onSecret,
   reset,
   animate,
   visible,
@@ -61,21 +63,25 @@ function World({
     const changed = previousMode.current !== mode;
     previousMode.current = mode;
     setTravel(true);
-    const fit = Math.min(1.2, Math.max(1, 1.1 / (size.width / Math.max(size.height, 1))));
+    const aspect = size.width / Math.max(size.height, 1);
+    const pinch = Math.max(0, 1 - aspect);
+    const fit =
+      mode === "map" ? Math.min(1.68, 1.06 + pinch * 1.15) : Math.min(2.35, 1.1 + pinch * 2.85);
     if (previousReset.current !== reset) viewMemory.delete(memoryKey);
     previousReset.current = reset;
     const remembered = viewMemory.get(memoryKey);
     const target = remembered
       ? { x: remembered[0], y: remembered[1], z: remembered[2] }
       : mode === "map"
-        ? { x: 4.6 * fit, y: 6.2 * fit, z: 6.5 * fit }
-        : { x: 3.8, y: 2.9, z: 5.4 };
+        ? { x: 3.05 * fit, y: 6.85 * fit, z: 5.45 * fit }
+        : { x: 2.72 * fit, y: 2.55 * fit, z: 4.25 * fit };
+    const lookY = mode === "map" ? 0.05 : 0.38;
     const tween = gsap.to(camera.position, {
       ...target,
       duration: reduced ? 0 : changed ? 1.15 : 0.7,
       ease: "power3.inOut",
       onUpdate: () => {
-        camera.lookAt(0, mode === "map" ? 0 : 0.55, 0);
+        camera.lookAt(0, lookY, 0);
         invalidate();
       },
       onComplete: () => {
@@ -94,20 +100,25 @@ function World({
     const context = gsap.context(() => {
       gsap.fromTo(
         node.scale,
-        { x: 0.82, y: 0.82, z: 0.82 },
+        { x: 0.72, y: 0.2, z: 0.72 },
         {
           x: 1,
           y: 1,
           z: 1,
-          duration: reduced ? 0 : 0.7,
-          ease: "back.out(1.3)",
+          duration: reduced ? 0 : 0.95,
+          ease: "back.out(1.6)",
           onUpdate: invalidate,
         },
       );
       gsap.fromTo(
+        node.rotation,
+        { y: -0.4 },
+        { y: 0, duration: reduced ? 0 : 1.05, ease: "power3.out", onUpdate: invalidate },
+      );
+      gsap.fromTo(
         node.position,
-        { y: -0.42 },
-        { y: -0.15, duration: reduced ? 0 : 0.7, ease: "power3.out", onUpdate: invalidate },
+        { y: -0.55 },
+        { y: 0, duration: reduced ? 0 : 0.9, ease: "power3.out", onUpdate: invalidate },
       );
     });
     return () => context.revert();
@@ -129,25 +140,45 @@ function World({
       tween.kill();
     };
   }, [spin, reduced, invalidate]);
+  const heldLong = useRef(false);
+  const holdTimer = useRef<number | null>(null);
+  const clearHold = () => {
+    if (holdTimer.current) window.clearTimeout(holdTimer.current);
+    holdTimer.current = null;
+  };
   return (
     <>
-      <PerspectiveCamera makeDefault fov={38} position={[4.6, 6.2, 6.5]} />
-      <ambientLight intensity={1.6} />
-      <directionalLight position={[-4, 7, 5]} intensity={3} />
-      <directionalLight position={[4, 2, -4]} intensity={1.5} color="#c3d0ff" />
+      <PerspectiveCamera makeDefault fov={34} position={[3.2, 6.4, 5.4]} />
+      <hemisphereLight args={["#fff6ea", "#8d7360", 0.8]} />
+      <ambientLight intensity={0.62} />
+      <directionalLight position={[4.2, 8.2, 5]} intensity={2.15} color="#fffaf3" />
+      <directionalLight position={[-4.5, 3.2, -2]} intensity={0.55} color="#ffd0a8" />
+      <pointLight position={[0.4, 2.4, 2.2]} intensity={6} distance={9} color="#ffe3bf" />
       <PerformanceMonitor
         onDecline={() => setDpr(1)}
         onIncline={() => setDpr(Math.min(window.devicePixelRatio, 1.5))}
       />
       <group
         ref={group}
+        onPointerDown={() => {
+          heldLong.current = false;
+          clearHold();
+          if (!onSecret) return;
+          holdTimer.current = window.setTimeout(() => {
+            heldLong.current = true;
+            onSecret();
+          }, 860);
+        }}
+        onPointerUp={clearHold}
+        onPointerLeave={clearHold}
         onClick={(e) => {
           if (
             (e.nativeEvent.target as HTMLElement)?.closest(
-              "button,a,input,select,label,.modal-backdrop",
+              "button,a,input,select,label,.modal-backdrop,.spot-layer",
             )
           )
             return;
+          if (heldLong.current) return;
           if ((mode === "city" || mode === "category") && e.delta < 5) {
             e.stopPropagation();
             onSelect();
@@ -164,10 +195,6 @@ function World({
           <ExpandedLandmark city={city} index={index} reduced={gentle} />
         )}
       </group>
-      <mesh position={[0, -0.48, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[mode === "map" ? 3.2 : 1.8, 64]} />
-        <meshBasicMaterial color="#c9ceba" transparent opacity={0.16} depthWrite={false} />
-      </mesh>
       <OrbitControls
         ref={controls}
         domElement={controlsElement}
@@ -177,11 +204,11 @@ function World({
         enablePan={false}
         enableDamping
         dampingFactor={0.075}
-        rotateSpeed={0.65}
-        zoomSpeed={0.7}
-        target={[0, mode === "map" ? 0 : 0.55, 0]}
-        minDistance={mode === "map" ? 6 : 3.4}
-        maxDistance={mode === "map" ? 17 : 8}
+        rotateSpeed={0.7}
+        zoomSpeed={0.9}
+        target={[0, mode === "map" ? 0.05 : 0.38, 0]}
+        minDistance={mode === "map" ? 5.2 : 2.8}
+        maxDistance={mode === "map" ? 22 : 14}
         minPolarAngle={0.2}
         maxPolarAngle={Math.PI / 2.15}
       />
@@ -192,7 +219,7 @@ export default function Scene(props: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const labels = useRef<Record<string, HTMLDivElement | null>>({});
   const [visible, setVisible] = useState(true);
-  const [spin, setSpin] = useState(0);
+  const [spin] = useState(0);
   const [controlsElement, setControlsElement] = useState<HTMLElement | null>(null);
   const trackControls = useCallback((element: HTMLElement | THREE.Group | null) => {
     setControlsElement(element instanceof HTMLElement ? element : null);
@@ -209,11 +236,26 @@ export default function Scene(props: Props) {
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
+  const gesture = useRef<{ x: number; y: number; t: number } | null>(null);
   return (
     <div
       ref={ref}
       className="scene-view"
-      aria-label="Interactive 3D illustration: drag to rotate, pinch to zoom"
+      role="region"
+      aria-label="Toy map of South Africa. Drag to spin, scroll or pinch to zoom, swipe to discover, tap a toy to step inside."
+      onPointerDown={(event) => {
+        gesture.current = { x: event.clientX, y: event.clientY, t: performance.now() };
+      }}
+      onPointerUp={(event) => {
+        const start = gesture.current;
+        gesture.current = null;
+        if (!start || props.mode !== "city" || !props.onCycle) return;
+        const dx = event.clientX - start.x;
+        const dy = event.clientY - start.y;
+        const dt = performance.now() - start.t;
+        if (dt < 340 && Math.abs(dx) > 78 && Math.abs(dx) > Math.abs(dy) * 1.7)
+          props.onCycle(dx > 0 ? -1 : 1);
+      }}
     >
       <View ref={trackControls} index={2} className="three-view" frames={Infinity}>
         {controlsElement && (
@@ -226,19 +268,6 @@ export default function Scene(props: Props) {
           />
         )}
       </View>
-      {props.mode !== "map" && (
-        <button
-          className="model-spin"
-          aria-label="Spin illustration"
-          onClickCapture={(event) => {
-            event.stopPropagation();
-            setSpin((v) => v + 1);
-          }}
-          onPointerDownCapture={(event) => event.stopPropagation()}
-        >
-          <UiIcon name="rotate" size={22} />
-        </button>
-      )}
       {props.mode === "map" && (
         <div className="map-label-layer">
           {provinceLabels.map((p) => (
@@ -257,9 +286,6 @@ export default function Scene(props: Props) {
                 } as React.CSSProperties
               }
             >
-              <svg className="province-leader" viewBox="-100 -100 200 200" aria-hidden="true">
-                <line x1="0" y1="0" x2={labelOffsets[p.code][0]} y2={labelOffsets[p.code][1]} />
-              </svg>
               {availableProvinces[p.code] !== undefined ? (
                 <Link
                   href={`/${cities[availableProvinces[p.code]].slug}`}
@@ -274,14 +300,11 @@ export default function Scene(props: Props) {
                   }}
                   onPointerDownCapture={(event) => event.stopPropagation()}
                 >
-                  <span>{p.name.toUpperCase()}</span>
-                  <small className="province-city-name">
-                    {cities[availableProvinces[p.code]].short}
-                  </small>
+                  {p.name}
                 </Link>
               ) : (
                 <span data-available="false" className="province">
-                  {p.name.toUpperCase()}
+                  {p.name}
                 </span>
               )}
             </div>

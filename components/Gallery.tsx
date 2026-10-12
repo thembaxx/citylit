@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { useGesture } from "@use-gesture/react";
-import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { X, CaretLeft, CaretRight, MagnifyingGlassPlus } from "@phosphor-icons/react";
 import type { Photo } from "../lib/data";
 export default function Gallery({
   images,
@@ -72,7 +72,7 @@ export default function Gallery({
           {context === "city" ? "CITY ATMOSPHERE" : "IN PICTURES"} · {index + 1} / {images.length}
         </span>
         <span className="gallery-zoom">
-          <ZoomIn size={17} /> Take a closer look
+          <MagnifyingGlassPlus size={17} weight="bold" /> Take a closer look
         </span>
       </button>
       <div className="gallery-thumbs">
@@ -113,7 +113,7 @@ export default function Gallery({
           aria-label="Close gallery"
           onClick={() => setOpen(false)}
         >
-          <X />
+          <X size={18} weight="bold" />
         </button>
         <div ref={area} className="lightbox-image-area">
           <motion.div
@@ -126,7 +126,7 @@ export default function Gallery({
         </div>
         <div className="lightbox-controls">
           <button className="round" onClick={() => select(-1)} aria-label="Previous photo">
-            <ChevronLeft />
+            <CaretLeft size={22} weight="bold" />
           </button>
           <div>
             <span>
@@ -137,7 +137,7 @@ export default function Gallery({
             </a>
           </div>
           <button className="round" onClick={() => select(1)} aria-label="Next photo">
-            <ChevronRight />
+            <CaretRight size={22} weight="bold" />
           </button>
         </div>
       </dialog>

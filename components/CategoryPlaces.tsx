@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import CategoryNav from "./CategoryNav";
 import CategoryIcon from "./CategoryIcon";
 import KhweziMoment from "./KhweziMoment";
-import { categories, categorySlug, cities, type Place } from "../lib/data";
+import { categories, categoryBlurbs, categorySlug, cities, type Place } from "../lib/data";
 const Scene = dynamic(() => import("./Scene"), {
   ssr: false,
   loading: () => <KhweziMoment pose="loading" compact />,
@@ -109,9 +109,7 @@ export default function CategoryPlaces(props: Props) {
             <span>IV</span>Follow your curiosity
           </div>
           <h1 id="category-page-title">{category}</h1>
-          <p>
-            The places that make {city.short}, {city.short}. Find something worth stepping out for.
-          </p>
+          <p>{categoryBlurbs[category]}</p>
           <Link className="category-page-back" href={`/${city.slug}`}>
             <ArrowLeft size={15} />
             Back to the city

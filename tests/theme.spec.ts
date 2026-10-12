@@ -23,8 +23,8 @@ function recoveryElement(value: unknown): ReactNode {
   return value as ReactNode;
 }
 const colors = {
-  day: { css: "rgb(246, 243, 237)", hex: "#f6f3ed", scheme: "light" },
-  night: { css: "rgb(8, 15, 32)", hex: "#080f20", scheme: "dark" },
+  day: { css: "rgb(230, 229, 226)", hex: "#e6e5e2", scheme: "light" },
+  night: { css: "rgb(34, 35, 38)", hex: "#222326", scheme: "dark" },
 } as const;
 async function matchesTheme(page: Page, theme: keyof typeof colors) {
   await expect(page.locator("html")).toHaveCSS("background-color", colors[theme].css);
@@ -217,7 +217,7 @@ test("viewport metadata replacements and compact landscape leave no background s
     document.documentElement.removeAttribute("data-theme");
     document
       .querySelectorAll('meta[name="theme-color"]')
-      .forEach((meta) => meta.setAttribute("content", "#080f20"));
+      .forEach((meta) => meta.setAttribute("content", "#222326"));
   });
   await matchesTheme(page, "day");
   for (const viewport of [

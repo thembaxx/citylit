@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Check, Plus, Share2, Flag, ArrowUpRight } from "lucide-react";
+import { Check, Plus, ShareNetwork, Flag, ArrowUpRight } from "@phosphor-icons/react";
 import { type Place, places } from "../lib/data";
 import { normalizeCorrections, readCorrections, publicHttpsUrl } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
@@ -54,7 +54,7 @@ export default function PlaceActions({ place }: { place: Place }) {
           {visited ? "Visited" : "Mark visited"}
         </button>
         <button onClick={share}>
-          <Share2 size={16} />
+          <ShareNetwork size={16} weight="bold" />
           Share
         </button>
       </div>

@@ -8,7 +8,7 @@ export const recoveryThemeScript = `(() => {
     ? saved : matchMedia("(prefers-color-scheme: light)").matches ? "day" : "night";
   root.dataset.theme = theme;
   document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
-    meta.content = theme === "day" ? "#f6f3ed" : "#080f20";
+    meta.content = theme === "day" ? "#e6e5e2" : "#222326";
   });
   document.querySelectorAll('meta[name="color-scheme"]').forEach(meta => {
     meta.content = theme === "day" ? "light" : "dark";

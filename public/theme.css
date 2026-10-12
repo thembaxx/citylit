@@ -1,21 +1,22 @@
-/* Shared by the live app, loading/recovery screens and downloaded guide. */
+/* Shared by the live app, loading/recovery screens and downloaded guide.
+   Surfaces stay warm gray. Colour lives in the toys, not the night sky. */
 :root {
-  --night-bg: #080f20;
-  --day-bg: #f6f3ed;
-  --night-ink: #f1f3ff;
-  --day-ink: #17223c;
-  --night-muted: #b0b9d1;
-  --day-muted: #505d74;
-  --night-accent: #7361ed;
-  --day-accent: #5b45c9;
-  --night-accent-ink: #b4a5ff;
-  --day-accent-ink: #5b45c9;
-  --night-line: #34425e;
-  --day-line: #b7becb;
-  --night-surface: #101b32;
-  --day-surface: #fffdf8;
-  --night-surface-glass: #101b32f5;
-  --day-surface-glass: #fffdf8f5;
+  --night-bg: #222326;
+  --day-bg: #e6e5e2;
+  --night-ink: #f4f3f0;
+  --day-ink: #2a2a2e;
+  --night-muted: #b3b1ab;
+  --day-muted: #6a6966;
+  --night-accent: #ff8a5b;
+  --day-accent: #e24b32;
+  --night-accent-ink: #ffb089;
+  --day-accent-ink: #c83b28;
+  --night-line: #3e3f44;
+  --day-line: #d2d0cb;
+  --night-surface: #2c2d31;
+  --day-surface: #f7f6f4;
+  --night-surface-glass: #2c2d31f5;
+  --day-surface-glass: #f7f6f4f5;
   color-scheme: dark;
   --bg: var(--night-bg);
   --ink: var(--night-ink);

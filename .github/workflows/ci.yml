@@ -43,6 +43,8 @@ jobs:
           path: |
             .next/
             !.next/cache/**
+            public/pwa-release.js
+            public/icons/ui.svg
           include-hidden-files: true
           retention-days: 1
           if-no-files-found: error
@@ -92,7 +94,7 @@ jobs:
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
           name: production-build
-          path: .next
+          path: .
       - name: Install this project's browser
         run: pnpm exec playwright install --with-deps "$BROWSER_ENGINE"
         env:

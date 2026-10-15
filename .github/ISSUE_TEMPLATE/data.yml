@@ -1,6 +1,12 @@
 name: Place data correction
 description: Suggest a sourced change to a place, pin, photo or practical fact.
+title: "Data correction: "
 body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public report. Include venue information only, with no personal location or contact details.
+        A maintainer verifies the source and publishes accepted changes through a catalog pull request. Submitting this form does not update the listing automatically.
   - type: input
     id: url
     attributes:
@@ -21,3 +27,8 @@ body:
       description: Prefer the venue, municipality or operator.
     validations:
       required: true
+  - type: input
+    id: checked
+    attributes:
+      label: When did you check this source?
+      description: Use YYYY-MM-DD if known. The app's draft creation date is not a source verification date.

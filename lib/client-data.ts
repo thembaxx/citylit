@@ -84,7 +84,7 @@ export function normalizeCorrections(value: unknown): Correction[] {
         byId.has(row.placeId) &&
         ["address", "accessibility", "hours", "pricing", "photos", "other"].includes(row.field) &&
         typeof row.value === "string" &&
-        row.value.length > 0 &&
+        row.value.trim().length > 0 &&
         row.value.length <= 1200 &&
         publicHttpsUrl(row.source) &&
         typeof row.createdAt === "string" &&

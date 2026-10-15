@@ -2,7 +2,7 @@ import EditorialDashboard from "../../components/EditorialDashboard";
 import { metadataForPage } from "../../lib/seo";
 export const metadata = metadataForPage(
   "Catalog review",
-  "Citylit’s source quality review and browser-local correction drafts.",
+  "Review Citylit source quality, manage correction drafts and prepare public reports for maintainers.",
   "/editorial",
   false,
 );

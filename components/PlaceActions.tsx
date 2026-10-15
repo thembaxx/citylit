@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import {
   Check,
@@ -16,12 +17,15 @@ import {
   readCorrections,
   publicHttpsUrl,
   MAX_TRIP_STOPS,
+  type Correction,
 } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
+import CorrectionReport from "./CorrectionReport";
 export default function PlaceActions({ place }: { place: Place }) {
   const { state, update } = useDiscovery();
   const [form, setForm] = useState(false),
     [message, setMessage] = useState("");
+  const [draft, setDraft] = useState<Correction | null>(null);
   const reduced = useReducedMotion();
   const visited = state.visited.includes(place.id);
   const share = async () => {
@@ -219,6 +223,8 @@ export default function PlaceActions({ place }: { place: Place }) {
         <Flag size={14} />
         Suggest a correction
       </button>
+      {draft && <CorrectionReport draft={draft} />}
+      {draft && <Link href="/editorial">Review or remove saved drafts</Link>}
       {form && (
         <form
           className="correction-form"
@@ -236,19 +242,26 @@ export default function PlaceActions({ place }: { place: Place }) {
                 setMessage("Your review queue is full. Export it before adding more drafts.");
                 return;
               }
-              queue.push({
+              const nextDraft: Correction = {
                 id: crypto.randomUUID(),
                 placeId: place.id,
                 field: String(data.get("field") || ""),
-                value: String(data.get("value") || ""),
+                value: String(data.get("value") || "").trim(),
                 source,
                 createdAt: new Date().toISOString(),
                 status: "needs-review",
-              });
+              };
+              if (!normalizeCorrections([nextDraft]).length) {
+                setMessage("Add the corrected details and a public supporting source.");
+                return;
+              }
+              queue.push(nextDraft);
               localStorage.setItem(
                 "citylit-corrections",
                 JSON.stringify(normalizeCorrections(queue)),
               );
+              window.dispatchEvent(new Event("citylit:corrections-changed"));
+              setDraft(nextDraft);
               setMessage(
                 "Draft saved on this device for review. It has not changed the public listing.",
               );
@@ -278,8 +291,9 @@ export default function PlaceActions({ place }: { place: Place }) {
             <input type="url" name="source" required maxLength={2048} placeholder="https://" />
           </label>
           <p className="planning-note">
-            Drafts stay on your device. Review and export them from the data quality page before
-            publishing.
+            Save a draft on this device, then open a public report for the project to review. Do not
+            include personal information. You can manage drafts on the{" "}
+            <Link href="/editorial">catalog review page</Link>.
           </p>
           <button className="pill-button" type="submit">
             Save for review

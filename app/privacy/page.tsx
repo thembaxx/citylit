@@ -62,6 +62,20 @@ export default function PrivacyPage() {
         </p>
       </section>
       <section>
+        <h2>Public correction reports</h2>
+        <p>
+          Saving a correction creates a draft on this browser. If you choose “Open report on
+          GitHub”, its venue URL, suggested details, supporting source and draft date are sent to
+          GitHub in the report-form URL. You must sign in and submit the issue there. Submitted
+          issues are public and follow GitHub’s retention and privacy rules.{" "}
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
+            GitHub privacy statement
+          </a>
+          . Include public venue information only. Removing a local draft does not delete a report
+          submitted to GitHub.
+        </p>
+      </section>
+      <section>
         <h2>Hosting and measurement</h2>
         <p>
           The site is hosted by Vercel. Hosting may process network and security logs to deliver and

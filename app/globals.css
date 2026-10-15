@@ -3290,6 +3290,47 @@ button:disabled {
   min-height: 120px;
   resize: vertical;
 }
+.correction-handoff {
+  margin-block: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+.correction-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.correction-actions a,
+.correction-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+  background: var(--surface);
+  font: inherit;
+  text-decoration: none;
+}
+.correction-actions a:focus-visible,
+.correction-actions button:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 3px;
+}
+@supports (corner-shape: squircle) {
+  .correction-handoff,
+  .correction-actions a,
+  .correction-actions button {
+    corner-shape: squircle;
+  }
+}
 .quality-summary {
   margin-top: 24px;
   display: flex;

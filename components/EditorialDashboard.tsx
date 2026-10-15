@@ -9,6 +9,7 @@ import { placePath, activeEvents } from "../lib/adventure";
 import ThemeToggle from "./ThemeToggle";
 import { qualityIssues } from "../lib/quality";
 import { readCorrections, publicHttpsUrl, type Correction } from "../lib/client-data";
+import CorrectionReport from "./CorrectionReport";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 export default function EditorialDashboard() {
   const { state } = useDiscovery();
@@ -16,10 +17,12 @@ export default function EditorialDashboard() {
   const [city, setCity] = useState("all"),
     [queue, setQueue] = useState<Correction[]>([]),
     [duplicates, setDuplicates] = useState<string[]>([]);
+  const [message, setMessage] = useState("");
   useEffect(() => {
-    try {
-      setQueue(readCorrections());
-    } catch {}
+    const sync = () => setQueue(readCorrections());
+    sync();
+    window.addEventListener("storage", sync);
+    window.addEventListener("citylit:corrections-changed", sync);
     const seen = new Set<string>();
     setDuplicates(
       places
@@ -31,19 +34,35 @@ export default function EditorialDashboard() {
         })
         .map((p) => p.name),
     );
+    return () => {
+      window.removeEventListener("storage", sync);
+      window.removeEventListener("citylit:corrections-changed", sync);
+    };
   }, []);
   const list = places.filter((p) => city === "all" || p.city === city);
-  const update = (id: string, status: string) => {
-    const next = queue.map((row) => (row.id === id ? { ...row, status } : row));
-    setQueue(next);
+  const save = (next: Correction[]) => {
     try {
       localStorage.setItem("citylit-corrections", JSON.stringify(next));
-    } catch {}
+      setQueue(next);
+      window.dispatchEvent(new Event("citylit:corrections-changed"));
+      setMessage("Draft queue updated on this device.");
+    } catch {
+      setMessage("This browser could not save the change. Allow site storage and try again.");
+    }
+  };
+  const update = (id: string, status: string) => {
+    save(readCorrections().map((row) => (row.id === id ? { ...row, status } : row)));
   };
   const download = () => {
     const url = URL.createObjectURL(
       new Blob(
-        [JSON.stringify({ exportedAt: new Date().toISOString(), corrections: queue }, null, 2)],
+        [
+          JSON.stringify(
+            { exportedAt: new Date().toISOString(), corrections: readCorrections() },
+            null,
+            2,
+          ),
+        ],
         { type: "application/json" },
       ),
     );
@@ -77,12 +96,14 @@ export default function EditorialDashboard() {
       <section className="adventure-section">
         <h2>Correction review</h2>
         <p>
-          These drafts belong to this browser. Reviewing them prepares an export; it does not change
-          the published catalog.
+          Drafts stay on this browser until you submit a public GitHub report. A maintainer checks
+          the source and publishes an accepted correction through a reviewed catalog change. Local
+          review status does not approve or publish a change.
         </p>
         <button className="pill-button" onClick={download}>
           Export review queue
         </button>
+        <p role="status">{message}</p>
         {queue.map((row) => (
           <article className="correction-review" key={row.id}>
             <h3>{places.find((p) => p.id === row.placeId)?.name || row.placeId}</h3>
@@ -97,8 +118,12 @@ export default function EditorialDashboard() {
               Supporting source
             </a>
             <p>Status: {row.status}</p>
+            {row.status !== "rejected" && <CorrectionReport draft={row} />}
             <button onClick={() => update(row.id, "reviewed")}>Mark reviewed</button>
             <button onClick={() => update(row.id, "rejected")}>Reject draft</button>
+            <button onClick={() => save(readCorrections().filter((draft) => draft.id !== row.id))}>
+              Delete draft
+            </button>
           </article>
         ))}
         {!queue.length && (

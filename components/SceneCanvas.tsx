@@ -1,5 +1,5 @@
 "use client";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { Component, useRef, type ReactNode } from "react";
 // Both views share a renderer. Clear once, then draw atmosphere and hero in order.
@@ -20,7 +20,7 @@ class WebGLBoundary extends Component<{ children: ReactNode }, { failed: boolean
   render() {
     return this.state.failed ? (
       <div className="webgl-fallback" role="status">
-        3D is unavailable on this device. Explore using the province links in the map legend.
+        3D is unavailable on this device. Use the city guides or province links to keep exploring.
       </div>
     ) : (
       this.props.children
@@ -30,7 +30,8 @@ class WebGLBoundary extends Component<{ children: ReactNode }, { failed: boolean
 export default function SceneCanvas({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   return (
-    <div ref={ref} className="canvas-root">
+    // Demand rendering must also track Views inside the guide's scroll container.
+    <div ref={ref} className="canvas-root" onScrollCapture={() => invalidate()}>
       {children}
       <WebGLBoundary>
         <Canvas

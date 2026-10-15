@@ -16,6 +16,12 @@ export default function PrivacyPage() {
       <section>
         <h2>Saved on this browser</h2>
         <p>
+          The optional 3D atlas and reading guide share an experience preference cookie,{" "}
+          <code>citylit-view</code>. It stores only your chosen view for up to one year and is sent
+          to this site so navigation opens the same experience. Use “Read guide” or “The 3D atlas”
+          to change it, or clear it in your browser’s site-data controls.
+        </p>
+        <p>
           Saved places, visits, itineraries, correction drafts, theme, touch-feedback preferences
           and welcome dismissal use browser storage. They are not synced to a Citylit account or
           database. Sound starts off on every reload. The service worker stores public guide text

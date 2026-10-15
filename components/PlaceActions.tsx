@@ -11,7 +11,12 @@ import {
   Path,
 } from "@phosphor-icons/react";
 import { type Place, places } from "../lib/data";
-import { normalizeCorrections, readCorrections, publicHttpsUrl } from "../lib/client-data";
+import {
+  normalizeCorrections,
+  readCorrections,
+  publicHttpsUrl,
+  MAX_TRIP_STOPS,
+} from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 export default function PlaceActions({ place }: { place: Place }) {
   const { state, update } = useDiscovery();
@@ -101,8 +106,22 @@ export default function PlaceActions({ place }: { place: Place }) {
               setMessage("Your day belongs to another destination. Clear it in Build a day first.");
               return;
             }
-            update({ itinerary: Array.from(new Set([...state.itinerary, place.id])) });
-            setMessage("Added to your day.");
+            if (state.itinerary.includes(place.id)) {
+              setMessage("Already in your day.");
+              return;
+            }
+            if (state.itinerary.length >= MAX_TRIP_STOPS) {
+              setMessage(`Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`);
+              return;
+            }
+            const saved = update((previous) => ({
+              itinerary: Array.from(new Set([...previous.itinerary, place.id])),
+            }));
+            setMessage(
+              saved
+                ? "Added to your day."
+                : "This browser could not save your day. Allow site storage and try again.",
+            );
           }}
         >
           <Plus size={16} />
@@ -111,12 +130,18 @@ export default function PlaceActions({ place }: { place: Place }) {
         <button
           aria-pressed={visited}
           onClick={() => {
-            update({
+            const saved = update((previous) => ({
               visited: visited
-                ? state.visited.filter((id) => id !== place.id)
-                : [...state.visited, place.id],
-            });
-            setMessage(visited ? "Visit removed." : "A chapter visited.");
+                ? previous.visited.filter((id) => id !== place.id)
+                : Array.from(new Set([...previous.visited, place.id])),
+            }));
+            setMessage(
+              saved
+                ? visited
+                  ? "Visit removed."
+                  : "A chapter visited."
+                : "This browser could not save your visit. Allow site storage and try again.",
+            );
           }}
         >
           <Check size={16} />

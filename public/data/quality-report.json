@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-12",
-  "places": 83,
+  "generatedAt": "2026-10-15",
+  "places": 89,
   "cities": 12,
   "venuePins": 52,
-  "images": 122,
+  "images": 130,
   "errors": [],
   "issues": [
     {
@@ -588,6 +588,50 @@
     },
     {
       "id": "mmabatho-palms-hotel",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "table-mountain",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "voortrekker-monument",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "route-67",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "william-humphreys-art-gallery",
+      "needs": [
+        "venue pin",
+        "entrance verification"
+      ]
+    },
+    {
+      "id": "polokwane-game-reserve",
+      "needs": [
+        "venue pin",
+        "entrance verification",
+        "venue photographs"
+      ]
+    },
+    {
+      "id": "national-museum-bloemfontein",
       "needs": [
         "venue pin",
         "entrance verification",

@@ -7,7 +7,7 @@ type IconName =
   | "sun"
   | "compass";
 
-/** Local Hugeicons sprite shared with the offline guide; decorative icons keep text labels intact. */
+/** Local Phosphor sprite shared with the offline guide; decorative icons keep text labels intact. */
 export default function UiIcon({ name, size = 18 }: { name: IconName; size?: number }) {
   return (
     <svg

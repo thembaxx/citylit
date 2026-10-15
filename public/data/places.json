@@ -1796,6 +1796,12 @@
         "title": "Kirstenbosch National Botanical Garden",
         "fetchedAt": "2026-10-07",
         "status": "fetched"
+      },
+      {
+        "url": "https://www.sanbi.org/gardens/kirstenboch/visitor-information/information/",
+        "title": "SANBI Kirstenbosch visitor information",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
       }
     ],
     "wikipedia": "https://en.wikipedia.org/wiki/Kirstenbosch_National_Botanical_Garden",
@@ -1835,7 +1841,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-15",
     "about": "Kirstenbosch is a botanical garden nestled at the eastern foot of Table Mountain in Cape Town. The garden is one of 10  National Botanical Gardens covering five of South Africa's six different biomes and administered by the South African National Biodiversity Institute (SANBI). Prior to 1 September 2004, the institute was known as the National Botanical Institute.\nKirstenbosch places a strong emphasis on the cultivation of indigenous plants.",
     "aboutSource": "https://en.wikipedia.org/wiki/Kirstenbosch_National_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -1845,7 +1851,7 @@
       "admission": {
         "value": "paid",
         "source": "https://www.sanbi.org/gardens/kirstenboch/visitor-information/information/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       },
       "booking": {
@@ -1903,9 +1909,9 @@
         "confidence": "verified"
       },
       "price": {
-        "value": "R270 standard adult; SA/SADC adult R110 with residency proof; other rates vary",
+        "value": "SANBI 2026–2027 adult rates: South African residents and SADC nationals R110 with qualifying ID, other African nationals R150, other international visitors R270. Child, student and membership concessions apply.",
         "source": "https://www.sanbi.org/gardens/kirstenboch/visitor-information/information/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       },
       "openingHours": {
@@ -1915,9 +1921,9 @@
         "confidence": "verified"
       },
       "paymentMethods": {
-        "value": "Cash payments are not accepted",
+        "value": "Cash is not accepted; check the operator for available payment and online-ticket options.",
         "source": "https://www.sanbi.org/gardens/kirstenboch/visitor-information/information/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       }
     },
@@ -3411,9 +3417,15 @@
         "title": "Apartheid Museum",
         "fetchedAt": "2026-10-07",
         "status": "fetched"
+      },
+      {
+        "url": "https://www.apartheidmuseum.org/about-the-museum/visitor-information",
+        "title": "Apartheid Museum visitor information",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-15",
     "wikipedia": "https://en.wikipedia.org/wiki/Apartheid_Museum",
     "about": "The Apartheid Museum is a museum illustrating apartheid and the 20th-century history of South Africa. The museum, part of the Gold Reef City complex located in the south of Johannesburg, was opened in November 2001. It was established by an independent non-profit organisation, Akani Egoli, and built as an offshoot of the development of the Gold Reef City Casino.\nAt least five times a year, events are held at the museum to celebrate the end of apartheid and the start of multiracial democracy for the people of South Africa.",
     "aboutSource": "https://en.wikipedia.org/wiki/Apartheid_Museum",
@@ -3422,16 +3434,16 @@
     "coordinateRole": "venue",
     "facts": {
       "admission": {
-        "value": null,
-        "source": "",
-        "checkedAt": "",
-        "confidence": "unknown"
+        "value": "paid",
+        "source": "https://www.apartheidmuseum.org/about-the-museum/visitor-information",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       },
       "booking": {
-        "value": null,
-        "source": "",
-        "checkedAt": "",
-        "confidence": "unknown"
+        "value": "Tickets are available at the door. Group guided tours must be booked ahead.",
+        "source": "https://www.apartheidmuseum.org/about-the-museum/visitor-information",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       },
       "stepFreeEntrance": {
         "value": null,
@@ -3470,13 +3482,26 @@
         "confidence": "unknown"
       },
       "durationMinutes": {
-        "value": 90,
-        "source": "Citylit editorial planning estimate",
-        "checkedAt": "2026-10-08",
-        "confidence": "editorial-estimate"
+        "value": 120,
+        "source": "https://www.apartheidmuseum.org/about-the-museum/visitor-information",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "openingHours": {
+        "value": "Tuesday–Sunday 09:00–17:00 and most public holidays.",
+        "source": "https://www.apartheidmuseum.org/about-the-museum/visitor-information",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "price": {
+        "value": "Admission with audio tour, from 1 May 2026: South African adults R170 with ID; international adults including SADC R240. Concessions differ; confirm eligibility with the museum.",
+        "source": "https://www.apartheidmuseum.org/about-the-museum/visitor-information",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       }
     },
-    "aboutCheckedAt": "2026-10-08"
+    "aboutCheckedAt": "2026-10-08",
+    "visitNote": "The museum advises against visits by children under 11 because of graphic content; check its guidance before bringing children."
   },
   {
     "id": "wits-art-museum",
@@ -6609,6 +6634,12 @@
         "title": "Stellenbosch Museum",
         "fetchedAt": "2026-10-08",
         "status": "fetched"
+      },
+      {
+        "url": "https://stelmus.co.za/about/",
+        "title": "Stellenbosch Museum visitor information",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
       }
     ],
     "coords": [
@@ -6647,7 +6678,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-15",
     "district": "Stellenbosch",
     "coordinateRole": "city",
     "facts": {
@@ -6704,13 +6735,20 @@
         "source": "Citylit editorial planning estimate",
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
+      },
+      "openingHours": {
+        "value": "Monday–Saturday 09:00–17:00. Sunday: April–August 10:00–13:00; September–March 10:00–16:00. Closed Christmas Day, Good Friday and Easter Sunday.",
+        "source": "https://stelmus.co.za/about/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       }
     },
     "wikipedia": "https://en.wikipedia.org/wiki/Stellenbosch_Museum",
     "about": "Stellenbosch Museum is a cultural history museum in the centre of Stellenbosch, South Africa.  It was proclaimed a museum on 23 March 1962 and is a province-aided museum which receives support from the Government of the Western Cape. The museum includes four period houses, which depict the way people lived and the difference in architectural styles over the periods illustrated (the Village Museum). It also includes a historical powder magazine and a toy museum.",
     "aboutSource": "https://en.wikipedia.org/wiki/Stellenbosch_Museum",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-08"
+    "aboutCheckedAt": "2026-10-08",
+    "visitNote": "The museum consists of four historic houses. Confirm the starting point and current admission with the museum; its administration address differs from the house entrances."
   },
   {
     "city": "stellenbosch",
@@ -7271,8 +7309,8 @@
     "sources": [
       {
         "url": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
-        "title": "Donkin Reserve - Pyramid and Lighthouse -  Nelson Mandela Bay (Port Elizabeth)",
-        "fetchedAt": "2026-10-08",
+        "title": "Nelson Mandela Bay Tourism: Donkin Reserve",
+        "fetchedAt": "2026-10-15",
         "status": "fetched"
       }
     ],
@@ -7312,7 +7350,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-15",
     "district": "Central",
     "coordinateRole": "venue",
     "facts": {
@@ -7361,8 +7399,8 @@
       "environment": {
         "value": "outdoor",
         "source": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
-        "checkedAt": "2026-10-08",
-        "confidence": "editorial-estimate"
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       },
       "durationMinutes": {
         "value": 60,
@@ -7371,7 +7409,8 @@
         "confidence": "editorial-estimate"
       }
     },
-    "about": "A hilltop public space with a lighthouse, stone pyramid and views across the bay. Climb the hill for the pyramid, the lighthouse and a wide look over Algoa Bay."
+    "about": "A hilltop public space with a lighthouse, stone pyramid and views across the bay. Climb the hill for the pyramid, the lighthouse and a wide look over Algoa Bay.",
+    "visitNote": "The reserve links to Route 67 and the Donkin Heritage Trail. Ask the visitor information office about current access to the lighthouse and guided walks."
   },
   {
     "city": "gqeberha",
@@ -7568,7 +7607,7 @@
     "city": "bloemfontein",
     "name": "Oliewenhuis Art Museum",
     "category": "Entertainment",
-    "website": "https://nationalmuseum.co.za/visitor-information/",
+    "website": "https://nationalmuseum.co.za/oliewenhuis-art-museum/",
     "address": "16 Harry Smith Street, Waverley",
     "description": "Art collections and a sculpture garden in a former presidential residence.",
     "wiki": "Oliewenhuis Art Museum",
@@ -7576,8 +7615,8 @@
     "sources": [
       {
         "url": "https://nationalmuseum.co.za/visitor-information/",
-        "title": "Oliewenhuis Art Museum - Visitor Information | National Museum",
-        "fetchedAt": "2026-10-08",
+        "title": "Oliewenhuis official visitor information",
+        "fetchedAt": "2026-10-15",
         "status": "fetched"
       }
     ],
@@ -7617,14 +7656,14 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-15",
     "district": "Waverley",
     "coordinateRole": "city",
     "facts": {
       "admission": {
         "value": "free",
         "source": "https://nationalmuseum.co.za/visitor-information/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       },
       "booking": {
@@ -7646,10 +7685,10 @@
         "confidence": "unknown"
       },
       "parking": {
-        "value": null,
-        "source": "",
-        "checkedAt": "",
-        "confidence": "unknown"
+        "value": "Secure parking: R10 per vehicle, cash only. Vehicle entry closes at 16:30 on weekdays and 15:30 on weekends/public holidays.",
+        "source": "https://nationalmuseum.co.za/visitor-information/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       },
       "publicTransport": {
         "value": null,
@@ -7674,6 +7713,18 @@
         "source": "Citylit editorial planning estimate",
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
+      },
+      "openingHours": {
+        "value": "Monday–Friday 08:00–17:00; weekends and public holidays 09:00–16:00. Closed Good Friday and Christmas Day.",
+        "source": "https://nationalmuseum.co.za/visitor-information/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "accessNotes": {
+        "value": "A main-entrance ramp and a lift to the first-floor permanent collection are listed by the museum.",
+        "source": "https://nationalmuseum.co.za/visitor-information/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       }
     },
     "about": "Art collections and a sculpture garden in a former presidential residence. A former residence on Grant’s Hill, now galleries plus a sculpture garden you can walk."
@@ -7920,6 +7971,12 @@
         "title": "Lowveld National Botanical Garden",
         "fetchedAt": "2026-10-08",
         "status": "fetched"
+      },
+      {
+        "url": "https://www.sanbi.org/gardens/lowveld/visitor-information/information/",
+        "title": "SANBI Lowveld visitor information",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
       }
     ],
     "coords": [
@@ -7958,15 +8015,15 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-15",
     "district": "Mbombela",
     "coordinateRole": "venue",
     "facts": {
       "admission": {
-        "value": null,
-        "source": "",
-        "checkedAt": "",
-        "confidence": "unknown"
+        "value": "paid",
+        "source": "https://www.sanbi.org/gardens/lowveld/visitor-information/information/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       },
       "booking": {
         "value": null,
@@ -8015,6 +8072,18 @@
         "source": "Citylit editorial planning estimate",
         "checkedAt": "2026-10-08",
         "confidence": "editorial-estimate"
+      },
+      "openingHours": {
+        "value": "Daily: September–March 08:00–18:00; April–August 08:00–17:00.",
+        "source": "https://www.sanbi.org/gardens/lowveld/visitor-information/information/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "price": {
+        "value": "Adult admission: R80 in September–March, R65 in April–August. Student and child concessions apply; confirm special-event rates.",
+        "source": "https://www.sanbi.org/gardens/lowveld/visitor-information/information/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
       }
     },
     "wikipedia": "https://en.wikipedia.org/wiki/Lowveld_National_Botanical_Garden",
@@ -8532,22 +8601,22 @@
     "city": "kimberley",
     "name": "The Big Hole",
     "category": "Entertainment",
-    "website": "https://thebighole.com/visitors-info/",
+    "website": "https://thebighole.com/",
     "address": "Tucker Street, Kimberley",
     "description": "A viewing platform, museum and reconstructed mining town around the historic excavation.",
     "wiki": "Big Hole",
     "id": "the-big-hole",
     "sources": [
       {
-        "url": "https://thebighole.com/visitors-info/",
-        "title": "The Big Hole Official Site | Tourist Attractions in Kimberley",
+        "url": "https://en.wikipedia.org/wiki/Big_Hole",
+        "title": "Big Hole",
         "fetchedAt": "2026-10-08",
         "status": "fetched"
       },
       {
-        "url": "https://en.wikipedia.org/wiki/Big_Hole",
-        "title": "Big Hole",
-        "fetchedAt": "2026-10-08",
+        "url": "https://thebighole.com/visitors-info/",
+        "title": "The Big Hole official visitor information",
+        "fetchedAt": "2026-10-15",
         "status": "fetched"
       }
     ],
@@ -8578,20 +8647,20 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-15",
     "district": "Kimberley",
     "coordinateRole": "city",
     "facts": {
       "admission": {
         "value": "paid",
         "source": "https://thebighole.com/visitors-info/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       },
       "booking": {
-        "value": "Groups of 20 or more require booking",
+        "value": "Individuals and families do not need to pre-book. Groups of 20 or more should contact the operator.",
         "source": "https://thebighole.com/visitors-info/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       },
       "stepFreeEntrance": {
@@ -8637,15 +8706,27 @@
         "confidence": "editorial-estimate"
       },
       "price": {
-        "value": "R160 adult tour; other ticket types vary",
+        "value": "Operator rates dated March 2026: adults R160, children 4–12 R120, students up to 23 with student card R130. Check current concessions and packages.",
         "source": "https://thebighole.com/visitors-info/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       },
       "entryPriceZAR": {
         "value": 160,
         "source": "https://thebighole.com/visitors-info/",
-        "checkedAt": "2026-10-08",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "openingHours": {
+        "value": "Daily 08:00–17:00; closed Christmas Day. Guided tours normally run hourly from 09:00, with the last tour at 16:00.",
+        "source": "https://thebighole.com/visitors-info/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "accessNotes": {
+        "value": "The operator describes the facility as wheelchair friendly. Confirm access to the particular tour and viewing areas you need.",
+        "source": "https://thebighole.com/visitors-info/",
+        "checkedAt": "2026-10-15",
         "confidence": "verified"
       }
     },
@@ -8653,7 +8734,8 @@
     "about": "The Kimberley Mine or Tim Kuilmine (Afrikaans: Groot Gat, lit. 'Big Hole') is an open-pit and underground mine in Kimberley, South Africa. It has been considered the deepest hole excavated by hand, contending the title with Jagersfontein Mine.",
     "aboutSource": "https://en.wikipedia.org/wiki/Big_Hole",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-08"
+    "aboutCheckedAt": "2026-10-08",
+    "visitNote": "Arrive before the hourly tour to buy tickets. Tour times and access to individual areas can change."
   },
   {
     "city": "kimberley",
@@ -9196,5 +9278,627 @@
       }
     },
     "about": "A hotel and villa retreat beside the Leopard Park golf course. Villas and hotel rooms beside the Leopard Park golf course, on the quieter Mmabatho side."
+  },
+  {
+    "id": "table-mountain",
+    "name": "Table Mountain",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "description": "A flat-topped mountain above the city, with a cableway journey and wide views across the peninsula.",
+    "address": "Lower Cable Station, Tafelberg Road, Cape Town",
+    "website": "https://www.tablemountain.net/",
+    "coords": [
+      18.4241,
+      -33.9249
+    ],
+    "coordinateAccuracy": "city",
+    "coordinateRole": "city",
+    "coordinateSource": "City reference from Citylit city catalog; venue coordinates not verified",
+    "images": [
+      {
+        "alt": "Taffelberget och Kapstaden i Sydafrika, sett från en strand vid stadsdelen Bloubergstrand",
+        "author": "Danie van der Merwe from Cape Town, South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_Mountain_DanieVDM.jpg",
+        "filename": "Table Mountain DanieVDM.jpg",
+        "src": "/images/d93b06e34d54.jpg"
+      },
+      {
+        "alt": "Sunrise from Lionshead above the clouds overlooking Table Moutain",
+        "author": "Brendon Wainwright",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:BRENDON_WAINWRIGHT_-_Table_Mountain_1.jpg",
+        "filename": "BRENDON WAINWRIGHT - Table Mountain 1.jpg",
+        "src": "/images/accd276676e3.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-15",
+    "sources": [
+      {
+        "url": "https://www.tablemountain.net/",
+        "title": "Table Mountain Aerial Cableway official website",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      }
+    ],
+    "facts": {
+      "admission": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "booking": {
+        "value": "Check the official site for cableway tickets, operating times and weather status.",
+        "source": "https://www.tablemountain.net/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "stepFreeEntrance": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "accessibleToilets": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "parking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "publicTransport": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "family": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "environment": {
+        "value": "outdoor",
+        "source": "https://www.tablemountain.net/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "durationMinutes": {
+        "value": 90,
+        "source": "Citylit editorial planning estimate",
+        "checkedAt": "2026-10-15",
+        "confidence": "editorial-estimate"
+      }
+    },
+    "visitNote": "Cableway operation depends on the weather. Tickets do not guarantee that it is running; check the operator on the day. Hiking is a separate activity that needs suitable preparation."
+  },
+  {
+    "id": "voortrekker-monument",
+    "name": "Voortrekker Monument",
+    "city": "pretoria",
+    "category": "Entertainment",
+    "description": "A granite monument and museum complex in Groenkloof, with exhibitions, walking grounds and views over Tshwane.",
+    "address": "Eeufees Road, Groenkloof, Pretoria",
+    "website": "https://vtm.org.za/en/contact-us/",
+    "coords": [
+      28.2293,
+      -25.7479
+    ],
+    "coordinateAccuracy": "city",
+    "coordinateRole": "city",
+    "coordinateSource": "City reference from Citylit city catalog; venue coordinates not verified",
+    "images": [
+      {
+        "alt": "The Voortrekker Monument outside Pretoria was completed in 1949. Inside is a marble frieze containing 27 panels commemorating events of the Great Trek in which farmers of mainly Du",
+        "author": "John Walker, Images of Africa Taken from de-Wikipedia, where it had been uploaded by Head under the same filename.",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voortrekker_Monument.jpg",
+        "filename": "Voortrekker Monument.jpg",
+        "src": "/images/7426d56d3ef4.jpg"
+      },
+      {
+        "alt": "Voortrekker Monument Chapel seen from the north, Pretoria, Gauteng, South Africa",
+        "author": "Ymblanter",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pretoria_Voortrekker_Monument_Chapel_seen_from_the_north.jpg",
+        "filename": "Pretoria Voortrekker Monument Chapel seen from the north.jpg",
+        "src": "/images/aec1a2b9e6eb.jpg"
+      },
+      {
+        "alt": "Vachellia sieberiana next to the chapel, Voortrekker Monument, Pretoria, Gauteng, South Africa",
+        "author": "Ymblanter",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pretoria_Voortrekker_Monument_Vachellia_sieberiana_next_to_the_chapel.jpg",
+        "filename": "Pretoria Voortrekker Monument Vachellia sieberiana next to the chapel.jpg",
+        "src": "/images/39a882b220e1.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-15",
+    "sources": [
+      {
+        "url": "https://vtm.org.za/en/contact-us/",
+        "title": "Voortrekker Monument contact and visitor information",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      },
+      {
+        "url": "https://vtm.org.za/entrance-fees/",
+        "title": "Voortrekker Monument official entrance fees",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      }
+    ],
+    "facts": {
+      "admission": {
+        "value": "paid",
+        "source": "https://vtm.org.za/entrance-fees/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "booking": {
+        "value": "Arrange guided tours with the operator in advance.",
+        "source": "https://vtm.org.za/en/contact-us/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "stepFreeEntrance": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "accessibleToilets": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "parking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "publicTransport": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "family": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "environment": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "durationMinutes": {
+        "value": 90,
+        "source": "Citylit editorial planning estimate",
+        "checkedAt": "2026-10-15",
+        "confidence": "editorial-estimate"
+      },
+      "openingHours": {
+        "value": "Daily: monument 08:00–17:30, grounds 07:00–17:30. Closed Good Friday, 24 December and 25 December.",
+        "source": "https://vtm.org.za/en/contact-us/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "price": {
+        "value": "Published full museum/grounds admission: SADC adults R250; international adults R370. A vehicle levy applies. Grounds-only tickets and online discounts are separate; confirm the option you need.",
+        "source": "https://vtm.org.za/entrance-fees/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      }
+    }
+  },
+  {
+    "id": "route-67",
+    "name": "Route 67",
+    "city": "gqeberha",
+    "category": "Entertainment",
+    "description": "A public-art and heritage route connecting the city centre to the Donkin Reserve through stories of South African democracy.",
+    "address": "Donkin Reserve visitor information office, Belmont Terrace, Gqeberha",
+    "website": "https://www.nmbt.co.za/listing/route_67.html",
+    "coords": [
+      25.6022,
+      -33.9608
+    ],
+    "coordinateAccuracy": "city",
+    "coordinateRole": "city",
+    "coordinateSource": "City reference from Citylit city catalog; venue coordinates not verified",
+    "images": [
+      {
+        "alt": "Route 67 is a vehicle for continuing the Urban Renewal of Central Port Elizabeth and simultaneously educating citizens and tourists on our struggle history and the cultural and his",
+        "author": "Suzi-k",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Elizabeth_Route_67_fish_bone.JPG",
+        "filename": "Port Elizabeth Route 67 fish bone.JPG",
+        "src": "/images/05841f4712d1.jpg"
+      },
+      {
+        "alt": "Route 67 is a vehicle for continuing the Urban Renewal of Central Port Elizabeth and simultaneously educating citizens and tourists on our struggle history and the cultural and his",
+        "author": "Suzi-k",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Elizabeth_Route_67_light.JPG",
+        "filename": "Port Elizabeth Route 67 light.JPG",
+        "src": "/images/0bab29cf42e4.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-15",
+    "sources": [
+      {
+        "url": "https://www.nmbt.co.za/listing/route_67.html",
+        "title": "Nelson Mandela Bay Tourism: Route 67",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      }
+    ],
+    "facts": {
+      "admission": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "booking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "stepFreeEntrance": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "accessibleToilets": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "parking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "publicTransport": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "family": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "environment": {
+        "value": "outdoor",
+        "source": "https://www.nmbt.co.za/listing/route_67.html",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "durationMinutes": {
+        "value": 90,
+        "source": "Citylit editorial planning estimate",
+        "checkedAt": "2026-10-15",
+        "confidence": "editorial-estimate"
+      }
+    },
+    "visitNote": "Ask the visitor information office inside the Donkin lighthouse about current guided walks and route conditions. The trail includes stairs and slopes; confirm an accessible route if needed."
+  },
+  {
+    "id": "william-humphreys-art-gallery",
+    "name": "William Humphreys Art Gallery",
+    "city": "kimberley",
+    "category": "Entertainment",
+    "description": "A Kimberley gallery bringing South African art, historic collections and temporary exhibitions into the same conversation.",
+    "address": "1 Cullinan Crescent, Civic Centre, Kimberley",
+    "website": "https://whag.co.za/contact-us",
+    "coords": [
+      24.7623,
+      -28.7282
+    ],
+    "coordinateAccuracy": "city",
+    "coordinateRole": "city",
+    "coordinateSource": "City reference from Citylit city catalog; venue coordinates not verified",
+    "images": [
+      {
+        "alt": "THE OUTING signed with the artist's monogram; signed on the reverse pen and ink, heightened with gouache 20 x 30cm EXHIBITED Strat Caldecott Exhibition, William Humphreys Art Galle",
+        "author": "Harry Stratford Caldecott (South African 1886-1929)",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Harry_Stratford_Caldecott_(South_African_1886-1929)_The_Outing.jpeg",
+        "filename": "Harry Stratford Caldecott (South African 1886-1929) The Outing.jpeg",
+        "src": "/images/f6f07bb33f46.jpg"
+      }
+    ],
+    "imageContext": "venue",
+    "checkedAt": "2026-10-15",
+    "sources": [
+      {
+        "url": "https://whag.co.za/contact-us",
+        "title": "William Humphreys Art Gallery contact information",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      }
+    ],
+    "facts": {
+      "admission": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "booking": {
+        "value": "Guided visits are available by appointment.",
+        "source": "https://whag.co.za/contact-us",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "stepFreeEntrance": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "accessibleToilets": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "parking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "publicTransport": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "family": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "environment": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "durationMinutes": {
+        "value": 90,
+        "source": "Citylit editorial planning estimate",
+        "checkedAt": "2026-10-15",
+        "confidence": "editorial-estimate"
+      },
+      "openingHours": {
+        "value": "Monday–Friday 08:00–16:30; Saturday 09:00–14:00; public holidays 09:00–12:00. Closed Sundays, Good Friday and 25 December–1 January.",
+        "source": "https://whag.co.za/contact-us",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      }
+    }
+  },
+  {
+    "id": "polokwane-game-reserve",
+    "name": "Polokwane Game Reserve",
+    "city": "polokwane",
+    "category": "Parks & zoos",
+    "description": "A municipal nature reserve near Polokwane, with open grassland, wildlife and a quieter pace beyond the city.",
+    "address": "Polokwane Game Reserve, Polokwane",
+    "website": "https://www.polokwane.gov.za/things-to-do/",
+    "coords": [
+      29.4689,
+      -23.9045
+    ],
+    "coordinateAccuracy": "city",
+    "coordinateRole": "city",
+    "coordinateSource": "City reference from Citylit city catalog; venue coordinates not verified",
+    "images": [
+      {
+        "alt": "Vue du Limpopo en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polokwane,_Limpopo,_South_Africa_(2417714241).jpg",
+        "filename": "Polokwane, Limpopo, South Africa (2417714241).jpg",
+        "src": "/images/980bb25306f7.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-15",
+    "sources": [
+      {
+        "url": "https://www.polokwane.gov.za/things-to-do/",
+        "title": "Polokwane Municipality: things to do",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      }
+    ],
+    "facts": {
+      "admission": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "booking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "stepFreeEntrance": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "accessibleToilets": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "parking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "publicTransport": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "family": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "environment": {
+        "value": "outdoor",
+        "source": "https://www.polokwane.gov.za/things-to-do/",
+        "checkedAt": "2026-10-15",
+        "confidence": "verified"
+      },
+      "durationMinutes": {
+        "value": 90,
+        "source": "Citylit editorial planning estimate",
+        "checkedAt": "2026-10-15",
+        "confidence": "editorial-estimate"
+      }
+    },
+    "visitNote": "The municipality lists the reserve as a local attraction. Current gate times, fees and route availability need confirmation with the reserve. The catalog pin is a city reference, not its entrance."
+  },
+  {
+    "id": "national-museum-bloemfontein",
+    "name": "National Museum Bloemfontein",
+    "city": "bloemfontein",
+    "category": "Entertainment",
+    "description": "Natural-history and cultural collections in central Bloemfontein, with exhibitions connecting the region’s landscapes and people.",
+    "address": "36 Aliwal Street, Bloemfontein",
+    "website": "https://nationalmuseum.co.za/",
+    "coords": [
+      26.2041,
+      -29.0852
+    ],
+    "coordinateAccuracy": "city",
+    "coordinateRole": "city",
+    "coordinateSource": "City reference from Citylit city catalog; venue coordinates not verified",
+    "images": [
+      {
+        "alt": "Vue du Free State en Afrique du Sud.",
+        "author": "South African Tourism from South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein,_Free_State,_South_Africa_(20349855518).jpg",
+        "filename": "Bloemfontein, Free State, South Africa (20349855518).jpg",
+        "src": "/images/77657b7bb74d.jpg"
+      }
+    ],
+    "imageContext": "city",
+    "checkedAt": "2026-10-15",
+    "sources": [
+      {
+        "url": "https://nationalmuseum.co.za/",
+        "title": "National Museum Bloemfontein official website",
+        "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      }
+    ],
+    "facts": {
+      "admission": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "booking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "stepFreeEntrance": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "accessibleToilets": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "parking": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "publicTransport": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "family": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "environment": {
+        "value": null,
+        "source": "",
+        "checkedAt": "",
+        "confidence": "unknown"
+      },
+      "durationMinutes": {
+        "value": 90,
+        "source": "Citylit editorial planning estimate",
+        "checkedAt": "2026-10-15",
+        "confidence": "editorial-estimate"
+      }
+    },
+    "visitNote": "Check current opening days and admission with the National Museum before travelling; hours differ from those of Oliewenhuis Art Museum."
   }
 ]

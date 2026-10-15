@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./legacy-fixture";
 import { cities, places } from "../lib/data";
 import { suggestions, orderItinerary, activeEvents, distanceKm } from "../lib/adventure";
 
@@ -28,6 +28,7 @@ test("catalog has all provinces and planning never treats unknown admission as f
 });
 
 test("collections build a day, preserve visits and import shareable trips", async ({ page }) => {
+  test.slow();
   await page.goto("/explore?city=pietermaritzburg");
   await page.getByRole("button", { name: "Switch to night theme", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");

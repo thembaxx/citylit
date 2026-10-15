@@ -1,0 +1,1937 @@
+@font-face {
+  font-family: Fraunces;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fraunces-normal-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: Fraunces;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fraunces-italic-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/manrope-normal-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 700 800;
+  font-display: swap;
+  src: url("/fonts/manrope-normal-700.ttf") format("truetype");
+}
+.discovery-guide {
+  --guide-accent: #ffc46b;
+  --guide-accent-contrast: #21160a;
+  --guide-surface: color-mix(in srgb, var(--bg) 82%, var(--ink) 5%);
+  --guide-heading: Fraunces, Georgia, serif;
+  --font-heading: Fraunces, Georgia, serif;
+  --accent: var(--guide-accent);
+  --accent-ink: var(--guide-accent);
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    400 15px/1.65 Manrope,
+    system-ui,
+    sans-serif;
+  position: relative;
+  isolation: auto;
+}
+:root[data-theme="day"] .discovery-guide {
+  --guide-accent: #963f06;
+  --guide-accent-contrast: #fff8ef;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) .discovery-guide {
+    --guide-accent: #963f06;
+    --guide-accent-contrast: #fff8ef;
+  }
+}
+.discovery-guide * {
+  box-sizing: border-box;
+}
+.discovery-guide h1,
+.discovery-guide h2,
+.discovery-guide h3,
+.discovery-guide p,
+.discovery-guide figure {
+  margin: 0;
+}
+.discovery-guide h1,
+.discovery-guide h2,
+.discovery-guide h3 {
+  font-family: var(--guide-heading);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.discovery-guide h1 {
+  font-size: clamp(52px, 7vw, 104px);
+}
+.discovery-guide h2 {
+  font-size: clamp(34px, 3.8vw, 56px);
+}
+.discovery-guide h3 {
+  font-size: 28px;
+  letter-spacing: -0.025em;
+}
+.discovery-guide em {
+  font-style: italic;
+  color: var(--guide-accent);
+}
+.discovery-guide button,
+.discovery-guide input,
+.discovery-guide select,
+.discovery-guide textarea {
+  font: inherit;
+}
+.discovery-guide input,
+.discovery-guide select,
+.discovery-guide textarea {
+  font-size: 16px;
+}
+.discovery-guide a,
+.discovery-guide button {
+  touch-action: manipulation;
+}
+.discovery-guide :is(a, button, input, select, summary):focus-visible {
+  outline: 2px solid var(--guide-accent);
+  outline-offset: 5px;
+}
+.discovery-guide button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.discovery-guide button,
+.discovery-guide a {
+  transition:
+    color 0.18s,
+    background 0.18s,
+    border-color 0.18s,
+    transform 0.18s;
+}
+.guide-skip {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 12px 20px;
+  transform: translateY(-160%);
+  border-radius: 8px;
+}
+.guide-skip:focus {
+  transform: translateY(0);
+}
+.atlas-nav {
+  height: 88px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 16px clamp(20px, 4.5vw, 72px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid var(--line);
+  gap: 16px;
+  background: var(--bg);
+}
+.atlas-wordmark {
+  font:
+    400 32px/1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.atlas-wordmark > span {
+  color: var(--guide-accent);
+}
+.atlas-nav nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.atlas-nav nav > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+.atlas-nav nav > a:hover,
+.atlas-footer a:hover {
+  color: var(--guide-accent);
+}
+.atlas-nav .atlas-day-link {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 0 18px;
+}
+.atlas-nav .icon-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+}
+.atlas-hero {
+  min-height: calc(100svh - 88px);
+  max-width: 1600px;
+  margin: auto;
+  position: relative;
+  padding: 88px clamp(20px, 4.5vw, 72px) 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+.atlas-hero-copy {
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+  max-width: 800px;
+}
+.atlas-eyebrow {
+  font-family: Manrope, system-ui, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700;
+  line-height: 1.6 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+  color: var(--guide-accent);
+}
+.atlas-hero-copy .atlas-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.atlas-live-dot {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  border-radius: 50%;
+  background: var(--guide-accent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--guide-accent) 45%, transparent);
+}
+.discovery-guide .atlas-hero h1 {
+  font-size: clamp(72px, 8.7vw, 140px);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+}
+.atlas-title-period {
+  color: var(--guide-accent);
+}
+.discovery-guide .atlas-hero-sub {
+  font-size: 18px;
+  line-height: 1.65;
+  margin-top: 28px;
+  color: var(--muted);
+}
+.atlas-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 11px 20px;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: transparent;
+  color: var(--ink);
+  line-height: 1.5;
+  cursor: pointer;
+}
+.atlas-button:hover {
+  background: color-mix(in srgb, var(--ink) 6%, var(--bg));
+  border-color: var(--guide-accent);
+}
+.atlas-primary {
+  color: var(--guide-accent-contrast);
+  background: var(--guide-accent);
+  border-color: var(--guide-accent);
+}
+.atlas-primary:hover {
+  background: var(--guide-accent);
+  filter: brightness(0.94);
+}
+.atlas-hero-copy > .atlas-button {
+  pointer-events: auto;
+  margin-top: 28px;
+}
+.atlas-map-stage {
+  position: absolute;
+  width: 66%;
+  height: 83%;
+  right: 0;
+  top: 0;
+  z-index: auto;
+}
+.glow-map {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  touch-action: pan-y;
+}
+.glow-map-view {
+  position: absolute !important;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.glow-map-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.glow-city-marker {
+  position: absolute;
+  left: -100px;
+  top: -100px;
+  transform: translate(-50%, -50%);
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  pointer-events: auto;
+  color: var(--ink);
+}
+.glow-marker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--guide-accent);
+  box-shadow: 0 0 12px var(--guide-accent);
+  display: block;
+}
+.glow-marker-name {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  position: absolute;
+  top: 27px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.glow-city-marker.is-major .glow-marker-name,
+.glow-city-marker:is(:hover, :focus-visible, .is-selected) .glow-marker-name {
+  opacity: 1;
+}
+.glow-city-marker.is-selected .glow-marker-dot {
+  width: 10px;
+  height: 10px;
+}
+.discovery-guide .glow-map-caption {
+  position: absolute;
+  bottom: 12%;
+  right: 20%;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+.atlas-map-coordinate {
+  position: absolute;
+  right: 48px;
+  top: 44px;
+  font:
+    10px/1.8 Manrope,
+    sans-serif;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  pointer-events: none;
+}
+.glow-map-loading {
+  padding: 32% 16%;
+  text-align: center;
+  color: var(--muted);
+}
+.glow-map-loading a {
+  display: block;
+  color: var(--guide-accent);
+  text-decoration: underline;
+}
+.atlas-hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+}
+@media (min-width: 1025px) {
+  .atlas-hero-bottom {
+    position: absolute;
+    left: clamp(20px, 4.5vw, 72px);
+    right: clamp(20px, 4.5vw, 72px);
+    bottom: 72px;
+  }
+}
+.discovery-guide .atlas-hero-count {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 400px;
+  padding-bottom: 12px;
+}
+.atlas-hero-count span + span {
+  border-left: 1px solid var(--line);
+  padding-left: 12px;
+}
+.atlas-beacon-card {
+  background: var(--guide-surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  width: 355px;
+  pointer-events: auto;
+  box-shadow: 0 8px 32px #00000005;
+}
+.atlas-beacon-card h2 {
+  font-size: 32px;
+  margin: 8px 0 10px;
+}
+.atlas-beacon-card p:not(.atlas-eyebrow) {
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 40ch;
+}
+.atlas-beacon-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 12px;
+}
+.atlas-beacon-actions > button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.atlas-text-link {
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+}
+.atlas-text-link:hover {
+  color: var(--guide-accent);
+}
+.atlas-scroll-cue {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--muted);
+  position: relative;
+  z-index: 3;
+}
+.atlas-section {
+  padding: 96px clamp(20px, 4.5vw, 72px);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.atlas-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+.atlas-section-heading .atlas-eyebrow {
+  margin-bottom: 16px;
+}
+.atlas-section-heading > p {
+  color: var(--muted);
+  font-size: 13px;
+  max-width: 340px;
+}
+.atlas-directory {
+  border-top: 1px solid var(--line);
+}
+.atlas-directory-tools {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+.atlas-search {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 54px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 16px;
+  max-width: 680px;
+  width: 100%;
+  color: var(--muted);
+}
+.atlas-search:focus-within {
+  border-color: var(--guide-accent);
+}
+.atlas-search input {
+  min-width: 0;
+  flex: 1;
+  background: none;
+  border: 0;
+  color: var(--ink);
+  outline: 0 !important;
+  padding: 12px 0;
+  width: 100%;
+  font-size: 16px;
+}
+.atlas-search input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.atlas-search button {
+  display: grid;
+  place-items: center;
+  min-width: 32px;
+  min-height: 40px;
+}
+.atlas-province-select {
+  display: flex;
+  align-items: center;
+  min-width: 210px;
+  flex: 1;
+  position: relative;
+}
+.atlas-province-select select {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  padding: 12px 16px;
+  min-height: 54px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+}
+.discovery-guide .atlas-results {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 20px 0;
+}
+.atlas-city-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px 24px;
+}
+.atlas-city-card,
+.atlas-place-card,
+.atlas-landmark-card {
+  min-width: 0;
+  position: relative;
+}
+.atlas-city-card-link,
+.atlas-place-card-link {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  height: calc(100% - 32px);
+}
+.atlas-city-card-link:hover,
+.atlas-place-card-link:hover {
+  border-color: var(--guide-accent);
+  transform: translateY(-3px);
+}
+.atlas-city-photo,
+.atlas-place-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.52;
+  overflow: hidden;
+  background: var(--guide-surface);
+}
+.atlas-city-photo img,
+.atlas-place-photo img,
+.atlas-landmark-photo img,
+.atlas-city-hero-photo img {
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+.atlas-city-card-link:hover img,
+.atlas-place-card-link:hover img {
+  transform: scale(1.035);
+}
+.atlas-card-number {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  border: 1px solid #ffffff44;
+  background: #181714aa;
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 4px 9px;
+  border-radius: 20px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+.atlas-card-arrow {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: #f4efe6;
+  color: #1b1a1f;
+  border-radius: 50%;
+}
+.atlas-card-copy {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.atlas-card-copy > .atlas-eyebrow {
+  font-size: 9px !important;
+}
+.atlas-card-copy > p:not(.atlas-eyebrow) {
+  font-size: 12px;
+  color: var(--muted);
+}
+.atlas-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  margin-top: 8px;
+}
+.atlas-card-meta svg {
+  flex-shrink: 0;
+}
+.atlas-photo-credit {
+  display: block;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.atlas-photo-credit a:hover {
+  text-decoration: underline;
+}
+.atlas-city-grid + .atlas-text-link {
+  margin-top: 32px;
+}
+.atlas-empty {
+  padding: 56px 24px;
+  background: var(--guide-surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: center;
+}
+.atlas-empty p {
+  color: var(--muted);
+  margin: 12px 0 24px;
+}
+.atlas-how {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: 80px;
+  border-top: 1px solid var(--line);
+}
+.atlas-how > div > p:last-child {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 24px;
+  max-width: 37ch;
+}
+.atlas-how h2 {
+  margin-top: 16px;
+}
+.atlas-how ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.atlas-how li {
+  border-top: 1px solid var(--guide-accent);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.atlas-how li > svg {
+  color: var(--guide-accent);
+}
+.atlas-how-number {
+  font-size: 9px;
+  color: var(--muted);
+}
+.discovery-guide .atlas-how h3 {
+  font-size: 23px;
+}
+.atlas-how li p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.atlas-end-note {
+  text-align: center;
+  border-top: 1px solid var(--line);
+  padding: 96px 24px;
+}
+.atlas-end-note h2 {
+  font-size: clamp(40px, 5.5vw, 80px);
+  margin: 24px 0 32px;
+}
+.atlas-footer {
+  max-width: 1600px;
+  margin: auto;
+  border-top: 1px solid var(--line);
+  padding: 48px clamp(20px, 4.5vw, 72px) calc(32px + env(safe-area-inset-bottom, 0px));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.atlas-footer > div > p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+.atlas-footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  font-size: 11px;
+  align-content: start;
+}
+.atlas-footer-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+}
+.discovery-guide .atlas-evidence {
+  grid-column: 1/-1;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  font-size: 10px;
+  color: var(--muted);
+  max-width: none;
+}
+.atlas-directory-header {
+  padding-top: 80px;
+  padding-bottom: 64px;
+}
+.atlas-directory-header h1 {
+  margin: 20px 0;
+}
+.atlas-breadcrumb {
+  padding: 28px clamp(20px, 4.5vw, 72px) 0;
+  max-width: 1600px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.atlas-breadcrumb > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+}
+.atlas-breadcrumb > a:hover {
+  color: var(--guide-accent);
+}
+.atlas-city-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 48px clamp(20px, 4.5vw, 72px) 56px;
+  max-width: 1600px;
+  margin: auto;
+}
+.atlas-city-hero h1 {
+  margin: 24px 0;
+}
+.atlas-city-hero .atlas-eyebrow {
+  max-width: 40ch;
+}
+.discovery-guide .atlas-city-intro {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 48ch;
+  margin-top: 24px;
+}
+.atlas-city-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+.atlas-city-hero-photo > div {
+  position: relative;
+  aspect-ratio: 1.15;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.atlas-city-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 clamp(20px, 4.5vw, 72px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.atlas-city-facts > div {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.atlas-city-facts > div:first-child {
+  padding-left: 0;
+}
+.atlas-city-facts > div + div {
+  border-left: 1px solid var(--line);
+}
+.atlas-city-facts span {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.atlas-city-facts strong,
+.atlas-city-facts a {
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.atlas-chapter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+  border-bottom: 1px solid var(--line);
+  padding: 20px clamp(20px, 4.5vw, 72px);
+  max-width: 1600px;
+  margin: auto;
+}
+.atlas-chapter-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  min-height: 40px;
+}
+.atlas-chapter-nav a:last-child {
+  margin-left: auto;
+  color: var(--guide-accent);
+}
+.atlas-landmark-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+.atlas-landmark-link {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  height: calc(100% - 30px);
+}
+.atlas-landmark-link > div:last-child {
+  padding: 24px;
+}
+.atlas-landmark-link h3 {
+  font-size: 26px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0;
+}
+.atlas-landmark-link h3 svg {
+  flex-shrink: 0;
+  color: var(--guide-accent);
+}
+.atlas-landmark-link p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.atlas-landmark-link .atlas-text-link {
+  margin-top: 20px;
+  color: var(--guide-accent);
+}
+.atlas-landmark-link:hover {
+  border-color: var(--guide-accent);
+  transform: translateY(-3px);
+}
+.atlas-landmark-photo {
+  position: relative;
+  aspect-ratio: 1.7;
+  overflow: hidden;
+}
+.atlas-place-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.atlas-place-filters button {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  font-size: 11px;
+  padding: 10px 16px;
+  min-height: 44px;
+}
+.atlas-place-filters button[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.atlas-plan {
+  background: var(--guide-surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.discovery-guide .atlas-plan-note {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.7;
+}
+.atlas-plan-note > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.atlas-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+.atlas-plan-stop {
+  border-top: 1px solid var(--guide-accent);
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.atlas-plan-time {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--guide-accent);
+}
+.atlas-plan-stop-link {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.atlas-plan-stop-link h3 {
+  font-size: 27px;
+}
+.atlas-plan-stop-link p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.atlas-plan-stop-link > span {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  color: var(--guide-accent);
+}
+.atlas-plan-stop > .atlas-button {
+  align-self: flex-start;
+}
+.atlas-plan-stop > .atlas-button[aria-pressed="true"] {
+  border-color: var(--guide-accent);
+  color: var(--guide-accent);
+}
+.atlas-plan-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.atlas-plan-bottom > p {
+  font-size: 11px;
+  color: var(--muted);
+  max-width: 70ch;
+}
+.atlas-neighbours .atlas-city-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.atlas-category-guide {
+  padding-top: 48px;
+  min-height: 70vh;
+}
+.atlas-category-guide > .atlas-eyebrow {
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+.atlas-category-guide .atlas-city-intro {
+  margin-bottom: 40px;
+}
+.atlas-venue {
+  padding-top: 40px;
+}
+.atlas-venue-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 36px;
+  margin-bottom: 48px;
+}
+.atlas-venue-heading h1 {
+  font-size: clamp(44px, 5.5vw, 80px);
+  max-width: 19ch;
+  margin-top: 20px;
+}
+.atlas-save-place {
+  flex-shrink: 0;
+}
+.atlas-save-place p {
+  font-size: 11px;
+  max-width: 25ch;
+  color: var(--guide-accent);
+}
+.atlas-venue-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+.atlas-venue-story {
+  min-width: 0;
+}
+.discovery-guide .photo-hero {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.45;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.discovery-guide .gallery-hero > span {
+  font:
+    10px Manrope,
+    sans-serif;
+  letter-spacing: 0.07em;
+}
+.discovery-guide .gallery-thumbs {
+  margin-top: 12px;
+}
+.discovery-guide .photo-credit {
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.discovery-guide .place-context {
+  padding: 0;
+  margin: 40px 0 0;
+}
+.discovery-guide .place-context > section {
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+}
+.discovery-guide .place-context h2 {
+  font:
+    400 32px/1.2 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.03em;
+  margin: 0 0 20px;
+}
+.discovery-guide .about-copy {
+  font:
+    400 14px/1.9 Manrope,
+    sans-serif;
+  color: var(--muted);
+}
+.discovery-guide .context-source,
+.discovery-guide .context-license {
+  font:
+    10px/1.6 Manrope,
+    sans-serif;
+  color: var(--muted);
+}
+.discovery-guide .about-more {
+  font:
+    700 12px Manrope,
+    sans-serif;
+  min-height: 40px;
+}
+.discovery-guide .facts-unconfirmed {
+  font:
+    12px/1.8 Manrope,
+    sans-serif;
+  color: var(--muted);
+}
+.discovery-guide .location-card {
+  border-radius: 10px;
+}
+.discovery-guide .location-card h3 {
+  font:
+    400 22px/1.2 Fraunces,
+    serif;
+}
+.atlas-visit-panel {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  background: var(--guide-surface);
+}
+.atlas-visit-panel h2 {
+  font-size: 36px;
+  margin: 16px 0 28px;
+}
+.atlas-address {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+.atlas-address > svg {
+  flex-shrink: 0;
+  color: var(--guide-accent);
+}
+.atlas-address p {
+  color: var(--muted);
+  margin-top: 8px;
+}
+.atlas-address strong {
+  font-weight: 400;
+}
+.atlas-visit-links {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.discovery-guide .place-planning {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.discovery-guide .day-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.discovery-guide .day-actions button,
+.discovery-guide .day-actions a {
+  font:
+    700 11px Manrope,
+    sans-serif;
+  min-height: 44px;
+  border-color: var(--line);
+  border-radius: 24px;
+  padding: 10px 14px;
+  background: var(--bg);
+}
+.discovery-guide .visit-note,
+.discovery-guide .planning-note {
+  font:
+    11px/1.7 Manrope,
+    sans-serif;
+  color: var(--muted);
+}
+.discovery-guide .visit-plan-trigger {
+  font-family: Manrope, sans-serif;
+  font-size: 13px;
+}
+.discovery-guide .visit-plan-body h3,
+.discovery-guide .plan-group h3 {
+  font:
+    700 12px/1.6 Manrope,
+    sans-serif;
+  letter-spacing: 0;
+}
+.discovery-guide .practical-facts li,
+.discovery-guide .plan-facts li {
+  font:
+    11px/1.8 Manrope,
+    sans-serif;
+}
+.atlas-source-details {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  font-size: 11px;
+}
+.atlas-source-details summary {
+  cursor: pointer;
+  min-height: 40px;
+}
+.atlas-source-details p {
+  color: var(--muted);
+  margin: 12px 0;
+}
+.atlas-source-details ul {
+  padding-left: 16px;
+  display: grid;
+  gap: 16px;
+}
+.atlas-source-details li > span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 4px;
+}
+.atlas-visit-panel > .atlas-text-link {
+  margin-top: 16px;
+}
+.atlas-landmark-story {
+  max-width: 1100px;
+  padding-top: 40px;
+}
+.atlas-landmark-story > h1 {
+  margin-top: 24px;
+  font-size: clamp(48px, 6vw, 88px);
+}
+.atlas-landmark-story > .atlas-city-intro {
+  margin-bottom: 40px;
+  max-width: 65ch;
+}
+.atlas-story-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.atlas-story-facts dt {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.atlas-story-facts dd {
+  font:
+    400 24px/1.3 Fraunces,
+    serif;
+  margin: 0;
+}
+.atlas-story-about {
+  padding: 24px 0 48px;
+}
+.atlas-story-about > p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin: 24px 0;
+}
+.atlas-story-about > a {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--guide-accent);
+}
+.atlas-story-next {
+  border-top: 1px solid var(--line);
+  padding-top: 48px;
+}
+.atlas-story-next > p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 24px 0;
+}
+.atlas-story-next > .atlas-button {
+  margin: 0 12px 12px 0;
+}
+@media (min-width: 1600px) {
+  .atlas-city-facts {
+    max-width: 1456px;
+    margin: auto;
+  }
+}
+@media (max-width: 1100px) {
+  .atlas-hero {
+    padding-top: 64px;
+    min-height: 820px;
+  }
+  .atlas-how {
+    gap: 40px;
+    grid-template-columns: 1fr;
+  }
+  .atlas-venue-columns {
+    gap: 32px;
+  }
+  .atlas-visit-panel {
+    padding: 24px;
+  }
+  .atlas-nav nav {
+    gap: 24px;
+  }
+  .atlas-city-hero {
+    gap: 32px;
+  }
+  .atlas-city-hero h1 {
+    font-size: clamp(50px, 7vw, 80px);
+  }
+  .atlas-hero-count {
+    flex-direction: column;
+  }
+  .atlas-hero-count span + span {
+    border: 0;
+    padding-left: 0;
+  }
+  .atlas-map-stage {
+    width: 70%;
+    top: 6%;
+    height: 75%;
+  }
+}
+@media (max-width: 768px) {
+  .atlas-nav {
+    height: 76px;
+    padding: 16px 24px;
+  }
+  .atlas-nav nav {
+    gap: 16px;
+  }
+  .atlas-nav nav > a {
+    font-size: 11px;
+  }
+  .atlas-about-link {
+    display: none !important;
+  }
+  .atlas-nav .atlas-day-link {
+    padding: 0 12px;
+  }
+  .atlas-wordmark {
+    font-size: 29px;
+  }
+  .atlas-hero {
+    min-height: 950px;
+    padding-top: 48px;
+  }
+  .discovery-guide .atlas-hero h1 {
+    font-size: clamp(62px, 12vw, 92px);
+  }
+  .atlas-hero-copy .atlas-eyebrow {
+    font-size: 8px !important;
+    margin-bottom: 20px;
+  }
+  .discovery-guide .atlas-hero-sub {
+    font-size: 15px;
+    margin-top: 20px;
+  }
+  .atlas-hero-copy > .atlas-button {
+    margin-top: 20px;
+  }
+  .atlas-map-stage {
+    width: 100%;
+    height: 460px;
+    top: 270px;
+    right: 0;
+  }
+  .atlas-map-coordinate {
+    top: 65px;
+    right: 24px;
+    font-size: 8px;
+  }
+  .discovery-guide .glow-map-caption {
+    bottom: 24px;
+    right: 24px;
+    font-size: 9px;
+  }
+  .atlas-hero-bottom {
+    margin-top: 320px;
+    gap: 24px;
+  }
+  .atlas-beacon-card {
+    padding: 20px;
+    width: 60%;
+    max-width: 355px;
+  }
+  .atlas-beacon-card h2 {
+    font-size: 28px;
+  }
+  .atlas-hero-count {
+    font-size: 10px !important;
+    width: 25%;
+    gap: 8px !important;
+  }
+  .atlas-scroll-cue {
+    font-size: 9px;
+    margin-top: 16px;
+  }
+  .atlas-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  .atlas-section-heading {
+    gap: 24px;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 28px;
+  }
+  .atlas-section-heading > p {
+    font-size: 12px;
+  }
+  .atlas-city-grid,
+  .atlas-landmark-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+  .atlas-card-copy {
+    padding: 20px;
+  }
+  .discovery-guide .atlas-card-copy h3 {
+    font-size: 25px;
+  }
+  .atlas-directory-tools {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .atlas-province-select {
+    width: 100%;
+  }
+  .atlas-search input {
+    font-size: 16px !important;
+  }
+  .atlas-city-hero {
+    grid-template-columns: 1fr;
+    padding-top: 24px;
+    gap: 36px;
+  }
+  .atlas-city-hero h1 {
+    font-size: clamp(50px, 10vw, 80px);
+  }
+  .atlas-city-hero-photo > div {
+    aspect-ratio: 1.6;
+  }
+  .atlas-city-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .atlas-city-facts > div:last-child {
+    display: none;
+  }
+  .atlas-city-facts > div {
+    padding: 20px;
+  }
+  .atlas-city-facts strong,
+  .atlas-city-facts a {
+    font-size: 12px;
+  }
+  .atlas-chapter-nav {
+    gap: 12px 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .atlas-chapter-nav a {
+    font-size: 10px;
+    gap: 6px;
+  }
+  .atlas-chapter-nav a:last-child {
+    margin-left: 0;
+  }
+  .atlas-plan-grid {
+    grid-template-columns: 1fr;
+  }
+  .atlas-plan-stop {
+    padding: 24px 0 12px;
+  }
+  .atlas-plan-stop-link {
+    gap: 12px;
+  }
+  .atlas-plan-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .atlas-venue-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    gap: 24px;
+  }
+  .atlas-venue-columns {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .atlas-visit-panel {
+    padding: 24px;
+  }
+  .atlas-venue {
+    padding-top: 24px;
+  }
+  .atlas-footer {
+    gap: 32px;
+    grid-template-columns: 1fr;
+  }
+  .atlas-footer-links {
+    gap: 12px;
+  }
+  .atlas-story-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .atlas-story-facts dd {
+    font-size: 22px;
+  }
+  .atlas-landmark-story > h1 {
+    font-size: 48px;
+  }
+  .atlas-directory-header {
+    padding-top: 48px;
+  }
+}
+@media (max-width: 480px) {
+  .atlas-nav {
+    padding: 12px 20px;
+  }
+  .atlas-nav nav {
+    gap: 12px;
+  }
+  .atlas-nav .atlas-day-link {
+    border: 0;
+    padding: 0;
+  }
+  .atlas-nav .atlas-day-link svg {
+    display: none;
+  }
+  .atlas-nav .icon-button {
+    width: 36px;
+    height: 36px;
+  }
+  .atlas-nav nav > a {
+    font-size: 10px;
+  }
+  .atlas-hero {
+    min-height: 920px;
+    gap: 20px;
+    padding-bottom: 24px;
+  }
+  .atlas-map-stage {
+    top: 290px;
+    height: 360px;
+  }
+  .atlas-hero-copy .atlas-eyebrow {
+    max-width: 300px;
+    letter-spacing: 0.12em !important;
+  }
+  .discovery-guide .atlas-hero h1 {
+    font-size: clamp(55px, 13vw, 66px);
+  }
+  .atlas-hero-bottom {
+    margin-top: 300px;
+    display: block;
+  }
+  .atlas-beacon-card {
+    width: 100%;
+    max-width: none;
+  }
+  .atlas-beacon-card h2 {
+    font-size: 28px;
+  }
+  .atlas-hero-count {
+    width: 100%;
+    flex-direction: row;
+    gap: 12px !important;
+    padding: 0 0 20px !important;
+  }
+  .atlas-hero-count span:last-child {
+    display: none;
+  }
+  .atlas-scroll-cue {
+    margin-top: 4px;
+  }
+  .atlas-city-grid,
+  .atlas-landmark-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .atlas-city-photo,
+  .atlas-place-photo {
+    aspect-ratio: 1.6;
+  }
+  .atlas-how ol {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .atlas-how li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px 16px;
+  }
+  .atlas-how li > svg {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .atlas-how li h3 {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .atlas-how li p {
+    grid-column: 2;
+  }
+  .atlas-how-number {
+    grid-column: 1/-1;
+  }
+  .atlas-neighbours .atlas-city-grid {
+    grid-template-columns: 1fr;
+  }
+  .atlas-city-hero h1 {
+    font-size: clamp(42px, 10.4vw, 60px);
+    overflow-wrap: anywhere;
+  }
+  .atlas-city-facts {
+    gap: 0;
+  }
+  .atlas-city-facts > div {
+    padding: 16px;
+  }
+  .atlas-city-facts span {
+    font-size: 8px;
+  }
+  .atlas-city-facts strong,
+  .atlas-city-facts a {
+    font-size: 11px;
+  }
+  .atlas-city-actions {
+    gap: 8px;
+  }
+  .atlas-city-actions .atlas-button {
+    padding: 10px 14px;
+    font-size: 11px !important;
+  }
+  .atlas-venue-heading h1 {
+    font-size: 42px;
+  }
+  .atlas-story-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .atlas-story-next > .atlas-button {
+    width: 100%;
+  }
+  .atlas-landmark-story > h1 {
+    font-size: 42px;
+  }
+  .atlas-footer {
+    padding-top: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .discovery-guide {
+    scroll-behavior: auto;
+  }
+  .discovery-guide * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* The editorial guide uses sentence case; the original game keeps its display type. */
+.discovery-guide h1,
+.discovery-guide h2,
+.discovery-guide h3 {
+  text-transform: none;
+  font-stretch: normal;
+}
+.atlas-city-hero {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+}
+.atlas-city-hero > div {
+  min-width: 0;
+}
+.atlas-city-hero h1 {
+  font-size: clamp(48px, 6vw, 88px);
+  overflow-wrap: anywhere;
+}
+.atlas-reading {
+  padding: 64px 0 80px;
+  max-width: 1000px;
+  width: calc(100% - 48px);
+  margin: auto;
+}
+.atlas-reading > h1 {
+  margin: 20px 0 28px;
+  font-size: clamp(44px, 6vw, 80px);
+}
+.atlas-reading > section {
+  margin: 40px 0;
+}
+.atlas-reading section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.atlas-reading p,
+.atlas-reading li {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.atlas-reading a {
+  text-decoration-color: var(--guide-accent);
+}
+.atlas-reading .reading-intro {
+  font-size: 18px;
+  max-width: 60ch;
+}
+.atlas-reading .tiny-label {
+  font:
+    700 10px/1.6 Manrope,
+    sans-serif;
+  color: var(--guide-accent);
+  letter-spacing: 0.14em;
+}
+.atlas-reading .destination-grid {
+  margin: 40px 0;
+}
+.atlas-reading .destination-card {
+  border-radius: 12px;
+}
+.atlas-reading .destination-card h2 {
+  font-size: 32px;
+}
+.atlas-reading .reading-links a,
+.atlas-reading .text-guide-link {
+  font:
+    700 11px/1.7 Manrope,
+    sans-serif;
+}
+.guide-planner {
+  --font-heading: Fraunces, Georgia, serif;
+  --font-mono: Manrope, sans-serif;
+  --accent: #ffc46b;
+  --accent-ink: #ffc46b;
+  --planner-button-ink: #21160a;
+  font-family: Manrope, sans-serif;
+}
+:root[data-theme="day"] .guide-planner {
+  --accent: #963f06;
+  --accent-ink: #963f06;
+  --planner-button-ink: #fff8ef;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) .guide-planner {
+    --accent: #963f06;
+    --accent-ink: #963f06;
+    --planner-button-ink: #fff8ef;
+  }
+}
+.guide-planner :is(.pill-button, .pwa-primary, .pwa-actions button) {
+  color: var(--planner-button-ink);
+}
+.guide-planner h1,
+.guide-planner h2,
+.guide-planner h3 {
+  font-family: Fraunces, Georgia, serif;
+  text-transform: none;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+.guide-planner h1 {
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1.1;
+  margin-top: 40px;
+}
+.guide-planner h2 {
+  font-size: 34px;
+}
+.guide-planner .adventure-card {
+  border-radius: 12px;
+}
+.guide-planner .adventure-card h3 {
+  font-size: 26px;
+}
+.guide-planner .tiny-label {
+  font:
+    700 10px/1.6 Manrope,
+    sans-serif;
+  letter-spacing: 0.14em;
+  color: var(--accent-ink);
+}
+.discovery-guide .visit-plan summary strong {
+  font-family: Manrope, sans-serif;
+  font-size: 13px;
+}
+.discovery-guide .visit-plan-group dd {
+  font-family: Manrope, sans-serif;
+  font-size: 12px;
+}
+.discovery-guide .practical-details {
+  border-radius: 12px;
+}
+.discovery-guide .place-planning > p[role="status"] {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 12px;
+}
+@media (max-width: 768px) {
+  .atlas-city-hero {
+    grid-template-columns: 1fr;
+  }
+  .atlas-city-hero h1 {
+    font-size: clamp(48px, 8vw, 76px);
+  }
+}
+@media (max-width: 480px) {
+  .atlas-city-hero h1 {
+    font-size: clamp(42px, 10.4vw, 60px);
+  }
+}
+.return-to-guide {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-right: 16px;
+  font-size: 10px;
+  color: var(--muted);
+  min-height: 40px;
+  position: relative;
+  z-index: 5;
+}
+.atlas-map-select {
+  display: block;
+  margin-bottom: 16px;
+}
+.atlas-map-select select {
+  font:
+    400 16px Manrope,
+    sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 40px;
+  width: 100%;
+  padding: 8px 12px;
+}
+.glow-city-marker.is-major {
+  z-index: 2;
+}
+.glow-city-marker.is-selected {
+  z-index: 3;
+}
+/* Squircle corners progressively enhance the rounded fallback. Map beacons remain circles. */
+.discovery-guide
+  :is(
+    .atlas-city-card-link,
+    .atlas-place-card-link,
+    .atlas-landmark-link,
+    .atlas-beacon-card,
+    .atlas-visit-panel,
+    .atlas-empty,
+    .atlas-city-hero-photo > div,
+    .photo-hero,
+    .gallery-dialog,
+    .practical-details,
+    .destination-card,
+    .location-card
+  ) {
+  border-radius: 24px;
+  corner-shape: squircle;
+}
+.discovery-guide
+  :is(
+    .atlas-button,
+    .atlas-day-link,
+    .atlas-search,
+    .atlas-province-select select,
+    .atlas-map-select select,
+    .atlas-place-filters button
+  ) {
+  border-radius: 16px;
+  corner-shape: squircle;
+}
+:is(
+  .guide-planner .adventure-card,
+  .guide-planner .collection-card,
+  .guide-planner .trip-stops li,
+  .guide-planner .pwa-panel
+) {
+  border-radius: 24px;
+  corner-shape: squircle;
+}
+:root[data-theme="day"] .discovery-guide {
+  --muted: #5c5b58;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) .discovery-guide {
+    --muted: #5c5b58;
+  }
+}
+/* Keep a compact viewport's title inside the content width. */
+@media (max-width: 480px) {
+  .discovery-guide .atlas-hero h1 {
+    font-size: clamp(47px, 12vw, 62px);
+    letter-spacing: -0.06em;
+  }
+}
+.glow-map {
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .return-to-guide {
+    font-size: 0;
+    min-width: 20px;
+    margin-right: 4px;
+    margin-left: 0;
+    gap: 0;
+  }
+  .return-to-guide svg {
+    width: 16px;
+    height: 16px;
+  }
+}

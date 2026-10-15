@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
+import "./discovery-guide.css";
 import PwaProvider from "../components/PwaProvider";
 import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";

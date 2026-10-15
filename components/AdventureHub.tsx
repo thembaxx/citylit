@@ -2,7 +2,7 @@
 import UiIcon from "./UiIcon";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { parseSharedTrip } from "../lib/client-data";
+import { MAX_TRIP_STOPS, parseSharedTrip } from "../lib/client-data";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
@@ -13,13 +13,13 @@ import {
   Check,
   Plus,
   X,
-  Share2,
+  ShareNetwork as Share2,
   Download,
-  Navigation,
-  Sparkles,
-  MoveUp,
-  MoveDown,
-} from "lucide-react";
+  NavigationArrow as Navigation,
+  Sparkle as Sparkles,
+  ArrowUp as MoveUp,
+  ArrowDown as MoveDown,
+} from "@phosphor-icons/react";
 import { cities, places, type Place } from "../lib/data";
 import {
   collections,
@@ -91,8 +91,18 @@ export default function AdventureHub() {
       setTab("day");
       return;
     }
-    update({ itinerary: [...state.itinerary, id] });
-    setMessage("Added to your day.");
+    if (trip.length >= MAX_TRIP_STOPS) {
+      setMessage(`Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`);
+      return;
+    }
+    const saved = update((previous) => ({
+      itinerary: Array.from(new Set([...previous.itinerary, id])),
+    }));
+    setMessage(
+      saved
+        ? "Added to your day."
+        : "This browser could not save your day. Allow site storage and try again.",
+    );
   };
   const share = async (ids: string[]) => {
     const url = new URL(
@@ -201,7 +211,7 @@ export default function AdventureHub() {
   );
   return (
     <main
-      className="field-guide"
+      className="field-guide guide-planner"
       onClickCapture={(event) => {
         const button = (event.target as HTMLElement).closest("button");
         if (button && !button.getAttribute("aria-label")?.startsWith("Save")) feedback("tap");

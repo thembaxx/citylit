@@ -1,8 +1,10 @@
 # Citylit
 
-A mobile-first discovery game for South African cities. Spin a province map, swipe through low-poly landmarks, choose a category, and find somewhere worth exploring.
+A mobile-first guide to South African cities. Discover landmarks and local places, save discoveries, and build a day around your curiosity.
 
-**12 destinations · 9 provinces · 83 places**
+**12 destinations · 9 provinces · 89 places**
+
+The default experience is a scrollable editorial guide inspired by the supplied Citylit redesign: a particle map, searchable city collection, linked landmark stories, source-linked place pages and saved day plans. Cards and panels use CSS squircle corners with rounded fallbacks; all UI icons use Phosphor. Choose **The 3D atlas** to use the original interactive experience, or **Read guide** to return. The preference is stored in a first-party cookie. See [redesign verification](docs/redesign/README.md) for the design reference, research changes and test evidence.
 
 ## Start
 
@@ -18,11 +20,15 @@ Open http://localhost:3000. For production, run `pnpm build && pnpm start`.
 
 ## Explore
 
+Choose a city beacon or use the searchable city collection. Open a landmark story or place card for photos, background, source-linked visitor information and directions. The **Plan a visit** section links to suggested stops and lets you add them to **My day**, where you can arrange or remove stops. Saves and plans stay in your browser. Place search and filters survive browser back navigation; the server-rendered guide also supports navigation without JavaScript.
+
+## Optional 3D atlas
+
 - Nine real province boundaries, projected and extruded. Provinces without data share a muted sage color. All nine provinces now contain seeded destinations and are elevated, individually colored and clickable, with outlined mono labels and small dot markers. Labels use a contrasting navy backplate; map pins are unnumbered. The destination chooser lists all twelve cities.
 - Nine detailed procedural landmarks: Ponte City, Nelson Mandela Bridge, Orlando Towers, Table Mountain, Bo-Kaap, Cape Point, Moses Mabhida Stadium, uShaka Marine World and Umhlanga Lighthouse.
 - Shared category dioramas: turning Ferris wheel, a bed with floating stars, a theatre stage, a giraffe and acacia, and a rotating disco ball.
 - Drag to rotate, pinch or scroll to zoom, reset the view, pause ambient motion, swipe landmark captions, or use arrow buttons/keys.
-- Eighty-three sourced places across five categories; fuzzy search spans the selected city. Save places locally and revisit them through the header.
+- Eighty-nine sourced places across five categories; fuzzy search spans the selected city. Save places locally and revisit them through the header.
 - Detail screens show credited local photos, a swipeable/pinchable fullscreen gallery, source links, Wikipedia where available, lazy-loaded street maps and Google Maps directions, with Apple Maps and Waze alternatives.
 - Deep links and browser back/forward navigation work. Invalid city/category/place combinations return 404.
 
@@ -32,7 +38,7 @@ Swipe landmarks, then choose **Explore city**. Swipe categories or use the botto
 
 ## Stack
 
-Latest stable package releases checked with the registry and `pnpm update --latest`: Next.js 16.4, React 19.3, strict TypeScript 7, Tailwind CSS 4, Three.js, React Three Fiber, drei, d3-geo, GSAP, Motion, use-gesture, MiniSearch, MapLibre, Lucide, Oxlint, Oxfmt and Playwright. Exact resolved versions are in `pnpm-lock.yaml`; `packageManager` pins pnpm.
+Latest stable package releases checked with the registry and `pnpm update --latest`: Next.js 16.4, React 19.3, strict TypeScript 7, Tailwind CSS 4, Three.js, React Three Fiber, drei, d3-geo, GSAP, Motion, use-gesture, MiniSearch, MapLibre, Phosphor, Oxlint, Oxfmt and Playwright. Exact resolved versions are in `pnpm-lock.yaml`; `packageManager` pins pnpm.
 
 One persistent R3F canvas lives in the root layout. Two drei Views share this canvas: a full-screen decorative background and the interactive hero. Backgrounds vary by chapter and city: map constellations, Joburg crystals, Cape Town orbit rings, Durban wave arcs, category marbles/portals and place fireflies. Fewer, smaller background objects drift slowly near the edges, leaving the central content clear. Background-only rendering is requested at 24fps, with capped object counts, no textures, no shadows and no postprocessing; it pauses with the hero, while sheets are open, in hidden tabs and for reduced motion. Shared clearing keeps the layers from leaving trails. Labels project into React-managed DOM elements, avoiding separate React roots and context creation. GSAP controls camera/scene entrances and selected object animations; Motion handles UI transitions and the gallery. OrbitControls provides touch rotation, pinch zoom and inertia.
 
@@ -74,7 +80,7 @@ Deploy as a standard Next.js application on a compatible Node.js host. There is 
 
 Original source code is MIT licensed; photos, fonts and geographic data retain their own documented licenses.
 
-Category navigation uses relevant Hugeicons and a Motion shared-layout glass pill, with keyboard selection and reduced-motion support. All inputs use 16px text. Cards, galleries, street maps and detail facts use CSS squircle corners when supported, with border-radius fallbacks. 58 locally cached, credited images are included.
+Category navigation uses Phosphor icons and a Motion shared-layout glass pill, with keyboard selection and reduced-motion support. All inputs use 16px text. Cards, galleries, street maps and detail facts use CSS squircle corners when supported, with border-radius fallbacks. Licensed photographs are cached locally with per-image credits.
 
 Place details include expandable About introductions, attributed Wikipedia links, source-linked Good to know facts and same-location cards when a shared site is confirmed. Unknown payment/accessibility facts remain unconfirmed. Refresh About excerpts with `python3 scripts/research-detail-facts.py`.
 

@@ -2,7 +2,14 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowUpRight, Heart, Search, MapPin, X } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Heart,
+  MagnifyingGlass as Search,
+  MapPin,
+  X,
+} from "@phosphor-icons/react";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useSearchParams } from "next/navigation";
 import CategoryNav from "./CategoryNav";

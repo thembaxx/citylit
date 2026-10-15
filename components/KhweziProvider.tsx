@@ -38,7 +38,10 @@ export default function KhweziProvider({ children }: { children: ReactNode }) {
   const [animations, setAnimations] = useState(true);
   const [welcome, setWelcome] = useState(false);
   const [moment, setMoment] = useState<Moment | null>(null);
-  const [visible, setVisible] = useState(true);
+  // Start still on both the server and the first client render. Enabling motion
+  // before hydration can leave the server's "play" attribute on reduced-motion
+  // devices, even when the client has correctly paused the scene.
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     const changed = () => setVisible(document.visibilityState === "visible");
     changed();

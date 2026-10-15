@@ -2,7 +2,7 @@
 import UiIcon from "./UiIcon";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { RefreshCw, X, WifiOff } from "lucide-react";
+import { ArrowClockwise as RefreshCw, X, WifiSlash as WifiOff } from "@phosphor-icons/react";
 import { usePwa } from "./PwaProvider";
 export default function AppStatus() {
   const pwa = usePwa(),

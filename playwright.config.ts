@@ -3,10 +3,15 @@ export default defineConfig({
   testDir: "./tests",
   fullyParallel: false,
   workers: 1,
-  timeout: 30000,
+  // Complete 3D/offline journeys need room for software-rendered mobile browsers.
+  timeout: 60000,
+  expect: { timeout: 15000 },
   use: {
     baseURL: "http://localhost:3000",
-    trace: "retain-on-failure",
+    // Continuous trace screenshots stall software WebGL. Keep DOM/network traces
+    // and capture one screenshot on failure instead.
+    trace: { mode: "retain-on-failure", screenshots: false, snapshots: true },
+    screenshot: "only-on-failure",
   },
   projects: [
     {

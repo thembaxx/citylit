@@ -1,7 +1,15 @@
 "use client";
 import UiIcon from "./UiIcon";
 import { useState } from "react";
-import { Check, Download, RefreshCw, Share2, Smartphone, HardDrive, Trash2 } from "lucide-react";
+import {
+  Check,
+  Download,
+  ArrowClockwise as RefreshCw,
+  ShareNetwork as Share2,
+  DeviceMobile as Smartphone,
+  HardDrive,
+  Trash as Trash2,
+} from "@phosphor-icons/react";
 import { usePwa } from "./PwaProvider";
 import { useDiscovery } from "./useDiscovery";
 import { useKhwezi } from "./KhweziProvider";

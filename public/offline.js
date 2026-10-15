@@ -25,7 +25,7 @@ const element = (tag, text) => {
   node.textContent = text;
   return node;
 };
-// Use the same local Hugeicons artwork as the online app, without inserting HTML strings.
+// Use the same local Phosphor artwork as the online app, without inserting HTML strings.
 const withIcon = (node, name = "arrow-up-right", before = false) => {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", "0 0 24 24");

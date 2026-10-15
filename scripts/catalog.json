@@ -597,7 +597,7 @@
     "city": "bloemfontein",
     "name": "Oliewenhuis Art Museum",
     "category": "Entertainment",
-    "website": "https://nationalmuseum.co.za/visitor-information/",
+    "website": "https://nationalmuseum.co.za/oliewenhuis-art-museum/",
     "address": "16 Harry Smith Street, Waverley",
     "description": "Art collections and a sculpture garden in a former presidential residence.",
     "wiki": "Oliewenhuis Art Museum"
@@ -675,7 +675,7 @@
     "city": "kimberley",
     "name": "The Big Hole",
     "category": "Entertainment",
-    "website": "https://thebighole.com/visitors-info/",
+    "website": "https://thebighole.com/",
     "address": "Tucker Street, Kimberley",
     "description": "A viewing platform, museum and reconstructed mining town around the historic excavation.",
     "wiki": "Big Hole"
@@ -722,5 +722,59 @@
     "website": "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
     "address": "Nelson Mandela Drive, Mahikeng",
     "description": "A hotel and villa retreat beside the Leopard Park golf course."
+  },
+  {
+    "name": "Table Mountain",
+    "city": "cape-town",
+    "category": "Parks & zoos",
+    "website": "https://www.tablemountain.net/",
+    "address": "Lower Cable Station, Tafelberg Road, Cape Town",
+    "description": "A flat-topped mountain above the city, with a cableway journey and wide views across the peninsula.",
+    "wiki": "Table Mountain"
+  },
+  {
+    "name": "Voortrekker Monument",
+    "city": "pretoria",
+    "category": "Entertainment",
+    "website": "https://vtm.org.za/en/contact-us/",
+    "address": "Eeufees Road, Groenkloof, Pretoria",
+    "description": "A granite monument and museum complex in Groenkloof, with exhibitions, walking grounds and views over Tshwane.",
+    "wiki": "Voortrekker Monument"
+  },
+  {
+    "name": "Route 67",
+    "city": "gqeberha",
+    "category": "Entertainment",
+    "website": "https://www.nmbt.co.za/listing/route_67.html",
+    "address": "Donkin Reserve visitor information office, Belmont Terrace, Gqeberha",
+    "description": "A public-art and heritage route connecting the city centre to the Donkin Reserve through stories of South African democracy.",
+    "wiki": "Route 67 (Port Elizabeth)"
+  },
+  {
+    "name": "William Humphreys Art Gallery",
+    "city": "kimberley",
+    "category": "Entertainment",
+    "website": "https://whag.co.za/contact-us",
+    "address": "1 Cullinan Crescent, Civic Centre, Kimberley",
+    "description": "A Kimberley gallery bringing South African art, historic collections and temporary exhibitions into the same conversation.",
+    "wiki": "William Humphreys Art Gallery"
+  },
+  {
+    "name": "Polokwane Game Reserve",
+    "city": "polokwane",
+    "category": "Parks & zoos",
+    "website": "https://www.polokwane.gov.za/things-to-do/",
+    "address": "Polokwane Game Reserve, Polokwane",
+    "description": "A municipal nature reserve near Polokwane, with open grassland, wildlife and a quieter pace beyond the city.",
+    "wiki": "Polokwane Game Reserve"
+  },
+  {
+    "name": "National Museum Bloemfontein",
+    "city": "bloemfontein",
+    "category": "Entertainment",
+    "website": "https://nationalmuseum.co.za/",
+    "address": "36 Aliwal Street, Bloemfontein",
+    "description": "Natural-history and cultural collections in central Bloemfontein, with exhibitions connecting the region’s landscapes and people.",
+    "wiki": "National Museum, Bloemfontein"
   }
 ]

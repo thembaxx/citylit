@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./legacy-fixture";
 import { places } from "../lib/data";
 import {
   normalizeDiscovery,

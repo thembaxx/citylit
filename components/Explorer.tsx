@@ -126,7 +126,9 @@ export default function Explorer() {
   const { state: discovery, update: updateDiscovery } = useDiscovery();
   const saved = discovery.saved;
   const setSaved = (change: string[] | ((previous: string[]) => string[])) =>
-    updateDiscovery({ saved: typeof change === "function" ? change(discovery.saved) : change });
+    updateDiscovery((previous) => ({
+      saved: typeof change === "function" ? change(previous.saved) : change,
+    }));
   const { night, toggleTheme } = useTheme();
   const [notice, setNotice] = useState("");
   const [showProvinces, setShowProvinces] = useState(false);
@@ -270,9 +272,6 @@ export default function Explorer() {
     if (saved.includes(id)) setNotice("Released back into the wild.");
     setSaved((prev) => {
       const next = prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id];
-      try {
-        localStorage.setItem("mzansi-saved", JSON.stringify(next));
-      } catch {}
       return next;
     });
   };
@@ -432,6 +431,9 @@ export default function Explorer() {
             </>
           )}
         </button>
+        <Link className="return-to-guide" prefetch={false} href={`${pathname}?view=guide`}>
+          Read guide <ArrowUpRight size={13} />
+        </Link>
         <div className="utility-nav">
           <Link
             className="icon-button"

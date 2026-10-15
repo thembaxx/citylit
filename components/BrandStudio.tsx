@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft, Download, Printer } from "lucide-react";
+import { ArrowLeft, Download, Printer } from "@phosphor-icons/react";
 import BrandWordmark from "./BrandWordmark";
 import KhweziMark from "./KhweziMark";
 import KhweziMoment from "./KhweziMoment";

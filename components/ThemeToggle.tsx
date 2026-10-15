@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "@phosphor-icons/react";
 import useTheme from "./useTheme";
 export default function ThemeToggle({ onChange }: { onChange?: (night: boolean) => void }) {
   const { night, toggleTheme } = useTheme();

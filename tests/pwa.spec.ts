@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./legacy-fixture";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
@@ -86,6 +86,7 @@ test("iPhone install instructions, native sheet focus and both themes are access
   });
   const page = await context.newPage();
   try {
+    await context.addCookies([{ name: "citylit-view", value: "3d", url: baseURL! }]);
     await page.goto("/");
     await page.getByRole("button", { name: "Experience settings", exact: true }).click();
     const sheet = page.getByRole("dialog", { name: "Experience settings", exact: true });

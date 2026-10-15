@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page } from "./legacy-fixture";
 import { createServer, type Server } from "node:http";
 import { createElement, type ReactNode, type Key } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -144,6 +144,7 @@ test("system changes and cross-tab choices update the UI; explicit choices survi
   page,
   context,
 }) => {
+  test.slow(); // Exercises two tabs, OS changes, storage events and three routes.
   await page.emulateMedia({ colorScheme: "light" });
   await page.addInitScript(() => localStorage.setItem("citylit-khwezi-met", "yes"));
   await page.goto("/");
@@ -158,7 +159,7 @@ test("system changes and cross-tab choices update the UI; explicit choices survi
   await matchesTheme(page, "day");
   await expect(page.getByRole("button", { name: "Switch to night theme" })).toBeVisible();
   await page.emulateMedia({ colorScheme: "dark" });
-  await page.getByRole("button", { name: "Choose from 12 destinations" }).click();
+  await page.getByRole("button", { name: "9 provinces ready to explore", exact: true }).click();
   await page
     .getByRole("navigation", { name: "Available provinces" })
     .locator('a[href="/durban"]')

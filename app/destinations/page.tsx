@@ -1,14 +1,7 @@
-import UiIcon from "../../components/UiIcon";
-import Link from "next/link";
-import ReadingPage from "../../components/ReadingPage";
+import GuideShell from "../../components/GuideShell";
+import CityDirectory from "../../components/CityDirectory";
 import JsonLd from "../../components/JsonLd";
-import {
-  provinces,
-  cityPlaces,
-  metadataForPage,
-  discoverySchema,
-  discoveryRoute,
-} from "../../lib/seo";
+import { metadataForPage, discoverySchema, discoveryRoute } from "../../lib/seo";
 export const metadata = metadataForPage(
   "South African city guides",
   "Browse twelve destinations across all nine South African provinces. Find researched places, landmarks, addresses, photographs and source links.",
@@ -17,40 +10,20 @@ export const metadata = metadataForPage(
 export default function DestinationsPage() {
   const schema = discoverySchema({ ...discoveryRoute()!, path: "/destinations" });
   return (
-    <ReadingPage>
+    <GuideShell>
       <JsonLd value={schema} />
-      <span className="tiny-label">TWELVE DESTINATIONS / NINE PROVINCES</span>
-      <h1>Find your next chapter.</h1>
-      <p className="reading-intro">
-        A country of little adventures. Choose a province, discover a city and follow a little
-        curiosity.
-      </p>
-      {provinces.map((province) => (
-        <section className="province-guide-section" key={province.slug}>
-          <h2>
-            <Link href={`/provinces/${province.slug}`}>
-              {province.name} <UiIcon name="arrow-up-right" />
-            </Link>
-          </h2>
-          <div className="destination-grid">
-            {province.cities.map((city) => (
-              <article className="destination-card" key={city.slug}>
-                <span className="tiny-label">{city.tag}</span>
-                <h3>
-                  <Link href={`/${city.slug}`}>
-                    {city.name} <UiIcon name="arrow-up-right" />
-                  </Link>
-                </h3>
-                <p>{city.intro}</p>
-                <span>{cityPlaces(city).length} researched discoveries</span>
-                <Link className="text-guide-link" href={`/guides/${city.slug}`}>
-                  Read the plain-text guide
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-      ))}
-    </ReadingPage>
+      <header className="atlas-directory-header atlas-section">
+        <p className="atlas-eyebrow">TWELVE DESTINATIONS / NINE PROVINCES</p>
+        <h1>
+          Find your
+          <br />
+          <em>next chapter.</em>
+        </h1>
+        <p className="atlas-city-intro">
+          A country of little adventures. Choose a city. Follow a little curiosity.
+        </p>
+      </header>
+      <CityDirectory />
+    </GuideShell>
   );
 }

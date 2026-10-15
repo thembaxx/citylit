@@ -1,5 +1,6 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./legacy-fixture";
 test("map to place, sources, photos, saves and back navigation", async ({ page }) => {
+  test.slow(); // Includes the full map, carousel, category, gallery and return journey.
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
@@ -87,12 +88,13 @@ test("invalid city and cross-category place URLs return 404", async ({ request }
 test("essential motion keeps exploring usable", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/johannesburg");
+  await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.getByRole("button", { name: "Experience settings", exact: true }).click();
   await page.getByRole("checkbox", { name: /Essential motion/ }).check();
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.getByRole("button", { name: "Close", exact: true }).click();
-  await page.locator(".landmark-caption").focus();
-  await page.keyboard.press("ArrowRight");
+  await expect(page.locator(".modal-backdrop")).toHaveCount(0);
+  await page.locator(".landmark-caption").press("ArrowRight");
   await expect(page.locator(".landmark-open h3")).toHaveText("Nelson Mandela Bridge");
 });
 test("touch swipe changes landmarks; drag and pinch manipulate 3D without navigating", async ({
@@ -168,6 +170,7 @@ test("touch swipe changes landmarks; drag and pinch manipulate 3D without naviga
 test("fullscreen chapters fit compact and landscape phones, with category navigation", async ({
   page,
 }) => {
+  test.slow(); // Six document loads plus category/history checks on software WebGL.
   for (const viewport of [
     { width: 360, height: 640 },
     { width: 844, height: 390 },
@@ -286,6 +289,7 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
 });
 
 test("province chooser, place trail and a short introduction", async ({ page }) => {
+  test.slow();
   await page.goto("/");
   await expect(page.getByRole("link", { name: "Browse city guides", exact: true })).toBeVisible();
   await expect(page.locator(".map-pin")).toHaveCount(0);
@@ -351,6 +355,7 @@ test("opened category is a themed field guide with persistent tabs and search", 
 });
 
 test("glass category selector keeps icons upright and inputs at 16px", async ({ page }) => {
+  test.slow();
   await page.goto("/durban/entertainment");
   const nav = page.locator(".glass-category-compact");
   await expect(nav.locator("[data-category-icon]")).toHaveCount(5);

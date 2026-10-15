@@ -79,7 +79,7 @@ jobs:
                 ["/api/health", 200, null],
                 ["/manifest.webmanifest", 200, null],
                 ["/data/places.json", 200, null],
-                ["/destinations", 200, /Find your next chapter/i],
+                ["/destinations", 200, /Find your(?:\s|<[^>]*>)*next chapter/i],
                 ["/robots.txt", 200, /sitemap.xml/i],
                 ["/sitemap.xml", 200, /<urlset/],
                 ["/llms.txt", 200, /Citylit/],

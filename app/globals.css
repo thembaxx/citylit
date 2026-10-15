@@ -118,7 +118,7 @@ a {
   letter-spacing: -1px;
 }
 .wordmark > span {
-  color: var(--accent);
+  color: var(--accent-ink);
   padding-left: 4px;
 }
 .utility-nav {
@@ -374,7 +374,7 @@ h3 {
   color: #c4c0cb;
 }
 .city-shortcuts button > span {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-size: 13px;
 }
 .map-legend {
@@ -450,7 +450,7 @@ h3 {
   color: #8a8693;
 }
 .carousel-arrow:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 .carousel-progress {
   display: flex;
@@ -558,7 +558,7 @@ h3 {
   color: #aaa6b0;
 }
 .game-search:focus-within {
-  border-color: var(--accent);
+  border-color: var(--accent-ink);
 }
 .game-search button {
   min-width: 28px;
@@ -756,7 +756,7 @@ h3 {
 }
 .sheet-header .roman-chapter {
   margin: 0;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 .sheet-header h2 {
   font-size: 30px;
@@ -785,7 +785,7 @@ h3 {
   padding: 19px 2px;
 }
 .place-icon {
-  color: var(--accent);
+  color: var(--accent-ink);
   padding: 12px;
   background: #796aff13;
   border-radius: 50%;
@@ -830,7 +830,7 @@ h3 {
   top: 10px;
   min-width: 32px;
   min-height: 32px;
-  color: var(--accent);
+  color: var(--accent-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1066,7 +1066,7 @@ h3 {
   scroll-snap-align: start;
 }
 .gallery-thumbs .selected {
-  border-color: var(--accent);
+  border-color: var(--accent-ink);
 }
 .gallery-thumbs img {
   height: 60px;
@@ -2192,7 +2192,7 @@ h3 {
 }
 .category-page h1 {
   font-size: clamp(58px, 7vw, 100px);
-  color: var(--accent);
+  color: var(--accent-ink);
   margin: 0 0 18px;
   line-height: 0.95;
 }
@@ -2262,8 +2262,8 @@ h3 {
     transform 0.2s;
 }
 .category-page-tabs button[aria-current="page"] {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--accent-ink);
+  color: var(--accent-ink);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
 }
 .category-page-tabs button:hover {
@@ -2304,7 +2304,7 @@ h3 {
   min-height: 44px;
 }
 .category-page-search:focus-within {
-  border-color: var(--accent);
+  border-color: var(--accent-ink);
 }
 .category-page-search input {
   flex: 1;
@@ -3701,7 +3701,7 @@ button:disabled {
   display: flex;
   gap: 5px;
   align-items: center;
-  color: var(--accent);
+  color: var(--accent-ink);
   font: 10px var(--font-mono);
   min-height: 28px;
   padding: 0;
@@ -3791,7 +3791,7 @@ button:disabled {
 .khwezi-toast a {
   display: block;
   font: 10px/1.5 var(--font-mono);
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-top: 8px;
   pointer-events: auto;
 }
@@ -4444,7 +4444,7 @@ button:disabled {
   color: var(--muted);
 }
 .street-map-link {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

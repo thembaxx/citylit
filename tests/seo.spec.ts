@@ -155,15 +155,15 @@ test("discovery works as a readable guide with JavaScript disabled", async ({
   try {
     const page = await context.newPage();
     await page.goto("/");
-    await expect(page.locator(".no-script-guide h1")).toHaveText("Discover South Africa");
-    await page.locator('.no-script-guide a[href="/cape-town"]').click();
-    await expect(page.locator(".no-script-guide h1")).toHaveText("Things to do in Cape Town");
+    await expect(page.locator(".discovery-guide h1")).toHaveText("DiscoverSouth Africa.");
+    await page.locator('.atlas-city-card-link[href="/cape-town"]').click();
+    await expect(page.locator(".discovery-guide h1")).toHaveText("Cape Town.");
     await page
-      .locator('.no-script-guide a[href="/cape-town/parks-zoos/kirstenbosch"]')
+      .locator('.atlas-place-card-link[href="/cape-town/parks-zoos/kirstenbosch"]')
       .first()
       .click();
-    await expect(page.locator(".no-script-guide h1")).toHaveText("Kirstenbosch in Cape Town");
-    await expect(page.locator('.no-script-guide a[href*="sanbi.org"]').first()).toBeVisible();
+    await expect(page.locator(".discovery-guide h1")).toHaveText("Kirstenbosch.");
+    await expect(page.getByRole("link", { name: "Visit official website" })).toBeVisible();
     expect(await page.evaluate(() => document.body.scrollWidth > innerWidth)).toBe(false);
   } finally {
     await context.close();
@@ -193,7 +193,7 @@ for (const path of [
 
 test("street-map failures retain a usable map link and named gallery", async ({ page }) => {
   await page.route("https://tile.openstreetmap.org/**", (route) => route.abort());
-  await page.goto("/cape-town/parks-zoos/kirstenbosch");
+  await page.goto("/cape-town/parks-zoos/kirstenbosch?view=3d");
   await expect(page.locator(".map-fallback")).toContainText("couldn’t load");
   await expect(page.getByRole("link", { name: "Open street map", exact: true })).toHaveAttribute(
     "href",

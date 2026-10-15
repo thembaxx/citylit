@@ -48,7 +48,11 @@ city_images={}
 for city in json.load(open(OUT/'cities.json')):
  name=city['name'].split(' /')[0];slug=city['slug'];city_images[slug]=list({i['src']:i for i in images(pages.get(name,{}),3)+previous_city_images.get(slug,[])}.values())[:5]
 places=json.load(open(OUT/'places.json'));catalog=json.load(open(ROOT/'scripts/catalog.json'))
-for row,seed in zip(places,catalog):
+# Editorial additions and reordered seeds must match by identity, never list position.
+seeds={(seed['city'],seed['name']):seed for seed in catalog}
+for row in places:
+ seed=seeds.get((row['city'],row['name']))
+ if not seed:continue
  row.update({k:seed[k] for k in ['website','address','description']});row['checkedAt']=DATE;source=next((s for s in r['official'] if s['url']==seed['website']),None)
  if source:row['sources'][0]={k:source[k] for k in ['url','title','fetchedAt','status']}
  p=pages.get(seed.get('wiki'),{});coords=p.get('coordinates',[None])[0]

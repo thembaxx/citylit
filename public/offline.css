@@ -45,6 +45,7 @@ h1 {
 article {
   border: 1px solid var(--line);
   border-radius: 28px;
+  corner-shape: squircle;
   padding: 24px;
   margin: 18px 0;
   background: var(--surface);
@@ -65,6 +66,7 @@ button {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
+  corner-shape: squircle;
   padding: 10px 14px;
   color: var(--ink);
   cursor: pointer;

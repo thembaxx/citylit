@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./legacy-fixture";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 
@@ -25,8 +25,12 @@ test("Khwezi welcomes once, teaches gestures and keeps a single canvas", async (
 test("new saves catch a spark; unsaves and reloads do not celebrate", async ({ page }) => {
   await page.goto("/cape-town/parks-zoos/kirstenbosch");
   await page.getByRole("button", { name: "Save this discovery", exact: true }).click();
-  await expect(page.locator(".khwezi-toast")).toContainText("A spark for later.");
-  await expect(page.locator('.khwezi-toast [data-pose="saved"]')).toBeVisible();
+  await expect(
+    page
+      .locator(".khwezi-toast")
+      .filter({ hasText: "A spark for later." })
+      .locator('[data-pose="saved"]'),
+  ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Saved to discoveries", exact: true }),
   ).toBeVisible();

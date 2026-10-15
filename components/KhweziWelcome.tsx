@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { X, ArrowUpRight } from "lucide-react";
+import { X, ArrowUpRight } from "@phosphor-icons/react";
 import { useKhwezi } from "./KhweziProvider";
 import KhweziMark from "./KhweziMark";
 const KhweziView = dynamic(() => import("./KhweziView"), {

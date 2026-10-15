@@ -1,6 +1,6 @@
 # Search and production readiness
 
-Citylit serves its interactive atlas at **https://citylit.vercel.app**. Its crawlable city directory is at `/destinations`, with nine province guides at `/provinces/[province]`. The interactive map, city and category pages remain full-screen.
+Citylit serves its interactive atlas at **https://citylit.vercel.app**. Its crawlable city directory is at `/destinations`, with nine province guides at `/provinces/[province]`. The default experience uses scrollable city, category and venue guides. The original interactive atlas remains an optional full-screen experience.
 
 ## Search engines and sharing
 
@@ -8,7 +8,7 @@ Citylit serves its interactive atlas at **https://citylit.vercel.app**. Its craw
 - `/sitemap.xml` includes populated, canonical destination pages and public information pages. Empty categories, filters, browser-local editorial tools, invalid routes and shared trip parameters are excluded. Filtered pages have `noindex, follow`; `view=places` canonicalizes to its category. Source-check dates inform `lastmod`, rather than a fabricated rebuild date.
 - `/robots.txt` advertises the sitemap. Vercel previews disallow crawling and page metadata uses `noindex`. Preview protection remains enabled.
 - JSON-LD describes the website, breadcrumbs, collections and places. It does not invent ratings, opening hours, prices or accessibility claims. City-reference coordinates and city-atmosphere images are excluded from venue schema.
-- Real destination, category and place links support browser-native navigation and modifiers. JavaScript-free visitors get readable source-linked guides inside `noscript`.
+- Real destination, category and place links support browser-native navigation and modifiers. JavaScript-free visitors can navigate the server-rendered default guide; the optional original 3D experience retains its `noscript` counterpart.
 - `/about` documents coverage, evidence, attribution and corrections; `/privacy` describes local storage, location permission, map requests, hosting logs and external links.
 
 ## AI search and reading

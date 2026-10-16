@@ -16,6 +16,13 @@ function fixture(overrides = {}) {
       "application/json",
     ],
     "/cape-town/parks-zoos/table-mountain": ["<h1>Table Mountain.</h1>", "text/html"],
+    "/cape-town/landmarks": ["<h2>Table Mountain</h2>", "text/html"],
+    "/models/stage/manifest.json": [
+      Array.from({ length: 15 }, () => ({ src: "/models/stage/table-mountain.glb", bytes: 6868 })),
+      "application/json",
+    ],
+    "/models/stage/table-mountain.glb": ["glTF-model", "model/gltf-binary"],
+    "/draco/draco_decoder.wasm": ["\0asm-decoder", "application/wasm"],
     "/manifest.webmanifest": [{ name: "Citylit", start_url: "/" }, "application/manifest+json"],
     "/not-a-city": ["<h1>Not found</h1>", "text/html", 404],
     ...overrides,
@@ -35,7 +42,7 @@ function fixture(overrides = {}) {
 test("healthy production checks cover the release and boot asset", async () => {
   const result = await checkProduction(fixture());
   assert.equal(result.revision, revision);
-  assert.equal(result.checked.length, 8);
+  assert.equal(result.checked.length, 12);
   assert.ok(result.checked.includes("/_next/static/app.js"));
 });
 

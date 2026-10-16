@@ -1,22 +1,22 @@
 /* Shared by the live app, loading/recovery screens and downloaded guide.
-   Surfaces stay warm gray. Colour lives in the toys, not the night sky. */
+   Cream and ink surfaces follow the supplied Citylit reference in every runtime state. */
 :root {
-  --night-bg: #222326;
-  --day-bg: #e6e5e2;
-  --night-ink: #f4f3f0;
-  --day-ink: #2a2a2e;
-  --night-muted: #b3b1ab;
-  --day-muted: #5c5b58;
+  --night-bg: #0e0f13;
+  --day-bg: #f4efe6;
+  --night-ink: #f3eee4;
+  --day-ink: #1b1a1f;
+  --night-muted: #aba69b;
+  --day-muted: #6b665e;
   --night-accent: #b74720;
   --day-accent: #ba4029;
   --night-accent-ink: #ffb089;
   --day-accent-ink: #b43922;
-  --night-line: #3e3f44;
-  --day-line: #d2d0cb;
-  --night-surface: #2c2d31;
-  --day-surface: #f7f6f4;
-  --night-surface-glass: #2c2d31f5;
-  --day-surface-glass: #f7f6f4f5;
+  --night-line: #34353b;
+  --day-line: #d9d2c8;
+  --night-surface: #191a21;
+  --day-surface: #fcfaf6;
+  --night-surface-glass: #191a21f5;
+  --day-surface-glass: #fcfaf6f5;
   color-scheme: dark;
   --bg: var(--night-bg);
   --ink: var(--night-ink);

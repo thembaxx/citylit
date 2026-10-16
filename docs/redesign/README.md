@@ -37,7 +37,7 @@ No new venue coordinates were inferred from city pins. New places reuse licensed
 - Guide content and links render on the server. Removing the root loading boundary prevents no-JavaScript visitors from being stranded in a streamed, hidden page; route-level planner loading remains.
 - The particle map uses the repository's provincial geometry, including its holes, rather than the prototype's approximate outline. Its camera fits narrow viewports. Scroll capture invalidates the shared renderer so the map clears as the guide scrolls. The directory remains usable without WebGL.
 - Fonts are local, with bundled SIL OFL licenses. Phosphor's MIT license is included. No Google Fonts or script CDN is needed at runtime.
-- The attached Blender script is an untested base-shape exporter. Existing original procedural landmark models remain available; no Blender or Unity output is claimed.
+- The supplied Blender approach is now implemented and validated with fifteen compressed assets. See [the current reference brief](reference-brief.md). The original procedural explorer remains available; a Unity flythrough is still an optional future build.
 - Research is not live venue confirmation. Many opening hours, access details and entrance pins still need operator confirmation. There are 52 venue pins; the other records use explicitly labelled city references. The correction workflow remains an on-device draft queue, not a publication backend.
 
 ## Verification

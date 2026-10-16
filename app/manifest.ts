@@ -59,8 +59,8 @@ export default function manifest(): MetadataRoute.Manifest {
       enctype: "application/x-www-form-urlencoded",
       params: { url: "shared-url", text: "shared-text", title: "shared-title" },
     },
-    background_color: "#222326",
-    theme_color: "#222326",
+    background_color: "#0e0f13",
+    theme_color: "#0e0f13",
     icons: [
       { src: "/app-icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
       { src: "/brand/app-icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },

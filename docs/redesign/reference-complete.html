@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Discover South Africa | Citylit (redesign)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#f4efe6;--ink:#1b1a1f;--mute:#6b665e;--glow:#d9660b;--dot:#8a8173;--card:rgba(255,255,255,.62);--line:rgba(27,26,31,.14);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0f13;--ink:#f3eee4;--mute:#9a968c;--glow:#ffc46b;--dot:#5b5f6b;--card:rgba(24,25,31,.62);--line:rgba(243,238,228,.14);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e0f13;--ink:#f3eee4;--mute:#9a968c;--glow:#ffc46b;--dot:#5b5f6b;--card:rgba(24,25,31,.62);--line:rgba(243,238,228,.14);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Manrope,system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;touch-action:pan-y;cursor:grab}
+main{position:relative;z-index:1}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px clamp(16px,4vw,48px);pointer-events:none}
+nav>*{pointer-events:auto}
+.logo{font:600 22px Fraunces,Georgia,serif;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.logo b{color:var(--glow)}
+.btn{font:700 12px Manrope,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);text-decoration:none}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:20px;padding:96px clamp(16px,4vw,48px) 28px;pointer-events:none}
+.eyebrow{font:700 11px Manrope;letter-spacing:.18em;text-transform:uppercase;color:var(--glow)}
+h1{font:300 clamp(46px,11vw,150px)/.92 Fraunces,Georgia,serif;letter-spacing:-.04em}
+h1 em{font-style:italic;color:var(--glow)}
+.ln{display:block;overflow:hidden;padding-bottom:.08em}.ln span{display:block}
+.sub{font:italic 300 clamp(20px,3vw,30px) Fraunces,Georgia,serif;color:var(--mute)}
+.row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+.hint{font-size:13px;color:var(--mute);max-width:26ch}
+.panel{pointer-events:auto;width:min(100%,380px);background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.panel small{font:700 11px Manrope;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.panel h2{font:400 30px/1.1 Fraunces,Georgia,serif;margin:4px 0 6px}
+.panel p{font-size:14px;color:var(--mute);margin-bottom:12px}
+.panel .go{display:flex;gap:8px}
+.go a.btn{background:var(--glow);color:#111;border-color:transparent}
+#lab{position:fixed;z-index:5;left:0;top:0;pointer-events:none;font:700 11px Manrope;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:5px 9px;border-radius:99px;opacity:0;transform:translate(-50%,-140%);white-space:nowrap}
+section.pg{padding:clamp(64px,12vw,140px) clamp(16px,4vw,48px)}
+section.pg h3{font:300 clamp(34px,6vw,72px)/1 Fraunces,Georgia,serif;letter-spacing:-.03em;margin-bottom:36px;max-width:16ch}
+section.pg h3 em{color:var(--glow)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:14px}
+.card{display:flex;flex-direction:column;gap:6px;min-height:170px;padding:20px;border:1px solid var(--line);border-radius:22px;background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:inherit;text-decoration:none;transition:border-color .3s,transform .3s}
+.card:hover{border-color:var(--glow);transform:translateY(-4px)}
+.card i{font:700 11px Manrope;font-style:normal;letter-spacing:.14em;color:var(--glow)}
+.card b{font:400 26px/1.1 Fraunces,Georgia,serif}
+.card span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.card p{font-size:14px;color:var(--mute);margin-top:auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}
+.step{border-top:2px solid var(--glow);padding:16px 4px 0}
+.step i{font:700 11px Manrope;font-style:normal;letter-spacing:.14em;color:var(--glow)}
+.step b{display:block;font:400 24px Fraunces,Georgia,serif;margin:6px 0}
+.step p{font-size:14px;color:var(--mute)}
+footer{padding:40px clamp(16px,4vw,48px) 56px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;display:grid;gap:12px;background:var(--bg);position:relative;z-index:1}
+footer a{color:var(--ink)}
+.view{display:none}.view.on{display:block}
+#veil{position:fixed;inset:0;background:var(--bg);opacity:0;z-index:0;pointer-events:none;transition:opacity .5s}
+.links{display:flex;gap:8px}
+.ph{min-height:62svh;display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:110px clamp(16px,4vw,48px) 32px;pointer-events:none}
+.ph h1{font-size:clamp(40px,9vw,120px)}.ph a{pointer-events:auto}
+.crumb{font:700 11px Manrope;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.crumb a{color:var(--glow);text-decoration:none}
+.view h3.rv{font:300 clamp(26px,4vw,44px)/1.1 Fraunces,Georgia,serif;letter-spacing:-.02em;max-width:none;margin:48px 0 20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.chip.on{background:var(--glow);color:#111;border-color:transparent}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.facts div{background:var(--card);padding:14px 16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.facts small{display:block;font:700 10px Manrope;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.facts a{color:var(--glow);text-decoration:none}
+.slot{border:1.5px dashed var(--line);border-radius:22px;padding:22px;background:var(--card)}
+.slot b{font:400 22px Fraunces,Georgia,serif}.slot p{font-size:14px;color:var(--mute);margin-top:6px;max-width:52ch}
+.prose{max-width:62ch;font-size:17px}
+.st{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:96px clamp(16px,4vw,48px) 20px;pointer-events:none}
+.st h1{font-size:clamp(34px,7vw,84px)}.st .btn,.st .sheet,.st a{pointer-events:auto}
+.tbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:6px;pointer-events:auto}.tb{white-space:nowrap}
+.btn.on{background:var(--glow);color:#111;border-color:transparent}
+.sheet{max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.sheet>small{font:700 11px Manrope;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.sheet h2{font:400 30px/1.1 Fraunces,Georgia,serif;margin:4px 0 6px}.sheet p{font-size:14px;color:var(--mute);margin-bottom:12px}
+.sheet .go{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.facts.sm{grid-template-columns:1fr 1fr}.facts.sm .w{grid-column:1/-1}.sheet{max-height:48svh;overflow:auto}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-label="Interactive 3D map of South Africa with glowing city beacons" role="img"></canvas>
+<div id="veil"></div>
+<div id="lab"></div>
+<nav>
+  <a class="logo" href="#/">c<b>ı</b>tylit</a>
+  <div class="links"><a class="btn" href="#/destinations">Cities</a><a class="btn" href="#/about">About</a><button class="btn" id="tg" aria-label="Toggle light or dark theme">Theme</button></div>
+</nav>
+<main id="top"><div class="view on" id="v-home">
+  <section class="hero">
+    <div class="eyebrow">South Africa / City guides</div>
+    <h1><span class="ln"><span>Discover</span></span><span class="ln"><span><em>South</em> Africa</span></span></h1>
+    <div class="row">
+      <div><p class="sub">Follow the glow.</p><p class="hint">Drag the land. Tap a glowing city. 12 cities across 9 provinces.</p></div>
+      <div class="panel" id="panel" aria-live="polite">
+        <small id="pp">Choose a beacon</small>
+        <h2 id="pn">Where to?</h2>
+        <p id="pt">Tap any glowing city on the map and the camera flies there.</p>
+        <div class="go"><a class="btn" id="pg" href="#/destinations">All guides</a><button class="btn" id="rs">Reset</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg" id="chapters">
+    <h3>Twelve cities, <em>one</em> glow.</h3>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="pg">
+    <h3>Built with <em>light</em>, not weight.</h3>
+    <div class="steps">
+      <div class="step"><i>01 · BLENDER</i><b>Landmark models</b><p>Low-poly Table Mountain, Union Buildings and more, baked lighting, exported as Draco-compressed glTF under ~150 KB each.</p></div>
+      <div class="step"><i>02 · THREE.JS</i><b>The living map</b><p>A particle-field South Africa with raycast-picked beacons. Landmark glTFs swap in over each beacon on selection.</p></div>
+      <div class="step"><i>03 · GSAP</i><b>Choreography</b><p>Camera fly-tos, masked headline reveals, ScrollTrigger scenes that dim the map behind the guides, reduced-motion respected.</p></div>
+      <div class="step"><i>04 · UNITY WEBGL</i><b>Optional flythroughs</b><p>A per-city "walk the streets" scene, lazy-loaded in a frame only when tapped, so the core page stays light.</p></div>
+    </div>
+  </section>
+</div><div class="view" id="v-page"></div></main>
+<footer>
+  <div><a href="#/destinations">All destinations</a> · <a href="#/about">About the research</a> · <a href="#/privacy">Privacy &amp; data</a></div>
+  <p>Source check dates describe catalog research, not live venue confirmation. Hours, prices and accessibility can change. City coordinates and photos are not venue locations or venue photos.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const C=[
+["Johannesburg","Gauteng","johannesburg",28.05,-26.2,"Big energy. Bold ideas. A city that never stops becoming."],
+["Cape Town","Western Cape","cape-town",18.42,-33.92,"Follow the mountain. Find your own kind of adventure."],
+["Durban","KwaZulu-Natal","durban",31.02,-29.86,"Ocean air, colourful streets, and a rhythm all its own."],
+["Pretoria / Tshwane","Gauteng","pretoria",28.19,-25.75,"Jacaranda streets, living history and a stage for new stories."],
+["Stellenbosch","Western Cape","stellenbosch",18.86,-33.93,"Oak-lined streets, garden paths and the stories behind the gables."],
+["Pietermaritzburg","KwaZulu-Natal","pietermaritzburg",30.38,-29.6,"A garden city where red-brick landmarks meet a rich art collection."],
+["Gqeberha","Eastern Cape","gqeberha",25.6,-33.96,"Coastal light, public art and unexpected stories beside the bay."],
+["Bloemfontein","Free State","bloemfontein",26.2,-29.12,"Art-filled gardens and open skies in the heart of the Free State."],
+["Mbombela","Mpumalanga","mbombela",30.97,-25.47,"Follow river paths, ancient stone and the warmth of the Lowveld."],
+["Polokwane","Limpopo","polokwane",29.45,-23.9,"Northern Sotho heritage, local art and a gateway to Limpopo."],
+["Kimberley","Northern Cape","kimberley",24.76,-28.74,"Look beyond the diamond story to art, archives and desert light."],
+["Mahikeng","North West","mahikeng",25.64,-25.85,"Meet the stories, grasslands and heritage of the North West."]];
+const $=s=>document.querySelector(s),root=document.documentElement;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,D=reduce?0:1;
+$('#grid').innerHTML=C.map((c,i)=>`<a class="card" data-i="${i}" href="#/city/${c[2]}"><i>${String(i+1).padStart(2,'0')}</i><b>${c[0]}</b><span>${c[1]}</span><p>${c[5]}</p></a>`).join('');
+
+const cv=$('#gl'),R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+R.setPixelRatio(Math.min(devicePixelRatio,2));
+const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(42,1,.1,100),look=new THREE.Vector3(),G=new THREE.Group();S.add(G);
+let K=1;const base=()=>({x:0,y:7.2*K,z:8.6*K});
+function size(){const w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;K=w/h<1?1.55:1;cam.updateProjectionMatrix()}
+addEventListener('resize',()=>{size();if(sel<0&&!stageOn){Object.assign(cam.position,base())}});
+
+const poly=[[16.5,-28.6],[18,-28.9],[20,-28.4],[20,-24.8],[22,-25.7],[24.7,-25.8],[26.5,-24.6],[27.4,-23.6],[29,-22.2],[31.3,-22.4],[32,-25],[32,-26.8],[32.9,-26.9],[32.5,-28.5],[31,-29.9],[30,-31],[28.5,-32.6],[27,-33.6],[25.6,-34],[23,-34.1],[20,-34.8],[18.5,-34.1],[18.3,-33],[17.8,-31],[16.5,-28.6]];
+const inside=(x,y)=>{let o=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>y)!=(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])o=!o}return o};
+const X=lon=>(lon-24.7)*.54,Z=lat=>-(lat+28.5)*.62,H=(lo,la)=>Math.sin(lo*1.7)*Math.cos(la*1.9)*.1;
+const pts=[];for(let lo=16.4;lo<33;lo+=.2)for(let la=-35;la<-22;la+=.2){const x=lo+Math.random()*.16,y=la+Math.random()*.16;if(inside(x,y))pts.push(X(x),H(x,y),Z(y))}
+const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
+const hs=[];for(let i=1;i<pts.length;i+=3)hs.push(pts[i]);
+const cc=document.createElement('canvas');cc.width=cc.height=32;const g2=cc.getContext('2d'),gr=g2.createRadialGradient(16,16,0,16,16,16);gr.addColorStop(0,'#fff');gr.addColorStop(.55,'#fff');gr.addColorStop(1,'rgba(255,255,255,0)');g2.fillStyle=gr;g2.fillRect(0,0,32,32);
+const mat=new THREE.PointsMaterial({size:.075,map:new THREE.CanvasTexture(cc),transparent:true,depthWrite:false,opacity:0});
+G.add(new THREE.Points(geo,mat));
+
+const gm=[],B=[],hit=[];
+C.forEach((c,i)=>{
+  const b=new THREE.Group();b.position.set(X(c[3]),H(c[3],c[4]),Z(c[4]));
+  const m=()=>{const k=new THREE.MeshBasicMaterial({transparent:true,depthWrite:false});gm.push(k);return k};
+  const core=new THREE.Mesh(new THREE.SphereGeometry(.07,16,16),m());
+  const beam=new THREE.Mesh(new THREE.CylinderGeometry(.012,.012,1.3,8,1,true),m());beam.position.y=.65;beam.material.opacity=.45;
+  const ring=new THREE.Mesh(new THREE.RingGeometry(.1,.12,48),m());ring.rotation.x=-Math.PI/2;ring.material.side=THREE.DoubleSide;
+  const h=new THREE.Mesh(new THREE.SphereGeometry(.24,8,8),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false}));h.userData.i=i;
+  b.add(core,beam,ring,h);b.userData={ring,ph:Math.random()*6};b.scale.setScalar(0);G.add(b);B.push(b);hit.push(h)});
+
+function theme(){const s=getComputedStyle(root);mat.color.set(s.getPropertyValue('--dot').trim());bm.color.set(s.getPropertyValue('--ink').trim()).lerp(new THREE.Color(s.getPropertyValue('--dot').trim()),.45);gm.forEach(k=>k.color.set(s.getPropertyValue('--glow').trim()))}
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',theme);
+$('#tg').onclick=()=>{const dark=getComputedStyle(root).getPropertyValue('--bg').trim()==='#0e0f13';root.dataset.theme=dark?'light':'dark';theme()};
+
+let sel=-1,hov=-1,rot={t:0,v:0};
+const lab=$('#lab'),ray=new THREE.Raycaster(),mp=new THREE.Vector2(),vv=new THREE.Vector3();
+function pick(i){
+  sel=i;const c=C[i],p=B[i].position.clone();rot.t=0;
+  gsap.to(cam.position,{x:p.x*.55,y:3.2*K,z:p.z+4.4*K,duration:1.6*D,ease:'power3.inOut'});
+  gsap.to(look,{x:p.x,y:0,z:p.z,duration:1.6*D,ease:'power3.inOut'});
+  $('#pp').textContent=c[1];$('#pn').textContent=c[0];$('#pt').textContent=c[5];
+  $('#pg').textContent='Open guide →';$('#pg').href='#/city/'+c[2];
+  gsap.fromTo('#panel',{y:8},{y:0,duration:.5*D,ease:'power2.out'});
+}
+function reset(){sel=-1;rot.t=0;const b=base();gsap.to(cam.position,{...b,duration:1.4*D,ease:'power3.inOut'});gsap.to(look,{x:0,y:0,z:0,duration:1.4*D,ease:'power3.inOut'});
+  $('#pp').textContent='Choose a beacon';$('#pn').textContent='Where to?';$('#pt').textContent='Tap any glowing city on the map and the camera flies there.';$('#pg').textContent='All guides';$('#pg').href='#/destinations'}
+$('#rs').onclick=reset;
+
+function aim(e){const r=cv.getBoundingClientRect();mp.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(mp,cam);const h=ray.intersectObjects(stageOn?sHit:hit)[0];return h?h.object.userData.i:-1}
+let dn=null,moved=0;
+cv.addEventListener('pointerdown',e=>{dn=e.clientX;moved=0});
+addEventListener('pointerup',e=>{if(dn!==null&&moved<6&&e.target===cv){const i=aim(e);if(i>=0)stageOn?spick(i):pick(i)}else if(dn!==null&&stageOn&&moved>=6){const n=SI.length;spick(((Math.round(-sr.t/(6.2832/n))%n)+n)%n)}dn=null;cv.style.cursor='grab'});
+addEventListener('pointermove',e=>{
+  if(dn!==null){const dx=e.clientX-dn;moved+=Math.abs(dx);dn=e.clientX;if(stageOn)sr.t+=dx*.008;else rot.t=Math.max(-.9,Math.min(.9,rot.t+dx*.006));cv.style.cursor='grabbing'}
+  if(e.target===cv)hov=aim(e);else if(!e.target.closest('.card'))hov=-1;
+  if(e.target===cv&&hov>=0)cv.style.cursor='pointer'});
+document.addEventListener('pointerover',e=>{const c=e.target.closest&&e.target.closest('.card[data-i]');if(c)hov=+c.dataset.i});
+
+
+/* ---- router + page templates ---- */
+const slug=s=>s.toLowerCase().replace(/ /g,'-'),PV=[...new Set(C.map(c=>c[1]))],num=n=>String(n).padStart(2,'0');
+const L=a=>a.map(([n,d,o])=>({n,d,...o}));const rows=x=>[['Address',x.a],['Hours',x.h],['Fees',x.f],['Good to know',x.x]].filter(r=>r[1]).map(r=>`<div class="w"><small>${r[0]}</small>${r[1]}</div>`).join('');
+const DATA={
+'johannesburg':{landmarks:L([['Apartheid Museum','Immersive galleries tracing apartheid and the road to democracy.',{a:'Cnr Northern Parkway and Gold Reef Roads, Ormonde',h:'Tue–Sun 09:00–17:00 and most public holidays',f:'From 1 May 2026: South African adults R170; students, pensioners and children R120; international adults R240',x:'Not recommended for children under 11 because of graphic content. Plan about two hours',s:'apartheidmuseum.org'}],['Constitution Hill','Former prison complex that now houses the Constitutional Court.',{a:'11 Kotze Street, Braamfontein',h:'Daily 09:00–17:00, last tour 16:00. Closed Good Friday, 25–26 December and 1 January',f:'Entry to the Constitutional Court is free; museums and guided tours are charged',x:'Allow one to two hours',s:'citysightseeing.co.za, tourismupdate.com'}],['Hector Pieterson Museum','Soweto museum and memorial to the 1976 student uprising.',{a:'8288 Khumalo Street, Orlando West, Soweto',s:'activities.marriott.com'}]]),places:L([['Maboneng Precinct','Converted warehouses, galleries, cafes and weekend markets.'],['Wits Art Museum','A major African art collection in Braamfontein.'],['Zoo Lake','Lakeside park with lawns and shaded walking paths.']]),plan:L([['Morning · Constitution Hill','Start with the court and the old prison.'],['Afternoon · Apartheid Museum','Allow a few hours for the galleries.'],['Evening · Maboneng','Dinner and a wander through the precinct.']])},
+'cape-town':{landmarks:L([['Table Mountain','The flat-topped icon above the city, reached by cableway or trail.',{h:'Cableway hours change through the year and with the weather',f:'Return fares vary by time of day and booking channel; confirm with the operator',x:'Highest point about 1,086 m above sea level. The cableway runs weather permitting',s:'citysightseeing.co.za, expedia.com'}],['Castle of Good Hope','Star-shaped fortress and the oldest colonial building in the country.'],['Robben Island','Island prison and museum, reached by ferry from the V&A Waterfront.']]),places:L([['V&A Waterfront','Working harbour with shops, food halls and views of the mountain.'],['Kirstenbosch Gardens','Botanical garden on the eastern slopes of Table Mountain.'],['Bo-Kaap','Brightly painted houses and the area\'s Cape Malay heritage.']]),plan:L([['Morning · Kirstenbosch','Gardens are best before the day warms up.'],['Afternoon · Bo-Kaap and the Castle','Both sit close to the city centre.'],['Evening · V&A Waterfront','Harbour views and dinner.']])},
+'durban':{landmarks:L([['Moses Mabhida Stadium','Arched stadium with a walk and a cable ride over the pitch.',{a:'44 Isaiah Ntshangase Road, Stamford Hill',x:'The SkyCar rises about 106 m up the arch; the Big Rush Big Swing is 80 m. A 2023 report said the SkyCar had been out of service since 2018, so confirm before you go',s:'sahistory.org.za, themercury.co.za'}],['Durban City Hall','Grand civic building facing Francis Farewell Square.'],['Juma Masjid','One of the largest mosques in the southern hemisphere.']]),places:L([['Golden Mile','Beachfront promenade running along the warm Indian Ocean.'],['Victoria Street Market','Spices, crafts and street food in the city centre.'],['Florida Road','Tree-lined strip of cafes, bars and restaurants.']]),plan:L([['Morning · Golden Mile','Walk or cycle the beachfront.'],['Afternoon · Victoria Street Market','Pair it with the nearby Juma Masjid.'],['Evening · Florida Road','Sunset drinks and dinner.']])},
+'pretoria':{landmarks:L([['Union Buildings','Sandstone seat of government on Meintjieskop, with terraced gardens.',{f:'Grounds entry and parking were free in a 2022 report',x:'Designed by Herbert Baker; the 1910 building is the official seat of government',s:'sundaytimes.timeslive.co.za, expedia.com'}],['Voortrekker Monument','Granite monument and museum on a hill south of the city.',{h:'Daily 08:00–16:00 in a 2022 report',f:'Sources disagree on current ticket prices; confirm with the monument',x:'Inaugurated 1949. Allow two to three hours',s:'sundaytimes.timeslive.co.za, kupi.com'}],['Church Square','Historic central square surrounded by heritage buildings.']]),places:L([['Freedom Park','Memorial, museum and gardens on Salvokop.',{h:'Daily 08:00–17:00; public tours at 09:00, 12:00 and 15:00 in a 2022 report',x:'Opened in 2007',s:'sundaytimes.timeslive.co.za'}],['Pretoria Art Museum','South African art in a modernist building in Arcadia Park.'],['Pretoria National Botanical Garden','Indigenous plants and walking paths on the eastern side.']]),plan:L([['Morning · Union Buildings','Gardens and city views.'],['Afternoon · Freedom Park','Allow time for the museum and the memorial.'],['Evening · Church Square','Stroll the centre as the light drops.']])},
+'stellenbosch':{landmarks:L([['Dorp Street','Oak-lined street of Cape Dutch, Georgian and Victorian buildings.',{x:'Free to walk, with Cape Dutch and Georgian buildings along its length',s:'traveltriangle.com, milehacker.com'}],['The Braak','Central village green ringed by historic buildings.',{x:'The original village green of the town',s:'odessia.com'}],['Stellenbosch Village Museum','Four restored houses showing life across different eras.',{a:'18 Ryneveld Street',h:'Mon–Sat 09:00–17:00; Sun 10:00–13:00 (Apr–Aug) or 10:00–16:00 (Sep–Mar). Closed Christmas Day, Good Friday and Easter Sunday',x:'Four houses: Schreuderhuis (1709), Blettermanhuis (1789), Grosvenor House (1803) and the OM Bergh house (1850)',s:'stelmus.co.za, frommers.com'}]]),places:L([['University Botanical Garden','Compact garden with succulents and glasshouses.',{h:'Nov–Apr 07:30–19:00; May–Oct 07:30–18:00',s:'milehacker.com'}],['Oom Samie se Winkel','Old-fashioned general store on Dorp Street.',{a:'Dorp Street',s:'milehacker.com'}],['Winelands estates','Tastings and cellar visits in the valleys around town.',{h:'Tasting rooms are typically open 10:00–17:00; hours vary by estate',s:'milehacker.com'}]]),plan:L([['Morning · Botanical Garden','A quiet start among the plants.'],['Afternoon · Dorp Street and the Village Museum','Walk the oaks and the gables.'],['Evening · A winelands estate','Tasting or dinner among the vines.']])},
+'pietermaritzburg':{landmarks:L([['City Hall','Red-brick Victorian hall, among the largest of its kind in the southern hemisphere.',{a:'Chief Albert Luthuli (Commercial) Road, opposite the Tatham Art Gallery',s:'sahris.org.za'}],['Railway Station','Where Gandhi was ejected from a first-class carriage in 1893.'],['Msunduzi Museum','Local history in the former Voortrekker museum complex.']]),places:L([['Tatham Art Gallery','Art collection housed in the old Supreme Court building.',{a:'Chief Albert Luthuli (Commercial) Road, opposite City Hall',x:'Founded in 1903. The first floor focuses on 20th-century South African art, and a cafe and shop are on site. Published opening hours differ between sources, so confirm before visiting',s:'lonelyplanet.com, viamichelin.pl, lekkeslaap.co.za'}],['Alexandra Park','Shaded park near the city centre.'],['Howick Falls','Tall waterfall in nearby Howick, a short drive away.']]),plan:L([['Morning · City Hall and the station','Both are in the centre, a short walk apart.'],['Afternoon · Tatham Art Gallery','Browse the collection.'],['Late afternoon · Alexandra Park','An easy stroll to finish.']])},
+'gqeberha':{landmarks:L([['Donkin Reserve','Hilltop park with a lighthouse, a pyramid and bay views.',{x:'The lighthouse dates from 1861. Allow one to two hours',s:'komoot.com'}],['Campanile','Memorial tower beside the harbour on the bay.'],['Fort Frederick','Early British fort overlooking the bay.']]),places:L([['Route 67','Public art trail of 67 works, linked to Mandela\'s years of public service.',{x:'Includes 67 giant steps and 67 public artworks by Eastern Cape artists. The Donkin Heritage Trail is about 5 km and takes around two hours',s:'busrep.co.za'}],['Humewood Beach','Bay beach with a promenade close to the centre.'],['Addo Elephant National Park','Elephant reserve within day-trip distance of the city.',{a:'About 72 km (one hour) from Gqeberha to Addo Main Camp; Matyholweni Gate is about 45 km away',f:'Daily conservation fees are paid at the gate; SANParks publishes the schedule',x:'A December 2025 advisory recommends avoiding the R335 via Motherwell. The gate between Matyholweni and Main Camp closes at 17:30',s:'sanparks.org, atcnews.org, travelbutlers.com'}]]),plan:L([['Morning · Donkin Reserve and Route 67','Art and views on foot.'],['Afternoon · Fort Frederick','History above the bay.'],['Late afternoon · Humewood Beach','Sea air along the bay.']])},
+'bloemfontein':{landmarks:L([['Fourth Raadsaal','Historic former parliament building from the 1890s.'],['Supreme Court of Appeal','Seat of South Africa\'s highest court of appeal.'],['Naval Hill','Hilltop with views across the city and a game reserve.',{h:'Daily 08:00–17:00 in a university tourism listing',s:'ufs.ac.za'}]]),places:L([['Oliewenhuis Art Museum','Art in a historic house set in gardens.',{a:'16 Harry Smith Street',h:'Mon–Fri 08:00–17:00; Sat, Sun and public holidays 09:00–16:00',f:'Free entry; parking R10 per car, cash only',x:'Ramp at the main entrance and a lift to the permanent collection',s:'ofm.co.za, novanews.co.za'}],['Free State National Botanical Garden','Grassland and rocky outcrop garden on the edge of the city.',{h:'Sources differ: 08:00–17:00 daily including public holidays, or Mon–Fri 08:00–16:30; confirm with SANBI',s:'inyourpocket.com, ufs.ac.za'}],['National Museum','Natural history and cultural collections in the city.',{h:'Mon–Fri 08:00–17:00, Sat 10:00–17:00 in a university tourism listing',x:'Collecting since 1877',s:'ufs.ac.za'}]]),plan:L([['Morning · Fourth Raadsaal','Start in the old centre.'],['Afternoon · Oliewenhuis Art Museum','Gallery visit and garden walk.'],['Evening · Naval Hill','City views as the light fades.']])},
+'mbombela':{landmarks:L([['Mbombela Stadium','Stadium with giraffe-patterned supports, built for the 2010 World Cup.'],['Sudwala Caves','Ancient dolomite caves within day-trip distance.'],['Makhonjwa Mountains','UNESCO-listed ancient rock around Barberton, within day-trip distance.']]),places:L([['Lowveld National Botanical Garden','River-side garden at the meeting of the Crocodile and Nels rivers.',{a:'Madiba Drive',h:'Daily: Sep–Mar 08:00–18:00; Apr–Aug 08:00–17:00',x:'Designed for wheelchair access, with a Braille trail. Hippos live in the rivers that run through it. Sources differ on entry fees, so confirm with SANBI',s:'firstcarrental.co.za, en.wikipedia.org'}],['Kruger National Park gates','Several gates are within day-trip distance of the city.']]),plan:L([['Morning · Lowveld Botanical Garden','River paths and shade.'],['Afternoon · Sudwala Caves','A cool stop on a warm day.']])},
+'polokwane':{landmarks:L([['Bakone Malapa Open-Air Museum','Living Northern Sotho heritage site.',{a:'R37 (Chuenespoort Road), about 9 km from Polokwane',h:'Weekdays 08:00–15:30',x:'Bookings are essential. Allow at least an hour',s:'whatsoninjoburg.com, southafrica.net'}],['Peter Mokaba Stadium','Stadium built for the 2010 World Cup.']]),places:L([['Polokwane Game Reserve','Wildlife reserve close to the city.',{x:'About 2,800 ha, one of the largest municipal game reserves in the country. An entrance fee is charged, and published opening hours differ between sources, so confirm before visiting',s:'en.wikipedia.org'}],['Polokwane Art Museum','Local and regional art collection.',{h:'Mon–Fri 09:00–17:00',s:'trip101.com'}],['Hugh Exton Photographic Museum','Historic photographs of the region.',{h:'Mon–Fri 09:00–15:30',x:'In a 19th-century church; holds about 23,000 photographs of Polokwane and its people',s:'trip101.com, cdm.org.za'}]]),plan:L([['Morning · Bakone Malapa','Heritage and crafts.'],['Afternoon · Polokwane Art Museum','Local art.'],['Late afternoon · Game Reserve','Wildlife before sunset.']])},
+'kimberley':{landmarks:L([['The Big Hole','Vast hand-dug diamond mine beside the Kimberley Mine Museum.',{a:'161 Tucker Street, West End',h:'Daily 08:00–17:00, closed Christmas Day. Tours hourly from 09:00, last tour 16:00',f:'Adults R150, children (4–12) R110, as at December 2024',x:'Wheelchair friendly. A 2026 De Beers stabilisation programme restricts some areas, and the historic tram was out of service when reported',s:'thebighole.com, novanews.co.za'}],['Honoured Dead Memorial','Memorial to those who died in the 1899 siege.'],['Kimberley City Hall','Historic civic building in the centre.']]),places:L([['William Humphreys Art Gallery','Art collection including Old Master works.'],['McGregor Museum','Natural history, archaeology and archives.'],['Duggan-Cronin Gallery','Early photographic portraits of southern African peoples.']]),plan:L([['Morning · The Big Hole','Mine museum and viewing platform.'],['Afternoon · McGregor Museum','Archives and natural history.'],['Late afternoon · William Humphreys Art Gallery','Art in desert light.']])},
+'mahikeng':{landmarks:L([['Mahikeng Museum','Local and siege-era history in a historic building.',{h:'Weekdays 08:00–16:30 in one listing',x:'In the former 1902 town hall, with a room on the 217-day siege. A recent visitor review reports it closed for renovations, so confirm before travelling',s:'whatsoninjoburg.com, wanderlog.com'}],['Siege cemetery','Graves from the 1899 to 1900 siege.']]),places:L([['Mahikeng Game Reserve','Nature reserve near the city.',{x:'Open Kalahari grassland and thorn scrub with white rhino, buffalo, gemsbok and giraffe; self-drive. Contact the reserve for fees and hours',s:'sa-venues.com, sahikes.com'}],['Lotlamoreng Dam and Nature Reserve','Dam and nature reserve near Mahikeng.']]),plan:L([['Morning · Mahikeng Museum','Local history.'],['Afternoon · Game Reserve','Open grassland and wildlife.']])}
+},COPY={privacy:'<p>This version of Citylit has no accounts and sets no cookies.</p><p style="margin-top:14px">Your "My day" picks are saved in this browser only, in local storage. Nothing is sent to a server, and clearing site data removes them.</p><p style="margin-top:14px">The page loads fonts from Google Fonts and scripts from cdnjs, so those hosts see your IP address as part of normal requests. The Maps button opens Google Maps in a new tab with a search for the place name.</p><p style="margin-top:14px">This describes the redesign prototype and does not replace your production policy.</p>'};
+// Plug in catalog data: DATA['cape-town']={landmarks:[{n:'Table Mountain',d:'…'}],places:[],plan:[]}
+const card=i=>`<a class="card rv" data-i="${i}" href="#/city/${C[i][2]}"><i>${num(i+1)}</i><b>${C[i][0]}</b><span>${C[i][1]}</span><p>${C[i][5]}</p></a>`;
+const head=(cr,t,s)=>`<section class="ph"><div class="crumb rv">${cr}</div><h1><span class="ln"><span>${t}</span></span></h1>${s?`<p class="sub rv">${s}</p>`:''}</section>`;
+const slot=(t,m)=>`<div class="slot rv"><b>${t}</b><p>${m}</p></div>`;
+const items=(t,a,m)=>`<h3 class="rv">${t}</h3>`+(a&&a.length?`<div class="grid">${a.map((x,k)=>`<div class="card rv"><i>${num(k+1)}</i><b>${x.n}</b><p>${x.d||''}</p>${x.h?`<span>${x.h}</span>`:''}</div>`).join('')}</div>`:slot(t,m));
+const hm='<a href="#/">Home</a>';
+const PAGES={
+destinations(){return head(hm+' / Destinations','All destinations','Discover 12 South African destinations across 9 provinces. Explore landmarks, find places worth visiting and plan a day with Citylit.')+`<section class="pg"><div class="chips rv">${['All',...PV].map((p,k)=>`<button class="btn chip${k?'':' on'}" data-f="${p}">${p}</button>`).join('')}</div><div class="grid" id="dg">${C.map((_,i)=>card(i)).join('')}</div></section>`},
+city(s){const i=C.findIndex(c=>c[2]===s);if(i<0)return null;const c=C[i];
+ return head(`${hm} / <a href="#/destinations">Destinations</a> / <a href="#/province/${slug(c[1])}">${c[1]}</a>`,c[0],c[5])+`<section class="pg"><div class="facts rv"><div><small>Province</small><a href="#/province/${slug(c[1])}">${c[1]}</a></div><div><small>Chapter</small>${num(i+1)} / 12</div><div><small>City reference</small>${Math.abs(c[4]).toFixed(2)}°S ${c[3].toFixed(2)}°E</div></div>`
+ +(DATA[s]?`<div class="chips rv" style="margin-top:14px"><a class="btn" href="#/city/${s}/landmarks">Landmarks in 3D</a><a class="btn" href="#/city/${s}/places">Places in 3D</a></div>`:'')+(DATA[s]?'<p class="hint rv" style="margin-top:14px;max-width:none">Hours, fees and access appear only where a source was checked on 15 Oct 2026.</p>':'')+items('Landmarks',DATA[s]?.landmarks,'Landmark entries for '+c[0]+' appear here, each with its source-check date.')
+ +items('Places worth visiting',DATA[s]?.places,'Places in '+c[0]+' appear here. Hours, prices and accessibility can change.')
+ +items('Plan a day',DATA[s]?.plan,'A suggested day in '+c[0]+' appears here.')
+ +`<h3 class="rv">Keep exploring</h3><div class="grid">${[C[(i+11)%12],C[(i+1)%12]].map(x=>card(C.indexOf(x))).join('')}</div></section>`},
+province(s){const pr=PV.find(p=>slug(p)===s);if(!pr)return null;const ids=C.map((_,i)=>i).filter(i=>C[i][1]===pr);
+ return head(`${hm} / Provinces`,pr,`${ids.length} city guide${ids.length>1?'s':''} in ${pr}.`)+`<section class="pg"><div class="grid">${ids.map(card).join('')}</div><h3 class="rv">Other provinces</h3><div class="chips rv">${PV.filter(p=>p!==pr).map(p=>`<a class="btn" href="#/province/${slug(p)}">${p}</a>`).join('')}</div></section>`},
+about(){const t=[['Check dates','Source check dates describe our catalog research, not live confirmation by the venue.'],['Things change','Opening hours, prices and accessibility can change.'],['Unknowns','Unknown facts are not confirmed unavailable.'],['Locations','City-reference coordinates and city photographs must not be treated as venue locations or venue photos.']];
+ return head(hm+' / About','About the research','How to read what you find in Citylit.')+`<section class="pg"><div class="steps">${t.map((x,k)=>`<div class="step rv"><i>${num(k+1)}</i><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div></section>`},
+privacy(){return head(hm+' / Privacy','Privacy & data','')+`<section class="pg">${COPY.privacy?`<div class="prose rv">${COPY.privacy}</div>`:slot('Your policy text','Paste your existing privacy & data copy into COPY.privacy and it renders here in this style.')}</section>`}};
+const vB={destinations:.55,province:.12,about:.8,privacy:.8};let cur='home',rvT=[];
+function vl(){const y=scrollY,h=innerHeight,s=Math.min(1,Math.max(0,(y-h*(cur==='home'?.4:.12))/(h*.6)))*.8;$('#veil').style.opacity=Math.max(vB[cur]||0,s)}
+function spot(ids){B.forEach((b,i)=>{const v=ids?(ids.includes(i)?1.3:.35):1;gsap.to(b.scale,{x:v,y:v,z:v,duration:.6*D})})}
+function frame(ids){sel=-1;rot.t=0;const q=ids.map(i=>B[i].position),x=q.reduce((a,p)=>a+p.x,0)/q.length,z=q.reduce((a,p)=>a+p.z,0)/q.length;gsap.to(cam.position,{x:x*.5,y:4.6*K,z:z+5.4*K,duration:1.6*D,ease:'power3.inOut'});gsap.to(look,{x,y:0,z,duration:1.6*D,ease:'power3.inOut'})}
+function reveal(){rvT.forEach(t=>t.kill());gsap.set('#v-page .rv',{opacity:0,y:28});rvT=ScrollTrigger.batch('#v-page .rv',{start:'top 94%',once:true,onEnter:b=>gsap.to(b,{opacity:1,y:0,duration:.8*D,stagger:.07,ease:'power3.out'})});ScrollTrigger.refresh()}
+function go(first){
+ const [k0,a,b]=location.hash.replace(/^#\/?/,'').split('/');let k=k0||'home';if(k==='city'&&(b==='landmarks'||b==='places'))k='stage';
+ let html=k==='home'?'':(PAGES[k]?PAGES[k](a,b):null);if(k!=='home'&&html==null){k='home';html=''}
+ const run=()=>{cur=k;stageOn=false;G.visible=true;SG.visible=false;$('#v-home').classList.toggle('on',k==='home');const vp=$('#v-page');vp.classList.toggle('on',k!=='home');vp.innerHTML=html;scrollTo(0,0);
+  gsap.killTweensOf([cam.position,look]);let ids=null;
+  if(k==='stage')openStage(a,b);else if(k==='city'){const i=C.findIndex(c=>c[2]===a);pick(i);ids=[i]}
+  else if(k==='province'){ids=C.map((_,i)=>i).filter(i=>C[i][1]===PV.find(p=>slug(p)===a));frame(ids)}
+  else reset();
+  spot(ids);vl();
+  if(k==='home')ScrollTrigger.refresh();
+  else{reveal();gsap.from('#v-page .ln span',{yPercent:110,duration:1.1*D,delay:.1,ease:'power3.out'});
+   document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f,cs=[...document.querySelectorAll('#dg .card')];cs.forEach((c,i)=>c.style.display=(f==='All'||C[i][1]===f)?'':'none');gsap.fromTo(cs.filter(c=>c.style.display===''),{opacity:0,y:20},{opacity:1,y:0,duration:.5*D,stagger:.05,overwrite:true});spot(f==='All'?null:C.map((_,i)=>i).filter(i=>C[i][1]===f))})}
+  gsap.to('main',{opacity:1,duration:.4*D})};
+ first?run():gsap.to('main',{opacity:0,duration:.2*D,onComplete:run});
+}
+/* ---- 3D stage: landmarks & places ---- */
+const SG=new THREE.Group(),sr={t:0,v:0},bm=new THREE.MeshLambertMaterial({color:0x999999}),am=new THREE.MeshBasicMaterial({color:0xffc46b}),lm=new THREE.LineBasicMaterial({transparent:true});
+gm.push(am,lm);SG.visible=false;S.add(SG,new THREE.AmbientLight(0xffffff,.75));const dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(3,6,4);S.add(dl);
+let stageOn=false,SI=[],sHit=[],SL=[],sIdx=0,sMode='',sCity=0,day=[],dline;
+const kind=n=>/hole/i.test(n)?'hole':/stadium/i.test(n)?'bowl':/mountain|hill|falls|caves|island|dam/i.test(n)?'peak':/garden|park|reserve|lake|beach|mile/i.test(n)?'park':/campanile|tower|square|street|braak|route/i.test(n)?'tower':/bridge|memorial|monument|cemetery|freedom/i.test(n)?'arch':'dome';
+const KL={dome:'Building or museum',peak:'Landscape',hole:'Heritage site',bowl:'Stadium',park:'Park or outdoors',tower:'Street or square',arch:'Memorial or bridge'};
+function mono(k){const g=new THREE.Group(),T=THREE,M=(geo,y,m=bm,x=0)=>{const o=new T.Mesh(geo,m);o.position.set(x,y,0);g.add(o);return o};
+ if(k==='peak'){M(new T.ConeGeometry(.95,1.5,5),.75);M(new T.ConeGeometry(.55,.9,5),.45,bm,.7)}
+ else if(k==='hole'){M(new T.CylinderGeometry(1,.8,.5,24),.25);M(new T.CylinderGeometry(.62,.3,.3,24),.42,am)}
+ else if(k==='bowl'){M(new T.TorusGeometry(.8,.26,10,32),.4).rotation.x=Math.PI/2;M(new T.CircleGeometry(.62,24),.2,am).rotation.x=-Math.PI/2}
+ else if(k==='park'){[[-.5,.7],[.3,1],[.7,.6],[-.1,.5]].forEach(([x,h],i)=>{M(new T.ConeGeometry(.3,h,8),h/2,bm,x).position.z=i%2?.4:-.4})}
+ else if(k==='tower'){M(new T.BoxGeometry(.5,1.8,.5),.9);M(new T.ConeGeometry(.4,.55,4),2.05,am)}
+ else if(k==='arch'){M(new T.TorusGeometry(.7,.13,10,24,Math.PI),.1);M(new T.BoxGeometry(1.6,.1,.4),.05)}
+ else{M(new T.BoxGeometry(1.7,.7,1.1),.35);M(new T.SphereGeometry(.5,20,12,0,6.283,0,1.57),.7);M(new T.CylinderGeometry(.03,.03,.5,6),1.45,am)}
+ return g}
+function buildStage(){while(SG.children.length)SG.remove(SG.children[0]);SI=[];sHit=[];const n=SL.length,R=Math.max(2.6,n*.8),col=getComputedStyle(root).getPropertyValue('--glow').trim();
+ SL.forEach((x,i)=>{const a=i/n*Math.PI*2,o=new THREE.Group(),ped=new THREE.Mesh(new THREE.CylinderGeometry(1.15,1.25,.1,40),bm),ring=new THREE.Mesh(new THREE.RingGeometry(.95,1.02,48),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.35,side:THREE.DoubleSide})),m=mono(kind(x.n)),h=new THREE.Mesh(new THREE.SphereGeometry(1.2,8,8),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false}));
+  ped.position.y=.05;ring.rotation.x=-Math.PI/2;ring.position.y=.11;gm.push(ring.material);m.position.y=.1;h.position.y=.8;h.userData.i=i;
+  o.add(ped,ring,m,h);o.position.set(R*Math.sin(a),0,R*Math.cos(a));o.scale.setScalar(.01);SG.add(o);SI.push(o);sHit.push(h)});
+ dline=new THREE.Line(new THREE.BufferGeometry(),lm);dline.frustumCulled=false;dline.visible=false;SG.add(dline)}
+function drawDay(){if(!dline)return;const q=day.map(j=>SI[j].position.clone().setY(.9));dline.geometry.setFromPoints(q);dline.visible=q.length>1;SI.forEach((o,j)=>{o.children[1].material.opacity=day.includes(j)?1:.35})}
+function toggleDay(i){day.includes(i)?day.splice(day.indexOf(i),1):day.push(i);try{localStorage.setItem('cl-day-'+C[sCity][2],JSON.stringify(day))}catch(e){}drawDay();sheet()}
+function sheet(){const c=C[sCity],x=SL[sIdx],n=SL.length,p=sMode==='places',el=document.getElementById('sheet');if(!el)return;
+ el.innerHTML=`<small>${c[0]} · ${p?'Place':'Landmark'} ${sIdx+1} of ${n}</small><h2>${x.n}</h2><p>${x.d}</p><div class="facts sm"><div><small>Type</small>${KL[kind(x.n)]}</div><div><small>City reference</small>${Math.abs(c[4]).toFixed(1)}°S ${c[3].toFixed(1)}°E</div>${rows(x)}</div>${x.s?`<p style="margin:10px 0 0">Checked 15 Oct 2026 · ${x.s}</p>`:''}${p?`<p style="margin:10px 0 0">My day: ${day.length?day.map(j=>SL[j].n).join(' → '):'nothing added yet'}</p>`:''}<div class="go"><button class="btn" data-s="-1">‹ Prev</button><button class="btn" data-s="1">Next ›</button>${p?`<button class="btn on" id="ad">${day.includes(sIdx)?'Remove from my day':'Add to my day'}</button>`:''}<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(x.n+' '+c[0])}">Maps ↗</a><a class="btn" href="#/city/${c[2]}/${p?'landmarks':'places'}">${p?'Landmarks':'Places'}</a></div>`;
+ el.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>spick((sIdx+ +b.dataset.s+n)%n));const ad=el.querySelector('#ad');if(ad)ad.onclick=()=>toggleDay(sIdx)}
+function spick(i){sIdx=i;const n=SI.length,a=i/n*Math.PI*2;sr.t=-a+Math.PI*2*Math.round((sr.t+a)/(Math.PI*2));
+ SI.forEach((o,j)=>{const v=j===i?1.4:.65;gsap.to(o.scale,{x:v,y:v,z:v,duration:.8*D,ease:'back.out(1.6)'})});
+ document.querySelectorAll('.tb').forEach((b,j)=>b.classList.toggle('on',j===i));drawDay();sheet()}
+function openStage(s,m){sCity=C.findIndex(c=>c[2]===s);sMode=m;SL=DATA[s][m==='places'?'places':'landmarks'];stageOn=true;G.visible=false;SG.visible=true;buildStage();sr.t=sr.v=0;day=[];
+ if(m==='places'){try{day=JSON.parse(localStorage.getItem('cl-day-'+s)||'[]').filter(j=>j<SL.length)}catch(e){day=[]}}
+ document.querySelectorAll('.tb').forEach(b=>b.onclick=()=>spick(+b.dataset.i));
+ gsap.to(cam.position,{x:0,y:2.3*K,z:7.4*K,duration:1.4*D,ease:'power3.inOut'});gsap.to(look,{x:0,y:.8,z:2.4,duration:1.4*D,ease:'power3.inOut'});spick(0)}
+PAGES.stage=function(s,m){const i=C.findIndex(c=>c[2]===s);if(i<0||!DATA[s])return null;const c=C[i],pl=m==='places',l=DATA[s][pl?'places':'landmarks'];if(!l||!l.length)return null;
+ return `<section class="st"><div><div class="crumb rv">${hm} / <a href="#/city/${s}">${c[0]}</a> / ${pl?'Places':'Landmarks'}</div><h1><span class="ln"><span>${c[0]} ${pl?'places':'landmarks'}</span></span></h1><p class="hint rv" style="max-width:34ch;margin-top:8px">Drag to spin the ring. Tap a model to focus it.</p></div><div><div class="tbs rv">${l.map((x,k)=>`<button class="btn tb" data-i="${k}">${x.n}</button>`).join('')}</div><div class="sheet rv" id="sheet"></div></div></section>`};
+const clock=new THREE.Clock();
+function loop(){
+  const t=clock.getElapsedTime();
+  rot.v+=(rot.t-rot.v)*.08;G.rotation.y=rot.v;
+  const p=geo.attributes.position.array;
+  for(let i=0,k=0;i<p.length;i+=3,k++)p[i+1]=hs[k]+Math.sin(t*.9+p[i]*1.2+p[i+2]*1.1)*.035;
+  geo.attributes.position.needsUpdate=true;
+  B.forEach((b,i)=>{const u=b.userData,f=(t*.6+u.ph)%1,on=(i===sel||i===hov);
+    u.ring.scale.setScalar(1+f*(on?5:3));u.ring.material.opacity=(1-f)*(on?.9:.5)});
+  if(stageOn){sr.v+=(sr.t-sr.v)*.08;SG.rotation.y=sr.v;SI.forEach((o,j)=>{o.children[2].rotation.y+=j===sIdx?.012:.004})}cam.lookAt(look);
+  const j=hov>=0?hov:sel;
+  if(j>=0&&!stageOn){B[j].getWorldPosition(vv);vv.project(cam);lab.textContent=C[j][0];lab.style.opacity=1;lab.style.left=((vv.x*.5+.5)*innerWidth)+'px';lab.style.top=((-vv.y*.5+.5)*innerHeight)+'px'}else lab.style.opacity=0;
+  R.render(S,cam);requestAnimationFrame(loop)}
+
+size();theme();Object.assign(cam.position,{x:0,y:14*K,z:16*K});
+gsap.registerPlugin(ScrollTrigger);
+const home0=!location.hash||location.hash==='#/';const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+tl.to(mat,{opacity:.85,duration:1.8*D})
+  .to(cam.position,{...base(),duration:2.4*D,ease:'power3.inOut'},0)
+  .from(G.position,{y:-.8,duration:2*D},0)
+  .from('.ln span',{yPercent:110,duration:1.1*D,stagger:.12},.3)
+  .from('.sub,.hint,.eyebrow',{opacity:0,y:14,duration:.9*D,stagger:.1},.9)
+  .from('#panel',{opacity:0,y:24,duration:.9*D},1.1)
+  .to(B.map(b=>b.scale),{x:1,y:1,z:1,duration:.9*D,stagger:.09,ease:'back.out(2.4)'},1.2);
+
+gsap.from('.card',{y:44,opacity:0,duration:.8*D,stagger:.06,ease:'power3.out',scrollTrigger:{trigger:'#grid',start:'top 85%'}});
+gsap.from('.step',{y:30,opacity:0,duration:.8*D,stagger:.12,scrollTrigger:{trigger:'.steps',start:'top 88%'}});
+gsap.from('section.pg h3',{y:30,opacity:0,duration:.9*D,scrollTrigger:{trigger:'section.pg h3',start:'top 88%'}});
+if(!home0)tl.progress(1);loop();addEventListener('hashchange',()=>go());addEventListener('scroll',vl,{passive:true});go(true);
+</script>
+</body>
+</html>

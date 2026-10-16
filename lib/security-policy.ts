@@ -11,6 +11,8 @@ export function contentSecurityPolicy({
 } = {}) {
   const scripts = [
     "'self'",
+    // Draco's local decoder compiles WebAssembly; JavaScript eval stays prohibited.
+    "'wasm-unsafe-eval'",
     `'sha256-${recoveryThemeHash}'`,
     ...(nonce ? [`'nonce-${nonce}'`, "'strict-dynamic'"] : []),
     ...(development ? ["'unsafe-eval'"] : []),

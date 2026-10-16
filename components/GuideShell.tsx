@@ -6,12 +6,24 @@ import type { ReactNode } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { useDiscovery } from "./useDiscovery";
 import { places } from "../lib/data";
+import GuideBackdrop, { type MapSelection } from "./GuideBackdrop";
+import GuideMotion from "./GuideMotion";
 
-export default function GuideShell({ children }: { children: ReactNode }) {
+export default function GuideShell({
+  children,
+  mapSelection,
+  stage = false,
+}: {
+  children: ReactNode;
+  mapSelection?: MapSelection;
+  stage?: boolean;
+}) {
   const { state } = useDiscovery();
   const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
   return (
-    <div className="discovery-guide">
+    <div className={`discovery-guide reference-guide${stage ? " reference-stage-guide" : ""}`}>
+      {!stage && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
+      <GuideMotion essential={state.essential} />
       <a className="guide-skip" href="#guide-main">
         Skip to content
       </a>

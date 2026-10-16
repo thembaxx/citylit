@@ -1,5 +1,4 @@
 "use client";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -13,41 +12,28 @@ import {
 import { cities, places } from "../lib/data";
 import GuideShell from "./GuideShell";
 import CityDirectory from "./CityDirectory";
-const GlowMap = dynamic(() => import("./GlowMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="glow-map-loading" role="status">
-      Lighting up South Africa…<Link href="#cities">Browse the city guides</Link>
-    </div>
-  ),
-});
 
 export default function DiscoveryHome() {
   const [selected, setSelected] = useState<number | null>(null);
   const city = selected === null ? null : cities[selected];
   return (
-    <GuideShell>
+    <GuideShell mapSelection={{ selected, onSelect: setSelected }}>
       <section className="atlas-hero">
         <div className="atlas-hero-copy">
-          <p className="atlas-eyebrow">
-            <span className="atlas-live-dot" /> SOUTH AFRICA, THROUGH A DIFFERENT LENS
-          </p>
+          <p className="atlas-eyebrow">SOUTH AFRICA / CITY GUIDES</p>
           <h1>
             Discover
             <br />
             <em>South</em> Africa<span className="atlas-title-period">.</span>
           </h1>
-          <p className="atlas-hero-sub">
-            Follow the glow.
+          <p className="atlas-hero-sub">Follow the glow.</p>
+          <p className="atlas-hero-hint">
+            Drag the land. Tap a glowing city.
             <br />
-            Find your kind of somewhere.
+            12 cities across 9 provinces.
           </p>
-          <a href="#cities" className="atlas-button atlas-primary">
-            Find your next city <ArrowDown size={18} />
-          </a>
         </div>
         <div className="atlas-map-stage">
-          <GlowMap selected={selected} onSelect={setSelected} />
           <div className="atlas-map-coordinate" aria-hidden="true">
             22° — 35° S<br />
             16° — 33° E
@@ -81,9 +67,7 @@ export default function DiscoveryHome() {
               <p className="atlas-eyebrow">{city ? city.province : "YOUR NEXT CHAPTER"}</p>
               <h2>{city ? city.name : "Where to?"}</h2>
               <p>
-                {city
-                  ? city.intro
-                  : "A little curiosity goes a long way. Choose a glowing city, or browse the guides below."}
+                {city ? city.intro : "Tap any glowing city on the map and the camera flies there."}
               </p>
             </div>
             <div className="atlas-beacon-actions">

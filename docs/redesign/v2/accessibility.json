@@ -1,0 +1,37 @@
+[
+  {
+    "name": "desktop",
+    "view": "home",
+    "violations": []
+  },
+  {
+    "name": "desktop",
+    "view": "stage",
+    "violations": []
+  },
+  {
+    "name": "mobile",
+    "view": "home",
+    "violations": []
+  },
+  {
+    "name": "mobile",
+    "view": "stage",
+    "violations": []
+  },
+  {
+    "name": "mobile-night",
+    "view": "home",
+    "violations": []
+  },
+  {
+    "name": "mobile-night",
+    "view": "stage",
+    "violations": []
+  },
+  {
+    "name": "small-mobile",
+    "view": "home",
+    "violations": []
+  }
+]

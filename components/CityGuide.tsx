@@ -8,14 +8,13 @@ import {
   CalendarBlank,
 } from "@phosphor-icons/react/dist/ssr";
 import { cities, places, landmarkSources } from "../lib/data";
-import { cityPhoto, landmarkPath, planningStops, type GuideCity } from "../lib/discovery-guide";
+import { landmarkPath, planningStops, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import { CityCard, PhotoCredit } from "./GuideCards";
 import PlacesBrowser from "./PlacesBrowser";
 import PlanVisit from "./PlanVisit";
 
 export default function CityGuide({ city }: { city: GuideCity }) {
-  const photo = cityPhoto(city);
   const local = places.filter((place) => place.city === city.slug);
   const neighbours = cities.filter(
     (other) => other.slug !== city.slug && other.province === city.province,
@@ -36,7 +35,7 @@ export default function CityGuide({ city }: { city: GuideCity }) {
           {city.province}
         </Link>
       </div>
-      <section className="atlas-city-hero">
+      <section className="atlas-city-hero atlas-city-map-hero">
         <div>
           <p className="atlas-eyebrow">
             {city.tag} / CHAPTER {String(cities.indexOf(city) + 1).padStart(2, "0")}
@@ -55,20 +54,6 @@ export default function CityGuide({ city }: { city: GuideCity }) {
             </a>
           </div>
         </div>
-        {photo && (
-          <figure className="atlas-city-hero-photo">
-            <div>
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                sizes="(max-width: 768px) 92vw, 47vw"
-                preload
-              />
-            </div>
-            <PhotoCredit photo={photo} city />
-          </figure>
-        )}
       </section>
       <div className="atlas-city-facts">
         <div>
@@ -87,12 +72,12 @@ export default function CityGuide({ city }: { city: GuideCity }) {
         </div>
       </div>
       <nav className="atlas-chapter-nav" aria-label={`${city.name} guide sections`}>
-        <a href="#landmarks">
-          <Compass size={17} /> Landmarks
-        </a>
-        <a href="#places">
-          <MapPin size={17} /> Places worth visiting
-        </a>
+        <Link href={`/${city.slug}/landmarks`}>
+          <Compass size={17} /> Landmarks in 3D
+        </Link>
+        <Link href={`/${city.slug}/places`}>
+          <MapPin size={17} /> Places in 3D
+        </Link>
         <a href="#plan">
           <CalendarBlank size={17} /> Plan a day
         </a>

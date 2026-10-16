@@ -59,6 +59,21 @@ export async function checkProduction(request = fetch) {
   if (!/Table Mountain/.test(await get("/cape-town/parks-zoos/table-mountain", "text/html"))) {
     throw new Error("Representative place page is missing.");
   }
+  if (!/Table Mountain/.test(await get("/cape-town/landmarks", "text/html")))
+    throw new Error("Interactive landmark stage is missing.");
+  const models = JSON.parse(await get("/models/stage/manifest.json", "application/json"));
+  if (
+    !Array.isArray(models) ||
+    models.length < 15 ||
+    !models.every(
+      (model) => /^\/models\/stage\/[a-z-]+\.glb$/.test(model.src) && model.bytes < 150 * 1024,
+    )
+  )
+    throw new Error("Model manifest is invalid.");
+  if (!(await get(models[0].src, "model/gltf-binary")).startsWith("glTF"))
+    throw new Error("Model asset is invalid.");
+  if (!(await get("/draco/draco_decoder.wasm", "application/wasm")).startsWith("\0asm"))
+    throw new Error("Model decoder is invalid.");
   const manifest = JSON.parse(await get("/manifest.webmanifest", "application/manifest+json"));
   if (!/citylit/i.test(manifest.name || "") || !manifest.start_url)
     throw new Error("Install manifest is invalid.");

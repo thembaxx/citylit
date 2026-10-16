@@ -39,9 +39,9 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
         <div>
           <p className="atlas-eyebrow">THE CITY COLLECTION</p>
           <h2 id="city-directory-title">
-            Twelve cities.
+            Twelve cities,
             <br />
-            <em>Endless little discoveries.</em>
+            <em>one glow.</em>
           </h2>
         </div>
         <p>

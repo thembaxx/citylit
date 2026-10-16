@@ -69,7 +69,9 @@ test("HTML uses fresh server-owned nonces and cannot be cached across visitors",
     expect(nonce).not.toBe("attacker");
     nonces.push(nonce!);
     expect(policy).toContain("'strict-dynamic'");
-    expect(policy.split("script-src ")[1].split(";")[0]).not.toMatch(/unsafe-inline|unsafe-eval/);
+    expect(policy.split("script-src ")[1].split(";")[0]).not.toMatch(
+      /'unsafe-inline'|'unsafe-eval'/,
+    );
     expect(policy).toContain("script-src-attr 'none'");
     expect(response.headers()["cache-control"]).toContain("no-store");
     const html = await response.text();

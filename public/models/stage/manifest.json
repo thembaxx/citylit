@@ -1,0 +1,122 @@
+[
+  {
+    "id": "table-mountain",
+    "src": "/models/stage/table-mountain.glb",
+    "bytes": 6868,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "stadium",
+    "src": "/models/stage/stadium.glb",
+    "bytes": 12420,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "union-buildings",
+    "src": "/models/stage/union-buildings.glb",
+    "bytes": 6952,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "ponte",
+    "src": "/models/stage/ponte.glb",
+    "bytes": 13384,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "bridge",
+    "src": "/models/stage/bridge.glb",
+    "bytes": 7212,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "lighthouse",
+    "src": "/models/stage/lighthouse.glb",
+    "bytes": 8556,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "hole",
+    "src": "/models/stage/hole.glb",
+    "bytes": 11348,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "park",
+    "src": "/models/stage/park.glb",
+    "bytes": 7496,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "dome",
+    "src": "/models/stage/dome.glb",
+    "bytes": 7812,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "tower",
+    "src": "/models/stage/tower.glb",
+    "bytes": 6840,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "arch",
+    "src": "/models/stage/arch.glb",
+    "bytes": 5568,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "fort",
+    "src": "/models/stage/fort.glb",
+    "bytes": 8420,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "bo-kaap",
+    "src": "/models/stage/bo-kaap.glb",
+    "bytes": 11696,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "cooling-towers",
+    "src": "/models/stage/cooling-towers.glb",
+    "bytes": 12204,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  },
+  {
+    "id": "aquarium",
+    "src": "/models/stage/aquarium.glb",
+    "bytes": 9964,
+    "authoring": "Blender 4.3",
+    "purpose": "Illustrative low-poly model",
+    "compression": "KHR_draco_mesh_compression"
+  }
+]

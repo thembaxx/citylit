@@ -285,7 +285,7 @@ test("native chrome follows theme and hidden apps pause continuous scenery", asy
     .poll(() => page.locator('meta[name="theme-color"]').first().getAttribute("content"))
     .toBe(
       await page.evaluate(() =>
-        document.documentElement.dataset.theme === "day" ? "#e6e5e2" : "#222326",
+        document.documentElement.dataset.theme === "day" ? "#f4efe6" : "#0e0f13",
       ),
     );
   await page.evaluate(() => {

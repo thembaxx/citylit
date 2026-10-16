@@ -28,6 +28,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm format:check
       - run: pnpm data:audit
+      - run: pnpm models:audit
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test:monitor

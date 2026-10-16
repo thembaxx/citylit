@@ -90,8 +90,14 @@ test("the particle map clears as the guide scrolls to city cards", async ({ page
     guide.scrollTo({ top: directory.offsetTop, behavior: "instant" });
   });
   await expect(page.locator("#city-directory-title")).toBeInViewport({ ratio: 1 });
-  await expect(page.locator(".glow-map")).not.toBeInViewport();
-  await page.screenshot({ scale: "css", path: "docs/redesign/07-home-city-collection.png" });
+  // The reference map stays fixed; scrolling fades its renderer and removes
+  // the city controls from interaction and the accessibility tree.
+  await expect(page.locator(".atlas-map-backdrop")).toHaveAttribute("aria-hidden", "true");
+  await expect(page.locator(".glow-map")).toHaveAttribute("data-interactive", "false");
+  await expect(page.getByRole("button", { name: "Choose Johannesburg", exact: true })).toHaveCount(
+    0,
+  );
+  await page.screenshot({ scale: "css", path: test.info().outputPath("city-collection.png") });
   await page.locator(".atlas-city-card-link").first().click();
   await expect(page.locator(".atlas-city-hero h1")).toBeInViewport({ ratio: 1 });
 });

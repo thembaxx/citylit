@@ -43,7 +43,7 @@ Deliberate adaptations are the real boundary geometry, sourced catalog, accessib
 
 ## Functional and production-build verification
 
-The latest stage regression run passed on mobile and desktop Chromium, including every Cape Town landmark chip, drag/snap, selection changes, day persistence after reload, full-guide navigation, place selection, all twelve city routes, unknown-city 404 and cacheable GLBs. The prior focused six-check run also verified beacon navigation. No page errors occurred in these flows.
+The latest stage regression run passed on mobile and desktop Chromium, including every Cape Town landmark chip, drag/snap, selection changes, day persistence after reload, full-guide navigation, place selection, all twelve city routes, unknown-city 404 and cacheable GLBs. The prior focused six-check run also verified beacon navigation. Two final mobile/desktop regressions verify the fixed map fades, disables interaction and removes its city buttons from the accessibility tree while scrolling to the collection; the [scrolled screenshot](docs/redesign/v2/implementation-scrolled-home.png) confirms the visual result. No page errors occurred in these flows.
 
 [Seven complete-page accessibility scans](docs/redesign/v2/accessibility.json) report zero WCAG A/AA violations across desktop home/stage, mobile home/stage, mobile night home/stage and the 320px home. The stage regression also audits the interactive content. These are automated checks of the inspected states, not assistive-technology certification.
 

@@ -14,16 +14,15 @@ export default function GuideMotion({ essential }: { essential: boolean }) {
     const context = gsap.context(() => {
       gsap.fromTo(
         host.querySelectorAll("h1"),
-        { y: 24, opacity: 0.3 },
-        { y: 0, opacity: 1, duration: 0.85, ease: "power3.out" },
+        { y: 24 },
+        { y: 0, duration: 0.85, ease: "power3.out" },
       );
       host.querySelectorAll(".atlas-section-heading, .atlas-city-facts").forEach((element) => {
         gsap.fromTo(
           element,
-          { y: 20, opacity: 0.3 },
+          { y: 20 },
           {
             y: 0,
-            opacity: 1,
             duration: 0.65,
             scrollTrigger: { trigger: element, scroller: host, start: "top 94%", once: true },
           },

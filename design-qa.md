@@ -37,6 +37,8 @@ Source and local production screenshots were captured at identical CSS viewports
 | P2 | Static Fraunces differed from the source at large display sizes | Self-hosted variable normal/italic fonts match the intended optical treatment |
 | P2 | Mobile preview inherited off-screen margins; stage sheet appeared too low | Preview fits 393px and 320px screens; stage actions appear before longer facts |
 | P2 | Decorative map labels remained focusable while fading; ring label lacked a supported role | Inactive labels are hidden/disabled; ring has a group role; all final automated audits have zero violations |
+| P2 | Heading fade-ins temporarily reduced text contrast; the visit-panel amber was too light on its tinted surface | Motion now changes position while text remains opaque; the panel uses the accessible accent token |
+| P2 | Emergency root recovery still used the previous browser theme colors | Saved day/night themes and fallback colors now use the reference palette under the hashed recovery script |
 | P2 | Local model decoder required WASM compilation and model assets inherited HTML no-store behavior | Narrow WASM CSP capability and cacheable model/decoder endpoints verified; JavaScript eval remains blocked |
 
 Deliberate adaptations are the real boundary geometry, sourced catalog, accessible city selector, My day navigation, squircle controls and actual illustrative models. These explain differences from the prototype while retaining its composition and visual language. No Unity build was supplied; an unavailable flythrough is not advertised.
@@ -50,3 +52,11 @@ The latest stage regression run passed on mobile and desktop Chromium, including
 The final local production build, TypeScript, lint, formatting, model decode/budget audit, workflow lint, dependency audit, catalog audit, four production-monitor tests and sixteen Python ingestion/image regressions pass. The catalog retains 89 places across twelve cities, 52 venue pins, 130 unique place images and 46 verified practical facts. CI runs the complete cross-browser suite against one shared production build and audits all model assets.
 
 The read-only production monitor now checks the stage, model manifest, GLB and local WASM decoder alongside health/release identity, application JavaScript, catalog, guide, manifest and 404 handling. See [production readiness](docs/production-readiness.md) for existing owner tasks such as legal identity, alert delivery and real-device acceptance.
+
+## Release follow-through — 16 October 2026
+
+Pushed the implementation and fixed-map regression to main. The first complete CI run exposed the recovery theme colors and three text-contrast failures described above; the corrections passed four focused recovery checks and four accessibility regressions covering mobile/desktop home, city, directory and Kirstenbosch. The production build, formatting, lint and TypeScript pass after these corrections. The complete CI suite is rerun for the final release commit.
+
+Real-browser checks on the deployed redesign verified beacon-to-city navigation, rendered GLB selection by clicking the Bo-Kaap model, the mobile stage with reduced motion, saved-day persistence, full venue navigation, visit stamping and the planner. There were no page errors. The twelve-request production monitor passed against the deployed revision; the deployment's error/fatal runtime-log query returned no groups during the check window.
+
+Open PRs #15, #16 and #17 were duplicate heads of work already squash-merged in #12, #7 and #11. Each branch's complete tree exactly matched the corresponding original merge commit. Closed these duplicate PRs without reapplying older styling or dependencies.

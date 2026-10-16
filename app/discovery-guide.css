@@ -1943,6 +1943,9 @@
 .reference-guide :is(h1, h2) em {
   color: var(--guide-glow);
 }
+.reference-guide .atlas-visit-panel h2 em {
+  color: var(--guide-accent);
+}
 :root[data-theme="day"] .reference-guide {
   --guide-glow: #d9660b;
 }

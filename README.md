@@ -1,4 +1,28 @@
-# Citylit
+# CityLit
+
+Discover South Africa through 12 city guides, 89 places and saved day plans, with an optional interactive 3D atlas.
+
+**[Explore the live application](https://citylit.vercel.app/destinations)** · [Browse the source](https://github.com/thembaxx/citylit)
+
+## Engineering highlights
+
+Source-linked visitor information, geographic-data refresh scripts and offline-aware planning; an editorial guide complements the WebGL experience.
+
+## Technology
+
+Declared in [package.json](package.json): Next.js `^16.4.0` · React `^19.3.0` · TypeScript `^7.0.2` · Tailwind CSS `^4.3.3` · Three.js `^0.186.1` · Motion `^14.0.0` · React Three Fiber `^9.8.1` · MapLibre `^6.13.0`.
+
+**Quality tooling:** `lint`, `typecheck`, `test`, `format:check` scripts are available. See the setup guide below for prerequisites; this documentation pass does not assert that those checks were run.
+
+## Application preview
+
+![CityLit — city guide collection](docs/screenshots/desktop.jpg)
+
+Captured from the live application on 17 October 2026. [Capture details and limitations](docs/screenshots/README.md).
+
+---
+
+## Project guide
 
 A mobile-first guide to South African cities. Discover landmarks and local places, save discoveries, and build a day around your curiosity.
 

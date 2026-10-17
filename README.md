@@ -1,5 +1,10 @@
 # Citylit
 
+> **Portfolio project** · [Live application](https://citylit.vercel.app) · [GitHub source](https://github.com/thembaxx/citylit)
+>
+> Built with a focus on intuitive interfaces, responsive design and practical product engineering. Explore the live experience or review the implementation below.
+
+
 A mobile-first guide to South African cities. Discover landmarks and local places, save discoveries, and build a day around your curiosity.
 
 **12 destinations · 9 provinces · 89 places**

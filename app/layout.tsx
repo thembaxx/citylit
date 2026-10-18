@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./discovery-guide.css";
 import PwaProvider from "../components/PwaProvider";
@@ -69,6 +70,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
             </KhweziProvider>
           </SceneCanvas>
         </PwaProvider>
+        <Analytics />
       </body>
     </html>
   );

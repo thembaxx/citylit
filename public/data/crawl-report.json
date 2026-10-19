@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-08",
+  "fetchedAt": "2026-10-19",
   "wikipedia": {
     "Gold Reef City": {
       "pageid": 2244517,
@@ -275,6 +275,14 @@
       "pageid": 24665036,
       "ns": 0,
       "title": "Orlando Power Station",
+      "coordinates": [
+        {
+          "lat": -26.25388889,
+          "lon": 27.925,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
       "thumbnail": {
         "source": "https://upload.wikimedia.org/wikipedia/commons/0/08/Soweto_Cooling_Towers.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "width": 1280,
@@ -305,6 +313,14 @@
       "pageid": 4784114,
       "ns": 0,
       "title": "Bo-Kaap",
+      "coordinates": [
+        {
+          "lat": -33.92083333,
+          "lon": 18.41527778,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
       "thumbnail": {
         "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Boe-Kaap.jpg/1280px-Boe-Kaap.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
         "width": 1000,
@@ -316,12 +332,46 @@
       "pageid": 652573,
       "ns": 0,
       "title": "Cape Point",
+      "coordinates": [
+        {
+          "lat": -34.35722222,
+          "lon": 18.4975,
+          "primary": "",
+          "globe": "earth"
+        }
+      ],
       "thumbnail": {
         "source": "https://upload.wikimedia.org/wikipedia/commons/7/78/Goodhope2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
         "width": 1167,
         "height": 780
       },
-      "pageimage": "Goodhope2.jpg"
+      "pageimage": "Goodhope2.jpg",
+      "images": [
+        {
+          "ns": 6,
+          "title": "File:Antiguo faro, Cape Point, Sudáfrica, 2018-07-23, DD 100.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Benguela and Agulhas Currents 2.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Cape Peninsula.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Cape Point, Sudáfrica, 2018-07-23, DD 109-111 PAN.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Cape Point by ozgur.jpg"
+        },
+        {
+          "ns": 6,
+          "title": "File:Commons-logo.svg"
+        }
+      ]
     },
     "Umhlanga Lighthouse": {
       "ns": 0,
@@ -931,22 +981,57 @@
         "height": 666
       },
       "pageimage": "Mafikeng,_North_West,_South_Africa_(20506154516).jpg"
+    },
+    "Voortrekker Monument": {
+      "pageid": 464062,
+      "ns": 0,
+      "title": "Voortrekker Monument",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Voortrekker_Monument.jpg/1280px-Voortrekker_Monument.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 1333
+      },
+      "pageimage": "Voortrekker_Monument.jpg"
+    },
+    "Route 67 (Port Elizabeth)": {
+      "ns": 0,
+      "title": "Route 67 (Port Elizabeth)",
+      "missing": ""
+    },
+    "William Humphreys Art Gallery": {
+      "pageid": 25455464,
+      "ns": 0,
+      "title": "William Humphreys Art Gallery"
+    },
+    "Polokwane Game Reserve": {
+      "pageid": 25252268,
+      "ns": 0,
+      "title": "Polokwane Game Reserve"
+    },
+    "National Museum, Bloemfontein": {
+      "pageid": 38770200,
+      "ns": 0,
+      "title": "National Museum, Bloemfontein",
+      "thumbnail": {
+        "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/National_Museum%2C_Bloemfontein%2C_Free_State%2C_South_Africa_%2820529066422%29.jpg/1280px-National_Museum%2C_Bloemfontein%2C_Free_State%2C_South_Africa_%2820529066422%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "width": 1000,
+        "height": 666
+      },
+      "pageimage": "National_Museum,_Bloemfontein,_Free_State,_South_Africa_(20529066422).jpg"
     }
   },
   "official": [
     {
       "url": "https://www.goldreefcity.co.za/",
-      "title": "Gold Reef City - Theme Park in Johannesburg South Africa",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.tsogosun.com/casino/gold-reef-city/",
-      "httpStatus": 200,
-      "description": "Experience the ultimate thrill at Gold Reef City Theme Park in Johannesburg! Discover over 30 exhilarating rides, family-friendly attractions..."
+      "title": "Gold Reef City",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "Unapproved source or redirect host"
     },
     {
       "url": "https://www.constitutionhill.org.za/",
       "title": "Constitution Hill",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.constitutionhill.org.za/",
       "httpStatus": 200,
@@ -954,17 +1039,15 @@
     },
     {
       "url": "https://thehoughtonhotel.com/",
-      "title": "The Houghton Hotel, an SLH Hotel",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://thehoughtonhotel.com/",
-      "httpStatus": 200,
-      "description": "A 5-star luxury hotel in Houghton, Johannesburg with suites, penthouses, fine dining, a spa, golf course and conference facilities. Book direct today."
+      "title": "The Houghton Hotel",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.southernsun.com/54-on-bath",
       "title": "Boutique Luxury Hotel Rosebank, Johannesburg | 54 on Bath",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.southernsun.com/54-on-bath",
       "httpStatus": 200,
@@ -973,7 +1056,7 @@
     {
       "url": "https://markettheatre.co.za/",
       "title": "Market Theatre – Home of live theatre shows – Theatres in Johannesburg",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://markettheatre.co.za/",
       "httpStatus": 200
@@ -981,7 +1064,7 @@
     {
       "url": "https://www.joburgtheatre.com/",
       "title": "Home - Joburg Theatre",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.joburgtheatre.com/",
       "httpStatus": 200,
@@ -989,15 +1072,17 @@
     },
     {
       "url": "https://www.jhbcityparksandzoo.com/",
-      "title": "Johannesburg Zoo",
-      "fetchedAt": "2026-10-08",
-      "status": "unavailable",
-      "error": "HTTP Error 403: Forbidden"
+      "title": "Home | JCPZ",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://www.jhbcityparksandzoo.com/",
+      "httpStatus": 200,
+      "description": "Welcome to the Joburg City Parks and Zoo homepage connecting you to the City of Johannesburg Parks, Zoo, Cemeteries, Botanical Gardens, and public spaces."
     },
     {
       "url": "https://www.sanbi.org/gardens/walter-sisulu/",
       "title": "Walter Sisulu - SANBI",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sanbi.org/gardens/walter-sisulu/",
       "httpStatus": 200,
@@ -1006,7 +1091,7 @@
     {
       "url": "https://livingroomjozi.co.za/contact-us/",
       "title": "Contact Us – The Living Room Jozi",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://livingroomjozi.co.za/contact-us/",
       "httpStatus": 200
@@ -1014,7 +1099,7 @@
     {
       "url": "https://andclub.co.za/contact/",
       "title": "Contact - AndClub",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://andclub.co.za/contact/",
       "httpStatus": 200
@@ -1022,7 +1107,7 @@
     {
       "url": "https://www.aquarium.co.za/",
       "title": "Explore, Experience and Engage | Two Oceans Aquarium",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.aquarium.co.za/",
       "httpStatus": 200,
@@ -1031,7 +1116,7 @@
     {
       "url": "https://zeitzmocaa.museum/",
       "title": "Zeitz MOCAA - Museum of Contemporary Art - Zeitz MOCAA",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://zeitzmocaa.museum/",
       "httpStatus": 200
@@ -1039,7 +1124,7 @@
     {
       "url": "https://www.theroyalportfolio.com/the-silo-hotel/",
       "title": "The Silo Hotel | Luxury Cape Town Hotel | The Royal Portfolio",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.theroyalportfolio.com/the-silo-hotel/",
       "httpStatus": 200,
@@ -1048,7 +1133,7 @@
     {
       "url": "https://www.belmond.com/hotels/africa/south-africa/cape-town/belmond-mount-nelson-hotel/",
       "title": "Mount Nelson, A Belmond Hotel | Best Hotel Cape Town Africa",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.belmond.com/en/hotels/africa/south-africa/mount-nelson-cape-town",
       "httpStatus": 200,
@@ -1057,22 +1142,23 @@
     {
       "url": "https://www.artscape.co.za/",
       "title": "Artscape Theatre Centre – Cape Town",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.artscape.co.za/",
       "httpStatus": 200
     },
     {
       "url": "https://baxter.uct.ac.za/",
-      "title": "The Baxter Theatre",
-      "fetchedAt": "2026-10-08",
-      "status": "unavailable",
-      "error": "HTTP Error 503: Service Unavailable"
+      "title": "Home | Baxter Theatre Centre",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://baxter.uct.ac.za/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.sanbi.org/gardens/kirstenbosch/",
       "title": "Kirstenbosch - SANBI",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sanbi.org/gardens/kirstenbosch/",
       "httpStatus": 200,
@@ -1080,34 +1166,30 @@
     },
     {
       "url": "https://www.capetown.travel/",
-      "title": "Cape Town Tourism",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.capetown.travel/",
-      "httpStatus": 200,
-      "description": "EXPLORE TRAVEL IDEAS WELCOME TO THE MOTHER CITY Cape Town is one of the most beautiful cities in the world, and there are plenty of reasons to visit. The city offers spectacular views of Table Mountain and the surrounding coastline. Cape Town is also home to some of the best beaches in South Africa,"
+      "title": "Green Point Urban Park",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://modularclub.com/about/",
       "title": "About - Modular",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://modularclub.com/about/",
       "httpStatus": 200
     },
     {
       "url": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
-      "title": "Cabo Beach Club | V&A Waterfront Cape Town",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
-      "httpStatus": 200,
-      "description": "Cabo Beach Club at the V&A Waterfront brings a beachside vibe to Cape Town's harbour — cocktails, fresh food and a relaxed atmosphere in a stunning setting."
+      "title": "Cabo Beach Club",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "url": "https://ushakamarine.com/",
       "title": "uShaka Marine World",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://ushakamarine.com/",
       "httpStatus": 200,
@@ -1116,7 +1198,7 @@
     {
       "url": "https://www.mmstadium.com/",
       "title": "Home - Welcome to Moses Mabhida Stadium",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.mmstadium.com/",
       "httpStatus": 200,
@@ -1125,7 +1207,7 @@
     {
       "url": "https://oysterboxhotel.com/",
       "title": "The Oyster Box, Luxury Hotel Umhlanga, KwaZulu-Natal, South Africa",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://oysterboxhotel.com/",
       "httpStatus": 200,
@@ -1134,7 +1216,7 @@
     {
       "url": "https://www.southernsun.com/beverly-hills",
       "title": "Luxury uMhlanga Rocks Hotel | Beverly Hills | Best Rates",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.southernsun.com/beverly-hills",
       "httpStatus": 200,
@@ -1143,14 +1225,14 @@
     {
       "url": "https://playhousecompany.com/",
       "title": "The Playhouse",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
-      "error": "HTTP Error 503: Service Unavailable"
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>"
     },
     {
       "url": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
       "title": "Contact Us - Elizabeth Sneddon Theatre",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
       "httpStatus": 200,
@@ -1159,7 +1241,7 @@
     {
       "url": "https://durbanbotanicgardens.org.za/",
       "title": "Durban Botanic Gardens - Africa's Oldest Surviving Botanic Garden",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://durbanbotanicgardens.org.za/",
       "httpStatus": 200,
@@ -1168,14 +1250,14 @@
     {
       "url": "https://www.umgeniriverbirdpark.co.za/",
       "title": "Umgeni River Bird Park",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
-      "error": "HTTP Error 503: Service Unavailable"
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1000)>"
     },
     {
       "url": "https://www.theorigin.co.za/contact",
       "title": "Origin Nightclub, South Africa",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.theorigin.co.za/contact",
       "httpStatus": 200,
@@ -1184,7 +1266,7 @@
     {
       "url": "https://cubana.co.za/pages/contact/",
       "title": "Contact – Cubaña",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://cubana.co.za/pages/contact/",
       "httpStatus": 200
@@ -1192,7 +1274,7 @@
     {
       "url": "https://www.apartheidmuseum.org/",
       "title": "Apartheid Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.apartheidmuseum.org/",
       "httpStatus": 200,
@@ -1201,7 +1283,7 @@
     {
       "url": "https://www.wits.ac.za/wam/",
       "title": "Wits Art Museum - Wits University",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.wits.ac.za/wam/",
       "httpStatus": 200,
@@ -1210,7 +1292,7 @@
     {
       "url": "https://joburg.org.za/",
       "title": "City of Johannesburg",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://joburg.org.za/",
       "httpStatus": 200
@@ -1218,7 +1300,7 @@
     {
       "url": "https://www.sci-bono.co.za/",
       "title": "Home",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sci-bono.co.za/",
       "httpStatus": 200
@@ -1226,7 +1308,7 @@
     {
       "url": "https://www.iziko.org.za/museums/south-african-museum/",
       "title": "The Iziko South African Museum – Iziko Museums",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.iziko.org.za/museums/south-african-museum/",
       "httpStatus": 200,
@@ -1235,54 +1317,50 @@
     {
       "url": "https://www.robben-island.org.za/",
       "title": "Home - Robben Island Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.robben-island.org.za/",
       "httpStatus": 200
     },
     {
       "url": "https://www.capetown.travel/",
-      "title": "Cape Town Tourism",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.capetown.travel/",
-      "httpStatus": 200,
-      "description": "EXPLORE TRAVEL IDEAS WELCOME TO THE MOTHER CITY Cape Town is one of the most beautiful cities in the world, and there are plenty of reasons to visit. The city offers spectacular views of Table Mountain and the surrounding coastline. Cape Town is also home to some of the best beaches in South Africa,"
+      "title": "Company’s Garden",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.durban.gov.za/",
       "title": "KwaMuhle Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
-      "error": "HTTP Error 503: Service Unavailable"
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>"
     },
     {
       "url": "https://www.durban.gov.za/",
       "title": "Durban Natural Science Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
-      "error": "HTTP Error 503: Service Unavailable"
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>"
     },
     {
       "url": "https://www.durban.gov.za/",
       "title": "Mitchell Park Zoo",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
-      "error": "HTTP Error 503: Service Unavailable"
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>"
     },
     {
       "url": "https://www.suncoastcasino.co.za/",
-      "title": "Suncoast - Suncoast Casino",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.tsogosun.com/casino/suncoast-home/",
-      "httpStatus": 200,
-      "description": "Suncoast, Durban’s Most Loved Entertainment Destination, Where There’s No Shortage of Family Fun, Events, Dining, & Gaming Thrills on Durban’s Golden Mile.Tsogo Sun"
+      "title": "Suncoast",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "Unapproved source or redirect host"
     },
     {
       "url": "https://www.mandelahouse.com/",
       "title": "Mandela House – 8115 Vilakazi St, orlando West, Soweto",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.mandelahouse.com/",
       "httpStatus": 200
@@ -1290,7 +1368,7 @@
     {
       "url": "https://www.saxon.co.za/contact/",
       "title": "Contact | Saxon Hotel",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.saxon.co.za/contact/",
       "httpStatus": 200
@@ -1298,7 +1376,7 @@
     {
       "url": "https://www.sowetotheatre.com/contact-us/",
       "title": "Contact Us – Soweto Theatre",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sowetotheatre.com/contact-us/",
       "httpStatus": 200,
@@ -1306,15 +1384,17 @@
     },
     {
       "url": "https://www.jhbcityparksandzoo.com/services-facilities/botanical-gardens/about",
-      "title": "Johannesburg Botanical Garden",
-      "fetchedAt": "2026-10-08",
-      "status": "unavailable",
-      "error": "HTTP Error 403: Forbidden"
+      "title": "The Johannesburg Botanical Gardens | JCPZ",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://www.jhbcityparksandzoo.com/services-facilities/botanical-gardens/about",
+      "httpStatus": 200,
+      "description": "Founded in 1969, the Johannesburg Botanical Gardens can be located on 81-hectares of large, grassy, open spaces overlooking the 7,5-hectare Emmarentia Dam."
     },
     {
       "url": "https://www.sognage.com/contact",
       "title": "CONTACT | Sognage",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sognage.com/contact",
       "httpStatus": 200,
@@ -1323,22 +1403,24 @@
     {
       "url": "https://www.castleofgoodhope.co.za/",
       "title": "Home",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.castleofgoodhope.co.za/",
       "httpStatus": 200
     },
     {
       "url": "https://www.capegrace.com/contact-us/",
-      "title": "Cape Grace",
-      "fetchedAt": "2026-10-08",
-      "status": "unavailable",
-      "error": "HTTP Error 301: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Permanently"
+      "title": "Contact Us | Cape Grace Hotel",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://www.capegrace.com/contact-us/",
+      "httpStatus": 200,
+      "description": "We would love to hear from you."
     },
     {
       "url": "https://www.themasque.co.za/",
       "title": "The Masque Theatre | Live theatre Cape Town | 37 Main Road, Muizenberg, Cape Town, South Africa",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.themasque.co.za/",
       "httpStatus": 200,
@@ -1347,7 +1429,7 @@
     {
       "url": "https://www.ardernegardens.org.za/location",
       "title": "Location / Contact",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.ardernegardens.org.za/location",
       "httpStatus": 200,
@@ -1356,7 +1438,7 @@
     {
       "url": "https://www.harringtonstreet.co.za/harringtons",
       "title": "Harringtons Cape Town",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.harringtonstreet.co.za/harringtons",
       "httpStatus": 200
@@ -1364,14 +1446,14 @@
     {
       "url": "https://phansi.online/about/",
       "title": "Phansi Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
       "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "url": "https://www.southernsun.com/southern-sun-elangeni-maharani/contact-us",
       "title": "Southern Sun Elangeni & Maharani | Durban North Beach",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.southernsun.com/southern-sun-elangeni-maharani/contact-us",
       "httpStatus": 200,
@@ -1379,25 +1461,22 @@
     },
     {
       "url": "https://events.durbantheatre.com/",
-      "title": "Durban Theatre",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://events.durbantheatre.com/",
-      "httpStatus": 200
+      "title": "Rhumbelow Theatre",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "<urlopen error timed out>"
     },
     {
       "url": "https://visitdurban.travel/space/kenneth-stainbank-nature-reserve",
-      "title": "Kenneth Stainbank Nature Reserve - Durban Tourism",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://visitdurban.travel/space/kenneth-stainbank-nature-reserve",
-      "httpStatus": 200,
-      "description": "Kenneth Stainbank&rsquo;s father, a Scot, built Coedmore Castle in 1875 with the help of Scottish stonemasons. Set in 600 acres/253 hectares, it was an attempt..."
+      "title": "Kenneth Stainbank Nature Reserve",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.tigertiger.durban/contact-us/",
       "title": "Contact Us – Tiger Tiger Durban | Premier Nightclub & Events in Durban",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.tigertiger.durban/contact-us/",
       "httpStatus": 200
@@ -1405,7 +1484,7 @@
     {
       "url": "https://www.freedompark.co.za/",
       "title": "Freedom Park Heritage Site",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.freedompark.co.za/",
       "httpStatus": 200
@@ -1413,7 +1492,7 @@
     {
       "url": "https://www.sanbi.org/gardens/pretoria/",
       "title": "Pretoria - SANBI",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sanbi.org/gardens/pretoria/",
       "httpStatus": 200,
@@ -1422,7 +1501,7 @@
     {
       "url": "https://www.statetheatre.co.za/ticket-loyalties/contact-us/",
       "title": "Contact Us – State Theatre",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.statetheatre.co.za/ticket-loyalties/contact-us/",
       "httpStatus": 200
@@ -1430,40 +1509,36 @@
     {
       "url": "https://stelmus.co.za/",
       "title": "Stellenbosch Museum | Stellenbosch Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://stelmus.co.za/",
       "httpStatus": 200
     },
     {
       "url": "https://www.sun.ac.za/english/entities/botanical-garden",
-      "title": "Stellenbosch University | Forward Together",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.su.ac.za/en",
-      "httpStatus": 200,
-      "description": "Stellenbosch University is a leading research institution driving knowledge, innovation and transformation through excellence, inclusivity and impact."
+      "title": "Stellenbosch University Botanical Garden",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "<urlopen error timed out>"
     },
     {
       "url": "https://www.marriott.com/en-us/hotels/cptst-protea-hotel-stellenbosch/overview/",
-      "title": "Protea Hotel Stellenbosch and Conference Centre | Locally Inspired Hotel",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.marriott.com/en-us/hotels/cptst-protea-hotel-stellenbosch/overview/",
-      "httpStatus": 200,
-      "description": "Book your stay at Protea Hotel Stellenbosch and Conference Centre. Enjoy comfortable accommodations & convenient amenities for business & leisure travelers."
+      "title": "Protea Hotel Stellenbosch",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.tathamartgallery.org.za/visit",
       "title": "Tatham Art Gallery",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
-      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+      "error": "[Errno -2] Name or service not known"
     },
     {
       "url": "https://www.sanbi.org/gardens/kwazulu-natal/",
       "title": "KwaZulu-Natal - SANBI",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sanbi.org/gardens/kwazulu-natal/",
       "httpStatus": 200,
@@ -1472,7 +1547,7 @@
     {
       "url": "https://www.southernsun.com/golden-horse-hotel",
       "title": "Southern Sun | Hotels, Dining, Events | Best Rates Direct",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.southernsun.com/",
       "httpStatus": 200,
@@ -1481,7 +1556,7 @@
     {
       "url": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
       "title": "Donkin Reserve - Pyramid and Lighthouse -  Nelson Mandela Bay (Port Elizabeth)",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
       "httpStatus": 200,
@@ -1490,7 +1565,7 @@
     {
       "url": "https://www.bayworld.co.za/",
       "title": "Bayworld  | Port Elizabeth",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.bayworld.co.za/",
       "httpStatus": 200,
@@ -1499,25 +1574,24 @@
     {
       "url": "https://www.suninternational.com/luxury-collection/boardwalk",
       "title": "Boardwalk | Luxury Hotel in Gqeberha - Sun International",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.suninternational.com/luxury-collection/boardwalk",
       "httpStatus": 200,
       "description": "Stay at The Boardwalk, a vibrant coastal escape in Gqeberha. Enjoy beachfront accommodation, ocean views, fine dining, and premium entertainment in the Eastern Cape."
     },
     {
-      "url": "https://nationalmuseum.co.za/visitor-information/",
-      "title": "Oliewenhuis Art Museum - Visitor Information | National Museum",
-      "fetchedAt": "2026-10-08",
+      "url": "https://nationalmuseum.co.za/oliewenhuis-art-museum/",
+      "title": "Oliewenhuis Art Museum Announces Valentine’s Couples Competition 2025 | National Museum",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
-      "resolvedUrl": "https://nationalmuseum.co.za/visitor-information/",
-      "httpStatus": 200,
-      "description": "Oliewenhuis Art Museum 16 Harry Smith Street Bloemfontein Free State South Africa. +27 (0) 51 011 0525 (ext 200). oliewen@nationalmuseum.co.za"
+      "resolvedUrl": "https://nationalmuseum.co.za/oliewenhuis-art-museum-announces-valentines-couples-competition-2025/",
+      "httpStatus": 200
     },
     {
       "url": "https://www.sanbi.org/gardens/free-state/",
       "title": "Free State - SANBI",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sanbi.org/gardens/free-state/",
       "httpStatus": 200,
@@ -1526,7 +1600,7 @@
     {
       "url": "https://pacofs.co.za/",
       "title": "PACOFS",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://pacofs.co.za/",
       "httpStatus": 200
@@ -1534,7 +1608,7 @@
     {
       "url": "https://www.sanbi.org/gardens/lowveld/",
       "title": "Lowveld - SANBI",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.sanbi.org/gardens/lowveld/",
       "httpStatus": 200,
@@ -1543,14 +1617,14 @@
     {
       "url": "https://sudwalacaves.com/",
       "title": "Sudwala Caves",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
-      "error": "HTTP Error 406: Not Acceptable"
+      "error": "Unapproved source or redirect host"
     },
     {
       "url": "https://www.southernsun.com/stayeasy-mbombela",
       "title": "Mbombela Budget-Friendly Hotel | StayEasy Mbombela",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.southernsun.com/stayeasy-mbombela",
       "httpStatus": 200,
@@ -1558,17 +1632,15 @@
     },
     {
       "url": "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
-      "title": "Bakone Malapa Open-Air Museum, Polokwane | Radisson Hotels",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
-      "httpStatus": 200,
-      "description": "This living museum explains the traditions of the Northern Sotho tribe. Learn how they make fire, grind maize and brew beer from the tribe themselves."
+      "title": "Bakone Malapa Open-Air Museum",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
       "title": "Polokwane Art Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
       "httpStatus": 200
@@ -1576,61 +1648,104 @@
     {
       "url": "https://www.suninternational.com/meropa/hotel/",
       "title": "Sun International",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.suninternational.com/meropa/hotel",
       "httpStatus": 200,
       "description": "Sun International offers premier hotels, casinos and entertainment destinations across South Africa. Explore properties, loyalty rewards and experiences.\n"
     },
     {
-      "url": "https://thebighole.com/visitors-info/",
-      "title": "The Big Hole Official Site | Tourist Attractions in Kimberley",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://thebighole.com/visitors-info/",
-      "httpStatus": 200
+      "url": "https://thebighole.com/",
+      "title": "The Big Hole",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.museumsnc.co.za/",
       "title": "McGregor Museum",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "unavailable",
       "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "url": "https://www.marriott.com/en-us/hotels/kimki-protea-hotel-kimberley/overview/",
-      "title": "Protea Hotel Kimberley | Locally Inspired Hotel",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://www.marriott.com/en-us/hotels/kimki-protea-hotel-kimberley/overview/",
-      "httpStatus": 200,
-      "description": "Book your stay at Protea Hotel Kimberley. Enjoy comfortable accommodations & convenient amenities for business & leisure travelers."
+      "title": "Protea Hotel Kimberley",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://www.nwgov.co.za/tourism",
       "title": "North West Government Online™ | Tourism",
-      "fetchedAt": "2026-10-08",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
       "resolvedUrl": "https://www.nwgov.co.za/tourism",
       "httpStatus": 200
     },
     {
       "url": "https://mmabathopalms.co.za/nearby-attractions/",
-      "title": "Nearby Attractions | Mmabatho Palms",
-      "fetchedAt": "2026-10-08",
-      "status": "fetched",
-      "resolvedUrl": "https://mmabathopalms.co.za/nearby-attractions/",
-      "httpStatus": 200,
-      "description": "Nearby Attractions - Mmabatho Palms Casino Resort is surrounded by the rich heritage of the Mahikeng district."
+      "title": "Mafikeng Game Reserve",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
-      "title": "Mmabatho Palms Hotel | 4-Star Luxury Villas in Mahikeng",
-      "fetchedAt": "2026-10-08",
+      "title": "Mmabatho Palms Hotel",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.tablemountain.net/",
+      "title": "Table Mountain",
+      "fetchedAt": "2026-10-19",
       "status": "fetched",
-      "resolvedUrl": "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
+      "resolvedUrl": "https://www.tablemountain.net/",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://vtm.org.za/en/contact-us/",
+      "title": "Voortrekker Monument",
+      "fetchedAt": "2026-10-19",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.nmbt.co.za/listing/route_67.html",
+      "title": "Route 67 -  Nelson Mandela Bay (Port Elizabeth)",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://www.nmbt.co.za/listing/route_67.html",
       "httpStatus": 200,
-      "description": "Book Mmabatho Palms Hotel Executive Villa's in Mahikeng. Private patios, a 4-star reputation, casino, golf and pool access, all in one luxurious stay."
+      "description": "The MBDA"
+    },
+    {
+      "url": "https://whag.co.za/contact-us",
+      "title": "William Humphreys Art Gallery",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://whag.co.za/contact-us",
+      "httpStatus": 200
+    },
+    {
+      "url": "https://www.polokwane.gov.za/things-to-do/",
+      "title": "Things to do - Polokwane Municipality",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://www.polokwane.gov.za/things-to-do/",
+      "httpStatus": 200,
+      "description": "Things to do Just a 10 minute drive from the city centre is the entrance to the Polokwane Game Reserve. Covering 3 250 hectares, this scenic reserve is one of the largest municipal reserves in South Africa.A part of the city, and yet not a part of the city, this game park with its unspoilt"
+    },
+    {
+      "url": "https://nationalmuseum.co.za/",
+      "title": "National Museum | Bloemfontein",
+      "fetchedAt": "2026-10-19",
+      "status": "fetched",
+      "resolvedUrl": "https://nationalmuseum.co.za/",
+      "httpStatus": 200,
+      "description": "The National Museum – a natural history, cultural history and art museum – was established in 1877 and is a Declared Cultural Institution, which resorts under the Department of Arts and Culture and is governed by a council."
     }
   ]
 }

@@ -142,8 +142,17 @@
   },
   {
     "name": "Constitution Hill",
-    "wikipedia": "https://en.wikipedia.org/wiki/Constitution_Hill,_Johannesburg",
+    "wikipedia": "https://en.wikipedia.org/wiki/Table_Mountain",
     "images": [
+      {
+        "alt": "Taffelberget och Kapstaden i Sydafrika, sett från en strand vid stadsdelen Bloubergstrand",
+        "author": "Danie van der Merwe from Cape Town, South Africa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_Mountain_DanieVDM.jpg",
+        "filename": "Table Mountain DanieVDM.jpg",
+        "src": "/images/d93b06e34d54.jpg"
+      },
       {
         "alt": "This media shows a South African Protected Site with SAHRA file reference Johannesburg in South AFrica.",
         "author": "ConstHill",
@@ -188,8 +197,17 @@
   },
   {
     "name": "Apartheid Museum",
-    "wikipedia": "https://en.wikipedia.org/wiki/Apartheid_Museum",
+    "wikipedia": "https://en.wikipedia.org/wiki/Bo-Kaap",
     "images": [
+      {
+        "alt": "The iconic tourist attraction Bo-Kaap houses.",
+        "author": "SkyPixels",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boe-Kaap.jpg",
+        "filename": "Boe-Kaap.jpg",
+        "src": "/images/4c1bb8adbf4f.jpg"
+      },
       {
         "alt": "Apartheid Museum",
         "author": "NJR ZA",
@@ -234,8 +252,26 @@
   },
   {
     "name": "Table Mountain",
-    "wikipedia": "https://en.wikipedia.org/wiki/Table_Mountain",
+    "wikipedia": "https://en.wikipedia.org/wiki/Cape_Point",
     "images": [
+      {
+        "alt": "Kap vun der Gudder Hoffnung",
+        "author": "Ernmuhl at lb.wikipedia",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Goodhope2.jpg",
+        "filename": "Goodhope2.jpg",
+        "src": "/images/dac0aa2e81c2.jpg"
+      },
+      {
+        "alt": "Cape Point görünüm, deniz feneri, sağ taraf Atlas, sol taraf Hint okyanusu",
+        "author": "Efeborn",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Point_by_ozgur.jpg",
+        "filename": "Cape Point by ozgur.jpg",
+        "src": "/images/55ceccf192c0.jpg"
+      },
       {
         "alt": "Taffelberget och Kapstaden i Sydafrika, sett från en strand vid stadsdelen Bloubergstrand",
         "author": "Danie van der Merwe from Cape Town, South Africa",
@@ -275,8 +311,17 @@
   },
   {
     "name": "Bo-Kaap",
-    "wikipedia": "https://en.wikipedia.org/wiki/Bo-Kaap",
+    "wikipedia": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
     "images": [
+      {
+        "alt": "World-class stadium",
+        "author": "Blastworlddbn",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moses_Mabhida_stadium_in_Durban.jpg",
+        "filename": "Moses Mabhida stadium in Durban.jpg",
+        "src": "/images/1e5e6c83d25f.jpg"
+      },
       {
         "alt": "The iconic tourist attraction Bo-Kaap houses.",
         "author": "SkyPixels",
@@ -321,8 +366,17 @@
   },
   {
     "name": "Cape Point",
-    "wikipedia": "https://en.wikipedia.org/wiki/Cape_Point",
+    "wikipedia": "https://en.wikipedia.org/wiki/UShaka_Marine_World",
     "images": [
+      {
+        "alt": "Eingang uShaka Marine World, Durban",
+        "author": "Bgabel",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:ZA-Durban-shaka-m-eing.jpg",
+        "filename": "ZA-Durban-shaka-m-eing.jpg",
+        "src": "/images/fe65d470dcda.jpg"
+      },
       {
         "alt": "Kap vun der Gudder Hoffnung",
         "author": "Ernmuhl at lb.wikipedia",
@@ -375,7 +429,7 @@
   },
   {
     "name": "Castle of Good Hope",
-    "wikipedia": "https://en.wikipedia.org/wiki/Castle_of_Good_Hope",
+    "wikipedia": "https://en.wikipedia.org/wiki/Umhlanga_Lighthouse",
     "images": [
       {
         "alt": "Entrance of Castle of Good Hope, Cape Town, South Africa",
@@ -2283,7 +2337,7 @@
   },
   {
     "name": "Botsalano Game Reserve",
-    "wikipedia": "https://en.wikipedia.org/wiki/Botsalano_Game_Reserve",
+    "wikipedia": "https://en.wikipedia.org/wiki/Umhlanga,_KwaZulu-Natal",
     "images": [],
     "about": "Botsalano Game Reserve is a 5800 hectare game reserve near the City of Mafikeng. It is located on flat land which is Kalahari bushveld and Acacia and Karee woodlands.",
     "aboutSource": "https://en.wikipedia.org/wiki/Botsalano_Game_Reserve",

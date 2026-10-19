@@ -1,15 +1,16 @@
 {
-  "generatedAt": "2026-10-15",
+  "generatedAt": "2026-10-19",
   "places": 89,
   "cities": 12,
-  "venuePins": 52,
-  "images": 130,
+  "venuePins": 53,
+  "images": 108,
   "errors": [],
   "issues": [
     {
       "id": "gold-reef-city",
       "needs": [
-        "entrance verification"
+        "entrance verification",
+        "source fetch"
       ]
     },
     {
@@ -23,7 +24,8 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -48,8 +50,7 @@
     {
       "id": "johannesburg-zoo",
       "needs": [
-        "entrance verification",
-        "source fetch"
+        "entrance verification"
       ]
     },
     {
@@ -107,8 +108,7 @@
       "id": "the-baxter-theatre",
       "needs": [
         "venue pin",
-        "entrance verification",
-        "source fetch"
+        "entrance verification"
       ]
     },
     {
@@ -122,7 +122,8 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -136,7 +137,8 @@
       "id": "cabo-beach-club",
       "needs": [
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -253,7 +255,8 @@
       "id": "company-s-garden",
       "needs": [
         "venue pin",
-        "entrance verification"
+        "entrance verification",
+        "source fetch"
       ]
     },
     {
@@ -285,7 +288,8 @@
     {
       "id": "suncoast",
       "needs": [
-        "entrance verification"
+        "entrance verification",
+        "source fetch"
       ]
     },
     {
@@ -313,8 +317,7 @@
       "id": "johannesburg-botanical-garden",
       "needs": [
         "venue pin",
-        "entrance verification",
-        "source fetch"
+        "entrance verification"
       ]
     },
     {
@@ -335,8 +338,7 @@
       "id": "cape-grace",
       "needs": [
         "entrance verification",
-        "venue photographs",
-        "source fetch"
+        "venue photographs"
       ]
     },
     {
@@ -382,14 +384,16 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
       "id": "kenneth-stainbank-nature-reserve",
       "needs": [
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -431,14 +435,16 @@
       "id": "stellenbosch-university-botanical-garden",
       "needs": [
         "venue pin",
-        "entrance verification"
+        "entrance verification",
+        "source fetch"
       ]
     },
     {
       "id": "protea-hotel-stellenbosch",
       "needs": [
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -533,7 +539,8 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -554,7 +561,8 @@
       "id": "the-big-hole",
       "needs": [
         "venue pin",
-        "entrance verification"
+        "entrance verification",
+        "source fetch"
       ]
     },
     {
@@ -569,7 +577,8 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -583,7 +592,8 @@
       "id": "mafikeng-game-reserve",
       "needs": [
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
@@ -591,13 +601,13 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "source fetch"
       ]
     },
     {
       "id": "table-mountain",
       "needs": [
-        "venue pin",
         "entrance verification"
       ]
     },
@@ -605,7 +615,8 @@
       "id": "voortrekker-monument",
       "needs": [
         "venue pin",
-        "entrance verification"
+        "entrance verification",
+        "source fetch"
       ]
     },
     {

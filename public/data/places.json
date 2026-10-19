@@ -11,9 +11,9 @@
     "sources": [
       {
         "url": "https://www.goldreefcity.co.za/",
-        "title": "Gold Reef City - Theme Park in Johannesburg South Africa",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Gold Reef City",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Gold_Reef_City",
@@ -50,7 +50,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "Gold Reef City is an amusement park in Johannesburg, South Africa. Located on an old gold mine which closed in 1971, the park is themed around the gold rush that started in 1886 on the Witwatersrand, and the buildings in the park are designed to mimic this period. There is a museum dedicated to gold mining on the grounds where it is possible to see a gold-containing ore vein and see how gold is poured into barrels.\nThere are many attractions at Gold Reef City, including water rides, roller coasters, and the famous Gold Reef City Casino.",
     "aboutSource": "https://en.wikipedia.org/wiki/Gold_Reef_City",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -112,7 +112,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Constitution Hill",
@@ -127,7 +127,7 @@
       {
         "url": "https://www.constitutionhill.org.za/",
         "title": "Constitution Hill",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -156,7 +156,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "The Constitution Hill precinct is the seat of the Constitutional Court of South Africa. It is located in Braamfontein, a suburb of Johannesburg, near the western end of the suburb of Hillbrow. The complex consists of the Constitutional Court, the Old Fort Prison and a museum.\nIn 2024 the Constitution Hill became a World Heritage Site, one of 14 component parts spread across South Africa known collectively as the \"Nelson Mandela Legacy Sites\".",
     "aboutSource": "https://en.wikipedia.org/wiki/Constitution_Hill%2C_Johannesburg",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -218,7 +218,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "The Houghton Hotel",
@@ -231,9 +231,9 @@
     "sources": [
       {
         "url": "https://thehoughtonhotel.com/",
-        "title": "The Houghton Hotel, an SLH Hotel",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "The Houghton Hotel",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -254,7 +254,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Houghton Estate",
     "coordinateRole": "city",
     "facts": {
@@ -327,7 +327,7 @@
       {
         "url": "https://www.southernsun.com/54-on-bath",
         "title": "Boutique Luxury Hotel Rosebank, Johannesburg | 54 on Bath",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -349,7 +349,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Rosebank",
     "coordinateRole": "venue",
     "facts": {
@@ -423,7 +423,7 @@
       {
         "url": "https://markettheatre.co.za/",
         "title": "Market Theatre – Home of live theatre shows – Theatres in Johannesburg",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -458,7 +458,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "The Market Theatre, based in the downtown bohemian suburb of Newtown in Johannesburg, South Africa, was opened in 1976, operating as an independent, anti-racist theatre during the country's apartheid regime. It was named after a fruit and vegetable market that was previously located there. It was also known as the Old Indian Market or the Newtown Market, which closed after 60 years. \nThe Market Theatre was founded by \nBarney Simon (Artistic Director), Mannie Manim (Administrative Director), Aletta Bezuidenhout, Vanessa Cooke, Judith Cornell, David Eppel, Leoni Hofmeyer, Janice Honeyman, Danny\nKeogh, Sue Kiel, Lindsay Reardon, and John Oakley Smith.",
     "aboutSource": "https://en.wikipedia.org/wiki/Market_Theatre_%28Johannesburg%29",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -520,7 +520,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Joburg Theatre",
@@ -535,7 +535,7 @@
       {
         "url": "https://www.joburgtheatre.com/",
         "title": "Home - Joburg Theatre",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -582,7 +582,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "Joburg Theatre Complex, previously known as the Johannesburg Civic Theatre, is a group of four theatres situated in Braamfontein, Johannesburg, South Africa. It was built in 1962, refurnished in the late 1980s and reopened in the early 1990s before it was re-branded in 2009. It is a venue that stages both Broadway musicals and home-grown productions, and is one of the few theatres open in Johannesburg for independent productions.",
     "aboutSource": "https://en.wikipedia.org/wiki/Joburg_Theatre",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -644,7 +644,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Johannesburg Zoo",
@@ -658,9 +658,9 @@
     "sources": [
       {
         "url": "https://www.jhbcityparksandzoo.com/",
-        "title": "Johannesburg Zoo",
-        "fetchedAt": "2026-10-08",
-        "status": "unavailable"
+        "title": "Home | JCPZ",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Johannesburg_Zoo",
@@ -706,7 +706,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "The Johannesburg Zoo or Joburg Zoo is a 55-hectare (140-acre) zoo in Johannesburg, South Africa. The zoo is dedicated to the accommodation, enrichment, husbandry, and medical care of wild animals, and houses about 2000 individuals of 320 species. Established in 1904, it has traditionally been owned and operated by the Johannesburg City Council. However, it has been turned into a corporation and registered as a Section 21 non-profit organisation.",
     "aboutSource": "https://en.wikipedia.org/wiki/Johannesburg_Zoo",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -768,7 +768,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Walter Sisulu Botanical Garden",
@@ -783,7 +783,7 @@
       {
         "url": "https://www.sanbi.org/gardens/walter-sisulu/",
         "title": "Walter Sisulu - SANBI",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -812,7 +812,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "The Walter Sisulu National Botanical Garden, previously known as the Witwatersrand National Botanical Garden, is a 300 hectares (3.0 km2) botanical reserve in western Roodepoort, near Johannesburg, South Africa.",
     "aboutSource": "https://en.wikipedia.org/wiki/Walter_Sisulu_National_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -874,7 +874,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "The Living Room",
@@ -888,7 +888,7 @@
       {
         "url": "https://livingroomjozi.co.za/contact-us/",
         "title": "Contact Us – The Living Room Jozi",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -910,7 +910,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Maboneng",
     "coordinateRole": "venue",
     "facts": {
@@ -983,7 +983,7 @@
       {
         "url": "https://andclub.co.za/contact/",
         "title": "Contact - AndClub",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -1005,7 +1005,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Newtown",
     "coordinateRole": "city",
     "facts": {
@@ -1079,7 +1079,7 @@
       {
         "url": "https://www.aquarium.co.za/",
         "title": "Explore, Experience and Engage | Two Oceans Aquarium",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -1125,7 +1125,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Two_Oceans_Aquarium",
     "about": "The Two Oceans Aquarium is an aquarium located at the Victoria & Alfred Waterfront in Cape Town, Western Cape, South Africa. The aquarium was opened on the 13 November 1995 and comprises several exhibition galleries with large viewing windows:  The aquarium is named for its location, where the Indian and Atlantic Ocean meet.",
     "aboutSource": "https://en.wikipedia.org/wiki/Two_Oceans_Aquarium",
@@ -1188,7 +1188,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Zeitz MOCAA",
@@ -1203,7 +1203,7 @@
       {
         "url": "https://zeitzmocaa.museum/",
         "title": "Zeitz MOCAA - Museum of Contemporary Art - Zeitz MOCAA",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -1250,7 +1250,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "locationGroup": "waterfront-grain-silo",
     "about": "Zeitz Museum of Contemporary Art Africa (Zeitz MOCAA) is a public non-profit museum in Cape Town, South Africa. Zeitz MOCAA opened on September 22, 2017 as the largest museum of contemporary art from Africa and its diaspora. The museum is located in the Silo District at the Victoria & Alfred Waterfront in Cape Town. A retail and hospitality property, the Waterfront receives around 24 million local and international visitors per year.",
     "aboutSource": "https://en.wikipedia.org/wiki/Zeitz_Museum_of_Contemporary_Art_Africa",
@@ -1313,7 +1313,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "The Silo Hotel",
@@ -1328,7 +1328,7 @@
       {
         "url": "https://www.theroyalportfolio.com/the-silo-hotel/",
         "title": "The Silo Hotel | Luxury Cape Town Hotel | The Royal Portfolio",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "search-verified"
       }
     ],
@@ -1349,17 +1349,26 @@
         "src": "/images/094b2b841d14.jpg"
       },
       {
-        "alt": "The Grain Silo, Victoria & Alfred Waterfront, Cape Town, 8001, South Africa, an old grain silo complex converted to a hotel and museum (Zeitz Museum of Contemporary Art Africa)",
-        "author": "Dicklyon",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Grain_Silo,_Cape_Town,_South_Africa.jpg",
-        "filename": "The Grain Silo, Cape Town, South Africa.jpg",
-        "src": "/images/a33153eea27b.jpg"
+        "alt": "Interior of the Zeitz Museum of Contemporary Art Africa (Zeitz MOCAA), showing the carved concrete atrium created from repurposed grain silos.",
+        "author": "lumoplank",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Town_architecture,_Part_II_-_20240912_135259.jpg",
+        "filename": "Cape Town architecture, Part II - 20240912 135259.jpg",
+        "src": "/images/861c84cb2815.jpg"
+      },
+      {
+        "alt": "The old grain silo at the Victoria & Alfred Waterfront in Cape Town, South Africa is being repurposed to house the Zeitz Museum of Contemporary Art Africa (Zeitz MoCAA) scheduled t",
+        "author": "HelenOnline",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:V%26A_Grain_Silo_1.jpg",
+        "filename": "V&A Grain Silo 1.jpg",
+        "src": "/images/d5c3e20e6db8.jpg"
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "locationGroup": "waterfront-grain-silo",
     "district": "V&A Waterfront",
     "coordinateRole": "venue",
@@ -1434,7 +1443,7 @@
       {
         "url": "https://www.belmond.com/hotels/africa/south-africa/cape-town/belmond-mount-nelson-hotel/",
         "title": "Mount Nelson, A Belmond Hotel | Best Hotel Cape Town Africa",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -1481,7 +1490,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "Belmond Mount Nelson Hotel is a luxury hotel situated in the Gardens neighbourhood of the city of Cape Town, South Africa. The hotel is located in a garden estate, overlooked by Table Mountain.",
     "aboutSource": "https://en.wikipedia.org/wiki/Belmond_Mount_Nelson_Hotel",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -1543,7 +1552,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Artscape Theatre",
@@ -1558,7 +1567,7 @@
       {
         "url": "https://www.artscape.co.za/",
         "title": "Artscape Theatre Centre – Cape Town",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -1596,7 +1605,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "about": "Artscape Theatre Centre (formerly Nico Malan Theatre Centre) is the main performing arts centre in Cape Town, South Africa. It was opened in 1971 and is located on reclaimed land in the Foreshore area of Cape Town CBD.\nThe inaugural performance was scheduled to be Giuseppe Verdi's Aida but illness struck the title-role singer Emma Renzi and the production was replaced by CAPAB Ballet's Sylvia. Other productions in the opening season were Mozart's Die Zauberflöte in Afrikaans and Giacomo Puccini's Madama Butterfly.\nThe complex includes:\n\nOpera House, seating 1,487 with provision for two wheelchairs.",
     "aboutSource": "https://en.wikipedia.org/wiki/Artscape_Theatre_Centre",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -1658,7 +1667,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "The Baxter Theatre",
@@ -1672,9 +1681,9 @@
     "sources": [
       {
         "url": "https://baxter.uct.ac.za/",
-        "title": "The Baxter Theatre",
-        "fetchedAt": "2026-10-08",
-        "status": "unavailable"
+        "title": "Home | Baxter Theatre Centre",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Baxter_Theatre_Centre",
@@ -1710,7 +1719,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Baxter_Theatre_Centre",
     "about": "The Baxter Theatre Centre is a performing arts complex in Rondebosch, Cape Town, South Africa. The Baxter, as it is often referred to, is part of the University of Cape Town (UCT). It is a popular venue for theatre performers and artists in the Western Cape.",
     "aboutSource": "https://en.wikipedia.org/wiki/Baxter_Theatre_Centre",
@@ -1773,7 +1782,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Kirstenbosch",
@@ -1788,7 +1797,7 @@
       {
         "url": "https://www.sanbi.org/gardens/kirstenbosch/",
         "title": "Kirstenbosch - SANBI",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -1841,7 +1850,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "about": "Kirstenbosch is a botanical garden nestled at the eastern foot of Table Mountain in Cape Town. The garden is one of 10  National Botanical Gardens covering five of South Africa's six different biomes and administered by the South African National Biodiversity Institute (SANBI). Prior to 1 September 2004, the institute was known as the National Botanical Institute.\nKirstenbosch places a strong emphasis on the cultivation of indigenous plants.",
     "aboutSource": "https://en.wikipedia.org/wiki/Kirstenbosch_National_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
@@ -1939,7 +1948,7 @@
         "source": "https://www.sanbi.org/gardens/kirstenboch/visitor-information/information/"
       }
     ],
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Green Point Urban Park",
@@ -1953,9 +1962,9 @@
     "sources": [
       {
         "url": "https://www.capetown.travel/",
-        "title": "Cape Town Tourism",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Green Point Urban Park",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -1994,7 +2003,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Green Point",
     "coordinateRole": "city",
     "facts": {
@@ -2067,7 +2076,7 @@
       {
         "url": "https://modularclub.com/about/",
         "title": "About - Modular",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -2107,7 +2116,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Cape Town City Centre",
     "coordinateRole": "venue",
     "facts": {
@@ -2179,9 +2188,9 @@
     "sources": [
       {
         "url": "https://www.waterfront.co.za/eat-and-drink/cabo-beach-club",
-        "title": "Cabo Beach Club | V&A Waterfront Cape Town",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Cabo Beach Club",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -2220,7 +2229,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "V&A Waterfront",
     "coordinateRole": "venue",
     "facts": {
@@ -2294,7 +2303,7 @@
       {
         "url": "https://ushakamarine.com/",
         "title": "uShaka Marine World",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -2331,7 +2340,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/UShaka_Marine_World",
     "about": "uShaka Marine World is a 16-hectare (40-acre) theme park that opened on 30 April 2004 in Durban, KwaZulu-Natal, South Africa. It has a total capacity of 4.6 million gallons containing 10,000 animal species.",
     "aboutSource": "https://en.wikipedia.org/wiki/UShaka_Marine_World",
@@ -2394,7 +2403,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Moses Mabhida Stadium",
@@ -2409,7 +2418,7 @@
       {
         "url": "https://www.mmstadium.com/",
         "title": "Home - Welcome to Moses Mabhida Stadium",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -2455,7 +2464,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
     "about": "The Moses Mabhida Stadium is a soccer stadium in Durban in the KwaZulu-Natal province of South Africa, named after Moses Mabhida, a former general secretary of the South African Communist Party. A multi-use stadium, it became a venue for several events, like bungee jumping, concerts, cricket, soccer, golf practise, motorsports and rugby union.\nIt was one of the host stadiums for the 2010 FIFA World Cup. The stadium has a capacity of 55,500 (expandable up to 75,000).",
     "aboutSource": "https://en.wikipedia.org/wiki/Moses_Mabhida_Stadium",
@@ -2518,7 +2527,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "The Oyster Box",
@@ -2533,7 +2542,7 @@
       {
         "url": "https://oysterboxhotel.com/",
         "title": "The Oyster Box, Luxury Hotel Umhlanga, KwaZulu-Natal, South Africa",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -2558,19 +2567,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
         "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
         "src": "/images/c4266986faf9.jpg"
-      },
-      {
-        "alt": "The Oyster Box Hotel, north Durban",
-        "author": "This Particular Greg",
-        "license": "CC BY-SA 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oyster_Box_South_Africa.jpg",
-        "filename": "Oyster Box South Africa.jpg",
-        "src": "/images/6b3a4eaf58c9.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/The_Oyster_Box",
     "about": "The Oyster Box may refer to:",
     "aboutSource": "https://en.wikipedia.org/wiki/The_Oyster_Box",
@@ -2633,7 +2633,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Beverly Hills",
@@ -2648,7 +2648,7 @@
       {
         "url": "https://www.southernsun.com/beverly-hills",
         "title": "Luxury uMhlanga Rocks Hotel | Beverly Hills | Best Rates",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -2670,7 +2670,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Umhlanga",
     "coordinateRole": "venue",
     "facts": {
@@ -2744,7 +2744,7 @@
       {
         "url": "https://playhousecompany.com/",
         "title": "The Playhouse",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       }
     ],
@@ -2763,28 +2763,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
         "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
         "src": "/images/c4266986faf9.jpg"
-      },
-      {
-        "alt": "Glen Eden Playhouse Theatre at dusk at the Going West Festival Gala event, 14 August 2021.\nThe theatre is a heritage listed Edwardian building.",
-        "author": "L Maule",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Glen_Eden_Playhouse_Theatre_01.jpg",
-        "filename": "Glen Eden Playhouse Theatre 01.jpg",
-        "src": "/images/b7a14ad62902.jpg"
-      },
-      {
-        "alt": "Pantages Playhouse Theatre in downtown Winnipeg, Manitoba",
-        "author": "OhanaUnitedTalk page",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pantages_Playhouse_Theatre_August_2025.jpg",
-        "filename": "Pantages Playhouse Theatre August 2025.jpg",
-        "src": "/images/1666431eb870.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Durban Central",
     "coordinateRole": "city",
     "facts": {
@@ -2858,7 +2840,7 @@
       {
         "url": "https://www.sneddontheatre.co.za/contact-us/contact-us.html",
         "title": "Elizabeth Sneddon Theatre contact",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "search-verified"
       }
     ],
@@ -2880,7 +2862,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Glenwood",
     "coordinateRole": "city",
     "facts": {
@@ -2954,7 +2936,7 @@
       {
         "url": "https://durbanbotanicgardens.org.za/",
         "title": "Durban Botanic Gardens - Africa's Oldest Surviving Botanic Garden",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -3000,7 +2982,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Durban_Botanic_Gardens",
     "about": "The Durban Botanic Gardens is situated in the city of Durban, KwaZulu-Natal, South Africa. It is Durban's oldest public institution and Africa's oldest surviving botanical gardens. The gardens cover an area of 15 hectares (37 acres) in a subtropical climate.",
     "aboutSource": "https://en.wikipedia.org/wiki/Durban_Botanic_Gardens",
@@ -3063,7 +3045,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Umgeni River Bird Park",
@@ -3078,7 +3060,7 @@
       {
         "url": "https://www.umgeniriverbirdpark.co.za/",
         "title": "Umgeni River Bird Park",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       },
       {
@@ -3115,7 +3097,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Umgeni_River_Bird_Park",
     "about": "The Umgeni River Bird Park is a bird zoo located in Durban, in the province of KwaZulu-Natal, South Africa.",
     "aboutSource": "https://en.wikipedia.org/wiki/Umgeni_River_Bird_Park",
@@ -3178,7 +3160,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Origin / CRCL",
@@ -3192,7 +3174,7 @@
       {
         "url": "https://www.theorigin.co.za/contact",
         "title": "Origin Nightclub, South Africa",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -3214,7 +3196,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Bulwer",
     "coordinateRole": "venue",
     "facts": {
@@ -3287,7 +3269,7 @@
       {
         "url": "https://cubana.co.za/pages/contact/",
         "title": "Cubaña contact",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "search-verified"
       }
     ],
@@ -3309,7 +3291,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Morningside",
     "coordinateRole": "city",
     "facts": {
@@ -3409,7 +3391,7 @@
       {
         "url": "https://www.apartheidmuseum.org/",
         "title": "Apartheid Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -3425,7 +3407,7 @@
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Apartheid_Museum",
     "about": "The Apartheid Museum is a museum illustrating apartheid and the 20th-century history of South Africa. The museum, part of the Gold Reef City complex located in the south of Johannesburg, was opened in November 2001. It was established by an independent non-profit organisation, Akani Egoli, and built as an offshoot of the development of the Gold Reef City Casino.\nAt least five times a year, events are held at the museum to celebrate the end of apartheid and the start of multiracial democracy for the people of South Africa.",
     "aboutSource": "https://en.wikipedia.org/wiki/Apartheid_Museum",
@@ -3500,7 +3482,7 @@
         "confidence": "verified"
       }
     },
-    "aboutCheckedAt": "2026-10-12",
+    "aboutCheckedAt": "2026-10-19",
     "visitNote": "The museum advises against visits by children under 11 because of graphic content; check its guidance before bringing children."
   },
   {
@@ -3533,11 +3515,11 @@
       {
         "url": "https://www.wits.ac.za/wam/",
         "title": "Wits Art Museum - Wits University",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Braamfontein",
     "coordinateRole": "venue",
     "facts": {
@@ -3646,7 +3628,7 @@
       {
         "url": "https://joburg.org.za/",
         "title": "City of Johannesburg",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -3662,7 +3644,7 @@
         "status": "search-verified"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Johannesburg_Art_Gallery",
     "about": "The Johannesburg Art Gallery  (JAG) is an art gallery in Joubert Park in the city centre of Johannesburg, South Africa. It was once the largest gallery on the continent with a collection of more than 9000 artworks. The gallery collection is larger than that of the Iziko South African National Gallery in Cape Town.\nThe building, which was completed in 1915, was designed by Sir Edwin Lutyens, with Robert Howden working as supervising architect, and consists of 15 exhibition halls and sculpture gardens.",
     "aboutSource": "https://en.wikipedia.org/wiki/Johannesburg_Art_Gallery",
@@ -3726,7 +3708,7 @@
       }
     },
     "visitNote": "The city is preparing temporary relocation of collections during gallery restoration. Confirm the current exhibition location and access before visiting.",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "sci-bono-discovery-centre",
@@ -3758,11 +3740,11 @@
       {
         "url": "https://www.sci-bono.co.za/",
         "title": "Home",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Newtown",
     "coordinateRole": "city",
     "facts": {
@@ -3871,7 +3853,7 @@
       {
         "url": "https://www.iziko.org.za/museums/south-african-museum/",
         "title": "The Iziko South African Museum – Iziko Museums",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -3881,7 +3863,7 @@
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Iziko_South_African_Museum",
     "about": "The Iziko South African Museum, formerly the South African Museum (Afrikaans: Suid-Afrikaanse Museum), is a South African national museum located in Cape Town. The museum was founded in 1825, the first in the country. It has been on its present site in the Company's Garden since 1897. The museum houses important African zoology, palaeontology, and archaeology collections.",
     "aboutSource": "https://en.wikipedia.org/wiki/Iziko_South_African_Museum",
@@ -3944,7 +3926,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "robben-island-museum",
@@ -3994,7 +3976,7 @@
       {
         "url": "https://www.robben-island.org.za/",
         "title": "Home - Robben Island Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -4004,9 +3986,9 @@
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Robben_Island",
-    "about": "Robben Island (Afrikaans: Robbeneiland) is an island in Table Bay, 6.9 kilometers (4.3 mi) west of the coast of Bloubergstrand, north of Cape Town, South Africa. It takes its name from the archaic Dutch word for seals (robben), hence the Dutch/Afrikaans name Robbeneiland, which translates to Seal(s) Island.\nRobben Island is roughly oval in shape, 3.3 kilometres (2 miles) long north–south, and 1.9 km (1+1⁄8 mi) wide, with an area of 5.08 km2 (1+31⁄32 sq mi). It is flat and only a few metres above sea level, as a result of an ancient erosion event.",
+    "about": "Robben Island (Dutch: Robbeneiland) is an island in Table Bay, 6.9 kilometers (4.3 mi) west of the coast of Bloubergstrand, north of Cape Town, South Africa. It takes its name from the archaic Dutch word for seals (robben).\nThe island is roughly oval in shape, 3.3 kilometres (2 miles) long north–south, and 1.9 km (1+1⁄8 mi) wide, with an area of 5.08 km2 (1+31⁄32 sq mi). It is flat and only a few metres above sea level, as a result of an ancient erosion event.",
     "aboutSource": "https://en.wikipedia.org/wiki/Robben_Island",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
     "district": "V&A Waterfront (ferry departure)",
@@ -4067,7 +4049,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "company-s-garden",
@@ -4116,9 +4098,9 @@
     "sources": [
       {
         "url": "https://www.capetown.travel/",
-        "title": "Cape Town Tourism",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Green Point Urban Park",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Company%27s_Garden",
@@ -4127,7 +4109,7 @@
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Company%27s_Garden",
     "about": "The Company's Garden is a large public park situated in Cape Town CBD - the main commercial district of Cape Town. It is the oldest garden in South Africa, and a national heritage site.\nThe garden was originally created in the 1650s by the region's first European settlers and provided fertile ground to grow fresh produce to replenish ships rounding the Cape. It is watered from the Molteno Dam, which uses water from the springs on the lower slopes of Table Mountain.",
     "aboutSource": "https://en.wikipedia.org/wiki/Company%27s_Garden",
@@ -4190,7 +4172,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "kwamuhle-museum",
@@ -4222,11 +4204,11 @@
       {
         "url": "https://www.durban.gov.za/",
         "title": "KwaMuhle Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Durban Central",
     "coordinateRole": "city",
     "facts": {
@@ -4310,15 +4292,6 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
         "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
         "src": "/images/c4266986faf9.jpg"
-      },
-      {
-        "alt": "Het gebouw is gebaseerd op de City Hall van Belfast en ontworpen door Stanley G. Hudson. Het stadhuis werd geopend in 1910 en biedt nu onderdak aan het Natural Science Museum, de e",
-        "author": "Fotograaf / photographer: niet bekend / unknown",
-        "license": "CC BY-SA 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:COLLECTIE_TROPENMUSEUM_De_City_Hall_in_Durban_TMnr_20014807.jpg",
-        "filename": "COLLECTIE TROPENMUSEUM De City Hall in Durban TMnr 20014807.jpg",
-        "src": "/images/be445bc47a45.jpg"
       }
     ],
     "imageContext": "city",
@@ -4326,11 +4299,11 @@
       {
         "url": "https://www.durban.gov.za/",
         "title": "KwaMuhle Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "234 Anton Lembede Street",
     "coordinateRole": "city",
     "facts": {
@@ -4414,24 +4387,6 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
         "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
         "src": "/images/c4266986faf9.jpg"
-      },
-      {
-        "alt": "Burman Bush Nature Reserve (above) & Mitchell Park Zoo (below) in Morningside, Durban, eThekwini",
-        "author": "Planet Labs, Inc.",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban,_South_Africa_by_Planet_Labs,_Burman_Bush_%26_Mitchell_Park_Zoo.jpg",
-        "filename": "Durban, South Africa by Planet Labs, Burman Bush & Mitchell Park Zoo.jpg",
-        "src": "/images/28fa0f8b644d.jpg"
-      },
-      {
-        "alt": "African gray parrot on display at the Mitchell Park Zoo, Durban, KwaZulu-Natal, South Africa.",
-        "author": "AlDuncan06",
-        "license": "CC BY-SA 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gray_Parrot,_Mitchell_Park_Zoo,_Durban,_July_2013.jpg",
-        "filename": "Gray Parrot, Mitchell Park Zoo, Durban, July 2013.jpg",
-        "src": "/images/54c0c8c0edda.jpg"
       }
     ],
     "imageContext": "city",
@@ -4439,7 +4394,7 @@
       {
         "url": "https://www.durban.gov.za/",
         "title": "KwaMuhle Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       },
       {
@@ -4449,7 +4404,7 @@
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Mitchell_Park_Zoo",
     "about": "Mitchell Park Zoo is also known as Mitchell Park or Mitchell's Park. Situated in the Morningside suburb of Durban, South Africa, it is the only zoo in Durban.\nThe zoo was established as an Ostrich farm in 1910, but was unprofitable and started adding other animals. At one time it was home to many large animals, the most notable of which was an Indian Elephant named Nellie.",
     "aboutSource": "https://en.wikipedia.org/wiki/Mitchell_Park_Zoo",
@@ -4512,7 +4467,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "suncoast",
@@ -4561,9 +4516,9 @@
     "sources": [
       {
         "url": "https://www.suncoastcasino.co.za/",
-        "title": "Suncoast - Suncoast Casino",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Suncoast",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Suncoast_Casino_and_Entertainment_World",
@@ -4572,7 +4527,7 @@
         "status": "fetched"
       }
     ],
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Suncoast_Casino_and_Entertainment_World",
     "about": "Suncoast Casino, Hotels and Entertainment is an entertainment complex situated at the northern end of Durban's Golden Mile, adjacent to the Kings Park Sporting Precinct. Besides the casino, the complex houses many restaurants, a beach bar, cinemas and its own semi-private beach, which was rated as one of the top 3 beaches in South Africa. The design of the complex is aimed to complement the vast art deco heritage that is found across Durban. Suncoast houses the largest Casino complex in South Africa.",
     "aboutSource": "https://en.wikipedia.org/wiki/Suncoast_Casino_and_Entertainment_World",
@@ -4635,7 +4590,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Mandela House",
@@ -4650,7 +4605,7 @@
       {
         "url": "https://www.mandelahouse.com/",
         "title": "Mandela House – 8115 Vilakazi St, orlando West, Soweto",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -4678,7 +4633,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Mandela_House",
     "about": "The Nelson Mandela National Museum, commonly referred to as Mandela House, is the house on Vilakazi Street, Orlando West, Soweto, South Africa where Nelson Mandela lived from 1946 to 1962. It is located at number 8115, around the corner of Vilakazi and Ngakane Streets and a short distance up the road from Tutu House, the home of Archbishop Emeritus Desmond Tutu. Mandela donated the house to the Soweto Heritage Trust, of which he was the founder, on 1 September 1997 for it to be run as a museum. The house was declared a National Heritage Site in 1999.",
     "aboutSource": "https://en.wikipedia.org/wiki/Mandela_House",
@@ -4741,7 +4696,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Saxon Hotel, Villas & Spa",
@@ -4755,7 +4710,7 @@
       {
         "url": "https://www.saxon.co.za/contact/",
         "title": "Contact | Saxon Hotel",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -4777,7 +4732,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Sandhurst",
     "coordinateRole": "city",
     "facts": {
@@ -4851,7 +4806,7 @@
       {
         "url": "https://www.sowetotheatre.com/contact-us/",
         "title": "Contact Us – Soweto Theatre",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -4873,7 +4828,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Soweto",
     "coordinateRole": "venue",
     "facts": {
@@ -4946,9 +4901,9 @@
     "sources": [
       {
         "url": "https://www.jhbcityparksandzoo.com/services-facilities/botanical-gardens/about",
-        "title": "Johannesburg Botanical Garden",
-        "fetchedAt": "2026-10-08",
-        "status": "unavailable"
+        "title": "The Johannesburg Botanical Gardens | JCPZ",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Johannesburg_Botanical_Garden",
@@ -4975,7 +4930,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Johannesburg_Botanical_Garden",
     "about": "The Johannesburg Botanical Garden is located in the suburb of Emmarentia in Johannesburg, South Africa. The gardens grew out of a large rose garden that was established in 1964 (becoming known locally as the \"Rose Garden\") and subsequently expanded from 1969 to cover an area of around 125 hectares (1.25 km2). It is administered by Johannesburg City Parks. The Emmarentia Dam is situated immediately to the east of the garden and shares its extensive acreage.",
     "aboutSource": "https://en.wikipedia.org/wiki/Johannesburg_Botanical_Garden",
@@ -5038,7 +4993,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Sognage",
@@ -5052,7 +5007,7 @@
       {
         "url": "https://www.sognage.com/contact",
         "title": "CONTACT | Sognage",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -5074,7 +5029,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Strijdompark",
     "coordinateRole": "city",
     "facts": {
@@ -5148,7 +5103,7 @@
       {
         "url": "https://www.castleofgoodhope.co.za/",
         "title": "Home",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -5185,7 +5140,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Castle_of_Good_Hope",
     "about": "The Castle of Good Hope (Dutch: Kasteel de Goede Hoop; Afrikaans: Kasteel die Goeie Hoop) is a 17th century pentagonal bastion fort in Cape Town, South Africa. Originally located on the coastline of Table Bay, following land reclamation in the Foreshore area, the fort is now located inland. The Castle is surrounded by a canal. In 1936, the Castle was declared a historical monument.",
     "aboutSource": "https://en.wikipedia.org/wiki/Castle_of_Good_Hope",
@@ -5248,7 +5203,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Cape Grace",
@@ -5262,9 +5217,9 @@
     "sources": [
       {
         "url": "https://www.capegrace.com/contact-us/",
-        "title": "Cape Grace",
-        "fetchedAt": "2026-10-08",
-        "status": "unavailable"
+        "title": "Contact Us | Cape Grace Hotel",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
       }
     ],
     "coords": [
@@ -5303,7 +5258,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "V&A Waterfront",
     "coordinateRole": "venue",
     "facts": {
@@ -5376,7 +5331,7 @@
       {
         "url": "https://www.themasque.co.za/",
         "title": "The Masque Theatre | Live theatre Cape Town | 37 Main Road, Muizenberg, Cape Town, South Africa",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -5416,7 +5371,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Muizenberg",
     "coordinateRole": "city",
     "facts": {
@@ -5490,7 +5445,7 @@
       {
         "url": "https://www.ardernegardens.org.za/location",
         "title": "Location / Contact",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -5536,7 +5491,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Arderne_Gardens",
     "about": "Arderne Gardens is a public park and arboretum in Claremont, Cape Town, located in the Western Cape of South Africa.  It was established in 1845 by Ralph Henry Arderne, a timber merchant originally from Cheshire, England. In 1979, the park was named a South African Provincial Heritage Site. It is now a popular venue for wedding photographs.",
     "aboutSource": "https://en.wikipedia.org/wiki/Arderne_Gardens",
@@ -5599,7 +5554,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Harringtons",
@@ -5613,7 +5568,7 @@
       {
         "url": "https://www.harringtonstreet.co.za/harringtons",
         "title": "Harringtons Cape Town",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -5653,7 +5608,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Cape Town",
     "coordinateRole": "city",
     "facts": {
@@ -5727,7 +5682,7 @@
       {
         "url": "https://phansi.online/about/",
         "title": "Phansi Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       }
     ],
@@ -5749,7 +5704,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Glenwood",
     "coordinateRole": "city",
     "facts": {
@@ -5822,7 +5777,7 @@
       {
         "url": "https://www.southernsun.com/southern-sun-elangeni-maharani/contact-us",
         "title": "Southern Sun Elangeni & Maharani | Durban North Beach",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -5850,7 +5805,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "goodToKnow": [
       {
         "label": "Free unlimited Wi-Fi",
@@ -5939,9 +5894,9 @@
     "sources": [
       {
         "url": "https://events.durbantheatre.com/",
-        "title": "Durban Theatre",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Rhumbelow Theatre",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -5962,7 +5917,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Umbilo",
     "coordinateRole": "city",
     "facts": {
@@ -6035,9 +5990,9 @@
     "sources": [
       {
         "url": "https://visitdurban.travel/space/kenneth-stainbank-nature-reserve",
-        "title": "Kenneth Stainbank Nature Reserve - Durban Tourism",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Kenneth Stainbank Nature Reserve",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Kenneth_Stainbank_Nature_Reserve",
@@ -6061,19 +6016,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
         "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
         "src": "/images/c4266986faf9.jpg"
-      },
-      {
-        "alt": "Photo of Splendorous Hornet Handmaiden Moth uploaded from iNaturalist.",
-        "author": "(c) suncana, some rights reserved (CC BY)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Euchromia_folletii,_Kenneth_Steinbank_Nature_Reserve_imported_from_iNaturalist_photo_119149147.jpg",
-        "filename": "Euchromia folletii, Kenneth Steinbank Nature Reserve imported from iNaturalist photo 119149147.jpg",
-        "src": "/images/88055931e463.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "wikipedia": "https://en.wikipedia.org/wiki/Kenneth_Stainbank_Nature_Reserve",
     "about": "Kenneth Stainbank Nature Reserve is a 253 hectare protected area in the suburb of Yellowwood Park, Durban, South Africa. The park was proclaimed in 1963, after land was donated by Mr Kenneth Stainbank for its purpose. The reserve is managed by Ezemvelo KZN Wildlife.",
     "aboutSource": "https://en.wikipedia.org/wiki/Kenneth_Stainbank_Nature_Reserve",
@@ -6136,7 +6082,7 @@
         "confidence": "editorial-estimate"
       }
     },
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "name": "Tiger Tiger Durban",
@@ -6150,7 +6096,7 @@
       {
         "url": "https://www.tigertiger.durban/contact-us/",
         "title": "Contact Us – Tiger Tiger Durban | Premier Nightclub & Events in Durban",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -6169,28 +6115,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg",
         "filename": "Durban from the Balcony (Dennis Sylvester Hurd) 1.jpg",
         "src": "/images/c4266986faf9.jpg"
-      },
-      {
-        "alt": "Wikivoyage banner image for Diving in Durban",
-        "author": "Peter Southwood",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chains_Durban_banner_Tiger_angelfish.JPG",
-        "filename": "Chains Durban banner Tiger angelfish.JPG",
-        "src": "/images/5b9c7148c688.jpg"
-      },
-      {
-        "alt": "Wallenius Wilhelmsen Logistics car carrier Tiger entering the inner harbour of the Port of Fremantle, Western Australia, at the conclusion of a voyage from Durban.  Next destinatio",
-        "author": "Bahnfrend",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tiger,_Fremantle,_2018_(02).jpg",
-        "filename": "Tiger, Fremantle, 2018 (02).jpg",
-        "src": "/images/3aa1262e3ebe.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Durban",
     "coordinateRole": "city",
     "facts": {
@@ -6264,7 +6192,7 @@
       {
         "url": "https://www.freedompark.co.za/",
         "title": "Freedom Park Heritage Site",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -6310,7 +6238,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Salvokop",
     "coordinateRole": "city",
     "facts": {
@@ -6373,7 +6301,7 @@
     "about": "Freedom Park is a park situated on Salvokop in Pretoria. It includes a memorial with a list of the names of those killed in the South African Wars, World War I, World War II as well as during the apartheid era.\n\n  \nIn March 2009, twenty-four deceased liberation struggle heroes were proposed for inclusion on the memorial. Some of the national leaders chosen include Steve Biko, Oliver Tambo, Helen Joseph, Chris Hani, Albert Lutuli, and Bram Fischer.",
     "aboutSource": "https://en.wikipedia.org/wiki/Freedom_Park_%28South_Africa%29",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "pretoria",
@@ -6388,7 +6316,7 @@
       {
         "url": "https://www.sanbi.org/gardens/pretoria/",
         "title": "Pretoria - SANBI",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -6434,7 +6362,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Brummeria",
     "coordinateRole": "venue",
     "facts": {
@@ -6497,7 +6425,7 @@
     "about": "The Pretoria National Botanical Garden is one of South Africa's nine National Botanical Gardens. The garden is wedged between Pretoria Road and Cussonia Avenue in Brummeria, in eastern Pretoria, Gauteng, and flanks a central rocky ridge that runs from east to west. The 76 hectares (0.76 km2) garden was established in 1946, and of late hosts the headquarters of the South African National Biodiversity Institute.",
     "aboutSource": "https://en.wikipedia.org/wiki/Pretoria_National_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "pretoria",
@@ -6512,7 +6440,7 @@
       {
         "url": "https://www.statetheatre.co.za/ticket-loyalties/contact-us/",
         "title": "Contact Us – State Theatre",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -6531,28 +6459,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Uniegebou.jpg",
         "filename": "Uniegebou.jpg",
         "src": "/images/21fdadf83ed7.jpg"
-      },
-      {
-        "alt": "At State Theatre (Liefling)",
-        "author": "JBB199400",
-        "license": "CC0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Liza_Br%C3%B6nner_-_State_Theatre_02.jpg",
-        "filename": "Liza Brönner - State Theatre 02.jpg",
-        "src": "/images/10b3b1dc5cd9.jpg"
-      },
-      {
-        "alt": "The South African State Theatre",
-        "author": "None",
-        "license": "CC0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:South_African_State_Theatre12.jpg",
-        "filename": "South African State Theatre12.jpg",
-        "src": "/images/6cc7068c0cc5.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Pretoria Central",
     "coordinateRole": "venue",
     "facts": {
@@ -6626,7 +6536,7 @@
       {
         "url": "https://stelmus.co.za/",
         "title": "Stellenbosch Museum | Stellenbosch Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -6678,7 +6588,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "district": "Stellenbosch",
     "coordinateRole": "city",
     "facts": {
@@ -6747,7 +6657,7 @@
     "about": "Stellenbosch Museum is a cultural history museum in the centre of Stellenbosch, South Africa.  It was proclaimed a museum on 23 March 1962 and is a province-aided museum which receives support from the Government of the Western Cape. The museum includes four period houses, which depict the way people lived and the difference in architectural styles over the periods illustrated (the Village Museum). It also includes a historical powder magazine and a toy museum.",
     "aboutSource": "https://en.wikipedia.org/wiki/Stellenbosch_Museum",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12",
+    "aboutCheckedAt": "2026-10-19",
     "visitNote": "The museum consists of four historic houses. Confirm the starting point and current admission with the museum; its administration address differs from the house entrances."
   },
   {
@@ -6762,9 +6672,9 @@
     "sources": [
       {
         "url": "https://www.sun.ac.za/english/entities/botanical-garden",
-        "title": "Stellenbosch University | Forward Together",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Stellenbosch University Botanical Garden",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Stellenbosch_University_Botanical_Garden",
@@ -6809,7 +6719,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Corner Neethling and Van Riebeeck Streets",
     "coordinateRole": "city",
     "facts": {
@@ -6872,7 +6782,7 @@
     "about": "The Stellenbosch University Botanical Garden, located in the historical center of Stellenbosch, is the oldest university botanical garden in South Africa. The Garden is relatively small and houses an enormous diversity of plants, both indigenous to South Africa and introduced species. It is open to the public.",
     "aboutSource": "https://en.wikipedia.org/wiki/Stellenbosch_University_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "stellenbosch",
@@ -6885,9 +6795,9 @@
     "sources": [
       {
         "url": "https://www.marriott.com/en-us/hotels/cptst-protea-hotel-stellenbosch/overview/",
-        "title": "Protea Hotel Stellenbosch and Conference Centre | Locally Inspired Hotel",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Protea Hotel Stellenbosch",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -6908,7 +6818,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Technopark",
     "coordinateRole": "venue",
     "facts": {
@@ -6982,7 +6892,7 @@
       {
         "url": "https://www.tathamartgallery.org.za/visit",
         "title": "Tatham Art Gallery",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       }
     ],
@@ -7004,7 +6914,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "opposite City Hall",
     "coordinateRole": "venue",
     "facts": {
@@ -7091,7 +7001,7 @@
       {
         "url": "https://www.sanbi.org/gardens/kwazulu-natal/",
         "title": "KwaZulu-Natal - SANBI",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -7137,7 +7047,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Prestbury",
     "coordinateRole": "city",
     "facts": {
@@ -7200,7 +7110,7 @@
     "about": "The KwaZulu-Natal National Botanical Garden is situated along Mayor's Walk, in the western suburbs of Pietermaritzburg, South Africa.",
     "aboutSource": "https://en.wikipedia.org/wiki/KwaZulu-Natal_National_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "pietermaritzburg",
@@ -7214,7 +7124,7 @@
       {
         "url": "https://www.southernsun.com/golden-horse-hotel",
         "title": "Southern Sun | Hotels, Dining, Events | Best Rates Direct",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -7236,7 +7146,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Scottsville",
     "coordinateRole": "city",
     "facts": {
@@ -7309,8 +7219,8 @@
     "sources": [
       {
         "url": "https://www.nmbt.co.za/listing/donkin_reserve_pyramid_and_lighthouse.html",
-        "title": "Nelson Mandela Bay Tourism: Donkin Reserve",
-        "fetchedAt": "2026-10-15",
+        "title": "Donkin Reserve - Pyramid and Lighthouse -  Nelson Mandela Bay (Port Elizabeth)",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -7329,28 +7239,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:City_Hall_Port_Elizabeth-003.jpg",
         "filename": "City Hall Port Elizabeth-003.jpg",
         "src": "/images/0e33f1d0fa3f.jpg"
-      },
-      {
-        "alt": "Donkin Memorial and Lighthouse in Port Elizabeth, South Africa",
-        "author": "Leo za1",
-        "license": "CC BY-SA 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:DonkinMemorialandLighthouse-001.jpg",
-        "filename": "DonkinMemorialandLighthouse-001.jpg",
-        "src": "/images/9bdcc020901a.jpg"
-      },
-      {
-        "alt": "Donkin Hill Lighthouse, Port Elizabeth, built in 1861, rebuilt in 1930 and inactive since 1973",
-        "author": "Ossewa",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Donkin_Hill_Lighthouse.jpg",
-        "filename": "Donkin Hill Lighthouse.jpg",
-        "src": "/images/3becf730ab6a.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "district": "Central",
     "coordinateRole": "venue",
     "facts": {
@@ -7425,7 +7317,7 @@
       {
         "url": "https://www.bayworld.co.za/",
         "title": "Bayworld  | Port Elizabeth",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -7447,7 +7339,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Humewood",
     "coordinateRole": "venue",
     "facts": {
@@ -7520,7 +7412,7 @@
       {
         "url": "https://www.suninternational.com/luxury-collection/boardwalk",
         "title": "Boardwalk | Luxury Hotel in Gqeberha - Sun International",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -7542,7 +7434,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Summerstrand",
     "coordinateRole": "city",
     "facts": {
@@ -7614,9 +7506,9 @@
     "id": "oliewenhuis-art-museum",
     "sources": [
       {
-        "url": "https://nationalmuseum.co.za/visitor-information/",
-        "title": "Oliewenhuis official visitor information",
-        "fetchedAt": "2026-10-15",
+        "url": "https://nationalmuseum.co.za/oliewenhuis-art-museum/",
+        "title": "Oliewenhuis Art Museum Announces Valentine’s Couples Competition 2025 | National Museum",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -7635,28 +7527,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein,_Free_State,_South_Africa_(20349855518).jpg",
         "filename": "Bloemfontein, Free State, South Africa (20349855518).jpg",
         "src": "/images/77657b7bb74d.jpg"
-      },
-      {
-        "alt": "The northeastern entrance of Oliewenhuis Art Museum, Bloemfontein, Free State, South Africa",
-        "author": "Ymblanter",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_Oliewenhuis_Art_Museum_northeastern_entrance.jpg",
-        "filename": "Bloemfontein Oliewenhuis Art Museum northeastern entrance.jpg",
-        "src": "/images/c29d70ca97f4.jpg"
-      },
-      {
-        "alt": "Oliewenhuis Art Museum seen from the east, Bloemfontein, Free State, South Africa",
-        "author": "Ymblanter",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bloemfontein_Oliewenhuis_Art_Museum_seen_from_the_east.jpg",
-        "filename": "Bloemfontein Oliewenhuis Art Museum seen from the east.jpg",
-        "src": "/images/419b8b65f9cb.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "district": "Waverley",
     "coordinateRole": "city",
     "facts": {
@@ -7742,7 +7616,7 @@
       {
         "url": "https://www.sanbi.org/gardens/free-state/",
         "title": "Free State - SANBI",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -7779,7 +7653,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "off Dan Pienaar Drive",
     "coordinateRole": "venue",
     "facts": {
@@ -7842,7 +7716,7 @@
     "about": "The Free State National Botanical Garden, located just outside Bloemfontein covers 70 hectares, and is home to about 400 species of plants, largely native to Free State and Northern Cape Provinces and Lesotho. Near Bain's Vlei, the garden was established in 1965, around 10 km north of downtown between picturesque dolerite rocks. 140 bird species, 50 mammal species, and 50 reptile species live in the park. A wild olive tree (Olea europaea subsp.",
     "aboutSource": "https://en.wikipedia.org/wiki/Free_State_National_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "bloemfontein",
@@ -7857,7 +7731,7 @@
       {
         "url": "https://pacofs.co.za/",
         "title": "PACOFS",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -7885,7 +7759,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Bloemfontein Central",
     "coordinateRole": "city",
     "facts": {
@@ -7948,7 +7822,7 @@
     "about": "The Sand du Plessis Theatre (Afrikaans: Sand du Plessis-teaterkompleks) is located on Markgraaff Street, Bloemfontein, South Africa. It is a large, multipurpose theater center opened on August 1, 1985 as the home of the Regional Council of Sukovs (Orange Free State Performing Arts Society). It covers a whole city block and includes two formal spaces. The theatre is named after Sand du Plessis, former administrator of Free State.",
     "aboutSource": "https://en.wikipedia.org/wiki/Sand_du_Plessis_Theatre",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "mbombela",
@@ -7963,7 +7837,7 @@
       {
         "url": "https://www.sanbi.org/gardens/lowveld/",
         "title": "Lowveld - SANBI",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       },
       {
@@ -8015,7 +7889,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "district": "Mbombela",
     "coordinateRole": "venue",
     "facts": {
@@ -8090,7 +7964,7 @@
     "about": "The Lowveld National Botanical Garden, one of the nine National Botanical Gardens of South Africa is located just outside Mbombela, Mpumalanga at the confluence of the Crocodile River and Nels River, which are separated by an extensive promontory. A lookout point at the far end of the garden, reached through a rainforest trail (surrounded by clivias, fig trees, and baobab) allows views of the river in the deep gorge. \n600 native and 2,000 imported plant species grow in the garden. Almost 650 native tree species are found there as well.",
     "aboutSource": "https://en.wikipedia.org/wiki/Lowveld_National_Botanical_Garden",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "mbombela",
@@ -8105,7 +7979,7 @@
       {
         "url": "https://sudwalacaves.com/",
         "title": "Sudwala Caves",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       },
       {
@@ -8133,7 +8007,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "outside Mbombela",
     "coordinateRole": "venue",
     "facts": {
@@ -8196,7 +8070,7 @@
     "about": "The Sudwala Caves in Mpumalanga, South Africa, are set in Precambrian dolomite rock, which was first laid down about 2.8 billion years ago. The caves themselves formed about 240 million years ago. They are one of the oldest caves in the world.\nThere are a number of speleothem structures in the cave, known by names such as the \"Lowveld Rocket\", \"Samson's Pillar\", and the \"Screaming Monster\"; some have been dated to 200 million years old.",
     "aboutSource": "https://en.wikipedia.org/wiki/Sudwala_Caves",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "mbombela",
@@ -8210,7 +8084,7 @@
       {
         "url": "https://www.southernsun.com/stayeasy-mbombela",
         "title": "Mbombela Budget-Friendly Hotel | StayEasy Mbombela",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -8232,7 +8106,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Riverside Park",
     "coordinateRole": "venue",
     "facts": {
@@ -8305,9 +8179,9 @@
     "sources": [
       {
         "url": "https://www.radissonhotels.com/en-us/destination/south-africa/polokwane/bakone-malapa-open-air-museum",
-        "title": "Bakone Malapa Open-Air Museum, Polokwane | Radisson Hotels",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Bakone Malapa Open-Air Museum",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -8328,7 +8202,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "approximately 9 km outside Polokwane",
     "coordinateRole": "city",
     "facts": {
@@ -8401,7 +8275,7 @@
       {
         "url": "https://www.polokwane.gov.za/wp-content/uploads/Visitors-Guide-1.pdf",
         "title": "Polokwane Art Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -8420,28 +8294,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polokwane,_Limpopo,_South_Africa_(2417714241).jpg",
         "filename": "Polokwane, Limpopo, South Africa (2417714241).jpg",
         "src": "/images/980bb25306f7.jpg"
-      },
-      {
-        "alt": "Vue du Limpopo en Afrique du Sud.",
-        "author": "South African Tourism from South Africa",
-        "license": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polokwane_Art_Museum,_Limpopo,_South_Africa_(10190436294).jpg",
-        "filename": "Polokwane Art Museum, Limpopo, South Africa (10190436294).jpg",
-        "src": "/images/d01e6c3d9452.jpg"
-      },
-      {
-        "alt": "Vue du Limpopo en Afrique du Sud.",
-        "author": "South African Tourism from South Africa",
-        "license": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polokwane_Art_Museum,_Limpopo,_South_Africa_(10190537725).jpg",
-        "filename": "Polokwane Art Museum, Limpopo, South Africa (10190537725).jpg",
-        "src": "/images/bafbfec3709e.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Polokwane",
     "coordinateRole": "venue",
     "facts": {
@@ -8514,7 +8370,7 @@
       {
         "url": "https://www.suninternational.com/meropa/hotel/",
         "title": "Sun International",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -8536,7 +8392,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Roodepoort Road",
     "coordinateRole": "venue",
     "facts": {
@@ -8608,15 +8464,21 @@
     "id": "the-big-hole",
     "sources": [
       {
-        "url": "https://en.wikipedia.org/wiki/Big_Hole",
-        "title": "Big Hole",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "url": "https://thebighole.com/",
+        "title": "The Big Hole",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://thebighole.com/visitors-info/",
         "title": "The Big Hole official visitor information",
         "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Big_Hole",
+        "title": "Big Hole",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -8647,7 +8509,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "district": "Kimberley",
     "coordinateRole": "city",
     "facts": {
@@ -8734,7 +8596,7 @@
     "about": "The Kimberley Mine or Tim Kuilmine (Afrikaans: Groot Gat, lit. 'Big Hole') is an open-pit and underground mine in Kimberley, South Africa. It has been considered the deepest hole excavated by hand, contending the title with Jagersfontein Mine.",
     "aboutSource": "https://en.wikipedia.org/wiki/Big_Hole",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12",
+    "aboutCheckedAt": "2026-10-19",
     "visitNote": "Arrive before the hourly tour to buy tickets. Tour times and access to individual areas can change."
   },
   {
@@ -8750,7 +8612,7 @@
       {
         "url": "https://www.museumsnc.co.za/",
         "title": "McGregor Museum",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "unavailable"
       },
       {
@@ -8796,7 +8658,7 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Kimberley",
     "coordinateRole": "venue",
     "facts": {
@@ -8859,7 +8721,7 @@
     "about": "The McGregor Museum in Kimberley, South Africa, originally known as the Alexander McGregor Memorial Museum, is a multidisciplinary museum which serves Kimberley and the Northern Cape, established in 1907.",
     "aboutSource": "https://en.wikipedia.org/wiki/McGregor_Museum",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "kimberley",
@@ -8872,9 +8734,9 @@
     "sources": [
       {
         "url": "https://www.marriott.com/en-us/hotels/kimki-protea-hotel-kimberley/overview/",
-        "title": "Protea Hotel Kimberley | Locally Inspired Hotel",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Protea Hotel Kimberley",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -8885,7 +8747,7 @@
     "coordinateAccuracy": "city",
     "images": [],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "West Circular Road",
     "coordinateRole": "city",
     "facts": {
@@ -8959,7 +8821,7 @@
       {
         "url": "https://www.nwgov.co.za/tourism",
         "title": "North West Government Online™ | Tourism",
-        "fetchedAt": "2026-10-08",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -8978,28 +8840,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mafikeng,_North_West,_South_Africa_(20506154516).jpg",
         "filename": "Mafikeng, North West, South Africa (20506154516).jpg",
         "src": "/images/ca5c02e8fc23.jpg"
-      },
-      {
-        "alt": "Mahikeng museum",
-        "author": "South African Tourism from South Africa",
-        "license": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mafikeng,_North_West,_South_Africa_(20343201878).jpg",
-        "filename": "Mafikeng, North West, South Africa (20343201878).jpg",
-        "src": "/images/303430a97940.jpg"
-      },
-      {
-        "alt": "Mahikeng museum",
-        "author": "South African Tourism from South Africa",
-        "license": "CC BY 2.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mafikeng,_North_West,_South_Africa_(20522649222).jpg",
-        "filename": "Mafikeng, North West, South Africa (20522649222).jpg",
-        "src": "/images/578eba125aea.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Mahikeng",
     "coordinateRole": "venue",
     "facts": {
@@ -9072,9 +8916,9 @@
     "sources": [
       {
         "url": "https://mmabathopalms.co.za/nearby-attractions/",
-        "title": "Nearby Attractions | Mmabatho Palms",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Mafikeng Game Reserve",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://en.wikipedia.org/wiki/Mafikeng_Game_Reserve",
@@ -9098,28 +8942,10 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mafikeng,_North_West,_South_Africa_(20506154516).jpg",
         "filename": "Mafikeng, North West, South Africa (20506154516).jpg",
         "src": "/images/ca5c02e8fc23.jpg"
-      },
-      {
-        "alt": "Mafikeng Game Reserve, Mahikeng, North West Province, SOUTH AFRICA",
-        "author": "Bernard DUPONT from FRANCE",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Wildebeest_(Connochaetes_gnou)_hidden_by_tall_grass_..._(55078218950).jpg",
-        "filename": "Black Wildebeest (Connochaetes gnou) hidden by tall grass ... (55078218950).jpg",
-        "src": "/images/33aa0f23917b.jpg"
-      },
-      {
-        "alt": "Mafikeng Game Reserve, Mahikeng, North West Province, SOUTH AFRICA",
-        "author": "Bernard DUPONT from FRANCE",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Black_Wildebeest_and_Blesbok_..._(55076956442).jpg",
-        "filename": "Black Wildebeest and Blesbok ... (55076956442).jpg",
-        "src": "/images/12ff050ca04a.jpg"
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Mahikeng",
     "coordinateRole": "venue",
     "facts": {
@@ -9182,7 +9008,7 @@
     "about": "Mafikeng Game Reserve is a game reserve in South Africa. Located in the city of Mafikeng, the reserve includes 46 km2 (18 sq mi) of Kalahari and Acacia bushveld, serving as the home of rhinoceroses, giraffes, gemsboks, buffaloes, wildebeests and springboks.",
     "aboutSource": "https://en.wikipedia.org/wiki/Mafikeng_Game_Reserve",
     "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "aboutCheckedAt": "2026-10-12"
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "city": "mahikeng",
@@ -9195,9 +9021,9 @@
     "sources": [
       {
         "url": "https://mmabathopalms.co.za/peermont-mmabatho-palms-hotel/",
-        "title": "Mmabatho Palms Hotel | 4-Star Luxury Villas in Mahikeng",
-        "fetchedAt": "2026-10-08",
-        "status": "fetched"
+        "title": "Mmabatho Palms Hotel",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       }
     ],
     "coords": [
@@ -9218,7 +9044,7 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-08",
+    "checkedAt": "2026-10-19",
     "district": "Mahikeng",
     "coordinateRole": "city",
     "facts": {
@@ -9288,12 +9114,12 @@
     "address": "Lower Cable Station, Tafelberg Road, Cape Town",
     "website": "https://www.tablemountain.net/",
     "coords": [
-      18.4241,
-      -33.9249
+      18.409883,
+      -33.96218
     ],
-    "coordinateAccuracy": "city",
+    "coordinateAccuracy": "venue",
     "coordinateRole": "city",
-    "coordinateSource": "City reference from Citylit city catalog; venue coordinates not verified",
+    "coordinateSource": "https://en.wikipedia.org/wiki/Table_Mountain",
     "images": [
       {
         "alt": "Taffelberget och Kapstaden i Sydafrika, sett från en strand vid stadsdelen Bloubergstrand",
@@ -9315,12 +9141,18 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "sources": [
       {
         "url": "https://www.tablemountain.net/",
-        "title": "Table Mountain Aerial Cableway official website",
-        "fetchedAt": "2026-10-15",
+        "title": "Table Mountain",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Table_Mountain",
+        "title": "Table Mountain",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -9380,7 +9212,12 @@
         "confidence": "editorial-estimate"
       }
     },
-    "visitNote": "Cableway operation depends on the weather. Tickets do not guarantee that it is running; check the operator on the day. Hiking is a separate activity that needs suitable preparation."
+    "visitNote": "Cableway operation depends on the weather. Tickets do not guarantee that it is running; check the operator on the day. Hiking is a separate activity that needs suitable preparation.",
+    "wikipedia": "https://en.wikipedia.org/wiki/Table_Mountain",
+    "about": "Table Mountain (Khoekhoe: Huriǂoaxa, lit. 'sea-emerging'; Afrikaans: Tafelberg) is a flat-topped mountain forming a prominent landmark overlooking the city of Cape Town in South Africa.\nIt is a significant tourist attraction, with many visitors either using the cableway or hiking to the top. The mountain has 2,285 plant species, of which around 80% are fynbos (Afrikaans for 'fine bush'). Table Mountain National Park is the most visited national park in South Africa, attracting 4.2 million people every year for various activities.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Table_Mountain",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "voortrekker-monument",
@@ -9427,18 +9264,24 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "sources": [
       {
         "url": "https://vtm.org.za/en/contact-us/",
-        "title": "Voortrekker Monument contact and visitor information",
-        "fetchedAt": "2026-10-15",
-        "status": "fetched"
+        "title": "Voortrekker Monument",
+        "fetchedAt": "2026-10-19",
+        "status": "unavailable"
       },
       {
         "url": "https://vtm.org.za/entrance-fees/",
         "title": "Voortrekker Monument official entrance fees",
         "fetchedAt": "2026-10-15",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Voortrekker_Monument",
+        "title": "Voortrekker Monument",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -9509,7 +9352,12 @@
         "checkedAt": "2026-10-15",
         "confidence": "verified"
       }
-    }
+    },
+    "wikipedia": "https://en.wikipedia.org/wiki/Voortrekker_Monument",
+    "about": "The Voortrekker Monument is located just south of Pretoria in South Africa. The granite structure is located on a hilltop, and was raised to commemorate the Voortrekkers who left the Cape Colony between 1835 and 1854. It was designed by the architect Gerard Moerdijk.\nOn 8 July 2011, the Voortrekker Monument was declared a National Heritage Site by the South African Heritage Resource Agency.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Voortrekker_Monument",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "route-67",
@@ -9547,12 +9395,12 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "sources": [
       {
         "url": "https://www.nmbt.co.za/listing/route_67.html",
-        "title": "Nelson Mandela Bay Tourism: Route 67",
-        "fetchedAt": "2026-10-15",
+        "title": "Route 67 -  Nelson Mandela Bay (Port Elizabeth)",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -9641,12 +9489,18 @@
       }
     ],
     "imageContext": "venue",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "sources": [
       {
         "url": "https://whag.co.za/contact-us",
-        "title": "William Humphreys Art Gallery contact information",
-        "fetchedAt": "2026-10-15",
+        "title": "William Humphreys Art Gallery",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery",
+        "title": "William Humphreys Art Gallery",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -9711,7 +9565,12 @@
         "checkedAt": "2026-10-15",
         "confidence": "verified"
       }
-    }
+    },
+    "wikipedia": "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery",
+    "about": "The William Humphreys Art Gallery, in Kimberley, South Africa, was opened in 1952 and named after its principal benefactor, William Benbow Humphreys (1889–1965).",
+    "aboutSource": "https://en.wikipedia.org/wiki/William_Humphreys_Art_Gallery",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "polokwane-game-reserve",
@@ -9740,12 +9599,18 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "sources": [
       {
         "url": "https://www.polokwane.gov.za/things-to-do/",
-        "title": "Polokwane Municipality: things to do",
-        "fetchedAt": "2026-10-15",
+        "title": "Things to do - Polokwane Municipality",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Polokwane_Game_Reserve",
+        "title": "Polokwane Game Reserve",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -9805,7 +9670,12 @@
         "confidence": "editorial-estimate"
       }
     },
-    "visitNote": "The municipality lists the reserve as a local attraction. Current gate times, fees and route availability need confirmation with the reserve. The catalog pin is a city reference, not its entrance."
+    "visitNote": "The municipality lists the reserve as a local attraction. Current gate times, fees and route availability need confirmation with the reserve. The catalog pin is a city reference, not its entrance.",
+    "wikipedia": "https://en.wikipedia.org/wiki/Polokwane_Game_Reserve",
+    "about": "Polokwane Game Reserve, formerly Pietersburg Nature Reserve, is situated near Polokwane in the Limpopo province of South Africa. It is 2800 ha in size, making it one of the largest municipal game reserves in South Africa. The reserve entrance is near its northern limit, about 1 km south of the N1 freeway. It is accessed via Silicon Street and an entrance fee is charged.",
+    "aboutSource": "https://en.wikipedia.org/wiki/Polokwane_Game_Reserve",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "aboutCheckedAt": "2026-10-19"
   },
   {
     "id": "national-museum-bloemfontein",
@@ -9834,12 +9704,18 @@
       }
     ],
     "imageContext": "city",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "sources": [
       {
         "url": "https://nationalmuseum.co.za/",
-        "title": "National Museum Bloemfontein official website",
-        "fetchedAt": "2026-10-15",
+        "title": "National Museum | Bloemfontein",
+        "fetchedAt": "2026-10-19",
+        "status": "fetched"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/National_Museum%2C_Bloemfontein",
+        "title": "National Museum, Bloemfontein",
+        "fetchedAt": "2026-10-19",
         "status": "fetched"
       }
     ],
@@ -9899,6 +9775,11 @@
         "confidence": "editorial-estimate"
       }
     },
-    "visitNote": "Check current opening days and admission with the National Museum before travelling; hours differ from those of Oliewenhuis Art Museum."
+    "visitNote": "Check current opening days and admission with the National Museum before travelling; hours differ from those of Oliewenhuis Art Museum.",
+    "wikipedia": "https://en.wikipedia.org/wiki/National_Museum%2C_Bloemfontein",
+    "about": "The National Museum in Bloemfontein dates back to the 1870s, when its collections and displays comprised mainly rarities from around the world. It was established on 20 July 1877 and opened to the public on 20 May 1878. The old Raadsaal building was made available by the then Free State Volksraad for hosting the Museum collections. A new museum building was completed in 1913 and the official opening took place in 1915.",
+    "aboutSource": "https://en.wikipedia.org/wiki/National_Museum%2C_Bloemfontein",
+    "aboutLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "aboutCheckedAt": "2026-10-19"
   }
 ]

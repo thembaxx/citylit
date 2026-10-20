@@ -14,14 +14,13 @@ const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 function smoke(
   fetcher: typeof fetch,
   url = "https://citylit.vercel.app",
-  bypass?: string,
-  environment = "Preview",
+  environment?: "Production",
 ) {
   const states: string[] = [];
   const run = new AsyncFunction("context", "github", "core", "fetch", "process", script)(
     {
       repo: { owner: "thembaxx", repo: "citylit" },
-      payload: { deployment: { sha: "a".repeat(40), environment } },
+      payload: environment ? { deployment: { sha: "a".repeat(40), environment } } : {},
       runId: 1,
     },
     {
@@ -31,7 +30,7 @@ function smoke(
     },
     { info: () => {} },
     fetcher,
-    { env: { DEPLOYMENT_URL: url, VERCEL_AUTOMATION_BYPASS_SECRET: bypass } },
+    { env: { DEPLOYMENT_URL: url } },
   ) as Promise<void>;
   return { run, states };
 }
@@ -46,7 +45,8 @@ test("deployment smoke validates real production routes before publishing succes
     return fetch(new URL(url.pathname + url.search, baseURL), init);
   });
   await result.run;
-  expect(result.states).toEqual(["pending", "success"]);
+  // Manual checks have no deployment commit on which to publish a status.
+  expect(result.states).toEqual([]);
   expect(paths).toContain("/api/health");
   expect(paths).toContain("/not-a-city");
   expect(paths.some((path) => path.startsWith("/_next/static/"))).toBe(true);
@@ -61,6 +61,7 @@ test("deployment smoke rejects unsafe URLs without requesting them", async () =>
     "https://citylit.vercel.app.evil.example",
     authenticated.href,
     "https://unrelated.vercel.app",
+    "https://citylit-preview-thembaxxs-projects.vercel.app",
     "https://citylit.vercel.app:8443",
   ]) {
     let calls = 0;
@@ -68,47 +69,39 @@ test("deployment smoke rejects unsafe URLs without requesting them", async () =>
       calls++;
       return new Response();
     }, url);
-    await expect(result.run).rejects.toThrow("HTTPS Vercel deployments");
+    await expect(result.run).rejects.toThrow("public Citylit production URL");
     expect(calls).toBe(0);
-    expect(result.states).toEqual(["failure"]);
+    expect(result.states).toEqual([]);
   }
 });
 
-test("protected previews fail clearly without following the sign-in redirect", async () => {
+test("protected production fails clearly without following the sign-in redirect", async () => {
   const result = smoke(
     async () =>
       new Response(null, {
         status: 302,
-        headers: { location: "https://vercel.com/sso-api?url=preview" },
+        headers: { location: "https://vercel.com/sso-api?url=production" },
       }),
   );
-  await expect(result.run).rejects.toThrow("configure VERCEL_AUTOMATION_BYPASS_SECRET");
-  expect(result.states).toEqual(["pending", "failure"]);
+  await expect(result.run).rejects.toThrow("production deployment must be publicly accessible");
+  expect(result.states).toEqual([]);
 });
 
-test("bypass header is confined to the original deployment origin", async () => {
+test("production smoke rejects preview redirects without sending a bypass header", async () => {
   const origins: string[] = [];
-  const result = smoke(
-    async (input, init) => {
-      const url = new URL(String(input));
-      origins.push(url.origin);
-      const header = new Headers(init?.headers).get("x-vercel-protection-bypass");
-      if (origins.length === 1) {
-        expect(header).toBe("fixture");
-        return new Response(null, {
-          status: 302,
-          headers: { location: "https://citylit-another-thembaxxs-projects.vercel.app/" },
-        });
-      }
-      expect(header).toBeNull();
-      return new Response(null, { status: 503 });
-    },
-    "https://citylit.vercel.app",
-    "fixture",
-  );
-  await expect(result.run).rejects.toThrow("expected 200, got 503");
-  expect(origins).toHaveLength(2);
-  expect(result.states).toEqual(["pending", "failure"]);
+  const result = smoke(async (input, init) => {
+    const url = new URL(String(input));
+    origins.push(url.origin);
+    const header = new Headers(init?.headers).get("x-vercel-protection-bypass");
+    expect(header).toBeNull();
+    return new Response(null, {
+      status: 302,
+      headers: { location: "https://citylit-another-thembaxxs-projects.vercel.app/" },
+    });
+  }, "https://citylit.vercel.app");
+  await expect(result.run).rejects.toThrow("public Citylit production URL");
+  expect(origins).toEqual(["https://citylit.vercel.app"]);
+  expect(result.states).toEqual([]);
 });
 
 test("deployment smoke blocks redirects away from the allowed host boundary", async () => {
@@ -117,9 +110,9 @@ test("deployment smoke blocks redirects away from the allowed host boundary", as
     calls++;
     return new Response(null, { status: 302, headers: { location: "https://127.0.0.1/private" } });
   });
-  await expect(result.run).rejects.toThrow("HTTPS Vercel deployments");
+  await expect(result.run).rejects.toThrow("public Citylit production URL");
   expect(calls).toBe(1);
-  expect(result.states).toEqual(["pending", "failure"]);
+  expect(result.states).toEqual([]);
 });
 
 test("health and security headers preserve opt-in location discovery", async ({ request }) => {
@@ -141,7 +134,6 @@ test("production smoke rejects an older public release before checking its route
       return Response.json({ status: "ok", revision: "b".repeat(40) });
     },
     "https://citylit-release-thembaxxs-projects.vercel.app",
-    undefined,
     "Production",
   );
   await expect(result.run).rejects.toThrow("not serving this deployment's commit");
@@ -163,7 +155,6 @@ test("production smoke uses the public alias only after verifying its exact comm
       return fetch(new URL(url.pathname + url.search, baseURL), init);
     },
     "https://citylit-release-thembaxxs-projects.vercel.app",
-    undefined,
     "Production",
   );
   await result.run;

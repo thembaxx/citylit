@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       deployment_url:
-        description: Public Citylit Vercel deployment URL
+        description: Public Citylit production URL
         required: true
         default: https://citylit.vercel.app
 permissions: {}
@@ -17,7 +17,7 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (github.event.deployment_status.state == 'success' &&
        github.event.deployment.creator.login == 'vercel[bot]' &&
-       (github.event.deployment.environment == 'Preview' || github.event.deployment.environment == 'Production'))
+       github.event.deployment.environment == 'Production')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -28,7 +28,6 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           DEPLOYMENT_URL: ${{ github.event.deployment_status.environment_url || github.event.deployment_status.target_url || inputs.deployment_url }}
-          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
         with:
           script: |
             const deployment = context.payload.deployment;
@@ -48,14 +47,13 @@ jobs:
               // Canonical authority must contain neither credentials nor a custom port.
               if (url.protocol !== "https:" || url.origin !== `https://${url.hostname}` ||
                   !url.href.startsWith(`${url.origin}/`) ||
-                  !(url.hostname === "citylit.vercel.app" || /^citylit-[a-z0-9-]+-thembaxxs-projects\.vercel\.app$/.test(url.hostname))) {
-                throw new Error("Smoke checks accept only HTTPS Vercel deployments.");
+                  url.hostname !== "citylit.vercel.app") {
+                throw new Error("Smoke checks accept only the public Citylit production URL.");
               }
               return url;
             };
             try {
-              let base = validateUrl(process.env.DEPLOYMENT_URL);
-              const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+              let base = validateUrl(deployment ? "https://citylit.vercel.app" : process.env.DEPLOYMENT_URL);
               await report("pending", "Checking deployed routes and public data.");
               // Production aliases are public while unique Vercel URLs can be protected.
               // Only use the alias after proving it serves this deployment's exact commit.
@@ -91,14 +89,13 @@ jobs:
                 for (let hop = 0; hop < 4; hop++) {
                   response = await fetch(validateUrl(url.href), {
                     redirect: "manual", signal: AbortSignal.timeout(15000),
-                    headers: bypass && url.origin === base.origin ? { "x-vercel-protection-bypass": bypass } : {},
                   });
                   if (![301, 302, 303, 307, 308].includes(response.status)) break;
                   const location = response.headers.get("location");
                   if (!location) throw new Error("Redirect without a location.");
                   const destination = new URL(location, url);
                   if (destination.origin === "https://vercel.com" && destination.pathname === "/sso-api") {
-                    throw new Error("Protected Vercel preview: configure VERCEL_AUTOMATION_BYPASS_SECRET in repository Actions secrets.");
+                    throw new Error("The production deployment must be publicly accessible.");
                   }
                   url = validateUrl(new URL(location, url).href);
                 }

@@ -3,6 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { cities } from "../lib/data";
 
 test("the stage opens a landmark guide and shares the real day planner", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   const model = page.waitForResponse(

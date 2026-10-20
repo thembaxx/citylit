@@ -2,7 +2,11 @@
 name: CI failure triage
 on:
   workflow_run: # zizmor: ignore[dangerous-triggers]
-    workflows: ["Refresh public catalog for review", "Production uptime", "Deployment smoke", "Security"]
+    workflows:
+      - Refresh public catalog for review
+      - Production uptime
+      - Deployment smoke
+      - Security
     types: [completed]
 permissions:
   contents: read

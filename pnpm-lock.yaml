@@ -193,14 +193,14 @@ importers:
         specifier: ^3.15.0
         version: 3.15.0
       maplibre-gl:
-        specifier: ^6.13.0
-        version: 6.13.0
+        specifier: ^6.14.0
+        version: 6.14.0
       minisearch:
         specifier: ^7.2.0
         version: 7.2.0
       motion:
-        specifier: ^14.0.0
-        version: 14.0.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^14.2.0
+        version: 14.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       next:
         specifier: ^16.4.0
         version: 16.4.0(@playwright/test@1.63.0)(@types/node@26.6.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -1643,8 +1643,8 @@ packages:
   fontkit@2.0.4:
     resolution: {integrity: sha512-syetQadaUEDNdxdugga9CpEYVaQIxOwk7GlwZWWZ19//qW4zE5bknOKeMBDYAASwnpaSHKJITRLMF9m1fp3s6g==}
 
-  framer-motion@14.0.0:
-    resolution: {integrity: sha512-QAtHmybrDFSliyW1sexMtSQTQd+1jw2ajibEmzpuI4XdPVzQkn+dAzJMm2sW3pl9MJuSS4xN51djQ7huhlP/VA==}
+  framer-motion@14.2.0:
+    resolution: {integrity: sha512-cD2gfFujHt4r/+dZpcn5yziu7VRwQAQDakwIm/bICYXbafnpHCYokV+PnEXqErnSdv6Eh28a+SRF+f3ndGcMsQ==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -1919,8 +1919,8 @@ packages:
   map-stream@0.0.7:
     resolution: {integrity: sha512-C0X0KQmGm3N2ftbTGBhSyuydQ+vV1LC3f3zPvT3RXHXNZrvfPZcoXp/N5DOa8vedX/rTMm2CjTtivFg2STJMRQ==}
 
-  maplibre-gl@6.13.0:
-    resolution: {integrity: sha512-ELXk4h+xl0URFQEnVbAN6MGn61P6jq4amUWHiskLVsvHCaKdf1Zq6G8UNOD0AQ3UaXoL5ECc8ovz8yqYEBGPKw==}
+  maplibre-gl@6.14.0:
+    resolution: {integrity: sha512-L7U9y9TyPJ3P/JJbW+eH+A3FzdPq+3fnZFqqeCwf/S6cRGganHwVI5b/C8/zOYzreUzsloDPZVVaMQA94wOt4A==}
     engines: {node: '>=16.14.0', npm: '>=8.1.0'}
 
   mapshaper@0.7.80:
@@ -1952,14 +1952,14 @@ packages:
   mkdirp-classic@0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
 
-  motion-dom@14.0.0:
-    resolution: {integrity: sha512-aU3ApXo1yTpeUi3JU+jbDk2TELjxPE3MbBMUP7nZHlARb6RweJK+ojmLjpuB0YsY6zhbBl1YWGo8LMsI1/Llqw==}
+  motion-dom@14.2.0:
+    resolution: {integrity: sha512-TDdxnjAavh2Qm4lQCQI3uoTx9IR/Id2PI8JNEXW3AcwwV2yvhoimAX3/TnE+x82gDHfPq2yx/cJ58TTw5mMr0A==}
 
-  motion-utils@14.0.0:
-    resolution: {integrity: sha512-jBsyjVxTTRZNeuvd/v+btVXr90LQkYl4HhRu9T2ARc+PMnvkmjsjRVeAg4Qm10b6TlTw+kykWI8gu/6LuvpLSQ==}
+  motion-utils@14.1.1:
+    resolution: {integrity: sha512-3VvN5Uvf8B6qG+OfOui6Nht5EWp+vLuU3IqcAj7ItZGKqtmTjCebl5sGZF7/08gEHRnEl1AP/fIwbcEyVrcQGQ==}
 
-  motion@14.0.0:
-    resolution: {integrity: sha512-oGc2lkge2lkRZCP+J8/JsnYu4NFjqP1MtXirNdetn3QbvK2JqwM9A200EdT4C598KfzDhjLT12zF21xDM4Oilw==}
+  motion@14.2.0:
+    resolution: {integrity: sha512-45cDwjZh0yOMZtnX3hIFPIPmzCWz/RC2bD/niWVIssGBjJlMmosbDILG9a+ZyoP635Z5xrbKvuo10spv9dBdnw==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -3658,10 +3658,10 @@ snapshots:
       unicode-properties: 1.4.1
       unicode-trie: 2.0.0
 
-  framer-motion@14.0.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+  framer-motion@14.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
     dependencies:
-      motion-dom: 14.0.0
-      motion-utils: 14.0.0
+      motion-dom: 14.2.0
+      motion-utils: 14.1.1
       tslib: 2.8.1
     optionalDependencies:
       react: 19.3.0
@@ -3894,7 +3894,7 @@ snapshots:
 
   map-stream@0.0.7: {}
 
-  maplibre-gl@6.13.0:
+  maplibre-gl@6.14.0:
     dependencies:
       '@mapbox/point-geometry': 1.1.0
       '@mapbox/tiny-sdf': 2.2.0
@@ -3975,15 +3975,15 @@ snapshots:
   mkdirp-classic@0.5.3:
     optional: true
 
-  motion-dom@14.0.0:
+  motion-dom@14.2.0:
     dependencies:
-      motion-utils: 14.0.0
+      motion-utils: 14.1.1
 
-  motion-utils@14.0.0: {}
+  motion-utils@14.1.1: {}
 
-  motion@14.0.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+  motion@14.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
     dependencies:
-      framer-motion: 14.0.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      framer-motion: 14.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       tslib: 2.8.1
     optionalDependencies:
       react: 19.3.0

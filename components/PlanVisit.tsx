@@ -6,6 +6,20 @@ import { places, type Place } from "../lib/data";
 import { venuePath } from "../lib/discovery-guide";
 import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
+import { ItineraryFeasibility } from "./ItineraryFeasibility";
+
+async function requestItineraryTravel(coordinates: number[][]) {
+  const response = await fetch("/api/itinerary", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ coordinates }),
+    cache: "no-store",
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!response.ok)
+    throw new Error("Route estimates are unavailable. Enter travel times manually.");
+  return response.json();
+}
 
 export default function PlanVisit({
   city,
@@ -21,6 +35,9 @@ export default function PlanVisit({
   const localDay = state.itinerary.filter(
     (id) => places.find((place) => place.id === id)?.city === city,
   );
+  const orderedDay = localDay
+    .map((id) => places.find((place) => place.id === id))
+    .filter((place): place is Place => !!place);
   const toggle = (place: Place) => {
     const included = state.itinerary.includes(place.id);
     const other = places.find((item) => item.id === state.itinerary[0]);
@@ -108,6 +125,7 @@ export default function PlanVisit({
           View &amp; arrange my day <ArrowRight size={18} />
         </Link>
       </div>
+      <ItineraryFeasibility places={orderedDay} onRequestTravel={requestItineraryTravel} />
     </section>
   );
 }

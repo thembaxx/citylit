@@ -38,7 +38,22 @@ import { sharedPlace } from "../lib/pwa-share";
 import { readyWorker, workerRequest } from "../lib/pwa";
 import { usePwa } from "./PwaProvider";
 import { useDiscovery } from "./useDiscovery";
+import { ItineraryFeasibility } from "./ItineraryFeasibility";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
+
+async function requestItineraryTravel(coordinates: number[][]) {
+  const response = await fetch("/api/itinerary", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ coordinates }),
+    cache: "no-store",
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!response.ok)
+    throw new Error("Route estimates are unavailable. Enter travel times manually.");
+  return response.json();
+}
+
 export default function AdventureHub() {
   const { feedback, sound, haptics, toggleSound, toggleHaptics, celebrate, moving } = useKhwezi();
   const pwa = usePwa();
@@ -572,6 +587,7 @@ export default function AdventureHub() {
                 minutes at venues, excluding travel. Confirm distances and routes in your maps app.
               </p>
             )}
+            <ItineraryFeasibility places={trip} onRequestTravel={requestItineraryTravel} />
           </section>
         )}
         {tab === "passport" && (

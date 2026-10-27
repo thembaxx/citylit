@@ -7,6 +7,53 @@ import gsap from "gsap";
 import StageModel from "./StageModel";
 import type { StageItem } from "./CityStage";
 
+// Small, original geometry adds a sense of place without introducing licensed GLB files.
+// This is illustrative scenery, never a real street or geospatial representation.
+function MiniatureStreet() {
+  return (
+    <group position={[0, -0.43, 0]}>
+      <mesh position={[0, 0.03, 1.46]} receiveShadow>
+        <boxGeometry args={[3.4, 0.06, 0.48]} />
+        <meshStandardMaterial color="#4c5450" roughness={0.94} />
+      </mesh>
+      {[-1.2, -0.4, 0.4, 1.2].map((x) => (
+        <mesh key={x} position={[x, 0.067, 1.46]}>
+          <boxGeometry args={[0.32, 0.004, 0.02]} />
+          <meshBasicMaterial color="#fae9c7" />
+        </mesh>
+      ))}
+      {[-1.33, 1.33].map((x, index) => (
+        <group key={x} position={[x, 0, 0.96]} scale={0.45}>
+          <mesh position={[0, 0.48, 0]} castShadow>
+            <boxGeometry args={[0.7, 0.96, 0.64]} />
+            <meshStandardMaterial color={index ? "#f5c5a1" : "#f3dcaf"} roughness={0.85} />
+          </mesh>
+          <mesh position={[0, 1.03, 0]} castShadow>
+            <coneGeometry args={[0.63, 0.46, 4]} />
+            <meshStandardMaterial color="#796d58" roughness={0.9} />
+          </mesh>
+          <mesh position={[0, 0.45, 0.327]}>
+            <boxGeometry args={[0.16, 0.2, 0.012]} />
+            <meshStandardMaterial color="#649db0" />
+          </mesh>
+        </group>
+      ))}
+      {[-0.95, 0.96].map((x) => (
+        <group key={x} position={[x, 0, -1.32]}>
+          <mesh position={[0, 0.22, 0]}>
+            <cylinderGeometry args={[0.035, 0.05, 0.44, 6]} />
+            <meshStandardMaterial color="#936d45" />
+          </mesh>
+          <mesh position={[0, 0.51, 0]} castShadow>
+            <icosahedronGeometry args={[0.28, 1]} />
+            <meshStandardMaterial color="#76a866" roughness={1} />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+}
+
 function Ring({
   items,
   selected,
@@ -83,6 +130,7 @@ function Ring({
             >
               <Suspense fallback={null}>
                 <StageModel model={item.model} />
+                {index === selected && <MiniatureStreet />}
               </Suspense>
             </group>
           ))}

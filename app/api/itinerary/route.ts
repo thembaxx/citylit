@@ -45,9 +45,7 @@ export async function POST(request: Request) {
       legs.length !== coordinates.length - 1 ||
       !legs.every(
         (leg: { duration?: number }) =>
-          typeof leg.duration === "number" &&
-          Number.isFinite(leg.duration) &&
-          leg.duration >= 0,
+          typeof leg.duration === "number" && Number.isFinite(leg.duration) && leg.duration >= 0,
       )
     )
       throw new Error("Incomplete route");
@@ -61,7 +59,10 @@ export async function POST(request: Request) {
     );
   } catch {
     return NextResponse.json(
-      { error: "Driving estimates are unavailable. Enter travel times manually; no missing leg is treated as zero." },
+      {
+        error:
+          "Driving estimates are unavailable. Enter travel times manually; no missing leg is treated as zero.",
+      },
       { status: 503 },
     );
   }

@@ -24,6 +24,12 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
+      - name: Install FFmpeg for silent H.264 encoding
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version
+          ffprobe -version
       - run: pnpm build
       - name: Capture genuine app screens and render silent promo
         run: node scripts/create-brand-reel.mjs

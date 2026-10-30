@@ -22,7 +22,7 @@ async function ready(server) {
   for (let attempt = 0; attempt < 100; attempt++) {
     if (server.exitCode !== null) throw Error("CityLit server exited before capture");
     try {
-      const response = await fetch(origin + "/");
+      const response = await fetch(origin + "/", { signal: AbortSignal.timeout(2000) });
       if (response.ok) return;
     } catch {
       // Wait until the local production server accepts connections.
@@ -52,8 +52,16 @@ async function main() {
       reducedMotion: "reduce",
     });
     for (const [index, shot] of story.entries()) {
+      const modelLoaded = shot.route.includes("/landmarks")
+        ? page.waitForResponse(
+            (response) =>
+              response.url().includes("/models/stage/") && response.status() === 200,
+            { timeout: 20000 },
+          )
+        : null;
       const response = await page.goto(origin + shot.route, { waitUntil: "domcontentloaded" });
       if (!response?.ok()) throw Error("Page unavailable: " + shot.route + " (" + response?.status() + ")");
+      await modelLoaded;
       await page.evaluate(() => document.fonts.ready);
       if (shot.route.includes("/landmarks")) {
         await page.locator(".atlas-stage-sheet h2").waitFor({ state: "visible", timeout: 20000 });

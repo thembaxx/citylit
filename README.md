@@ -20,6 +20,10 @@ Declared in [package.json](package.json): Next.js `^16.4.0` · React `^19.3.0` �
 
 Captured from the live application on 17 October 2026. [Capture details and limitations](docs/screenshots/README.md).
 
+**Original CityLit preview reel:** [Watch the silent 9.5-second MP4](public/media/citylit-journey.mp4) · [Capture provenance and checksums](public/media/citylit-journey.json).
+
+Captured from the **actual local production build** in Chromium at 1200 × 675, then edited into a 1280 × 720 H.264 clip with transitions. It shows the home page plus Cape Town and Johannesburg landmark galleries, including the existing Blender-authored, Draco-compressed assets. It is editorial showcase footage, not a continuous screen recording or a UI mockup, and contains no music. The capture metadata retains `REVIEW_REQUIRED` until any final marketing-use approval and device playback QA.
+
 ---
 
 ## Project guide

@@ -1,0 +1,25 @@
+{
+  "type": "real-application-capture",
+  "frame": "1280x720",
+  "screenshotFrame": "1200x675",
+  "durationSeconds": 9.5,
+  "sourceRoutes": [
+    {
+      "route": "/",
+      "label": "Explore CityLit"
+    },
+    {
+      "route": "/cape-town/landmarks",
+      "label": "Explore Cape Town"
+    },
+    {
+      "route": "/johannesburg/landmarks",
+      "label": "Explore Johannesburg"
+    }
+  ],
+  "source": "Local production build of CityLit, Chromium screenshots; no mockups",
+  "authoring": "Playwright screenshot capture and FFmpeg silent H.264 edit",
+  "sha256": "9271ddd7a7a0d722e5b330487cc9cbc1257135edff1635814b1f7e1165f6a7b2",
+  "bytes": 343222,
+  "status": "REVIEW_REQUIRED"
+}

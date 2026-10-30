@@ -1,0 +1,54 @@
+name: Original CityLit reel
+on:
+  push:
+    branches:
+      - feat/stage-fallback-original-promo-oct30
+    paths:
+      - "scripts/create-brand-reel.mjs"
+      - ".github/workflows/original-brand-reel.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: true
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Install FFmpeg for silent H.264 encoding
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version
+          ffprobe -version
+      - run: pnpm build
+      - name: Capture genuine app screens and render silent promo
+        run: node scripts/create-brand-reel.mjs
+      - name: Preserve preview and capture metadata
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: citylit-original-brand-reel
+          path: |
+            public/media/citylit-journey.mp4
+            public/media/citylit-journey.json
+            .brand-reel-captures/*.png
+          retention-days: 30
+          if-no-files-found: error
+      - name: Commit render into review branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/media/citylit-journey.mp4 public/media/citylit-journey.json
+          if ! git diff --cached --quiet; then
+            git commit -m "assets(citylit): original silent reel from real application screenshots"
+            git push origin HEAD:feat/stage-fallback-original-promo-oct30
+          fi

@@ -1,10 +1,10 @@
 "use client";
 import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
-import StageModel from "./StageModel";
+import SafeStageModel from "./SafeStageModel";
 import type { StageItem } from "./CityStage";
 
 // Small, original geometry adds a sense of place without introducing licensed GLB files.
@@ -128,10 +128,8 @@ function Ring({
                 onSelect(index);
               }}
             >
-              <Suspense fallback={null}>
-                <StageModel model={item.model} />
-                {index === selected && <MiniatureStreet />}
-              </Suspense>
+              <SafeStageModel model={item.model} />
+              {index === selected && <MiniatureStreet />}
             </group>
           ))}
           {route.length > 1 && (

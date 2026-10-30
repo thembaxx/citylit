@@ -163,7 +163,14 @@ function World({
       <pointLight position={[0.4, 2.4, 2.2]} intensity={6} distance={9} color="#ffe3bf" />
       <PerformanceMonitor
         onDecline={() => setDpr(1)}
-        onIncline={() => setDpr(Math.min(window.devicePixelRatio, 1.5))}
+        onIncline={() =>
+          setDpr(
+            Math.min(
+              window.devicePixelRatio || 1,
+              window.matchMedia("(max-width: 760px), (pointer: coarse)").matches ? 1 : 1.5,
+            ),
+          )
+        }
       />
       <group
         ref={group}
@@ -226,17 +233,22 @@ export default function Scene(props: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const labels = useRef<Record<string, HTMLDivElement | null>>({});
   const [visible, setVisible] = useState(true);
+  const inViewport = useRef(true);
   const [spin] = useState(0);
   const [controlsElement, setControlsElement] = useState<HTMLElement | null>(null);
   const trackControls = useCallback((element: HTMLElement | THREE.Group | null) => {
     setControlsElement(element instanceof HTMLElement ? element : null);
   }, []);
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
-      threshold: 0.05,
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inViewport.current = entry.isIntersecting;
+        setVisible(inViewport.current && !document.hidden);
+      },
+      { threshold: 0.05 },
+    );
     if (ref.current) observer.observe(ref.current);
-    const onVisibility = () => setVisible(document.visibilityState === "visible");
+    const onVisibility = () => setVisible(inViewport.current && !document.hidden);
     document.addEventListener("visibilitychange", onVisibility);
     return () => {
       observer.disconnect();

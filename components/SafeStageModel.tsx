@@ -22,10 +22,7 @@ function LandmarkPlaceholder() {
   );
 }
 
-class LandmarkAssetBoundary extends Component<
-  { children: ReactNode },
-  { failed: boolean }
-> {
+class LandmarkAssetBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
 
   static getDerivedStateFromError(): { failed: boolean } {

@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/server.js";
 
 export async function POST(request: Request) {
   if (request.headers.get("origin") !== new URL(request.url).origin)
@@ -32,10 +32,18 @@ export async function POST(request: Request) {
     );
   try {
     const path = coordinates.map((point: number[]) => point.join(",")).join(";");
-    const response = await fetch(
-      `https://router.project-osrm.org/route/v1/driving/${path}?overview=false&steps=false`,
-      { signal: AbortSignal.timeout(10000), cache: "no-store" },
-    );
+    // Coordinates may populate the path only; they never become URL authority.
+    const url = new URL("https://router.project-osrm.org/");
+    url.pathname = `/route/v1/driving/${path}`;
+    url.searchParams.set("overview", "false");
+    url.searchParams.set("steps", "false");
+    if (url.protocol !== "https:" || url.host !== "router.project-osrm.org")
+      throw new Error("Invalid routing origin");
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(10000),
+      cache: "no-store",
+      redirect: "error",
+    });
     if (!response.ok) throw new Error("Routing unavailable");
     const data = await response.json();
     const legs = data.routes?.[0]?.legs;

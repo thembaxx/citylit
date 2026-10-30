@@ -73,9 +73,9 @@ async function main() {
     }
     args.push(
       "-filter_complex",
-      "[0:v]fps=30,scale=1200:675:flags=lanczos,format=yuv420p,setsar=1[v0];" +
-      "[1:v]fps=30,scale=1200:675:flags=lanczos,format=yuv420p,setsar=1[v1];" +
-      "[2:v]fps=30,scale=1200:675:flags=lanczos,format=yuv420p,setsar=1[v2];" +
+      "[0:v]fps=30,scale=1280:720:flags=lanczos,format=yuv420p,setsar=1[v0];" +
+      "[1:v]fps=30,scale=1280:720:flags=lanczos,format=yuv420p,setsar=1[v1];" +
+      "[2:v]fps=30,scale=1280:720:flags=lanczos,format=yuv420p,setsar=1[v2];" +
       "[v0][v1]xfade=transition=fade:duration=0.5:offset=3.0[x1];" +
       "[x1][v2]xfade=transition=fade:duration=0.5:offset=6.0[out]",
       "-map", "[out]", "-r", "30", "-an", "-c:v", "libx264",
@@ -95,13 +95,14 @@ async function main() {
       "-show_entries", "format=duration",
       "-of", "json", videoPath,
     ], { encoding: "utf8" }));
-    if (probe.streams?.[0]?.codec_name !== "h264" || probe.streams[0].width !== 1200 ||
-        probe.streams[0].height !== 675 || Math.abs(Number(probe.format?.duration) - 9.5) > 0.6) {
+    if (probe.streams?.[0]?.codec_name !== "h264" || probe.streams[0].width !== 1280 ||
+        probe.streams[0].height !== 720 || Math.abs(Number(probe.format?.duration) - 9.5) > 0.6) {
       throw Error("Reel failed codec, size or duration verification");
     }
     writeFileSync(join(output, "citylit-journey.json"), JSON.stringify({
       type: "real-application-capture",
-      frame: "1200x675",
+      frame: "1280x720",
+      screenshotFrame: "1200x675",
       durationSeconds: Number(probe.format.duration),
       sourceRoutes: story.map(({ route, label }) => ({ route, label })),
       source: "Local production build of CityLit, Chromium screenshots; no mockups",

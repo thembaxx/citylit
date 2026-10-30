@@ -1,0 +1,5 @@
+# Confirmed public localStorage namespace, not an API credential.
+# Both commits introduce the same FEASIBILITY_STORAGE_KEY literal on line 3.
+# Fingerprints preserve every other file, rule, line and future commit scan.
+541d665a7ee607a8500127df4a6f42e2f7dbe968:lib/itinerary-feasibility.ts:generic-api-key:3
+be0a8b80a22555d3c769e6b33b5e241cc4977fb6:lib/itinerary-feasibility.ts:generic-api-key:3

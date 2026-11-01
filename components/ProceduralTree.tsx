@@ -38,8 +38,7 @@ export default function ProceduralTree({
       const t = (i + 0.5) / count;
       const theta = i * 2.399963229728653 + seed * 0.83;
       const spread = Math.sqrt(t) * (0.27 + 0.08 * Math.sin(i * 1.7 + seed));
-      const height =
-        0.71 + 0.6 * (1 - Math.abs(2 * t - 1)) + 0.15 * Math.sin(i * 1.13 + seed);
+      const height = 0.71 + 0.6 * (1 - Math.abs(2 * t - 1)) + 0.15 * Math.sin(i * 1.13 + seed);
       dummy.position.set(Math.cos(theta) * spread, height, Math.sin(theta) * spread);
       dummy.rotation.set(i * 1.23, theta, i * 0.57);
       const variation = 0.8 + 0.3 * (0.5 + 0.5 * Math.sin(i * 2.91 + seed));

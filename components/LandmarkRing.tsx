@@ -129,8 +129,20 @@ function MiniatureStreet({ compact }: { compact: boolean }) {
       <StreetHouse x={1.32} color="#eecfaf" roofColor="#747d6a" />
       <StreetLamp x={-0.96} />
       <StreetLamp x={1.08} />
-      <ProceduralTree position={[-0.94, 0, -1.32]} scale={0.43} color="#579761" seed={3} detail={compact ? "compact" : "hero"} />
-      <ProceduralTree position={[0.98, 0, -1.3]} scale={0.41} color="#80ad62" seed={7} detail={compact ? "compact" : "hero"} />
+      <ProceduralTree
+        position={[-0.94, 0, -1.32]}
+        scale={0.43}
+        color="#579761"
+        seed={3}
+        detail={compact ? "compact" : "hero"}
+      />
+      <ProceduralTree
+        position={[0.98, 0, -1.3]}
+        scale={0.41}
+        color="#80ad62"
+        seed={7}
+        detail={compact ? "compact" : "hero"}
+      />
       <mesh position={[-1.04, 0.13, 0.64]}>
         <boxGeometry args={[0.3, 0.09, 0.12]} />
         <meshStandardMaterial color="#8d694c" roughness={0.94} />

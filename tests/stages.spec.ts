@@ -69,3 +69,19 @@ test("stage routes resolve all twelve cities, reject unknown cities and serve ca
   expect(model.headers()["cache-control"]).not.toContain("no-store");
   expect((await model.body()).subarray(0, 4).toString()).toBe("glTF");
 });
+
+test("narrow-screen stages remain navigable with procedural city detail", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/cape-town/landmarks");
+  await expect(page.locator(".atlas-ring-scene")).toBeVisible();
+  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
+  await page.getByRole("button", { name: "Next discovery" }).click();
+  await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
+  await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
+  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
+  await expect(page.getByRole("link", { name: "Open the full guide" })).toBeVisible();
+  expect(errors).toEqual([]);
+});

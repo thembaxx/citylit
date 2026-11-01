@@ -5,48 +5,151 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
 import SafeStageModel from "./SafeStageModel";
+import ProceduralTree from "./ProceduralTree";
 import type { StageItem } from "./CityStage";
 
 // Small, original geometry adds a sense of place without introducing licensed GLB files.
 // This is illustrative scenery, never a real street or geospatial representation.
-function MiniatureStreet() {
+function StreetHouse({ x, color, roofColor }: { x: number; color: string; roofColor: string }) {
   return (
-    <group position={[0, -0.43, 0]}>
-      <mesh position={[0, 0.03, 1.46]} receiveShadow>
-        <boxGeometry args={[3.4, 0.06, 0.48]} />
-        <meshStandardMaterial color="#4c5450" roughness={0.94} />
+    <group position={[x, 0, 0.95]} scale={0.46}>
+      <mesh position={[0, 0.04, 0]}>
+        <boxGeometry args={[0.86, 0.08, 0.81]} />
+        <meshStandardMaterial color="#c9b69a" roughness={0.95} />
       </mesh>
-      {[-1.2, -0.4, 0.4, 1.2].map((x) => (
-        <mesh key={x} position={[x, 0.067, 1.46]}>
-          <boxGeometry args={[0.32, 0.004, 0.02]} />
-          <meshBasicMaterial color="#fae9c7" />
-        </mesh>
-      ))}
-      {[-1.33, 1.33].map((x, index) => (
-        <group key={x} position={[x, 0, 0.96]} scale={0.45}>
-          <mesh position={[0, 0.48, 0]} castShadow>
-            <boxGeometry args={[0.7, 0.96, 0.64]} />
-            <meshStandardMaterial color={index ? "#f5c5a1" : "#f3dcaf"} roughness={0.85} />
+      <mesh position={[0, 0.53, 0]} castShadow>
+        <boxGeometry args={[0.76, 0.94, 0.71]} />
+        <meshStandardMaterial color={color} roughness={0.88} />
+      </mesh>
+      <mesh position={[0, 1.04, 0]} castShadow>
+        <coneGeometry args={[0.61, 0.42, 4]} />
+        <meshStandardMaterial color={roofColor} roughness={0.8} metalness={0.06} />
+      </mesh>
+      <mesh position={[0, 0.99, 0.03]}>
+        <boxGeometry args={[0.86, 0.055, 0.79]} />
+        <meshStandardMaterial color="#fff0d6" roughness={0.9} />
+      </mesh>
+      <mesh position={[0.22, 1.21, -0.15]}>
+        <boxGeometry args={[0.13, 0.22, 0.14]} />
+        <meshStandardMaterial color={color} />
+      </mesh>
+      <mesh position={[0, 0.27, 0.365]}>
+        <boxGeometry args={[0.19, 0.46, 0.032]} />
+        <meshStandardMaterial color="#625748" roughness={0.83} />
+      </mesh>
+      <mesh position={[0.055, 0.28, 0.389]}>
+        <sphereGeometry args={[0.017, 6, 4]} />
+        <meshStandardMaterial color="#d5a655" metalness={0.5} roughness={0.4} />
+      </mesh>
+      {[-0.24, 0.24].map((windowX) => (
+        <group key={windowX} position={[windowX, 0.68, 0.367]}>
+          <mesh>
+            <boxGeometry args={[0.23, 0.29, 0.035]} />
+            <meshStandardMaterial color="#faf1dc" roughness={0.75} />
           </mesh>
-          <mesh position={[0, 1.03, 0]} castShadow>
-            <coneGeometry args={[0.63, 0.46, 4]} />
-            <meshStandardMaterial color="#796d58" roughness={0.9} />
+          <mesh position={[0, 0, 0.023]}>
+            <boxGeometry args={[0.18, 0.235, 0.01]} />
+            <meshStandardMaterial color="#648c97" roughness={0.26} metalness={0.1} />
           </mesh>
-          <mesh position={[0, 0.45, 0.327]}>
-            <boxGeometry args={[0.16, 0.2, 0.012]} />
-            <meshStandardMaterial color="#649db0" />
+          <mesh position={[0, 0, 0.033]}>
+            <boxGeometry args={[0.025, 0.26, 0.012]} />
+            <meshStandardMaterial color="#f9edd5" />
+          </mesh>
+          <mesh position={[0, 0, 0.034]}>
+            <boxGeometry args={[0.21, 0.023, 0.012]} />
+            <meshStandardMaterial color="#f9edd5" />
+          </mesh>
+          <mesh position={[0, -0.17, 0.036]}>
+            <boxGeometry args={[0.26, 0.045, 0.08]} />
+            <meshStandardMaterial color="#d3b38f" />
           </mesh>
         </group>
       ))}
-      {[-0.95, 0.96].map((x) => (
-        <group key={x} position={[x, 0, -1.32]}>
-          <mesh position={[0, 0.22, 0]}>
-            <cylinderGeometry args={[0.035, 0.05, 0.44, 6]} />
-            <meshStandardMaterial color="#936d45" />
+    </group>
+  );
+}
+
+function StreetLamp({ x }: { x: number }) {
+  return (
+    <group position={[x, 0, 1.07]}>
+      <mesh position={[0, 0.28, 0]}>
+        <cylinderGeometry args={[0.016, 0.026, 0.56, 6]} />
+        <meshStandardMaterial color="#445954" metalness={0.4} roughness={0.65} />
+      </mesh>
+      <mesh position={[0.04, 0.55, 0]}>
+        <boxGeometry args={[0.09, 0.018, 0.025]} />
+        <meshStandardMaterial color="#445954" />
+      </mesh>
+      <mesh position={[0.082, 0.51, 0]}>
+        <sphereGeometry args={[0.047, 8, 6]} />
+        <meshStandardMaterial
+          color="#fff0c8"
+          emissive="#d69d55"
+          emissiveIntensity={0.32}
+          roughness={0.5}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+// An illustrative street, not a surveyed reconstruction of any South African neighbourhood.
+function MiniatureStreet({ compact }: { compact: boolean }) {
+  return (
+    <group position={[0, -0.43, 0]}>
+      <mesh position={[0, 0.03, 1.46]} receiveShadow>
+        <boxGeometry args={[3.4, 0.06, 0.49]} />
+        <meshStandardMaterial color="#454b4a" roughness={0.96} />
+      </mesh>
+      {[1.17, 1.76].map((z) => (
+        <group key={z}>
+          <mesh position={[0, 0.07, z]} receiveShadow>
+            <boxGeometry args={[3.4, 0.055, 0.17]} />
+            <meshStandardMaterial color="#d2c4a7" roughness={0.96} />
           </mesh>
-          <mesh position={[0, 0.51, 0]} castShadow>
-            <icosahedronGeometry args={[0.28, 1]} />
-            <meshStandardMaterial color="#76a866" roughness={1} />
+          <mesh position={[0, 0.1, z - 0.058]}>
+            <boxGeometry args={[3.4, 0.017, 0.02]} />
+            <meshStandardMaterial color="#f1e2c6" roughness={0.9} />
+          </mesh>
+        </group>
+      ))}
+      {[-1.25, -0.45, 0.35, 1.15].map((x) => (
+        <mesh key={x} position={[x, 0.068, 1.46]}>
+          <boxGeometry args={[0.33, 0.006, 0.023]} />
+          <meshBasicMaterial color="#f5e5bf" />
+        </mesh>
+      ))}
+      {[-0.1, 0, 0.1].map((x) => (
+        <mesh key={x} position={[x + 0.44, 0.07, 1.55]}>
+          <boxGeometry args={[0.045, 0.006, 0.29]} />
+          <meshBasicMaterial color="#f7ebce" />
+        </mesh>
+      ))}
+      <StreetHouse x={-1.32} color="#e7b88d" roofColor="#907968" />
+      <StreetHouse x={1.32} color="#eecfaf" roofColor="#747d6a" />
+      <StreetLamp x={-0.96} />
+      <StreetLamp x={1.08} />
+      <ProceduralTree position={[-0.94, 0, -1.32]} scale={0.43} color="#579761" seed={3} detail={compact ? "compact" : "hero"} />
+      <ProceduralTree position={[0.98, 0, -1.3]} scale={0.41} color="#80ad62" seed={7} detail={compact ? "compact" : "hero"} />
+      <mesh position={[-1.04, 0.13, 0.64]}>
+        <boxGeometry args={[0.3, 0.09, 0.12]} />
+        <meshStandardMaterial color="#8d694c" roughness={0.94} />
+      </mesh>
+      {[-1.14, -0.94].map((x) => (
+        <mesh key={x} position={[x, 0.075, 0.64]}>
+          <boxGeometry args={[0.022, 0.12, 0.1]} />
+          <meshStandardMaterial color="#534d40" />
+        </mesh>
+      ))}
+      {[-1.54, 1.54].map((x) => (
+        <group key={x} position={[x, 0.08, -0.57]}>
+          <mesh position={[0, 0.1, 0]}>
+            <cylinderGeometry args={[0.17, 0.16, 0.18, 8]} />
+            <meshStandardMaterial color="#a98964" roughness={0.93} />
+          </mesh>
+          <mesh position={[0, 0.2, 0]}>
+            <cylinderGeometry args={[0.145, 0.145, 0.05, 8]} />
+            <meshStandardMaterial color="#627957" roughness={1} />
           </mesh>
         </group>
       ))}
@@ -114,8 +217,10 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 3.2, 10.8]} fov={42} />
-      <ambientLight intensity={1.8} />
-      <directionalLight position={[4, 7, 5]} intensity={2.5} />
+      <hemisphereLight args={["#fff4e3", "#715b4a", 1.1]} />
+      <ambientLight intensity={0.55} />
+      <directionalLight position={[4, 7, 5]} intensity={2.25} color="#fff3dd" />
+      <directionalLight position={[-4, 3, -2]} intensity={0.55} color="#ffa968" />
       <group position={[size.width > size.height ? 1.45 : 0, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
@@ -129,7 +234,7 @@ function Ring({
               }}
             >
               <SafeStageModel model={item.model} />
-              {index === selected && <MiniatureStreet />}
+              {index === selected && <MiniatureStreet compact={size.width < 760} />}
             </group>
           ))}
           {route.length > 1 && (

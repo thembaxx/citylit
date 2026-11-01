@@ -4,6 +4,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
+import ProceduralTree from "./ProceduralTree";
 const windowBlue = "#3d7ef0",
   dark = "#3a3532",
   cream = "#fff4e6",
@@ -87,24 +88,19 @@ function Grove() {
   return (
     <>
       {spots.map(([x, z], i) => (
-        <group key={i} position={[x, 0.02, z]} scale={0.9 + (i % 3) * 0.15}>
-          <mesh position={[0, 0.08, 0]}>
-            <cylinderGeometry args={[0.028, 0.04, 0.16, 5]} />
-            <meshStandardMaterial color="#8a5a32" />
-          </mesh>
-          <mesh position={[0, 0.22, 0]}>
-            <icosahedronGeometry args={[0.12, 0]} />
-            <meshStandardMaterial color={i % 2 ? "#6bc44a" : "#3e9a38"} />
-          </mesh>
-          <mesh position={[0, 0.32, 0]} scale={[0.7, 0.8, 0.7]}>
-            <icosahedronGeometry args={[0.09, 0]} />
-            <meshStandardMaterial color="#9be06a" />
-          </mesh>
-        </group>
+        <ProceduralTree
+          key={i}
+          position={[x, 0.02, z]}
+          scale={0.34 + (i % 3) * 0.045}
+          seed={i * 3}
+          color={i % 2 ? "#649d53" : "#447d57"}
+          detail="compact"
+        />
       ))}
     </>
   );
 }
+
 function Base({ ocean = false }: { ocean?: boolean }) {
   return (
     <group>

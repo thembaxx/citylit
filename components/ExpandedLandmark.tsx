@@ -4,6 +4,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 import { cities } from "../lib/data";
 import { Alive } from "./Models";
+import ProceduralTree from "./ProceduralTree";
 const colors = [
   "#f3c7a6",
   "#7dce6a",
@@ -32,16 +33,9 @@ function Block({
   );
 }
 function Tree({ x, z, color }: { x: number; z: number; color: string }) {
-  return (
-    <group position={[x, 0, z]}>
-      <Block p={[0, 0.35, 0]} s={[0.09, 0.7, 0.09]} color="#79634c" />
-      <mesh position={[0, 0.85, 0]}>
-        <icosahedronGeometry args={[0.36, 0]} />
-        <meshStandardMaterial color={color} roughness={0.62} />
-      </mesh>
-    </group>
-  );
+  return <ProceduralTree position={[x, 0, z]} color={color} scale={0.84} />;
 }
+
 function Signature({ model, index, tone }: { model: string; index: number; tone: string }) {
   if (model === "monument" && index === 0)
     return (

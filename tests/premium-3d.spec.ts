@@ -49,7 +49,9 @@ test("Kimberley museum exposes functional, accessible architectural inspector to
   expect(errors).toEqual([]);
 });
 
-test("inspector tools fit a narrow mobile viewport and respect reduced motion", async ({ page }) => {
+test("inspector tools fit a narrow mobile viewport and respect reduced motion", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/kimberley/landmarks");

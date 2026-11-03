@@ -38,7 +38,13 @@ class LandmarkAssetBoundary extends Component<{ children: ReactNode }, { failed:
  * Fail one model independently without removing the ring, itinerary controls,
  * or researched written guide. Changing the model remounts this boundary.
  */
-export default function SafeStageModel({ model, active = true }: { model: string; active?: boolean }) {
+export default function SafeStageModel({
+  model,
+  active = true,
+}: {
+  model: string;
+  active?: boolean;
+}) {
   return (
     <LandmarkAssetBoundary key={model}>
       <Suspense fallback={<LandmarkPlaceholder />}>

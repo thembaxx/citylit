@@ -3,7 +3,15 @@ import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
-import { ArrowCounterClockwise, Cube, Stack, MagnifyingGlassMinus, MagnifyingGlassPlus, Moon, Sun } from "@phosphor-icons/react";
+import {
+  ArrowCounterClockwise,
+  Cube,
+  Stack,
+  MagnifyingGlassMinus,
+  MagnifyingGlassPlus,
+  Moon,
+  Sun,
+} from "@phosphor-icons/react";
 import * as THREE from "three";
 import gsap from "gsap";
 import SafeStageModel from "./SafeStageModel";
@@ -287,7 +295,11 @@ function Ring({
         shadow-bias={-0.00025}
         shadow-normalBias={0.025}
       />
-      <directionalLight position={[-4, 3, -2]} intensity={night ? 0.3 : 0.65} color={night ? "#99b4db" : "#ffa968"} />
+      <directionalLight
+        position={[-4, 3, -2]}
+        intensity={night ? 0.3 : 0.65}
+        color={night ? "#99b4db" : "#ffa968"}
+      />
       <group position={[size.width > size.height ? 1.45 : 0, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
@@ -490,7 +502,9 @@ export default function LandmarkRing({
         </div>
         {museumSelected && (
           <div className="atlas-inspector-features">
-            <span><Cube size={15} /> Inspect details</span>
+            <span>
+              <Cube size={15} /> Inspect details
+            </span>
             {features.map((option) => (
               <button
                 key={option.id}

@@ -92,9 +92,7 @@ export default function MuseumShowcase({
   const grounds = useRef<THREE.Group>(null);
   const { invalidate } = useThree();
   const buildingWindows = useMemo(
-    () => [-0.78, -0.26, 0.26, 0.78].flatMap((x) =>
-      [0.43, 1.07].map((y) => ({ x, y })),
-    ),
+    () => [-0.78, -0.26, 0.26, 0.78].flatMap((x) => [0.43, 1.07].map((y) => ({ x, y }))),
     [],
   );
 
@@ -170,7 +168,12 @@ export default function MuseumShowcase({
         ))}
         <Volume position={[0, 0.35, 0.831]} size={[0.42, 0.62, 0.075]} color={timber} />
         <Volume position={[0, 0.7, 0.851]} size={[0.52, 0.1, 0.14]} color={trim} />
-        <Volume position={[0, 0.38, 0.882]} size={[0.018, 0.58, 0.02]} color="#caad78" metalness={0.5} />
+        <Volume
+          position={[0, 0.38, 0.882]}
+          size={[0.018, 0.58, 0.02]}
+          color="#caad78"
+          metalness={0.5}
+        />
         <mesh position={[0.15, 0.37, 0.901]}>
           <sphereGeometry args={[0.026, 12, 8]} />
           <meshStandardMaterial color="#ba8c44" metalness={0.7} roughness={0.3} />
@@ -198,15 +201,17 @@ export default function MuseumShowcase({
             active={feature === "windows"}
           />
         ))}
-        {buildingWindows.filter(({ x }) => Math.abs(x) > 0.6).map(({ x, y }) => (
-          <MuseumWindow
-            key={`${x}-${y}`}
-            position={[x > 0 ? 1.111 : -1.111, y, x > 0 ? -0.27 : 0.27]}
-            side
-            night={night}
-            active={feature === "windows"}
-          />
-        ))}
+        {buildingWindows
+          .filter(({ x }) => Math.abs(x) > 0.6)
+          .map(({ x, y }) => (
+            <MuseumWindow
+              key={`${x}-${y}`}
+              position={[x > 0 ? 1.111 : -1.111, y, x > 0 ? -0.27 : 0.27]}
+              side
+              night={night}
+              active={feature === "windows"}
+            />
+          ))}
         <mesh position={[0, 0.07, 1.04]} receiveShadow>
           <boxGeometry args={[0.84, 0.115, 0.48]} />
           <meshStandardMaterial color="#d2c1a7" roughness={0.97} />
@@ -216,11 +221,7 @@ export default function MuseumShowcase({
       <group ref={roof} name="copper-roof">
         {[-1, 1].map((side) => (
           <group key={side}>
-            <mesh
-              castShadow
-              position={[side * 0.59, 1.8, 0]}
-              rotation={[0, 0, side * -0.45]}
-            >
+            <mesh castShadow position={[side * 0.59, 1.8, 0]} rotation={[0, 0, side * -0.45]}>
               <boxGeometry args={[1.42, 0.1, 1.89]} />
               <meshStandardMaterial
                 color={feature === "roof" ? "#779c83" : copper}
@@ -244,16 +245,27 @@ export default function MuseumShowcase({
         <Volume position={[0, 2.1, 0]} size={[0.08, 0.13, 2.0]} color="#3f6257" metalness={0.42} />
         <Volume position={[0.48, 2.12, -0.18]} size={[0.34, 0.65, 0.38]} color="#e7dccc" />
         <Volume position={[0.48, 2.51, -0.18]} size={[0.42, 0.12, 0.46]} color="#cbb9a0" />
-        <Volume position={[0.48, 2.62, -0.18]} size={[0.49, 0.09, 0.53]} color="#43695e" metalness={0.33} />
-        <Volume position={[0.48, 2.43, 0.023]} size={[0.14, 0.23, 0.025]} color={night ? "#e5b56c" : "#658d96"} />
+        <Volume
+          position={[0.48, 2.62, -0.18]}
+          size={[0.49, 0.09, 0.53]}
+          color="#43695e"
+          metalness={0.33}
+        />
+        <Volume
+          position={[0.48, 2.43, 0.023]}
+          size={[0.14, 0.23, 0.025]}
+          color={night ? "#e5b56c" : "#658d96"}
+        />
       </group>
       {onFeature &&
-        ([
-          { id: "architecture", position: [0, 0.65, 1.03] },
-          { id: "roof", position: [-0.2, 2.2, 0.54] },
-          { id: "windows", position: [0.73, 1.02, 0.91] },
-          { id: "gardens", position: [-1.24, 0.26, 0.92] },
-        ] as { id: MuseumFeature; position: [number, number, number] }[]).map((hotspot) => (
+        (
+          [
+            { id: "architecture", position: [0, 0.65, 1.03] },
+            { id: "roof", position: [-0.2, 2.2, 0.54] },
+            { id: "windows", position: [0.73, 1.02, 0.91] },
+            { id: "gardens", position: [-1.24, 0.26, 0.92] },
+          ] as { id: MuseumFeature; position: [number, number, number] }[]
+        ).map((hotspot) => (
           <mesh
             key={hotspot.id}
             name={`hotspot-${hotspot.id}`}

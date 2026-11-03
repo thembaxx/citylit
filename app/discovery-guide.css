@@ -2571,7 +2571,6 @@
   margin-top: 16px;
 }
 
-
 /* Architectural inspector: restrained, touch-ready controls over the existing shared 3D view. */
 .atlas-inspector-toolbar {
   position: absolute;
@@ -2593,7 +2592,9 @@
   background: color-mix(in srgb, var(--surface) 88%, transparent);
   border: 1px solid var(--line);
   border-radius: 26px;
-  box-shadow: 0 16px 40px rgb(25 25 30 / 12%), inset 0 1px rgb(255 255 255 / 14%);
+  box-shadow:
+    0 16px 40px rgb(25 25 30 / 12%),
+    inset 0 1px rgb(255 255 255 / 14%);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
 }
@@ -2608,13 +2609,16 @@
   color: var(--ink);
   background: transparent;
   cursor: pointer;
-  transition: background 180ms ease, transform 180ms ease, color 180ms ease;
+  transition:
+    background 180ms ease,
+    transform 180ms ease,
+    color 180ms ease;
 }
 .atlas-inspector-toolbar button:hover {
   background: var(--surface-glass);
 }
 .atlas-inspector-toolbar button:active {
-  transform: scale(.94);
+  transform: scale(0.94);
 }
 .atlas-inspector-toolbar button:focus-visible {
   outline: 2px solid var(--accent-ink);
@@ -2625,7 +2629,7 @@
   background: var(--guide-glow);
 }
 .atlas-inspector-toolbar button:disabled {
-  opacity: .35;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 .atlas-inspector-features {
@@ -2648,7 +2652,7 @@
   padding: 5px 8px 7px;
   color: var(--muted);
   font-size: 10px;
-  letter-spacing: .03em;
+  letter-spacing: 0.03em;
 }
 .atlas-inspector-features button {
   justify-content: flex-start;
@@ -2683,8 +2687,12 @@
     min-height: 33px;
     font-size: 10px;
   }
-  .atlas-inspector-note { display: none; }
+  .atlas-inspector-note {
+    display: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .atlas-inspector-toolbar button { transition: none; }
+  .atlas-inspector-toolbar button {
+    transition: none;
+  }
 }

@@ -23,6 +23,7 @@ document.createExtension(KHRDracoMeshCompression).setRequired(true).setEncoderOp
   decodeSpeed: 5,
 });
 const compressed = await io.writeBinary(document);
+console.log("Compressed museum hero:", compressed.length, "bytes; textures:", document.getRoot().listTextures().length);
 assert.ok(compressed.length <= 12 * 1024 * 1024, "Hero exceeds 12 MiB; optimize scans");
 const verified = await io.readBinary(compressed);
 assert.ok(verified.getRoot().listMeshes().length > 3, "No compressed architecture meshes");

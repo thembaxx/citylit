@@ -30,3 +30,9 @@ canopies still appeared sparse at the app's normal field of view. Leaf counts
 increased to 2,816 while preserving the one-mesh canopy and independent green
 materials. Actual screenshots and frame-time behavior must be reviewed again;
 source counts alone are not the release gate.
+
+## Reviewed GLB captures and scoped binary release
+
+The denser second Blender run [41694215219](https://github.com/thembaxx/citylit/actions/runs/41694215219) passed GLB audits, format, lint, TypeScript and production build. Its actual ready-state screenshots at 1440×900, 390×844 and 320×720 are in artifact `citylit-botanical-fidelity-desktop-mobile`. Visual review confirms fuller layered canopy silhouettes than the first botanical pass, with no observed stage-control overlap. They remain stylized procedural trees; the reference's photographic botanical realism is not yet achieved.
+
+Blender/Draco also re-encoded four **unchanged** sculpt models (Bo-Kaap, Constitution Hill, Durban City Hall, Union Buildings), changing a few hundred bytes without modifying their authoring. Their pre-upgrade blobs and manifest byte counts were restored directly to keep this PR limited to the park asset. The post-restore structural catalog audit must still pass.

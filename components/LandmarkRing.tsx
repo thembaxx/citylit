@@ -279,10 +279,10 @@ function Ring({
             ? [-0.85, 3.15, 11.2]
             : [0.5, 2.35, size.width < 760 ? 10.6 : 11.45]
       : view === "detail"
-        ? [0.7, 2.5, 8.5]
+        ? [0.8, 2.55, 7.8]
         : view === "overhead"
-          ? [0.4, 5.1, 9.4]
-          : [0, 3.2, 10.8];
+          ? [0.4, 5.1, 9.0]
+          : [0.9, 3.2, 9.3];
     const tween = gsap.to(camera.position, {
       x: preset[0],
       y: preset[1],
@@ -347,16 +347,16 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
-      <StudioEnvironment intensity={night ? 0.08 : 0.29} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.1 : 0.21]} />
-      <ambientLight intensity={night ? 0.06 : 0.075} />
+      <StudioEnvironment intensity={night ? 0.18 : 0.62} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.19 : 0.32]} />
+      <ambientLight intensity={night ? 0.10 : 0.17} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.2 : 1.23}
+        intensity={night ? 0.46 : 1.75}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        shadow-mapSize-width={size.width < 760 ? 1024 : 2048}
+        shadow-mapSize-height={size.width < 760 ? 1024 : 2048}
         shadow-camera-left={-9}
         shadow-camera-right={9}
         shadow-camera-top={9}
@@ -366,8 +366,14 @@ function Ring({
       />
       <directionalLight
         position={[-4, 3, -2]}
-        intensity={night ? 0.08 : 0.3}
+        intensity={night ? 0.18 : 0.46}
         color={night ? "#99b4db" : "#ffa968"}
+      />
+      <pointLight
+        position={[1.8, 2.5, 3.4]}
+        intensity={night ? 1.12 : 0.28}
+        distance={9}
+        color="#ffe3be"
       />
       <group position={[size.width > size.height ? 1.52 : 0.04, 0, 0]}>
         <group ref={ring}>
@@ -395,8 +401,8 @@ function Ring({
                         ? 0.77
                         : 0.72
                       : size.width < 760
-                        ? 0.9
-                        : 1.24) * zoom
+                        ? 1.02
+                        : 1.42) * zoom
                   : 0.55
               }
               onClick={(event) => {

@@ -90,9 +90,12 @@ function Model({
     ears.current.rotation.x = active ? Math.sin(t * 1.1 + 0.5) * 0.05 : 0;
     const blink = t % 5.4 > 5.1 ? 0.12 : 1;
     eyes.current.scale.y = sleeping ? 0.14 : blink;
-    wave.current.rotation.z = pose === "welcome" && active
-      ? -0.34 - Math.sin(t * 4) * 0.18
-      : pose === "saved" && active ? -0.75 : 0;
+    wave.current.rotation.z =
+      pose === "welcome" && active
+        ? -0.34 - Math.sin(t * 4) * 0.18
+        : pose === "saved" && active
+          ? -0.75
+          : 0;
     const catching = pose === "saved";
     spark.current.position.set(
       catching ? 0.65 * Math.max(0, 1 - t / 1.4) : 0.75 + Math.sin(t * 0.8) * 0.08,

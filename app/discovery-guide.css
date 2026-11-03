@@ -2570,3 +2570,121 @@
 .atlas-stage-description + .atlas-stage-actions {
   margin-top: 16px;
 }
+
+
+/* Architectural inspector: restrained, touch-ready controls over the existing shared 3D view. */
+.atlas-inspector-toolbar {
+  position: absolute;
+  top: clamp(175px, 22vh, 245px);
+  right: clamp(14px, 3.2vw, 48px);
+  z-index: 4;
+  display: grid;
+  justify-items: end;
+  gap: 11px;
+  pointer-events: auto;
+  color: var(--ink);
+}
+.atlas-inspector-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 7px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  box-shadow: 0 16px 40px rgb(25 25 30 / 12%), inset 0 1px rgb(255 255 255 / 14%);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+.atlas-inspector-toolbar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 17px;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease, color 180ms ease;
+}
+.atlas-inspector-toolbar button:hover {
+  background: var(--surface-glass);
+}
+.atlas-inspector-toolbar button:active {
+  transform: scale(.94);
+}
+.atlas-inspector-toolbar button:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+.atlas-inspector-toolbar button[aria-pressed="true"] {
+  color: var(--accent-ink);
+  background: var(--guide-glow);
+}
+.atlas-inspector-toolbar button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+.atlas-inspector-features {
+  width: 145px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--surface) 91%, transparent);
+  box-shadow: 0 12px 36px rgb(20 20 25 / 10%);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+.atlas-inspector-features span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px 7px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .03em;
+}
+.atlas-inspector-features button {
+  justify-content: flex-start;
+  min-height: 36px;
+  padding: 7px 10px;
+  border-radius: 13px;
+  font-size: 11px;
+  font-weight: 650;
+}
+.atlas-inspector-note {
+  max-width: 150px;
+  text-align: right;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+@media (max-width: 767px) {
+  .atlas-inspector-toolbar {
+    top: 75px;
+    right: 10px;
+    gap: 8px;
+  }
+  .atlas-inspector-actions {
+    padding: 4px;
+    border-radius: 22px;
+  }
+  .atlas-inspector-features {
+    width: 120px;
+    border-radius: 18px;
+  }
+  .atlas-inspector-features button {
+    min-height: 33px;
+    font-size: 10px;
+  }
+  .atlas-inspector-note { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-inspector-toolbar button { transition: none; }
+}

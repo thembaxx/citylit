@@ -1,4 +1,5 @@
 name: Architectural visual benchmark (one shot)
+# Second visual review: contrast, mobile inspector and framing
 on:
   push:
     branches:

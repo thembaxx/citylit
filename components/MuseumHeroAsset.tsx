@@ -38,16 +38,17 @@ function HeritageMuseum({
       [instance.getObjectByName("MuseumRoof"), exploded ? 0.70 : 0],
       [instance.getObjectByName("MuseumLandscape"), exploded ? -0.16 : 0],
     ] as const;
-    const tweens = layers
-      .filter((layer): layer is [THREE.Object3D, number] => !!layer[0])
-      .map(([object, y]) =>
+    const tweens = layers.flatMap(([object, y]) => {
+      if (!object) return [];
+      return [
         gsap.to(object.position, {
           y,
           duration: reduced ? 0 : 0.76,
           ease: "power3.inOut",
           onUpdate: invalidate,
         }),
-      );
+      ];
+    });
     invalidate();
     return () => {
       tweens.forEach((tween) => tween.kill());

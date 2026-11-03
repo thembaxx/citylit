@@ -14,7 +14,13 @@ const io = new NodeIO().registerExtensions([KHRDracoMeshCompression]).registerDe
 const document = await io.read(source.pathname);
 const requiredNodes = ["MuseumFacade", "MuseumRoof", "MuseumGlass", "MuseumLandscape"];
 for (const name of requiredNodes) {
-  assert.ok(document.getRoot().listNodes().some((node) => node.getName() === name), name);
+  assert.ok(
+    document
+      .getRoot()
+      .listNodes()
+      .some((node) => node.getName() === name),
+    name,
+  );
 }
 assert.ok(document.getRoot().listTextures().length >= 8, "Missing image-based PBR maps");
 document.createExtension(KHRDracoMeshCompression).setRequired(true).setEncoderOptions({
@@ -23,7 +29,12 @@ document.createExtension(KHRDracoMeshCompression).setRequired(true).setEncoderOp
   decodeSpeed: 5,
 });
 const compressed = await io.writeBinary(document);
-console.log("Compressed museum hero:", compressed.length, "bytes; textures:", document.getRoot().listTextures().length);
+console.log(
+  "Compressed museum hero:",
+  compressed.length,
+  "bytes; textures:",
+  document.getRoot().listTextures().length,
+);
 assert.ok(compressed.length <= 12 * 1024 * 1024, "Hero exceeds 12 MiB; optimize scans");
 const verified = await io.readBinary(compressed);
 assert.ok(verified.getRoot().listMeshes().length > 3, "No compressed architecture meshes");

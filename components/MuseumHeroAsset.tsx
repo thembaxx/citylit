@@ -35,7 +35,7 @@ function HeritageMuseum({
 
   useEffect(() => {
     const layers = [
-      [instance.getObjectByName("MuseumRoof"), exploded ? 0.70 : 0],
+      [instance.getObjectByName("MuseumRoof"), exploded ? 0.7 : 0],
       [instance.getObjectByName("MuseumLandscape"), exploded ? -0.16 : 0],
     ] as const;
     const tweens = layers.flatMap(([object, y]) => {
@@ -118,7 +118,9 @@ function HeritageMuseum({
             />
           </mesh>
         ))}
-      {night && <pointLight intensity={1.2} distance={5.2} color="#f5bb7b" position={[0, 1.4, 1.8]} />}
+      {night && (
+        <pointLight intensity={1.2} distance={5.2} color="#f5bb7b" position={[0, 1.4, 1.8]} />
+      )}
     </group>
   );
 }

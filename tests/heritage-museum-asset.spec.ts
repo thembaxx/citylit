@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test("museum uses a separately compressed, genuinely textured architectural asset", async ({ request }) => {
+test("museum uses a separately compressed, genuinely textured architectural asset", async ({
+  request,
+}) => {
   const metadata = await request.get("/models/hero/manifest.json");
   expect(metadata.ok()).toBeTruthy();
   const manifest = (await metadata.json()) as {

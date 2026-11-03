@@ -29,6 +29,11 @@ for (const id of ["bo-kaap", "dome", "tower", "union-buildings"]) {
     names.includes("Architectural window glazing"),
     id + " has no individual glass material",
   );
+  if (id === "bo-kaap") {
+    for (const entryMaterial of ["Recessed mahogany entry", "Brushed brass door hardware"]) {
+      assert.ok(names.includes(entryMaterial), id + " is missing physical entrywork: " + entryMaterial);
+    }
+  }
   const count = document
     .getRoot()
     .listMeshes()

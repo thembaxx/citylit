@@ -1,7 +1,7 @@
 """Portable PBR material treatment for CityLit's authored Blender landmark assets.
 
 Uses the same build-time CC0 ambientCG scans as McGregor Museum.
-Textures are downscaled in Blender and embedded into each self-contained GLB.
+Source-resolution textures are embedded into each self-contained GLB.
 Architectural geometry remains landmark-specific, not a generic building clone.
 """
 from pathlib import Path
@@ -49,7 +49,7 @@ def texture(category, channel):
         raise RuntimeError("Missing CC0 PBR texture: %s %s" % (category, channel))
     image = bpy.data.images.load(str(matches[0]), check_existing=True)
     image.name = "CityLit CC0 %s %s" % key
-    # Images were downsampled to 320px JPEGs before Blender, avoiding PNG bloat.
+    # Use the original source scan resolution; preserve sRGB vs linear texture channels.
     image.colorspace_settings.name = "sRGB" if channel == "Color" else "Non-Color"
     image.pack()
     IMAGE_CACHE[key] = image
@@ -69,20 +69,24 @@ def apply_material(mat):
     if not bsdf:
         return
     tint = tuple(mat.diffuse_color[:3]) + (1,)
-    tex = tree.nodes.new("ShaderNodeTexImage")
-    tex.label = "CC0 %s albedo, downscaled 320px" % category
-    tex.image = texture(category, "Color")
-    tint_mix = tree.nodes.new("ShaderNodeMixRGB")
-    tint_mix.blend_type = "MULTIPLY"
-    tint_mix.inputs["Fac"].default_value = CATEGORIES[category][1]
-    tint_mix.inputs["Color1"].default_value = tint
-    tree.links.new(tex.outputs["Color"], tint_mix.inputs["Color2"])
-    tree.links.new(tint_mix.outputs["Color"], bsdf.inputs["Base Color"])
+    # Coloured houses and cooling-tower murals are painted surfaces. Applying
+    # stone albedo to them washes out their authored palette. Retain paint
+    # colour but still use rights-cleared scanned normal/roughness variation.
+    if "painted" not in mat.name.lower():
+        tex = tree.nodes.new("ShaderNodeTexImage")
+        tex.label = "CC0 %s source-resolution albedo" % category
+        tex.image = texture(category, "Color")
+        tint_mix = tree.nodes.new("ShaderNodeMixRGB")
+        tint_mix.blend_type = "MULTIPLY"
+        tint_mix.inputs["Fac"].default_value = CATEGORIES[category][1]
+        tint_mix.inputs["Color1"].default_value = tint
+        tree.links.new(tex.outputs["Color"], tint_mix.inputs["Color2"])
+        tree.links.new(tint_mix.outputs["Color"], bsdf.inputs["Base Color"])
 
     normal = tree.nodes.new("ShaderNodeTexImage")
     normal.image = texture(category, "NormalGL")
     bump = tree.nodes.new("ShaderNodeNormalMap")
-    bump.inputs["Strength"].default_value = .20 if category == "grass" else .32
+    bump.inputs["Strength"].default_value = .20 if category == "grass" else .40
     tree.links.new(normal.outputs["Color"], bump.inputs["Color"])
     tree.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
     roughness = tree.nodes.new("ShaderNodeTexImage")

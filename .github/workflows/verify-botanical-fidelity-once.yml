@@ -1,3 +1,4 @@
+# Second visual-density pass (2,816 leaves): run the complete GLB and screenshot gate.
 name: Verify botanical stage geometry (one shot)
 on:
   push:

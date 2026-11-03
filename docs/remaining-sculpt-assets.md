@@ -52,3 +52,27 @@ Improved mesh complexity and texture resolution do **not** imply physically
 accurate indirect lighting, photogrammetry, or faithful reconstruction. Those
 require art-directed reference modeling, higher quality scans, interior geometry
 and baked lighting with measured visual review.
+
+## Recorded November 3 validation and remaining quality gap
+
+- All fifteen GLBs regenerated or preserved and decoded; each stayed inside the
+  2 MiB limit, with locally embedded CC0 material maps.
+- The one-shot build [completed successfully](https://github.com/thembaxx/citylit/actions/runs/41664960658).
+- Captures that only proved a WebGL canvas was present could contain a
+  Suspense fallback. Screenshot coverage now requires explicit ready status for
+  the active model, and a regression asserts error status on failed GLB loads.
+- The [full 10-model loaded-geometry capture](https://github.com/thembaxx/citylit/actions/runs/41666258815)
+  passed on 1440 × 900 desktop and 390 × 844 mobile.
+- Recompressed authored baseColorFactor tints, including five independent Bo-Kaap
+  paint colours, after detecting colour loss from Blender's MixRGB nodes.
+  [The colour-corrected capture](https://github.com/thembaxx/citylit/actions/runs/41666595526)
+  passed; the final source was normalized with pinned Oxfmt.
+- Visual review confirms distinguishing geometry, no displayed loading fallback,
+  and restored facade colours. However the scenes remain stylized, relatively
+  low-poly editorial models. They **do not yet meet the requested photographic
+  architectural-visualization benchmark**. The next art pass needs site-accurate
+  measured proportions, realistic botanical models, higher-frequency UV detail,
+  physically convincing glazing and interior depth, baked GI/AO, and comparative
+  visual approval, with mobile memory/FPS review.
+- Do not claim full fidelity or release approval solely from synthetic WebGL
+  screenshots or pipeline CI. Keep this PR draft unless the visual benchmark is met.

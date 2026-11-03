@@ -1,4 +1,5 @@
 name: Format museum architecture code once
+# Apply format after contrast, mobile presentation and asset integration edits
 on:
   push:
     branches:

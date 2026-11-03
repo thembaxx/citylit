@@ -26,9 +26,34 @@ function HeritageMuseum({
       if (!(object instanceof THREE.Mesh)) return;
       object.castShadow = true;
       object.receiveShadow = true;
+      const tune = (source: THREE.Material): THREE.Material => {
+        const material = source.clone();
+        if (material instanceof THREE.MeshStandardMaterial) {
+          const name = material.name.toLowerCase();
+          // Image-based base colors were exported without the original tint.
+          // These calibrated factors let real brick/stone scans show through
+          // without turning the entire model into a white paper miniature.
+          if (name.includes("heritage brick")) material.color.set("#9c5747");
+          else if (name.includes("pathway stone")) material.color.set("#bca78d");
+          else if (name.includes("lawn")) material.color.set("#59744b");
+          else if (name.includes("heritage wood")) material.color.set("#7a5540");
+          else if (name.includes("copper red roof")) material.color.set("#71403a");
+          else if (name.includes("roof seam")) material.color.set("#51352f");
+          else if (name.includes("painted veranda trim")) material.color.set("#d3c3aa");
+          else if (name.includes("trim edge")) material.color.set("#e0d2b9");
+          else if (name.includes("sash glazing")) {
+            material.color.set("#2b4c57");
+            material.roughness = 0.09;
+            material.metalness = 0.18;
+            material.envMapIntensity = 1.7;
+          } else if (name.includes("deep interior")) material.color.set("#151f24");
+          material.needsUpdate = true;
+        }
+        return material;
+      };
       object.material = Array.isArray(object.material)
-        ? object.material.map((material) => material.clone())
-        : object.material.clone();
+        ? object.material.map(tune)
+        : tune(object.material);
     });
     return root;
   }, [scene]);

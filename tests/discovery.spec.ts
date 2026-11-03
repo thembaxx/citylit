@@ -222,8 +222,9 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   });
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
-  await expect(page.locator(".wordmark")).toHaveAccessibleName("citylit");
-  const brandSymbol = page.locator(".wordmark .citylit-logo-symbol");
+  const headerWordmark = page.locator(".atlas-nav .wordmark");
+  await expect(headerWordmark).toHaveAccessibleName("citylit");
+  const brandSymbol = headerWordmark.locator(".citylit-logo-symbol");
   await expect(brandSymbol).toHaveCount(1);
   await expect(brandSymbol).toHaveAttribute("aria-hidden", "true");
   await expect(page.locator(".map-pin")).toHaveCount(0);

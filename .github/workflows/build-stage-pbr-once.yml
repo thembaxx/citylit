@@ -1,4 +1,5 @@
 name: Build textured CityLit landmark catalog once
+# Final pass: glTF baseColorFactor calibration and true-color scans
 # Retry with 320px preoptimized CC0 JPEG material maps
 on:
   push:

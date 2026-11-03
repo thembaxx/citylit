@@ -21,10 +21,10 @@ export type MuseumProps = {
   onFeature?: (feature: MuseumFeature) => void;
 };
 
-const stone = "#e4d7c3";
-const trim = "#f6eddb";
-const copper = "#547a68";
-const timber = "#725848";
+const stone = "#d2c2ad";
+const trim = "#efe4d2";
+const copper = "#395e50";
+const timber = "#684b3a";
 
 const SurfaceContext = createContext<MuseumSurfaceLibrary | null>(null);
 
@@ -69,7 +69,7 @@ function DetailedTree({ x, z, seed }: { x: number; z: number; seed: number }) {
             number,
           ],
           size,
-          color: ["#52734c", "#789a64", "#5e8255", "#9ab184", "#6c9661"][(i + seed) % 5],
+          color: ["#375e40", "#547951", "#446b43", "#73916a", "#426544"][(i + seed) % 5],
         };
       }),
     [seed],
@@ -153,11 +153,12 @@ function MuseumWindow({
 }) {
   return (
     <group position={position} rotation={[0, side ? Math.PI / 2 : 0, 0]}>
-      <Volume position={[0, 0, 0]} size={[0.33, 0.43, 0.055]} color={trim} />
-      <mesh position={[0, 0, 0.031]}>
+      <Volume position={[0, 0, -0.012]} size={[0.35, 0.45, 0.075]} color="#a89984" surface="stone" />
+      <Volume position={[0, 0, 0.016]} size={[0.31, 0.41, 0.027]} color="#242f30" surface="stone" />
+      <mesh position={[0, 0, 0.039]}>
         <boxGeometry args={[0.27, 0.36, 0.01]} />
         <meshPhysicalMaterial
-          color={night ? "#ffe6a4" : "#7c9ea7"}
+          color={night ? "#efcd83" : "#405b63"}
           metalness={0.06}
           roughness={0.095}
           ior={1.46}
@@ -225,19 +226,19 @@ export default function MuseumShowcase({
           <Volume
             position={[0, -0.21, 0]}
             size={[3.18, 0.21, 2.86]}
-            color="#b8aa94"
+            color="#948576"
             surface="stone"
           />
           <Volume
             position={[0, -0.085, 0]}
             size={[3.08, 0.065, 2.76]}
-            color="#ede4d4"
+            color="#d5c8b6"
             surface="paving"
           />
           <Volume
             position={[0, -0.031, 0]}
             size={[2.99, 0.045, 2.67]}
-            color="#9dba8e"
+            color="#728f69"
             surface="grass"
           />
           <Volume
@@ -255,8 +256,6 @@ export default function MuseumShowcase({
           {[
             [-1.25, -0.95, 3],
             [1.27, -0.98, 7],
-            [-1.24, 0.95, 11],
-            [1.29, 0.86, 17],
           ].map(([x, z, seed]) => (
             <DetailedTree key={seed} x={x} z={z} seed={seed} />
           ))}

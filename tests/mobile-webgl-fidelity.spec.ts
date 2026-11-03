@@ -1,9 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("Retina mobile renders 3D above 1x without exceeding the capped pixel budget", async (
-  { browser },
-  testInfo,
-) => {
+test("Retina mobile uses capped pixel density", async ({ browser }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile-chromium", "Mobile Chromium renderer coverage");
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },

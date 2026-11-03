@@ -16,7 +16,8 @@ def build(name, box, material, bpy):
     light = material("Interior linen and lampshades", (.72, .63, .46), roughness=.83)
     foliage = material("Interior potted leaves", (.21, .40, .25), roughness=.92)
     glass = material("Architectural window glazing", (.21, .36, .40), roughness=.10)
-    entrance_wood = material("Recessed mahogany entry", (.245, .145, .090), roughness=.57)
+    entrance_wood = material("Recessed mahogany entry", (.30, .17, .105), roughness=.61)
+    entry_reveal = material("Entry plaster shadow", (.46, .43, .38), roughness=.90)
     door_bronze = material("Brushed brass door hardware", (.61, .39, .20), roughness=.30, metalness=.72)
 
     def carve(solid_name, cx, front, bottom, width, height, serial):
@@ -109,24 +110,26 @@ def build(name, box, material, bpy):
             .025, height * .97, room)
         for offset in (-width * .49, width * .49):
             box(cx + offset, front + .16, bottom + height / 2,
-                .015, .40, height, side)
-        box(cx, front + .16, bottom + height, width, .40, .020, side)
+                .015, .40, height, entry_reveal)
+        box(cx, front + .16, bottom + height, width, .40, .020, entry_reveal)
         box(cx, front + .09, bottom - .008, width + .042, .41, .025, wood)
 
         # The door sits deep in the cavity; independent raised timber stiles
         # and panels create highlights and parallax as the miniature rotates.
-        door_y = front + .240
-        box(cx, door_y, bottom + .309, width * .79, .032, .595, entrance_wood)
+        # Traditional joinery is closer to the facade; a modest visible inset
+        # retains depth without hiding the painted timber behind the side jambs.
+        door_y = front + .095
+        box(cx, door_y, bottom + .309, width * .86, .032, .595, entrance_wood)
         for offset in (-width * .32, width * .32):
             box(cx + offset, door_y - .023, bottom + .309,
                 .010, .013, .574, wood)
         for panel_z in (bottom + .155, bottom + .36, bottom + .567):
             box(cx, door_y - .024, panel_z, width * .58, .014, .012, wood)
         # The glazed transom is physically between timber and the reveal lintel.
-        box(cx, front + .142, bottom + .652, width * .79, .010, .091, glass)
+        box(cx, front + .070, bottom + .652, width * .82, .010, .091, glass)
         for z in (bottom + .606, bottom + .705):
-            box(cx, front + .110, z, width + .010, .028, .012, wood)
-        box(cx, front + .106, bottom + .652, .011, .029, .100, wood)
+            box(cx, front + .048, z, width + .010, .028, .012, wood)
+        box(cx, front + .043, bottom + .652, .011, .029, .100, wood)
 
         # Exposed jambs and brass backplate / handle make the opening readable
         # at close-up without pretending the building is a site survey.

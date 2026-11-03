@@ -25,6 +25,11 @@ const cases = [
   ["aquarium", "durban", "uShaka Marine World"],
 ];
 
+const focusIds = new Set((process.env.STAGE_FOCUS_IDS ?? "").split(",").filter(Boolean));
+const selectedCases = focusIds.size ? cases.filter(([id]) => focusIds.has(id)) : cases;
+if (focusIds.size && selectedCases.length !== focusIds.size) {
+  throw new Error("Unknown landmark model IDs in STAGE_FOCUS_IDS");
+}
 const browser = await chromium.launch({
   headless: true,
   args: ["--enable-webgl", "--enable-unsafe-swiftshader", "--use-gl=angle", "--use-angle=swiftshader"],
@@ -41,7 +46,7 @@ for (const screen of [
   { id: "mobile", width: 390, height: 844 },
 ]) {
   await page.setViewportSize({ width: screen.width, height: screen.height });
-  for (const [id, city, name] of cases) {
+  for (const [id, city, name] of selectedCases) {
     await page.goto(base + "/" + city + "/landmarks", { waitUntil: "domcontentloaded" });
     const chip = page.locator(".atlas-stage-chips").getByRole("button", { name, exact: true });
     await chip.click();

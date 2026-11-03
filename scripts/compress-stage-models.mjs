@@ -80,4 +80,6 @@ for (const item of manifest) {
 await writeFile(new URL("manifest.json", root), JSON.stringify(manifest, null, 2) + "\n");
 
 const totalBytes = manifest.reduce((total, entry) => total + entry.bytes, 0);
-console.log(`All ${manifest.length} full-detail landmark GLBs: ${(totalBytes / 1048576).toFixed(1)} MiB; no arbitrary model/catalog size cap`);
+console.log(
+  `All ${manifest.length} full-detail landmark GLBs: ${(totalBytes / 1048576).toFixed(1)} MiB; no arbitrary model/catalog size cap`,
+);

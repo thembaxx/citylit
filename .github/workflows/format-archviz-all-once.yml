@@ -1,0 +1,39 @@
+name: Format all-assets archviz PR once
+on:
+  push:
+    branches:
+      - feat/archviz-all-assets
+    paths:
+      - .github/workflows/format-archviz-all-once.yml
+permissions:
+  contents: write
+jobs:
+  apply-format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: feat/archviz-all-assets
+          persist-credentials: true
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Apply repository Oxfmt settings and verify
+        run: |
+          pnpm format
+          pnpm format:check
+          git diff --check
+      - name: Commit only source formatting
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github app components lib tests scripts
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "style(archviz): apply repository Oxfmt to all-asset visual upgrade"
+          git fetch origin feat/archviz-all-assets
+          git rebase origin/feat/archviz-all-assets
+          git push origin HEAD:feat/archviz-all-assets

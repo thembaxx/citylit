@@ -562,3 +562,22 @@ button,
     corner-shape: squircle;
   }
 }
+
+/* Native mobile form typography: iOS Safari must not zoom focused fields.
+   Use a real 16px computed size for every editable field and picker. */
+:where(input, textarea, select, [contenteditable="true"], [role="combobox"], [role="textbox"], [role="searchbox"], [role="spinbutton"]) {
+  font-size: 16px !important;
+  line-height: 1.5;
+}
+:where(input, textarea, select) {
+  max-width: 100%;
+  min-width: 0;
+}
+:where(input, textarea, select):focus-visible {
+  scroll-margin-bottom: calc(96px + env(safe-area-inset-bottom));
+}
+@media (max-width: 767px) {
+  :where(input, textarea, select, [contenteditable="true"], [role="combobox"], [role="textbox"], [role="searchbox"], [role="spinbutton"]) {
+    font-size: 16px !important;
+  }
+}

@@ -355,6 +355,7 @@ function Ring({
             <group
               key={item.name}
               position={positions[index]}
+              rotation={[0, index === selected && item.name.toLowerCase().includes("mcgregor museum") ? index * Math.PI * 2 / items.length - 0.29 : 0, 0]}
               scale={index === selected ? (item.name.toLowerCase().includes("mcgregor museum") ? (size.width < 760 ? 0.8 : 0.72) : (size.width < 760 ? 0.8 : 1)) * zoom : 0.55}
               onClick={(event) => {
                 event.stopPropagation();

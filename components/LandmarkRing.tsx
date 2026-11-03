@@ -271,7 +271,7 @@ function Ring({
                 onSelect(index);
               }}
             >
-              {/\* high-detail museum shares the same canvas and scene budget \*/}
+              {/* high-detail museum shares the same canvas and scene budget */}
               {item.name.toLowerCase().includes("mcgregor museum") ? (
                 <MuseumShowcase
                   night={night}

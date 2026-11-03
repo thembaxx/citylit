@@ -53,7 +53,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/models/stage/ components/StageModel.tsx components/LandmarkRing.tsx scripts/prepare-stage-scans.py scripts/stage-pbr.py scripts/sculpt-remaining-assets.py
+          # The formatter can touch other tracked files; leave no dirty worktree
+          # before rebase, or Git refuses to publish otherwise-valid GLBs.
+          git add -u
+          git add public/models/stage/
           if ! git diff --cached --quiet; then
             git commit -m "assets(archviz): regenerate all fifteen source-resolution studio models"
             git fetch origin feat/archviz-reference-materials

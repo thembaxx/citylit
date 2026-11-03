@@ -260,7 +260,7 @@ function Ring({
     const museum = items[selected]?.name.toLowerCase().includes("mcgregor museum");
     const preset = museum
       ? feature === "roof"
-        ? [0, 3.30, 10.8]
+        ? [0, 3.3, 10.8]
         : feature === "windows"
           ? [1.15, 2.05, 10.2]
           : feature === "gardens"
@@ -336,11 +336,11 @@ function Ring({
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
       <StudioEnvironment intensity={night ? 0.08 : 0.4} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.10 : 0.29]} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.1 : 0.29]} />
       <ambientLight intensity={night ? 0.06 : 0.11} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.20 : 1.45}
+        intensity={night ? 0.2 : 1.45}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
         shadow-mapSize-width={1024}
@@ -362,7 +362,11 @@ function Ring({
           {items.map((item, index) => (
             <group
               key={item.name}
-              visible={size.width >= 760 || !items[selected]?.name.toLowerCase().includes("mcgregor museum") || index === selected}
+              visible={
+                size.width >= 760 ||
+                !items[selected]?.name.toLowerCase().includes("mcgregor museum") ||
+                index === selected
+              }
               position={positions[index]}
               rotation={[
                 0,

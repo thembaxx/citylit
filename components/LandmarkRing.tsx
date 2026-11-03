@@ -3,7 +3,7 @@ import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
-import { ArrowCounterClockwise, Cube, Layers, MagnifyingGlassMinus, MagnifyingGlassPlus, Moon, Sun } from "@phosphor-icons/react";
+import { ArrowCounterClockwise, Cube, Stack, MagnifyingGlassMinus, MagnifyingGlassPlus, Moon, Sun } from "@phosphor-icons/react";
 import * as THREE from "three";
 import gsap from "gsap";
 import SafeStageModel from "./SafeStageModel";
@@ -469,7 +469,7 @@ export default function LandmarkRing({
               title="Exploded view"
               onClick={() => setExploded((value) => !value)}
             >
-              <Layers size={19} />
+              <Stack size={19} />
             </button>
           )}
           <button

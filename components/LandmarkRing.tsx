@@ -388,8 +388,8 @@ function Ring({
                         ? 0.77
                         : 0.72
                       : size.width < 760
-                        ? 0.8
-                        : 1) * zoom
+                        ? 0.90
+                        : 1.24) * zoom
                   : 0.55
               }
               onClick={(event) => {

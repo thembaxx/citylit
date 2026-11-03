@@ -36,17 +36,24 @@ const page = await browser.newPage({
 });
 const errors = [];
 page.on("pageerror", (error) => errors.push(error.message));
-for (const [id, city, name] of cases) {
-  await page.goto(base + "/" + city + "/landmarks", { waitUntil: "domcontentloaded" });
-  const chip = page.locator(".atlas-stage-chips").getByRole("button", { name, exact: true });
-  await chip.click();
-  await page.locator(".atlas-ring-scene").waitFor();
-  await page.waitForTimeout(850);
-  if ((await page.locator("canvas").count()) < 1) {
-    throw new Error(id + " lacks the shared 3D canvas");
+for (const screen of [
+  { id: "desktop", width: 1440, height: 900 },
+  { id: "mobile", width: 390, height: 844 },
+]) {
+  await page.setViewportSize({ width: screen.width, height: screen.height });
+  for (const [id, city, name] of cases) {
+    await page.goto(base + "/" + city + "/landmarks", { waitUntil: "domcontentloaded" });
+    const chip = page.locator(".atlas-stage-chips").getByRole("button", { name, exact: true });
+    await chip.click();
+    await page.locator(".atlas-ring-scene").waitFor();
+    await page.waitForTimeout(950);
+    if ((await page.locator("canvas").count()) < 1) {
+      throw new Error(id + " lacks the shared 3D canvas");
+    }
+    const filename = id + (screen.id === "mobile" ? "-mobile" : "") + ".png";
+    await page.screenshot({ path: directory + "/" + filename });
+    console.log("Captured", screen.id, "live model:", id, name);
   }
-  await page.screenshot({ path: directory + "/" + id + ".png" });
-  console.log("Captured actual browser model:", id, name);
 }
 await page.close();
 await browser.close();

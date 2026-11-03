@@ -76,3 +76,24 @@ and baked lighting with measured visual review.
   visual approval, with mobile memory/FPS review.
 - Do not claim full fidelity or release approval solely from synthetic WebGL
   screenshots or pipeline CI. Keep this PR draft unless the visual benchmark is met.
+
+## 2026-11-03 — High-resolution archviz follow-up (separate stacked branch)
+
+The supplied architectural reference is **not met** by these renders. The earlier
+2 MiB/22 MiB limits and 320 px scan downsampling were arbitrary technical limits,
+not art-direction goals; remove them. New builds preserve source-scan resolution,
+and Draco and structural checks remain mandatory. Only selected and adjacent
+landmarks can mount when surroundings are visible, avoiding downloading all large
+models just to show one. More expensive GLBs require real mobile memory tests and
+per-scene error/fallback validation. Resolution alone does not create realism;
+architecture, depth, materials and presentation still need comparison screenshots.
+
+## Microgeometry layer (draft)
+
+A separate physical detailing pass covers the ten newest landmark classes: mullioned
+windows with shadow backing and window sills, joinery and roof edging, civic masonry,
+bridge fittings, lighthouse lanterns, individual botanical leaves, fort surface
+joints, cooling tower ladders and aquarium structural glazing. This is not an
+as-built accuracy guarantee. Regenerate and inspect binary GLBs before counting
+this work as delivered. The quality acceptance gate is a visual comparison of
+**actual ready-state WebGL captures** and inspection close-ups, not merely source code.

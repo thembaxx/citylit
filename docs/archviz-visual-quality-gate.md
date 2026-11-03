@@ -93,3 +93,12 @@ pnpm hero:audit
 pnpm models:audit
 pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
 ```
+
+## Full-fidelity revision
+
+The previous mobile-size and compressor caps were not visual-quality criteria. Fixed
+8/12 MiB GLB caps have been removed for the hero to support more architectural
+geometry and source-resolution scans. This does not by itself improve the
+already-exported museum asset. Any future rebuilt hero must still be decoded,
+visually inspected on desktop and mobile, and tested for actual GPU memory and
+frame-time behavior. Asset size cannot substitute for physical material quality.

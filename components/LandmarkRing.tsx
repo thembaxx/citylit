@@ -347,16 +347,16 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
-      <StudioEnvironment intensity={night ? 0.08 : 0.29} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.1 : 0.21]} />
-      <ambientLight intensity={night ? 0.06 : 0.075} />
+      <StudioEnvironment intensity={night ? 0.15 : 0.42} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.15 : 0.24]} />
+      <ambientLight intensity={night ? 0.08 : 0.09} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.2 : 1.23}
+        intensity={night ? 0.4 : 1.45}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        shadow-mapSize-width={size.width < 760 ? 1024 : 2048}
+        shadow-mapSize-height={size.width < 760 ? 1024 : 2048}
         shadow-camera-left={-9}
         shadow-camera-right={9}
         shadow-camera-top={9}
@@ -366,15 +366,26 @@ function Ring({
       />
       <directionalLight
         position={[-4, 3, -2]}
-        intensity={night ? 0.08 : 0.3}
+        intensity={night ? 0.16 : 0.34}
         color={night ? "#99b4db" : "#ffa968"}
+      />
+      <pointLight
+        position={[1.8, 2.5, 3.4]}
+        intensity={night ? 0.9 : 0.12}
+        distance={9}
+        color="#ffe3be"
       />
       <group position={[size.width > size.height ? 1.52 : 0.04, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
             <group
               key={item.name}
-              visible={showContext || index === selected}
+              visible={
+                index === selected ||
+                (showContext &&
+                  (index === (selected + 1) % items.length ||
+                    index === (selected - 1 + items.length) % items.length))
+              }
               position={positions[index]}
               rotation={[
                 0,
@@ -410,11 +421,16 @@ function Ring({
                     onFeature={index === selected ? onFeature : undefined}
                   />
                 ) : (
-                  <SafeStageModel
-                    model={item.model}
-                    active={index === selected}
-                    onStatus={onModelStatus}
-                  />
+                  (index === selected ||
+                    (showContext &&
+                      (index === (selected + 1) % items.length ||
+                        index === (selected - 1 + items.length) % items.length))) && (
+                    <SafeStageModel
+                      model={item.model}
+                      active={index === selected}
+                      onStatus={onModelStatus}
+                    />
+                  )
                 )}
                 {showContext &&
                   index === selected &&

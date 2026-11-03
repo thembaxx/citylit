@@ -28,6 +28,11 @@ remaining_spec = importlib.util.spec_from_file_location(
 )
 remaining = importlib.util.module_from_spec(remaining_spec)
 remaining_spec.loader.exec_module(remaining)
+premium_spec = importlib.util.spec_from_file_location(
+    "architectural_detail", ROOT / "scripts/architectural-detail-pass.py"
+)
+premium = importlib.util.module_from_spec(premium_spec)
+premium_spec.loader.exec_module(premium)
 MATERIALS = {}
 
 
@@ -63,12 +68,12 @@ def add(operator, location, scale=None, mat=STONE, **kwargs):
 
 def box(x, y, z, sx, sy, sz, mat=STONE):
     obj = add(bpy.ops.mesh.primitive_cube_add, (x, y, z), (sx, sy, sz), mat, size=1)
-    # Bevel only large architectural masses. Thin mouldings, windows and cables
-    # stay sharp, keeping the exported Draco file and draw-call budget bounded.
-    if min(sx, sy, sz) > .22:
+    # Give structural edges small physical highlights, without rounding mullions.
+    # Detail and shading quality, not Draco output size, determine the geometry.
+    if min(sx, sy, sz) > .09:
         bevel = obj.modifiers.new("Architectural edge highlights", "BEVEL")
-        bevel.width = min(sx, sy, sz) * .045
-        bevel.segments = 2
+        bevel.width = min(.018, min(sx, sy, sz) * .042)
+        bevel.segments = 3
         bpy.context.view_layer.objects.active = obj
         bpy.ops.object.modifier_apply(modifier=bevel.name)
     return obj
@@ -281,6 +286,9 @@ for name, build in BUILDERS.items():
     else:
         build()
         details.decorate(name, box, cylinder, beam, material, add, bpy)
+    # Preserve landmark-specific topology; add independent physical micro-geometry.
+    if name in remaining.SUPPORTED:
+        premium.build(name, box, cylinder, beam, material, add, bpy)
     stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.
@@ -302,4 +310,4 @@ for name, build in BUILDERS.items():
                          else "Original architectural/landscape miniature, not a site survey"
                      )})
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to finalize and verify the size budget.")
+print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to embed Draco and audit high-fidelity geometry.")

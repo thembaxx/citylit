@@ -22,7 +22,7 @@ Historical references for form only (not republished or included as textures):
 - Runtime: `components/MuseumHeroAsset.tsx`, backed by the procedural scene
   as an offline/network failure fallback
 - Production asset: `public/models/hero/mcgregor-museum.glb`
-- 3.82 MB compressed asset, 12 embedded PBR images
+- 3.92 MB compressed asset, 12 embedded PBR images
 - Named MuseumFacade, MuseumRoof, MuseumGlass and MuseumLandscape nodes
 - Detailing: red-brick walls, pitched and seamed roofs, chimneys, double veranda,
   balcony spindles, white columns, dark divided windows, landscaping and plinth
@@ -41,6 +41,29 @@ Official licensing: https://docs.ambientcg.com/license/
 
 No museum photograph or proprietary design from the inspiration is shipped
 inside the app.
+
+## Follow-up visual changes (recessed glazing and stage grounding)
+
+- One Boolean operation now cuts actual window and entrance openings into the
+  brick facade. Sashes, partially transparent glazing, shaded room backing and
+  curtains sit within those openings rather than looking pasted to a flat wall.
+- Landscaping replaces oversized spherical crowns and uniform hedge balls with
+  articulated branches, smaller angled leaves and individual garden planting.
+- A locally generated 128px gradient contact shadow anchors the 3D plinth,
+  including on mobile devices where costly dynamic shadow maps are disabled.
+- When McGregor Museum is selected, other ring models are hidden visually,
+  keeping the museum as the focus; chips, swipe and other navigation remain.
+- The latest WebGL screenshot run is
+  https://github.com/thembaxx/citylit/actions/runs/41647180994
+  (artifact: `heritage-final-grounding-comparison`, 1440×900 and 390×844,
+  daylight and night).
+- Asset regeneration was audited: the updated Draco GLB is **3,921,484 bytes**,
+  with the same 12 embedded PBR images.
+
+This is closer to the supplied architectural app reference, but the real
+screenshots still show a stylized digital miniature. It is **not a completed
+photorealistic reconstruction**. Do not merge without the owner's visual
+approval and real-device mobile performance validation.
 
 ## QA and visual gate
 

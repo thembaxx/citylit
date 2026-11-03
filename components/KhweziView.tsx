@@ -20,8 +20,8 @@ function Facet({
 }) {
   return (
     <mesh position={at} scale={size}>
-      <sphereGeometry args={[1, 8, 6]} />
-      <meshStandardMaterial color={color} flatShading roughness={1} />
+      <sphereGeometry args={[1, 28, 18]} />
+      <meshStandardMaterial color={color} roughness={0.75} metalness={0.02} />
     </mesh>
   );
 }
@@ -83,8 +83,10 @@ function Model({
       pose === "saved"
         ? Math.sin(Math.PI * Math.min(t / 0.9, 1)) * 0.28
         : Math.sin(t * 1.5) * 0.016;
-    root.current.scale.setScalar(sleeping ? 0.86 : 1 + Math.sin(t * 1.5) * 0.006);
-    ears.current.rotation.z = sleeping ? -0.28 : Math.sin(t * 1.3) * 0.04;
+    root.current.scale.setScalar(sleeping ? 0.86 : 1 + Math.sin(t * 1.5) * 0.012);
+    root.current.rotation.z = active ? Math.sin(t * 0.82) * 0.028 : 0;
+    ears.current.rotation.z = sleeping ? -0.28 : Math.sin(t * 1.3) * 0.065;
+    ears.current.rotation.x = active ? Math.sin(t * 1.1 + 0.5) * 0.05 : 0;
     const blink = t % 5.4 > 5.1 ? 0.12 : 1;
     eyes.current.scale.y = sleeping ? 0.14 : blink;
     const catching = pose === "saved";
@@ -104,7 +106,7 @@ function Model({
       <directionalLight position={[3, 1, -2]} intensity={1.2} color="#B8BCFF" />
       <group ref={root}>
         <mesh geometry={tail}>
-          <meshStandardMaterial color={brand.colors.ink} flatShading />
+          <meshStandardMaterial color={brand.colors.ink} roughness={0.82} />
         </mesh>
         <Facet at={[0, 0.85, 0]} size={[0.43, 0.57, 0.33]} />
         <Facet at={[-0.3, 0.17, 0.2]} size={[0.25, 0.16, 0.38]} color={brand.colors.ink} />
@@ -114,11 +116,11 @@ function Model({
           {[-1, 1].map((side) => (
             <group key={side} position={[side * 0.25, 0, 0]} rotation={[0, 0, side * -0.15]}>
               <mesh position={[0, 0.48, 0]}>
-                <coneGeometry args={[0.17, 1.1, 5]} />
-                <meshStandardMaterial color={brand.colors.ivory} flatShading />
+                <coneGeometry args={[0.17, 1.1, 16]} />
+                <meshStandardMaterial color={brand.colors.ivory} roughness={0.82} />
               </mesh>
               <mesh position={[0, 0.86, 0]}>
-                <coneGeometry args={[0.115, 0.36, 5]} />
+                <coneGeometry args={[0.115, 0.36, 16]} />
                 <meshStandardMaterial color={brand.colors.ink} flatShading />
               </mesh>
               <Facet at={[0, 0.35, 0.1]} size={[0.065, 0.28, 0.025]} color={brand.colors.blush} />
@@ -133,8 +135,9 @@ function Model({
             </group>
           ))}
         </group>
-        <Facet at={[-0.3, 1.52, 0.33]} size={[0.08, 0.035, 0.025]} color={brand.colors.blush} />
-        <Facet at={[0.3, 1.52, 0.33]} size={[0.08, 0.035, 0.025]} color={brand.colors.blush} />
+        <Facet at={[0, 0.91, 0.31]} size={[0.25, 0.31, 0.085]} color="#FFF9F0" />
+        <Facet at={[-0.3, 1.52, 0.33]} size={[0.1, 0.052, 0.032]} color={brand.colors.blush} />
+        <Facet at={[0.3, 1.52, 0.33]} size={[0.1, 0.052, 0.032]} color={brand.colors.blush} />
         <mesh position={[0, 1.5, 0.47]} scale={[1, 0.7, 0.6]}>
           <octahedronGeometry args={[0.065]} />
           <meshStandardMaterial color={brand.colors.electric} />

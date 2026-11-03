@@ -1,6 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+import KhweziMark from "./KhweziMark";
+import MagneticButton from "./ui/MagneticButton";
+import type { KhweziPose } from "../lib/brand";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -13,8 +17,14 @@ import { cities, places } from "../lib/data";
 import GuideShell from "./GuideShell";
 import CityDirectory from "./CityDirectory";
 
+const KhweziView = dynamic(() => import("./KhweziView"), {
+  ssr: false,
+  loading: () => <KhweziMark pose="welcome" />,
+});
+
 export default function DiscoveryHome() {
   const [selected, setSelected] = useState<number | null>(null);
+  const [mascotPose, setMascotPose] = useState<KhweziPose>("welcome");
   const city = selected === null ? null : cities[selected];
   return (
     <GuideShell mapSelection={{ selected, onSelect: setSelected }}>
@@ -27,11 +37,7 @@ export default function DiscoveryHome() {
             <em>South</em> Africa<span className="atlas-title-period">.</span>
           </h1>
           <p className="atlas-hero-sub">Follow the glow.</p>
-          <p className="atlas-hero-hint">
-            Drag the land. Tap a glowing city.
-            <br />
-            12 cities across 9 provinces.
-          </p>
+          <p className="atlas-hero-hint">Tap a glowing city to begin.</p>
         </div>
         <div className="atlas-map-stage">
           <div className="atlas-map-coordinate" aria-hidden="true">
@@ -40,13 +46,8 @@ export default function DiscoveryHome() {
           </div>
         </div>
         <div className="atlas-hero-bottom">
-          <p className="atlas-hero-count">
-            <span>12 cities</span>
-            <span>9 provinces</span>
-            <span>A thousand ways to feel here.</span>
-          </p>
           <div className="atlas-beacon-card" aria-live="polite">
-            <div>
+            <div className="atlas-beacon-content">
               <label className="atlas-map-select">
                 <span className="sr-only">Choose a city on the map</span>
                 <select
@@ -67,23 +68,35 @@ export default function DiscoveryHome() {
               <p className="atlas-eyebrow">{city ? city.province : "YOUR NEXT CHAPTER"}</p>
               <h2>{city ? city.name : "Where to?"}</h2>
               <p>
-                {city ? city.intro : "Tap any glowing city on the map and the camera flies there."}
+                {city ? city.intro : "Pick a city and explore its places."}
               </p>
+            </div>
+            <div className="atlas-beacon-mascot">
+              <div className="atlas-mascot-view">
+                <KhweziView pose={mascotPose} index={6} />
+              </div>
+              <MagneticButton
+                className="atlas-mascot-action"
+                strength={0.13}
+                onClick={() => setMascotPose((current) => current === "saved" ? "welcome" : "saved")}
+              >
+                {mascotPose === "saved" ? "Say hello" : "Make Khwezi hop"}
+              </MagneticButton>
             </div>
             <div className="atlas-beacon-actions">
               <Link href={city ? `/${city.slug}` : "/destinations"} className="atlas-text-link">
                 {city ? "Explore the city" : "Browse all city guides"} <ArrowUpRight size={18} />
               </Link>
               {city && (
-                <button aria-label="Reset map selection" onClick={() => setSelected(null)}>
+                <MagneticButton aria-label="Reset map selection" strength={0.12} onClick={() => setSelected(null)}>
                   <ArrowCounterClockwise size={19} />
-                </button>
+                </MagneticButton>
               )}
             </div>
           </div>
         </div>
         <a href="#cities" className="atlas-scroll-cue">
-          <ArrowDown size={16} /> A country waiting to be discovered
+          <ArrowDown size={16} /> Explore cities
         </a>
       </section>
       <CityDirectory compact />
@@ -96,8 +109,7 @@ export default function DiscoveryHome() {
             <em>local curiosity.</em>
           </h2>
           <p>
-            Considered guides to {places.length} places, with the details that help you turn a spark
-            into a day out.
+            Discover {places.length} places and plan a day worth remembering.
           </p>
         </div>
         <ol>
@@ -105,17 +117,17 @@ export default function DiscoveryHome() {
             {
               icon: Compass,
               title: "Find your city",
-              copy: "Follow a beacon or browse the collection. Familiar or far away, every city has its own rhythm.",
+              copy: "Choose a city on the map or in the list.",
             },
             {
               icon: MapPin,
               title: "Get to know a place",
-              copy: "Landmark stories, local discoveries, addresses and source-linked visitor information.",
+              copy: "Find places, stories and practical information.",
             },
             {
               icon: BookmarkSimple,
               title: "Make the day yours",
-              copy: "Save the places that catch your eye. Build a day, reorder your stops and take your guide with you.",
+              copy: "Save favourites and build your itinerary.",
             },
           ].map(({ icon: Icon, title, copy }, index) => (
             <li key={title}>

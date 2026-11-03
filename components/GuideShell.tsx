@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, BookmarkSimple, Compass } from "@phosphor-icons/react";
+import { ArrowUpRight, BookmarkSimple, Compass, House, MapPin, Cube } from "@phosphor-icons/react";
+import { usePathname } from "next/navigation";
+import BrandWordmark from "./BrandWordmark";
 import type { ReactNode } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { useDiscovery } from "./useDiscovery";
@@ -19,6 +21,7 @@ export default function GuideShell({
   stage?: boolean;
 }) {
   const { state } = useDiscovery();
+  const pathname = usePathname();
   const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
   return (
     <div className={`discovery-guide reference-guide${stage ? " reference-stage-guide" : ""}`}>
@@ -29,13 +32,10 @@ export default function GuideShell({
       </a>
       <header className="atlas-nav">
         <Link className="atlas-wordmark" href="/" aria-label="Citylit home">
-          c<span>ı</span>tylit<span className="wordmark-period">.</span>
+          <BrandWordmark />
         </Link>
         <nav aria-label="Main navigation">
           <Link href="/destinations">City guides</Link>
-          <Link href="/about" className="atlas-about-link">
-            Our story
-          </Link>
           <Link
             href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
             className="atlas-day-link"
@@ -49,10 +49,28 @@ export default function GuideShell({
       <main id="guide-main" tabIndex={-1}>
         {children}
       </main>
+      <nav className="atlas-native-dock" aria-label="Mobile navigation">
+        <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>
+          <House size={21} aria-hidden="true" weight={pathname === "/" ? "fill" : "regular"} />
+          <span>Discover</span>
+        </Link>
+        <Link href="/destinations" aria-current={pathname === "/destinations" ? "page" : undefined}>
+          <MapPin size={21} aria-hidden="true" weight={pathname === "/destinations" ? "fill" : "regular"} />
+          <span>Cities</span>
+        </Link>
+        <Link href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}>
+          <BookmarkSimple size={21} aria-hidden="true" />
+          <span>My day</span>
+        </Link>
+        <Link href="/?view=3d">
+          <Cube size={21} aria-hidden="true" />
+          <span>3D atlas</span>
+        </Link>
+      </nav>
       <footer className="atlas-footer">
         <div>
           <Link href="/" className="atlas-wordmark">
-            c<span>ı</span>tylit.
+            <BrandWordmark />
           </Link>
           <p>A little curiosity. A whole country.</p>
         </div>

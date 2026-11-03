@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./discovery-guide.css";
+import "./native-refinement.css";
 import PwaProvider from "../components/PwaProvider";
 import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";

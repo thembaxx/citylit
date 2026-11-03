@@ -35,7 +35,7 @@ export default function GuideShell({
           <BrandWordmark />
         </Link>
         <nav aria-label="Main navigation">
-          <Link href="/destinations">City guides</Link>
+          <Link href="/destinations">Cities</Link>
           <Link
             href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
             className="atlas-day-link"
@@ -52,7 +52,7 @@ export default function GuideShell({
       <nav className="atlas-native-dock" aria-label="Mobile navigation">
         <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>
           <House size={21} aria-hidden="true" weight={pathname === "/" ? "fill" : "regular"} />
-          <span>Discover</span>
+          <span>Home</span>
         </Link>
         <Link href="/destinations" aria-current={pathname === "/destinations" ? "page" : undefined}>
           <MapPin
@@ -62,13 +62,13 @@ export default function GuideShell({
           />
           <span>Cities</span>
         </Link>
-        <Link href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}>
+        <Link href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`} aria-current={pathname.startsWith("/explore") ? "page" : undefined}>
           <BookmarkSimple size={21} aria-hidden="true" />
           <span>My day</span>
         </Link>
         <Link href="/?view=3d">
           <Cube size={21} aria-hidden="true" />
-          <span>3D atlas</span>
+          <span>Atlas</span>
         </Link>
       </nav>
       <footer className="atlas-footer">

@@ -586,3 +586,238 @@ textarea:focus-visible,
 select:focus-visible {
   scroll-margin-bottom: calc(96px + env(safe-area-inset-bottom));
 }
+
+
+/* November 2026 — expressive, mobile-first native polish.
+   EasyUI-inspired spring/tactile surfaces, with no additional animation runtime. */
+.reference-guide {
+  --citylit-spring: cubic-bezier(0.2, 0.9, 0.2, 1);
+  --citylit-pressed: cubic-bezier(0.18, 0.75, 0.3, 1);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.reference-guide :is(h1, h2, h3, .atlas-wordmark) {
+  text-wrap: balance;
+  font-kerning: normal;
+}
+.reference-guide :is(.atlas-city-intro, .atlas-hero-sub, .atlas-stage-description) {
+  max-width: 60ch;
+  line-height: 1.5;
+}
+.reference-guide .atlas-eyebrow {
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0.075em !important;
+}
+.reference-guide :is(.atlas-button, .atlas-text-link, .atlas-stage-chips button) {
+  font-size: clamp(14px, 1.1vw, 16px) !important;
+}
+.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-beacon-card) {
+  overflow: clip;
+  transition:
+    box-shadow 360ms var(--citylit-spring),
+    border-color 220ms ease,
+    background-color 220ms ease,
+    transform 460ms var(--citylit-spring);
+}
+.reference-guide .atlas-beacon-card {
+  box-shadow:
+    0 18px 55px rgb(10 16 35 / 13%),
+    inset 0 1px 0 rgb(255 255 255 / 12%);
+}
+.reference-guide .atlas-beacon-card h2 {
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+.reference-guide .atlas-beacon-card p:not(.atlas-eyebrow) {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.reference-guide :is(.atlas-button, .atlas-native-dock a, .atlas-mascot-action) {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 340ms var(--citylit-spring),
+    transform 400ms var(--citylit-spring);
+}
+.reference-guide :is(.atlas-button, .atlas-mascot-action):active {
+  transform: scale(0.97);
+}
+.reference-guide :is(input, select, textarea, [role="combobox"], [role="textbox"]) {
+  font-size: 16px !important;
+  line-height: 1.5;
+  min-height: 44px;
+  scroll-margin-bottom: calc(98px + env(safe-area-inset-bottom));
+}
+.reference-guide input::placeholder,
+.reference-guide textarea::placeholder {
+  opacity: 0.72;
+}
+.reference-guide .atlas-mascot-action {
+  min-height: 36px;
+  padding: 8px 12px;
+  font-size: 12px;
+  box-shadow: 0 5px 14px rgb(14 19 34 / 12%);
+}
+.reference-guide :is(.atlas-native-dock a, .atlas-nav a, button, select, input) {
+  -webkit-tap-highlight-color: transparent;
+}
+.reference-guide :is(.atlas-native-dock a, .atlas-nav a, button):focus-visible {
+  outline: 3px solid var(--guide-accent);
+  outline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 45px rgb(10 16 35 / 15%);
+  }
+  .reference-guide .atlas-mascot-action:hover {
+    transform: translateY(-2px);
+  }
+}
+@media (max-width: 767px) {
+  .reference-guide {
+    scroll-padding-top: 78px;
+    padding-bottom: calc(104px + env(safe-area-inset-bottom));
+  }
+  .reference-guide .atlas-nav {
+    position: sticky;
+    z-index: 65;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--line) 75%, transparent);
+    box-shadow: 0 8px 26px rgb(12 16 30 / 5%);
+  }
+  .reference-guide .atlas-hero {
+    min-height: max(640px, calc(100svh - 65px));
+    padding: clamp(44px, 7svh, 82px) 16px 118px;
+    gap: 20px;
+  }
+  .reference-guide .atlas-hero-copy {
+    min-height: 0;
+  }
+  .reference-guide .atlas-hero h1 {
+    font-size: clamp(42px, 11.4vw, 68px);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+  .reference-guide .atlas-hero-sub {
+    font-size: clamp(16px, 4.25vw, 19px);
+    line-height: 1.34;
+    margin-top: 12px;
+  }
+  .reference-guide .atlas-hero-hint {
+    font-size: 14px;
+  }
+  .reference-guide .atlas-beacon-card {
+    padding: 18px;
+    border-radius: 27px;
+  }
+  .reference-guide .atlas-beacon-content {
+    padding-right: 86px;
+  }
+  .reference-guide .atlas-beacon-card p:not(.atlas-eyebrow) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .reference-guide .atlas-beacon-actions {
+    gap: 9px;
+    flex-wrap: wrap;
+  }
+  .reference-guide .atlas-native-dock,
+  .atlas-native-dock {
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(8px + env(safe-area-inset-bottom));
+    min-height: 72px;
+    padding: 6px;
+    gap: 3px;
+    border-radius: 27px;
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    background: color-mix(in srgb, var(--surface) 84%, transparent);
+    box-shadow: 0 14px 38px rgb(10 13 23 / 24%), inset 0 1px rgb(255 255 255 / 14%);
+    backdrop-filter: saturate(1.5) blur(24px);
+    -webkit-backdrop-filter: saturate(1.5) blur(24px);
+  }
+  .atlas-native-dock a {
+    min-height: 58px;
+    gap: 4px;
+    font-size: 12px;
+    letter-spacing: -0.015em;
+    border-radius: 21px;
+  }
+  .atlas-native-dock a[aria-current="page"] {
+    box-shadow: inset 0 1px rgb(255 255 255 / 15%), 0 4px 18px rgb(15 20 35 / 11%);
+    background: color-mix(in srgb, var(--guide-accent) 23%, var(--surface));
+  }
+  .atlas-native-dock a svg {
+    flex-shrink: 0;
+    transition: transform 380ms var(--citylit-spring);
+  }
+  .atlas-native-dock a:active svg {
+    transform: scale(0.88);
+  }
+  .reference-guide .atlas-city-grid {
+    gap: 16px;
+  }
+  .reference-guide .atlas-city-card-link,
+  .reference-guide .atlas-place-card-link {
+    border-radius: 25px;
+  }
+  .reference-guide .atlas-directory-header h1,
+  .reference-guide .atlas-city-map-hero h1 {
+    font-size: clamp(42px, 11vw, 65px);
+    line-height: 1.03;
+  }
+  .reference-guide .atlas-card-copy > p:not(.atlas-eyebrow),
+  .reference-guide .atlas-section-heading > p,
+  .reference-guide .atlas-city-intro {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .reference-guide .atlas-stage-heading h1 {
+    font-size: clamp(34px, 8.5vw, 48px);
+  }
+  .reference-guide .atlas-stage-chips button {
+    min-height: 44px;
+  }
+}
+@media (max-width: 375px) {
+  .reference-guide .atlas-hero {
+    padding-inline: 12px;
+  }
+  .reference-guide .atlas-beacon-card {
+    padding: 14px;
+  }
+  .reference-guide .atlas-hero h1 {
+    font-size: clamp(39px, 11.6vw, 45px);
+  }
+  .reference-guide .atlas-native-dock,
+  .atlas-native-dock {
+    left: max(8px, env(safe-area-inset-left));
+    right: max(8px, env(safe-area-inset-right));
+  }
+  .atlas-native-dock a {
+    font-size: 11.5px;
+    min-height: 54px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-beacon-card, .atlas-button, .atlas-mascot-action),
+  .atlas-native-dock :is(a, svg) {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+@media (prefers-contrast: more) {
+  .atlas-native-dock,
+  .reference-guide .atlas-beacon-card {
+    border: 2px solid var(--ink);
+  }
+  .atlas-native-dock a[aria-current="page"] {
+    outline: 2px solid var(--ink);
+    outline-offset: -3px;
+  }
+}

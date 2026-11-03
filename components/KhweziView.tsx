@@ -1,7 +1,7 @@
 "use client";
 import { useFrame, useThree } from "@react-three/fiber";
 import { PerspectiveCamera, View } from "@react-three/drei";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { useDrag } from "@use-gesture/react";
 import * as THREE from "three";
 import KhweziMark from "./KhweziMark";
@@ -9,6 +9,7 @@ import { useKhwezi } from "./KhweziProvider";
 import { brand, type KhweziPose } from "../lib/brand";
 
 type Props = { pose?: KhweziPose; yaw?: number; index?: number; accent?: string; reset?: number };
+type Gaze = { x: number; y: number };
 function Facet({
   at,
   size,
@@ -21,7 +22,7 @@ function Facet({
   return (
     <mesh position={at} scale={size}>
       <sphereGeometry args={[1, 28, 18]} />
-      <meshStandardMaterial color={color} roughness={0.75} metalness={0.02} />
+      <meshStandardMaterial color={color} roughness={0.46} metalness={0.035} />
     </mesh>
   );
 }
@@ -33,11 +34,13 @@ function Model({
   visible,
   onReady,
   turn,
+  gaze,
 }: Required<Omit<Props, "index" | "reset">> & {
   moving: boolean;
   visible: boolean;
   onReady: () => void;
   turn: number;
+  gaze: RefObject<Gaze>;
 }) {
   const { invalidate } = useThree();
   const root = useRef<THREE.Group>(null),
@@ -80,6 +83,7 @@ function Model({
     const sleeping = pose === "offline";
     root.current.rotation.y =
       yaw + turn + (pose === "gesture" ? Math.sin(t * 1.8) * 0.3 : Math.sin(t * 0.7) * 0.035);
+    root.current.rotation.x = active ? -gaze.current.y * 0.045 + Math.sin(t * 0.85) * 0.015 : 0;
     root.current.position.y =
       pose === "saved"
         ? Math.sin(Math.PI * Math.min(t / 0.9, 1)) * 0.28
@@ -88,8 +92,13 @@ function Model({
     root.current.rotation.z = active ? Math.sin(t * 0.82) * 0.028 : 0;
     ears.current.rotation.z = sleeping ? -0.28 : Math.sin(t * 1.3) * 0.065;
     ears.current.rotation.x = active ? Math.sin(t * 1.1 + 0.5) * 0.05 : 0;
-    const blink = t % 5.4 > 5.1 ? 0.12 : 1;
+    const blinkTime = t % 5.4;
+    const blink = blinkTime > 5.08 && blinkTime < 5.33
+      ? Math.max(0.12, Math.abs(Math.cos(((blinkTime - 5.08) / 0.25) * Math.PI)))
+      : 1;
     eyes.current.scale.y = sleeping ? 0.14 : blink;
+    eyes.current.position.x = THREE.MathUtils.damp(eyes.current.position.x, active ? gaze.current.x * 0.045 : 0, 6, delta);
+    eyes.current.position.y = THREE.MathUtils.damp(eyes.current.position.y, active ? 1.7 - gaze.current.y * 0.035 : 1.7, 6, delta);
     wave.current.rotation.z =
       pose === "welcome" && active
         ? -0.34 - Math.sin(t * 4) * 0.18
@@ -111,6 +120,11 @@ function Model({
       <ambientLight intensity={2} />
       <directionalLight position={[-3, 5, 4]} intensity={3} />
       <directionalLight position={[3, 1, -2]} intensity={1.2} color="#B8BCFF" />
+      <pointLight position={[0, 3, 3]} intensity={0.65} distance={7} color={accent} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.015, 0]} scale={[0.8, 0.55, 1]}>
+        <circleGeometry args={[1, 48]} />
+        <meshBasicMaterial color="#17243C" transparent opacity={0.12} depthWrite={false} />
+      </mesh>
       <group ref={root}>
         <mesh geometry={tail}>
           <meshStandardMaterial color={brand.colors.ink} roughness={0.82} />
@@ -118,33 +132,38 @@ function Model({
         <Facet at={[0, 0.85, 0]} size={[0.43, 0.57, 0.33]} />
         <Facet at={[-0.3, 0.17, 0.2]} size={[0.25, 0.16, 0.38]} color={brand.colors.ink} />
         <Facet at={[0.3, 0.17, 0.2]} size={[0.25, 0.16, 0.38]} color={brand.colors.ink} />
-        <Facet at={[0, 1.65, 0.06]} size={[0.53, 0.48, 0.4]} />
+        <Facet at={[0.61, 0.91, -0.79]} size={[0.19, 0.16, 0.15]} />
+        <Facet at={[0, 1.65, 0.06]} size={[0.54, 0.49, 0.42]} />
         <group ref={ears} position={[0, 1.93, 0]}>
           {[-1, 1].map((side) => (
             <group key={side} position={[side * 0.25, 0, 0]} rotation={[0, 0, side * -0.15]}>
-              <mesh position={[0, 0.48, 0]}>
-                <coneGeometry args={[0.17, 1.1, 16]} />
-                <meshStandardMaterial color={brand.colors.ivory} roughness={0.82} />
+              {/* Rounded ear shells, inset pads and a warm rim highlight. */}
+              <mesh position={[0, 0.53, 0]} rotation={[0, 0, side * -0.07]} scale={[0.175, 0.59, 0.135]}>
+                <sphereGeometry args={[1, 32, 24]} />
+                <meshStandardMaterial color={brand.colors.ivory} roughness={0.5} />
               </mesh>
-              <mesh position={[0, 0.86, 0]}>
-                <coneGeometry args={[0.115, 0.36, 16]} />
-                <meshStandardMaterial color={brand.colors.ink} flatShading />
+              <mesh position={[0, 0.55, 0.118]} rotation={[0, 0, side * -0.07]} scale={[0.104, 0.435, 0.03]}>
+                <sphereGeometry args={[1, 24, 18]} />
+                <meshStandardMaterial color={brand.colors.blush} roughness={0.55} />
               </mesh>
-              <Facet at={[0, 0.35, 0.1]} size={[0.065, 0.28, 0.025]} color={brand.colors.blush} />
+              <mesh position={[-side * 0.028, 0.85, 0.14]} scale={[0.034, 0.14, 0.012]}>
+                <sphereGeometry args={[1, 16, 12]} />
+                <meshBasicMaterial color="#FFF9F0" transparent opacity={0.64} />
+              </mesh>
             </group>
           ))}
         </group>
         <group ref={eyes} position={[0, 1.7, 0.4]}>
           {[-1, 1].map((side) => (
             <group key={side} position={[side * 0.21, 0, 0]}>
-              <Facet at={[0, 0, 0]} size={[0.065, 0.085, 0.035]} color={brand.colors.ink} />
-              <Facet at={[0.018, 0.025, 0.03]} size={[0.018, 0.021, 0.012]} color="#FFFFFF" />
+              <Facet at={[0, 0, 0]} size={[0.08, 0.105, 0.042]} color={brand.colors.ink} />
+              <Facet at={[0.018, 0.033, 0.04]} size={[0.021, 0.025, 0.012]} color="#FFFFFF" />
             </group>
           ))}
         </group>
         <Facet at={[0, 0.91, 0.31]} size={[0.25, 0.31, 0.085]} color="#FFF9F0" />
-        <Facet at={[-0.3, 1.52, 0.33]} size={[0.1, 0.052, 0.032]} color={brand.colors.blush} />
-        <Facet at={[0.3, 1.52, 0.33]} size={[0.1, 0.052, 0.032]} color={brand.colors.blush} />
+        <Facet at={[-0.3, 1.52, 0.33]} size={[0.115, 0.065, 0.032]} color={brand.colors.blush} />
+        <Facet at={[0.3, 1.52, 0.33]} size={[0.115, 0.065, 0.032]} color={brand.colors.blush} />
         <Facet at={[-0.22, 1.83, 0.38]} size={[0.13, 0.025, 0.03]} color={brand.colors.ink} />
         <Facet at={[0.22, 1.83, 0.38]} size={[0.13, 0.025, 0.03]} color={brand.colors.ink} />
         <mesh position={[0, 1.5, 0.47]} scale={[1, 0.7, 0.6]}>
@@ -152,7 +171,7 @@ function Model({
           <meshStandardMaterial color={brand.colors.electric} />
         </mesh>
         <mesh position={[0, 1.41, 0.425]} rotation={[0, 0, Math.PI]} scale={[1, 0.6, 1]}>
-          <torusGeometry args={[0.075, 0.012, 3, 12, Math.PI]} />
+          <torusGeometry args={[pose === "saved" ? 0.105 : 0.075, 0.012, 3, 18, Math.PI]} />
           <meshStandardMaterial color={brand.colors.ink} />
         </mesh>
         <mesh position={[0, 1.91, 0.39]} scale={[0.8, 1.2, 0.4]}>
@@ -239,6 +258,7 @@ export default function KhweziView({
     [visible, setVisible] = useState(true),
     [turn, setTurn] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  const gaze = useRef<Gaze>({ x: 0, y: 0 });
   const onReady = useCallback(() => setReady(true), []);
   useEffect(() => setTurn(0), [reset]);
   useEffect(() => {
@@ -264,7 +284,21 @@ export default function KhweziView({
     { axis: "x", filterTaps: true, from: () => [turn / 0.009, 0] },
   );
   return (
-    <div ref={ref} className="khwezi-view" data-ready={ready}>
+    <div
+      ref={ref}
+      className="khwezi-view"
+      data-ready={ready}
+      onPointerMove={(event) => {
+        if (!moving || event.pointerType !== "mouse") return;
+        const bounds = event.currentTarget.getBoundingClientRect();
+        gaze.current.x = Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2));
+        gaze.current.y = Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2));
+      }}
+      onPointerLeave={() => {
+        gaze.current.x = 0;
+        gaze.current.y = 0;
+      }}
+    >
       <KhweziMark pose={pose} className="khwezi-view-fallback" />
       <View index={index} visible={visible} className="khwezi-three-view">
         <Model
@@ -275,6 +309,7 @@ export default function KhweziView({
           visible={visible}
           onReady={onReady}
           turn={turn}
+          gaze={gaze}
         />
       </View>
       <button

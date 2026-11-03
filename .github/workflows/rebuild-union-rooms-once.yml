@@ -36,6 +36,8 @@ jobs:
           pnpm models:audit
       - name: Verify code and production build
         run: |
+          # The earlier porcelain-plinth commit left this one audit unformatted.
+          pnpm exec oxfmt scripts/audit-site-informed-models.mjs
           pnpm format:check
           pnpm lint
           pnpm typecheck
@@ -44,7 +46,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/models/stage/ scripts/.stage-pbr/
+          git add public/models/stage/ scripts/.stage-pbr/ scripts/audit-site-informed-models.mjs
           if ! git diff --cached --quiet; then
             git commit -m "assets(3d): bake Union Buildings carved window room geometry"
             git push origin HEAD:feat/union-buildings-recessed-windows

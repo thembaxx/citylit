@@ -352,7 +352,7 @@ function Ring({
       <ambientLight intensity={night ? 0.08 : 0.09} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.40 : 1.45}
+        intensity={night ? 0.4 : 1.45}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
         shadow-mapSize-width={size.width < 760 ? 1024 : 2048}
@@ -371,7 +371,7 @@ function Ring({
       />
       <pointLight
         position={[1.8, 2.5, 3.4]}
-        intensity={night ? 0.90 : 0.12}
+        intensity={night ? 0.9 : 0.12}
         distance={9}
         color="#ffe3be"
       />

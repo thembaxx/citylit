@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19",
+  "generatedAt": "2026-11-02",
   "places": 89,
   "cities": 12,
   "venuePins": 53,
@@ -384,8 +384,7 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs",
-        "source fetch"
+        "venue photographs"
       ]
     },
     {

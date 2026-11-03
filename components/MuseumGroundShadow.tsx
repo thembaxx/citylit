@@ -45,12 +45,7 @@ export default function MuseumGroundShadow({
   useEffect(() => () => texture.dispose(), [texture]);
 
   return (
-    <mesh
-      name={name}
-      position={[0, positionY, 0]}
-      rotation={[-Math.PI / 2, 0, 0]}
-      renderOrder={-2}
-    >
+    <mesh name={name} position={[0, positionY, 0]} rotation={[-Math.PI / 2, 0, 0]} renderOrder={-2}>
       <planeGeometry args={dimensions} />
       <meshBasicMaterial
         map={texture}

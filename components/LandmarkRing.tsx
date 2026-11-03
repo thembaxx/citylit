@@ -364,7 +364,7 @@ function Ring({
       />
       <directionalLight
         position={[-4, 3, -2]}
-        intensity={night ? 0.08 : 0.30}
+        intensity={night ? 0.08 : 0.3}
         color={night ? "#99b4db" : "#ffa968"}
       />
       <group position={[size.width > size.height ? 1.52 : 0.04, 0, 0]}>

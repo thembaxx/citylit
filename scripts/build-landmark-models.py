@@ -20,6 +20,9 @@ spec.loader.exec_module(details)
 pbr_spec = importlib.util.spec_from_file_location("stage_pbr", ROOT / "scripts/stage-pbr.py")
 stage_pbr = importlib.util.module_from_spec(pbr_spec)
 pbr_spec.loader.exec_module(stage_pbr)
+fidelity_spec = importlib.util.spec_from_file_location("fidelity", ROOT / "scripts/sculpt-landmark-heroes.py")
+fidelity = importlib.util.module_from_spec(fidelity_spec)
+fidelity_spec.loader.exec_module(fidelity)
 MATERIALS = {}
 
 
@@ -266,8 +269,11 @@ for name, build in BUILDERS.items():
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
     base()
-    build()
-    details.decorate(name, box, cylinder, beam, material, add, bpy)
+    if name in fidelity.SUPPORTED:
+        fidelity.build(name, box, cylinder, beam, material, add, bpy)
+    else:
+        build()
+        details.decorate(name, box, cylinder, beam, material, add, bpy)
     stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.
@@ -277,6 +283,8 @@ for name, build in BUILDERS.items():
                               export_draco_mesh_compression_enable=False,
                               export_cameras=False, export_lights=False)
     manifest.append({"id": name, "src": f"/models/stage/{name}.glb", "bytes": path.stat().st_size,
-                     "authoring": "Blender 4.3", "purpose": "Illustrative architectural miniature, not a surveyed reconstruction"})
+                     "authoring": "Blender 4.3",
+                     "geometryTier": "site-informed-sculpt-v1" if name in fidelity.SUPPORTED else "illustrative-pbr-v1",
+                     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction" if name in fidelity.SUPPORTED else "Illustrative architectural miniature, not a surveyed reconstruction"})
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to finalize and verify the size budget.")

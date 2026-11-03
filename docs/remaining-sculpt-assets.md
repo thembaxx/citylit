@@ -87,3 +87,13 @@ landmarks can mount when surroundings are visible, avoiding downloading all larg
 models just to show one. More expensive GLBs require real mobile memory tests and
 per-scene error/fallback validation. Resolution alone does not create realism;
 architecture, depth, materials and presentation still need comparison screenshots.
+
+## Microgeometry layer (draft)
+
+A separate physical detailing pass covers the ten newest landmark classes: mullioned
+windows with shadow backing and window sills, joinery and roof edging, civic masonry,
+bridge fittings, lighthouse lanterns, individual botanical leaves, fort surface
+joints, cooling tower ladders and aquarium structural glazing. This is not an
+as-built accuracy guarantee. Regenerate and inspect binary GLBs before counting
+this work as delivered. The quality acceptance gate is a visual comparison of
+**actual ready-state WebGL captures** and inspection close-ups, not merely source code.

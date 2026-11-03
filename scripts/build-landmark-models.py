@@ -28,6 +28,11 @@ remaining_spec = importlib.util.spec_from_file_location(
 )
 remaining = importlib.util.module_from_spec(remaining_spec)
 remaining_spec.loader.exec_module(remaining)
+premium_spec = importlib.util.spec_from_file_location(
+    "architectural_detail", ROOT / "scripts/architectural-detail-pass.py"
+)
+premium = importlib.util.module_from_spec(premium_spec)
+premium_spec.loader.exec_module(premium)
 MATERIALS = {}
 
 
@@ -281,6 +286,9 @@ for name, build in BUILDERS.items():
     else:
         build()
         details.decorate(name, box, cylinder, beam, material, add, bpy)
+    # Preserve landmark-specific topology; add independent physical micro-geometry.
+    if name in remaining.SUPPORTED:
+        premium.build(name, box, cylinder, beam, material, add, bpy)
     stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.

@@ -13,14 +13,14 @@ export default function DestinationsPage() {
     <GuideShell>
       <JsonLd value={schema} />
       <header className="atlas-directory-header atlas-section">
-        <p className="atlas-eyebrow">TWELVE DESTINATIONS / NINE PROVINCES</p>
+        <p className="atlas-eyebrow">12 CITIES · 9 PROVINCES</p>
         <h1>
           Find your
           <br />
           <em>next chapter.</em>
         </h1>
         <p className="atlas-city-intro">
-          A country of little adventures. Choose a city. Follow a little curiosity.
+          Choose a city. Find somewhere new.
         </p>
       </header>
       <CityDirectory />

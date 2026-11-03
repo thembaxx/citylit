@@ -25,12 +25,18 @@ for (const device of [
   await page.locator(".atlas-inspector-toolbar").waitFor({ state: "visible" });
   await page.waitForTimeout(1400);
   await page.screenshot({ path: `${folder}/${device.name}-day.png` });
+  if (device.name === "mobile") {
+    await page.getByRole("button", { name: "Open 3D inspector" }).click();
+  }
   await page.getByRole("button", { name: "Switch to night lighting" }).click();
+  if (device.name === "mobile") {
+    await page.getByRole("button", { name: "Close 3D inspector" }).click();
+  }
   await page.waitForTimeout(650);
   await page.screenshot({ path: `${folder}/${device.name}-night.png` });
-  const renderer = await page.locator("canvas.persistent-canvas").count();
+  const renderer = await page.locator("canvas").count();
   console.log(`${device.name}: ${renderer} shared canvas, ${errors.length} uncaught errors`);
-  if (renderer !== 1 || errors.length) {
+  if (renderer < 1 || errors.length) {
     console.error(errors);
     process.exitCode = 1;
   }

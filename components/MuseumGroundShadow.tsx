@@ -8,7 +8,15 @@ import * as THREE from "three";
  * One 128px transparent texture and one plane; works on mobile where dynamic
  * shadow maps are disabled. The app background remains transparent.
  */
-export default function MuseumGroundShadow() {
+export default function MuseumGroundShadow({
+  positionY = -0.337,
+  dimensions = [5.7, 4.4],
+  name = "museum-contact-shadow",
+}: {
+  positionY?: number;
+  dimensions?: [number, number];
+  name?: string;
+}) {
   const texture = useMemo(() => {
     const size = 128;
     const pixels = new Uint8Array(size * size * 4);
@@ -38,12 +46,12 @@ export default function MuseumGroundShadow() {
 
   return (
     <mesh
-      name="museum-contact-shadow"
-      position={[0, -0.337, 0]}
+      name={name}
+      position={[0, positionY, 0]}
       rotation={[-Math.PI / 2, 0, 0]}
       renderOrder={-2}
     >
-      <planeGeometry args={[5.7, 4.4]} />
+      <planeGeometry args={dimensions} />
       <meshBasicMaterial
         map={texture}
         transparent

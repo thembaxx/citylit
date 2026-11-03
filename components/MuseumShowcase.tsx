@@ -153,7 +153,12 @@ function MuseumWindow({
 }) {
   return (
     <group position={position} rotation={[0, side ? Math.PI / 2 : 0, 0]}>
-      <Volume position={[0, 0, -0.012]} size={[0.35, 0.45, 0.075]} color="#a89984" surface="stone" />
+      <Volume
+        position={[0, 0, -0.012]}
+        size={[0.35, 0.45, 0.075]}
+        color="#a89984"
+        surface="stone"
+      />
       <Volume position={[0, 0, 0.016]} size={[0.31, 0.41, 0.027]} color="#242f30" surface="stone" />
       <mesh position={[0, 0, 0.039]}>
         <boxGeometry args={[0.27, 0.36, 0.01]} />

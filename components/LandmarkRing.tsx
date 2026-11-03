@@ -278,7 +278,7 @@ function Ring({
       duration: reduced ? 0 : 0.72,
       ease: "power3.inOut",
       onUpdate: () => {
-        camera.lookAt(0, 0.55, 0);
+        camera.lookAt(0, items[selected]?.name.toLowerCase().includes("mcgregor museum") ? 0.08 : 0.55, 0);
         invalidate();
       },
       onComplete: invalidate,
@@ -303,7 +303,7 @@ function Ring({
         invalidate();
       },
     });
-    camera.lookAt(0, 0.55, 0);
+    camera.lookAt(0, items[selected]?.name.toLowerCase().includes("mcgregor museum") ? 0.08 : 0.55, 0);
     invalidate();
     return () => {
       tween.kill();
@@ -349,7 +349,7 @@ function Ring({
         intensity={night ? 0.3 : 0.65}
         color={night ? "#99b4db" : "#ffa968"}
       />
-      <group position={[size.width > size.height ? 0.72 : -0.48, 0, 0]}>
+      <group position={[size.width > size.height ? 0.85 : 0.2, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
             <group

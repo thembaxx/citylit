@@ -22,3 +22,28 @@ reproductions. Blender outputs must be committed, validated with
 captures, and reviewed for memory/performance before merging.
 
 No assets from the user's reference image are copied.
+
+## Verified reconstruction — November 3, 2026
+
+The complete original Blender authoring run passed after fixing a Python
+material-variable collision and an inherited Oxfmt formatting issue.
+[Build, audited models, TypeScript, lint, format and actual desktop/mobile
+ready-state captures](https://github.com/thembaxx/citylit/actions/runs/41687540362)
+all succeeded. The generated, Draco-compressed fifteen-model catalog is
+committed as `cb020d89`, including the Union Buildings actual Boolean apertures
+and independent room backing, side walls, miniature furnishings and glass.
+
+The screenshots are in artifact `citylit-union-buildings-window-depth`
+(1440 × 900 and 390 × 844). These show the building and its windows load
+successfully at both sizes, without loading-state fallbacks or lost geometry.
+
+**Visual verdict:** The new architectural interiors are visible mainly on
+close inspection and rotate; the overview still reads as a simplified,
+editorial miniature. This does not meet the owner's photographic architectural
+inspiration in the absence of measured landmark geometry, architectural
+material aging, high-resolution environment lighting and baked GI/AO.
+The work improves geometry and preserves existing navigation and accessibility,
+but should not be described as reference-level realism.
+
+One-shot workflow retired after successful capture; source and verification
+remain reproducible through `pnpm models:build` and `pnpm models:audit`.

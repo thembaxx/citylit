@@ -551,7 +551,7 @@ export default function LandmarkRing({
             view={view}
             showContext={showContext}
             reduced={reduced}
-             onModelStatus={onModelStatus}
+            onModelStatus={onModelStatus}
           />
         )}
       </View>

@@ -45,8 +45,8 @@ for (const item of manifest) {
     // an albedo scan is connected. Preserve the authored colours in the GLB.
     "Sculpt cut sandstone": [0.74, 0.61, 0.48],
     "Sculpt pale plaster": [0.89, 0.83, 0.72],
-    "Sculpt reclaimed brick": [0.67, 0.40, 0.32],
-    "Sculpt weathered concrete": [0.60, 0.62, 0.59],
+    "Sculpt reclaimed brick": [0.67, 0.4, 0.32],
+    "Sculpt weathered concrete": [0.6, 0.62, 0.59],
     "Sculpt dark wood": [0.49, 0.33, 0.25],
     "Sculpt garden grass": [0.43, 0.62, 0.36],
     "Sculpt leaf canopy": [0.33, 0.55, 0.37],
@@ -55,7 +55,7 @@ for (const item of manifest) {
     "Sculpt painted ochre": [0.99, 0.66, 0.26],
     "Sculpt painted turquoise": [0.38, 0.78, 0.77],
     "Sculpt painted lavender": [0.69, 0.59, 0.86],
-    "Sculpt painted mint": [0.58, 0.80, 0.56],
+    "Sculpt painted mint": [0.58, 0.8, 0.56],
   };
   for (const material of document.getRoot().listMaterials()) {
     if (!material.getBaseColorTexture()) continue;

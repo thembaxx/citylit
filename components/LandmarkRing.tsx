@@ -35,15 +35,23 @@ function StreetHouse({ x, color, roofColor }: { x: number; color: string; roofCo
         <boxGeometry args={[0.76, 0.94, 0.71]} />
         <meshStandardMaterial color={color} roughness={0.88} />
       </mesh>
-      <mesh position={[0, 1.04, 0]} castShadow>
-        <coneGeometry args={[0.61, 0.42, 4]} />
-        <meshStandardMaterial color={roofColor} roughness={0.8} metalness={0.06} />
-      </mesh>
+      {[-1, 1].map((side) => (
+        <mesh
+          key={side}
+          position={[side * 0.205, 1.16, 0]}
+          rotation={[0, 0, side * -0.72]}
+          castShadow
+          receiveShadow
+        >
+          <boxGeometry args={[0.60, 0.041, 0.85]} />
+          <meshStandardMaterial color={roofColor} roughness={0.77} metalness={0.03} />
+        </mesh>
+      ))}
       <mesh position={[0, 0.99, 0.03]}>
         <boxGeometry args={[0.86, 0.055, 0.79]} />
         <meshStandardMaterial color="#fff0d6" roughness={0.9} />
       </mesh>
-      <mesh position={[0.22, 1.21, -0.15]}>
+      <mesh position={[0.22, 1.32, -0.15]} castShadow>
         <boxGeometry args={[0.13, 0.22, 0.14]} />
         <meshStandardMaterial color={color} />
       </mesh>

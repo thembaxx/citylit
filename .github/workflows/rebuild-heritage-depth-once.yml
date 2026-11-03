@@ -1,0 +1,65 @@
+name: Rebuild museum window depth and foliage once
+on:
+  push:
+    branches:
+      - feat/archviz-quality-benchmark
+    paths:
+      - .github/workflows/rebuild-heritage-depth-once.yml
+permissions:
+  contents: write
+jobs:
+  remodel-and-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: feat/archviz-quality-benchmark
+          persist-credentials: true
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install Blender and PIL
+        run: |
+          sudo apt-get update -y
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y blender python3-numpy python3-pil
+      - name: Rebuild fully recessed museum facade and realistic tree detail
+        run: |
+          python3 scripts/fetch-museum-pbr.py
+          blender --background --python-exit-code 1 --python scripts/build-museum-hero.py
+          node scripts/compress-museum-hero.mjs
+          pnpm hero:audit
+      - name: Commit only rebuilt validated museum asset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/models/hero/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "assets(archviz): rebuild deep sash windows and botanical foliage"
+          git fetch origin feat/archviz-quality-benchmark
+          git rebase origin/feat/archviz-quality-benchmark
+          git push origin HEAD:feat/archviz-quality-benchmark
+      - name: Verify production rendering
+        run: |
+          pnpm typecheck
+          pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Capture updated day/night scenes at desktop/mobile sizes
+        run: |
+          pnpm start --hostname 127.0.0.1 > /tmp/citylit-archviz.log 2>&1 &
+          for i in $(seq 1 70); do
+            if curl -fsS http://127.0.0.1:3000/kimberley/landmarks > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/capture-archviz.mjs
+      - name: Upload visual review evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: heritage-recessed-glazing-foliage
+          path: artifacts/archviz/
+          if-no-files-found: warn
+          retention-days: 10

@@ -349,7 +349,7 @@ function Ring({
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
       <StudioEnvironment intensity={night ? 0.18 : 0.62} />
       <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.19 : 0.32]} />
-      <ambientLight intensity={night ? 0.10 : 0.17} />
+      <ambientLight intensity={night ? 0.1 : 0.17} />
       <directionalLight
         position={[4, 7, 5]}
         intensity={night ? 0.46 : 1.75}

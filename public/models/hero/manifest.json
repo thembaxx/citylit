@@ -1,0 +1,9 @@
+{
+  "id": "mcgregor-museum",
+  "src": "/models/hero/mcgregor-museum.glb",
+  "bytes": 3930132,
+  "compression": "KHR_draco_mesh_compression",
+  "textures": 12,
+  "modeling": "Original historic architecture study, not a measured reconstruction",
+  "materialSource": "ambientCG CC0 Bricks090, PavingStones128, Grass004, Wood096"
+}

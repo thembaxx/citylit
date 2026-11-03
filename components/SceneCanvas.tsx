@@ -56,7 +56,7 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
           onCreated={({ gl }) => {
             gl.outputColorSpace = THREE.SRGBColorSpace;
             gl.toneMapping = THREE.AgXToneMapping;
-            gl.toneMappingExposure = 1.12;
+            gl.toneMappingExposure = 0.98;
             if (!lowPower) gl.shadowMap.type = THREE.PCFSoftShadowMap;
           }}
           dpr={lowPower ? [1, 1] : [1, 1.5]}

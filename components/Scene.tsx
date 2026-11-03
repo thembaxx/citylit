@@ -10,6 +10,7 @@ import ProvinceMap, { provinceLabels, type LabelRefs } from "./ProvinceMap";
 import { provinceColors, availableProvinces } from "../lib/province-colors";
 import { cities } from "../lib/data";
 import ExpandedLandmark from "./ExpandedLandmark";
+import StudioEnvironment from "./StudioEnvironment";
 import SurfaceFinishes from "./SurfaceFinishes";
 import { Landmark, CategoryModel } from "./Models";
 const viewMemory = new Map<string, number[]>();
@@ -157,6 +158,7 @@ function World({
   return (
     <>
       <PerspectiveCamera makeDefault fov={34} position={[3.2, 6.4, 5.4]} />
+      {mode !== "map" && <StudioEnvironment intensity={0.9} />}
       <hemisphereLight args={["#fff6ea", "#8d7360", 0.8]} />
       <ambientLight intensity={0.62} />
       <directionalLight

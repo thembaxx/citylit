@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { cities } from "../lib/data";
 import { Alive } from "./Models";
 import ProceduralTree from "./ProceduralTree";
-import MuseumShowcase from "./MuseumShowcase";
+import MuseumHeroAsset from "./MuseumHeroAsset";
 const colors = [
   "#f3c7a6",
   "#7dce6a",
@@ -213,7 +213,7 @@ export default function ExpandedLandmark({
   if (cities[city].slug === "kimberley" && index === 1) {
     return (
       <Alive reduced={reduced}>
-        <MuseumShowcase reduced={reduced} />
+        <MuseumHeroAsset reduced={reduced} />
       </Alive>
     );
   }

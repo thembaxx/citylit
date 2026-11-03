@@ -49,7 +49,10 @@ for (const id of required) {
   // Keep architectural displays visually restrained without accidentally
   // applying a museum slab to natural landscapes. Check exported GLB
   // materials, not just the Blender source or build logs.
-  const materials = doc.getRoot().listMaterials().map((mat) => mat.getName());
+  const materials = doc
+    .getRoot()
+    .listMaterials()
+    .map((mat) => mat.getName());
   const landscapes = new Set(["table-mountain", "hole", "park"]);
   assert.equal(
     materials.includes("Architectural porcelain base"),

@@ -8,7 +8,7 @@ const root = new URL("../public/models/stage/", import.meta.url);
 const io = new NodeIO().registerExtensions([KHRDracoMeshCompression]).registerDependencies({
   "draco3d.decoder": await draco.createDecoderModule(),
 });
-for (const id of ["bo-kaap", "dome", "tower"]) {
+for (const id of ["bo-kaap", "dome", "tower", "union-buildings"]) {
   const bytes = await readFile(new URL(id + ".glb", root));
   const document = await io.readBinary(bytes);
   const names = document

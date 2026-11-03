@@ -73,10 +73,14 @@ def build(name, box, cylinder, beam, material, add, bpy):
             major_segments=major, minor_segments=minor,
         )
 
-    def window(x, y, z, width=.14, height=.21, frame=plaster):
-        # Shadow well behind the glazed sash reads at both near and far camera angles.
-        box(x, y + .015, z, width + .035, .045, height + .035, concrete)
-        box(x, y - .018, z, width, .025, height, deep)
+    def window(x, y, z, width=.14, height=.21, frame=plaster, carved=False):
+        # Carved civic windows must actually reveal the miniature room volume.
+        # The older flat opaque backing is reserved for other miniatures.
+        if not carved:
+            box(x, y + .015, z, width + .035, .045, height + .035, concrete)
+        glazing = (material("Architectural window glazing",
+                            (.21, .36, .40), roughness=.10) if carved else deep)
+        box(x, y - .018, z, width, .012 if carved else .025, height, glazing)
         for offset in (-width * .5, 0, width * .5):
             box(x + offset, y - .040, z, .012, .017, height + .038, frame)
         for offset in (-height * .5, 0, height * .5):
@@ -197,11 +201,13 @@ def build(name, box, cylinder, beam, material, add, bpy):
         # Neo-Renaissance symmetrical wings joined by a curved open colonnade.
         for side in (-1, 1):
             cx = side * 1.01
-            box(cx, .06, .55, .82, .60, .89, stone)
+            box(cx, .06, .55, .82, .60, .89, stone).name = (
+                "RecessShellUnionEast" if side > 0 else "RecessShellUnionWest"
+            )
             box(cx, .06, 1.02, .89, .70, .07, plaster)
             for dx in (-.27, -.09, .09, .27):
                 for z in (.40, .72):
-                    window(cx + dx, -.265, z, .13, .19, plaster)
+                    window(cx + dx, -.265, z, .13, .19, plaster, carved=True)
             # Distinct pair of cylindrical landmark tower caps.
             cylinder(cx, .14, 1.10, .24, .28, stone, vertices=20)
             cylinder(cx, .14, 1.39, .25, .34, copper, top=0, vertices=24)

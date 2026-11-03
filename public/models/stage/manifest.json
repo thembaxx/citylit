@@ -24,12 +24,12 @@
   {
     "id": "union-buildings",
     "src": "/models/stage/union-buildings.glb",
-    "bytes": 902368,
+    "bytes": 1565228,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
     "compression": "KHR_draco_mesh_compression",
-    "textureCount": 3,
+    "textureCount": 6,
     "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
@@ -79,7 +79,7 @@
   {
     "id": "park",
     "src": "/models/stage/park.glb",
-    "bytes": 3250844,
+    "bytes": 3250696,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -90,7 +90,7 @@
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 4099716,
+    "bytes": 4101200,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -101,7 +101,7 @@
   {
     "id": "tower",
     "src": "/models/stage/tower.glb",
-    "bytes": 1584480,
+    "bytes": 1586112,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -134,7 +134,7 @@
   {
     "id": "bo-kaap",
     "src": "/models/stage/bo-kaap.glb",
-    "bytes": 2541232,
+    "bytes": 2541228,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -156,7 +156,7 @@
   {
     "id": "aquarium",
     "src": "/models/stage/aquarium.glb",
-    "bytes": 4088504,
+    "bytes": 4088484,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",

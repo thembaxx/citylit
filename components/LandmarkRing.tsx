@@ -347,12 +347,12 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
-      <StudioEnvironment intensity={night ? 0.17 : 0.62} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.16 : 0.28]} />
-      <ambientLight intensity={night ? 0.06 : 0.075} />
+      <StudioEnvironment intensity={night ? 0.10 : 0.32} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.14 : 0.18]} />
+      <ambientLight intensity={night ? 0.045 : 0.045} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.33 : 1.14}
+        intensity={night ? 0.28 : 1.03}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
         shadow-mapSize-width={2048}
@@ -366,12 +366,12 @@ function Ring({
       />
       <directionalLight
         position={[-4, 3, -2]}
-        intensity={night ? 0.13 : 0.42}
+        intensity={night ? 0.1 : 0.27}
         color={night ? "#99b4db" : "#ffa968"}
       />
       <directionalLight
         position={[1, 5, -6]}
-        intensity={night ? 0.06 : 0.22}
+        intensity={night ? 0.04 : 0.13}
         color={night ? "#a4c1e8" : "#e7f3ff"}
       />
       <group position={[size.width > size.height ? 1.52 : 0.04, 0, 0]}>

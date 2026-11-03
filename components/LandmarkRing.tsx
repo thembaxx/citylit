@@ -362,6 +362,7 @@ function Ring({
           {items.map((item, index) => (
             <group
               key={item.name}
+              visible={size.width >= 760 || !items[selected]?.name.toLowerCase().includes("mcgregor museum") || index === selected}
               position={positions[index]}
               rotation={[
                 0,

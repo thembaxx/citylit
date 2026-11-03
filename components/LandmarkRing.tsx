@@ -463,7 +463,7 @@ export default function LandmarkRing({
   return (
     <div
       ref={setHost}
-      className="atlas-ring-scene"
+      className={museumSelected ? "atlas-ring-scene is-heritage-hero" : "atlas-ring-scene"}
       role="group"
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {

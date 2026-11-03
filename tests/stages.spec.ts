@@ -86,7 +86,6 @@ test("narrow-screen stages remain navigable with procedural city detail", async 
   expect(errors).toEqual([]);
 });
 
-
 test("320px header keeps a visible saved-day action and usable stage chips", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -99,9 +98,13 @@ test("320px header keeps a visible saved-day action and usable stage chips", asy
   await expect(chips).toBeVisible();
   await chips.getByRole("button", { name: "Ponte City", exact: true }).click();
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute("data-active-model", "ponte");
-  await expect(page.locator(".atlas-ring-scene")).toHaveAttribute("data-active-model-status", "ready", {
-    timeout: 30000,
-  });
+  await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
+    "data-active-model-status",
+    "ready",
+    {
+      timeout: 30000,
+    },
+  );
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Ponte City");
   const width = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(width).toBeLessThanOrEqual(321);

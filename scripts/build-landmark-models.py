@@ -23,6 +23,11 @@ pbr_spec.loader.exec_module(stage_pbr)
 fidelity_spec = importlib.util.spec_from_file_location("fidelity", ROOT / "scripts/sculpt-landmark-heroes.py")
 fidelity = importlib.util.module_from_spec(fidelity_spec)
 fidelity_spec.loader.exec_module(fidelity)
+remaining_spec = importlib.util.spec_from_file_location(
+    "remaining", ROOT / "scripts/sculpt-remaining-assets.py"
+)
+remaining = importlib.util.module_from_spec(remaining_spec)
+remaining_spec.loader.exec_module(remaining)
 MATERIALS = {}
 
 
@@ -271,6 +276,8 @@ for name, build in BUILDERS.items():
     base()
     if name in fidelity.SUPPORTED:
         fidelity.build(name, box, cylinder, beam, material, add, bpy)
+    elif name in remaining.SUPPORTED:
+        remaining.build(name, box, cylinder, beam, material, add, bpy)
     else:
         build()
         details.decorate(name, box, cylinder, beam, material, add, bpy)
@@ -284,7 +291,15 @@ for name, build in BUILDERS.items():
                               export_cameras=False, export_lights=False)
     manifest.append({"id": name, "src": f"/models/stage/{name}.glb", "bytes": path.stat().st_size,
                      "authoring": "Blender 4.3",
-                     "geometryTier": "site-informed-sculpt-v1" if name in fidelity.SUPPORTED else "illustrative-pbr-v1",
-                     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction" if name in fidelity.SUPPORTED else "Illustrative architectural miniature, not a surveyed reconstruction"})
+                     "geometryTier": (
+                         "site-informed-sculpt-v1" if name in fidelity.SUPPORTED
+                         else "distinct-sculpt-v2" if name in remaining.SUPPORTED
+                         else "illustrative-pbr-v1"
+                     ),
+                     "purpose": (
+                         "Reference-informed editorial miniature, not a measured architectural reconstruction"
+                         if name in fidelity.SUPPORTED
+                         else "Original architectural/landscape miniature, not a site survey"
+                     )})
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to finalize and verify the size budget.")

@@ -31,4 +31,4 @@ To validate: `pnpm models:audit && pnpm site-models:audit`. For real desktop/mob
 
 ## Remaining model groups
 
-Other templates — bridge, lighthouse, park, civic dome, tower, arch, fort, Bo-Kaap, cooling towers, and aquarium — retain the prior fully working PBR upgrades and remain candidates for future bespoke model authoring. The McGregor Museum already has its own independently authored heritage GLB.
+The ten earlier PBR templates are being replaced on the separate `feat/sculpt-remaining-ten-stage-assets` branch by distinctive original meshes. Their source and geometry budget are documented in `docs/remaining-sculpt-assets.md`. The five priority models and independently authored McGregor Museum hero remain preserved. The new ten models are not production assets until regenerated, audited, visually reviewed and merged.

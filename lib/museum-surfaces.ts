@@ -39,11 +39,7 @@ function smoothNoise(x: number, y: number, cell: number, seed: number) {
   const b = hash(x0 + 1, y0, seed);
   const c = hash(x0, y0 + 1, seed);
   const d = hash(x0 + 1, y0 + 1, seed);
-  return THREE.MathUtils.lerp(
-    THREE.MathUtils.lerp(a, b, u),
-    THREE.MathUtils.lerp(c, d, u),
-    v,
-  );
+  return THREE.MathUtils.lerp(THREE.MathUtils.lerp(a, b, u), THREE.MathUtils.lerp(c, d, u), v);
 }
 
 /**
@@ -62,8 +58,8 @@ function createPair(type: MuseumSurface): SurfacePair {
       const fine = hash(x, y, setting.seed + 21);
       const stripe = type === "wood" ? Math.sin((x + coarse * 7) * 0.16) * 0.13 : 0;
       const veining = type === "stone" ? Math.sin((x + y * 0.48 + middle * 9) * 0.08) * 0.06 : 0;
-      const granularity = (coarse - 0.5) * 0.65 + (middle - 0.5) * 0.24 +
-        (fine - 0.5) * 0.11 + stripe + veining;
+      const granularity =
+        (coarse - 0.5) * 0.65 + (middle - 0.5) * 0.24 + (fine - 0.5) * 0.11 + stripe + veining;
       const variance = granularity * setting.grain;
       const base = type === "grass" ? 221 : type === "copper" ? 235 : 241;
       const color = THREE.MathUtils.clamp(Math.round(base + variance), 0, 255);

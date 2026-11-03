@@ -2,7 +2,7 @@ import { chromium, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 
 const base = process.env.STAGE_URL ?? "http://127.0.0.1:3000";
-const directory = "artifacts/stage-pbr";
+const directory = process.env.STAGE_CAPTURE_DIR ?? "artifacts/stage-pbr";
 await mkdir(directory, { recursive: true });
 
 // One representative, real UI selection for each of the 15 unique Blender
@@ -43,7 +43,7 @@ const errors = [];
 page.on("pageerror", (error) => errors.push(error.message));
 for (const screen of [
   { id: "desktop", width: 1440, height: 900 },
-  { id: "mobile", width: 390, height: 844 },
+  { id: "mobile", width: Number(process.env.STAGE_MOBILE_WIDTH ?? 390), height: Number(process.env.STAGE_MOBILE_HEIGHT ?? 844) },
 ]) {
   await page.setViewportSize({ width: screen.width, height: screen.height });
   for (const [id, city, name] of selectedCases) {

@@ -24,6 +24,12 @@ test("the stage opens a landmark guide and shares the real day planner", async (
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(name);
   }
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
+  // Selecting chips scrolls their sheet into view. Restore the scene viewport
+  // before the drag; otherwise the mouse moves over the fixed header (y≈34).
+  await page.locator(".reference-guide").evaluate((guide) =>
+    guide.scrollTo({ top: 0, behavior: "instant" }),
+  );
+  await expect(page.locator(".atlas-stage-heading h1")).toBeInViewport();
   const scene = await page.locator(".atlas-ring-scene").boundingBox();
   expect(scene).not.toBeNull();
   await page.mouse.move(scene!.x + scene!.width * 0.45, scene!.y + scene!.height * 0.45);

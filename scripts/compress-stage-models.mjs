@@ -67,7 +67,8 @@ for (const item of manifest) {
   const textureCount = document.getRoot().listTextures().length;
   if (textureCount < 3) throw new Error(`${item.id} is missing CC0 PBR textures`);
   const bytes = await io.writeBinary(document);
-  if (bytes.length > 16 * 1024 * 1024) throw new Error(`${item.id} is unexpectedly large (>16 MiB).`);
+  if (bytes.length > 16 * 1024 * 1024)
+    throw new Error(`${item.id} is unexpectedly large (>16 MiB).`);
   const decoded = await io.readBinary(bytes);
   if (!decoded.getRoot().listMeshes().length)
     throw new Error(`${item.id} has no decoded geometry.`);

@@ -347,7 +347,7 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
-      <StudioEnvironment intensity={night ? 0.10 : 0.32} />
+      <StudioEnvironment intensity={night ? 0.1 : 0.32} />
       <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.14 : 0.18]} />
       <ambientLight intensity={night ? 0.045 : 0.045} />
       <directionalLight
@@ -407,26 +407,26 @@ function Ring({
               {/* high-detail museum shares the same canvas and scene budget */}
               {(showContext || index === selected) && (
                 <RotatingMiniature selected={index === selected} spin={spin} reduced={reduced}>
-                {item.name.toLowerCase().includes("mcgregor museum") ? (
-                  <MuseumHeroAsset
-                    night={night}
-                    exploded={index === selected && exploded}
-                    feature={index === selected ? feature : "architecture"}
-                    reduced={reduced}
-                    onFeature={index === selected ? onFeature : undefined}
-                  />
-                ) : (
-                  <SafeStageModel
-                    model={item.model}
-                    active={index === selected}
-                    onStatus={onModelStatus}
-                  />
-                )}
-                {showContext &&
-                  index === selected &&
-                  !item.name.toLowerCase().includes("mcgregor museum") && (
-                    <MiniatureStreet compact={size.width < 760} />
+                  {item.name.toLowerCase().includes("mcgregor museum") ? (
+                    <MuseumHeroAsset
+                      night={night}
+                      exploded={index === selected && exploded}
+                      feature={index === selected ? feature : "architecture"}
+                      reduced={reduced}
+                      onFeature={index === selected ? onFeature : undefined}
+                    />
+                  ) : (
+                    <SafeStageModel
+                      model={item.model}
+                      active={index === selected}
+                      onStatus={onModelStatus}
+                    />
                   )}
+                  {showContext &&
+                    index === selected &&
+                    !item.name.toLowerCase().includes("mcgregor museum") && (
+                      <MiniatureStreet compact={size.width < 760} />
+                    )}
                 </RotatingMiniature>
               )}
             </group>

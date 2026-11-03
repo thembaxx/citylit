@@ -1,4 +1,5 @@
 name: Review rebuilt museum render once
+# Compare final tuned brick facade, reference-facing camera and improved mobile hero space
 # Retry after TS narrowing fix; captures genuine Draco + PBR hero
 on:
   push:

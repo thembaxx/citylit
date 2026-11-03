@@ -1,5 +1,5 @@
 name: Format museum architecture code once
-# Apply final format including camera-facing museum orientation
+# Format museum after centered mobile and improved vertical framing
 on:
   push:
     branches:

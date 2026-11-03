@@ -357,7 +357,7 @@ function Ring({
         intensity={night ? 0.08 : 0.48}
         color={night ? "#99b4db" : "#ffa968"}
       />
-      <group position={[size.width > size.height ? 0.66 : 0.04, 0, 0]}>
+      <group position={[size.width > size.height ? 1.52 : 0.04, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
             <group
@@ -379,8 +379,8 @@ function Ring({
                 index === selected
                   ? (item.name.toLowerCase().includes("mcgregor museum")
                       ? size.width < 760
-                        ? 1.12
-                        : 0.63
+                        ? 0.77
+                        : 0.72
                       : size.width < 760
                         ? 0.8
                         : 1) * zoom

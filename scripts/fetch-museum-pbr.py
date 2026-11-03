@@ -8,6 +8,8 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from zipfile import ZipFile, is_zipfile
+from io import BytesIO
+from PIL import Image
 import shutil
 import time
 
@@ -57,8 +59,15 @@ for category, asset in ASSETS.items():
                 raise RuntimeError("Unexpectedly large PBR texture")
             # Explicit destination avoids path traversal from archive filenames.
             path = folder / Path(item.filename).name
-            with archive.open(item) as source, open(path, "wb") as output:
-                shutil.copyfileobj(source, output)
+            with archive.open(item) as source:
+                pixels = source.read()
+            with Image.open(BytesIO(pixels)) as original:
+                # Downsample the 1K originals to 768px with high-quality Lanczos.
+                # Keeps material variation without shipping 12 huge texture maps.
+                image = original.convert("RGB")
+                if max(image.size) > 768:
+                    image.thumbnail((768, 768), Image.Resampling.LANCZOS)
+                image.save(path, "JPEG", quality=84, optimize=True, subsampling=0)
     filename.unlink()
     for mapname in ALLOWED_MAPS:
         if not any(mapname.lower() in p.name.lower() for p in folder.iterdir()):

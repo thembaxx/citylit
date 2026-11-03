@@ -1,4 +1,5 @@
 name: Capture all fifteen PBR landmark scenes once
+# Final true-color focused hero capture at desktop and mobile sizes
 # Retry after correcting the R3F canvas DOM selector
 on:
   push:

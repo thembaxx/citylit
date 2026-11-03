@@ -28,6 +28,27 @@ export default function StageModel({
         const material = source.clone();
         if (material instanceof THREE.MeshStandardMaterial) {
           const name = material.name.toLowerCase();
+          if (name.includes("architectural window glazing")) {
+            // Actual open masonry pockets and room contents sit behind this
+            // optical layer. Apply transmission only to glazed panels, never
+            // to structural stone, so the added cost stays contained.
+            const glazing = new THREE.MeshPhysicalMaterial({
+              name: material.name,
+              color: material.color.clone(),
+              map: material.map,
+              roughness: 0.11,
+              metalness: 0,
+              transmission: 0.48,
+              thickness: 0.025,
+              ior: 1.46,
+              clearcoat: 0.6,
+              clearcoatRoughness: 0.16,
+              envMapIntensity: 1.15,
+              side: THREE.DoubleSide,
+            });
+            material.dispose();
+            return glazing;
+          }
           if (name.includes("water")) {
             material.roughness = 0.13;
             material.metalness = 0.08;
@@ -47,6 +68,15 @@ export default function StageModel({
           ) {
             material.roughness = 0.25;
             material.metalness = 0.12;
+          } else if (
+            name.includes("botanical lamina") ||
+            name.includes("botanical garden grass blades")
+          ) {
+            // Double-sided thin leaves reveal silhouette and curvature from
+            // below the canopy without alpha-card sorting artifacts.
+            material.side = THREE.DoubleSide;
+            material.roughness = 0.92;
+            material.metalness = 0;
           } else if (name.includes("foliage") || name.includes("leaf")) {
             material.roughness = 0.93;
             material.metalness = 0;

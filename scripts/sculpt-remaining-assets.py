@@ -123,7 +123,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
                      [(3,2,1,0),(4,5,6,7),(0,1,5,4),
                       (1,2,6,5),(2,3,7,6),(3,0,4,7)], mat)
 
-    def plant(x, y, z=.05, scale=1.0):
+    def plant(x, y, z=.05, scale=1.0, leafy=True):
         trunk_top = z + .37*scale
         beam((x,y,z), (x,y,trunk_top), .026*scale, wood)
         for branch in range(5):
@@ -131,12 +131,14 @@ def build(name, box, cylinder, beam, material, add, bpy):
             target=(x+math.cos(a)*.20*scale, y+math.sin(a)*.18*scale,
                     trunk_top+.22*scale+(.04 if branch%2 else 0))
             beam((x,y,trunk_top-.07*scale), target, .012*scale, wood)
-            add(bpy.ops.mesh.primitive_ico_sphere_add, target,
-                (.28*scale,.24*scale,.24*scale),
-                leaves if branch%2 else leaves2, subdivisions=2, radius=1)
-        add(bpy.ops.mesh.primitive_ico_sphere_add,
-            (x,y,trunk_top+.28*scale), (.30*scale,.28*scale,.23*scale),
-            leaves, subdivisions=2, radius=1)
+            if leafy:
+                add(bpy.ops.mesh.primitive_ico_sphere_add, target,
+                    (.28*scale,.24*scale,.24*scale),
+                    leaves if branch%2 else leaves2, subdivisions=2, radius=1)
+        if leafy:
+            add(bpy.ops.mesh.primitive_ico_sphere_add,
+                (x,y,trunk_top+.28*scale), (.30*scale,.28*scale,.23*scale),
+                leaves, subdivisions=2, radius=1)
 
     if name == "bridge":
         # Distinct cable-stayed asymmetric bridge, continuous deck and towers.
@@ -187,7 +189,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
         cylinder(0,0,.04,1.16,.09,grass,vertices=64)
         for x,y,scale in [(-.67,.35,.94),(.62,.34,.83),
                           (-.72,-.32,.74),(.71,-.34,.71)]:
-            plant(x,y,.10,scale)
+            plant(x,y,.10,scale,leafy=False)
         box(0,-.12,.065,.26,1.65,.026,sandstone)
         box(-.20,.38,.065,.66,.19,.025,sandstone)
         box(.20,-.52,.065,.73,.17,.025,sandstone)
@@ -215,9 +217,9 @@ def build(name, box, cylinder, beam, material, add, bpy):
         # Constitution Hill: modern Constitutional Court, open entrance court,
         # red-brick historical wing and vertical glass-and-concrete tower.
         # No imaginary oversized dome or symmetrical generic courthouse.
-        box(-.70, .12, .51, .91, .77, .88, brick)
+        box(-.70, .12, .51, .91, .77, .88, brick).name = "RecessShellConstitutionBrick"
         box(-.70, .12, .975, .96, .82, .07, sandstone)
-        box(.72, .12, .45, .73, .70, .75, pale)
+        box(.72, .12, .45, .73, .70, .75, pale).name = "RecessShellConstitutionStone"
         box(.72, .12, .85, .81, .77, .065, sandstone)
         # High vertical court building, glazing several layers behind slender fins.
         box(.06, .22, .88, .62, .58, 1.55, pale)
@@ -257,10 +259,9 @@ def build(name, box, cylinder, beam, material, add, bpy):
     elif name == "tower":
         # Durban City Hall: symmetrical neoclassical wings with an elevated
         # copper dome, free-standing portico columns and sculpted pediment.
-        box(0, .11, .46, 2.16, .78, .88, sandstone)
+        box(0, .11, .46, 2.16, .78, .88, sandstone).name = "RecessShellDurbanHall"
         box(0, .11, .92, 2.30, .88, .095, pale)
-        for x in (-.88, -.58, -.29, 0, .29, .58, .88):
-            opening(x, -.312, .47, .145, .30)
+        # The actual masonry apertures and glazing are cut in recessed-architecture.py.
         for x in (-.94, .94):
             box(x, .11, 1.01, .30, .91, .15, pale)
             cylinder(x, .11, 1.13, .23, .23, sandstone, vertices=24)
@@ -357,7 +358,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
         # plaster, stepped parapets and stoops, not alpine pitched rooftops.
         for i,x in enumerate((-.96,-.48,0,.48,.96)):
             ground=.12+.055*(i%3)
-            box(x, .17, ground+.40, .43, .79, .80, paint[i])
+            box(x, .17, ground+.40, .43, .79, .80, paint[i]).name = "RecessShellBoKaap%d" % i
             # Flat roof and front parapet, projected plaster eaves and corners.
             box(x, .17, ground+.835, .46, .82, .060, sandstone)
             box(x, -.245, ground+.925, .46, .072, .16, paint[i])

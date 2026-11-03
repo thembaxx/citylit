@@ -223,7 +223,9 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
   await expect(page.locator(".wordmark")).toHaveAccessibleName("citylit");
-  await expect(page.locator(".wordmark svg, .wordmark img")).toHaveCount(0);
+  const brandSymbol = page.locator(".wordmark .citylit-logo-symbol");
+  await expect(brandSymbol).toHaveCount(1);
+  await expect(brandSymbol).toHaveAttribute("aria-hidden", "true");
   await expect(page.locator(".map-pin")).toHaveCount(0);
   await expect(page.locator("a.province-active")).toHaveCount(9);
   expect(

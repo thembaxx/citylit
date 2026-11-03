@@ -139,9 +139,11 @@ a {
     color 0.2s,
     background 0.2s;
 }
-.icon-button:hover {
-  background: #ffffff09;
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .icon-button:hover {
+    background: #ffffff09;
+    color: var(--ink);
+  }
 }
 .save-count {
   position: absolute;
@@ -317,8 +319,10 @@ h3 {
   box-shadow: 0 0 28px #796aff5c;
   transition: transform 0.2s;
 }
-.map-pin:hover {
-  transform: scale(1.1);
+@media (hover: hover) and (pointer: fine) {
+  .map-pin:hover {
+    transform: scale(1.1);
+  }
 }
 .pin-tooltip {
   position: absolute;
@@ -335,9 +339,13 @@ h3 {
   opacity: 0;
   pointer-events: none;
 }
-.map-pin:hover .pin-tooltip,
 .map-pin:focus-visible .pin-tooltip {
   opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .map-pin:hover .pin-tooltip {
+    opacity: 1;
+  }
 }
 .game-controls {
   position: relative;
@@ -449,8 +457,10 @@ h3 {
   min-height: 44px;
   color: #8a8693;
 }
-.carousel-arrow:hover {
-  color: var(--accent-ink);
+@media (hover: hover) and (pointer: fine) {
+  .carousel-arrow:hover {
+    color: var(--accent-ink);
+  }
 }
 .carousel-progress {
   display: flex;
@@ -506,9 +516,11 @@ h3 {
     box-shadow 0.2s;
   white-space: nowrap;
 }
-.pill-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px #796aff24;
+@media (hover: hover) and (pointer: fine) {
+  .pill-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px #796aff24;
+  }
 }
 .pill-button:active {
   transform: scale(0.97);
@@ -638,9 +650,13 @@ h3 {
   white-space: nowrap;
   pointer-events: none;
 }
-.category-glyphs button:hover .glyph-tooltip,
 .category-glyphs button:focus-visible .glyph-tooltip {
   opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .category-glyphs button:hover .glyph-tooltip {
+    opacity: 1;
+  }
 }
 .ambient-shard {
   position: absolute;
@@ -1026,8 +1042,10 @@ h3 {
   object-fit: cover;
   transition: transform 0.5s;
 }
-.gallery-hero:hover .gallery-image {
-  transform: scale(1.025);
+@media (hover: hover) and (pointer: fine) {
+  .gallery-hero:hover .gallery-image {
+    transform: scale(1.025);
+  }
 }
 .photo-hero > span {
   position: absolute;
@@ -1754,9 +1772,11 @@ h3 {
     color 0.2s,
     background 0.2s;
 }
-.icon-button:hover {
-  transform: translateY(-2px) rotate(-5deg);
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .icon-button:hover {
+    transform: translateY(-2px) rotate(-5deg);
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+  }
 }
 .icon-button:active {
   transform: scale(0.86);
@@ -1771,9 +1791,11 @@ h3 {
     background 0.2s,
     box-shadow 0.2s;
 }
-.pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px #e24b3235;
+@media (hover: hover) and (pointer: fine) {
+  .pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px #e24b3235;
+  }
 }
 .pill:active,
 .category-glyphs button:active,
@@ -1783,8 +1805,10 @@ h3 {
 .category-glyphs button[aria-current="page"] {
   color: var(--ink);
 }
-.category-glyphs button:hover {
-  transform: translateY(-3px) rotate(-8deg);
+@media (hover: hover) and (pointer: fine) {
+  .category-glyphs button:hover {
+    transform: translateY(-3px) rotate(-8deg);
+  }
 }
 .delight-notice {
   position: fixed;
@@ -1936,9 +1960,13 @@ h3 {
   white-space: nowrap;
   max-width: 100%;
 }
-.chapter-breadcrumbs a[aria-current="page"],
-.chapter-breadcrumbs a:hover {
+.chapter-breadcrumbs a[aria-current="page"] {
   color: var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .chapter-breadcrumbs a:hover {
+    color: var(--ink);
+  }
 }
 .heading-description,
 .category-description {
@@ -2003,8 +2031,10 @@ h3 {
   max-width: 400px;
   margin: 0 auto;
 }
-.geography-credit:hover {
-  text-decoration: underline;
+@media (hover: hover) and (pointer: fine) {
+  .geography-credit:hover {
+    text-decoration: underline;
+  }
 }
 .game-map .game-controls {
   position: relative;
@@ -2266,8 +2296,10 @@ h3 {
   color: var(--accent-ink);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
 }
-.category-page-tabs button:hover {
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .category-page-tabs button:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
 }
 .category-page-tabs button:active {
   transform: scale(0.96);
@@ -2505,8 +2537,10 @@ textarea {
 .glass-category-nav button[aria-current="page"] {
   color: var(--accent-ink);
 }
-.glass-category-nav button:hover {
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .glass-category-nav button:hover {
+    color: var(--ink);
+  }
 }
 .glass-active-pill {
   position: absolute;
@@ -2739,8 +2773,10 @@ textarea {
   scroll-snap-align: start;
   transition: border-color 0.2s;
 }
-.location-card:hover {
-  border-color: var(--accent-ink);
+@media (hover: hover) and (pointer: fine) {
+  .location-card:hover {
+    border-color: var(--accent-ink);
+  }
 }
 .location-card h3 {
   margin: 20px 0;
@@ -3603,8 +3639,10 @@ button:disabled {
   min-width: 40px;
   height: 44px;
 }
-.game-nav .utility-nav .icon-button:hover {
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .game-nav .utility-nav .icon-button:hover {
+    transform: translateY(-1px);
+  }
 }
 .khwezi-mark {
   display: block;
@@ -3758,8 +3796,10 @@ button:disabled {
   color: var(--muted);
   border-radius: 50%;
 }
-.khwezi-dismiss:hover {
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .khwezi-dismiss:hover {
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+  }
 }
 .khwezi-moment {
   display: flex;
@@ -3865,8 +3905,10 @@ button:disabled {
 .preference-button[aria-pressed="true"] {
   border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
 }
-.preference-button:hover {
-  background: color-mix(in srgb, var(--accent) 7%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .preference-button:hover {
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+  }
 }
 .experience-settings .setting-row {
   font-size: 12px;
@@ -4925,9 +4967,11 @@ button {
   white-space: normal;
   font-family: "DM Sans", sans-serif;
 }
-.spot-open:hover {
-  transform: none;
-  box-shadow: none;
+@media (hover: hover) and (pointer: fine) {
+  .spot-open:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }
 .spot-open span {
   display: grid;

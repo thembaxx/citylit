@@ -37,3 +37,11 @@ At 320px the landmark chip row is kept below the stage models so the
 broadest bases do not overlap controls; a small amount of white space is
 intentional. Further reductions in this clearance require model-specific
 bounds checks, not arbitrary negative margins.
+
+## Verified result — November 3, 2026
+
+The [desktop, 390px and 320px real-WebGL run](https://github.com/thembaxx/citylit/actions/runs/41690947666) passed. Its artifact `citylit-stage-responsive-320-390-desktop` contains 24 actual app captures covering Ponte City, Union Buildings, Moses Mabhida Stadium, Bo-Kaap, Durban City Hall and Table Mountain. All targeted models reached the explicit `data-active-model-status="ready"` state. The production build, formatter, lint, TypeScript and GLB audits passed, as did the existing desktop and mobile `tests/stages.spec.ts` interactions.
+
+The first QA capture found that the narrowest 320px models nearly collided with the floating Inspector control, while the 390px layout was clear. A narrow-only left shift of the scene group resolved the overlap. The McGregor Museum hero retains its original vertical presentation; desktop framing remains unchanged.
+
+The first attempt's browser test command failed only because a running screenshot server occupied the configured Playwright test port. The corrected final run reused that server and the complete targeted stage-interaction matrix passed. This is a **responsive visual-clarity improvement**, not a claim that the actual 3D assets now match the owner's photoreal architecture reference.

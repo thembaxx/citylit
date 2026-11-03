@@ -75,14 +75,8 @@ def build(name, box, cylinder, beam, material, add, bpy):
             z0=.12+.055*(i%3)
             front=-.225
             window_frame(x-.105,front,z0+.46,.166,.245,columns=3,rows=2)
-            # Weathered door, inset panels, small glazed transom and hardware.
-            box(x+.115,front-.011,z0+.37,.175,.026,.66,shadow)
-            box(x+.115,front-.037,z0+.36,.153,.017,.635,timber)
-            for yheight in (.15,.32,.50):
-                box(x+.115,front-.053,z0+yheight,.132,.014,.012,bronze)
-            box(x+.115,front-.056,z0+.735,.158,.016,.082,pane)
-            box(x+.115,front-.07,z0+.74,.017,.015,.080,enamel)
-            cylinder(x+.167,front-.079,z0+.37,.010,.024,bronze,vertices=12).rotation_euler.x=pi/2
+            # No surface-mounted door sticker: recessed-architecture.py
+            # carves the real opening after the facade details are authored.
             # Continuous cornices, raised plaster borders and rainwater pipes.
             box(x,front-.06,z0+.84,.455,.066,.04,white)
             box(x,front-.065,z0+.97,.45,.076,.018,white)

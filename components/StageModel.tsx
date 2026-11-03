@@ -7,14 +7,14 @@ import * as THREE from "three";
  * Give every existing, compressed Blender landmark believable material response
  * without mutating the cached GLTF used by other instances of the model.
  */
-export default function StageModel({ model }: { model: string }) {
+export default function StageModel({ model, active = true }: { model: string; active?: boolean }) {
   const { scene } = useGLTF(`/models/stage/${model}.glb`, "/draco/");
   const instance = useMemo(() => {
     const root = scene.clone(true);
     root.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
-      object.castShadow = true;
-      object.receiveShadow = true;
+      object.castShadow = active;
+      object.receiveShadow = active;
       const tune = (source: THREE.Material): THREE.Material => {
         const material = source.clone();
         if (material instanceof THREE.MeshStandardMaterial) {
@@ -47,7 +47,7 @@ export default function StageModel({ model }: { model: string }) {
         : tune(object.material);
     });
     return root;
-  }, [scene]);
+  }, [scene, active]);
 
   useEffect(() => {
     return () => {

@@ -41,7 +41,7 @@ McGregor Museum hero lives under `public/models/hero`.
 The CC0 material scans originate from ambientCG and are retrieved only while
 building, not while browsing. The same four source material groups are used
 across the app: `Bricks090`, `PavingStones128`, `Grass004`, and `Wood096`.
-Their albedo, OpenGL normal and roughness scans are optimized as 320px JPEGs
+Their albedo, OpenGL normal and roughness scans are retained up to their available 1K source resolution (without synthetic upscaling)
 and embedded directly into each compressed model. Read the CC0 license at
 https://docs.ambientcg.com/license/.
 
@@ -57,8 +57,7 @@ The Blender exporter creates uncompressed glTF binaries first; the
 `@gltf-transform` script writes Draco-compressed GLBs, restores the intended
 per-material base-colour multipliers, decodes each result and verifies integrity.
 
-Each GLB must stay below 2 MiB, with a combined maximum of 22 MiB. The
-catalog now totals approximately 4.9 MiB after the ten-mesh rebuild. Manifest entries record size,
+A 16 MiB/model and 180 MiB total sanity check protects against accidental build bloat, without prioritising minimal file size over visual detail. The previous catalog totalled approximately 4.9 MiB after the ten-mesh rebuild; the full-resolution pass must be measured again after regeneration. Manifest entries record size,
 texture count, compression, and material provenance.
 
 ## QA and release policy

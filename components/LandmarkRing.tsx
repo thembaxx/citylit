@@ -243,6 +243,7 @@ function Ring({
   zoom,
   spin,
   view,
+  showContext,
   reduced,
 }: {
   items: StageItem[];
@@ -259,6 +260,7 @@ function Ring({
   zoom: number;
   spin: number;
   view: StageView;
+  showContext: boolean;
   reduced: boolean;
 }) {
   const ring = useRef<THREE.Group>(null);
@@ -370,10 +372,7 @@ function Ring({
           {items.map((item, index) => (
             <group
               key={item.name}
-              visible={
-                !items[selected]?.name.toLowerCase().includes("mcgregor museum") ||
-                index === selected
-              }
+              visible={showContext || index === selected}
               position={positions[index]}
               rotation={[
                 0,
@@ -411,13 +410,13 @@ function Ring({
                 ) : (
                   <SafeStageModel model={item.model} active={index === selected} />
                 )}
-                {index === selected && !item.name.toLowerCase().includes("mcgregor museum") && (
+                {showContext && index === selected && !item.name.toLowerCase().includes("mcgregor museum") && (
                   <MiniatureStreet compact={size.width < 760} />
                 )}
               </RotatingMiniature>
             </group>
           ))}
-          {route.length > 1 && (
+          {showContext && route.length > 1 && (
             <Line
               points={route}
               color="#d9660b"
@@ -457,6 +456,7 @@ export default function LandmarkRing({
   const [mobileInspectorOpen, setMobileInspectorOpen] = useState(false);
   const [view, setView] = useState<StageView>("overview");
   const [spin, setSpin] = useState(0);
+  const [showContext, setShowContext] = useState(false);
   const reduced = !!useReducedMotion();
   const museumSelected = items[selected]?.name.toLowerCase().includes("mcgregor museum");
   const features: { id: MuseumFeature; label: string }[] = [
@@ -531,6 +531,7 @@ export default function LandmarkRing({
             zoom={zoom}
             spin={spin}
             view={view}
+            showContext={showContext}
             reduced={reduced}
           />
         )}
@@ -618,6 +619,7 @@ export default function LandmarkRing({
                 setExploded(false);
                 setFeature("architecture");
                 setView("overview");
+                setShowContext(false);
               }}
             >
               <ArrowCounterClockwise size={19} />
@@ -644,6 +646,18 @@ export default function LandmarkRing({
                   {option.label}
                 </button>
               ))}
+            </div>
+          )}
+          {!museumSelected && (
+            <div className="atlas-inspector-features" aria-label="Surroundings visibility">
+              <button
+                type="button"
+                aria-label={showContext ? "Hide illustrative surroundings" : "Show illustrative surroundings"}
+                aria-pressed={showContext}
+                onClick={() => setShowContext((value) => !value)}
+              >
+                {showContext ? "Hide surroundings" : "Show surroundings"}
+              </button>
             </div>
           )}
           {museumSelected && (

@@ -24,7 +24,6 @@ def build(name, box, cylinder, beam, material, add, bpy):
     concrete = material("Sculpt weathered concrete", (.48, .49, .46), roughness=.91)
     dark = material("Sculpt recessed glazing", (.10, .24, .29), roughness=.21, metalness=.10)
     glass = material("Sculpt sea glass", (.24, .55, .58), roughness=.15, metalness=.08)
-    interior = material("Sculpt warmly shaded interior", (.52, .35, .22), roughness=.88)
     metal = material("Sculpt structural metal", (.52, .57, .58), roughness=.37, metalness=.50)
     warm = material("Sculpt aged brass", (.59, .43, .26), roughness=.40, metalness=.52)
     wood = material("Sculpt dark wood", (.32, .24, .18), roughness=.79)
@@ -95,18 +94,12 @@ def build(name, box, cylinder, beam, material, add, bpy):
     def opening(x, y, z, width, height, frame=pale):
         # Shadow pocket, recessed glass and four-piece raised frame.
         box(x, y, z, width+.055, .065, height+.065, sandstone)
-        # Separate shadow reveal, warm room backing and physically-rendered
-        # glazed panes. The layered depth reads as architectural joinery,
-        # rather than a window-shaped sticker on a wall.
-        box(x, y-.044, z, width, .014, height, dark)
-        box(x, y-.058, z, width*.94, .012, height*.92, interior)
-        box(x, y-.073, z, width*.88, .008, height*.88, glass)
-        box(x, y-.087, z, .013, .016, height+.06, frame)
-        box(x, y-.089, z, width+.01, .016, .012, frame)
+        box(x, y-.046, z, width, .014, height, dark)
+        box(x, y-.062, z, .012, .018, height+.07, frame)
         for side in (-1, 1):
-            box(x+side*width/2, y-.082, z, .015, .025, height+.05, frame)
-        box(x, y-.084, z+height/2, width+.04, .027, .016, frame)
-        box(x, y-.087, z-height/2, width+.07, .050, .03, frame)
+            box(x+side*width/2, y-.065, z, .014, .018, height+.05, frame)
+        box(x, y-.065, z+height/2, width+.04, .018, .016, frame)
+        box(x, y-.065, z-height/2, width+.07, .045, .026, frame)
 
     def rail(a, b, posts=12, height=.15):
         for i in range(posts+1):
@@ -130,7 +123,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
                      [(3,2,1,0),(4,5,6,7),(0,1,5,4),
                       (1,2,6,5),(2,3,7,6),(3,0,4,7)], mat)
 
-    def plant(x, y, z=.05, scale=1.0):
+    def plant(x, y, z=.05, scale=1.0, leafy=True):
         trunk_top = z + .37*scale
         beam((x,y,z), (x,y,trunk_top), .026*scale, wood)
         for branch in range(5):
@@ -138,12 +131,14 @@ def build(name, box, cylinder, beam, material, add, bpy):
             target=(x+math.cos(a)*.20*scale, y+math.sin(a)*.18*scale,
                     trunk_top+.22*scale+(.04 if branch%2 else 0))
             beam((x,y,trunk_top-.07*scale), target, .012*scale, wood)
-            add(bpy.ops.mesh.primitive_ico_sphere_add, target,
-                (.28*scale,.24*scale,.24*scale),
-                leaves if branch%2 else leaves2, subdivisions=2, radius=1)
-        add(bpy.ops.mesh.primitive_ico_sphere_add,
-            (x,y,trunk_top+.28*scale), (.30*scale,.28*scale,.23*scale),
-            leaves, subdivisions=2, radius=1)
+            if leafy:
+                add(bpy.ops.mesh.primitive_ico_sphere_add, target,
+                    (.28*scale,.24*scale,.24*scale),
+                    leaves if branch%2 else leaves2, subdivisions=2, radius=1)
+        if leafy:
+            add(bpy.ops.mesh.primitive_ico_sphere_add,
+                (x,y,trunk_top+.28*scale), (.30*scale,.28*scale,.23*scale),
+                leaves, subdivisions=2, radius=1)
 
     if name == "bridge":
         # Distinct cable-stayed asymmetric bridge, continuous deck and towers.
@@ -194,7 +189,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
         cylinder(0,0,.04,1.16,.09,grass,vertices=64)
         for x,y,scale in [(-.67,.35,.94),(.62,.34,.83),
                           (-.72,-.32,.74),(.71,-.34,.71)]:
-            plant(x,y,.10,scale)
+            plant(x,y,.10,scale,leafy=False)
         box(0,-.12,.065,.26,1.65,.026,sandstone)
         box(-.20,.38,.065,.66,.19,.025,sandstone)
         box(.20,-.52,.065,.73,.17,.025,sandstone)
@@ -219,53 +214,98 @@ def build(name, box, cylinder, beam, material, add, bpy):
             cylinder(x,y,.085,.05,.045,paint[j%5],vertices=8)
 
     elif name == "dome":
-        # Justice/civic courtyard model, not an inaccurate oversized dome.
-        for x in (-.66,.66):
-            box(x,.10,.49,.75,.70,.93,brick)
-            box(x,.1,.97,.83,.80,.12,sandstone)
-            for j in range(3):
-                opening(x-.24+j*.24,-.264,.58,.13,.24)
-        box(0,.42,.35,.75,.32,.62,pale)
-        box(0,.37,.73,.88,.40,.10,sandstone)
-        for x in (-.42,.42):
-            wall((x,-.62),(x,.10),.14,.77,.10,sandstone)
-        for x in (-.39,-.13,.13,.39):
-            cylinder(x,-.55,.39,.025,.60,pale,vertices=12)
-            box(x,-.56,.70,.075,.10,.065,sandstone)
-        box(0,-.53,.73,1.06,.21,.10,sandstone)
-        for x in (-.46,.46):
-            opening(x,-.658,.45,.14,.26)
-        for i in range(5):
-            box(0,-.70-i*.085,.11-i*.014,.95+i*.08,.18,.045,pale)
-        box(0,-.22,.10,1.68,.35,.05,grass)
-        for x in (-.82,.82):
-            plant(x,-.74,.06,.38)
+        # Constitution Hill: modern Constitutional Court, open entrance court,
+        # red-brick historical wing and vertical glass-and-concrete tower.
+        # No imaginary oversized dome or symmetrical generic courthouse.
+        box(-.70, .12, .51, .91, .77, .88, brick).name = "RecessShellConstitutionBrick"
+        box(-.70, .12, .975, .96, .82, .07, sandstone)
+        box(.72, .12, .45, .73, .70, .75, pale).name = "RecessShellConstitutionStone"
+        box(.72, .12, .85, .81, .77, .065, sandstone)
+        # High vertical court building, glazing several layers behind slender fins.
+        box(.06, .22, .88, .62, .58, 1.55, pale)
+        box(.06, -.09, .89, .51, .026, 1.40, dark)
+        for i in range(9):
+            x = -.18 + i * .06
+            box(x, -.127, .91, .016, .034, 1.43, metal)
+        for z in (.37, .66, .96, 1.24, 1.52):
+            box(.06, -.135, z, .54, .028, .022, pale)
+        box(.06, .22, 1.68, .72, .72, .105, concrete)
+        for x in (-.35, .46):
+            box(x, -.17, 1.03, .068, .12, 1.32, sandstone)
+        # A perforated masonry screen echoes the Court's shaded public facade.
+        for row in range(7):
+            for col in range(9):
+                x = -.99 + col * .073
+                z = .28 + row * .084
+                box(x, -.293, z, .037, .042, .038, pale if (row + col) % 3 else brick)
+        # Tall central entrance, with open portico and visible inside shadow.
+        box(-.38, -.37, .39, .85, .32, .70, pale)
+        box(-.38, -.555, .37, .52, .02, .56, dark)
+        for x in (-.79, -.56, -.33, -.10):
+            cylinder(x, -.55, .43, .033, .68, sandstone, vertices=16)
+            box(x, -.55, .79, .080, .12, .065, pale)
+            box(x, -.55, .09, .085, .12, .055, sandstone)
+        box(-.38, -.53, .85, .98, .42, .09, pale)
+        # Courtyard pavers, wide entrance stairs, low trees and bollards.
+        for row in range(7):
+            y = -.69 - row * .079
+            box(0, y, .062-row*.006, 2.26, .074, .025,
+                sandstone if row % 3 else pale)
+        for x in (-1.01, 1.06):
+            plant(x, -.92, .07, .37)
+        for x in (-.76, -.47, -.18, .11, .40, .69, .98):
+            cylinder(x, -.86, .16, .019, .20, metal, vertices=10)
 
     elif name == "tower":
-        # Classical civic hall with central clock tower and portico.
-        box(0,.12,.41,2.15,.76,.76,sandstone)
-        box(0,.12,.82,2.28,.87,.09,pale)
-        for x in (-.87,-.53,-.18,.18,.53,.87):
-            opening(x,-.275,.49,.17,.28)
-            cylinder(x,-.40,.34,.032,.62,pale,vertices=12)
-            box(x,-.40,.68,.095,.10,.05,sandstone)
-        box(0,-.38,.78,2.35,.19,.14,pale)
-        box(0,.1,1.12,.58,.60,.70,brick)
-        box(0,.1,1.47,.70,.72,.12,pale)
-        for side in (-1,1):
-            opening(side*.22,-.221,1.18,.12,.21)
-        # Clock face, tick marks and hands placed in front of stone.
-        cylinder(0,-.222,1.30,.184,.020,pale,vertices=40).rotation_euler.x=math.pi/2
-        for i in range(12):
-            angle=tau*i/12
-            box(math.sin(angle)*.14,-.245,1.30+math.cos(angle)*.14,
-                .012,.012,.014,dark)
-        beam((0,-.256,1.30),(.075,-.256,1.38),.010,dark)
-        beam((0,-.259,1.30),(-.028,-.259,1.20),.008,dark)
-        surface_rings("Copper civic roof",[(.44,.44,0,.1,1.53),
-                                          (.09,.09,0,.1,1.90)],
-                      warm,n=16)
-        cylinder(0,.1,1.96,.014,.22,metal,vertices=8)
+        # Durban City Hall: symmetrical neoclassical wings with an elevated
+        # copper dome, free-standing portico columns and sculpted pediment.
+        box(0, .11, .46, 2.16, .78, .88, sandstone).name = "RecessShellDurbanHall"
+        box(0, .11, .92, 2.30, .88, .095, pale)
+        # The actual masonry apertures and glazing are cut in recessed-architecture.py.
+        for x in (-.94, .94):
+            box(x, .11, 1.01, .30, .91, .15, pale)
+            cylinder(x, .11, 1.13, .23, .23, sandstone, vertices=24)
+            surface_rings("City Hall wing copper cap",
+                [(.22, .22, x, .11, 1.23),
+                 (.21, .21, x, .11, 1.31),
+                 (.14, .14, x, .11, 1.43),
+                 (.015, .015, x, .11, 1.50)], warm, n=36)
+        box(0, -.38, .78, 1.70, .24, .12, pale)
+        for x in (-.74, -.45, -.15, .15, .45, .74):
+            cylinder(x, -.46, .46, .038, .64, pale, vertices=18)
+            cylinder(x, -.46, .15, .057, .055, sandstone, vertices=18)
+            box(x, -.46, .80, .096, .12, .055, sandstone)
+        box(0, -.43, .85, 1.84, .36, .08, pale)
+        # Roof-level pediment with an actual triangular sculpted silhouette.
+        geometry("Neoclassical pediment", [
+            (-.91,-.61,.89),(.91,-.61,.89),(0,-.61,1.11),
+            (-.91,-.32,.89),(.91,-.32,.89),(0,-.32,1.11),
+        ],[(0,1,2),(5,4,3),(0,3,4,1),(1,4,5,2),(2,5,3,0)],sandstone)
+        box(0, -.61, .89, 1.90, .038, .045, pale)
+        # Round lantern drum and curved oxidized copper central roof.
+        copper = material("Oxidized civic copper roof", (.34,.53,.48),
+                          roughness=.43, metalness=.43)
+        cylinder(0, .11, 1.11, .37, .34, pale, vertices=48)
+        for i in range(16):
+            a=tau*i/16
+            x,y=.31*math.cos(a),.11+.31*math.sin(a)
+            cylinder(x,y,1.20,.021,.25,sandstone,vertices=12)
+        cylinder(0, .11, 1.30, .42, .08, sandstone, vertices=48)
+        surface_rings("Durban City Hall copper dome", [
+            (.38,.38,0,.11,1.34),(.39,.39,0,.11,1.43),
+            (.36,.36,0,.11,1.53),(.30,.30,0,.11,1.68),
+            (.20,.20,0,.11,1.82),(.07,.07,0,.11,1.90),
+            (.012,.012,0,.11,1.94)], copper, n=64)
+        for i in range(20):
+            a=tau*i/20
+            beam((.38*math.cos(a),.11+.38*math.sin(a),1.39),
+                 (.13*math.cos(a),.11+.13*math.sin(a),1.87),
+                 .006, sandstone)
+        cylinder(0, .11, 1.99, .045, .11, sandstone, vertices=16)
+        cylinder(0, .11, 2.08, .02, .13, warm, top=0, vertices=12)
+        for row in range(4):
+            box(0, -.72-row*.09, .09-row*.021,
+                1.54+row*.09, .18, .047, pale)
 
     elif name == "arch":
         # Women's memorial inspired monument with open stone arch and relief.
@@ -314,27 +354,34 @@ def build(name, box, cylinder, beam, material, add, bpy):
             box(x,-.95,.05,.12,.10,.02,pale)
 
     elif name == "bo-kaap":
-        # Terraced Cape street, real stepped foundations and pitched roof masses.
+        # Authentic flat-roof Cape Malay terrace massing: colourful painted
+        # plaster, stepped parapets and stoops, not alpine pitched rooftops.
         for i,x in enumerate((-.96,-.48,0,.48,.96)):
             ground=.12+.055*(i%3)
-            front=-.39+(i%2)*.07
-            box(x,.17,ground+.40,.43,.79,.80,paint[i])
-            box(x,front-.07,ground+.40,.23,.035,.57,dark)
-            opening(x-.11,front-.10,ground+.59,.14,.21,pale)
-            box(x+.12,front-.105,ground+.22,.12,.035,.38,wood)
-            box(x+.12,front-.13,ground+.23,.010,.016,.03,warm)
-            # Continuous roof planes (not disconnected diagonal sticks),
-            # plus thin gutters and a separate visible roof ridge.
+            box(x, .17, ground+.40, .43, .79, .80, paint[i]).name = "RecessShellBoKaap%d" % i
+            # Flat roof and front parapet, projected plaster eaves and corners.
+            box(x, .17, ground+.835, .46, .82, .060, sandstone)
+            box(x, -.245, ground+.925, .46, .072, .16, paint[i])
+            box(x, -.285, ground+1.018, .49, .075, .025, pale)
             for side in (-1,1):
-                roof = box(x+side*.12,.15,ground+.94,.33,.88,.048,brick)
-                roof.rotation_euler.y = side*.68
-                beam((x+side*.24,-.30,ground+.84),
-                     (x+side*.24,.60,ground+.84),.013,metal)
-            beam((x,-.30,ground+1.047),(x,.60,ground+1.047),.018,brick)
+                box(x+side*.222, .17, ground+.89, .030, .85, .14, paint[i])
+                box(x+side*.227, -.26, ground+.49, .024, .064, .74, pale)
+            # Recessed threshold is separated from the paved sidewalk.
+            box(x+.105, -.26, ground+.055, .20, .095, .08, sandstone)
             for step in range(3):
-                box(x+.12,front-.23-step*.065,
-                    ground-.025-step*.018,.22,.13,.04,pale)
+                box(x+.105, -.34-step*.065,
+                    ground-.025-step*.021, .23, .13, .042, pale)
+            # Distinct shallow shop-house awnings and street furniture.
+            if i in (0,2,4):
+                box(x-.095, -.317, ground+.74, .22, .18, .032, metal)
+                for side in (-1,1):
+                    beam((x-.095+side*.095,-.25,ground+.70),
+                         (x-.095+side*.095,-.40,ground+.74),.008,metal)
         box(0,-.66,.035,2.40,.36,.035,sandstone)
+        for j in range(38):
+            x=-1.16+(j%19)*.13
+            y=-.76+(j//19)*.13
+            box(x,y,.057,.100,.006,.009,pale if j%5 else brick)
         for x in (-1.12,1.12):
             beam((x,-.72,.06),(x,-.72,1.22),.021,metal)
             cylinder(x,-.72,1.29,.08,.15,warm,vertices=12)

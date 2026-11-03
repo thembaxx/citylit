@@ -49,15 +49,15 @@ function vector(pose) {
     .replace(/ aria-hidden="true"/g, "")
     .replace(/var\(--khwezi-spark, #6558F5\)/g, "#6558F5");
 }
-const character = vector("idle"),
-  body = character.replace(/^<svg[^>]*>/, "").replace(/<\/svg>$/, "");
+const character = vector("idle");
 await writeFile(new URL("khwezi.svg", directory), character);
 const offline = vector("offline").replace(
   '<g class="khwezi-eyes">',
   '<g class="khwezi-eyes" transform="translate(0 94) scale(1 .14)">',
 );
 await writeFile(new URL("khwezi-offline.svg", directory), offline);
-const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><rect width="128" height="128" rx="28" fill="#091323"/><svg x="16" y="10" width="96" height="108" fill="none" viewBox="34 8 108 137">${body}</svg></svg>`;
+const iconArtwork = `<path d="M64 16 78.6 49.4 112 64 78.6 78.6 64 112 49.4 78.6 16 64 49.4 49.4Z" fill="#F3C975"/><path d="M64 35 73.5 64 64 93 54.5 64Z" fill="#6558F5"/><circle cx="64" cy="64" r="10" fill="#FFF8E8"/>`;
+const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><rect width="128" height="128" rx="28" fill="#17243C"/>${iconArtwork}</svg>`;
 await writeFile(new URL("../app-icon.svg", directory), icon);
 for (const [file, size] of [
   ["favicon-16", 16],
@@ -70,21 +70,19 @@ for (const [file, size] of [
     .resize(size, size)
     .png()
     .toFile(fileURLToPath(new URL(`${file}.png`, directory)));
-const maskable = icon
-  .replace('rx="28"', 'rx="0"')
-  .replace('x="16" y="10" width="96" height="108"', 'x="25" y="23" width="78" height="84"');
+const maskable = `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><rect width="128" height="128" fill="#17243C"/><g transform="translate(25 25) scale(0.61)">${iconArtwork}</g></svg>`;
 await sharp(Buffer.from(maskable))
   .resize(512, 512)
   .png()
   .toFile(fileURLToPath(new URL("app-icon-maskable.png", directory)));
-const wordmark = `<svg xmlns="http://www.w3.org/2000/svg" width="440" height="140" viewBox="0 0 440 140"><style>@media(prefers-color-scheme:dark){text{fill:#F3EFE3}}</style><text x="10" y="108" font-family="DM Sans, sans-serif" font-size="110" font-weight="700" letter-spacing="-6" fill="#17243C">cıtylit</text><path d="m95 20 8 8-8 8-8-8Z" fill="#6558F5"/></svg>`;
+const wordmark = `<svg xmlns="http://www.w3.org/2000/svg" width="440" height="140" viewBox="0 0 440 140"><rect x="6" y="29" width="88" height="88" rx="29" fill="#17243C"/><path d="M50 42 61 67 86 78 61 89 50 114 39 89 14 78 39 67Z" fill="#F3C975"/><path d="M50 57 58 78 50 99 42 78Z" fill="#6558F5"/><circle cx="50" cy="78" r="7" fill="#FFF8E8"/><style>@media(prefers-color-scheme:dark){text{fill:#F3EFE3}}</style><text x="109" y="101" font-family="Manrope, sans-serif" font-size="85" font-weight="700" letter-spacing="-6" fill="#17243C">citylit</text></svg>`;
 await writeFile(new URL("wordmark.svg", directory), wordmark);
 const embedded = (svg, x, y, width, height) =>
   svg.replace(
     /^<svg[^>]*>/,
     `<svg x="${x}" y="${y}" width="${width}" height="${height}" viewBox="0 0 180 200" fill="none">`,
   );
-const social = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#091323"/><circle cx="940" cy="335" r="240" fill="#1C2845"/><text x="70" y="110" fill="#F3EFE3" font-family="sans-serif" font-size="44" font-weight="700">cıtylit</text><path d="m100 72 5 5-5 5-5-5Z" fill="#998BFF"/><text x="70" y="272" fill="#F3EFE3" font-family="sans-serif" font-size="79" font-weight="800" textLength="625" lengthAdjust="spacingAndGlyphs">EVERY CITY</text><text x="70" y="363" fill="#F3EFE3" font-family="sans-serif" font-size="79" font-weight="800" textLength="625" lengthAdjust="spacingAndGlyphs">HAS A SPARK.</text><text x="73" y="443" fill="#BBC3D5" font-family="sans-serif" font-size="25">Follow a little curiosity.</text><text x="73" y="559" fill="#BBC3D5" font-family="monospace" font-size="17">SOUTH AFRICA / LITTLE ADVENTURES / CITYLIT</text>${embedded(vector("welcome"), 765, 80, 345, 450)}</svg>`;
+const social = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#091323"/><circle cx="940" cy="335" r="240" fill="#1C2845"/><g transform="translate(48 34) scale(.53)">${iconArtwork}</g><text x="135" y="110" fill="#F3EFE3" font-family="sans-serif" font-size="44" font-weight="700">citylit</text><path d="m100 72 5 5-5 5-5-5Z" fill="#998BFF"/><text x="70" y="272" fill="#F3EFE3" font-family="sans-serif" font-size="79" font-weight="800" textLength="625" lengthAdjust="spacingAndGlyphs">EVERY CITY</text><text x="70" y="363" fill="#F3EFE3" font-family="sans-serif" font-size="79" font-weight="800" textLength="625" lengthAdjust="spacingAndGlyphs">HAS A SPARK.</text><text x="73" y="443" fill="#BBC3D5" font-family="sans-serif" font-size="25">Follow a little curiosity.</text><text x="73" y="559" fill="#BBC3D5" font-family="monospace" font-size="17">SOUTH AFRICA / LITTLE ADVENTURES / CITYLIT</text>${embedded(vector("welcome"), 765, 80, 345, 450)}</svg>`;
 await writeFile(new URL("social-card.svg", directory), social);
 await sharp(Buffer.from(social))
   .png()

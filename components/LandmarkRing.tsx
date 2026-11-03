@@ -347,39 +347,53 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
-      <StudioEnvironment intensity={night ? 0.1 : 0.32} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.14 : 0.18]} />
-      <ambientLight intensity={night ? 0.045 : 0.045} />
+      <StudioEnvironment intensity={night ? 0.15 : 0.42} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.15 : 0.24]} />
+      <ambientLight intensity={night ? 0.08 : 0.09} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.28 : 1.03}
+        intensity={night ? 0.4 : 1.45}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={size.width < 760 ? 1024 : 2048}
+        shadow-mapSize-height={size.width < 760 ? 1024 : 2048}
         shadow-camera-left={-9}
         shadow-camera-right={9}
         shadow-camera-top={9}
         shadow-camera-bottom={-9}
         shadow-bias={-0.00025}
-        shadow-normalBias={0.014}
+        shadow-normalBias={0.025}
       />
       <directionalLight
         position={[-4, 3, -2]}
-        intensity={night ? 0.1 : 0.27}
+        intensity={night ? 0.16 : 0.34}
         color={night ? "#99b4db" : "#ffa968"}
       />
-      <directionalLight
-        position={[1, 5, -6]}
-        intensity={night ? 0.04 : 0.13}
-        color={night ? "#a4c1e8" : "#e7f3ff"}
+      <pointLight
+        position={[1.8, 2.5, 3.4]}
+        intensity={night ? 0.9 : 0.12}
+        distance={9}
+        color="#ffe3be"
       />
-      <group position={[size.width > size.height ? 1.52 : 0.04, 0, 0]}>
+      <group
+        position={[
+          size.width > size.height ? 1.52 : size.width < 360 ? -0.18 : 0.04,
+          size.width < 760 && !items[selected]?.name.toLowerCase().includes("mcgregor museum")
+            ? 0.12
+            : 0,
+          0,
+        ]}
+      >
         <group ref={ring}>
           {items.map((item, index) => (
             <group
               key={item.name}
-              visible={showContext || index === selected}
+              visible={
+                index === selected ||
+                (showContext &&
+                  (index === (selected + 1) % items.length ||
+                    index === (selected - 1 + items.length) % items.length))
+              }
               position={positions[index]}
               rotation={[
                 0,
@@ -395,7 +409,9 @@ function Ring({
                         ? 0.77
                         : 0.72
                       : size.width < 760
-                        ? 0.9
+                        ? size.width < 360
+                          ? 0.96
+                          : 1.04
                         : 1.24) * zoom
                   : 0.55
               }
@@ -405,30 +421,33 @@ function Ring({
               }}
             >
               {/* high-detail museum shares the same canvas and scene budget */}
-              {(showContext || index === selected) && (
-                <RotatingMiniature selected={index === selected} spin={spin} reduced={reduced}>
-                  {item.name.toLowerCase().includes("mcgregor museum") ? (
-                    <MuseumHeroAsset
-                      night={night}
-                      exploded={index === selected && exploded}
-                      feature={index === selected ? feature : "architecture"}
-                      reduced={reduced}
-                      onFeature={index === selected ? onFeature : undefined}
-                    />
-                  ) : (
+              <RotatingMiniature selected={index === selected} spin={spin} reduced={reduced}>
+                {item.name.toLowerCase().includes("mcgregor museum") ? (
+                  <MuseumHeroAsset
+                    night={night}
+                    exploded={index === selected && exploded}
+                    feature={index === selected ? feature : "architecture"}
+                    reduced={reduced}
+                    onFeature={index === selected ? onFeature : undefined}
+                  />
+                ) : (
+                  (index === selected ||
+                    (showContext &&
+                      (index === (selected + 1) % items.length ||
+                        index === (selected - 1 + items.length) % items.length))) && (
                     <SafeStageModel
                       model={item.model}
                       active={index === selected}
                       onStatus={onModelStatus}
                     />
+                  )
+                )}
+                {showContext &&
+                  index === selected &&
+                  !item.name.toLowerCase().includes("mcgregor museum") && (
+                    <MiniatureStreet compact={size.width < 760} />
                   )}
-                  {showContext &&
-                    index === selected &&
-                    !item.name.toLowerCase().includes("mcgregor museum") && (
-                      <MiniatureStreet compact={size.width < 760} />
-                    )}
-                </RotatingMiniature>
-              )}
+              </RotatingMiniature>
             </group>
           ))}
           {showContext && route.length > 1 && (
@@ -505,6 +524,8 @@ export default function LandmarkRing({
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {
         if (event.button === 0) {
+          // Capture immediately so dragging continues across scene overlays.
+          event.currentTarget.setPointerCapture(event.pointerId);
           drag.current = { x: event.clientX, y: event.clientY, angle: angle.current };
           moved.current = false;
         }
@@ -521,13 +542,20 @@ export default function LandmarkRing({
           redraw();
         }
       }}
-      onPointerUp={() => {
+      onPointerUp={(event) => {
         if (!drag.current) return;
+        const travel = event.clientX - drag.current.x;
         drag.current = null;
         dragging.current = false;
-        if (moved.current) {
+        if (moved.current && items.length > 1) {
           const snapped = Math.round((-angle.current / (Math.PI * 2)) * items.length);
-          onSelect(((snapped % items.length) + items.length) % items.length);
+          const nearest = ((snapped % items.length) + items.length) % items.length;
+          // Do not snap a deliberate short swipe back to its starting item.
+          const next =
+            nearest === selected && Math.abs(travel) > 24
+              ? (selected + (travel > 0 ? items.length - 1 : 1)) % items.length
+              : nearest;
+          onSelect(next);
           setSettle((value) => value + 1);
         }
       }}

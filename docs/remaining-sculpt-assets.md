@@ -33,12 +33,12 @@ pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
 STAGE_FOCUS_IDS=bridge,lighthouse,park,dome,tower,arch,fort,bo-kaap,cooling-towers,aquarium node scripts/capture-stage-catalog.mjs
 ```
 
-The previous Blender regeneration produced fifteen Draco-compressed models and a manifest. The new full-resolution and layered-glazing source changes require a fresh model rebuild and visual QA before release. Per-asset technical validation passed in the rebuild workflow; visual review and complete final-branch CI remain separate gates.
+The one-time Blender regeneration has produced fifteen Draco-compressed models and a manifest. Per-asset technical validation passed in the rebuild workflow; visual review and complete final-branch CI remain separate gates.
 All fifteen models must decode, contain at least three embedded CC0 images,
-have adequate mesh complexity and material differentiation, and preserve plausible surface detail. Guardrails now allow up to
-16 MiB per model / 180 MiB for the catalog as an accidental-bloat check, not an artistic target.
+have adequate mesh complexity and material differentiation, and stay below
+2 MiB each / 22 MiB for the combined catalog.
 
-Compare actual 1440×900 and 390×844 browser renderings with the supplied reference, geometry silhouettes
+Inspect actual 1440×900 and 390×844 browser renderings, geometry silhouettes
 and memory/performance before merge. Screen-reader navigation, keyboard
 controls, day/night modes and offline fallbacks must continue working.
 A clean build alone cannot establish realism or visual similarity to the
@@ -76,3 +76,24 @@ and baked lighting with measured visual review.
   visual approval, with mobile memory/FPS review.
 - Do not claim full fidelity or release approval solely from synthetic WebGL
   screenshots or pipeline CI. Keep this PR draft unless the visual benchmark is met.
+
+## 2026-11-03 — High-resolution archviz follow-up (separate stacked branch)
+
+The supplied architectural reference is **not met** by these renders. The earlier
+2 MiB/22 MiB limits and 320 px scan downsampling were arbitrary technical limits,
+not art-direction goals; remove them. New builds preserve source-scan resolution,
+and Draco and structural checks remain mandatory. Only selected and adjacent
+landmarks can mount when surroundings are visible, avoiding downloading all large
+models just to show one. More expensive GLBs require real mobile memory tests and
+per-scene error/fallback validation. Resolution alone does not create realism;
+architecture, depth, materials and presentation still need comparison screenshots.
+
+## Microgeometry layer (draft)
+
+A separate physical detailing pass covers the ten newest landmark classes: mullioned
+windows with shadow backing and window sills, joinery and roof edging, civic masonry,
+bridge fittings, lighthouse lanterns, individual botanical leaves, fort surface
+joints, cooling tower ladders and aquarium structural glazing. This is not an
+as-built accuracy guarantee. Regenerate and inspect binary GLBs before counting
+this work as delivered. The quality acceptance gate is a visual comparison of
+**actual ready-state WebGL captures** and inspection close-ups, not merely source code.

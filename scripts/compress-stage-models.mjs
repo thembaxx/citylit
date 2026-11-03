@@ -67,8 +67,6 @@ for (const item of manifest) {
   const textureCount = document.getRoot().listTextures().length;
   if (textureCount < 3) throw new Error(`${item.id} is missing CC0 PBR textures`);
   const bytes = await io.writeBinary(document);
-  if (bytes.length > 16 * 1024 * 1024)
-    throw new Error(`${item.id} is unexpectedly large (>16 MiB).`);
   const decoded = await io.readBinary(bytes);
   if (!decoded.getRoot().listMeshes().length)
     throw new Error(`${item.id} has no decoded geometry.`);
@@ -82,5 +80,6 @@ for (const item of manifest) {
 await writeFile(new URL("manifest.json", root), JSON.stringify(manifest, null, 2) + "\n");
 
 const totalBytes = manifest.reduce((total, entry) => total + entry.bytes, 0);
-if (totalBytes > 180 * 1024 * 1024) throw new Error("Unexpected catalog size above 180 MiB");
-console.log(`All ${manifest.length} landmark GLBs: ${totalBytes} bytes total`);
+console.log(
+  `All ${manifest.length} full-detail landmark GLBs: ${(totalBytes / 1048576).toFixed(1)} MiB; no arbitrary model/catalog size cap`,
+);

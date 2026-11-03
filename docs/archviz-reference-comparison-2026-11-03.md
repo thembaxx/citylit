@@ -1,6 +1,6 @@
 # CityLit architectural reference comparison — 3 November 2026
 
-## Reference and decision
+> Historical QA snapshot of PR #57, before the later model refinements on `main`. The 34.4 MB figure and staged-model descriptions refer to that earlier build; they are not the current production asset totals. Its unaccepted visual-parity verdict still applies. During conflict reconciliation, newer main-branch GLBs, component code, and build scripts were intentionally retained instead of replacing them with earlier versions.\n\n## Reference and decision
 
 The owner's supplied Iconly Skyline Tower visual establishes the target: an isometric architectural model with carefully recessed facades, realistic transparent glazing and interiors, layered structural elements, detailed roof equipment, calibrated white materials and soft global illumination. This is a **visual-quality reference**, not an asset to copy into CityLit.
 

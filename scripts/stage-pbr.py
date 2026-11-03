@@ -1,7 +1,7 @@
 """Portable PBR material treatment for CityLit's authored Blender landmark assets.
 
 Uses the same build-time CC0 ambientCG scans as McGregor Museum.
-Source-resolution textures are embedded into each self-contained GLB.
+Source-resolution CC0 maps are embedded into the self-contained GLBs.
 Architectural geometry remains landmark-specific, not a generic building clone.
 """
 from pathlib import Path
@@ -20,6 +20,10 @@ IMAGE_CACHE = {}
 
 def surface_category(material_name):
     name = material_name.lower()
+    # The bespoke leaf laminae use locally authored rough, coloured geometry.
+    # Applying tiled lawn albedo to thin leaves makes them look like plastic.
+    if "botanical lamina" in name or "botanical garden grass blades" in name:
+        return None
     if "water" in name or "glass" in name or "glazing" in name or "recess" in name:
         return None
     if "bronze" in name or "amber" in name or "metal" in name:
@@ -49,7 +53,7 @@ def texture(category, channel):
         raise RuntimeError("Missing CC0 PBR texture: %s %s" % (category, channel))
     image = bpy.data.images.load(str(matches[0]), check_existing=True)
     image.name = "CityLit CC0 %s %s" % key
-    # Use the original source scan resolution; preserve sRGB vs linear texture channels.
+    # Preserve original available map resolution for material close-ups.
     image.colorspace_settings.name = "sRGB" if channel == "Color" else "Non-Color"
     image.pack()
     IMAGE_CACHE[key] = image
@@ -69,24 +73,20 @@ def apply_material(mat):
     if not bsdf:
         return
     tint = tuple(mat.diffuse_color[:3]) + (1,)
-    # Coloured houses and cooling-tower murals are painted surfaces. Applying
-    # stone albedo to them washes out their authored palette. Retain paint
-    # colour but still use rights-cleared scanned normal/roughness variation.
-    if "painted" not in mat.name.lower():
-        tex = tree.nodes.new("ShaderNodeTexImage")
-        tex.label = "CC0 %s source-resolution albedo" % category
-        tex.image = texture(category, "Color")
-        tint_mix = tree.nodes.new("ShaderNodeMixRGB")
-        tint_mix.blend_type = "MULTIPLY"
-        tint_mix.inputs["Fac"].default_value = CATEGORIES[category][1]
-        tint_mix.inputs["Color1"].default_value = tint
-        tree.links.new(tex.outputs["Color"], tint_mix.inputs["Color2"])
-        tree.links.new(tint_mix.outputs["Color"], bsdf.inputs["Base Color"])
+    tex = tree.nodes.new("ShaderNodeTexImage")
+    tex.label = "CC0 %s full-resolution albedo" % category
+    tex.image = texture(category, "Color")
+    tint_mix = tree.nodes.new("ShaderNodeMixRGB")
+    tint_mix.blend_type = "MULTIPLY"
+    tint_mix.inputs["Fac"].default_value = CATEGORIES[category][1]
+    tint_mix.inputs["Color1"].default_value = tint
+    tree.links.new(tex.outputs["Color"], tint_mix.inputs["Color2"])
+    tree.links.new(tint_mix.outputs["Color"], bsdf.inputs["Base Color"])
 
     normal = tree.nodes.new("ShaderNodeTexImage")
     normal.image = texture(category, "NormalGL")
     bump = tree.nodes.new("ShaderNodeNormalMap")
-    bump.inputs["Strength"].default_value = .20 if category == "grass" else .40
+    bump.inputs["Strength"].default_value = .32 if category == "grass" else .56
     tree.links.new(normal.outputs["Color"], bump.inputs["Color"])
     tree.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
     roughness = tree.nodes.new("ShaderNodeTexImage")
@@ -111,7 +111,7 @@ def uv_project(obj):
                 uv = (vertex.x, vertex.z)
             else:
                 uv = (vertex.y, vertex.z)
-            layer.data[corner].uv = (uv[0] / .65, uv[1] / .65)
+            layer.data[corner].uv = (uv[0] / .48, uv[1] / .48)
 
 
 def prepare_scene_for_export():

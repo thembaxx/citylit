@@ -796,7 +796,7 @@
                 "source": "commons-desc-page"
               },
               "Artist": {
-                "value": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:JMK\" title=\"User:JMK\">JMK</a>",
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:JMK\" title=\"User:JMK\">JMK</a>",
                 "source": "commons-desc-page"
               },
               "LicenseShortName": {
@@ -1423,15 +1423,15 @@
                 "source": "commons-desc-page"
               },
               "DateTimeOriginal": {
-                "value": "Taken on<span typeof=\"mw:Entity\"> </span>19 February 2025, 16:04<link rel=\"mw:PageProp/Category\" href=\"./Category:South_Africa_photographs_taken_on_2025-02-19\">",
+                "value": "Taken on 19 February 2025, 16:04",
                 "source": "commons-desc-page"
               },
               "Credit": {
-                "value": "<a rel=\"mw:ExtLink nofollow\" href=\"https://www.flickr.com/photos/dennissylvesterhurd/54338049100/\" class=\"external text\">Durban from the Balcony</a>",
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/dennissylvesterhurd/54338049100/\">Durban from the Balcony</a>",
                 "source": "commons-desc-page"
               },
               "Artist": {
-                "value": "<a rel=\"mw:ExtLink nofollow\" href=\"https://www.flickr.com/people/43296902@N00\" class=\"external text\">Dennis Sylvester Hurd</a>",
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/43296902@N00\">Dennis Sylvester Hurd</a>",
                 "source": "commons-desc-page"
               },
               "LicenseShortName": {
@@ -1525,11 +1525,11 @@
                 "source": "commons-desc-page"
               },
               "Credit": {
-                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span><br>Transferred from <a rel=\"mw:ExtLink\" href=\"https://lb.wikipedia.org\" class=\"external text\" data-mw-original-href=\"http://lb.wikipedia.org\">lb.wikipedia</a>",
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span><br>Transferred from <a class=\"external text\" data-mw-original-href=\"http://lb.wikipedia.org\" href=\"https://lb.wikipedia.org\">lb.wikipedia</a>",
                 "source": "commons-desc-page"
               },
               "Artist": {
-                "value": "<a rel=\"mw:WikiLink/Interwiki\" href=\"https://lb.wikipedia.org/wiki/User:Ernmuhl\" title=\"lb:User:Ernmuhl\" class=\"extiw\">Ernmuhl</a> at <a rel=\"mw:ExtLink\" href=\"https://lb.wikipedia.org\" class=\"external text\" data-mw-original-href=\"http://lb.wikipedia.org\">lb.wikipedia</a>",
+                "value": "<a href=\"https://lb.wikipedia.org/wiki/User:Ernmuhl\" class=\"extiw\" title=\"lb:User:Ernmuhl\">Ernmuhl</a> at <a class=\"external text\" data-mw-original-href=\"http://lb.wikipedia.org\" href=\"https://lb.wikipedia.org\">lb.wikipedia</a>",
                 "source": "commons-desc-page"
               },
               "LicenseShortName": {
@@ -1547,7 +1547,7 @@
                 "hidden": ""
               },
               "Attribution": {
-                "value": "<a rel=\"mw:WikiLink/Interwiki\" href=\"https://lb.wikipedia.org/wiki/User:Ernmuhl\" title=\"lb:User:Ernmuhl\" class=\"extiw\">Ernmuhl</a> at <a rel=\"mw:ExtLink\" href=\"https://lb.wikipedia.org\" class=\"external text\" data-mw-original-href=\"http://lb.wikipedia.org\">lb.wikipedia</a>",
+                "value": "<a href=\"https://lb.wikipedia.org/wiki/User:Ernmuhl\" class=\"extiw\" title=\"lb:User:Ernmuhl\">Ernmuhl</a> at <a class=\"external text\" data-mw-original-href=\"http://lb.wikipedia.org\" href=\"https://lb.wikipedia.org\">lb.wikipedia</a>",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -2297,7 +2297,7 @@
                 "source": "commons-desc-page"
               },
               "Artist": {
-                "value": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Blastworlddbn?action=edit&amp;redlink=1\" title=\"User:Blastworlddbn (page does not exist)\" class=\"new\" typeof=\"mw:LocalizedAttrs\" data-mw-i18n='{\"title\":{\"lang\":\"x-page\",\"key\":\"red-link-title\",\"params\":[\"User:Blastworlddbn\"]}}'>Blastworlddbn</a>",
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Blastworlddbn&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Blastworlddbn (page does not exist)\">Blastworlddbn</a>",
                 "source": "commons-desc-page"
               },
               "LicenseShortName": {
@@ -3128,7 +3128,7 @@
                 "source": "commons-desc-page"
               },
               "Credit": {
-                "value": "<span class=\"int-own-work\" lang=\"\">Own work by the original uploader</span>",
+                "value": "<span class=\"int-own-work\" lang=\"\">own work by the original uploader</span>",
                 "source": "commons-desc-page"
               },
               "Artist": {
@@ -4552,7 +4552,7 @@
                 "source": "commons-desc-page"
               },
               "Credit": {
-                "value": "This is an image from the <a href=\"//commons.wikimedia.org/wiki/Commons:Atlas_of_Mutual_Heritage\" title=\"Commons:Atlas of Mutual Heritage\">Atlas of Mutual Heritage</a> and the <a rel=\"nofollow\" class=\"external text\" href=\"https://www.nationaalarchief.nl/en\">Nationaal Archief</a>, the Dutch National Archives.<br>\n<p><small>The metadata of this file is public domain under a Creative Commons Public Domain Dedication (CC-ZERO). This permission has been archived as ticket #<a class=\"external text\" href=\"https://ticket.wikimedia.org/otrs/index.pl?Action=AgentTicketZoom&amp;TicketNumber=2014051410008887\">2014051410008887</a></small> \n</p>",
+                "value": "This is an image from the <a href=\"//commons.wikimedia.org/wiki/Commons:Atlas_of_Mutual_Heritage\" title=\"Commons:Atlas of Mutual Heritage\">Atlas of Mutual Heritage</a> and the <a rel=\"nofollow\" class=\"external text\" href=\"https://www.nationaalarchief.nl/en\">Nationaal Archief</a>, the Dutch National Archives.<br>\n<small>The metadata of this file is public domain under a Creative Commons Public Domain Dedication (CC-ZERO). This permission has been archived as ticket #<a class=\"external text\" href=\"https://ticket.wikimedia.org/otrs/index.pl?Action=AgentTicketZoom&amp;TicketNumber=2014051410008887\">2014051410008887</a></small>",
                 "source": "commons-desc-page"
               },
               "LicenseShortName": {

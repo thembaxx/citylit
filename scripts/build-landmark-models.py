@@ -28,6 +28,21 @@ remaining_spec = importlib.util.spec_from_file_location(
 )
 remaining = importlib.util.module_from_spec(remaining_spec)
 remaining_spec.loader.exec_module(remaining)
+premium_spec = importlib.util.spec_from_file_location(
+    "architectural_detail", ROOT / "scripts/architectural-detail-pass.py"
+)
+premium = importlib.util.module_from_spec(premium_spec)
+premium_spec.loader.exec_module(premium)
+depth_spec = importlib.util.spec_from_file_location(
+    "window_depth", ROOT / "scripts/recessed-architecture.py"
+)
+window_depth = importlib.util.module_from_spec(depth_spec)
+depth_spec.loader.exec_module(window_depth)
+botany_spec = importlib.util.spec_from_file_location(
+    "botanical_fidelity", ROOT / "scripts/botanical-fidelity.py"
+)
+botany = importlib.util.module_from_spec(botany_spec)
+botany_spec.loader.exec_module(botany)
 MATERIALS = {}
 
 
@@ -63,12 +78,12 @@ def add(operator, location, scale=None, mat=STONE, **kwargs):
 
 def box(x, y, z, sx, sy, sz, mat=STONE):
     obj = add(bpy.ops.mesh.primitive_cube_add, (x, y, z), (sx, sy, sz), mat, size=1)
-    # Bevel only large architectural masses. Thin mouldings, windows and cables
-    # stay sharp, keeping the exported Draco file and draw-call budget bounded.
-    if min(sx, sy, sz) > .22:
+    # Give structural edges small physical highlights, without rounding mullions.
+    # Detail and shading quality, not Draco output size, determine the geometry.
+    if min(sx, sy, sz) > .09:
         bevel = obj.modifiers.new("Architectural edge highlights", "BEVEL")
-        bevel.width = min(sx, sy, sz) * .045
-        bevel.segments = 2
+        bevel.width = min(.018, min(sx, sy, sz) * .042)
+        bevel.segments = 3
         bpy.context.view_layer.objects.active = obj
         bpy.ops.object.modifier_apply(modifier=bevel.name)
     return obj
@@ -87,20 +102,21 @@ def beam(a, b, radius=0.025, mat=AMBER):
 
 
 def base(name):
-    # Organic terrain models retain the rounded diorama footprint. Built
-    # architecture sits on a restrained, low-profile porcelain display slab
-    # with bevelled edges instead of the old orange toy-platform rings.
+    # Architecture belongs on a neutral exhibition plinth, not an orange
+    # toy podium. Landscapes retain an understated circular terrain base.
     if name in {"table-mountain", "hole", "park"}:
-        cylinder(0, 0, -0.10, 1.35, 0.12, LIGHT, vertices=64)
+        cylinder(0, 0, -0.105, 1.35, 0.13, LIGHT, vertices=72)
         return
-    porcelain = material("Studio porcelain plinth", (.87, .86, .83), roughness=.79)
-    slab = box(0, 0, -0.12, 2.78, 2.16, .13, porcelain)
-    bevel = slab.modifiers.new("Polished architectural plinth edge", "BEVEL")
-    bevel.width = .035
-    bevel.segments = 3
+    porcelain = material("Architectural porcelain base", (.89, .88, .85), roughness=.75)
+    slab = add(bpy.ops.mesh.primitive_cube_add, (0, 0, -.12),
+               (2.76, 2.13, .13), porcelain, size=1)
+    slab.name = "Porcelain display plinth"
+    bevel = slab.modifiers.new("Rounded architectural platform rim", "BEVEL")
+    bevel.width = .032
+    bevel.segments = 4
     bpy.context.view_layer.objects.active = slab
     bpy.ops.object.modifier_apply(modifier=bevel.name)
-    box(0, 0, -.044, 2.70, 2.08, .025, porcelain)
+    box(0, 0, -.042, 2.67, 2.04, .055, porcelain)
 
 
 def park():
@@ -293,6 +309,14 @@ for name, build in BUILDERS.items():
     else:
         build()
         details.decorate(name, box, cylinder, beam, material, add, bpy)
+    # Preserve landmark-specific topology; add independent physical micro-geometry.
+    if name in remaining.SUPPORTED:
+        premium.build(name, box, cylinder, beam, material, add, bpy)
+    # Boolean cutouts must happen before geometry is joined, after builders
+    # have created the separate facade shells and their decorative joinery.
+    window_depth.build(name, box, material, bpy)
+    # Single batched mesh of actual curved foliage and fine native groundcover.
+    botany.build(name, beam, material, bpy)
     stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.
@@ -314,4 +338,4 @@ for name, build in BUILDERS.items():
                          else "Original architectural/landscape miniature, not a site survey"
                      )})
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to finalize and verify the size budget.")
+print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to embed Draco and audit high-fidelity geometry.")

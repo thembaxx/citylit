@@ -2,7 +2,7 @@
   {
     "id": "table-mountain",
     "src": "/models/stage/table-mountain.glb",
-    "bytes": 2461024,
+    "bytes": 2462112,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -13,7 +13,7 @@
   {
     "id": "stadium",
     "src": "/models/stage/stadium.glb",
-    "bytes": 2480460,
+    "bytes": 2480724,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -24,18 +24,18 @@
   {
     "id": "union-buildings",
     "src": "/models/stage/union-buildings.glb",
-    "bytes": 899592,
+    "bytes": 1566676,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
     "compression": "KHR_draco_mesh_compression",
-    "textureCount": 3,
+    "textureCount": 6,
     "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "ponte",
     "src": "/models/stage/ponte.glb",
-    "bytes": 957912,
+    "bytes": 1097004,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -46,7 +46,7 @@
   {
     "id": "bridge",
     "src": "/models/stage/bridge.glb",
-    "bytes": 886440,
+    "bytes": 901768,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -57,7 +57,7 @@
   {
     "id": "lighthouse",
     "src": "/models/stage/lighthouse.glb",
-    "bytes": 1865620,
+    "bytes": 1875484,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -68,7 +68,7 @@
   {
     "id": "hole",
     "src": "/models/stage/hole.glb",
-    "bytes": 902908,
+    "bytes": 903776,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -79,7 +79,7 @@
   {
     "id": "park",
     "src": "/models/stage/park.glb",
-    "bytes": 3120808,
+    "bytes": 3516528,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -90,7 +90,7 @@
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 4069800,
+    "bytes": 4101264,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -101,7 +101,7 @@
   {
     "id": "tower",
     "src": "/models/stage/tower.glb",
-    "bytes": 1850052,
+    "bytes": 1584552,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -112,7 +112,7 @@
   {
     "id": "arch",
     "src": "/models/stage/arch.glb",
-    "bytes": 2490248,
+    "bytes": 2503452,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -123,7 +123,7 @@
   {
     "id": "fort",
     "src": "/models/stage/fort.glb",
-    "bytes": 4052124,
+    "bytes": 4075560,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -134,7 +134,7 @@
   {
     "id": "bo-kaap",
     "src": "/models/stage/bo-kaap.glb",
-    "bytes": 2506616,
+    "bytes": 2541980,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -145,18 +145,18 @@
   {
     "id": "cooling-towers",
     "src": "/models/stage/cooling-towers.glb",
-    "bytes": 1763552,
+    "bytes": 1938116,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
     "compression": "KHR_draco_mesh_compression",
-    "textureCount": 5,
+    "textureCount": 6,
     "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "aquarium",
     "src": "/models/stage/aquarium.glb",
-    "bytes": 4073840,
+    "bytes": 4088484,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",

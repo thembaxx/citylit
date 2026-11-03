@@ -1,14 +1,37 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 type TreeDetail = "hero" | "compact";
 
+/** A curved midrib and tapered, non-planar leaf instead of a faceted canopy blob. */
+function buildLeafLamina(): THREE.BufferGeometry {
+  const points: number[] = [];
+  const triangles: number[] = [];
+  const segments = 6;
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const y = (t - 0.5) * 0.32;
+    const width = Math.pow(Math.sin(Math.PI * t), 0.85) * 0.095;
+    const bend = Math.sin(Math.PI * t) * 0.038 + Math.sin(t * Math.PI * 2) * 0.012;
+    points.push(-width, y, bend, 0, y, bend + 0.014, width, y, bend);
+    if (i === segments) continue;
+    const k = i * 3;
+    triangles.push(k, k + 3, k + 1, k + 1, k + 3, k + 4);
+    triangles.push(k + 1, k + 4, k + 2, k + 2, k + 4, k + 5);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(points, 3));
+  geometry.setIndex(triangles);
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
 /**
- * Deterministic, texture-free foliage. One instanced draw for all leaf clusters
- * per tree, instead of a separate mesh/material for every leaf.
+ * Deterministic, texture-free curved leaves. Each tree keeps a single
+ * instanced foliage draw call instead of hundreds of independent meshes.
  */
 export default function ProceduralTree({
   position = [0, 0, 0],
@@ -25,7 +48,8 @@ export default function ProceduralTree({
 }) {
   const leaves = useRef<THREE.InstancedMesh>(null);
   const { invalidate } = useThree();
-  const count = detail === "hero" ? 108 : 48;
+  const count = detail === "hero" ? 224 : 96;
+  const lamina = useMemo(buildLeafLamina, []);
 
   useLayoutEffect(() => {
     const mesh = leaves.current;
@@ -37,12 +61,16 @@ export default function ProceduralTree({
     for (let i = 0; i < count; i++) {
       const t = (i + 0.5) / count;
       const theta = i * 2.399963229728653 + seed * 0.83;
-      const spread = Math.sqrt(t) * (0.32 + 0.12 * Math.sin(i * 1.7 + seed));
-      const height = 0.71 + 0.6 * (1 - Math.abs(2 * t - 1)) + 0.15 * Math.sin(i * 1.13 + seed);
+      const spread = Math.sqrt(t) * (0.28 + 0.11 * Math.sin(i * 1.7 + seed));
+      const height = 0.76 + 0.5 * (1 - Math.abs(2 * t - 1)) + 0.13 * Math.sin(i * 1.13 + seed);
       dummy.position.set(Math.cos(theta) * spread, height, Math.sin(theta) * spread);
-      dummy.rotation.set(i * 1.23, theta, i * 0.57);
-      const variation = 0.8 + 0.3 * (0.5 + 0.5 * Math.sin(i * 2.91 + seed));
-      dummy.scale.set(variation * 0.68, variation * 0.39, variation * 0.94);
+      dummy.rotation.set(
+        0.2 * Math.sin(i * 1.43 + seed),
+        theta + Math.sin(i * 0.83) * 0.22,
+        -0.32 + Math.sin(i * 2.17 + seed) * 0.4,
+      );
+      const variation = 0.78 + 0.42 * (0.5 + 0.5 * Math.sin(i * 2.91 + seed));
+      dummy.scale.set(variation, variation * 0.87, variation);
       dummy.updateMatrix();
       mesh.setMatrixAt(i, dummy.matrix);
       const tint = base.clone();
@@ -73,9 +101,13 @@ export default function ProceduralTree({
           <meshStandardMaterial color="#846446" roughness={1} />
         </mesh>
       ))}
-      <instancedMesh ref={leaves} args={[undefined, undefined, count]} castShadow frustumCulled>
-        <icosahedronGeometry args={[0.12, 1]} />
-        <meshStandardMaterial color="#ffffff" roughness={0.94} />
+      <instancedMesh
+        ref={leaves}
+        args={[lamina, undefined, count]}
+        castShadow={detail === "hero"}
+        frustumCulled
+      >
+        <meshStandardMaterial color="#ffffff" roughness={0.9} side={THREE.DoubleSide} />
       </instancedMesh>
     </group>
   );

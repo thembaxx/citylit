@@ -12,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
-    "build": "node scripts/export-ui-icons.mjs && node scripts/build-pwa.mjs && next build",
+    "build": "node scripts/export-brand-assets.mjs && node scripts/export-ui-icons.mjs && node scripts/build-pwa.mjs && next build",
     "start": "next start --hostname 0.0.0.0",
     "lint": "oxlint app components lib tests next.config.ts proxy.ts playwright.config.ts scripts/export-brand-assets.mjs scripts/export-ui-icons.mjs scripts/build-pwa.mjs public/offline.js public/sw.js public/theme.js scripts/check-production.mjs scripts/tests/production.test.mjs scripts/compress-stage-models.mjs scripts/audit-stage-models.mjs scripts/compress-museum-hero.mjs scripts/audit-museum-hero.mjs scripts/audit-site-informed-models.mjs",
     "format": "oxfmt app components lib tests next.config.ts proxy.ts playwright.config.ts .github .coderabbit.yaml vercel.json scripts/export-brand-assets.mjs scripts/export-ui-icons.mjs scripts/build-pwa.mjs public/offline.js public/sw.js public/theme.js public/offline.css public/theme.css scripts/check-production.mjs scripts/tests/production.test.mjs scripts/compress-stage-models.mjs scripts/audit-stage-models.mjs scripts/compress-museum-hero.mjs scripts/audit-museum-hero.mjs scripts/audit-site-informed-models.mjs",
@@ -30,7 +30,7 @@
     "brand:export": "node scripts/export-brand-assets.mjs",
     "icons:export": "node scripts/export-ui-icons.mjs",
     "models:build": "python3 scripts/prepare-stage-scans.py && blender --background --python-exit-code 1 --python scripts/build-landmark-models.py && node scripts/compress-stage-models.mjs",
-    "models:audit": "node scripts/audit-stage-models.mjs && node scripts/audit-museum-hero.mjs && node scripts/audit-site-informed-models.mjs",
+    "models:audit": "node scripts/audit-stage-models.mjs && node scripts/audit-museum-hero.mjs && node scripts/audit-site-informed-models.mjs && node scripts/audit-recessed-architecture.mjs",
     "hero:build": "python3 scripts/fetch-museum-pbr.py && blender --background --python-exit-code 1 --python scripts/build-museum-hero.py && node scripts/compress-museum-hero.mjs",
     "hero:audit": "node scripts/audit-museum-hero.mjs",
     "site-models:audit": "node scripts/audit-site-informed-models.mjs"

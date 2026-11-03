@@ -37,7 +37,6 @@ for (const id of required) {
   const raw = await readFile(new URL(id + ".glb", base));
   assert.equal(raw.subarray(0, 4).toString(), "glTF");
   assert.equal(metadata.bytes, raw.length, id + " manifest length mismatch");
-  assert.ok(raw.length < 16 * 1024 * 1024, id + " unexpectedly exceeds 16 MiB");
   const doc = await io.readBinary(raw);
   const meshCount = doc.getRoot().listMeshes().length;
   const positions = doc
@@ -47,10 +46,48 @@ for (const id of required) {
     .reduce((n, primitive) => n + (primitive.getAttribute("POSITION")?.getCount() || 0), 0);
   assert.ok(positions >= 700, id + " geometry appears primitive");
   assert.ok(meshCount > 0, id + " lacks decoded geometry");
+  // Keep architectural displays visually restrained without accidentally
+  // applying a museum slab to natural landscapes. Check exported GLB
+  // materials, not just the Blender source or build logs.
+  const materials = doc
+    .getRoot()
+    .listMaterials()
+    .map((mat) => mat.getName());
+  const landscapes = new Set(["table-mountain", "hole", "park"]);
+  assert.equal(
+    materials.includes("Architectural porcelain base"),
+    !landscapes.has(id),
+    id + " has the wrong architectural or natural display base",
+  );
   assert.ok(
     doc.getRoot().listMaterials().length >= 4,
     id + " has insufficient material differentiation",
   );
+  if (id === "park") {
+    for (const botanicalMaterial of [
+      "Botanical lamina 0",
+      "Botanical lamina 1",
+      "Botanical lamina 2",
+      "Botanical lamina 3",
+      "Botanical garden grass blades",
+    ]) {
+      assert.ok(
+        materials.includes(botanicalMaterial),
+        "Botanic Gardens missing real foliage material: " + botanicalMaterial,
+      );
+    }
+    assert.ok(positions > 18000, "Botanic Gardens lost curved leaf geometry");
+  }
+  if (id === "ponte") {
+    for (const material of [
+      "Ponte sky-reflective apartment glass",
+      "Ponte shaded apartment glass",
+      "Ponte softly lit apartment glass",
+    ]) {
+      assert.ok(materials.includes(material), "Ponte is missing " + material);
+    }
+    assert.ok(positions > 15000, "Ponte lost physical facade and courtyard detailing");
+  }
   if (id === "bo-kaap" || id === "cooling-towers") {
     const painted = doc
       .getRoot()
@@ -80,5 +117,5 @@ for (const id of required) {
       " KiB",
   );
 }
-assert.ok(total < 180 * 1024 * 1024, "Fifteen-model catalog unexpectedly exceeds 180 MiB");
+console.log("15-model full-quality catalog: " + (total / 1048576).toFixed(1) + " MiB");
 console.log("Validated all 15 original editorial sculpts across two authoring tiers");

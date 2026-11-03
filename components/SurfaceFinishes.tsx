@@ -3,7 +3,11 @@
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { makeMuseumSurfaces, disposeMuseumSurfaces, type MuseumSurface } from "../lib/museum-surfaces";
+import {
+  makeMuseumSurfaces,
+  disposeMuseumSurfaces,
+  type MuseumSurface,
+} from "../lib/museum-surfaces";
 
 /**
  * Existing procedural CityLit models were deliberately flat-shaded and widely
@@ -51,12 +55,15 @@ export default function SurfaceFinishes({ children }: { children: ReactNode }) {
         }
         // These are lightweight procedurally generated maps for classic
         // CityLit objects, not scans or survey-accurate textures.
-        const surface: MuseumSurface =
-          greenFoliage ? "grass"
-          : name.includes("wood") || name.includes("timber") ? "wood"
-          : blueGlass ? "copper"
-          : bright < 0.27 ? "stone"
-          : "plaster";
+        const surface: MuseumSurface = greenFoliage
+          ? "grass"
+          : name.includes("wood") || name.includes("timber")
+            ? "wood"
+            : blueGlass
+              ? "copper"
+              : bright < 0.27
+                ? "stone"
+                : "plaster";
         if (!blueGlass && !finish.map) {
           finish.map = maps[surface].albedo;
           finish.bumpMap = maps[surface].bump;

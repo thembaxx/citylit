@@ -59,7 +59,13 @@ for (const citySlug of [
 test("all 15 Blender architectural assets remain valid Draco GLB files", async ({ request }) => {
   const manifestResponse = await request.get("/models/stage/manifest.json");
   expect(manifestResponse.ok()).toBeTruthy();
-  const manifest = (await manifestResponse.json()) as { id: string; bytes: number; src: string; textureCount: number; compression: string }[];
+  const manifest = (await manifestResponse.json()) as {
+    id: string;
+    bytes: number;
+    src: string;
+    textureCount: number;
+    compression: string;
+  }[];
   expect(manifest).toHaveLength(15);
   for (const entry of manifest) {
     const response = await request.get(entry.src);

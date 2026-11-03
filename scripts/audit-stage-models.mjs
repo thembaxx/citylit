@@ -20,7 +20,10 @@ for (const entry of manifest) {
   const json = JSON.parse(raw.toString("utf8", 20, 20 + raw.readUInt32LE(12)));
   assert.ok(json.extensionsRequired.includes("KHR_draco_mesh_compression"));
   assert.ok((json.images?.length ?? 0) >= 3, `${entry.id} is missing embedded PBR scans`);
-  assert.ok(json.images.every((img) => !img.uri), "Unexpected runtime texture fetch");
+  assert.ok(
+    json.images.every((img) => !img.uri),
+    "Unexpected runtime texture fetch",
+  );
   const document = await io.readBinary(raw);
   assert.ok(
     document

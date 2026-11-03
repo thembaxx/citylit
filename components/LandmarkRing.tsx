@@ -43,7 +43,7 @@ function StreetHouse({ x, color, roofColor }: { x: number; color: string; roofCo
           castShadow
           receiveShadow
         >
-          <boxGeometry args={[0.60, 0.041, 0.85]} />
+          <boxGeometry args={[0.6, 0.041, 0.85]} />
           <meshStandardMaterial color={roofColor} roughness={0.77} metalness={0.03} />
         </mesh>
       ))}

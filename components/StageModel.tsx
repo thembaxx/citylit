@@ -93,7 +93,7 @@ export default function StageModel({
       {active && (
         <MuseumGroundShadow name="stage-contact-shadow" positionY={-0.18} dimensions={[4.2, 3.6]} />
       )}
-      <group rotation={[0, model === "dome" ? Math.PI : model === "tower" ? Math.PI / 2 : 0, 0]}>
+      <group rotation={[0, model === "dome" ? Math.PI : model === "tower" ? -Math.PI / 2 : 0, 0]}>
         <primitive object={instance} dispose={null} />
       </group>
     </>

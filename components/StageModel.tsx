@@ -1,6 +1,6 @@
 "use client";
 import { useGLTF } from "@react-three/drei";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import * as THREE from "three";
 
 /**
@@ -48,6 +48,17 @@ export default function StageModel({ model }: { model: string }) {
     });
     return root;
   }, [scene]);
+
+  useEffect(() => {
+    return () => {
+      // Geometries belong to the cached GLB. Only cloned materials belong to this instance.
+      instance.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return;
+        const materials = Array.isArray(object.material) ? object.material : [object.material];
+        materials.forEach((material) => material.dispose());
+      });
+    };
+  }, [instance]);
 
   return <primitive object={instance} dispose={null} />;
 }

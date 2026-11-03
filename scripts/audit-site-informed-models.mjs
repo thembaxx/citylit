@@ -63,6 +63,21 @@ for (const id of required) {
     doc.getRoot().listMaterials().length >= 4,
     id + " has insufficient material differentiation",
   );
+  if (id === "park") {
+    for (const botanicalMaterial of [
+      "Botanical lamina 0",
+      "Botanical lamina 1",
+      "Botanical lamina 2",
+      "Botanical lamina 3",
+      "Botanical garden grass blades",
+    ]) {
+      assert.ok(
+        materials.includes(botanicalMaterial),
+        "Botanic Gardens missing real foliage material: " + botanicalMaterial,
+      );
+    }
+    assert.ok(positions > 18000, "Botanic Gardens lost curved leaf geometry");
+  }
   if (id === "ponte") {
     for (const material of [
       "Ponte sky-reflective apartment glass",

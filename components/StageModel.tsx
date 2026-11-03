@@ -68,6 +68,15 @@ export default function StageModel({
           ) {
             material.roughness = 0.25;
             material.metalness = 0.12;
+          } else if (
+            name.includes("botanical lamina") ||
+            name.includes("botanical garden grass blades")
+          ) {
+            // Double-sided thin leaves reveal silhouette and curvature from
+            // below the canopy without alpha-card sorting artifacts.
+            material.side = THREE.DoubleSide;
+            material.roughness = 0.92;
+            material.metalness = 0;
           } else if (name.includes("foliage") || name.includes("leaf")) {
             material.roughness = 0.93;
             material.metalness = 0;

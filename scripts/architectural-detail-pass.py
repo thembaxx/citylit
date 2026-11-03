@@ -156,21 +156,8 @@ def build(name, box, cylinder, beam, material, add, bpy):
             box(.36*math.cos(a),.36*math.sin(a),1.32,.045,.045,.024,bronze)
 
     elif name == "park":
-        # Botanically uneven leaf clusters instead of only simple icosphere crowns.
-        for x,y,scale in ((-.67,.35,.94),(.62,.34,.83),(-.72,-.32,.74),(.71,-.34,.71)):
-            for branch in range(9):
-                a=tau*branch/9
-                for k in range(9):
-                    ph=(k+1)/10
-                    angle=a+math.sin(k*2.1)*.45
-                    radius=(.12+.19*ph)*scale
-                    px=x+math.cos(angle)*radius
-                    py=y+math.sin(angle)*radius
-                    pz=.42*scale+.11*math.sin(angle*2.7)+ph*.32*scale
-                    leaf=add(bpy.ops.mesh.primitive_uv_sphere_add, (px,py,pz),
-                             (.036*scale,.055*scale,.012*scale),
-                             foliage[(branch+k)%4],segments=8,ring_count=5,radius=1)
-                    leaf.rotation_euler=(.36,angle,angle*.43)
+        # Individual curved leaves, woody twigs and grass now come from
+        # botanical-fidelity.py, so the old oval canopy spheres are removed.
         for j in range(42):
             x=rng.uniform(-.96,.96);y=rng.uniform(-.96,.96)
             if abs(x)<.15 or (x*x+y*y)>.96:

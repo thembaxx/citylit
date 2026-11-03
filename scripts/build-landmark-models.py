@@ -38,6 +38,11 @@ depth_spec = importlib.util.spec_from_file_location(
 )
 window_depth = importlib.util.module_from_spec(depth_spec)
 depth_spec.loader.exec_module(window_depth)
+botany_spec = importlib.util.spec_from_file_location(
+    "botanical_fidelity", ROOT / "scripts/botanical-fidelity.py"
+)
+botany = importlib.util.module_from_spec(botany_spec)
+botany_spec.loader.exec_module(botany)
 MATERIALS = {}
 
 
@@ -310,6 +315,8 @@ for name, build in BUILDERS.items():
     # Boolean cutouts must happen before geometry is joined, after builders
     # have created the separate facade shells and their decorative joinery.
     window_depth.build(name, box, material, bpy)
+    # Single batched mesh of actual curved foliage and fine native groundcover.
+    botany.build(name, beam, material, bpy)
     stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.

@@ -123,7 +123,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
                      [(3,2,1,0),(4,5,6,7),(0,1,5,4),
                       (1,2,6,5),(2,3,7,6),(3,0,4,7)], mat)
 
-    def plant(x, y, z=.05, scale=1.0):
+    def plant(x, y, z=.05, scale=1.0, leafy=True):
         trunk_top = z + .37*scale
         beam((x,y,z), (x,y,trunk_top), .026*scale, wood)
         for branch in range(5):
@@ -131,12 +131,14 @@ def build(name, box, cylinder, beam, material, add, bpy):
             target=(x+math.cos(a)*.20*scale, y+math.sin(a)*.18*scale,
                     trunk_top+.22*scale+(.04 if branch%2 else 0))
             beam((x,y,trunk_top-.07*scale), target, .012*scale, wood)
-            add(bpy.ops.mesh.primitive_ico_sphere_add, target,
-                (.28*scale,.24*scale,.24*scale),
-                leaves if branch%2 else leaves2, subdivisions=2, radius=1)
-        add(bpy.ops.mesh.primitive_ico_sphere_add,
-            (x,y,trunk_top+.28*scale), (.30*scale,.28*scale,.23*scale),
-            leaves, subdivisions=2, radius=1)
+            if leafy:
+                add(bpy.ops.mesh.primitive_ico_sphere_add, target,
+                    (.28*scale,.24*scale,.24*scale),
+                    leaves if branch%2 else leaves2, subdivisions=2, radius=1)
+        if leafy:
+            add(bpy.ops.mesh.primitive_ico_sphere_add,
+                (x,y,trunk_top+.28*scale), (.30*scale,.28*scale,.23*scale),
+                leaves, subdivisions=2, radius=1)
 
     if name == "bridge":
         # Distinct cable-stayed asymmetric bridge, continuous deck and towers.
@@ -187,7 +189,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
         cylinder(0,0,.04,1.16,.09,grass,vertices=64)
         for x,y,scale in [(-.67,.35,.94),(.62,.34,.83),
                           (-.72,-.32,.74),(.71,-.34,.71)]:
-            plant(x,y,.10,scale)
+            plant(x,y,.10,scale,leafy=False)
         box(0,-.12,.065,.26,1.65,.026,sandstone)
         box(-.20,.38,.065,.66,.19,.025,sandstone)
         box(.20,-.52,.065,.73,.17,.025,sandstone)

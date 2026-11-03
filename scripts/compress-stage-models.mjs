@@ -41,6 +41,21 @@ for (const item of manifest) {
     "Fidelity sandstone earth": [0.61, 0.42, 0.31],
     "Fidelity ironstone rock": [0.43, 0.29, 0.25],
     "Fidelity muted grass": [0.39, 0.59, 0.35],
+    // The Blender MixRGB tint is otherwise dropped by the glTF exporter when
+    // an albedo scan is connected. Preserve the authored colours in the GLB.
+    "Sculpt cut sandstone": [0.74, 0.61, 0.48],
+    "Sculpt pale plaster": [0.89, 0.83, 0.72],
+    "Sculpt reclaimed brick": [0.67, 0.40, 0.32],
+    "Sculpt weathered concrete": [0.60, 0.62, 0.59],
+    "Sculpt dark wood": [0.49, 0.33, 0.25],
+    "Sculpt garden grass": [0.43, 0.62, 0.36],
+    "Sculpt leaf canopy": [0.33, 0.55, 0.37],
+    "Sculpt pale foliage": [0.51, 0.65, 0.43],
+    "Sculpt painted rose": [0.95, 0.43, 0.47],
+    "Sculpt painted ochre": [0.99, 0.66, 0.26],
+    "Sculpt painted turquoise": [0.38, 0.78, 0.77],
+    "Sculpt painted lavender": [0.69, 0.59, 0.86],
+    "Sculpt painted mint": [0.58, 0.80, 0.56],
   };
   for (const material of document.getRoot().listMaterials()) {
     if (!material.getBaseColorTexture()) continue;

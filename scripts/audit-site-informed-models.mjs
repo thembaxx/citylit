@@ -51,6 +51,23 @@ for (const id of required) {
     doc.getRoot().listMaterials().length >= 4,
     id + " has insufficient material differentiation",
   );
+  if (id === "bo-kaap" || id === "cooling-towers") {
+    const painted = doc
+      .getRoot()
+      .listMaterials()
+      .filter((mat) => mat.getName().startsWith("Sculpt painted"));
+    const uniqueTints = new Set(
+      painted.map((mat) => JSON.stringify(mat.getBaseColorFactor().slice(0, 3))),
+    );
+    assert.ok(
+      uniqueTints.size >= (id === "bo-kaap" ? 5 : 2),
+      id + " is missing its independent, locally embedded paint colours",
+    );
+    assert.ok(
+      painted.every((mat) => mat.getBaseColorFactor().some((value) => value < 0.92)),
+      id + " has lost the authored paint tint",
+    );
+  }
   total += raw.length;
   console.log(
     id +

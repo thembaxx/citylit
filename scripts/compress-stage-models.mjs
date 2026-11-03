@@ -21,13 +21,13 @@ for (const item of manifest) {
   // into glTF's baseColorFactor so textured architecture never renders white.
   const tintByName = {
     "Warm limestone": [0.78, 0.67, 0.57],
-    "Pale stone": [0.89, 0.81, 0.70],
+    "Pale stone": [0.89, 0.81, 0.7],
     "Porous warm plaster": [0.91, 0.78, 0.65],
     "Cut sandstone highlights": [0.96, 0.85, 0.68],
-    "Weathered earth brick": [0.74, 0.40, 0.29],
+    "Weathered earth brick": [0.74, 0.4, 0.29],
     "Dark oiled timber": [0.53, 0.34, 0.23],
     "Natural muted lawn": [0.53, 0.72, 0.41],
-    "Foliage": [0.43, 0.67, 0.36],
+    Foliage: [0.43, 0.67, 0.36],
     "Leaf canopy variations": [0.37, 0.61, 0.35],
     "Paving and mortar": [0.85, 0.78, 0.67],
     "Roof terracotta": [0.77, 0.39, 0.32],

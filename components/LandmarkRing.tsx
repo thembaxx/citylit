@@ -388,7 +388,7 @@ function Ring({
                         ? 0.77
                         : 0.72
                       : size.width < 760
-                        ? 0.90
+                        ? 0.9
                         : 1.24) * zoom
                   : 0.55
               }
@@ -410,9 +410,11 @@ function Ring({
                 ) : (
                   <SafeStageModel model={item.model} active={index === selected} />
                 )}
-                {showContext && index === selected && !item.name.toLowerCase().includes("mcgregor museum") && (
-                  <MiniatureStreet compact={size.width < 760} />
-                )}
+                {showContext &&
+                  index === selected &&
+                  !item.name.toLowerCase().includes("mcgregor museum") && (
+                    <MiniatureStreet compact={size.width < 760} />
+                  )}
               </RotatingMiniature>
             </group>
           ))}
@@ -652,7 +654,9 @@ export default function LandmarkRing({
             <div className="atlas-inspector-features" aria-label="Surroundings visibility">
               <button
                 type="button"
-                aria-label={showContext ? "Hide illustrative surroundings" : "Show illustrative surroundings"}
+                aria-label={
+                  showContext ? "Hide illustrative surroundings" : "Show illustrative surroundings"
+                }
                 aria-pressed={showContext}
                 onClick={() => setShowContext((value) => !value)}
               >

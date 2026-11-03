@@ -99,6 +99,14 @@ def build(name, box, cylinder, beam, material, add, bpy):
         # Facade strips combine all 36 levels into one mesh to keep draw calls small.
         layers, segments = 36, 56
         outer_r, inner_r = .64, .345
+        # A city tower is not one uniform pane color. Variants are subtle
+        # actual materials on the authored GLB (not postprocessed pixels).
+        sky_glass = material("Ponte sky-reflective apartment glass",
+                             (.34, .51, .55), roughness=.18, metalness=.07)
+        dark_glass = material("Ponte shaded apartment glass",
+                              (.18, .31, .36), roughness=.23, metalness=.05)
+        warm_glass = material("Ponte softly lit apartment glass",
+                              (.53, .44, .30), roughness=.29, metalness=.04)
         verts, faces, face_mats = [], [], []
         def quad(points, mat_index):
             offset = len(verts)
@@ -121,11 +129,14 @@ def build(name, box, cylinder, beam, material, add, bpy):
                     if j % 9 == 0:
                         quad(outline, 0)
                     else:
+                        variation = (level * 13 + j * 7) % 37
+                        pane_material = 3 if variation == 0 else 2 if variation < 7 else 1
                         quad([point(a, radius, z + .010), point(b, radius, z + .010),
                               point(b, radius, z + .041), point(a, radius, z + .041)]
                              if not reverse else
                              [point(a, radius, z + .041), point(b, radius, z + .041),
-                              point(b, radius, z + .010), point(a, radius, z + .010)], 1)
+                              point(b, radius, z + .010), point(a, radius, z + .010)],
+                             pane_material)
                     quad([point(a, radius, z), point(b, radius, z),
                           point(b, radius, z + .010), point(a, radius, z + .010)]
                          if not reverse else
@@ -137,7 +148,26 @@ def build(name, box, cylinder, beam, material, add, bpy):
                          [point(a, radius, z + .052), point(b, radius, z + .052),
                           point(b, radius, z + .041), point(a, radius, z + .041)], 0)
         custom_mesh("Ponte hollow 54-storey facade glazing and floor slabs",
-                    verts, faces, [concrete, deep], face_mats)
+                    verts, faces,
+                    [concrete, dark_glass, sky_glass, warm_glass], face_mats)
+        # Physical slab projections, weather ledges, vertical fins and open
+        # courtyard galleries cast real parallax/shadows when the model rotates.
+        # Keep the characteristic central atrium fully open.
+        for level in range(3, layers, 3):
+            z = .12 + level * .052
+            torus(0, 0, z, outer_r + .007, .007, stone, major=84, minor=6)
+            torus(0, 0, z, inner_r - .010, .012, concrete, major=84, minor=6)
+            # Courtyard balustrade, offset from the recessed floor plate.
+            torus(0, 0, z + .055, inner_r - .035, .004, metal, major=84, minor=6)
+            for j in range(0, segments, 7):
+                angle = tau * j / segments
+                rx = (inner_r - .035) * math.cos(angle)
+                ry = (inner_r - .035) * math.sin(angle)
+                beam((rx, ry, z), (rx, ry, z + .060), .0035, metal)
+        for j in range(0, segments, 4):
+            angle = tau * j / segments
+            x, y = (outer_r + .011) * math.cos(angle), (outer_r + .011) * math.sin(angle)
+            beam((x, y, .14), (x, y, 1.99), .0035, plaster)
         for rx, width, z in ((outer_r, .025, .12), (outer_r, .025, 1.99),
                              (inner_r, .012, 1.99)):
             torus(0, 0, z, rx, width, stone)
@@ -152,6 +182,19 @@ def build(name, box, cylinder, beam, material, add, bpy):
                  (.65 * math.cos(angle), .65 * math.sin(angle), 2.11),
                  .009, metal)
         torus(0, 0, 2.11, .655, .03, copper)
+        # Rooftop equipment is part of the model, with independent vents and
+        # access housings instead of a smooth empty cap.
+        for i, (x, y) in enumerate(((.47, .08), (-.47, -.10), (.06, .47), (-.08, -.47))):
+            box(x, y, 2.044, .13, .10, .10, concrete)
+            box(x, y, 2.101, .115, .091, .012, metal)
+            for j in range(4):
+                box(x - .042 + j * .027, y - .052, 2.045, .013, .008, .054, deep)
+            if i % 2 == 0:
+                beam((x, y, 2.10), (x, y, 2.20), .007, metal)
+        for angle in (0, tau / 3, 2 * tau / 3):
+            x, y = .51 * math.cos(angle), .51 * math.sin(angle)
+            box(x, y, 2.075, .13, .10, .065, plaster)
+            box(x, y, 2.12, .105, .06, .026, deep)
 
     elif name == "stadium":
         # Open seating bowl with an annular roof membrane and truly free pitch.

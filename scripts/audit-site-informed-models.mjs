@@ -63,6 +63,16 @@ for (const id of required) {
     doc.getRoot().listMaterials().length >= 4,
     id + " has insufficient material differentiation",
   );
+  if (id === "ponte") {
+    for (const material of [
+      "Ponte sky-reflective apartment glass",
+      "Ponte shaded apartment glass",
+      "Ponte softly lit apartment glass",
+    ]) {
+      assert.ok(materials.includes(material), "Ponte is missing " + material);
+    }
+    assert.ok(positions > 15000, "Ponte lost physical facade and courtyard detailing");
+  }
   if (id === "bo-kaap" || id === "cooling-towers") {
     const painted = doc
       .getRoot()

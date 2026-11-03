@@ -8,7 +8,15 @@ import MuseumGroundShadow from "./MuseumGroundShadow";
  * Give every existing, compressed Blender landmark believable material response
  * without mutating the cached GLTF used by other instances of the model.
  */
-export default function StageModel({ model, active = true }: { model: string; active?: boolean }) {
+export default function StageModel({
+  model,
+  active = true,
+  onReady,
+}: {
+  model: string;
+  active?: boolean;
+  onReady?: () => void;
+}) {
   const { scene } = useGLTF(`/models/stage/${model}.glb`, "/draco/");
   const instance = useMemo(() => {
     const root = scene.clone(true);
@@ -66,6 +74,10 @@ export default function StageModel({ model, active = true }: { model: string; ac
       });
     };
   }, [instance]);
+
+  useEffect(() => {
+    onReady?.();
+  }, [instance, onReady]);
 
   return (
     <>

@@ -2,9 +2,20 @@
 import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "motion/react";
+import {
+  ArrowCounterClockwise,
+  Cube,
+  Stack,
+  MagnifyingGlassMinus,
+  MagnifyingGlassPlus,
+  Moon,
+  Sun,
+} from "@phosphor-icons/react";
 import * as THREE from "three";
 import gsap from "gsap";
 import SafeStageModel from "./SafeStageModel";
+import MuseumShowcase, { type MuseumFeature } from "./MuseumShowcase";
 import ProceduralTree from "./ProceduralTree";
 import type { StageItem } from "./CityStage";
 
@@ -177,6 +188,12 @@ function Ring({
   itinerary,
   dragging,
   settle,
+  night,
+  exploded,
+  feature,
+  onFeature,
+  zoom,
+  reduced,
 }: {
   items: StageItem[];
   selected: number;
@@ -185,10 +202,43 @@ function Ring({
   itinerary: string[];
   dragging: React.RefObject<boolean>;
   settle: number;
+  night: boolean;
+  exploded: boolean;
+  feature: MuseumFeature;
+  onFeature: (feature: MuseumFeature) => void;
+  zoom: number;
+  reduced: boolean;
 }) {
   const ring = useRef<THREE.Group>(null);
   const { size, invalidate, camera } = useThree();
   const radius = items.length < 4 ? 2.8 : 3.8;
+  useEffect(() => {
+    const museum = items[selected]?.name.toLowerCase().includes("mcgregor museum");
+    const preset = museum
+      ? feature === "roof"
+        ? [0, 4.55, 9.45]
+        : feature === "windows"
+          ? [1.5, 2.45, 9.0]
+          : feature === "gardens"
+            ? [-1.15, 4.05, 10.3]
+            : [0, 3.2, 10.8]
+      : [0, 3.2, 10.8];
+    const tween = gsap.to(camera.position, {
+      x: preset[0],
+      y: preset[1],
+      z: preset[2],
+      duration: reduced ? 0 : 0.72,
+      ease: "power3.inOut",
+      onUpdate: () => {
+        camera.lookAt(0, 0.55, 0);
+        invalidate();
+      },
+      onComplete: invalidate,
+    });
+    return () => {
+      tween.kill();
+    };
+  }, [camera, feature, selected, reduced, invalidate, items]);
   useEffect(() => {
     if (!ring.current) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -229,24 +279,54 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 3.2, 10.8]} fov={42} />
-      <hemisphereLight args={["#fff4e3", "#715b4a", 1.1]} />
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[4, 7, 5]} intensity={2.25} color="#fff3dd" />
-      <directionalLight position={[-4, 3, -2]} intensity={0.55} color="#ffa968" />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.28 : 0.88]} />
+      <ambientLight intensity={night ? 0.23 : 0.36} />
+      <directionalLight
+        position={[4, 7, 5]}
+        intensity={night ? 0.55 : 2.8}
+        color={night ? "#a2b8e0" : "#fff3dd"}
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-left={-9}
+        shadow-camera-right={9}
+        shadow-camera-top={9}
+        shadow-camera-bottom={-9}
+        shadow-bias={-0.00025}
+        shadow-normalBias={0.025}
+      />
+      <directionalLight
+        position={[-4, 3, -2]}
+        intensity={night ? 0.3 : 0.65}
+        color={night ? "#99b4db" : "#ffa968"}
+      />
       <group position={[size.width > size.height ? 1.45 : 0, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
             <group
               key={item.name}
               position={positions[index]}
-              scale={index === selected ? 1 : 0.6}
+              scale={index === selected ? zoom : 0.6}
               onClick={(event) => {
                 event.stopPropagation();
                 onSelect(index);
               }}
             >
-              <SafeStageModel model={item.model} />
-              {index === selected && <MiniatureStreet compact={size.width < 760} />}
+              {/* high-detail museum shares the same canvas and scene budget */}
+              {item.name.toLowerCase().includes("mcgregor museum") ? (
+                <MuseumShowcase
+                  night={night}
+                  exploded={index === selected && exploded}
+                  feature={index === selected ? feature : "architecture"}
+                  reduced={reduced}
+                  onFeature={index === selected ? onFeature : undefined}
+                />
+              ) : (
+                <SafeStageModel model={item.model} active={index === selected} />
+              )}
+              {index === selected && !item.name.toLowerCase().includes("mcgregor museum") && (
+                <MiniatureStreet compact={size.width < 760} />
+              )}
             </group>
           ))}
           {route.length > 1 && (
@@ -282,6 +362,23 @@ export default function LandmarkRing({
   const dragging = useRef(false);
   const moved = useRef(false);
   const [settle, setSettle] = useState(0);
+  const [night, setNight] = useState(false);
+  const [exploded, setExploded] = useState(false);
+  const [feature, setFeature] = useState<MuseumFeature>("architecture");
+  const [zoom, setZoom] = useState(1);
+  const reduced = !!useReducedMotion();
+  const museumSelected = items[selected]?.name.toLowerCase().includes("mcgregor museum");
+  const features: { id: MuseumFeature; label: string }[] = [
+    { id: "architecture", label: "Architecture" },
+    { id: "roof", label: "Roof" },
+    { id: "windows", label: "Windows" },
+    { id: "gardens", label: "Gardens" },
+  ];
+  useEffect(() => {
+    setExploded(false);
+    setFeature("architecture");
+    setZoom(1);
+  }, [selected]);
   return (
     <div
       ref={setHost}
@@ -334,9 +431,100 @@ export default function LandmarkRing({
             itinerary={itinerary}
             dragging={dragging}
             settle={settle}
+            night={night}
+            exploded={exploded}
+            feature={feature}
+            onFeature={setFeature}
+            zoom={zoom}
+            reduced={reduced}
           />
         )}
       </View>
+      <div
+        className="atlas-inspector-toolbar"
+        aria-label="3D inspection tools"
+        onPointerDown={(event) => event.stopPropagation()}
+        onPointerMove={(event) => event.stopPropagation()}
+        onPointerUp={(event) => event.stopPropagation()}
+      >
+        <div className="atlas-inspector-actions">
+          <button
+            type="button"
+            aria-label={night ? "Switch to daylight" : "Switch to night lighting"}
+            aria-pressed={night}
+            title={night ? "Daylight" : "Night lighting"}
+            onClick={() => setNight((value) => !value)}
+          >
+            {night ? <Sun size={19} /> : <Moon size={19} />}
+          </button>
+          <button
+            type="button"
+            title="Zoom in"
+            aria-label="Zoom in"
+            disabled={zoom >= 1.4}
+            onClick={() => setZoom((value) => Math.min(1.4, +(value + 0.1).toFixed(2)))}
+          >
+            <MagnifyingGlassPlus size={19} />
+          </button>
+          <button
+            type="button"
+            title="Zoom out"
+            aria-label="Zoom out"
+            disabled={zoom <= 0.8}
+            onClick={() => setZoom((value) => Math.max(0.8, +(value - 0.1).toFixed(2)))}
+          >
+            <MagnifyingGlassMinus size={19} />
+          </button>
+          {museumSelected && (
+            <button
+              type="button"
+              aria-label={exploded ? "Assemble roof and landscape" : "Explode architectural layers"}
+              aria-pressed={exploded}
+              title="Exploded view"
+              onClick={() => setExploded((value) => !value)}
+            >
+              <Stack size={19} />
+            </button>
+          )}
+          <button
+            type="button"
+            title="Reset inspection"
+            aria-label="Reset inspection"
+            onClick={() => {
+              setZoom(1);
+              setNight(false);
+              setExploded(false);
+              setFeature("architecture");
+            }}
+          >
+            <ArrowCounterClockwise size={19} />
+          </button>
+        </div>
+        {museumSelected && (
+          <div className="atlas-inspector-features">
+            <span>
+              <Cube size={15} /> Inspect details
+            </span>
+            {features.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={feature === option.id}
+                onClick={() => setFeature(option.id)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
+        <p className="atlas-inspector-note" role="status" aria-live="polite">
+          {museumSelected
+            ? exploded
+              ? "Architectural layers separated"
+              : `${features.find((option) => option.id === feature)?.label} · interactive miniature`
+            : `${night ? "Night" : "Day"} view · ${Math.round(zoom * 100)}% scale`}
+        </p>
+      </div>
     </div>
   );
 }

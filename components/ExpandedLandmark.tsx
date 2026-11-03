@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { cities } from "../lib/data";
 import { Alive } from "./Models";
 import ProceduralTree from "./ProceduralTree";
+import MuseumShowcase from "./MuseumShowcase";
 const colors = [
   "#f3c7a6",
   "#7dce6a",
@@ -26,7 +27,7 @@ function Block({
   color?: string;
 }) {
   return (
-    <mesh position={p} scale={s}>
+    <mesh position={p} scale={s} castShadow receiveShadow>
       <boxGeometry />
       <meshStandardMaterial color={color} roughness={0.62} />
     </mesh>
@@ -209,18 +210,25 @@ export default function ExpandedLandmark({
   });
   const garden = index === 1 && ["gables", "gallery", "waterfall", "grassland"].includes(model);
   const signature = Signature({ model, index, tone });
+  if (cities[city].slug === "kimberley" && index === 1) {
+    return (
+      <Alive reduced={reduced}>
+        <MuseumShowcase reduced={reduced} />
+      </Alive>
+    );
+  }
   return (
     <Alive reduced={reduced}>
       <group>
-        <mesh position={[0, -0.22, 0]}>
+        <mesh position={[0, -0.22, 0]} castShadow receiveShadow>
           <boxGeometry args={[3.3, 0.14, 3.3]} />
           <meshStandardMaterial color="#6b4128" roughness={0.9} />
         </mesh>
-        <mesh position={[0, -0.1, 0]}>
+        <mesh position={[0, -0.1, 0]} receiveShadow>
           <boxGeometry args={[3.12, 0.12, 3.12]} />
           <meshStandardMaterial color="#e6c98a" roughness={0.86} />
         </mesh>
-        <mesh position={[0, 0.01, 0]}>
+        <mesh position={[0, 0.01, 0]} receiveShadow>
           <boxGeometry args={[2.94, 0.14, 2.94]} />
           <meshStandardMaterial color="#86d456" roughness={0.78} />
         </mesh>

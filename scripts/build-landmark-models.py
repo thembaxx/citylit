@@ -15,23 +15,24 @@ OUT.mkdir(parents=True, exist_ok=True)
 MATERIALS = {}
 
 
-def material(name, color):
+def material(name, color, roughness=0.82, metalness=0.0):
     if name not in MATERIALS:
         result = bpy.data.materials.new(name)
         result.diffuse_color = (*color, 1)
         result.use_nodes = True
         node = result.node_tree.nodes["Principled BSDF"]
         node.inputs["Base Color"].default_value = (*color, 1)
-        node.inputs["Roughness"].default_value = 0.85
+        node.inputs["Roughness"].default_value = roughness
+        node.inputs["Metallic"].default_value = metalness
         MATERIALS[name] = result
     return MATERIALS[name]
 
 
-STONE = material("Warm limestone", (0.48, 0.45, 0.41))
-LIGHT = material("Pale stone", (0.72, 0.69, 0.62))
-AMBER = material("Amber", (0.96, 0.51, 0.16))
-DARK = material("Recesses", (0.16, 0.18, 0.19))
-LEAF = material("Foliage", (0.39, 0.45, 0.34))
+STONE = material("Warm limestone", (0.48, 0.45, 0.41), roughness=0.88)
+LIGHT = material("Pale stone", (0.72, 0.69, 0.62), roughness=0.81)
+AMBER = material("Amber", (0.96, 0.51, 0.16), roughness=0.52, metalness=0.16)
+DARK = material("Recesses", (0.16, 0.18, 0.19), roughness=0.28, metalness=0.1)
+LEAF = material("Foliage", (0.39, 0.45, 0.34), roughness=0.95)
 
 
 def add(operator, location, scale=None, mat=STONE, **kwargs):
@@ -45,7 +46,16 @@ def add(operator, location, scale=None, mat=STONE, **kwargs):
 
 
 def box(x, y, z, sx, sy, sz, mat=STONE):
-    return add(bpy.ops.mesh.primitive_cube_add, (x, y, z), (sx, sy, sz), mat, size=1)
+    obj = add(bpy.ops.mesh.primitive_cube_add, (x, y, z), (sx, sy, sz), mat, size=1)
+    # Bevel only large architectural masses. Thin mouldings, windows and cables
+    # stay sharp, keeping the exported Draco file and draw-call budget bounded.
+    if min(sx, sy, sz) > .22:
+        bevel = obj.modifiers.new("Architectural edge highlights", "BEVEL")
+        bevel.width = min(sx, sy, sz) * .045
+        bevel.segments = 2
+        bpy.context.view_layer.objects.active = obj
+        bpy.ops.object.modifier_apply(modifier=bevel.name)
+    return obj
 
 
 def cylinder(x, y, z, radius, depth, mat=STONE, top=None, vertices=24):
@@ -225,7 +235,7 @@ def cooling_towers():
 
 
 def aquarium():
-    water = material("Ocean water", (.29,.56,.59))
+    water = material("Ocean water", (.29,.56,.59), roughness=0.18, metalness=0.08)
     cylinder(0, 0, .08, 1.04, .13, water, vertices=32)
     box(-.35,.35,.39,1.4,.50,.6,LIGHT)
     for x in [-.85,-.45,-.05,.35]:
@@ -257,6 +267,6 @@ for name, build in BUILDERS.items():
                               export_draco_mesh_compression_enable=False,
                               export_cameras=False, export_lights=False)
     manifest.append({"id": name, "src": f"/models/stage/{name}.glb", "bytes": path.stat().st_size,
-                     "authoring": "Blender 4.3", "purpose": "Illustrative low-poly model"})
+                     "authoring": "Blender 4.3", "purpose": "Illustrative architectural miniature, not a surveyed reconstruction"})
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to finalize and verify the size budget.")

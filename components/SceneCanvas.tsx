@@ -2,6 +2,7 @@
 import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { Component, useRef, useSyncExternalStore, type ReactNode } from "react";
+import * as THREE from "three";
 
 const qualityQuery = "(max-width: 760px), (pointer: coarse)";
 function subscribeQuality(onChange: () => void) {
@@ -51,6 +52,13 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
           className="persistent-canvas"
           style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 2 }}
           frameloop="demand"
+          shadows={!lowPower}
+          onCreated={({ gl }) => {
+            gl.outputColorSpace = THREE.SRGBColorSpace;
+            gl.toneMapping = THREE.AgXToneMapping;
+            gl.toneMappingExposure = 1.12;
+            if (!lowPower) gl.shadowMap.type = THREE.PCFSoftShadowMap;
+          }}
           dpr={lowPower ? [1, 1] : [1, 1.5]}
           gl={{
             antialias: !lowPower,

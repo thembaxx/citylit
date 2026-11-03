@@ -32,3 +32,9 @@ node scripts/audit-recessed-architecture.mjs
 pnpm format:check && pnpm lint && pnpm typecheck && pnpm build
 STAGE_FOCUS_IDS=bo-kaap,tower,dome node scripts/capture-stage-catalog.mjs
 ```
+
+## 3 November 2026 — reproduction and visual review
+
+The one-shot production Blender run [41683485445](https://github.com/thembaxx/citylit/actions/runs/41683485445) regenerated all 15 GLBs and passed the independent interior-material audit, format, lint, TypeScript and production build. It committed the verified binaries as `9881d66` and captured actual ready-state 1440×900 desktop and 390×844 mobile WebGL frames for Bo-Kaap, Durban City Hall and Constitution Hill. The six screenshots are retained as the GitHub artifact `citylit-carved-interior-depth-desktop-mobile`.
+
+The technical gate passed and the visual evidence confirms all three models load and retain their existing form. The new depth is subtle at the default zoom, however, and the scenes remain stylized dioramas rather than the reference's convincing architectural visualization. This is a validated incremental change, **not a claim of photographic parity**. Future work should concentrate on camera-close material realism, bespoke architectural geometry, vegetation, and baked indirect lighting; do not mistake bigger GLBs for better visual quality.

@@ -30,7 +30,7 @@
     "brand:export": "node scripts/export-brand-assets.mjs",
     "icons:export": "node scripts/export-ui-icons.mjs",
     "models:build": "python3 scripts/prepare-stage-scans.py && blender --background --python-exit-code 1 --python scripts/build-landmark-models.py && node scripts/compress-stage-models.mjs",
-    "models:audit": "node scripts/audit-stage-models.mjs && node scripts/audit-museum-hero.mjs && node scripts/audit-site-informed-models.mjs",
+    "models:audit": "node scripts/audit-stage-models.mjs && node scripts/audit-museum-hero.mjs && node scripts/audit-site-informed-models.mjs && node scripts/audit-recessed-architecture.mjs",
     "hero:build": "python3 scripts/fetch-museum-pbr.py && blender --background --python-exit-code 1 --python scripts/build-museum-hero.py && node scripts/compress-museum-hero.mjs",
     "hero:audit": "node scripts/audit-museum-hero.mjs",
     "site-models:audit": "node scripts/audit-site-informed-models.mjs"

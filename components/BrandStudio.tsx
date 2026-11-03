@@ -39,18 +39,18 @@ export default function BrandStudio() {
           <br />
           has a spark.
         </h1>
-        <p>Small adventures. A little wonder. A whole country waiting to be discovered.</p>
+        <p>Small adventures. Big character.</p>
       </header>
       <section className="brand-character" aria-labelledby="khwezi-title">
         <div className="brand-character-stage">
           <KhweziView pose={pose} yaw={yaw} accent={accent} reset={turnReset} />
-          <span className="brand-stage-caption">Drag Khwezi to turn · arrow keys work too</span>
+          <span className="brand-stage-caption">Drag to turn · tap to play</span>
         </div>
         <div className="brand-character-story">
-          <span className="tiny-label">YOUR CURIOUS COMPANION</span>
+          <span className="tiny-label">MEET YOUR GUIDE</span>
           <h2 id="khwezi-title">Meet Khwezi.</h2>
-          <p>{brand.story} A luminous diamond, enormous ears and a pocket full of possibility.</p>
-          <p>Drag to turn, choose an expression, or give Khwezi a little hop.</p>
+          <p>{brand.story}</p>
+          <p>Pick a mood or give Khwezi a hop.</p>
           <MagneticButton
             className="brand-magnetic-action"
             onClick={() => {

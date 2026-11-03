@@ -13,6 +13,9 @@ test("Kimberley museum exposes functional, accessible architectural inspector to
 
   const tools = page.getByLabel("3D inspection tools");
   await expect(tools).toBeVisible();
+  if ((page.viewportSize()?.width ?? 1024) <= 767) {
+    await tools.getByRole("button", { name: "Open 3D inspector" }).click();
+  }
   await tools.getByRole("button", { name: "Switch to night lighting" }).click();
   await expect(tools.getByRole("button", { name: "Switch to daylight" })).toHaveAttribute(
     "aria-pressed",
@@ -58,6 +61,9 @@ test("inspector tools fit a narrow mobile viewport and respect reduced motion", 
   await page.getByRole("button", { name: "McGregor Museum", exact: true }).click();
   const tools = page.getByLabel("3D inspection tools");
   await expect(tools).toBeVisible();
+  if ((page.viewportSize()?.width ?? 1024) <= 767) {
+    await tools.getByRole("button", { name: "Open 3D inspector" }).click();
+  }
   const box = await tools.boundingBox();
   expect(box).not.toBeNull();
   expect(box!.x).toBeGreaterThanOrEqual(0);

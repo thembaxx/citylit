@@ -1,10 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import gsap from "gsap";
-import ProceduralTree from "./ProceduralTree";
+import { RoundedBox } from "@react-three/drei";
+import {
+  makeMuseumSurfaces,
+  disposeMuseumSurfaces,
+  type MuseumSurface,
+  type MuseumSurfaceLibrary,
+} from "../lib/museum-surfaces";
 
 export type MuseumFeature = "architecture" | "roof" | "windows" | "gardens";
 export type MuseumProps = {
@@ -20,6 +26,86 @@ const trim = "#f6eddb";
 const copper = "#547a68";
 const timber = "#725848";
 
+const SurfaceContext = createContext<MuseumSurfaceLibrary | null>(null);
+
+function SurfaceMaterial({
+  color,
+  roughness,
+  metalness,
+  surface = "plaster",
+}: {
+  color: string;
+  roughness: number;
+  metalness: number;
+  surface?: MuseumSurface;
+}) {
+  const maps = useContext(SurfaceContext)?.[surface];
+  return (
+    <meshStandardMaterial
+      color={color}
+      roughness={roughness}
+      metalness={metalness}
+      map={maps?.albedo}
+      bumpMap={maps?.bump}
+      bumpScale={maps?.bumpScale ?? 0}
+      envMapIntensity={surface === "copper" ? 1.1 : 0.75}
+    />
+  );
+}
+
+/** Smooth, layered vegetation; intentionally art-directed, not botanical survey data. */
+function DetailedTree({
+  x,
+  z,
+  seed,
+}: {
+  x: number;
+  z: number;
+  seed: number;
+}) {
+  const leaves = useMemo(
+    () =>
+      Array.from({ length: 22 }, (_, i) => {
+        const angle = i * 2.39996 + seed;
+        const radius = 0.20 + ((i * 17 + seed * 9) % 11) * 0.023;
+        const height = 0.66 + ((i * 23 + seed * 3) % 13) * 0.028;
+        const size = 0.15 + ((i * 7 + seed) % 9) * 0.012;
+        return {
+          position: [Math.cos(angle) * radius, height, Math.sin(angle) * radius] as [
+            number, number, number
+          ],
+          size,
+          color: ["#52734c", "#789a64", "#5e8255", "#9ab184", "#6c9661"][(i + seed) % 5],
+        };
+      }),
+    [seed],
+  );
+  return (
+    <group position={[x, 0.015, z]} name="landscape-tree">
+      <mesh castShadow receiveShadow position={[0, 0.32, 0]}>
+        <cylinderGeometry args={[0.042, 0.072, 0.67, 9]} />
+        <meshStandardMaterial color="#796450" roughness={0.94} />
+      </mesh>
+      {Array.from({ length: 5 }, (_, i) => {
+        const a = i * 2.1;
+        return (
+          <mesh key={i} position={[Math.cos(a) * 0.12, 0.53 + i * 0.035, Math.sin(a) * 0.12]}
+            rotation={[Math.sin(a) * 0.53, 0, Math.cos(a) * 0.58]} castShadow>
+            <cylinderGeometry args={[0.014, 0.03, 0.40, 6]} />
+            <meshStandardMaterial color="#77634b" roughness={0.95} />
+          </mesh>
+        );
+      })}
+      {leaves.map((leaf, i) => (
+        <mesh key={i} position={leaf.position} castShadow receiveShadow>
+          <icosahedronGeometry args={[leaf.size, 2]} />
+          <meshStandardMaterial color={leaf.color} roughness={0.93} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
 function Volume({
   position,
   size,
@@ -27,6 +113,7 @@ function Volume({
   roughness = 0.83,
   metalness = 0,
   castShadow = true,
+  surface = "plaster",
 }: {
   position: [number, number, number];
   size: [number, number, number];
@@ -34,12 +121,24 @@ function Volume({
   roughness?: number;
   metalness?: number;
   castShadow?: boolean;
+  surface?: MuseumSurface;
 }) {
   return (
-    <mesh position={position} castShadow={castShadow} receiveShadow>
-      <boxGeometry args={size} />
-      <meshStandardMaterial color={color} roughness={roughness} metalness={metalness} />
-    </mesh>
+    <RoundedBox
+      position={position}
+      args={size}
+      radius={Math.min(0.014, ...size.map((dimension) => dimension * 0.08))}
+      smoothness={2}
+      castShadow={castShadow}
+      receiveShadow
+    >
+      <SurfaceMaterial
+        surface={surface}
+        color={color}
+        roughness={roughness}
+        metalness={metalness}
+      />
+    </RoundedBox>
   );
 }
 
@@ -61,10 +160,12 @@ function MuseumWindow({
         <boxGeometry args={[0.27, 0.36, 0.01]} />
         <meshPhysicalMaterial
           color={night ? "#ffe6a4" : "#7c9ea7"}
-          metalness={0.12}
-          roughness={0.16}
-          clearcoat={0.8}
-          clearcoatRoughness={0.12}
+          metalness={0.06}
+          roughness={0.095}
+          ior={1.46}
+          envMapIntensity={1.6}
+          clearcoat={1}
+          clearcoatRoughness={0.06}
           emissive={night ? "#e1ab52" : active ? "#568d9d" : "#071924"}
           emissiveIntensity={night ? 0.65 : active ? 0.18 : 0.025}
         />
@@ -91,6 +192,8 @@ export default function MuseumShowcase({
   const roof = useRef<THREE.Group>(null);
   const grounds = useRef<THREE.Group>(null);
   const { invalidate } = useThree();
+  const surfaces = useMemo(makeMuseumSurfaces, []);
+  useEffect(() => () => disposeMuseumSurfaces(surfaces), [surfaces]);
   const buildingWindows = useMemo(
     () => [-0.78, -0.26, 0.26, 0.78].flatMap((x) => [0.43, 1.07].map((y) => ({ x, y }))),
     [],
@@ -118,27 +221,21 @@ export default function MuseumShowcase({
   }, [exploded, reduced, invalidate]);
 
   return (
+    <SurfaceContext.Provider value={surfaces}>
     <group name="museum-showcase">
       <group ref={grounds} name="gardens-and-plinth">
-        <Volume position={[0, -0.21, 0]} size={[3.18, 0.21, 2.86]} color="#b8aa94" />
-        <Volume position={[0, -0.085, 0]} size={[3.08, 0.065, 2.76]} color="#ede4d4" />
-        <Volume position={[0, -0.031, 0]} size={[2.99, 0.045, 2.67]} color="#9dba8e" />
-        <Volume position={[0, 0.003, 1.11]} size={[0.78, 0.018, 0.43]} color="#d5c4a8" />
-        <Volume position={[0, 0.029, 1.36]} size={[0.74, 0.045, 0.23]} color="#ddcfb8" />
+        <Volume position={[0, -0.21, 0]} size={[3.18, 0.21, 2.86]} color="#b8aa94" surface="stone" />
+        <Volume position={[0, -0.085, 0]} size={[3.08, 0.065, 2.76]} color="#ede4d4" surface="paving" />
+        <Volume position={[0, -0.031, 0]} size={[2.99, 0.045, 2.67]} color="#9dba8e" surface="grass" />
+        <Volume position={[0, 0.003, 1.11]} size={[0.78, 0.018, 0.43]} color="#d5c4a8" surface="paving" />
+        <Volume position={[0, 0.029, 1.36]} size={[0.74, 0.045, 0.23]} color="#ddcfb8" surface="paving" />
         {[
           [-1.25, -0.95, 3],
           [1.27, -0.98, 7],
           [-1.24, 0.95, 11],
           [1.29, 0.86, 17],
         ].map(([x, z, seed]) => (
-          <ProceduralTree
-            key={seed}
-            position={[x, 0.012, z]}
-            scale={0.47}
-            color={seed % 2 ? "#658b62" : "#789c73"}
-            detail="hero"
-            seed={seed}
-          />
+          <DetailedTree key={seed} x={x} z={z} seed={seed} />
         ))}
         {[-1, 1].map((x) => (
           <group key={x}>
@@ -166,7 +263,7 @@ export default function MuseumShowcase({
             <Volume position={[x, 1.44, 0.84]} size={[0.2, 0.12, 0.18]} color="#f3e6d4" />
           </group>
         ))}
-        <Volume position={[0, 0.35, 0.831]} size={[0.42, 0.62, 0.075]} color={timber} />
+        <Volume position={[0, 0.35, 0.831]} size={[0.42, 0.62, 0.075]} color={timber} surface="wood" />
         <Volume position={[0, 0.7, 0.851]} size={[0.52, 0.1, 0.14]} color={trim} />
         <Volume
           position={[0, 0.38, 0.882]}
@@ -223,10 +320,11 @@ export default function MuseumShowcase({
           <group key={side}>
             <mesh castShadow position={[side * 0.59, 1.8, 0]} rotation={[0, 0, side * -0.45]}>
               <boxGeometry args={[1.42, 0.1, 1.89]} />
-              <meshStandardMaterial
+              <SurfaceMaterial
+                surface="copper"
                 color={feature === "roof" ? "#779c83" : copper}
-                roughness={0.46}
-                metalness={0.42}
+                roughness={0.39}
+                metalness={0.62}
               />
             </mesh>
             {[-0.6, -0.2, 0.2, 0.6].map((z) => (
@@ -237,7 +335,7 @@ export default function MuseumShowcase({
                 rotation={[0, 0, side * -0.45]}
               >
                 <boxGeometry args={[1.42, 0.012, 0.012]} />
-                <meshStandardMaterial color="#a4bba0" metalness={0.55} roughness={0.42} />
+                <SurfaceMaterial color="#a4bba0" surface="copper" metalness={0.62} roughness={0.35} />
               </mesh>
             ))}
           </group>
@@ -295,5 +393,6 @@ export default function MuseumShowcase({
         <pointLight position={[0, 0.7, 1.12]} intensity={1.5} distance={3.5} color="#ffcd8d" />
       )}
     </group>
+    </SurfaceContext.Provider>
   );
 }

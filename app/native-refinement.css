@@ -504,6 +504,12 @@ button,
     font-size: 12px;
     min-height: 44px;
   }
+  .brand-theme-examples {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .brand-theme-examples > div {
+    min-width: 0;
+  }
 }
 @media (max-width: 360px) {
   .reference-guide .atlas-hero {

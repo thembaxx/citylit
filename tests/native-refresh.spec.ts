@@ -57,7 +57,7 @@ test("reduced motion leaves the guide logo and mascot controllable", async ({ pa
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
-  await expect(page.locator(".atlas-wordmark .citylit-logo-symbol")).toBeVisible();
+  await expect(page.locator(".atlas-wordmark .citylit-logo-symbol").first()).toBeVisible();
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
   await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
 });

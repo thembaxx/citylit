@@ -40,8 +40,14 @@ test("the stage opens a landmark guide and shares the real day planner", async (
       for (const fractionY of [0.6, 0.7, 0.55, 0.8]) {
         const x = Math.round(rect.left + rect.width * fractionX);
         const y = Math.round(rect.top + rect.height * fractionY);
-        if (x < 120 || x > viewportWidth - 210 || y < 120 || y > viewportHeight - 110)
+        if (
+          x < 120 ||
+          x > viewportWidth - 210 ||
+          y < 120 ||
+          y > viewportHeight - 110
+        ) {
           continue;
+        }
         const target = document.elementFromPoint(x, y);
         if (target && host.contains(target)) return { x, y };
       }

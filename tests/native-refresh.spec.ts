@@ -74,3 +74,29 @@ test("new icon and logo are available to installed users", async ({ request }) =
   expect((await request.get("/brand/wordmark.svg")).ok()).toBe(true);
   expect((await request.get("/brand/apple-touch-icon.png")).ok()).toBe(true);
 });
+
+test("all editable controls use at least 16px text on mobile", async ({ page }) => {
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    for (const route of ["/", "/destinations", "/brand"]) {
+      const response = await page.goto(route);
+      expect(response?.ok(), `${route} should load at ${width}px`).toBe(true);
+      const sizes = await page
+        .locator(
+          'input, textarea, select, [contenteditable="true"], [role="combobox"], [role="textbox"], [role="searchbox"], [role="spinbutton"]',
+        )
+        .evaluateAll((elements) =>
+          elements.map((element) => ({
+            tag: element.tagName,
+            size: Number.parseFloat(getComputedStyle(element).fontSize),
+          })),
+        );
+      for (const control of sizes) {
+        expect(
+          control.size,
+          `${route} at ${width}px: ${control.tag} font size`,
+        ).toBeGreaterThanOrEqual(16);
+      }
+    }
+  }
+});

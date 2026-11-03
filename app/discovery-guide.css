@@ -176,9 +176,11 @@
   gap: 8px;
   min-height: 44px;
 }
-.atlas-nav nav > a:hover,
-.atlas-footer a:hover {
-  color: var(--guide-accent);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-nav nav > a:hover,
+  .atlas-footer a:hover {
+    color: var(--guide-accent);
+  }
 }
 .atlas-nav .atlas-day-link {
   border: 1px solid var(--line);
@@ -264,18 +266,22 @@
   line-height: 1.5;
   cursor: pointer;
 }
-.atlas-button:hover {
-  background: color-mix(in srgb, var(--ink) 6%, var(--bg));
-  border-color: var(--guide-accent);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-button:hover {
+    background: color-mix(in srgb, var(--ink) 6%, var(--bg));
+    border-color: var(--guide-accent);
+  }
 }
 .atlas-primary {
   color: var(--guide-accent-contrast);
   background: var(--guide-accent);
   border-color: var(--guide-accent);
 }
-.atlas-primary:hover {
-  background: var(--guide-accent);
-  filter: brightness(0.94);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-primary:hover {
+    background: var(--guide-accent);
+    filter: brightness(0.94);
+  }
 }
 .atlas-hero-copy > .atlas-button {
   pointer-events: auto;
@@ -346,8 +352,13 @@
   border: 1px solid var(--line);
 }
 .glow-city-marker.is-major .glow-marker-name,
-.glow-city-marker:is(:hover, :focus-visible, .is-selected) .glow-marker-name {
+.glow-city-marker:is(:focus-visible, .is-selected) .glow-marker-name {
   opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .glow-city-marker:hover .glow-marker-name {
+    opacity: 1;
+  }
 }
 .glow-city-marker.is-selected .glow-marker-dot {
   width: 10px;
@@ -455,8 +466,10 @@
   gap: 10px;
   min-height: 40px;
 }
-.atlas-text-link:hover {
-  color: var(--guide-accent);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-text-link:hover {
+    color: var(--guide-accent);
+  }
 }
 .atlas-scroll-cue {
   font-size: 10px;
@@ -574,10 +587,12 @@
   overflow: hidden;
   height: calc(100% - 32px);
 }
-.atlas-city-card-link:hover,
-.atlas-place-card-link:hover {
-  border-color: var(--guide-accent);
-  transform: translateY(-3px);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-city-card-link:hover,
+  .atlas-place-card-link:hover {
+    border-color: var(--guide-accent);
+    transform: translateY(-3px);
+  }
 }
 .atlas-city-photo,
 .atlas-place-photo {
@@ -594,9 +609,11 @@
   object-fit: cover;
   transition: transform 0.6s;
 }
-.atlas-city-card-link:hover img,
-.atlas-place-card-link:hover img {
-  transform: scale(1.035);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-city-card-link:hover img,
+  .atlas-place-card-link:hover img {
+    transform: scale(1.035);
+  }
 }
 .atlas-card-number {
   position: absolute;
@@ -657,8 +674,10 @@
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
-.atlas-photo-credit a:hover {
-  text-decoration: underline;
+@media (hover: hover) and (pointer: fine) {
+  .atlas-photo-credit a:hover {
+    text-decoration: underline;
+  }
 }
 .atlas-city-grid + .atlas-text-link {
   margin-top: 32px;
@@ -786,8 +805,10 @@
   gap: 8px;
   min-height: 40px;
 }
-.atlas-breadcrumb > a:hover {
-  color: var(--guide-accent);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-breadcrumb > a:hover {
+    color: var(--guide-accent);
+  }
 }
 .atlas-city-hero {
   display: grid;
@@ -910,9 +931,11 @@
   margin-top: 20px;
   color: var(--guide-accent);
 }
-.atlas-landmark-link:hover {
-  border-color: var(--guide-accent);
-  transform: translateY(-3px);
+@media (hover: hover) and (pointer: fine) {
+  .atlas-landmark-link:hover {
+    border-color: var(--guide-accent);
+    transform: translateY(-3px);
+  }
 }
 .atlas-landmark-photo {
   position: relative;
@@ -2017,8 +2040,13 @@
   opacity: 0;
   transition: opacity 0.15s;
 }
-.atlas-map-backdrop .glow-city-marker:is(:hover, :focus-visible, .is-selected) .glow-marker-name {
+.atlas-map-backdrop .glow-city-marker:is(:focus-visible, .is-selected) .glow-marker-name {
   opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .atlas-map-backdrop .glow-city-marker:hover .glow-marker-name {
+    opacity: 1;
+  }
 }
 .reference-guide .atlas-hero {
   display: flex;
@@ -2468,9 +2496,17 @@
 }
 .reference-guide
   .atlas-map-backdrop
-  .glow-city-marker:is(:hover, :focus-visible, .is-selected)
+  .glow-city-marker:is(:focus-visible, .is-selected)
   .glow-marker-name {
   opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .reference-guide
+    .atlas-map-backdrop
+    .glow-city-marker:hover
+    .glow-marker-name {
+    opacity: 1;
+  }
 }
 @media (min-width: 768px) {
   .reference-guide .atlas-hero-copy {

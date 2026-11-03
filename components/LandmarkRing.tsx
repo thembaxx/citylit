@@ -16,7 +16,8 @@ import {
 import * as THREE from "three";
 import gsap from "gsap";
 import SafeStageModel from "./SafeStageModel";
-import MuseumShowcase, { type MuseumFeature } from "./MuseumShowcase";
+import MuseumHeroAsset from "./MuseumHeroAsset";
+import { type MuseumFeature } from "./MuseumShowcase";
 import StudioEnvironment from "./StudioEnvironment";
 import ProceduralTree from "./ProceduralTree";
 import type { StageItem } from "./CityStage";
@@ -363,7 +364,7 @@ function Ring({
               {/* high-detail museum shares the same canvas and scene budget */}
               <RotatingMiniature selected={index === selected} spin={spin} reduced={reduced}>
                 {item.name.toLowerCase().includes("mcgregor museum") ? (
-                  <MuseumShowcase
+                  <MuseumHeroAsset
                     night={night}
                     exploded={index === selected && exploded}
                     feature={index === selected ? feature : "architecture"}

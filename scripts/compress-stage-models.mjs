@@ -35,6 +35,12 @@ for (const item of manifest) {
     "Painted house 1": [0.98, 0.84, 0.48],
     "Painted house 2": [0.57, 0.82, 0.88],
     "Painted house 3": [0.79, 0.66, 0.86],
+    "Fidelity sandstone": [0.71, 0.61, 0.48],
+    "Fidelity plaster": [0.84, 0.78, 0.69],
+    "Fidelity weathered stone": [0.58, 0.56, 0.53],
+    "Fidelity sandstone earth": [0.61, 0.42, 0.31],
+    "Fidelity ironstone rock": [0.43, 0.29, 0.25],
+    "Fidelity muted grass": [0.39, 0.59, 0.35],
   };
   for (const material of document.getRoot().listMaterials()) {
     if (!material.getBaseColorTexture()) continue;

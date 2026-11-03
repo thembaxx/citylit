@@ -2,6 +2,7 @@
 import { useGLTF } from "@react-three/drei";
 import { useEffect, useMemo } from "react";
 import * as THREE from "three";
+import MuseumGroundShadow from "./MuseumGroundShadow";
 
 /**
  * Give every existing, compressed Blender landmark believable material response
@@ -66,5 +67,12 @@ export default function StageModel({ model, active = true }: { model: string; ac
     };
   }, [instance]);
 
-  return <primitive object={instance} dispose={null} />;
+  return (
+    <>
+      {active && (
+        <MuseumGroundShadow name="stage-contact-shadow" positionY={-0.18} dimensions={[4.2, 3.6]} />
+      )}
+      <primitive object={instance} dispose={null} />
+    </>
+  );
 }

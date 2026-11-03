@@ -10,6 +10,7 @@ import ProvinceMap, { provinceLabels, type LabelRefs } from "./ProvinceMap";
 import { provinceColors, availableProvinces } from "../lib/province-colors";
 import { cities } from "../lib/data";
 import ExpandedLandmark from "./ExpandedLandmark";
+import SurfaceFinishes from "./SurfaceFinishes";
 import { Landmark, CategoryModel } from "./Models";
 const viewMemory = new Map<string, number[]>();
 const labelOffsets: Record<string, [number, number]> = {
@@ -214,12 +215,16 @@ function World({
       >
         {mode === "map" ? (
           <ProvinceMap onCity={onCity} reduced={gentle} labels={labels} />
-        ) : mode === "category" ? (
-          <CategoryModel index={category} reduced={gentle} />
-        ) : city < 3 ? (
-          <Landmark city={city} index={index} reduced={gentle} />
         ) : (
-          <ExpandedLandmark city={city} index={index % 3} reduced={gentle} />
+          <SurfaceFinishes key={`${mode}:${city}:${index}:${category}`}>
+            {mode === "category" ? (
+              <CategoryModel index={category} reduced={gentle} />
+            ) : city < 3 ? (
+              <Landmark city={city} index={index} reduced={gentle} />
+            ) : (
+              <ExpandedLandmark city={city} index={index % 3} reduced={gentle} />
+            )}
+          </SurfaceFinishes>
         )}
       </group>
       <OrbitControls

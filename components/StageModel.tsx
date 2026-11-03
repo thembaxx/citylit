@@ -22,7 +22,11 @@ export default function StageModel({ model, active = true }: { model: string; ac
           if (name.includes("water")) {
             material.roughness = 0.2;
             material.metalness = 0.1;
-          } else if (name.includes("recess") || name.includes("glass")) {
+          } else if (
+            name.includes("recess") ||
+            name.includes("glass") ||
+            name.includes("glazing")
+          ) {
             material.roughness = 0.25;
             material.metalness = 0.12;
           } else if (name.includes("foliage") || name.includes("leaf")) {
@@ -35,8 +39,10 @@ export default function StageModel({ model, active = true }: { model: string; ac
             material.roughness = 0.48;
             material.metalness = 0.17;
           } else {
-            material.roughness = 0.84;
-            material.metalness = 0;
+            // Keep authored Blender PBR finishes for metal, plaster, glazing,
+            // wood, sandstone and roof materials instead of flattening them.
+            material.roughness = THREE.MathUtils.clamp(material.roughness, 0.14, 0.98);
+            material.metalness = THREE.MathUtils.clamp(material.metalness, 0, 0.85);
           }
           material.envMapIntensity = 0.7;
         }

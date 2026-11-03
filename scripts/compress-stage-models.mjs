@@ -17,7 +17,7 @@ for (const item of manifest) {
     .setRequired(true)
     .setEncoderOptions({ method: "edgebreaker", encodeSpeed: 5, decodeSpeed: 5 });
   const bytes = await io.writeBinary(document);
-  if (bytes.length > 150 * 1024) throw new Error(`${item.id} exceeds 150 KiB.`);
+  if (bytes.length > 256 * 1024) throw new Error(`${item.id} exceeds premium 256 KiB budget.`);
   const decoded = await io.readBinary(bytes);
   if (!decoded.getRoot().listMeshes().length)
     throw new Error(`${item.id} has no decoded geometry.`);

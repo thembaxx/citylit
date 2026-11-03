@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import {
   ArrowCounterClockwise,
+  ArrowClockwise,
   Cube,
   Stack,
   MagnifyingGlassMinus,
@@ -180,6 +181,43 @@ function MiniatureStreet({ compact }: { compact: boolean }) {
   );
 }
 
+type StageView = "overview" | "detail" | "overhead";
+
+function RotatingMiniature({
+  children,
+  selected,
+  spin,
+  reduced,
+}: {
+  children: React.ReactNode;
+  selected: boolean;
+  spin: number;
+  reduced: boolean;
+}) {
+  const group = useRef<THREE.Group>(null);
+  const previous = useRef(spin);
+  const { invalidate } = useThree();
+  useEffect(() => {
+    if (!selected) {
+      previous.current = spin;
+      return;
+    }
+    if (!group.current || previous.current === spin) return;
+    previous.current = spin;
+    const tween = gsap.to(group.current.rotation, {
+      y: group.current.rotation.y + Math.PI * 2,
+      duration: reduced ? 0 : 1.28,
+      ease: "power2.inOut",
+      onUpdate: invalidate,
+      onComplete: invalidate,
+    });
+    return () => {
+      tween.kill();
+    };
+  }, [spin, selected, reduced, invalidate]);
+  return <group ref={group}>{children}</group>;
+}
+
 function Ring({
   items,
   selected,
@@ -193,6 +231,8 @@ function Ring({
   feature,
   onFeature,
   zoom,
+  spin,
+  view,
   reduced,
 }: {
   items: StageItem[];
@@ -207,6 +247,8 @@ function Ring({
   feature: MuseumFeature;
   onFeature: (feature: MuseumFeature) => void;
   zoom: number;
+  spin: number;
+  view: StageView;
   reduced: boolean;
 }) {
   const ring = useRef<THREE.Group>(null);
@@ -222,7 +264,11 @@ function Ring({
           : feature === "gardens"
             ? [-1.15, 4.05, 10.3]
             : [0, 3.2, 10.8]
-      : [0, 3.2, 10.8];
+      : view === "detail"
+        ? [0.7, 2.5, 8.5]
+        : view === "overhead"
+          ? [0.4, 5.1, 9.4]
+          : [0, 3.2, 10.8];
     const tween = gsap.to(camera.position, {
       x: preset[0],
       y: preset[1],
@@ -238,7 +284,7 @@ function Ring({
     return () => {
       tween.kill();
     };
-  }, [camera, feature, selected, reduced, invalidate, items]);
+  }, [camera, feature, view, selected, reduced, invalidate, items]);
   useEffect(() => {
     if (!ring.current) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -313,20 +359,22 @@ function Ring({
               }}
             >
               {/* high-detail museum shares the same canvas and scene budget */}
-              {item.name.toLowerCase().includes("mcgregor museum") ? (
-                <MuseumShowcase
-                  night={night}
-                  exploded={index === selected && exploded}
-                  feature={index === selected ? feature : "architecture"}
-                  reduced={reduced}
-                  onFeature={index === selected ? onFeature : undefined}
-                />
-              ) : (
-                <SafeStageModel model={item.model} active={index === selected} />
-              )}
-              {index === selected && !item.name.toLowerCase().includes("mcgregor museum") && (
-                <MiniatureStreet compact={size.width < 760} />
-              )}
+              <RotatingMiniature selected={index === selected} spin={spin} reduced={reduced}>
+                {item.name.toLowerCase().includes("mcgregor museum") ? (
+                  <MuseumShowcase
+                    night={night}
+                    exploded={index === selected && exploded}
+                    feature={index === selected ? feature : "architecture"}
+                    reduced={reduced}
+                    onFeature={index === selected ? onFeature : undefined}
+                  />
+                ) : (
+                  <SafeStageModel model={item.model} active={index === selected} />
+                )}
+                {index === selected && !item.name.toLowerCase().includes("mcgregor museum") && (
+                  <MiniatureStreet compact={size.width < 760} />
+                )}
+              </RotatingMiniature>
             </group>
           ))}
           {route.length > 1 && (
@@ -366,6 +414,8 @@ export default function LandmarkRing({
   const [exploded, setExploded] = useState(false);
   const [feature, setFeature] = useState<MuseumFeature>("architecture");
   const [zoom, setZoom] = useState(1);
+  const [view, setView] = useState<StageView>("overview");
+  const [spin, setSpin] = useState(0);
   const reduced = !!useReducedMotion();
   const museumSelected = items[selected]?.name.toLowerCase().includes("mcgregor museum");
   const features: { id: MuseumFeature; label: string }[] = [
@@ -378,6 +428,7 @@ export default function LandmarkRing({
     setExploded(false);
     setFeature("architecture");
     setZoom(1);
+    setView("overview");
   }, [selected]);
   return (
     <div
@@ -436,6 +487,8 @@ export default function LandmarkRing({
             feature={feature}
             onFeature={setFeature}
             zoom={zoom}
+            spin={spin}
+            view={view}
             reduced={reduced}
           />
         )}
@@ -475,6 +528,14 @@ export default function LandmarkRing({
           >
             <MagnifyingGlassMinus size={19} />
           </button>
+          <button
+            type="button"
+            title="Rotate selected miniature"
+            aria-label="Rotate selected miniature"
+            onClick={() => setSpin((value) => value + 1)}
+          >
+            <ArrowClockwise size={19} />
+          </button>
           {museumSelected && (
             <button
               type="button"
@@ -495,11 +556,35 @@ export default function LandmarkRing({
               setNight(false);
               setExploded(false);
               setFeature("architecture");
+              setView("overview");
             }}
           >
             <ArrowCounterClockwise size={19} />
           </button>
         </div>
+        {!museumSelected && (
+          <div className="atlas-inspector-features" aria-label="Landmark camera views">
+            <span>
+              <Cube size={15} /> Camera presets
+            </span>
+            {(
+              [
+                { id: "overview", label: "Overview" },
+                { id: "detail", label: "Close-up" },
+                { id: "overhead", label: "Overhead" },
+              ] as { id: StageView; label: string }[]
+            ).map((option) => (
+              <button
+                type="button"
+                key={option.id}
+                aria-pressed={view === option.id}
+                onClick={() => setView(option.id)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
         {museumSelected && (
           <div className="atlas-inspector-features">
             <span>
@@ -522,7 +607,7 @@ export default function LandmarkRing({
             ? exploded
               ? "Architectural layers separated"
               : `${features.find((option) => option.id === feature)?.label} · interactive miniature`
-            : `${night ? "Night" : "Day"} view · ${Math.round(zoom * 100)}% scale`}
+            : `${night ? "Night" : "Day"} · ${view} · ${Math.round(zoom * 100)}% scale`}
         </p>
       </div>
     </div>

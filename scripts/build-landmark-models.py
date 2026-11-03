@@ -8,10 +8,15 @@ import json
 import math
 import pathlib
 import bpy
+import importlib.util
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "public/models/stage"
 OUT.mkdir(parents=True, exist_ok=True)
+# External detailing remains in a separate reusable script for all 15 miniature classes.
+spec = importlib.util.spec_from_file_location("landmark_details", ROOT / "scripts/landmark-details.py")
+details = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(details)
 MATERIALS = {}
 
 
@@ -259,6 +264,7 @@ for name, build in BUILDERS.items():
     bpy.ops.object.delete(use_global=False)
     base()
     build()
+    details.decorate(name, box, cylinder, beam, material, add, bpy)
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.
     bpy.ops.object.join()

@@ -1,0 +1,36 @@
+name: Format museum architecture code once
+on:
+  push:
+    branches:
+      - feat/archviz-quality-benchmark
+    paths:
+      - .github/workflows/format-museum-archviz-once.yml
+permissions:
+  contents: write
+jobs:
+  oxfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: feat/archviz-quality-benchmark
+          persist-credentials: true
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: |
+          pnpm format
+          git diff --check
+      - name: Commit formatting on top of current branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app components lib scripts tests .github
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "style(archviz): format GLB loader and quality tests with Oxfmt"
+          git fetch origin feat/archviz-quality-benchmark
+          git rebase origin/feat/archviz-quality-benchmark
+          git push origin HEAD:feat/archviz-quality-benchmark

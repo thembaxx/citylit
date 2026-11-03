@@ -2583,6 +2583,14 @@
   pointer-events: auto;
   color: var(--ink);
 }
+.atlas-inspector-panel {
+  display: grid;
+  justify-items: end;
+  gap: 11px;
+}
+.atlas-inspector-toggle {
+  display: none;
+}
 .atlas-inspector-actions {
   display: flex;
   flex-direction: column;
@@ -2670,11 +2678,37 @@
   color: var(--muted);
 }
 @media (max-width: 767px) {
-  /* Compact controls clear the carousel chips and the main touch area. */
+  /* The dock is opt-in on small screens: no overlays over landmark title or chips. */
   .atlas-inspector-toolbar {
-    top: 22px;
+    top: 145px;
     right: 12px;
     gap: 6px;
+  }
+  .atlas-inspector-toggle {
+    display: flex;
+    min-height: 44px;
+    gap: 7px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--surface) 94%, transparent);
+    box-shadow: 0 7px 20px rgb(20 20 25 / 12%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    font-size: 11px;
+    font-weight: 650;
+  }
+  .atlas-inspector-panel {
+    display: none;
+  }
+  .atlas-inspector-panel.is-open {
+    display: grid;
+    gap: 7px;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: 0 14px 48px rgb(25 20 16 / 17%);
   }
   .atlas-inspector-actions {
     display: grid;

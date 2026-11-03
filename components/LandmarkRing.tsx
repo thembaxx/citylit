@@ -363,7 +363,6 @@ function Ring({
             <group
               key={item.name}
               visible={
-                size.width >= 760 ||
                 !items[selected]?.name.toLowerCase().includes("mcgregor museum") ||
                 index === selected
               }

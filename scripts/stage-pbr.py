@@ -20,6 +20,10 @@ IMAGE_CACHE = {}
 
 def surface_category(material_name):
     name = material_name.lower()
+    # The bespoke leaf laminae use locally authored rough, coloured geometry.
+    # Applying tiled lawn albedo to thin leaves makes them look like plastic.
+    if "botanical lamina" in name or "botanical garden grass blades" in name:
+        return None
     if "water" in name or "glass" in name or "glazing" in name or "recess" in name:
         return None
     if "bronze" in name or "amber" in name or "metal" in name:

@@ -67,9 +67,7 @@ export default function DiscoveryHome() {
               </label>
               <p className="atlas-eyebrow">{city ? city.province : "YOUR NEXT CHAPTER"}</p>
               <h2>{city ? city.name : "Where to?"}</h2>
-              <p>
-                {city ? city.intro : "Pick a city and explore its places."}
-              </p>
+              <p>{city ? city.intro : "Pick a city and explore its places."}</p>
             </div>
             <div className="atlas-beacon-mascot">
               <div className="atlas-mascot-view">
@@ -78,7 +76,9 @@ export default function DiscoveryHome() {
               <MagneticButton
                 className="atlas-mascot-action"
                 strength={0.13}
-                onClick={() => setMascotPose((current) => current === "saved" ? "welcome" : "saved")}
+                onClick={() =>
+                  setMascotPose((current) => (current === "saved" ? "welcome" : "saved"))
+                }
               >
                 {mascotPose === "saved" ? "Say hello" : "Make Khwezi hop"}
               </MagneticButton>
@@ -88,7 +88,11 @@ export default function DiscoveryHome() {
                 {city ? "Explore the city" : "Browse all city guides"} <ArrowUpRight size={18} />
               </Link>
               {city && (
-                <MagneticButton aria-label="Reset map selection" strength={0.12} onClick={() => setSelected(null)}>
+                <MagneticButton
+                  aria-label="Reset map selection"
+                  strength={0.12}
+                  onClick={() => setSelected(null)}
+                >
                   <ArrowCounterClockwise size={19} />
                 </MagneticButton>
               )}
@@ -108,9 +112,7 @@ export default function DiscoveryHome() {
             <br />
             <em>local curiosity.</em>
           </h2>
-          <p>
-            Discover {places.length} places and plan a day worth remembering.
-          </p>
+          <p>Discover {places.length} places and plan a day worth remembering.</p>
         </div>
         <ol>
           {[

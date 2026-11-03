@@ -55,7 +55,11 @@ export default function GuideShell({
           <span>Discover</span>
         </Link>
         <Link href="/destinations" aria-current={pathname === "/destinations" ? "page" : undefined}>
-          <MapPin size={21} aria-hidden="true" weight={pathname === "/destinations" ? "fill" : "regular"} />
+          <MapPin
+            size={21}
+            aria-hidden="true"
+            weight={pathname === "/destinations" ? "fill" : "regular"}
+          />
           <span>Cities</span>
         </Link>
         <Link href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}>

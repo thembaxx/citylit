@@ -30,8 +30,15 @@ for (const id of ["bo-kaap", "dome", "tower", "union-buildings"]) {
     id + " has no individual glass material",
   );
   if (id === "bo-kaap") {
-    for (const entryMaterial of ["Recessed mahogany entry", "Brushed brass door hardware"]) {
-      assert.ok(names.includes(entryMaterial), id + " is missing physical entrywork: " + entryMaterial);
+    for (const entryMaterial of [
+      "Recessed mahogany entry",
+      "Brushed brass door hardware",
+      "Entry plaster shadow",
+    ]) {
+      assert.ok(
+        names.includes(entryMaterial),
+        id + " is missing physical entrywork: " + entryMaterial,
+      );
     }
   }
   const count = document

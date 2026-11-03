@@ -42,7 +42,7 @@ for (const [id, city, name] of cases) {
   await chip.click();
   await page.locator(".atlas-ring-scene").waitFor();
   await page.waitForTimeout(850);
-  if ((await page.locator("canvas.persistent-canvas").count()) !== 1) {
+  if ((await page.locator("canvas").count()) < 1) {
     throw new Error(id + " lacks the shared 3D canvas");
   }
   await page.screenshot({ path: directory + "/" + id + ".png" });

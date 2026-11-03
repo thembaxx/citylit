@@ -347,27 +347,32 @@ function Ring({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
-      <StudioEnvironment intensity={night ? 0.08 : 0.29} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.1 : 0.21]} />
+      <StudioEnvironment intensity={night ? 0.17 : 0.62} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.16 : 0.28]} />
       <ambientLight intensity={night ? 0.06 : 0.075} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.2 : 1.23}
+        intensity={night ? 0.33 : 1.14}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
         shadow-camera-left={-9}
         shadow-camera-right={9}
         shadow-camera-top={9}
         shadow-camera-bottom={-9}
         shadow-bias={-0.00025}
-        shadow-normalBias={0.025}
+        shadow-normalBias={0.014}
       />
       <directionalLight
         position={[-4, 3, -2]}
-        intensity={night ? 0.08 : 0.3}
+        intensity={night ? 0.13 : 0.42}
         color={night ? "#99b4db" : "#ffa968"}
+      />
+      <directionalLight
+        position={[1, 5, -6]}
+        intensity={night ? 0.06 : 0.22}
+        color={night ? "#a4c1e8" : "#e7f3ff"}
       />
       <group position={[size.width > size.height ? 1.52 : 0.04, 0, 0]}>
         <group ref={ring}>
@@ -400,7 +405,8 @@ function Ring({
               }}
             >
               {/* high-detail museum shares the same canvas and scene budget */}
-              <RotatingMiniature selected={index === selected} spin={spin} reduced={reduced}>
+              {(showContext || index === selected) && (
+                <RotatingMiniature selected={index === selected} spin={spin} reduced={reduced}>
                 {item.name.toLowerCase().includes("mcgregor museum") ? (
                   <MuseumHeroAsset
                     night={night}
@@ -421,7 +427,8 @@ function Ring({
                   !item.name.toLowerCase().includes("mcgregor museum") && (
                     <MiniatureStreet compact={size.width < 760} />
                   )}
-              </RotatingMiniature>
+                </RotatingMiniature>
+              )}
             </group>
           ))}
           {showContext && route.length > 1 && (

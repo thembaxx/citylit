@@ -7,7 +7,20 @@ import draco from "draco3d";
 const base = new URL("../public/models/stage/", import.meta.url);
 const manifest = JSON.parse(await readFile(new URL("manifest.json", base), "utf8"));
 const originals = new Map(manifest.map((m) => [m.id, m]));
-const required = ["ponte", "stadium", "union-buildings", "table-mountain", "hole"];
+const originalFive = ["ponte", "stadium", "union-buildings", "table-mountain", "hole"];
+const remainingTen = [
+  "bridge",
+  "lighthouse",
+  "park",
+  "dome",
+  "tower",
+  "arch",
+  "fort",
+  "bo-kaap",
+  "cooling-towers",
+  "aquarium",
+];
+const required = [...originalFive, ...remainingTen];
 const io = new NodeIO().registerExtensions([KHRDracoMeshCompression]).registerDependencies({
   "draco3d.decoder": await draco.createDecoderModule(),
 });
@@ -15,7 +28,11 @@ let total = 0;
 for (const id of required) {
   const metadata = originals.get(id);
   assert.ok(metadata, id + " has no manifest entry");
-  assert.equal(metadata.geometryTier, "site-informed-sculpt-v1");
+  assert.equal(
+    metadata.geometryTier,
+    originalFive.includes(id) ? "site-informed-sculpt-v1" : "distinct-sculpt-v2",
+    id + " has the wrong sculpt revision",
+  );
   assert.ok(metadata.textureCount >= 3, id + " is missing PBR maps");
   const raw = await readFile(new URL(id + ".glb", base));
   assert.equal(raw.subarray(0, 4).toString(), "glTF");
@@ -34,6 +51,23 @@ for (const id of required) {
     doc.getRoot().listMaterials().length >= 4,
     id + " has insufficient material differentiation",
   );
+  if (id === "bo-kaap" || id === "cooling-towers") {
+    const painted = doc
+      .getRoot()
+      .listMaterials()
+      .filter((mat) => mat.getName().startsWith("Sculpt painted"));
+    const uniqueTints = new Set(
+      painted.map((mat) => JSON.stringify(mat.getBaseColorFactor().slice(0, 3))),
+    );
+    assert.ok(
+      uniqueTints.size >= (id === "bo-kaap" ? 5 : 2),
+      id + " is missing its independent, locally embedded paint colours",
+    );
+    assert.ok(
+      painted.every((mat) => mat.getBaseColorFactor().some((value) => value < 0.92)),
+      id + " has lost the authored paint tint",
+    );
+  }
   total += raw.length;
   console.log(
     id +
@@ -46,5 +80,5 @@ for (const id of required) {
       " KiB",
   );
 }
-assert.ok(total < 9 * 1024 * 1024, "Five-model catalog exceeds 9 MiB");
-console.log("Validated all five site-informed editorial miniatures");
+assert.ok(total < 22 * 1024 * 1024, "Fifteen-model catalog exceeds 22 MiB");
+console.log("Validated all 15 original editorial sculpts across two authoring tiers");

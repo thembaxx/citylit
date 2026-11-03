@@ -1,4 +1,4 @@
-import { chromium } from "@playwright/test";
+import { chromium, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 
 const base = process.env.STAGE_URL ?? "http://127.0.0.1:3000";
@@ -50,8 +50,13 @@ for (const screen of [
     await page.goto(base + "/" + city + "/landmarks", { waitUntil: "domcontentloaded" });
     const chip = page.locator(".atlas-stage-chips").getByRole("button", { name, exact: true });
     await chip.click();
-    await page.locator(".atlas-ring-scene").waitFor();
-    await page.waitForTimeout(950);
+    const scene = page.locator(".atlas-ring-scene");
+    await expect(scene).toHaveAttribute("data-active-model", id);
+    // A loaded canvas is not proof that the GLB has replaced Suspense fallback.
+    await expect(scene).toHaveAttribute("data-active-model-status", "ready", {
+      timeout: 30000,
+    });
+    await page.waitForTimeout(400);
     if ((await page.locator("canvas").count()) < 1) {
       throw new Error(id + " lacks the shared 3D canvas");
     }

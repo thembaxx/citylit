@@ -1,7 +1,7 @@
 "use client";
 import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import {
   ArrowCounterClockwise,
@@ -245,6 +245,7 @@ function Ring({
   view,
   showContext,
   reduced,
+  onModelStatus,
 }: {
   items: StageItem[];
   selected: number;
@@ -262,6 +263,7 @@ function Ring({
   view: StageView;
   showContext: boolean;
   reduced: boolean;
+  onModelStatus: (model: string, status: "ready" | "error") => void;
 }) {
   const ring = useRef<THREE.Group>(null);
   const { size, invalidate, camera } = useThree();
@@ -408,7 +410,11 @@ function Ring({
                     onFeature={index === selected ? onFeature : undefined}
                   />
                 ) : (
-                  <SafeStageModel model={item.model} active={index === selected} />
+                  <SafeStageModel
+                    model={item.model}
+                    active={index === selected}
+                    onStatus={onModelStatus}
+                  />
                 )}
                 {showContext &&
                   index === selected &&
@@ -459,6 +465,12 @@ export default function LandmarkRing({
   const [view, setView] = useState<StageView>("overview");
   const [spin, setSpin] = useState(0);
   const [showContext, setShowContext] = useState(false);
+  const [modelStatuses, setModelStatuses] = useState<Record<string, "ready" | "error">>({});
+  const onModelStatus = useCallback((model: string, status: "ready" | "error") => {
+    setModelStatuses((previous) =>
+      previous[model] === status ? previous : { ...previous, [model]: status },
+    );
+  }, []);
   const reduced = !!useReducedMotion();
   const museumSelected = items[selected]?.name.toLowerCase().includes("mcgregor museum");
   const features: { id: MuseumFeature; label: string }[] = [
@@ -478,6 +490,10 @@ export default function LandmarkRing({
     <div
       ref={setHost}
       className={museumSelected ? "atlas-ring-scene is-heritage-hero" : "atlas-ring-scene"}
+      data-active-model={museumSelected ? "museum" : items[selected]?.model}
+      data-active-model-status={
+        museumSelected ? "ready" : (modelStatuses[items[selected]?.model] ?? "loading")
+      }
       role="group"
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {
@@ -535,6 +551,7 @@ export default function LandmarkRing({
             view={view}
             showContext={showContext}
             reduced={reduced}
+            onModelStatus={onModelStatus}
           />
         )}
       </View>

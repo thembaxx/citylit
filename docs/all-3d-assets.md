@@ -29,9 +29,11 @@ unobstructed, larger **focused model** and exposes a user-controlled option to
 show the original illustrative surroundings.
 
 **These are enhanced original architectural miniatures, not surveyed or
-photogrammetric representations.** The fifteen templates are reused for
-different attractions according to `lib/stage-models.ts`; they are **not**
-fifteen site-specific, photographic reconstructions. The separately modeled
+photogrammetric representations.** The fifteen mesh types are reused for different attractions according to
+`lib/stage-models.ts`. The first five landmark archetypes now have reference-informed
+bespoke sculpting; the ten remaining archetypes use distinct topology builders,
+described in `docs/remaining-sculpt-assets.md`. The entire collection remains
+**editorial and is not fifteen site-specific photographic reconstructions**. The separately modeled
 McGregor Museum hero lives under `public/models/hero`.
 
 ## Asset pipeline
@@ -56,7 +58,7 @@ The Blender exporter creates uncompressed glTF binaries first; the
 per-material base-colour multipliers, decodes each result and verifies integrity.
 
 Each GLB must stay below 2 MiB, with a combined maximum of 22 MiB. The
-catalog currently totals approximately 3.5 MB. Manifest entries record size,
+catalog now totals approximately 4.9 MiB after the ten-mesh rebuild. Manifest entries record size,
 texture count, compression, and material provenance.
 
 ## QA and release policy

@@ -23,6 +23,11 @@ for (const citySlug of [
     await page.goto(`/${citySlug}/landmarks`);
     const city = cities.find((item) => item.slug === citySlug)!;
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[0]);
+    await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
+      "data-active-model-status",
+      "ready",
+      { timeout: 30000 },
+    );
     const toolbar = page.getByLabel("3D inspection tools");
     await expect(toolbar).toBeVisible();
     if ((page.viewportSize()?.width ?? 1024) <= 767) {

@@ -220,7 +220,9 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
       },
     });
   });
-  await page.goto("/");
+  // A stored 3D experience preference may select Explorer on plain "/".
+  // This test audits the guide theme and logo, so request that view explicitly.
+  await page.goto("/?view=guide");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
   const headerWordmark = page.locator(".atlas-nav .wordmark");
   await expect(headerWordmark).toHaveAccessibleName("citylit");

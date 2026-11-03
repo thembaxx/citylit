@@ -1,4 +1,5 @@
 name: Heritage visual QA snapshot (temporary)
+# Final framing check: fully visible mobile hero and lower floating inspector
 on:
   push:
     branches:

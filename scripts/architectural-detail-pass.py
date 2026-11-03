@@ -67,22 +67,51 @@ def build(name, box, cylinder, beam, material, add, bpy):
         box(cx,cy-.090,height+.017,.016,.025,.035,bronze)
 
     if name == "bo-kaap":
-        for i, x in enumerate((-.96,-.48,0,.48,.96)):
+        # One staggered multi-pane window and one distinct recessed door per
+        # terrace home. Flat parapets, ironwork and tiny stoops match the
+        # local Cape Malay streetscape instead of a generic pitched-roof toy.
+        for i,x in enumerate((-.96,-.48,0,.48,.96)):
             z0=.12+.055*(i%3)
-            # The original five houses keep their authored, distinct facades.
-            front=-.28+(i%2)*.015
-            for j in (0,1):
-                cx=x-.10+j*.20
-                window_frame(cx,front,z0+.43,.145,.27,columns=2,rows=2)
-            hardware(x+.115,front,z0+.025)
-            box(x,front-.03,z0+.81,.45,.09,.045,white)
-            box(x,front-.035,z0+.88,.46,.13,.026,terracotta)
-            box(x,front-.035,z0+.10,.46,.11,.028,white)
-            for k in range(3):
-                fixtures(x-.165+k*.165,front-.07,z0+.79,.014)
+            front=-.225
+            window_frame(x-.105,front,z0+.46,.166,.245,columns=3,rows=2)
+            # Weathered door, inset panels, small glazed transom and hardware.
+            box(x+.115,front-.011,z0+.37,.175,.026,.66,shadow)
+            box(x+.115,front-.037,z0+.36,.153,.017,.635,timber)
+            for yheight in (.15,.32,.50):
+                box(x+.115,front-.053,z0+yheight,.132,.014,.012,bronze)
+            box(x+.115,front-.056,z0+.735,.158,.016,.082,pane)
+            box(x+.115,front-.07,z0+.74,.017,.015,.080,enamel)
+            cylinder(x+.167,front-.079,z0+.37,.010,.024,bronze,vertices=12).rotation_euler.x=pi/2
+            # Continuous cornices, raised plaster borders and rainwater pipes.
+            box(x,front-.06,z0+.84,.455,.066,.04,white)
+            box(x,front-.065,z0+.97,.45,.076,.018,white)
+            box(x-.214,front-.045,z0+.49,.019,.055,.70,white)
+            box(x+.214,front-.045,z0+.49,.019,.055,.70,white)
+            strip((x+.201,front-.10,z0+.79),(x+.201,front-.10,z0+.05),.009,mullion)
+            # Iron security grilles with a separate depth from the glass.
+            for col in range(4):
+                gx=x-.18+col*.05
+                strip((gx,front-.082,z0+.47),
+                      (gx,front-.082,z0+.705),.005,mullion)
+            for h in (.49,.58,.69):
+                strip((x-.19,front-.082,z0+h),
+                      (x-.02,front-.082,z0+h),.004,mullion)
+            fixtures(x-.19,front-.10,z0+.77,.012)
+            # Stoop handrails, individual stair treads, bright low walls.
+            for side in (-1,1):
+                sx=x+.115+side*.118
+                strip((sx,-.29,z0+.23),(sx,-.52,z0-.025),.006,mullion)
+                strip((sx,-.29,z0+.23),(sx,-.29,z0+.04),.007,mullion)
+                strip((sx,-.52,z0+.02),(sx,-.52,z0-.08),.006,mullion)
             if i in (1,3):
-                balcony(x-.085,front,z0+.43,.28)
-        # Naturalistic, narrow interlocking paving-stone joints.
+                box(x-.12,front-.12,z0+.42,.22,.23,.038,white)
+                for j in range(6):
+                    gx=x-.215+j*.038
+                    strip((gx,front-.22,z0+.43),
+                          (gx,front-.22,z0+.66),.005,mullion)
+                strip((x-.218,front-.22,z0+.67),
+                      (x-.02,front-.22,z0+.67),.010,mullion)
+        # Repeating street joints, not a flat beige texture plane.
         for i in range(45):
             x=-1.18+(i%15)*.168
             y=-.83+(i//15)*.086
@@ -152,37 +181,61 @@ def build(name, box, cylinder, beam, material, add, bpy):
                 strip((x,.378,z),(x,.718,z),.006,mullion)
 
     elif name == "dome":
-        for x in (-.66,.66):
-            for j in range(6):
-                cx=x-.29+j*.116
-                box(cx,-.302,.97,.052,.044,.023,white)
-            for z in (.26,.88):
-                box(x,-.28,z,.82,.05,.034,white)
-            for offset in (-.24,0,.24):
-                window_frame(x+offset,-.305,.36,.16,.35,columns=2,rows=2)
-        for x in (-.39,-.13,.13,.39):
-            cylinder(x,-.55,.72,.061,.037,white,vertices=20)
-            cylinder(x,-.55,.17,.070,.041,white,vertices=20)
-        box(0,-.65,.81,1.07,.08,.065,white)
-        for i in range(7):
-            x=-.51+i*.17
-            box(x,-.61,.80,.09,.024,.026,enamel)
+        # Constitution Hill's newer Constitutional Court and the old prison
+        # structures combine brick, precast screens, glazing and shaded plazas.
+        for j in range(12):
+            gx=-1.04+j*.061
+            for z in (.25,.37,.49,.61,.73,.85):
+                box(gx,-.296,z,.048,.012,.012,terracotta if j%2 else white)
+        for x in (.50,.73,.95):
+            window_frame(x,-.257,.40,.15,.27,columns=3,rows=3,trim=mullion)
+            box(x,-.28,.76,.19,.08,.027,white)
+        # Modern structural glazing is framed at smaller spacing than the
+        # structural fins, including the horizontal shadows between floors.
+        for z in (.38,.52,.70,.88,1.05,1.24,1.42):
+            box(.06,-.155,z,.56,.050,.015,mullion)
+        for x in (-.17,-.07,.03,.13,.23):
+            strip((x,-.15,.23),(x,-.15,1.57),.007,mullion)
+        box(.06,-.22,1.70,.69,.46,.044,white)
+        # Portico joinery and low standing public realm hardware.
+        for x in (-.79,-.56,-.33,-.10):
+            cylinder(x,-.55,.77,.060,.032,white,vertices=20)
+            cylinder(x,-.55,.13,.069,.028,white,vertices=20)
+        for x in (-.82,-.56,-.30,.02,.29,.55,.81):
+            box(x,-.75,.09,.064,.17,.040,white)
+        for x in (-.95,.98):
+            fixtures(x,-.31,.77,.021)
 
     elif name == "tower":
-        for x in (-.89,-.54,-.18,.18,.54,.89):
-            window_frame(x,-.314,.38,.13,.27,2,2)
-            box(x,-.405,.68,.084,.09,.026,white)
+        # Durban City Hall stone cornices and copper-ribbed central dome.
+        for x in (-.88,-.58,-.29,0,.29,.58,.88):
+            window_frame(x,-.329,.35,.135,.28,columns=2,rows=3)
+            box(x,-.40,.79,.18,.10,.024,white)
         for side in (-1,1):
-            for z in (.88,.98,1.08):
-                box(side*.9,.12,z,.20,.83,.019,white)
-        for x in (-1.08,1.08):
-            fixtures(x,-.37,.75,.018)
-        for i in range(12):
-            a=tau*i/12
-            x=.16*math.sin(a)
-            z=1.30+.16*math.cos(a)
-            box(x,-.262,z,.008,.014,.024,bronze)
-        cylinder(0,.1,1.96,.034,.044,bronze,vertices=20)
+            for z in (.95,1.04,1.13):
+                box(side*.94,.11,z,.27,.84,.018,white)
+            fixtures(side*1.03,-.38,.69,.020)
+        # Fluted free-standing portico columns and stepped capitals.
+        for x in (-.74,-.45,-.15,.15,.45,.74):
+            for side in (-1,1):
+                strip((x+side*.022,-.499,.18),
+                      (x+side*.022,-.499,.76),.006,white)
+            cylinder(x,-.46,.79,.067,.040,white,vertices=24)
+            cylinder(x,-.46,.16,.061,.032,white,vertices=24)
+        for i in range(7):
+            z=.90+i*.023
+            box(0,-.635,z,1.91-i*.16,.037,.011,white)
+        # Vertical copper seams and lantern frame on the domed roof.
+        for i in range(24):
+            a=tau*i/24
+            strip((.38*math.cos(a),.11+.38*math.sin(a),1.40),
+                  (.09*math.cos(a),.11+.09*math.sin(a),1.90),
+                  .005,bronze)
+        for i in range(16):
+            a=tau*i/16
+            x,y=.315*math.cos(a),.11+.315*math.sin(a)
+            cylinder(x,y,1.20,.025,.28,white,vertices=16)
+        box(0,-.63,.86,1.88,.06,.026,white)
 
     elif name == "arch":
         for i in range(13):

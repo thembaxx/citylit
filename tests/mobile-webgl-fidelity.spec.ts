@@ -13,6 +13,7 @@ test("Retina mobile uses capped pixel density", async ({ browser }, testInfo) =>
     const canvas = page.locator(".persistent-canvas canvas");
     await expect(canvas).toBeVisible({ timeout: 30000 });
     const ratio = await canvas.evaluate((element) => {
+      if (!(element instanceof HTMLCanvasElement)) return 0;
       const width = element.getBoundingClientRect().width;
       return width > 0 ? element.width / width : 0;
     });

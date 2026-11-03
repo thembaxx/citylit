@@ -1,0 +1,49 @@
+name: Capture full-detail CityLit WebGL scenes (one shot)
+on:
+  push:
+    branches:
+      - feat/citylit-premium-asset-fidelity
+    paths:
+      - .github/workflows/capture-premium-scenes-once.yml
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Confirm real GLB models, full-resolution maps and current scene code
+        run: |
+          pnpm models:audit
+          pnpm format:check
+          pnpm lint
+          pnpm typecheck
+          pnpm build
+      - name: Capture all fifteen selected GLBs at desktop and mobile resolutions
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          pnpm start --hostname 127.0.0.1 > /tmp/citylit-capture.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3000/cape-town/landmarks > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/capture-stage-catalog.mjs
+      - name: Publish actual loaded-geometry visual QA
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: full-detail-citylit-15-desktop-mobile
+          path: artifacts/stage-pbr/
+          if-no-files-found: warn
+          retention-days: 14

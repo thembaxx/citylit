@@ -1,0 +1,70 @@
+name: Build premium CityLit stage models (one shot)
+on:
+  push:
+    branches:
+      - feat/citylit-premium-asset-fidelity
+    paths:
+      - .github/workflows/regenerate-premium-stage-assets-once.yml
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: feat/citylit-premium-asset-fidelity
+          persist-credentials: true
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install Blender and locally cached CC0 scan processors
+        run: |
+          sudo apt-get update -y
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y blender python3-numpy python3-pil
+      - name: Rebuild all fifteen high-fidelity GLBs with source-resolution PBR
+        run: |
+          python3 -m py_compile scripts/*.py
+          pnpm models:build
+          pnpm models:audit
+          pnpm site-models:audit
+      - name: Persist decoded assets and manifest to isolated draft branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/models/stage/
+          if ! git diff --cached --quiet; then
+            git commit -m "assets(3d): regenerate detailed landmark geometry with full-resolution CC0 scans"
+            git fetch origin feat/citylit-premium-asset-fidelity
+            git rebase origin/feat/citylit-premium-asset-fidelity
+            git push origin HEAD:feat/citylit-premium-asset-fidelity
+          fi
+      - name: Validate production build and source checks
+        run: |
+          pnpm format:check
+          pnpm lint
+          pnpm typecheck
+          pnpm build
+      - name: Capture actual desktop and mobile WebGL views of all fifteen assets
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          pnpm start --hostname 127.0.0.1 > /tmp/citylit-premium.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3000/cape-town/landmarks > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/capture-stage-catalog.mjs
+      - name: Preserve actual before/after review frames
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: premium-citylit-stage-desktop-mobile
+          path: artifacts/stage-pbr/
+          if-no-files-found: warn
+          retention-days: 14

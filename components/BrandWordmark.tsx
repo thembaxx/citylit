@@ -9,7 +9,11 @@ export default function BrandWordmark() {
         <circle cx="20" cy="20" r="3.2" fill="#FFF8E8" />
       </svg>
       <span className="wordmark-letters" aria-hidden="true">
-        c<span className="wordmark-i">ı<span className="wordmark-spark" /></span>tylit
+        c
+        <span className="wordmark-i">
+          ı<span className="wordmark-spark" />
+        </span>
+        tylit
       </span>
     </span>
   );

@@ -1,12 +1,17 @@
 import { test, expect } from "@playwright/test";
 
-test("mobile guide has tactile navigation, readable inputs and interactive Khwezi", async ({ page }) => {
+test("mobile guide has tactile navigation, readable inputs and interactive Khwezi", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   const dock = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(dock).toBeVisible();
   await expect(dock.getByRole("link")).toHaveCount(4);
-  await expect(dock.getByRole("link", { name: "Discover" })).toHaveAttribute("aria-current", "page");
+  await expect(dock.getByRole("link", { name: "Discover" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
   await expect(page.locator(".atlas-nav .atlas-about-link")).toHaveCount(0);
   const choose = page.getByRole("combobox", { name: "Choose a city on the map" });
   await expect(choose).toHaveCSS("font-size", "16px");
@@ -17,12 +22,17 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   await choose.selectOption("1");
   await expect(page.locator(".atlas-beacon-card h2")).toHaveText("Cape Town");
   await expect(page.getByRole("link", { name: "Explore the city" })).toBeVisible();
-  const overflow = await page.locator(".reference-guide").evaluate((el) => el.scrollWidth > el.clientWidth + 1);
+  const overflow = await page
+    .locator(".reference-guide")
+    .evaluate((el) => el.scrollWidth > el.clientWidth + 1);
   expect(overflow).toBe(false);
   await dock.getByRole("link", { name: "Cities" }).click();
   await expect(page).toHaveURL(/\/destinations$/);
-  await expect(page.getByRole("navigation", { name: "Mobile navigation" })
-    .getByRole("link", { name: "Cities" })).toHaveAttribute("aria-current", "page");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Mobile navigation" })
+      .getByRole("link", { name: "Cities" }),
+  ).toHaveAttribute("aria-current", "page");
 });
 
 for (const width of [320, 360, 390, 768, 1440]) {
@@ -30,11 +40,15 @@ for (const width of [320, 360, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto("/");
     await expect(page.locator(".reference-guide h1")).toBeVisible();
-    const overflow = await page.locator(".reference-guide").evaluate((el) => el.scrollWidth > el.clientWidth + 1);
+    const overflow = await page
+      .locator(".reference-guide")
+      .evaluate((el) => el.scrollWidth > el.clientWidth + 1);
     expect(overflow).toBe(false);
     await page.goto("/brand");
     await expect(page.getByRole("heading", { name: /Every city/ })).toBeVisible();
-    expect(await page.locator(".brand-page").evaluate((el) => el.scrollWidth > el.clientWidth + 1)).toBe(false);
+    expect(
+      await page.locator(".brand-page").evaluate((el) => el.scrollWidth > el.clientWidth + 1),
+    ).toBe(false);
     await expect(page.getByRole("button", { name: "Make Khwezi hop" })).toBeVisible();
   });
 }

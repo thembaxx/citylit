@@ -5,10 +5,16 @@
  * https://github.com/Surajmaurya1/easyui
  * Uses Citylit's existing motion package and design tokens, with no added dependency.
  */
-import { useRef, type ComponentPropsWithoutRef, type PointerEvent } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { useRef, type PointerEvent } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  type HTMLMotionProps,
+} from "motion/react";
 
-export type MagneticButtonProps = ComponentPropsWithoutRef<"button"> & {
+export type MagneticButtonProps = HTMLMotionProps<"button"> & {
   strength?: number;
 };
 
@@ -34,7 +40,12 @@ export default function MagneticButton({
   };
   const move = (event: PointerEvent<HTMLButtonElement>) => {
     onPointerMove?.(event);
-    if (reduced || event.pointerType !== "mouse" || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (
+      reduced ||
+      event.pointerType !== "mouse" ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    )
+      return;
     const box = ref.current?.getBoundingClientRect();
     if (!box) return;
     dx.set((event.clientX - box.left - box.width / 2) * strength);
@@ -48,8 +59,14 @@ export default function MagneticButton({
       className={`easyui-magnetic-button ${className}`}
       style={{ x: reduced ? 0 : x, y: reduced ? 0 : y }}
       onPointerMove={move}
-      onPointerLeave={(event) => { reset(); onPointerLeave?.(event); }}
-      onBlur={(event) => { reset(); onBlur?.(event); }}
+      onPointerLeave={(event) => {
+        reset();
+        onPointerLeave?.(event);
+      }}
+      onBlur={(event) => {
+        reset();
+        onBlur?.(event);
+      }}
       whileTap={reduced ? undefined : { scale: 0.96 }}
       transition={{ type: "spring", stiffness: 460, damping: 35 }}
     >

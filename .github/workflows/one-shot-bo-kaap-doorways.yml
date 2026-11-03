@@ -1,4 +1,5 @@
 name: Bo-Kaap physical doorway rebuild and visual QA
+# Visual QA revision 2: shallow timber setback and physically shaded jambs.
 on:
   push:
     branches:

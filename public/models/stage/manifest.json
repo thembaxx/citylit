@@ -2,7 +2,7 @@
   {
     "id": "table-mountain",
     "src": "/models/stage/table-mountain.glb",
-    "bytes": 332948,
+    "bytes": 332508,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -13,7 +13,7 @@
   {
     "id": "stadium",
     "src": "/models/stage/stadium.glb",
-    "bytes": 352756,
+    "bytes": 351224,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -24,7 +24,7 @@
   {
     "id": "union-buildings",
     "src": "/models/stage/union-buildings.glb",
-    "bytes": 134296,
+    "bytes": 133880,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -35,7 +35,7 @@
   {
     "id": "ponte",
     "src": "/models/stage/ponte.glb",
-    "bytes": 192600,
+    "bytes": 187020,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -46,7 +46,7 @@
   {
     "id": "bridge",
     "src": "/models/stage/bridge.glb",
-    "bytes": 121048,
+    "bytes": 120620,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -57,7 +57,7 @@
   {
     "id": "lighthouse",
     "src": "/models/stage/lighthouse.glb",
-    "bytes": 296004,
+    "bytes": 294480,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -68,7 +68,7 @@
   {
     "id": "hole",
     "src": "/models/stage/hole.glb",
-    "bytes": 137208,
+    "bytes": 136508,
     "authoring": "Blender 4.3",
     "geometryTier": "site-informed-sculpt-v1",
     "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
@@ -79,7 +79,7 @@
   {
     "id": "park",
     "src": "/models/stage/park.glb",
-    "bytes": 411252,
+    "bytes": 411224,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -90,7 +90,7 @@
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 554424,
+    "bytes": 554512,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -101,7 +101,7 @@
   {
     "id": "tower",
     "src": "/models/stage/tower.glb",
-    "bytes": 278292,
+    "bytes": 278108,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -123,7 +123,7 @@
   {
     "id": "fort",
     "src": "/models/stage/fort.glb",
-    "bytes": 540664,
+    "bytes": 540660,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -134,7 +134,7 @@
   {
     "id": "bo-kaap",
     "src": "/models/stage/bo-kaap.glb",
-    "bytes": 354460,
+    "bytes": 354468,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -145,7 +145,7 @@
   {
     "id": "cooling-towers",
     "src": "/models/stage/cooling-towers.glb",
-    "bytes": 339752,
+    "bytes": 337128,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -156,7 +156,7 @@
   {
     "id": "aquarium",
     "src": "/models/stage/aquarium.glb",
-    "bytes": 562136,
+    "bytes": 561992,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",

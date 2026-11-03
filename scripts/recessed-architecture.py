@@ -82,13 +82,13 @@ def build(name, box, material, bpy):
     elif name == "union-buildings":
         # Paired façades each have 8 carved, independently glazed rooms.
         # Match the actual Blender window centres in sculpt-landmark-heroes.py.
-        for side in (-1, 1):
-            cx = side * 1.01
-            shell = "RecessShellUnionEast" if side > 0 else "RecessShellUnionWest"
+        for wing in (-1, 1):
+            cx = wing * 1.01
+            shell = "RecessShellUnionEast" if wing > 0 else "RecessShellUnionWest"
             for row, z in enumerate((.40, .72)):
                 for col, dx in enumerate((-.27, -.09, .09, .27)):
                     carve(shell, cx + dx, -.24, z - .095,
-                          .13, .19, (row * 4 + col) + (0 if side < 0 else 8))
+                          .13, .19, (row * 4 + col) + (0 if wing < 0 else 8))
     elif name == "dome":
         for i, x in enumerate((.50,.73,.95)):
             carve("RecessShellConstitutionStone", x, -.23,

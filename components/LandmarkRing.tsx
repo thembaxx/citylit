@@ -348,13 +348,13 @@ function Ring({
         intensity={night ? 0.3 : 0.65}
         color={night ? "#99b4db" : "#ffa968"}
       />
-      <group position={[size.width > size.height ? 1.45 : 0, 0, 0]}>
+      <group position={[size.width > size.height ? 0.72 : -0.48, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
             <group
               key={item.name}
               position={positions[index]}
-              scale={index === selected ? zoom : 0.6}
+              scale={index === selected ? (size.width < 760 ? 0.8 : 1) * zoom : 0.55}
               onClick={(event) => {
                 event.stopPropagation();
                 onSelect(index);
@@ -416,6 +416,7 @@ export default function LandmarkRing({
   const [exploded, setExploded] = useState(false);
   const [feature, setFeature] = useState<MuseumFeature>("architecture");
   const [zoom, setZoom] = useState(1);
+  const [mobileInspectorOpen, setMobileInspectorOpen] = useState(false);
   const [view, setView] = useState<StageView>("overview");
   const [spin, setSpin] = useState(0);
   const reduced = !!useReducedMotion();
@@ -431,6 +432,7 @@ export default function LandmarkRing({
     setFeature("architecture");
     setZoom(1);
     setView("overview");
+    setMobileInspectorOpen(false);
   }, [selected]);
   return (
     <div
@@ -502,6 +504,21 @@ export default function LandmarkRing({
         onPointerMove={(event) => event.stopPropagation()}
         onPointerUp={(event) => event.stopPropagation()}
       >
+        <button
+          type="button"
+          className="atlas-inspector-toggle"
+          aria-label={mobileInspectorOpen ? "Close 3D inspector" : "Open 3D inspector"}
+          aria-controls="atlas-inspector-panel"
+          aria-expanded={mobileInspectorOpen}
+          onClick={() => setMobileInspectorOpen((open) => !open)}
+        >
+          <Cube size={18} />
+          <span>Inspect</span>
+        </button>
+        <div
+          id="atlas-inspector-panel"
+          className={mobileInspectorOpen ? "atlas-inspector-panel is-open" : "atlas-inspector-panel"}
+        >
         <div className="atlas-inspector-actions">
           <button
             type="button"
@@ -611,6 +628,7 @@ export default function LandmarkRing({
               : `${features.find((option) => option.id === feature)?.label} · interactive miniature`
             : `${night ? "Night" : "Day"} · ${view} · ${Math.round(zoom * 100)}% scale`}
         </p>
+        </div>
       </div>
     </div>
   );

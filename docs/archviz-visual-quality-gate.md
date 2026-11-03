@@ -1,56 +1,72 @@
-# CityLit — photographic-quality architecture benchmark
+# CityLit — architecture visual-quality benchmark
 
-## Visual target
+## Source and design direction
 
-Reference supplied by the project owner: a realistic, art-directed isometric architectural
-visualization of a contemporary building with genuinely convincing surfaces, depth,
-reflection, landscaping, light, and camera composition.
+The quality target is the user-provided premium architectural app reference.
+The Kimberley McGregor Museum is a *historic red-brick Victorian Sanatorium
+building*, not the simple cream cottage used by CityLit previously. The updated
+hero is an **original illustrative architectural study** of the real landmark,
+not a surveyed or photogrammetric reconstruction.
 
-**The current CityLit stage miniatures do not meet this target.** Passing TypeScript,
-GLB size checks, or browser interaction tests is not evidence of comparable visual quality.
+Historical references for form only (not republished or included as textures):
+- https://www.gov.za/news/media-statements/northern-cape-sport-arts-and-culture-calls-nomination-serve-mcgregor-museum
+- https://artefacts.co.za/main/Buildings/bldgframes_mob.php?bldgid=12247
+- https://www.tripadvisor.com.mx/Attraction_Review-g312643-d2513715-Reviews-McGregor_Museum-Kimberley_Northern_Cape.html
 
-## Existing shortcomings confirmed by actual browser renders
+## What has been authored
 
-- Many landmarks still resemble coloured primitives, including the historic museum hero.
-- Geometry is too simple to produce believable window recesses, roof profiles,
-  interiors, material transitions, edge highlights or small-scale architectural details.
-- Generic vertex/solid colours stand in for UV-authored PBR texture maps.
-- Landmark framing is cropped on desktop and has conflicted with controls on mobile.
-- Landscape foliage has a conspicuously simplified, rounded appearance.
-- Tiny Draco GLBs are evidence of efficient assets, not evidence of photorealism.
+- Blender builder: `scripts/build-museum-hero.py`
+- Licensed texture retrieval: `scripts/fetch-museum-pbr.py`
+- Draco compression: `scripts/compress-museum-hero.mjs`
+- Independent audit: `scripts/audit-museum-hero.mjs`
+- Runtime: `components/MuseumHeroAsset.tsx`, backed by the procedural scene
+  as an offline/network failure fallback
+- Production asset: `public/models/hero/mcgregor-museum.glb`
+- 3.82 MB compressed asset, 12 embedded PBR images
+- Named MuseumFacade, MuseumRoof, MuseumGlass and MuseumLandscape nodes
+- Detailing: red-brick walls, pitched and seamed roofs, chimneys, double veranda,
+  balcony spindles, white columns, dark divided windows, landscaping and plinth
+- PMREM studio reflections, calibrated material colors, adaptive shadows, day/night,
+  camera-aware model orientation and collapsible mobile controls
 
-## Work in this experiment
+## PBR scans and rights
 
-- Local, procedural albedo/relief maps for stone, plaster, copper, paving, wood, and grass.
-- Smooth micro-bevels, more convincing glazing, less obstructive foliage, richer contrast.
-- Local PMREM studio reflection environment for surfaces without an external runtime fetch.
-- Revised framing and a collapsible mobile inspector.
-- Repeatable screenshots at 1440x900 and 390x844 in daylight and night mode.
+The Blender model is original. Four generic surface sets are downloaded
+**at build time only** from ambientCG, licensed CC0 1.0:
+`Bricks090`, `PavingStones128`, `Grass004`, `Wood096`.
+Their Color, NormalGL and Roughness maps are resized to 768px and embedded
+in the GLB so CityLit does not depend on a third-party material CDN at runtime.
 
-**This is a rendering experiment, not the final asset-quality milestone.**
+Official licensing: https://docs.ambientcg.com/license/
 
-## Non-negotiable acceptance criteria for a future premium-asset milestone
+No museum photograph or proprietary design from the inspiration is shipped
+inside the app.
 
-1. A new, reference-informed Blender museum or other landmark model with authored
-   proportions, bevelled hard-surface geometry, window reveals, mullions, doors, roof
-   construction, trim and a believable interior behind glass.
-2. Rights-cleared photographic/PBR material maps (base color, normal, roughness,
-   ambient occlusion), with UVs, calibrated roughness and appropriate metalness.
-3. HDR/PMREM studio lighting, ambient occlusion, soft contact shadows, correct colour
-   management, and depth without overexposed white surfaces.
-4. Landscape vegetation that reads as vegetation rather than spheres and low-poly cones.
-5. **Visual review of actual browser captures** at 1440x900 and 390x844, compared
-   side-by-side with the user's provided screenshots before any merge or rollout.
-6. Render quality tiers, LOD, texture compression and asset preloading verified on
-   real midrange mobile hardware. Adaptive settings must preserve recognisable quality.
-7. Keyboard, screen reader, reduced-motion, offline fallback, and visual interaction QA.
+## QA and visual gate
 
-## Release policy
+The built asset passes Blender export, Draco decode, texture/node integrity and
+budget checks. True desktop/mobile renders were captured at 1440×900 and
+390×844 (day/night) by Playwright WebGL on CI.
 
-Do not merge an experimental styling branch solely because it builds. A reviewer should
-visually sign off on a genuinely improved hero image. Do not apply an unapproved
-style mechanically across the remaining 3D assets.
+Final centered-reference screenshot run:
+https://github.com/thembaxx/citylit/actions/runs/41642418418
+Artifact: `heritage-museum-new-model-desktop-mobile`
 
-Some figures in the supplied reference are a visually polished architectural illustration,
-not proof of the ability to reconstruct a historic building. Never label an unverified
-illustrative model as an accurate survey.
+The model now reads as a distinct heritage building and is framed properly,
+but still looks like an architectural miniature, **not photorealistic**.
+Full reference quality would require further production modeling, realistic
+interiors through the windows, detailed vegetation, ambient occlusion, and
+visual tuning with measured frame times on real devices.
+
+Do not treat technical pass/fail, a small GLB size, or a polished UI as proof of
+reference-level visual fidelity. **PR remains draft; do not merge automatically
+until visual acceptance.**
+
+## Reproducible commands
+
+```bash
+pnpm hero:build   # requires Blender + Python Pillow and access to CC0 scans
+pnpm hero:audit
+pnpm models:audit
+pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
+```

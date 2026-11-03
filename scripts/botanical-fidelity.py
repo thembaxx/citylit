@@ -49,14 +49,14 @@ def build(name, beam, material, bpy):
             cy=y+math.sin(angle)*spread
             cz=.10+(.58+.11*rng.random())*scale
             beam((x,y,.10+.35*scale),(cx,cy,cz),.0055*scale,bark)
-            for k in range(29):
-                origin=(cx+rng.uniform(-.105,.105)*scale,
-                        cy+rng.uniform(-.095,.095)*scale,
-                        cz+rng.uniform(-.11,.11)*scale)
+            for k in range(64):
+                origin=(cx+rng.uniform(-.12,.12)*scale,
+                        cy+rng.uniform(-.12,.12)*scale,
+                        cz+rng.uniform(-.14,.14)*scale)
                 a=angle+rng.uniform(-1.9,1.9)
                 leaf(origin,(math.cos(a),math.sin(a),rng.uniform(-.32,.64)),
-                     rng.uniform(.052,.094)*scale,
-                     rng.uniform(.018,.037)*scale,(ti+cluster+k//5)%4)
+                     rng.uniform(.064,.112)*scale,
+                     rng.uniform(.023,.046)*scale,(ti+cluster+k//5)%4)
 
     canopy=bpy.data.meshes.new("Curved botanical leaf laminae")
     canopy.from_pydata(vertices,[],faces)
@@ -100,6 +100,6 @@ def build(name, beam, material, bpy):
     count=len(faces)//16
     print("Botanical laminae:",count,"leaf tris:",len(faces),
           "ground blades:",len(fs)//4)
-    if count<1000 or len(faces)<15000:
+    if count<2500 or len(faces)<40000:
         raise RuntimeError("Botanical geometry unexpectedly sparse")
     return True

@@ -1,8 +1,7 @@
 name: CI
+# Paused by owner request: no automatic CI on push, PR or merge queue.
+# Manual run remains available from GitHub Actions when needed.
 on:
-  push:
-  pull_request:
-  merge_group:
   workflow_dispatch:
 permissions:
   contents: read

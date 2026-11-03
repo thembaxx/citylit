@@ -1,5 +1,5 @@
 name: Format museum architecture code once
-# Apply format after contrast, mobile presentation and asset integration edits
+# Apply final format including camera-facing museum orientation
 on:
   push:
     branches:

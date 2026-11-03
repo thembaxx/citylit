@@ -2753,3 +2753,30 @@
     transition: none;
   }
 }
+
+/* Heritage model is a visual centerpiece, not a tiny carousel thumbnail.
+   Only the museum selection gets the additional breathing room. */
+@media (max-width: 767px) {
+  .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-ring-scene {
+    top: 162px;
+    height: 430px;
+    overflow: visible;
+  }
+  .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-stage-content {
+    margin-top: 352px;
+  }
+  .atlas-ring-scene.is-heritage-hero .atlas-inspector-toolbar {
+    top: 65px;
+    right: 9px;
+  }
+  .atlas-ring-scene.is-heritage-hero .atlas-inspector-toggle {
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    border-radius: 999px;
+    box-shadow: 0 8px 25px rgb(17 17 17 / 10%);
+  }
+}
+@media (min-width: 768px) {
+  .atlas-ring-scene.is-heritage-hero .atlas-inspector-toolbar {
+    right: clamp(10px, 2.3vw, 32px);
+  }
+}

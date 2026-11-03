@@ -1,4 +1,4 @@
-"""Author Citylit's illustrative, low-poly stage models in Blender.
+"""Author CityLit's PBR architectural stage miniatures in Blender.
 
 Derived from the supplied build-models.py guidance. Run with Blender 4.3+:
   blender --background --python scripts/build-landmark-models.py
@@ -17,6 +17,9 @@ OUT.mkdir(parents=True, exist_ok=True)
 spec = importlib.util.spec_from_file_location("landmark_details", ROOT / "scripts/landmark-details.py")
 details = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(details)
+pbr_spec = importlib.util.spec_from_file_location("stage_pbr", ROOT / "scripts/stage-pbr.py")
+stage_pbr = importlib.util.module_from_spec(pbr_spec)
+pbr_spec.loader.exec_module(stage_pbr)
 MATERIALS = {}
 
 
@@ -265,6 +268,7 @@ for name, build in BUILDERS.items():
     base()
     build()
     details.decorate(name, box, cylinder, beam, material, add, bpy)
+    stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.
     bpy.ops.object.join()

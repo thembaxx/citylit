@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { cities } from "../lib/data";
 import { Alive } from "./Models";
 import ProceduralTree from "./ProceduralTree";
+import MuseumShowcase from "./MuseumShowcase";
 const colors = [
   "#f3c7a6",
   "#7dce6a",
@@ -209,6 +210,13 @@ export default function ExpandedLandmark({
   });
   const garden = index === 1 && ["gables", "gallery", "waterfall", "grassland"].includes(model);
   const signature = Signature({ model, index, tone });
+  if (cities[city].slug === "kimberley" && index === 1) {
+    return (
+      <Alive reduced={reduced}>
+        <MuseumShowcase reduced={reduced} />
+      </Alive>
+    );
+  }
   return (
     <Alive reduced={reduced}>
       <group>

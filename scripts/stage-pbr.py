@@ -8,7 +8,7 @@ from pathlib import Path
 import bpy
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "scripts" / ".museum-pbr"
+SOURCE = ROOT / "scripts" / ".stage-pbr"
 CATEGORIES = {
     "brick": ("bricks", 0.58),
     "stone": ("paving", 0.33),
@@ -49,9 +49,7 @@ def texture(category, channel):
         raise RuntimeError("Missing CC0 PBR texture: %s %s" % (category, channel))
     image = bpy.data.images.load(str(matches[0]), check_existing=True)
     image.name = "CityLit CC0 %s %s" % key
-    # 320px keeps each GLB lightweight while retaining relief when seen close.
-    # image.scale edits pixel data; image.pack makes the GLB self-contained.
-    image.scale(320, 320)
+    # Images were downsampled to 320px JPEGs before Blender, avoiding PNG bloat.
     image.colorspace_settings.name = "sRGB" if channel == "Color" else "Non-Color"
     image.pack()
     IMAGE_CACHE[key] = image

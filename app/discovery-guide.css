@@ -2569,6 +2569,11 @@
     padding: 7px 9px;
     min-width: 36px;
   }
+  .reference-guide .atlas-nav .atlas-day-link svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
 }
 .reference-guide h1 {
   font-weight: 300;

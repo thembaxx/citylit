@@ -374,7 +374,12 @@ function Ring({
           {items.map((item, index) => (
             <group
               key={item.name}
-              visible={showContext || index === selected}
+              visible={
+                index === selected ||
+                (showContext &&
+                  (index === (selected + 1) % items.length ||
+                    index === (selected - 1 + items.length) % items.length))
+              }
               position={positions[index]}
               rotation={[
                 0,
@@ -410,11 +415,16 @@ function Ring({
                     onFeature={index === selected ? onFeature : undefined}
                   />
                 ) : (
-                  <SafeStageModel
-                    model={item.model}
-                    active={index === selected}
-                    onStatus={onModelStatus}
-                  />
+                  (index === selected ||
+                    (showContext &&
+                      (index === (selected + 1) % items.length ||
+                        index === (selected - 1 + items.length) % items.length))) && (
+                    <SafeStageModel
+                      model={item.model}
+                      active={index === selected}
+                      onStatus={onModelStatus}
+                    />
+                  )
                 )}
                 {showContext &&
                   index === selected &&

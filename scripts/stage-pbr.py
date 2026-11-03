@@ -1,7 +1,7 @@
 """Portable PBR material treatment for CityLit's authored Blender landmark assets.
 
 Uses the same build-time CC0 ambientCG scans as McGregor Museum.
-Textures are downscaled in Blender and embedded into each self-contained GLB.
+Source-resolution CC0 maps are embedded into the self-contained GLBs.
 Architectural geometry remains landmark-specific, not a generic building clone.
 """
 from pathlib import Path
@@ -49,7 +49,7 @@ def texture(category, channel):
         raise RuntimeError("Missing CC0 PBR texture: %s %s" % (category, channel))
     image = bpy.data.images.load(str(matches[0]), check_existing=True)
     image.name = "CityLit CC0 %s %s" % key
-    # Images were downsampled to 320px JPEGs before Blender, avoiding PNG bloat.
+    # Preserve original available map resolution for material close-ups.
     image.colorspace_settings.name = "sRGB" if channel == "Color" else "Non-Color"
     image.pack()
     IMAGE_CACHE[key] = image
@@ -70,7 +70,7 @@ def apply_material(mat):
         return
     tint = tuple(mat.diffuse_color[:3]) + (1,)
     tex = tree.nodes.new("ShaderNodeTexImage")
-    tex.label = "CC0 %s albedo, downscaled 320px" % category
+    tex.label = "CC0 %s full-resolution albedo" % category
     tex.image = texture(category, "Color")
     tint_mix = tree.nodes.new("ShaderNodeMixRGB")
     tint_mix.blend_type = "MULTIPLY"
@@ -82,7 +82,7 @@ def apply_material(mat):
     normal = tree.nodes.new("ShaderNodeTexImage")
     normal.image = texture(category, "NormalGL")
     bump = tree.nodes.new("ShaderNodeNormalMap")
-    bump.inputs["Strength"].default_value = .20 if category == "grass" else .32
+    bump.inputs["Strength"].default_value = .32 if category == "grass" else .56
     tree.links.new(normal.outputs["Color"], bump.inputs["Color"])
     tree.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
     roughness = tree.nodes.new("ShaderNodeTexImage")
@@ -107,7 +107,7 @@ def uv_project(obj):
                 uv = (vertex.x, vertex.z)
             else:
                 uv = (vertex.y, vertex.z)
-            layer.data[corner].uv = (uv[0] / .65, uv[1] / .65)
+            layer.data[corner].uv = (uv[0] / .48, uv[1] / .48)
 
 
 def prepare_scene_for_export():

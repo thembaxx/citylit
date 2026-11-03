@@ -29,8 +29,17 @@ export default function StageModel({
         if (material instanceof THREE.MeshStandardMaterial) {
           const name = material.name.toLowerCase();
           if (name.includes("water")) {
-            material.roughness = 0.2;
-            material.metalness = 0.1;
+            material.roughness = 0.13;
+            material.metalness = 0.08;
+            material.envMapIntensity = 1.55;
+          } else if (
+            name.includes("sea glass") ||
+            (name.includes("glass") && !name.includes("recess"))
+          ) {
+            material.roughness = 0.07;
+            material.metalness = 0.04;
+            material.envMapIntensity = 1.7;
+            material.side = THREE.DoubleSide;
           } else if (
             name.includes("recess") ||
             name.includes("glass") ||
@@ -53,7 +62,7 @@ export default function StageModel({
             material.roughness = THREE.MathUtils.clamp(material.roughness, 0.14, 0.98);
             material.metalness = THREE.MathUtils.clamp(material.metalness, 0, 0.85);
           }
-          material.envMapIntensity = 0.7;
+          material.envMapIntensity = Math.max(material.envMapIntensity, 0.95);
         }
         return material;
       };

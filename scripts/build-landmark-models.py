@@ -63,12 +63,12 @@ def add(operator, location, scale=None, mat=STONE, **kwargs):
 
 def box(x, y, z, sx, sy, sz, mat=STONE):
     obj = add(bpy.ops.mesh.primitive_cube_add, (x, y, z), (sx, sy, sz), mat, size=1)
-    # Bevel only large architectural masses. Thin mouldings, windows and cables
-    # stay sharp, keeping the exported Draco file and draw-call budget bounded.
-    if min(sx, sy, sz) > .22:
+    # Give structural edges small physical highlights, without rounding mullions.
+    # Detail and shading quality, not Draco output size, determine the geometry.
+    if min(sx, sy, sz) > .09:
         bevel = obj.modifiers.new("Architectural edge highlights", "BEVEL")
-        bevel.width = min(sx, sy, sz) * .045
-        bevel.segments = 2
+        bevel.width = min(.018, min(sx, sy, sz) * .042)
+        bevel.segments = 3
         bpy.context.view_layer.objects.active = obj
         bpy.ops.object.modifier_apply(modifier=bevel.name)
     return obj
@@ -302,4 +302,4 @@ for name, build in BUILDERS.items():
                          else "Original architectural/landscape miniature, not a site survey"
                      )})
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to finalize and verify the size budget.")
+print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to embed Draco and audit high-fidelity geometry.")

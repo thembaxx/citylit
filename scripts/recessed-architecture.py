@@ -16,6 +16,8 @@ def build(name, box, material, bpy):
     light = material("Interior linen and lampshades", (.72, .63, .46), roughness=.83)
     foliage = material("Interior potted leaves", (.21, .40, .25), roughness=.92)
     glass = material("Architectural window glazing", (.21, .36, .40), roughness=.10)
+    entrance_wood = material("Recessed mahogany entry", (.245, .145, .090), roughness=.57)
+    door_bronze = material("Brushed brass door hardware", (.61, .39, .20), roughness=.30, metalness=.72)
 
     def carve(solid_name, cx, front, bottom, width, height, serial):
         solid = bpy.data.objects.get(solid_name)
@@ -71,11 +73,80 @@ def build(name, box, material, bpy):
                 box(x, front-.035, bottom+height/2, .012, .024, height+.035, side)
             box(cx, front-.036, bottom+height*.54, width+.028, .020, .013, side)
 
+    def carve_entrance(solid_name, cx, front, ground, serial):
+        """Cut a genuine deep entry pocket, not a wooden sticker on the facade.
+
+        Five narrow terrace facades share these dimensions. The cutter stops
+        before the rear wall and leaves physical reveal faces for side lighting.
+        Keep openings apart from the adjacent carved window and roof ring.
+        """
+        solid = bpy.data.objects.get(solid_name)
+        if not solid or solid.type != "MESH":
+            raise RuntimeError("Missing terrace facade for door: " + solid_name)
+        width, height = .174, .716
+        bottom = ground + .044
+        bpy.ops.mesh.primitive_cube_add(
+            size=1, location=(cx, front + .16, bottom + height / 2)
+        )
+        cutter = bpy.context.object
+        cutter.name = "Temporary physical entry cut %d" % serial
+        cutter.dimensions = (width, .44, height)
+        bpy.context.view_layer.objects.active = cutter
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+        bpy.ops.object.select_all(action="DESELECT")
+        solid.select_set(True)
+        bpy.context.view_layer.objects.active = solid
+        cut = solid.modifiers.new("Actual recessed entrance", "BOOLEAN")
+        cut.operation = "DIFFERENCE"
+        cut.solver = "EXACT"
+        cut.object = cutter
+        bpy.ops.object.modifier_apply(modifier=cut.name)
+        bpy.data.objects.remove(cutter, do_unlink=True)
+        solid.select_set(False)
+
+        # Rendered pocket: depth, side and top returns, and a real threshold.
+        box(cx, front + .363, bottom + height / 2, width * .95,
+            .025, height * .97, room)
+        for offset in (-width * .49, width * .49):
+            box(cx + offset, front + .16, bottom + height / 2,
+                .015, .40, height, side)
+        box(cx, front + .16, bottom + height, width, .40, .020, side)
+        box(cx, front + .09, bottom - .008, width + .042, .41, .025, wood)
+
+        # The door sits deep in the cavity; independent raised timber stiles
+        # and panels create highlights and parallax as the miniature rotates.
+        door_y = front + .240
+        box(cx, door_y, bottom + .309, width * .79, .032, .595, entrance_wood)
+        for offset in (-width * .32, width * .32):
+            box(cx + offset, door_y - .023, bottom + .309,
+                .010, .013, .574, wood)
+        for panel_z in (bottom + .155, bottom + .36, bottom + .567):
+            box(cx, door_y - .024, panel_z, width * .58, .014, .012, wood)
+        # The glazed transom is physically between timber and the reveal lintel.
+        box(cx, front + .142, bottom + .652, width * .79, .010, .091, glass)
+        for z in (bottom + .606, bottom + .705):
+            box(cx, front + .110, z, width + .010, .028, .012, wood)
+        box(cx, front + .106, bottom + .652, .011, .029, .100, wood)
+
+        # Exposed jambs and brass backplate / handle make the opening readable
+        # at close-up without pretending the building is a site survey.
+        for offset in (-width * .52, width * .52):
+            box(cx + offset, front - .023, bottom + height / 2,
+                .017, .045, height + .028, side)
+        box(cx, front - .025, bottom + height + .014,
+            width + .037, .056, .031, side)
+        box(cx + width * .27, door_y - .041, bottom + .36,
+            .014, .012, .048, door_bronze)
+        box(cx + width * .28, door_y - .054, bottom + .36,
+            .024, .013, .013, door_bronze)
+
     if name == "bo-kaap":
         for i, cx in enumerate((-.96, -.48, 0, .48, .96)):
             ground = .12 + .055*(i%3)
             carve("RecessShellBoKaap%d" % i, cx-.105, -.225,
                   ground+.46, .166, .245, i)
+            carve_entrance("RecessShellBoKaap%d" % i, cx+.109,
+                           -.225, ground, i)
     elif name == "tower":
         for i, x in enumerate((-.88,-.58,-.29,0,.29,.58,.88)):
             carve("RecessShellDurbanHall", x, -.28, .35, .135, .28, i)

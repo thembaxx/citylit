@@ -33,12 +33,12 @@ pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
 STAGE_FOCUS_IDS=bridge,lighthouse,park,dome,tower,arch,fort,bo-kaap,cooling-towers,aquarium node scripts/capture-stage-catalog.mjs
 ```
 
-The one-time Blender regeneration has produced fifteen Draco-compressed models and a manifest. Per-asset technical validation passed in the rebuild workflow; visual review and complete final-branch CI remain separate gates.
+The previous Blender regeneration produced fifteen Draco-compressed models and a manifest. The new full-resolution and layered-glazing source changes require a fresh model rebuild and visual QA before release. Per-asset technical validation passed in the rebuild workflow; visual review and complete final-branch CI remain separate gates.
 All fifteen models must decode, contain at least three embedded CC0 images,
-have adequate mesh complexity and material differentiation, and stay below
-2 MiB each / 22 MiB for the combined catalog.
+have adequate mesh complexity and material differentiation, and preserve plausible surface detail. Guardrails now allow up to
+16 MiB per model / 180 MiB for the catalog as an accidental-bloat check, not an artistic target.
 
-Inspect actual 1440×900 and 390×844 browser renderings, geometry silhouettes
+Compare actual 1440×900 and 390×844 browser renderings with the supplied reference, geometry silhouettes
 and memory/performance before merge. Screen-reader navigation, keyboard
 controls, day/night modes and offline fallbacks must continue working.
 A clean build alone cannot establish realism or visual similarity to the

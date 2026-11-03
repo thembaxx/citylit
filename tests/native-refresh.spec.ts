@@ -82,17 +82,20 @@ test("all editable controls use at least 16px text on mobile", async ({ page }) 
       const response = await page.goto(route);
       expect(response?.ok(), `${route} should load at ${width}px`).toBe(true);
       const sizes = await page
-      .locator(
-        'input, textarea, select, [contenteditable="true"], [role="combobox"], [role="textbox"], [role="searchbox"], [role="spinbutton"]',
-      )
-      .evaluateAll((elements) =>
-        elements.map((element) => ({
-          tag: element.tagName,
-          size: Number.parseFloat(getComputedStyle(element).fontSize),
-        })),
-      );
-    for (const control of sizes) {
-      expect(control.size, `${route} at ${width}px: ${control.tag} font size`).toBeGreaterThanOrEqual(16);
+        .locator(
+          'input, textarea, select, [contenteditable="true"], [role="combobox"], [role="textbox"], [role="searchbox"], [role="spinbutton"]',
+        )
+        .evaluateAll((elements) =>
+          elements.map((element) => ({
+            tag: element.tagName,
+            size: Number.parseFloat(getComputedStyle(element).fontSize),
+          })),
+        );
+      for (const control of sizes) {
+        expect(
+          control.size,
+          `${route} at ${width}px: ${control.tag} font size`,
+        ).toBeGreaterThanOrEqual(16);
       }
     }
   }

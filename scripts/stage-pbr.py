@@ -59,6 +59,8 @@ def texture(category, channel):
 
 
 def apply_material(mat):
+    if mat.get("citylit_pbr"):
+        return
     category = surface_category(mat.name)
     if not category:
         return
@@ -88,6 +90,7 @@ def apply_material(mat):
     roughness = tree.nodes.new("ShaderNodeTexImage")
     roughness.image = texture(category, "Roughness")
     tree.links.new(roughness.outputs["Color"], bsdf.inputs["Roughness"])
+    mat["citylit_pbr"] = True
 
 
 def uv_project(obj):

@@ -82,6 +82,10 @@ BRICK_DARK = pbr("Brick mortar/corbel details", (.36,.19,.17), roughness=.87)
 RED_ROOF = pbr("Weathered copper red roof", (.54,.29,.25), roughness=.43, metallic=.3)
 ROOF_SEAM = pbr("Roof seam and ridge", (.38,.20,.19), roughness=.47, metallic=.28)
 GLASS = pbr("Sash glazing", (.29,.42,.48), roughness=.11, metallic=.16)
+# Partially transmitting panes reveal the newly recessed room surfaces.
+# Keep the transmission cheap for mobile (alpha blending, no refraction passes).
+GLASS.node_tree.nodes.get("Principled BSDF").inputs["Alpha"].default_value = .65
+GLASS.blend_method = "BLEND"
 GLASS_DARK = pbr("Deep interior", (.075,.09,.105), roughness=.68)
 WARM = pbr("Interior warm walls", (.60,.43,.30), roughness=.84)
 GOLD = pbr("Period brass hardware", (.70,.55,.30), roughness=.27, metallic=.78)
@@ -319,22 +323,49 @@ for x in (-1.72,1.72):
     block("Raised flowerbed edging",(x,-.95,.055),(.30,.77,.09),STONE,"MuseumLandscape",.012)
     for i in range(7):
         yy=-1.31+i*.115
-        cylinder("Topiary flower planter",(x,yy,.14),.09,.12,SOIL,"MuseumLandscape",10)
-        color=LEAVES[(i+int(abs(x)*10))%len(LEAVES)]
-        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2,radius=.11, location=(x,yy,.26))
-        use_obj(bpy.context.object,color,"MuseumLandscape",smooth=True)
+        cylinder("Soil planting pocket",(x,yy,.105),.083,.052,SOIL,"MuseumLandscape",12)
+        # Individual lanceolate leaves rather than a row of perfect spheres.
+        for j in range(7):
+            theta=j*math.tau/7 + i*.36
+            r=.035+.055*((j*7+i)%5)/4
+            bpy.ops.mesh.primitive_uv_sphere_add(segments=8,ring_count=5,radius=1,
+                location=(x+math.cos(theta)*r,yy+math.sin(theta)*r,.17+(j%3)*.018))
+            leaf=bpy.context.object
+            leaf.name="Garden perennial leaf"
+            leaf.scale=(.024,.063,.013)
+            leaf.rotation_euler=(.45*math.sin(theta), .40*math.cos(theta), theta+.4)
+            bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+            use_obj(leaf,LEAVES[(i+j)%len(LEAVES)],"MuseumLandscape",smooth=True)
 
-# Compact leaf clusters flank but do not cover the facade.
+# Faceted pom-poms were the main source of the cartoonish look.
+# Branched trunks with many small, individually oriented leaves create softer
+# silhouettes without billboards, expensive alpha sorting, or texture fetches.
 for tx,ty,seed in ((-1.92,.73,11),(1.92,.70,19)):
     random.seed(seed)
-    pole("Small landscape tree trunk",(tx,ty,0),(tx,ty,.64),.044,BARK,"MuseumLandscape")
-    for j in range(24):
-        angle=j*math.tau/13 + random.random()*.17
-        rad=.11+.27*random.random()
-        height=.65+.48*random.random()
-        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2,radius=.085+.055*random.random(),
-              location=(tx+math.cos(angle)*rad, ty+math.sin(angle)*rad, height))
-        use_obj(bpy.context.object, LEAVES[j % len(LEAVES)],"MuseumLandscape",smooth=True)
+    pole("Landscape tree trunk",(tx,ty,0),(tx,ty,.75),.038,BARK,"MuseumLandscape")
+    for branch in range(9):
+        theta=branch*2.39996
+        z0=.38+branch*.045
+        length=.29+random.random()*.18
+        pole("Natural branch",(tx,ty,z0),
+             (tx+math.cos(theta)*length,ty+math.sin(theta)*length,z0+.24),
+             .012,BARK,"MuseumLandscape",vertices=7)
+    for j in range(105):
+        theta=j*2.39996 + seed*.14
+        radius=.12+.31*math.sqrt((j+.5)/105)
+        x=tx+math.cos(theta)*radius
+        y=ty+math.sin(theta)*radius
+        z=.72+(.28*math.sin((j+seed)*1.93))+.24*random.random()
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=7,ring_count=5,radius=1,
+              location=(x,y,z))
+        leaf=bpy.context.object
+        leaf.name="Individually angled leaf clusters"
+        leaf.scale=(.048+random.random()*.04,.025+random.random()*.02,
+                    .068+random.random()*.035)
+        leaf.rotation_euler=(random.random()*math.pi,random.random()*math.pi,
+                             theta+random.random()*.45)
+        bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+        use_obj(leaf,LEAVES[(j+seed)%len(LEAVES)],"MuseumLandscape",smooth=True)
 
 # Group by layer + material to keep draw calls manageable and layer transforms separate.
 for layer, empty in LAYERS.items():

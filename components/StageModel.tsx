@@ -28,32 +28,53 @@ export default function StageModel({
         const material = source.clone();
         if (material instanceof THREE.MeshStandardMaterial) {
           const name = material.name.toLowerCase();
+          if (name.includes("sea glass")) {
+            // Shared scene remains opaque behind window recesses, while the
+            // thin front pane provides optical depth and crisp studio glints.
+            const pane = new THREE.MeshPhysicalMaterial({
+              name: material.name,
+              color: material.color.clone(),
+              map: material.map,
+              normalMap: material.normalMap,
+              normalScale: material.normalScale.clone(),
+              roughness: 0.14,
+              metalness: 0,
+              transmission: 0.48,
+              thickness: 0.07,
+              ior: 1.46,
+              clearcoat: 0.7,
+              clearcoatRoughness: 0.09,
+              envMapIntensity: 1.35,
+              side: THREE.DoubleSide,
+            });
+            material.dispose();
+            return pane;
+          }
           if (name.includes("water")) {
-            material.roughness = 0.2;
-            material.metalness = 0.1;
-          } else if (
-            name.includes("recess") ||
-            name.includes("glass") ||
-            name.includes("glazing")
-          ) {
-            material.roughness = 0.25;
-            material.metalness = 0.12;
+            material.roughness = 0.13;
+            material.metalness = 0.07;
+          } else if (name.includes("warmly shaded interior")) {
+            material.emissive = new THREE.Color("#ffbd76");
+            material.emissiveIntensity = 0.19;
+            material.roughness = 0.84;
+          } else if (name.includes("recess") || name.includes("glazing")) {
+            material.roughness = 0.16;
+            material.metalness = 0.09;
           } else if (name.includes("foliage") || name.includes("leaf")) {
-            material.roughness = 0.93;
+            material.roughness = 0.88;
             material.metalness = 0;
           } else if (name.includes("paint")) {
-            material.roughness = 0.68;
+            // Keep the vibrant authored Bo-Kaap and tower colours.
+            material.roughness = 0.62;
             material.metalness = 0;
           } else if (name.includes("amber")) {
-            material.roughness = 0.48;
-            material.metalness = 0.17;
+            material.roughness = 0.38;
+            material.metalness = 0.3;
           } else {
-            // Keep authored Blender PBR finishes for metal, plaster, glazing,
-            // wood, sandstone and roof materials instead of flattening them.
-            material.roughness = THREE.MathUtils.clamp(material.roughness, 0.14, 0.98);
+            material.roughness = THREE.MathUtils.clamp(material.roughness, 0.12, 0.98);
             material.metalness = THREE.MathUtils.clamp(material.metalness, 0, 0.85);
           }
-          material.envMapIntensity = 0.7;
+          material.envMapIntensity = 1.12;
         }
         return material;
       };

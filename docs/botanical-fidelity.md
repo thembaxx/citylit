@@ -5,7 +5,7 @@ floating oval foliage, even after the architectural-detail pass. Its large
 canopy silhouettes failed the owner's architectural reference target.
 
 This isolated improvement replaces **only** the park's tree canopies with
-1,276 deterministic curved leaf laminae (4 trees × 11 clusters × 29 leaves),
+2,816 deterministic curved leaf laminae (4 trees × 11 clusters × 64 leaves),
 plus slender twigs and hundreds of individually tapered ground blades.
 Individual laminae have geometric midrib curvature and four physically rough
 green materials. The entire canopy exports as one Blender mesh with four
@@ -22,3 +22,11 @@ geometry were used. Source texture maps stay bundled for other surfaces.
 is visibly more natural and that stage controls don't collide. Check
 mobile memory and interactions. This is a detailed procedural miniature,
 not a scanned real-world tree or photorealistic botanical reconstruction.
+
+## Second visual-density pass
+
+The first ready-state desktop and phone capture showed correct leaf geometry but
+canopies still appeared sparse at the app's normal field of view. Leaf counts
+increased to 2,816 while preserving the one-mesh canopy and independent green
+materials. Actual screenshots and frame-time behavior must be reviewed again;
+source counts alone are not the release gate.

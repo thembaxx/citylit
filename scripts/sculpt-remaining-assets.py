@@ -249,7 +249,6 @@ def build(name, box, cylinder, beam, material, add, bpy):
             opening(side*.22,-.221,1.18,.12,.21)
         # Clock face, tick marks and hands placed in front of stone.
         cylinder(0,-.222,1.30,.184,.020,pale,vertices=40).rotation_euler.x=math.pi/2
-        tube_ring(0,-.237,1.30,.16,.16,warm,count=32,radius=.008) if False else None
         for i in range(12):
             angle=tau*i/12
             box(math.sin(angle)*.14,-.245,1.30+math.cos(angle)*.14,

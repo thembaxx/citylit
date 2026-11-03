@@ -2,7 +2,7 @@
 
 ## Direction and provenance
 
-These ten CityLit miniatures replace generic cones/boxes with distinct authored
+These ten CityLit miniatures are generated from dedicated Blender meshes rather than generic cones/boxes with distinct authored
 structure. They use the original Blender material pipeline and locally embedded,
 rights-cleared ambientCG CC0 PBR maps. They are **original interpretations** for
 the interactive explorer, not site surveys or replicas of copyrighted architectural
@@ -33,7 +33,7 @@ pnpm lint && pnpm typecheck && pnpm format:check && pnpm build
 STAGE_FOCUS_IDS=bridge,lighthouse,park,dome,tower,arch,fort,bo-kaap,cooling-towers,aquarium node scripts/capture-stage-catalog.mjs
 ```
 
-The reusable pipeline must output fifteen Draco-compressed models and a manifest.
+The one-time Blender regeneration has produced fifteen Draco-compressed models and a manifest. Per-asset technical validation passed in the rebuild workflow; visual review and complete final-branch CI remain separate gates.
 All fifteen models must decode, contain at least three embedded CC0 images,
 have adequate mesh complexity and material differentiation, and stay below
 2 MiB each / 22 MiB for the combined catalog.

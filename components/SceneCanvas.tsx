@@ -59,7 +59,11 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
             gl.toneMappingExposure = 0.98;
             if (!lowPower) gl.shadowMap.type = THREE.PCFSoftShadowMap;
           }}
-          dpr={lowPower ? [1, 1] : [1, 1.5]}
+          // A fixed 1× mobile backing buffer blurs detailed glazing and thin
+          // geometry on Retina phones. Cap the mobile buffer at 1.5× while
+          // keeping shadows and MSAA off on low-power layouts; desktop at 2×.
+          // R3F clamps this range to the device's actual pixel ratio.
+          dpr={lowPower ? [1, 1.5] : [1, 2]}
           gl={{
             antialias: !lowPower,
             alpha: true,

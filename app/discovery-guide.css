@@ -2501,10 +2501,7 @@
   opacity: 1;
 }
 @media (hover: hover) and (pointer: fine) {
-  .reference-guide
-    .atlas-map-backdrop
-    .glow-city-marker:hover
-    .glow-marker-name {
+  .reference-guide .atlas-map-backdrop .glow-city-marker:hover .glow-marker-name {
     opacity: 1;
   }
 }

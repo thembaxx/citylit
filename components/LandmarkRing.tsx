@@ -328,7 +328,7 @@ function Ring({
     <>
       <PerspectiveCamera makeDefault position={[0, 3.2, 10.8]} fov={42} />
       <StudioEnvironment intensity={night ? 0.18 : 0.54} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.14 : 0.40]} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.14 : 0.4]} />
       <ambientLight intensity={night ? 0.12 : 0.15} />
       <directionalLight
         position={[4, 7, 5]}
@@ -355,8 +355,24 @@ function Ring({
             <group
               key={item.name}
               position={positions[index]}
-              rotation={[0, index === selected && item.name.toLowerCase().includes("mcgregor museum") ? index * Math.PI * 2 / items.length - 0.29 : 0, 0]}
-              scale={index === selected ? (item.name.toLowerCase().includes("mcgregor museum") ? (size.width < 760 ? 0.8 : 0.72) : (size.width < 760 ? 0.8 : 1)) * zoom : 0.55}
+              rotation={[
+                0,
+                index === selected && item.name.toLowerCase().includes("mcgregor museum")
+                  ? (index * Math.PI * 2) / items.length - 0.29
+                  : 0,
+                0,
+              ]}
+              scale={
+                index === selected
+                  ? (item.name.toLowerCase().includes("mcgregor museum")
+                      ? size.width < 760
+                        ? 0.8
+                        : 0.72
+                      : size.width < 760
+                        ? 0.8
+                        : 1) * zoom
+                  : 0.55
+              }
               onClick={(event) => {
                 event.stopPropagation();
                 onSelect(index);

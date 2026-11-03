@@ -24,13 +24,34 @@ test("the stage opens a landmark guide and shares the real day planner", async (
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(name);
   }
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
-  const scene = await page.locator(".atlas-ring-scene").boundingBox();
-  expect(scene).not.toBeNull();
-  await page.mouse.move(scene!.x + scene!.width * 0.45, scene!.y + scene!.height * 0.45);
-  await page.mouse.down();
-  await page.mouse.move(scene!.x + scene!.width * 0.45 + 150, scene!.y + scene!.height * 0.45, {
-    steps: 8,
+  // Selecting chips scrolls their sheet into view. Restore the scene viewport
+  // before the drag; otherwise the mouse moves over the fixed header (y≈34).
+  await page
+    .locator(".reference-guide")
+    .evaluate((guide) => guide.scrollTo({ top: 0, behavior: "instant" }));
+  await expect(page.locator(".atlas-stage-heading h1")).toBeInViewport();
+  // After selecting chips, the stage can be partly above the viewport.
+  // A bounding-box percentage alone previously dragged at y=34, over the header.
+  const point = await page.locator(".atlas-ring-scene").evaluate((host) => {
+    const rect = host.getBoundingClientRect();
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
+    const swipe = Math.round(Math.min(150, Math.max(90, viewportWidth * 0.38)));
+    for (const fractionX of [0.42, 0.5, 0.34, 0.58, 0.68]) {
+      for (const fractionY of [0.45, 0.55, 0.35, 0.65, 0.75]) {
+        const x = Math.round(rect.left + rect.width * fractionX);
+        const y = Math.round(rect.top + rect.height * fractionY);
+        if (x < 16 || x > viewportWidth - swipe - 12 || y < 120 || y > viewportHeight - 110)
+          continue;
+        const target = document.elementFromPoint(x, y);
+        if (target && host.contains(target)) return { x, y, swipe };
+      }
+    }
+    throw new Error("The 3D ring has no visible unobstructed drag target.");
   });
+  await page.mouse.move(point.x, point.y);
+  await page.mouse.down();
+  await page.mouse.move(point.x + point.swipe, point.y, { steps: 8 });
   await page.mouse.up();
   await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
@@ -90,7 +111,10 @@ test("320px header keeps a visible saved-day action and usable stage chips", asy
   await page.setViewportSize({ width: 320, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/johannesburg/landmarks");
-  const savedDay = page.locator(".reference-guide .atlas-nav .atlas-day-link");
+  // The mobile redesign moves this action into the persistent bottom dock.
+  const savedDay = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "My day" });
   await expect(savedDay).toBeVisible();
   await expect(savedDay.locator("svg")).toBeVisible();
   await expect(savedDay).toHaveAttribute("href", /tab=day/);

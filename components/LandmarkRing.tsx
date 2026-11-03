@@ -524,6 +524,8 @@ export default function LandmarkRing({
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {
         if (event.button === 0) {
+          // Capture immediately so dragging continues across scene overlays.
+          event.currentTarget.setPointerCapture(event.pointerId);
           drag.current = { x: event.clientX, y: event.clientY, angle: angle.current };
           moved.current = false;
         }
@@ -540,13 +542,20 @@ export default function LandmarkRing({
           redraw();
         }
       }}
-      onPointerUp={() => {
+      onPointerUp={(event) => {
         if (!drag.current) return;
+        const travel = event.clientX - drag.current.x;
         drag.current = null;
         dragging.current = false;
-        if (moved.current) {
+        if (moved.current && items.length > 1) {
           const snapped = Math.round((-angle.current / (Math.PI * 2)) * items.length);
-          onSelect(((snapped % items.length) + items.length) % items.length);
+          const nearest = ((snapped % items.length) + items.length) % items.length;
+          // Do not snap a deliberate short swipe back to its starting item.
+          const next =
+            nearest === selected && Math.abs(travel) > 24
+              ? (selected + (travel > 0 ? items.length - 1 : 1)) % items.length
+              : nearest;
+          onSelect(next);
           setSettle((value) => value + 1);
         }
       }}

@@ -7,6 +7,7 @@ import BrandWordmark from "./BrandWordmark";
 import KhweziMark from "./KhweziMark";
 import KhweziMoment from "./KhweziMoment";
 import ThemeToggle from "./ThemeToggle";
+import MagneticButton from "./ui/MagneticButton";
 import { brand, khweziMoments, type KhweziPose } from "../lib/brand";
 const KhweziView = dynamic(() => import("./KhweziView"), {
   ssr: false,
@@ -49,10 +50,16 @@ export default function BrandStudio() {
           <span className="tiny-label">YOUR CURIOUS COMPANION</span>
           <h2 id="khwezi-title">Meet Khwezi.</h2>
           <p>{brand.story} A luminous diamond, enormous ears and a pocket full of possibility.</p>
-          <p>
-            The ears do the talking. The glow follows the city. Every saved place becomes a spark to
-            carry with you.
-          </p>
+          <p>Drag to turn, choose an expression, or give Khwezi a little hop.</p>
+          <MagneticButton
+            className="brand-magnetic-action"
+            onClick={() => {
+              setPose((current) => (current === "saved" ? "welcome" : "saved"));
+              setTurnReset((value) => value + 1);
+            }}
+          >
+            {pose === "saved" ? "Say hello" : "Make Khwezi hop"}
+          </MagneticButton>
           <div className="brand-pose-picker" aria-label="Khwezi moments">
             {Object.keys(khweziMoments).map((key) => (
               <button
@@ -107,9 +114,14 @@ export default function BrandStudio() {
           </figure>
           <figure>
             <div className="brand-icon-example">
-              <img src="/app-icon.svg" width="128" height="128" alt="Khwezi app icon" />
+              <img
+                src="/app-icon.svg"
+                width="128"
+                height="128"
+                alt="Citylit compass-spark app icon"
+              />
             </div>
-            <figcaption>A face for your home screen</figcaption>
+            <figcaption>The Citylit spark on your home screen</figcaption>
           </figure>
         </div>
       </section>

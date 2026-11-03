@@ -25,6 +25,9 @@ for (const citySlug of [
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[0]);
     const toolbar = page.getByLabel("3D inspection tools");
     await expect(toolbar).toBeVisible();
+    if ((page.viewportSize()?.width ?? 1024) <= 767) {
+      await toolbar.getByRole("button", { name: "Open 3D inspector" }).click();
+    }
 
     await toolbar.getByRole("button", { name: "Switch to night lighting" }).click();
     await expect(toolbar.getByRole("button", { name: "Switch to daylight" })).toBeVisible();

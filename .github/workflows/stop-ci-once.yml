@@ -1,0 +1,35 @@
+name: Stop outstanding CityLit CI
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/stop-ci-once.yml
+permissions:
+  contents: read
+  actions: write
+jobs:
+  stop-older-ci-runs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Cancel only running/queued CI workflow runs
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const {data} = await github.rest.actions.listWorkflowRuns({
+              owner, repo, workflow_id: 'ci.yml', per_page: 100,
+            });
+            const pending = data.workflow_runs.filter(run =>
+              ['queued', 'pending', 'waiting', 'in_progress', 'requested'].includes(run.status)
+            );
+            core.info('Outstanding CI workflow runs: ' + pending.length);
+            for (const run of pending) {
+              try {
+                await github.rest.actions.cancelWorkflowRun({owner, repo, run_id: run.id});
+                core.info('Cancellation requested for CI run ' + run.id);
+              } catch (err) {
+                // A run can finish between enumeration and the cancellation call.
+                core.warning('CI run ' + run.id + ': ' + err.message);
+              }
+            }

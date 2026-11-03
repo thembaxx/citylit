@@ -51,10 +51,13 @@ export default function BrandStudio() {
           <h2 id="khwezi-title">Meet Khwezi.</h2>
           <p>{brand.story} A luminous diamond, enormous ears and a pocket full of possibility.</p>
           <p>Drag to turn, choose an expression, or give Khwezi a little hop.</p>
-          <MagneticButton className="brand-magnetic-action" onClick={() => {
-            setPose((current) => current === "saved" ? "welcome" : "saved");
-            setTurnReset((value) => value + 1);
-          }}>
+          <MagneticButton
+            className="brand-magnetic-action"
+            onClick={() => {
+              setPose((current) => (current === "saved" ? "welcome" : "saved"));
+              setTurnReset((value) => value + 1);
+            }}
+          >
             {pose === "saved" ? "Say hello" : "Make Khwezi hop"}
           </MagneticButton>
           <div className="brand-pose-picker" aria-label="Khwezi moments">
@@ -111,9 +114,14 @@ export default function BrandStudio() {
           </figure>
           <figure>
             <div className="brand-icon-example">
-              <img src="/app-icon.svg" width="128" height="128" alt="Khwezi app icon" />
+              <img
+                src="/app-icon.svg"
+                width="128"
+                height="128"
+                alt="Citylit compass-spark app icon"
+              />
             </div>
-            <figcaption>A face for your home screen</figcaption>
+            <figcaption>The Citylit spark on your home screen</figcaption>
           </figure>
         </div>
       </section>

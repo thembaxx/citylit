@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { makeMuseumSurfaces, disposeMuseumSurfaces, type MuseumSurface } from "../lib/museum-surfaces";
 
 /**
  * Existing procedural CityLit models were deliberately flat-shaded and widely
@@ -16,6 +17,7 @@ export default function SurfaceFinishes({ children }: { children: ReactNode }) {
   const { invalidate } = useThree();
 
   useLayoutEffect(() => {
+    const maps = makeMuseumSurfaces();
     const originals: {
       mesh: THREE.Mesh;
       material: THREE.Material | THREE.Material[];
@@ -47,6 +49,20 @@ export default function SurfaceFinishes({ children }: { children: ReactNode }) {
           finish.roughness = Math.max(0.45, Math.min(0.91, finish.roughness));
           finish.metalness = Math.min(0.18, finish.metalness);
         }
+        // These are lightweight procedurally generated maps for classic
+        // CityLit objects, not scans or survey-accurate textures.
+        const surface: MuseumSurface =
+          greenFoliage ? "grass"
+          : name.includes("wood") || name.includes("timber") ? "wood"
+          : blueGlass ? "copper"
+          : bright < 0.27 ? "stone"
+          : "plaster";
+        if (!blueGlass && !finish.map) {
+          finish.map = maps[surface].albedo;
+          finish.bumpMap = maps[surface].bump;
+          finish.bumpScale = maps[surface].bumpScale;
+          finish.needsUpdate = true;
+        }
         finish.envMapIntensity = 0.65;
         copies.push(finish);
         return finish;
@@ -69,6 +85,7 @@ export default function SurfaceFinishes({ children }: { children: ReactNode }) {
         mesh.receiveShadow = receiveShadow;
       });
       copies.forEach((copy) => copy.dispose());
+      disposeMuseumSurfaces(maps);
       invalidate();
     };
   }, [invalidate]);

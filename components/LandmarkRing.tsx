@@ -278,7 +278,11 @@ function Ring({
       duration: reduced ? 0 : 0.72,
       ease: "power3.inOut",
       onUpdate: () => {
-        camera.lookAt(0, items[selected]?.name.toLowerCase().includes("mcgregor museum") ? 0.08 : 0.55, 0);
+        camera.lookAt(
+          0,
+          items[selected]?.name.toLowerCase().includes("mcgregor museum") ? 0.08 : 0.55,
+          0,
+        );
         invalidate();
       },
       onComplete: invalidate,
@@ -303,7 +307,11 @@ function Ring({
         invalidate();
       },
     });
-    camera.lookAt(0, items[selected]?.name.toLowerCase().includes("mcgregor museum") ? 0.08 : 0.55, 0);
+    camera.lookAt(
+      0,
+      items[selected]?.name.toLowerCase().includes("mcgregor museum") ? 0.08 : 0.55,
+      0,
+    );
     invalidate();
     return () => {
       tween.kill();

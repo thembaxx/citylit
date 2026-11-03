@@ -76,10 +76,12 @@ test("new icon and logo are available to installed users", async ({ request }) =
 });
 
 test("all editable controls use at least 16px text on mobile", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ["/", "/destinations", "/brand"]) {
-    await page.goto(route);
-    const sizes = await page
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    for (const route of ["/", "/destinations", "/brand"]) {
+      const response = await page.goto(route);
+      expect(response?.ok(), `${route} should load at ${width}px`).toBe(true);
+      const sizes = await page
       .locator(
         'input, textarea, select, [contenteditable="true"], [role="combobox"], [role="textbox"], [role="searchbox"], [role="spinbutton"]',
       )
@@ -90,7 +92,8 @@ test("all editable controls use at least 16px text on mobile", async ({ page }) 
         })),
       );
     for (const control of sizes) {
-      expect(control.size, `${route}: ${control.tag} font size`).toBeGreaterThanOrEqual(16);
+      expect(control.size, `${route} at ${width}px: ${control.tag} font size`).toBeGreaterThanOrEqual(16);
+      }
     }
   }
 });

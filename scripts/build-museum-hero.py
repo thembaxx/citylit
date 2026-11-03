@@ -171,13 +171,22 @@ def pediment(name,cx,y,width,base,peak,depth=.08):
     obj=bpy.data.objects.new(name,mesh);bpy.context.collection.objects.link(obj)
     return use_obj(obj,BRICK,"MuseumRoof",tile=.44)
 
-def window(cx,level,front=-.706,side=False):
-    # Deep stone reveals, dark interior backing, a reflective pane set behind muntins.
+def window(cx,level,front=-.610,side=False):
+    # Genuine facade openings: sash windows sit within the brick rather than
+    # projecting like stickers. Recessed alcoves add parallax at oblique angles.
     w,h=.28,.40
     y=front-.014
-    block("Window shadow recess", (cx,y,level),(w+.07,.04,h+.07),BRICK_DARK,"MuseumFacade",.003)
-    block("Interior room surface", (cx,y-.018,level),(w,.012,h),WARM,"MuseumFacade")
-    block("Real glazing", (cx,y-.034,level),(w,.010,h),GLASS,"MuseumGlass")
+    block("Shadowed window alcove", (cx,-.372,level),(w+.045,.012,h+.045),
+          GLASS_DARK,"MuseumFacade",.002)
+    block("Warm interior wall", (cx,-.385,level),(w,.012,h),WARM,"MuseumFacade")
+    block("Dark window side reveals", (cx,-.495,level),(w+.055,.024,h+.06),
+          BRICK_DARK,"MuseumFacade",.003)
+    for side_x in (-1,1):
+        block("Linen curtain in recessed window",
+              (cx+side_x*(w*.34),-.515,level),
+              (.027,.013,h*.84),WHITE,"MuseumGlass",.003)
+    block("Real recessed reflective glazing", (cx,-.633,level),
+          (w,.009,h),GLASS,"MuseumGlass",.003)
     for dx in (-w/2,w/2):
         block("Painted reveal upright", (cx+dx,y-.052,level),(.023,.075,h+.09),WHITE,"MuseumFacade",.004)
     for dz in (-h/2,0,h/2):
@@ -204,7 +213,42 @@ block("Landscape topsoil",(0,0,-.060),(4.03,3.05,.042),SOIL,"MuseumLandscape",.0
 block("Actual turf", (0,0,-.037),(3.94,2.96,.027),GRASS,"MuseumLandscape",.009,tile=.48)
 
 # Building: low heritage brick wings, central two-storey volume and wall bands.
-block("Main red brick Victorian building",(0,.13,.87),(3.35,1.47,1.79),BRICK,"MuseumFacade",.025,tile=.52)
+main_wall = block("Main red brick Victorian building",(0,.13,.87),
+                  (3.35,1.47,1.79),BRICK,"MuseumFacade",.025,tile=.52)
+# Boolean once for all windows and the entrance; keeping this as a single
+# operation preserves shared UVs and avoids many expensive modifiers.
+cutters = []
+for z in (.47,1.31):
+    for x in (-1.31,-.90,-.49,.49,.90,1.31):
+        bpy.ops.mesh.primitive_cube_add(size=1,location=(x,-.58,z))
+        cutter=bpy.context.object
+        cutter.name="Window recess boolean tool"
+        cutter.scale=(.335,.46,.445)
+        bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+        cutters.append(cutter)
+bpy.ops.mesh.primitive_cube_add(size=1,location=(0,-.60,.51))
+door_cutter=bpy.context.object
+door_cutter.name="Recessed entrance boolean tool"
+door_cutter.scale=(.56,.47,.86)
+bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+cutters.append(door_cutter)
+bpy.ops.object.select_all(action="DESELECT")
+for cutter in cutters:
+    cutter.select_set(True)
+bpy.context.view_layer.objects.active=cutters[0]
+bpy.ops.object.join()
+tool=cutters[0]
+bpy.ops.object.select_all(action="DESELECT")
+main_wall.select_set(True)
+bpy.context.view_layer.objects.active=main_wall
+opening=main_wall.modifiers.new("Recessed Victorian glazing and entrance","BOOLEAN")
+opening.operation="DIFFERENCE"
+opening.solver="EXACT"
+opening.object=tool
+bpy.ops.object.modifier_apply(modifier=opening.name)
+bpy.data.objects.remove(tool,do_unlink=True)
+uv_world(main_wall,.52)
+
 block("Main limestone footing",(0,.13,.105),(3.48,1.58,.16),STONE,"MuseumFacade",.009,tile=.75)
 block("Cornice at first floor",(0,-.68,1.00),(3.5,.10,.052),WHITE_HIGHLIGHT,"MuseumFacade",.006)
 block("Front upper brick stringcourse",(0,-.70,1.55),(3.5,.12,.056),BRICK_DARK,"MuseumFacade",.004)

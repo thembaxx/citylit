@@ -32,7 +32,12 @@ if (focusIds.size && selectedCases.length !== focusIds.size) {
 }
 const browser = await chromium.launch({
   headless: true,
-  args: ["--enable-webgl", "--enable-unsafe-swiftshader", "--use-gl=angle", "--use-angle=swiftshader"],
+  args: [
+    "--enable-webgl",
+    "--enable-unsafe-swiftshader",
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+  ],
 });
 const page = await browser.newPage({
   viewport: { width: 1440, height: 900 },
@@ -43,7 +48,11 @@ const errors = [];
 page.on("pageerror", (error) => errors.push(error.message));
 for (const screen of [
   { id: "desktop", width: 1440, height: 900 },
-  { id: "mobile", width: Number(process.env.STAGE_MOBILE_WIDTH ?? 390), height: Number(process.env.STAGE_MOBILE_HEIGHT ?? 844) },
+  {
+    id: "mobile",
+    width: Number(process.env.STAGE_MOBILE_WIDTH ?? 390),
+    height: Number(process.env.STAGE_MOBILE_HEIGHT ?? 844),
+  },
 ]) {
   await page.setViewportSize({ width: screen.width, height: screen.height });
   for (const [id, city, name] of selectedCases) {

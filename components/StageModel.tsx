@@ -74,7 +74,7 @@ export default function StageModel({
             material.roughness = THREE.MathUtils.clamp(material.roughness, 0.12, 0.98);
             material.metalness = THREE.MathUtils.clamp(material.metalness, 0, 0.85);
           }
-          material.envMapIntensity = 1.12;
+          material.envMapIntensity = 0.86;
         }
         return material;
       };

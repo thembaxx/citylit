@@ -25,14 +25,14 @@ export default function KhweziMark({
           strokeLinecap="round"
         />
         <g className="khwezi-ear khwezi-ear-left">
-          <path d="M64 96 45 43 50 14 66 29 78 92Z" fill="#F3EFE3" />
-          <path d="m45 43 5-29 16 15-9 22Z" fill="#17243C" />
-          <path d="m60 53 10 38-8-3-10-34Z" fill="#E9B2BA" />
+          <path d="M65 98C54 81 39 46 44 23c2-12 12-16 20-1 8 15 13 47 15 71Z" fill="#F3EFE3" />
+          <path d="M44 33C43 21 49 11 55 13c6 2 10 9 12 19l-8 20Z" fill="#17243C" />
+          <path d="M55 47c0-11 4-15 7-9 5 10 9 33 11 51l-8-3Z" fill="#E9B2BA" />
         </g>
         <g className="khwezi-ear khwezi-ear-right">
-          <path d="m102 92 9-67 15-12 9 27-20 57Z" fill="#F3EFE3" />
-          <path d="m111 25 15-12 9 27-13 9Z" fill="#17243C" />
-          <path d="m119 56-9 34 8-2 12-33Z" fill="#E9B2BA" />
+          <path d="M100 92c2-25 7-58 16-72 8-13 19-9 20 3 3 24-12 61-24 75Z" fill="#F3EFE3" />
+          <path d="M111 33c4-12 9-18 15-20 7-2 11 10 10 21l-14 18Z" fill="#17243C" />
+          <path d="M124 47c0-10-4-14-8-8-4 9-8 33-10 51l8-3Z" fill="#E9B2BA" />
         </g>
         <path d="m63 135-9 33 16 14 23-6 23 6 13-14-10-33Z" fill="#DED8CE" />
         <path d="m67 133-8 21 34 18 29-21-6-20Z" fill="#F3EFE3" />
@@ -44,11 +44,13 @@ export default function KhweziMark({
         <path d="m68 137-15 8 1 15 13-2 11-13Z" fill="#F3EFE3" />
         <path d="m113 137 16 8-1 15-13-2-11-13Z" fill="#F3EFE3" />
         <g className="khwezi-eyes">
-          <ellipse cx="72" cy="109" rx="6" ry="8" fill="#17243C" />
-          <ellipse cx="108" cy="109" rx="6" ry="8" fill="#17243C" />
+          <ellipse cx="72" cy="109" rx="6.6" ry="9.2" fill="#17243C" />
+          <ellipse cx="108" cy="109" rx="6.6" ry="9.2" fill="#17243C" />
           <circle cx="74" cy="107" r="2" fill="white" />
           <circle cx="110" cy="107" r="2" fill="white" />
         </g>
+        <ellipse cx="56" cy="123" rx="8" ry="4" fill="#E9B2BA" opacity=".55" />
+        <ellipse cx="124" cy="123" rx="8" ry="4" fill="#E9B2BA" opacity=".55" />
         <path d="m85 123 6-5 6 5-6 6Z" fill="#6558F5" />
         <path d="M83 132q8 7 16 0" stroke="#17243C" strokeWidth="2.5" strokeLinecap="round" />
         <path d="m90 84 7 8-7 8-7-8Z" fill="var(--khwezi-spark, #6558F5)" />

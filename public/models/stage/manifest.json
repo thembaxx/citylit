@@ -82,7 +82,7 @@
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 121884,
+    "bytes": 121864,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",

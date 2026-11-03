@@ -1,4 +1,4 @@
-"""Prepare compact CC0 JPEG scans for the fifteen standalone landmark models.
+"""Prepare full-resolution CC0 JPEG scans for the fifteen standalone landmark models.
 
 Sources: scripts/.museum-pbr from the ambientCG CC0 acquisition workflow.
 Output: scripts/.stage-pbr (untracked transient asset inputs).
@@ -21,8 +21,8 @@ for category in ("bricks", "paving", "grass", "wood"):
         target = folder / (category + "_" + channel + ".jpg")
         with Image.open(matches[0]) as source:
             image = source.convert("RGB")
-            image.thumbnail((320, 320), Image.Resampling.LANCZOS)
-            image.save(target, "JPEG", quality=80, optimize=True, subsampling=0)
-        if not 1000 <= target.stat().st_size <= 160000:
+            image.thumbnail((2048, 2048), Image.Resampling.LANCZOS)
+            image.save(target, "JPEG", quality=94, optimize=True, subsampling=0)
+        if not 1000 <= target.stat().st_size <= 8 * 1024 * 1024:
             raise RuntimeError("Unexpected texture size: " + str(target))
         print(target.relative_to(ROOT), target.stat().st_size, "bytes")

@@ -109,6 +109,11 @@ button,
   justify-items: center;
   gap: 2px;
 }
+/* The shared Three.js View needs to render above the opaque home card.
+   Canvas remains pointer-events:none; other atlas scenes keep their layer. */
+.canvas-root:has(.reference-guide .atlas-beacon-mascot) .persistent-canvas {
+  z-index: 20 !important;
+}
 .reference-guide .atlas-mascot-view {
   width: 90px;
   height: 102px;

@@ -17,6 +17,11 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   await expect(choose).toHaveCSS("font-size", "16px");
   await expect(choose).toBeVisible();
   await expect(page.getByRole("button", { name: "Make Khwezi hop" })).toBeVisible();
+  await expect(page.locator(".atlas-beacon-mascot .khwezi-view")).toHaveAttribute(
+    "data-ready",
+    "true",
+  );
+  await expect(page.locator(".persistent-canvas")).toHaveCSS("z-index", "20");
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
   await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
   await choose.selectOption("1");

@@ -25,7 +25,7 @@ jobs:
       - name: Install Blender and NumPy for glTF exporter
         run: |
           sudo apt-get update -y
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y blender python3-numpy
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y blender python3-numpy python3-pil
           blender --version | head -1
       - name: Download and verify CC0 textures
         run: python3 scripts/fetch-museum-pbr.py

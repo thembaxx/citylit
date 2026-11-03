@@ -27,8 +27,9 @@ def build(name, box, cylinder, beam, material, add, bpy):
         beam(a, b, thickness, mat)
 
     def window_frame(cx, front, bottom, width, height, columns=2, rows=2, trim=enamel):
-        # Shadow backplate, glass, perimeter joinery and independent mullions.
-        box(cx, front+.014, bottom+height/2, width*.94, .026, height*.92, shadow)
+        # Place room backing deep inside the carved masonry pocket, not
+        # directly behind the glass as a flat opaque sticker.
+        box(cx, front+.28, bottom+height/2, width*.94, .026, height*.92, shadow)
         box(cx, front-.020, bottom+height/2, width*.84, .012, height*.84, pane)
         for side in (-1, 1):
             box(cx+side*width*.5, front-.045, bottom+height/2,

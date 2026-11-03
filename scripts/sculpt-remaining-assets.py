@@ -215,9 +215,9 @@ def build(name, box, cylinder, beam, material, add, bpy):
         # Constitution Hill: modern Constitutional Court, open entrance court,
         # red-brick historical wing and vertical glass-and-concrete tower.
         # No imaginary oversized dome or symmetrical generic courthouse.
-        box(-.70, .12, .51, .91, .77, .88, brick)
+        box(-.70, .12, .51, .91, .77, .88, brick).name = "RecessShellConstitutionBrick"
         box(-.70, .12, .975, .96, .82, .07, sandstone)
-        box(.72, .12, .45, .73, .70, .75, pale)
+        box(.72, .12, .45, .73, .70, .75, pale).name = "RecessShellConstitutionStone"
         box(.72, .12, .85, .81, .77, .065, sandstone)
         # High vertical court building, glazing several layers behind slender fins.
         box(.06, .22, .88, .62, .58, 1.55, pale)
@@ -257,10 +257,9 @@ def build(name, box, cylinder, beam, material, add, bpy):
     elif name == "tower":
         # Durban City Hall: symmetrical neoclassical wings with an elevated
         # copper dome, free-standing portico columns and sculpted pediment.
-        box(0, .11, .46, 2.16, .78, .88, sandstone)
+        box(0, .11, .46, 2.16, .78, .88, sandstone).name = "RecessShellDurbanHall"
         box(0, .11, .92, 2.30, .88, .095, pale)
-        for x in (-.88, -.58, -.29, 0, .29, .58, .88):
-            opening(x, -.312, .47, .145, .30)
+        # The actual masonry apertures and glazing are cut in recessed-architecture.py.
         for x in (-.94, .94):
             box(x, .11, 1.01, .30, .91, .15, pale)
             cylinder(x, .11, 1.13, .23, .23, sandstone, vertices=24)
@@ -357,7 +356,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
         # plaster, stepped parapets and stoops, not alpine pitched rooftops.
         for i,x in enumerate((-.96,-.48,0,.48,.96)):
             ground=.12+.055*(i%3)
-            box(x, .17, ground+.40, .43, .79, .80, paint[i])
+            box(x, .17, ground+.40, .43, .79, .80, paint[i]).name = "RecessShellBoKaap%d" % i
             # Flat roof and front parapet, projected plaster eaves and corners.
             box(x, .17, ground+.835, .46, .82, .060, sandstone)
             box(x, -.245, ground+.925, .46, .072, .16, paint[i])

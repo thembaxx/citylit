@@ -33,6 +33,11 @@ premium_spec = importlib.util.spec_from_file_location(
 )
 premium = importlib.util.module_from_spec(premium_spec)
 premium_spec.loader.exec_module(premium)
+depth_spec = importlib.util.spec_from_file_location(
+    "window_depth", ROOT / "scripts/recessed-architecture.py"
+)
+window_depth = importlib.util.module_from_spec(depth_spec)
+depth_spec.loader.exec_module(window_depth)
 MATERIALS = {}
 
 
@@ -289,6 +294,9 @@ for name, build in BUILDERS.items():
     # Preserve landmark-specific topology; add independent physical micro-geometry.
     if name in remaining.SUPPORTED:
         premium.build(name, box, cylinder, beam, material, add, bpy)
+    # Boolean cutouts must happen before geometry is joined, after builders
+    # have created the separate facade shells and their decorative joinery.
+    window_depth.build(name, box, material, bpy)
     stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.

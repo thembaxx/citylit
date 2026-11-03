@@ -3,8 +3,6 @@ import AxeBuilder from "@axe-core/playwright";
 import { cities } from "../lib/data";
 
 test("the stage opens a landmark guide and shares the real day planner", async ({ page }) => {
-  // Multi-route mobile journey includes slow shared-WebGL initialization on CI runners.
-  test.slow(test.info().project.name === "mobile-chromium");
   await page.emulateMedia({ reducedMotion: "reduce" });
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));

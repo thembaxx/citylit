@@ -375,7 +375,15 @@ function Ring({
         distance={9}
         color="#ffe3be"
       />
-      <group position={[size.width > size.height ? 1.52 : 0.04, size.width < 760 ? 0.12 : 0, 0]}>
+      <group
+        position={[
+          size.width > size.height ? 1.52 : size.width < 360 ? -0.18 : 0.04,
+          size.width < 760 && !items[selected]?.name.toLowerCase().includes("mcgregor museum")
+            ? 0.12
+            : 0,
+          0,
+        ]}
+      >
         <group ref={ring}>
           {items.map((item, index) => (
             <group

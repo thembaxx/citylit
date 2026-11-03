@@ -2763,11 +2763,19 @@
     overflow: visible;
   }
   .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-stage-content {
-    margin-top: 352px;
+    margin-top: 374px;
   }
   .atlas-ring-scene.is-heritage-hero .atlas-inspector-toolbar {
-    top: 65px;
-    right: 9px;
+    top: auto;
+    bottom: 17px;
+    right: 10px;
+  }
+  .atlas-ring-scene.is-heritage-hero .atlas-inspector-panel.is-open {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    right: 0;
+    max-height: 310px;
+    overflow-y: auto;
   }
   .atlas-ring-scene.is-heritage-hero .atlas-inspector-toggle {
     background: color-mix(in srgb, var(--surface) 96%, transparent);

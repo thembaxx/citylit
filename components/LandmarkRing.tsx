@@ -183,6 +183,7 @@ function Ring({
   night,
   exploded,
   feature,
+  onFeature,
   zoom,
   reduced,
 }: {
@@ -196,12 +197,38 @@ function Ring({
   night: boolean;
   exploded: boolean;
   feature: MuseumFeature;
+  onFeature: (feature: MuseumFeature) => void;
   zoom: number;
   reduced: boolean;
 }) {
   const ring = useRef<THREE.Group>(null);
   const { size, invalidate, camera } = useThree();
   const radius = items.length < 4 ? 2.8 : 3.8;
+  useEffect(() => {
+    const museum = items[selected]?.name.toLowerCase().includes("mcgregor museum");
+    const preset = museum
+      ? feature === "roof"
+        ? [0, 4.55, 9.45]
+        : feature === "windows"
+          ? [1.5, 2.45, 9.0]
+          : feature === "gardens"
+            ? [-1.15, 4.05, 10.3]
+            : [0, 3.2, 10.8]
+      : [0, 3.2, 10.8];
+    const tween = gsap.to(camera.position, {
+      x: preset[0],
+      y: preset[1],
+      z: preset[2],
+      duration: reduced ? 0 : 0.72,
+      ease: "power3.inOut",
+      onUpdate: () => {
+        camera.lookAt(0, 0.55, 0);
+        invalidate();
+      },
+      onComplete: invalidate,
+    });
+    return () => tween.kill();
+  }, [camera, feature, selected, reduced, invalidate, items]);
   useEffect(() => {
     if (!ring.current) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -278,6 +305,7 @@ function Ring({
                   exploded={index === selected && exploded}
                   feature={index === selected ? feature : "architecture"}
                   reduced={reduced}
+                  onFeature={index === selected ? onFeature : undefined}
                 />
               ) : (
                 <SafeStageModel model={item.model} />
@@ -392,6 +420,7 @@ export default function LandmarkRing({
             night={night}
             exploded={exploded}
             feature={feature}
+            onFeature={setFeature}
             zoom={zoom}
             reduced={reduced}
           />

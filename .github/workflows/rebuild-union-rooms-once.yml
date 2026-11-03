@@ -5,6 +5,7 @@ on:
       - feat/union-buildings-recessed-windows
     paths:
       - .github/workflows/rebuild-union-rooms-once.yml
+      - scripts/recessed-architecture.py
 permissions:
   contents: write
 jobs:

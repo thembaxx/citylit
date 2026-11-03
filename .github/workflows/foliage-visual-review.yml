@@ -1,0 +1,97 @@
+name: Foliage Before/After Visual QA
+on:
+  push:
+    branches:
+      - feat/procedural-lamina-foliage-2026-11
+permissions:
+  contents: read
+jobs:
+  capture:
+    name: Foliage ${{ matrix.label }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: baseline
+            ref: caf6e46fddf14780ad3a808f569c3fc97d5baabd
+          - label: curved-leaves
+            ref: feat/procedural-lamina-foliage-2026-11
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ matrix.ref }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Capture loaded surroundings and daylight/nightlight
+        shell: bash
+        env:
+          CAPTURE_LABEL: ${{ matrix.label }}
+        run: |
+          set -euo pipefail
+          pnpm start >/tmp/citylit-foliage.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for i in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:3000/api/health >/dev/null; then break; fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:3000/api/health >/dev/null
+          node --input-type=module <<'JS'
+          import { chromium, expect } from '@playwright/test';
+          import {mkdir, writeFile} from 'node:fs/promises';
+          const label = process.env.CAPTURE_LABEL;
+          const directory = 'artifacts/foliage';
+          await mkdir(directory,{recursive:true});
+          const browser=await chromium.launch({headless:true,args:['--enable-webgl','--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader']});
+          const records=[];
+          for(const [width,height] of [[1440,900],[390,844],[320,720]]){
+            const page=await browser.newPage({viewport:{width,height},reducedMotion:'reduce',deviceScaleFactor:1});
+            const errors=[];
+            page.on('pageerror',e=>errors.push(e.message));
+            await page.goto('http://127.0.0.1:3000/cape-town/landmarks',{waitUntil:'domcontentloaded'});
+            await page.getByRole('button',{name:'Bo-Kaap',exact:true}).click();
+            const scene=page.locator('.atlas-ring-scene');
+            await expect(scene).toHaveAttribute('data-active-model-status','ready',{timeout:30000});
+            if(width<=767)await page.getByRole('button',{name:'Open 3D inspector'}).click();
+            await page.getByRole('button',{name:'Show illustrative surroundings'}).click();
+            await expect(page.getByRole('button',{name:'Hide illustrative surroundings'})).toBeVisible();
+            if(width<=767)await page.getByRole('button',{name:'Close 3D inspector'}).click();
+            await scene.scrollIntoViewIfNeeded();
+            await page.waitForTimeout(800);
+            const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+            if(overflow>1)throw new Error('Horizontal overflow at '+width+'px: '+overflow+'px');
+            if(await page.locator('canvas').count()<1)throw new Error('No WebGL canvas at '+width+'px');
+            await page.screenshot({path:directory+'/'+label+'-'+width+'-day.png'});
+            if(width<=767)await page.getByRole('button',{name:'Open 3D inspector'}).click();
+            await page.getByRole('button',{name:'Switch to night lighting'}).click();
+            if(width<=767)await page.getByRole('button',{name:'Close 3D inspector'}).click();
+            await scene.scrollIntoViewIfNeeded();
+            await page.waitForTimeout(500);
+            await page.screenshot({path:directory+'/'+label+'-'+width+'-night.png'});
+            if(errors.length)throw new Error('Page errors at '+width+'px: '+errors.slice(0,3).join('; '));
+            records.push({label,width,height,selected:'Bo-Kaap',surroundings:true,dayNight:true,overflow,webgl:true});
+            await page.close();
+          }
+          await browser.close();
+          await writeFile(directory+'/'+label+'-report.json',JSON.stringify(records,null,2));
+          console.log(records);
+          JS
+      - name: Upload real WebGL screenshots
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: foliage-${{ matrix.label }}-desktop-mobile
+          path: artifacts/foliage/
+          retention-days: 7
+          if-no-files-found: warn

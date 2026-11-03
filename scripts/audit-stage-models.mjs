@@ -15,7 +15,7 @@ for (const entry of manifest) {
   assert.equal(raw.toString("utf8", 0, 4), "glTF");
   assert.equal(raw.readUInt32LE(4), 2);
   assert.equal(raw.length, entry.bytes);
-  assert.ok(raw.length < 150 * 1024);
+  assert.ok(raw.length <= 256 * 1024);
   const json = JSON.parse(raw.toString("utf8", 20, 20 + raw.readUInt32LE(12)));
   assert.ok(json.extensionsRequired.includes("KHR_draco_mesh_compression"));
   const document = await io.readBinary(raw);

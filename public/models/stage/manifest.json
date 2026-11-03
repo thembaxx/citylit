@@ -2,121 +2,121 @@
   {
     "id": "table-mountain",
     "src": "/models/stage/table-mountain.glb",
-    "bytes": 6868,
+    "bytes": 15080,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "stadium",
     "src": "/models/stage/stadium.glb",
-    "bytes": 12420,
+    "bytes": 21228,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "union-buildings",
     "src": "/models/stage/union-buildings.glb",
-    "bytes": 6952,
+    "bytes": 18076,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "ponte",
     "src": "/models/stage/ponte.glb",
-    "bytes": 13384,
+    "bytes": 36308,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "bridge",
     "src": "/models/stage/bridge.glb",
-    "bytes": 7212,
+    "bytes": 13012,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "lighthouse",
     "src": "/models/stage/lighthouse.glb",
-    "bytes": 8556,
+    "bytes": 19496,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "hole",
     "src": "/models/stage/hole.glb",
-    "bytes": 11348,
+    "bytes": 23088,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "park",
     "src": "/models/stage/park.glb",
-    "bytes": 7496,
+    "bytes": 16088,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 7812,
+    "bytes": 19176,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "tower",
     "src": "/models/stage/tower.glb",
-    "bytes": 6840,
+    "bytes": 14356,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "arch",
     "src": "/models/stage/arch.glb",
-    "bytes": 5568,
+    "bytes": 12732,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "fort",
     "src": "/models/stage/fort.glb",
-    "bytes": 8420,
+    "bytes": 13708,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "bo-kaap",
     "src": "/models/stage/bo-kaap.glb",
-    "bytes": 11696,
+    "bytes": 22216,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "cooling-towers",
     "src": "/models/stage/cooling-towers.glb",
-    "bytes": 12204,
+    "bytes": 26932,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   },
   {
     "id": "aquarium",
     "src": "/models/stage/aquarium.glb",
-    "bytes": 9964,
+    "bytes": 16372,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
+    "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression"
   }
 ]

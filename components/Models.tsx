@@ -5,6 +5,7 @@ import { Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import ProceduralTree from "./ProceduralTree";
+import { CategoryDetails, LandmarkDetails } from "./SceneDetails";
 const windowBlue = "#3d7ef0",
   dark = "#3a3532",
   cream = "#fff4e6",
@@ -674,6 +675,7 @@ export function Landmark({
           ) : (
             <Lighthouse reduced={reduced} />
           )}
+          <LandmarkDetails city={city} index={index} />
         </group>
       </Alive>
       <Spark reduced={reduced} color={accent} />
@@ -726,6 +728,7 @@ export function CategoryModel({ index, reduced }: { index: number; reduced: bool
           ) : (
             <Disco reduced={reduced} />
           )}
+          <CategoryDetails index={index} />
         </group>
       </Alive>
       <Spark reduced={reduced} color={accent} />

@@ -79,7 +79,7 @@
   {
     "id": "park",
     "src": "/models/stage/park.glb",
-    "bytes": 3251972,
+    "bytes": 3252376,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -90,7 +90,7 @@
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 4083748,
+    "bytes": 4092128,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
@@ -101,12 +101,12 @@
   {
     "id": "tower",
     "src": "/models/stage/tower.glb",
-    "bytes": 1861780,
+    "bytes": 931756,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
     "compression": "KHR_draco_mesh_compression",
-    "textureCount": 6,
+    "textureCount": 3,
     "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
@@ -134,12 +134,12 @@
   {
     "id": "bo-kaap",
     "src": "/models/stage/bo-kaap.glb",
-    "bytes": 2534300,
+    "bytes": 1885172,
     "authoring": "Blender 4.3",
     "geometryTier": "distinct-sculpt-v2",
     "purpose": "Original architectural/landscape miniature, not a site survey",
     "compression": "KHR_draco_mesh_compression",
-    "textureCount": 9,
+    "textureCount": 6,
     "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {

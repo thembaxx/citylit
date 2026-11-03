@@ -90,7 +90,10 @@ test("320px header keeps a visible saved-day action and usable stage chips", asy
   await page.setViewportSize({ width: 320, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/johannesburg/landmarks");
-  const savedDay = page.locator(".reference-guide .atlas-nav .atlas-day-link");
+  // The mobile redesign moves this action into the persistent bottom dock.
+  const savedDay = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "My day" });
   await expect(savedDay).toBeVisible();
   await expect(savedDay.locator("svg")).toBeVisible();
   await expect(savedDay).toHaveAttribute("href", /tab=day/);

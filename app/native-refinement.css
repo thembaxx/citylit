@@ -563,7 +563,7 @@ button,
   }
 }
 
-/* Keep editable controls at 16px to prevent iOS Safari focus zoom. */
+/* Maintain 16px editable controls across mobile and desktop to prevent iOS focus zoom. */
 input,
 textarea,
 select,

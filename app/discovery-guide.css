@@ -2687,9 +2687,6 @@
     min-height: 33px;
     font-size: 10px;
   }
-  .atlas-inspector-note {
-    display: none;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .atlas-inspector-toolbar button {

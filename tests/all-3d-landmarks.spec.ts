@@ -48,6 +48,15 @@ for (const citySlug of [
       "aria-pressed",
       "true",
     );
+    const contextToggle = toolbar.getByRole("button", { name: "Show illustrative surroundings" });
+    await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
+    await contextToggle.click();
+    await expect(toolbar.getByRole("button", { name: "Hide illustrative surroundings" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    await toolbar.getByRole("button", { name: "Hide illustrative surroundings" }).click();
+    await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
 
     await page.getByRole("button", { name: "Next discovery" }).click();
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[1]);

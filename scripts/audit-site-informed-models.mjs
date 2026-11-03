@@ -23,14 +23,28 @@ for (const id of required) {
   assert.ok(raw.length < 2 * 1024 * 1024, id + " exceeds 2 MiB budget");
   const doc = await io.readBinary(raw);
   const meshCount = doc.getRoot().listMeshes().length;
-  const positions = doc.getRoot().listMeshes().flatMap((mesh) => mesh.listPrimitives())
+  const positions = doc
+    .getRoot()
+    .listMeshes()
+    .flatMap((mesh) => mesh.listPrimitives())
     .reduce((n, primitive) => n + (primitive.getAttribute("POSITION")?.getCount() || 0), 0);
   assert.ok(positions >= 700, id + " geometry appears primitive");
   assert.ok(meshCount > 0, id + " lacks decoded geometry");
-  assert.ok(doc.getRoot().listMaterials().length >= 4, id + " has insufficient material differentiation");
+  assert.ok(
+    doc.getRoot().listMaterials().length >= 4,
+    id + " has insufficient material differentiation",
+  );
   total += raw.length;
-  console.log(id + ": " + positions + " decoded vertices, " + doc.getRoot().listMaterials().length +
-    " materials, " + Math.round(raw.length / 1024) + " KiB");
+  console.log(
+    id +
+      ": " +
+      positions +
+      " decoded vertices, " +
+      doc.getRoot().listMaterials().length +
+      " materials, " +
+      Math.round(raw.length / 1024) +
+      " KiB",
+  );
 }
 assert.ok(total < 9 * 1024 * 1024, "Five-model catalog exceeds 9 MiB");
 console.log("Validated all five site-informed editorial miniatures");

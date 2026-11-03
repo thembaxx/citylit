@@ -26,9 +26,9 @@ test("the stage opens a landmark guide and shares the real day planner", async (
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
   // Selecting chips scrolls their sheet into view. Restore the scene viewport
   // before the drag; otherwise the mouse moves over the fixed header (y≈34).
-  await page.locator(".reference-guide").evaluate((guide) =>
-    guide.scrollTo({ top: 0, behavior: "instant" }),
-  );
+  await page
+    .locator(".reference-guide")
+    .evaluate((guide) => guide.scrollTo({ top: 0, behavior: "instant" }));
   await expect(page.locator(".atlas-stage-heading h1")).toBeInViewport();
   // After selecting chips, the stage can be partly above the viewport.
   // A bounding-box percentage alone previously dragged at y=34, over the header.
@@ -40,14 +40,7 @@ test("the stage opens a landmark guide and shares the real day planner", async (
       for (const fractionY of [0.6, 0.7, 0.55, 0.8]) {
         const x = Math.round(rect.left + rect.width * fractionX);
         const y = Math.round(rect.top + rect.height * fractionY);
-        if (
-          x < 120 ||
-          x > viewportWidth - 210 ||
-          y < 120 ||
-          y > viewportHeight - 110
-        ) {
-          continue;
-        }
+        if (x < 120 || x > viewportWidth - 210 || y < 120 || y > viewportHeight - 110) continue;
         const target = document.elementFromPoint(x, y);
         if (target && host.contains(target)) return { x, y };
       }

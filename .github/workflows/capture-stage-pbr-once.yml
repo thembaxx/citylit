@@ -1,4 +1,5 @@
 name: Capture all fifteen PBR landmark scenes once
+# Retry after correcting the R3F canvas DOM selector
 on:
   push:
     branches:

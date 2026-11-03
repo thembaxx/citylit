@@ -12,6 +12,7 @@ export type MuseumProps = {
   exploded?: boolean;
   feature?: MuseumFeature;
   reduced?: boolean;
+  onFeature?: (feature: MuseumFeature) => void;
 };
 
 const stone = "#e4d7c3";
@@ -85,6 +86,7 @@ export default function MuseumShowcase({
   exploded = false,
   feature = "architecture",
   reduced = false,
+  onFeature,
 }: MuseumProps) {
   const roof = useRef<THREE.Group>(null);
   const grounds = useRef<THREE.Group>(null);
@@ -245,6 +247,38 @@ export default function MuseumShowcase({
         <Volume position={[0.48, 2.62, -0.18]} size={[0.49, 0.09, 0.53]} color="#43695e" metalness={0.33} />
         <Volume position={[0.48, 2.43, 0.023]} size={[0.14, 0.23, 0.025]} color={night ? "#e5b56c" : "#658d96"} />
       </group>
+      {onFeature &&
+        ([
+          { id: "architecture", position: [0, 0.65, 1.03] },
+          { id: "roof", position: [-0.2, 2.2, 0.54] },
+          { id: "windows", position: [0.73, 1.02, 0.91] },
+          { id: "gardens", position: [-1.24, 0.26, 0.92] },
+        ] as { id: MuseumFeature; position: [number, number, number] }[]).map((hotspot) => (
+          <mesh
+            key={hotspot.id}
+            name={`hotspot-${hotspot.id}`}
+            position={hotspot.position}
+            onClick={(event) => {
+              event.stopPropagation();
+              onFeature(hotspot.id);
+            }}
+            onPointerOver={() => {
+              document.body.style.cursor = "pointer";
+            }}
+            onPointerOut={() => {
+              document.body.style.cursor = "";
+            }}
+          >
+            <sphereGeometry args={[feature === hotspot.id ? 0.08 : 0.065, 16, 12]} />
+            <meshStandardMaterial
+              color={feature === hotspot.id ? "#fff4dc" : "#d7b47a"}
+              roughness={0.35}
+              metalness={0.36}
+              emissive="#d9b36b"
+              emissiveIntensity={feature === hotspot.id ? 0.42 : 0.15}
+            />
+          </mesh>
+        ))}
       {night && (
         <pointLight position={[0, 0.7, 1.12]} intensity={1.5} distance={3.5} color="#ffcd8d" />
       )}

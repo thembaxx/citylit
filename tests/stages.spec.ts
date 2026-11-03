@@ -36,20 +36,22 @@ test("the stage opens a landmark guide and shares the real day planner", async (
     const rect = host.getBoundingClientRect();
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
-    for (const fractionX of [0.68, 0.62, 0.76]) {
-      for (const fractionY of [0.6, 0.7, 0.55, 0.8]) {
+    const swipe = Math.round(Math.min(150, Math.max(90, viewportWidth * 0.38)));
+    for (const fractionX of [0.42, 0.5, 0.34, 0.58, 0.68]) {
+      for (const fractionY of [0.45, 0.55, 0.35, 0.65, 0.75]) {
         const x = Math.round(rect.left + rect.width * fractionX);
         const y = Math.round(rect.top + rect.height * fractionY);
-        if (x < 120 || x > viewportWidth - 210 || y < 120 || y > viewportHeight - 110) continue;
+        if (x < 16 || x > viewportWidth - swipe - 12 || y < 120 || y > viewportHeight - 110)
+          continue;
         const target = document.elementFromPoint(x, y);
-        if (target && host.contains(target)) return { x, y };
+        if (target && host.contains(target)) return { x, y, swipe };
       }
     }
     throw new Error("The 3D ring has no visible unobstructed drag target.");
   });
   await page.mouse.move(point.x, point.y);
   await page.mouse.down();
-  await page.mouse.move(point.x + 150, point.y, { steps: 8 });
+  await page.mouse.move(point.x + point.swipe, point.y, { steps: 8 });
   await page.mouse.up();
   await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();

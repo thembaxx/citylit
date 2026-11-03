@@ -24,6 +24,7 @@ def build(name, box, cylinder, beam, material, add, bpy):
     concrete = material("Sculpt weathered concrete", (.48, .49, .46), roughness=.91)
     dark = material("Sculpt recessed glazing", (.10, .24, .29), roughness=.21, metalness=.10)
     glass = material("Sculpt sea glass", (.24, .55, .58), roughness=.15, metalness=.08)
+    interior = material("Sculpt warmly shaded interior", (.52, .35, .22), roughness=.88)
     metal = material("Sculpt structural metal", (.52, .57, .58), roughness=.37, metalness=.50)
     warm = material("Sculpt aged brass", (.59, .43, .26), roughness=.40, metalness=.52)
     wood = material("Sculpt dark wood", (.32, .24, .18), roughness=.79)
@@ -94,12 +95,18 @@ def build(name, box, cylinder, beam, material, add, bpy):
     def opening(x, y, z, width, height, frame=pale):
         # Shadow pocket, recessed glass and four-piece raised frame.
         box(x, y, z, width+.055, .065, height+.065, sandstone)
-        box(x, y-.046, z, width, .014, height, dark)
-        box(x, y-.062, z, .012, .018, height+.07, frame)
+        # Separate shadow reveal, warm room backing and physically-rendered
+        # glazed panes. The layered depth reads as architectural joinery,
+        # rather than a window-shaped sticker on a wall.
+        box(x, y-.044, z, width, .014, height, dark)
+        box(x, y-.058, z, width*.94, .012, height*.92, interior)
+        box(x, y-.073, z, width*.88, .008, height*.88, glass)
+        box(x, y-.087, z, .013, .016, height+.06, frame)
+        box(x, y-.089, z, width+.01, .016, .012, frame)
         for side in (-1, 1):
-            box(x+side*width/2, y-.065, z, .014, .018, height+.05, frame)
-        box(x, y-.065, z+height/2, width+.04, .018, .016, frame)
-        box(x, y-.065, z-height/2, width+.07, .045, .026, frame)
+            box(x+side*width/2, y-.082, z, .015, .025, height+.05, frame)
+        box(x, y-.084, z+height/2, width+.04, .027, .016, frame)
+        box(x, y-.087, z-height/2, width+.07, .050, .03, frame)
 
     def rail(a, b, posts=12, height=.15):
         for i in range(posts+1):

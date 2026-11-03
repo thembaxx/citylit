@@ -96,9 +96,22 @@ def beam(a, b, radius=0.025, mat=AMBER):
     obj.rotation_euler = (end - start).to_track_quat("Z", "Y").to_euler()
 
 
-def base():
-    cylinder(0, 0, -0.10, 1.35, 0.12, LIGHT, vertices=48)
-    cylinder(0, 0, -0.015, 1.23, 0.055, AMBER, vertices=48)
+def base(name):
+    # Architecture belongs on a neutral exhibition plinth, not an orange
+    # toy podium. Landscapes retain an understated circular terrain base.
+    if name in {"table-mountain", "hole", "park"}:
+        cylinder(0, 0, -0.105, 1.35, 0.13, LIGHT, vertices=72)
+        return
+    porcelain = material("Architectural porcelain base", (.89, .88, .85), roughness=.75)
+    slab = add(bpy.ops.mesh.primitive_cube_add, (0, 0, -.12),
+               (2.76, 2.13, .13), porcelain, size=1)
+    slab.name = "Porcelain display plinth"
+    bevel = slab.modifiers.new("Rounded architectural platform rim", "BEVEL")
+    bevel.width = .032
+    bevel.segments = 4
+    bpy.context.view_layer.objects.active = slab
+    bpy.ops.object.modifier_apply(modifier=bevel.name)
+    box(0, 0, -.042, 2.67, 2.04, .055, porcelain)
 
 
 def park():
@@ -283,7 +296,7 @@ manifest = []
 for name, build in BUILDERS.items():
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
-    base()
+    base(name)
     if name in fidelity.SUPPORTED:
         fidelity.build(name, box, cylinder, beam, material, add, bpy)
     elif name in remaining.SUPPORTED:

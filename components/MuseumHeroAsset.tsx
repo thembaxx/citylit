@@ -33,20 +33,20 @@ function HeritageMuseum({
           // Image-based base colors were exported without the original tint.
           // These calibrated factors let real brick/stone scans show through
           // without turning the entire model into a white paper miniature.
-          if (name.includes("heritage brick")) material.color.set("#9c5747");
-          else if (name.includes("pathway stone")) material.color.set("#bca78d");
-          else if (name.includes("lawn")) material.color.set("#59744b");
-          else if (name.includes("heritage wood")) material.color.set("#7a5540");
-          else if (name.includes("copper red roof")) material.color.set("#71403a");
-          else if (name.includes("roof seam")) material.color.set("#51352f");
-          else if (name.includes("painted veranda trim")) material.color.set("#d3c3aa");
-          else if (name.includes("trim edge")) material.color.set("#e0d2b9");
+          if (name.includes("heritage brick")) material.color.set("#7d3829");
+          else if (name.includes("pathway stone")) material.color.set("#9b856f");
+          else if (name.includes("lawn")) material.color.set("#49683a");
+          else if (name.includes("heritage wood")) material.color.set("#5c3b2a");
+          else if (name.includes("copper red roof")) material.color.set("#612e29");
+          else if (name.includes("roof seam")) material.color.set("#38211d");
+          else if (name.includes("painted veranda trim")) material.color.set("#a48f78");
+          else if (name.includes("trim edge")) material.color.set("#b7a28b");
           else if (name.includes("sash glazing")) {
-            material.color.set("#2b4c57");
+            material.color.set("#193b48");
             material.roughness = 0.09;
             material.metalness = 0.18;
             material.envMapIntensity = 1.7;
-          } else if (name.includes("deep interior")) material.color.set("#151f24");
+          } else if (name.includes("deep interior")) material.color.set("#0c1117");
           material.needsUpdate = true;
         }
         return material;

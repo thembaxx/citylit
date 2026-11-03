@@ -1,4 +1,4 @@
-"""Actual recessed architectural openings for three CityLit building classes.
+"""Actual recessed architectural openings for four CityLit building classes.
 
 This art-directed geometry pass carves masonry pockets by Blender Exact Boolean,
 then authors independent inset rooms, sill/floor geometry and miniature contents.
@@ -7,7 +7,7 @@ Blender 4.0+; use named facade shell meshes (no arbitrary object index selection
 """
 
 def build(name, box, material, bpy):
-    if name not in ("bo-kaap", "tower", "dome"):
+    if name not in ("bo-kaap", "tower", "dome", "union-buildings"):
         return False
 
     room = material("Interior room backing", (.28, .24, .19), roughness=.94)
@@ -79,6 +79,16 @@ def build(name, box, material, bpy):
     elif name == "tower":
         for i, x in enumerate((-.88,-.58,-.29,0,.29,.58,.88)):
             carve("RecessShellDurbanHall", x, -.28, .35, .135, .28, i)
+    elif name == "union-buildings":
+        # Paired façades each have 8 carved, independently glazed rooms.
+        # Match the actual Blender window centres in sculpt-landmark-heroes.py.
+        for side in (-1, 1):
+            cx = side * 1.01
+            shell = "RecessShellUnionEast" if side > 0 else "RecessShellUnionWest"
+            for row, z in enumerate((.40, .72)):
+                for col, dx in enumerate((-.27, -.09, .09, .27)):
+                    carve(shell, cx + dx, -.24, z - .095,
+                          .13, .19, (row * 4 + col) + (0 if side < 0 else 8))
     elif name == "dome":
         for i, x in enumerate((.50,.73,.95)):
             carve("RecessShellConstitutionStone", x, -.23,

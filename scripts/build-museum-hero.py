@@ -78,6 +78,10 @@ GRASS = pbr("Lawn - ambientCG CC0", (.33,.48,.25), roughness=.97, texture="grass
 WOOD = pbr("Heritage wood - ambientCG CC0", (.30,.20,.13), roughness=.57, texture="wood", normal_strength=.35)
 WHITE = pbr("Painted veranda trim", (.89,.85,.76), roughness=.60)
 WHITE_HIGHLIGHT = pbr("Trim edge highlights", (.97,.93,.85), roughness=.43)
+SOFFIT = pbr("Recessed veranda soffit shade", (.35,.31,.27), roughness=.95)
+GLASS_REFLECTION = pbr("Subtle sky reflection", (.66,.79,.80), roughness=.12, metallic=.05)
+GLASS_REFLECTION.node_tree.nodes.get("Principled BSDF").inputs["Alpha"].default_value = .18
+GLASS_REFLECTION.blend_method = "BLEND"
 BRICK_DARK = pbr("Brick mortar/corbel details", (.36,.19,.17), roughness=.87)
 RED_ROOF = pbr("Weathered copper red roof", (.54,.29,.25), roughness=.43, metallic=.3)
 ROOF_SEAM = pbr("Roof seam and ridge", (.38,.20,.19), roughness=.47, metallic=.28)
@@ -191,6 +195,9 @@ def window(cx,level,front=-.610,side=False):
               (.027,.013,h*.84),WHITE,"MuseumGlass",.003)
     block("Real recessed reflective glazing", (cx,-.633,level),
           (w,.009,h),GLASS,"MuseumGlass",.003)
+    # Slim glancing reflection, visible only from the front angle.
+    block("Soft glazing highlight", (cx+w*.23,-.645,level+.045),
+          (.021,.004,h*.69),GLASS_REFLECTION,"MuseumGlass",.001)
     for dx in (-w/2,w/2):
         block("Painted reveal upright", (cx+dx,y-.052,level),(.023,.075,h+.09),WHITE,"MuseumFacade",.004)
     for dz in (-h/2,0,h/2):
@@ -255,6 +262,8 @@ uv_world(main_wall,.52)
 
 block("Main limestone footing",(0,.13,.105),(3.48,1.58,.16),STONE,"MuseumFacade",.009,tile=.75)
 block("Cornice at first floor",(0,-.68,1.00),(3.5,.10,.052),WHITE_HIGHLIGHT,"MuseumFacade",.006)
+block("First floor masonry shadow line",(0,-.624,.953),(3.34,.021,.038),
+      SOFFIT,"MuseumFacade",.003)
 block("Front upper brick stringcourse",(0,-.70,1.55),(3.5,.12,.056),BRICK_DARK,"MuseumFacade",.004)
 block("Projecting upper eaves",(0,-.63,1.81),(3.62,.18,.065),WHITE,"MuseumRoof",.01)
 # Repeating facade windows allow a readable, balanced central entrance.
@@ -273,6 +282,12 @@ block("Stone entrance lintel",(0,-.75,.96),(.71,.18,.082),STONE,"MuseumDetails",
 block("Ground veranda deck",(0,-1.01,.13),(3.89,.72,.14),PAVING,"MuseumDetails",.012,tile=.40)
 block("First-floor veranda balcony",(0,-1.00,1.035),(3.94,.76,.075),WHITE,"MuseumDetails",.012)
 block("Upper veranda canopy",(0,-1.01,1.88),(4.06,.82,.075),RED_ROOF,"MuseumRoof",.011)
+# Subtle baked-style underside occlusion: mobile disables live shadow maps.
+# Thin inset surfaces shade the veranda without changing the 3D silhouette.
+block("Upper balcony underside shade",(0,-1.00,.989),(3.69,.65,.012),
+      SOFFIT,"MuseumDetails",.002)
+block("Roof canopy underside shade",(0,-1.01,1.833),(3.80,.70,.012),
+      SOFFIT,"MuseumRoof",.002)
 block("Canopy fascia",(0,-1.45,1.848),(4.11,.06,.09),WHITE_HIGHLIGHT,"MuseumDetails",.004)
 for z,h in ((.15,.89),(1.07,.78)):
     for x in (-1.86,-1.37,-.88,-.39,.10,.59,1.08,1.57,1.86):

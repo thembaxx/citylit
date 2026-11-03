@@ -2,7 +2,7 @@
   {
     "id": "table-mountain",
     "src": "/models/stage/table-mountain.glb",
-    "bytes": 473412,
+    "bytes": 473632,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -12,7 +12,7 @@
   {
     "id": "stadium",
     "src": "/models/stage/stadium.glb",
-    "bytes": 323608,
+    "bytes": 323756,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -22,7 +22,7 @@
   {
     "id": "union-buildings",
     "src": "/models/stage/union-buildings.glb",
-    "bytes": 120480,
+    "bytes": 120664,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -32,7 +32,7 @@
   {
     "id": "ponte",
     "src": "/models/stage/ponte.glb",
-    "bytes": 145176,
+    "bytes": 145284,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -42,7 +42,7 @@
   {
     "id": "bridge",
     "src": "/models/stage/bridge.glb",
-    "bytes": 114816,
+    "bytes": 114924,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -52,7 +52,7 @@
   {
     "id": "lighthouse",
     "src": "/models/stage/lighthouse.glb",
-    "bytes": 123352,
+    "bytes": 123464,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -62,7 +62,7 @@
   {
     "id": "hole",
     "src": "/models/stage/hole.glb",
-    "bytes": 354788,
+    "bytes": 354972,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -72,7 +72,7 @@
   {
     "id": "park",
     "src": "/models/stage/park.glb",
-    "bytes": 385588,
+    "bytes": 385808,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -82,7 +82,7 @@
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 121864,
+    "bytes": 122072,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -92,7 +92,7 @@
   {
     "id": "tower",
     "src": "/models/stage/tower.glb",
-    "bytes": 116180,
+    "bytes": 116288,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -102,7 +102,7 @@
   {
     "id": "arch",
     "src": "/models/stage/arch.glb",
-    "bytes": 271496,
+    "bytes": 271680,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -112,7 +112,7 @@
   {
     "id": "fort",
     "src": "/models/stage/fort.glb",
-    "bytes": 184064,
+    "bytes": 184212,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -122,7 +122,7 @@
   {
     "id": "bo-kaap",
     "src": "/models/stage/bo-kaap.glb",
-    "bytes": 350676,
+    "bytes": 351044,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -132,7 +132,7 @@
   {
     "id": "cooling-towers",
     "src": "/models/stage/cooling-towers.glb",
-    "bytes": 292084,
+    "bytes": 292192,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",
@@ -142,7 +142,7 @@
   {
     "id": "aquarium",
     "src": "/models/stage/aquarium.glb",
-    "bytes": 117972,
+    "bytes": 118084,
     "authoring": "Blender 4.3",
     "purpose": "Illustrative architectural miniature, not a surveyed reconstruction",
     "compression": "KHR_draco_mesh_compression",

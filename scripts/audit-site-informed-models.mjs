@@ -46,6 +46,16 @@ for (const id of required) {
     .reduce((n, primitive) => n + (primitive.getAttribute("POSITION")?.getCount() || 0), 0);
   assert.ok(positions >= 700, id + " geometry appears primitive");
   assert.ok(meshCount > 0, id + " lacks decoded geometry");
+  // Keep architectural displays visually restrained without accidentally
+  // applying a museum slab to natural landscapes. Check exported GLB
+  // materials, not just the Blender source or build logs.
+  const materials = doc.getRoot().listMaterials().map((mat) => mat.getName());
+  const landscapes = new Set(["table-mountain", "hole", "park"]);
+  assert.equal(
+    materials.includes("Architectural porcelain base"),
+    !landscapes.has(id),
+    id + " has the wrong architectural or natural display base",
+  );
   assert.ok(
     doc.getRoot().listMaterials().length >= 4,
     id + " has insufficient material differentiation",

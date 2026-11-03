@@ -6,6 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import MuseumShowcase, { type MuseumFeature, type MuseumProps } from "./MuseumShowcase";
+import MuseumGroundShadow from "./MuseumGroundShadow";
 
 const url = "/models/hero/mcgregor-museum.glb";
 
@@ -115,6 +116,7 @@ function HeritageMuseum({
   ];
   return (
     <group name="heritage-museum-hero">
+      <MuseumGroundShadow />
       <primitive object={instance} dispose={null} />
       {onFeature &&
         targets.map((target) => (

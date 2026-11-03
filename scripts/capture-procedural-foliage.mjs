@@ -32,7 +32,7 @@ try {
     // Legacy city view contains the reusable instanced ProceduralTree canopy.
     await page.goto(base + "/johannesburg?view=3d", { waitUntil: "domcontentloaded" });
     await expect(page.locator(".game-screen")).toBeVisible();
-    await expect(page.locator("canvas.persistent-canvas")).toBeVisible({ timeout: 30000 });
+    await expect(page.locator(".persistent-canvas canvas")).toBeVisible({ timeout: 30000 });
     await expect(page.locator(".webgl-fallback")).toHaveCount(0);
     await page.waitForTimeout(900);
     await page.screenshot({ path: out + "/" + label + "-classic-city.png" });
@@ -44,7 +44,7 @@ try {
     await expect(stage).toHaveAttribute("data-active-model-status", "ready", {
       timeout: 30000,
     });
-    await expect(page.locator("canvas.persistent-canvas")).toBeVisible();
+    await expect(page.locator(".persistent-canvas canvas")).toBeVisible();
     await page.waitForTimeout(900);
     await page.screenshot({ path: out + "/" + label + "-stage.png" });
     if (errors.length > 0) {

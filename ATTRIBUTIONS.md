@@ -35,3 +35,7 @@ Wikipedia introductions are excerpts attributed to the linked article and Wikipe
 ## Expanded destinations and practical facts
 
 Additional source pages include SANBI national garden listings, Visit Stellenbosch, Tatham Art Gallery, Nelson Mandela Bay Tourism, National Museum/Oliewenhuis, PACOFS, municipal tourism guides, hotel operators and the Big Hole visitor information. Every place retains its own source URLs and fetch outcomes. Practical facts distinguish verified information, editorial planning estimates and unknown values. Event dates link directly to Market Theatre and PACOFS programmes and disappear after expiry. City chapters use visitor-destination boundaries; outlying venues are labelled in their address. The nine additional city miniatures are original procedural illustrations, not architectural reconstructions.
+
+## UI interactions
+
+The magnetic button interaction in `components/ui/MagneticButton.tsx` is adapted from [EasyUI](https://github.com/Surajmaurya1/easyui), Copyright (c) 2026 Suraj Maurya, distributed under the [MIT License](https://github.com/Surajmaurya1/easyui/blob/main/LICENSE). It is adapted for Citylit's existing Motion package, accessible focus states, coarse-pointer behavior and reduced-motion preference.

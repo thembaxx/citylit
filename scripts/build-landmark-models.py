@@ -1,4 +1,4 @@
-"""Author Citylit's illustrative, low-poly stage models in Blender.
+"""Author CityLit's PBR architectural stage miniatures in Blender.
 
 Derived from the supplied build-models.py guidance. Run with Blender 4.3+:
   blender --background --python scripts/build-landmark-models.py
@@ -8,30 +8,62 @@ import json
 import math
 import pathlib
 import bpy
+import importlib.util
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "public/models/stage"
 OUT.mkdir(parents=True, exist_ok=True)
+# External detailing remains in a separate reusable script for all 15 miniature classes.
+spec = importlib.util.spec_from_file_location("landmark_details", ROOT / "scripts/landmark-details.py")
+details = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(details)
+pbr_spec = importlib.util.spec_from_file_location("stage_pbr", ROOT / "scripts/stage-pbr.py")
+stage_pbr = importlib.util.module_from_spec(pbr_spec)
+pbr_spec.loader.exec_module(stage_pbr)
+fidelity_spec = importlib.util.spec_from_file_location("fidelity", ROOT / "scripts/sculpt-landmark-heroes.py")
+fidelity = importlib.util.module_from_spec(fidelity_spec)
+fidelity_spec.loader.exec_module(fidelity)
+remaining_spec = importlib.util.spec_from_file_location(
+    "remaining", ROOT / "scripts/sculpt-remaining-assets.py"
+)
+remaining = importlib.util.module_from_spec(remaining_spec)
+remaining_spec.loader.exec_module(remaining)
+premium_spec = importlib.util.spec_from_file_location(
+    "architectural_detail", ROOT / "scripts/architectural-detail-pass.py"
+)
+premium = importlib.util.module_from_spec(premium_spec)
+premium_spec.loader.exec_module(premium)
+depth_spec = importlib.util.spec_from_file_location(
+    "window_depth", ROOT / "scripts/recessed-architecture.py"
+)
+window_depth = importlib.util.module_from_spec(depth_spec)
+depth_spec.loader.exec_module(window_depth)
+botany_spec = importlib.util.spec_from_file_location(
+    "botanical_fidelity", ROOT / "scripts/botanical-fidelity.py"
+)
+botany = importlib.util.module_from_spec(botany_spec)
+botany_spec.loader.exec_module(botany)
 MATERIALS = {}
 
 
-def material(name, color):
+def material(name, color, roughness=0.82, metalness=0.0):
     if name not in MATERIALS:
         result = bpy.data.materials.new(name)
         result.diffuse_color = (*color, 1)
         result.use_nodes = True
         node = result.node_tree.nodes["Principled BSDF"]
         node.inputs["Base Color"].default_value = (*color, 1)
-        node.inputs["Roughness"].default_value = 0.85
+        node.inputs["Roughness"].default_value = roughness
+        node.inputs["Metallic"].default_value = metalness
         MATERIALS[name] = result
     return MATERIALS[name]
 
 
-STONE = material("Warm limestone", (0.48, 0.45, 0.41))
-LIGHT = material("Pale stone", (0.72, 0.69, 0.62))
-AMBER = material("Amber", (0.96, 0.51, 0.16))
-DARK = material("Recesses", (0.16, 0.18, 0.19))
-LEAF = material("Foliage", (0.39, 0.45, 0.34))
+STONE = material("Warm limestone", (0.48, 0.45, 0.41), roughness=0.88)
+LIGHT = material("Pale stone", (0.72, 0.69, 0.62), roughness=0.81)
+AMBER = material("Amber", (0.96, 0.51, 0.16), roughness=0.52, metalness=0.16)
+DARK = material("Recesses", (0.16, 0.18, 0.19), roughness=0.28, metalness=0.1)
+LEAF = material("Foliage", (0.39, 0.45, 0.34), roughness=0.95)
 
 
 def add(operator, location, scale=None, mat=STONE, **kwargs):
@@ -45,7 +77,16 @@ def add(operator, location, scale=None, mat=STONE, **kwargs):
 
 
 def box(x, y, z, sx, sy, sz, mat=STONE):
-    return add(bpy.ops.mesh.primitive_cube_add, (x, y, z), (sx, sy, sz), mat, size=1)
+    obj = add(bpy.ops.mesh.primitive_cube_add, (x, y, z), (sx, sy, sz), mat, size=1)
+    # Give structural edges small physical highlights, without rounding mullions.
+    # Detail and shading quality, not Draco output size, determine the geometry.
+    if min(sx, sy, sz) > .09:
+        bevel = obj.modifiers.new("Architectural edge highlights", "BEVEL")
+        bevel.width = min(.018, min(sx, sy, sz) * .042)
+        bevel.segments = 3
+        bpy.context.view_layer.objects.active = obj
+        bpy.ops.object.modifier_apply(modifier=bevel.name)
+    return obj
 
 
 def cylinder(x, y, z, radius, depth, mat=STONE, top=None, vertices=24):
@@ -60,9 +101,22 @@ def beam(a, b, radius=0.025, mat=AMBER):
     obj.rotation_euler = (end - start).to_track_quat("Z", "Y").to_euler()
 
 
-def base():
-    cylinder(0, 0, -0.10, 1.35, 0.12, LIGHT, vertices=48)
-    cylinder(0, 0, -0.015, 1.23, 0.055, AMBER, vertices=48)
+def base(name):
+    # Architecture belongs on a neutral exhibition plinth, not an orange
+    # toy podium. Landscapes retain an understated circular terrain base.
+    if name in {"table-mountain", "hole", "park"}:
+        cylinder(0, 0, -0.105, 1.35, 0.13, LIGHT, vertices=72)
+        return
+    porcelain = material("Architectural porcelain base", (.89, .88, .85), roughness=.75)
+    slab = add(bpy.ops.mesh.primitive_cube_add, (0, 0, -.12),
+               (2.76, 2.13, .13), porcelain, size=1)
+    slab.name = "Porcelain display plinth"
+    bevel = slab.modifiers.new("Rounded architectural platform rim", "BEVEL")
+    bevel.width = .032
+    bevel.segments = 4
+    bpy.context.view_layer.objects.active = slab
+    bpy.ops.object.modifier_apply(modifier=bevel.name)
+    box(0, 0, -.042, 2.67, 2.04, .055, porcelain)
 
 
 def park():
@@ -225,7 +279,7 @@ def cooling_towers():
 
 
 def aquarium():
-    water = material("Ocean water", (.29,.56,.59))
+    water = material("Ocean water", (.29,.56,.59), roughness=0.18, metalness=0.08)
     cylinder(0, 0, .08, 1.04, .13, water, vertices=32)
     box(-.35,.35,.39,1.4,.50,.6,LIGHT)
     for x in [-.85,-.45,-.05,.35]:
@@ -247,8 +301,23 @@ manifest = []
 for name, build in BUILDERS.items():
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
-    base()
-    build()
+    base(name)
+    if name in fidelity.SUPPORTED:
+        fidelity.build(name, box, cylinder, beam, material, add, bpy)
+    elif name in remaining.SUPPORTED:
+        remaining.build(name, box, cylinder, beam, material, add, bpy)
+    else:
+        build()
+        details.decorate(name, box, cylinder, beam, material, add, bpy)
+    # Preserve landmark-specific topology; add independent physical micro-geometry.
+    if name in remaining.SUPPORTED:
+        premium.build(name, box, cylinder, beam, material, add, bpy)
+    # Boolean cutouts must happen before geometry is joined, after builders
+    # have created the separate facade shells and their decorative joinery.
+    window_depth.build(name, box, material, bpy)
+    # Single batched mesh of actual curved foliage and fine native groundcover.
+    botany.build(name, beam, material, bpy)
+    stage_pbr.prepare_scene_for_export()
     bpy.ops.object.select_all(action="SELECT")
     # Join geometry to avoid one draw call and glTF node for every beam or column.
     bpy.ops.object.join()
@@ -257,6 +326,16 @@ for name, build in BUILDERS.items():
                               export_draco_mesh_compression_enable=False,
                               export_cameras=False, export_lights=False)
     manifest.append({"id": name, "src": f"/models/stage/{name}.glb", "bytes": path.stat().st_size,
-                     "authoring": "Blender 4.3", "purpose": "Illustrative low-poly model"})
+                     "authoring": "Blender 4.3",
+                     "geometryTier": (
+                         "site-informed-sculpt-v1" if name in fidelity.SUPPORTED
+                         else "distinct-sculpt-v2" if name in remaining.SUPPORTED
+                         else "illustrative-pbr-v1"
+                     ),
+                     "purpose": (
+                         "Reference-informed editorial miniature, not a measured architectural reconstruction"
+                         if name in fidelity.SUPPORTED
+                         else "Original architectural/landscape miniature, not a site survey"
+                     )})
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to finalize and verify the size budget.")
+print(f"Exported {len(manifest)} Blender models. Run compress-stage-models.mjs to embed Draco and audit high-fidelity geometry.")

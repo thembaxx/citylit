@@ -5,6 +5,7 @@ import { Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import ProceduralTree from "./ProceduralTree";
+import { CategoryDetails, LandmarkDetails } from "./SceneDetails";
 const windowBlue = "#3d7ef0",
   dark = "#3a3532",
   cream = "#fff4e6",
@@ -24,7 +25,7 @@ function Box({
   r?: V;
 }) {
   return (
-    <mesh position={p} rotation={r}>
+    <mesh position={p} rotation={r} castShadow receiveShadow>
       <boxGeometry args={s} />
       <meshStandardMaterial color={c} roughness={0.8} />
     </mesh>
@@ -68,7 +69,7 @@ function Cable({
     dir.clone().normalize(),
   );
   return (
-    <mesh position={mid} quaternion={quaternion}>
+    <mesh position={mid} quaternion={quaternion} castShadow>
       <cylinderGeometry args={[width, width, dir.length(), 5]} />
       <meshStandardMaterial color={c} />
     </mesh>
@@ -104,15 +105,15 @@ function Grove() {
 function Base({ ocean = false }: { ocean?: boolean }) {
   return (
     <group>
-      <mesh position={[0, -0.3, 0]}>
+      <mesh position={[0, -0.3, 0]} castShadow receiveShadow>
         <boxGeometry args={[3.4, 0.14, 3.4]} />
         <meshStandardMaterial color="#6b4128" roughness={0.9} />
       </mesh>
-      <mesh position={[0, -0.18, 0]}>
+      <mesh position={[0, -0.18, 0]} receiveShadow>
         <boxGeometry args={[3.22, 0.12, 3.22]} />
         <meshStandardMaterial color="#e6c98a" roughness={0.86} />
       </mesh>
-      <mesh position={[0, -0.06, 0]}>
+      <mesh position={[0, -0.06, 0]} receiveShadow>
         <boxGeometry args={[3.04, 0.14, 3.04]} />
         <meshStandardMaterial color="#86d456" roughness={0.78} />
       </mesh>
@@ -674,6 +675,7 @@ export function Landmark({
           ) : (
             <Lighthouse reduced={reduced} />
           )}
+          <LandmarkDetails city={city} index={index} />
         </group>
       </Alive>
       <Spark reduced={reduced} color={accent} />
@@ -726,6 +728,7 @@ export function CategoryModel({ index, reduced }: { index: number; reduced: bool
           ) : (
             <Disco reduced={reduced} />
           )}
+          <CategoryDetails index={index} />
         </group>
       </Alive>
       <Spark reduced={reduced} color={accent} />

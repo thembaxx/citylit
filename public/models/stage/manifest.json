@@ -2,121 +2,166 @@
   {
     "id": "table-mountain",
     "src": "/models/stage/table-mountain.glb",
-    "bytes": 6868,
+    "bytes": 2462112,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "site-informed-sculpt-v1",
+    "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 6,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "stadium",
     "src": "/models/stage/stadium.glb",
-    "bytes": 12420,
+    "bytes": 2480724,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "site-informed-sculpt-v1",
+    "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 6,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "union-buildings",
     "src": "/models/stage/union-buildings.glb",
-    "bytes": 6952,
+    "bytes": 1566676,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "site-informed-sculpt-v1",
+    "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 6,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "ponte",
     "src": "/models/stage/ponte.glb",
-    "bytes": 13384,
+    "bytes": 1097004,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "site-informed-sculpt-v1",
+    "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 3,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "bridge",
     "src": "/models/stage/bridge.glb",
-    "bytes": 7212,
+    "bytes": 901768,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 3,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "lighthouse",
     "src": "/models/stage/lighthouse.glb",
-    "bytes": 8556,
+    "bytes": 1875484,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 6,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "hole",
     "src": "/models/stage/hole.glb",
-    "bytes": 11348,
+    "bytes": 903776,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "site-informed-sculpt-v1",
+    "purpose": "Reference-informed editorial miniature, not a measured architectural reconstruction",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 3,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "park",
     "src": "/models/stage/park.glb",
-    "bytes": 7496,
+    "bytes": 3516528,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 9,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "dome",
     "src": "/models/stage/dome.glb",
-    "bytes": 7812,
+    "bytes": 4101264,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 12,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "tower",
     "src": "/models/stage/tower.glb",
-    "bytes": 6840,
+    "bytes": 1584552,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 6,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "arch",
     "src": "/models/stage/arch.glb",
-    "bytes": 5568,
+    "bytes": 2503452,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 9,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "fort",
     "src": "/models/stage/fort.glb",
-    "bytes": 8420,
+    "bytes": 4075560,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 12,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "bo-kaap",
     "src": "/models/stage/bo-kaap.glb",
-    "bytes": 11696,
+    "bytes": 2541980,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 9,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "cooling-towers",
     "src": "/models/stage/cooling-towers.glb",
-    "bytes": 12204,
+    "bytes": 1938116,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 6,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   },
   {
     "id": "aquarium",
     "src": "/models/stage/aquarium.glb",
-    "bytes": 9964,
+    "bytes": 4088484,
     "authoring": "Blender 4.3",
-    "purpose": "Illustrative low-poly model",
-    "compression": "KHR_draco_mesh_compression"
+    "geometryTier": "distinct-sculpt-v2",
+    "purpose": "Original architectural/landscape miniature, not a site survey",
+    "compression": "KHR_draco_mesh_compression",
+    "textureCount": 12,
+    "materials": "embedded CC0 color, normal and roughness PBR maps"
   }
 ]

@@ -2,6 +2,7 @@
 import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { Component, useRef, useSyncExternalStore, type ReactNode } from "react";
+import * as THREE from "three";
 
 const qualityQuery = "(max-width: 760px), (pointer: coarse)";
 function subscribeQuality(onChange: () => void) {
@@ -51,7 +52,18 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
           className="persistent-canvas"
           style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 2 }}
           frameloop="demand"
-          dpr={lowPower ? [1, 1] : [1, 1.5]}
+          shadows={!lowPower}
+          onCreated={({ gl }) => {
+            gl.outputColorSpace = THREE.SRGBColorSpace;
+            gl.toneMapping = THREE.AgXToneMapping;
+            gl.toneMappingExposure = 0.98;
+            if (!lowPower) gl.shadowMap.type = THREE.PCFSoftShadowMap;
+          }}
+          // A fixed 1× mobile backing buffer blurs detailed glazing and thin
+          // geometry on Retina phones. Cap the mobile buffer at 1.5× while
+          // keeping shadows and MSAA off on low-power layouts; desktop at 2×.
+          // R3F clamps this range to the device's actual pixel ratio.
+          dpr={lowPower ? [1, 1.5] : [1, 2]}
           gl={{
             antialias: !lowPower,
             alpha: true,

@@ -10,6 +10,8 @@ import ProvinceMap, { provinceLabels, type LabelRefs } from "./ProvinceMap";
 import { provinceColors, availableProvinces } from "../lib/province-colors";
 import { cities } from "../lib/data";
 import ExpandedLandmark from "./ExpandedLandmark";
+import StudioEnvironment from "./StudioEnvironment";
+import SurfaceFinishes from "./SurfaceFinishes";
 import { Landmark, CategoryModel } from "./Models";
 const viewMemory = new Map<string, number[]>();
 const labelOffsets: Record<string, [number, number]> = {
@@ -156,9 +158,23 @@ function World({
   return (
     <>
       <PerspectiveCamera makeDefault fov={34} position={[3.2, 6.4, 5.4]} />
+      {mode !== "map" && <StudioEnvironment intensity={0.9} />}
       <hemisphereLight args={["#fff6ea", "#8d7360", 0.8]} />
       <ambientLight intensity={0.62} />
-      <directionalLight position={[4.2, 8.2, 5]} intensity={2.15} color="#fffaf3" />
+      <directionalLight
+        position={[4.2, 8.2, 5]}
+        intensity={2.15}
+        color="#fffaf3"
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-left={-6}
+        shadow-camera-right={6}
+        shadow-camera-top={6}
+        shadow-camera-bottom={-6}
+        shadow-bias={-0.0002}
+        shadow-normalBias={0.025}
+      />
       <directionalLight position={[-4.5, 3.2, -2]} intensity={0.55} color="#ffd0a8" />
       <pointLight position={[0.4, 2.4, 2.2]} intensity={6} distance={9} color="#ffe3bf" />
       <PerformanceMonitor
@@ -201,12 +217,16 @@ function World({
       >
         {mode === "map" ? (
           <ProvinceMap onCity={onCity} reduced={gentle} labels={labels} />
-        ) : mode === "category" ? (
-          <CategoryModel index={category} reduced={gentle} />
-        ) : city < 3 ? (
-          <Landmark city={city} index={index} reduced={gentle} />
         ) : (
-          <ExpandedLandmark city={city} index={index % 3} reduced={gentle} />
+          <SurfaceFinishes key={`${mode}:${city}:${index}:${category}`}>
+            {mode === "category" ? (
+              <CategoryModel index={category} reduced={gentle} />
+            ) : city < 3 ? (
+              <Landmark city={city} index={index} reduced={gentle} />
+            ) : (
+              <ExpandedLandmark city={city} index={index % 3} reduced={gentle} />
+            )}
+          </SurfaceFinishes>
         )}
       </group>
       <OrbitControls

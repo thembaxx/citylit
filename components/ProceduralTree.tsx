@@ -25,7 +25,7 @@ export default function ProceduralTree({
 }) {
   const leaves = useRef<THREE.InstancedMesh>(null);
   const { invalidate } = useThree();
-  const count = detail === "hero" ? 52 : 22;
+  const count = detail === "hero" ? 108 : 48;
 
   useLayoutEffect(() => {
     const mesh = leaves.current;
@@ -37,12 +37,12 @@ export default function ProceduralTree({
     for (let i = 0; i < count; i++) {
       const t = (i + 0.5) / count;
       const theta = i * 2.399963229728653 + seed * 0.83;
-      const spread = Math.sqrt(t) * (0.27 + 0.08 * Math.sin(i * 1.7 + seed));
+      const spread = Math.sqrt(t) * (0.32 + 0.12 * Math.sin(i * 1.7 + seed));
       const height = 0.71 + 0.6 * (1 - Math.abs(2 * t - 1)) + 0.15 * Math.sin(i * 1.13 + seed);
       dummy.position.set(Math.cos(theta) * spread, height, Math.sin(theta) * spread);
       dummy.rotation.set(i * 1.23, theta, i * 0.57);
       const variation = 0.8 + 0.3 * (0.5 + 0.5 * Math.sin(i * 2.91 + seed));
-      dummy.scale.set(variation, variation * 0.64, variation * 1.16);
+      dummy.scale.set(variation * 0.68, variation * 0.39, variation * 0.94);
       dummy.updateMatrix();
       mesh.setMatrixAt(i, dummy.matrix);
       const tint = base.clone();
@@ -74,8 +74,8 @@ export default function ProceduralTree({
         </mesh>
       ))}
       <instancedMesh ref={leaves} args={[undefined, undefined, count]} castShadow frustumCulled>
-        <icosahedronGeometry args={[0.15, 0]} />
-        <meshStandardMaterial color="#ffffff" roughness={0.87} flatShading />
+        <icosahedronGeometry args={[0.12, 1]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.94} />
       </instancedMesh>
     </group>
   );

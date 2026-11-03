@@ -48,6 +48,14 @@ for (const citySlug of [
       "aria-pressed",
       "true",
     );
+    const contextToggle = toolbar.getByRole("button", { name: "Show illustrative surroundings" });
+    await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
+    await contextToggle.click();
+    await expect(
+      toolbar.getByRole("button", { name: "Hide illustrative surroundings" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    await toolbar.getByRole("button", { name: "Hide illustrative surroundings" }).click();
+    await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
 
     await page.getByRole("button", { name: "Next discovery" }).click();
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[1]);
@@ -59,7 +67,13 @@ for (const citySlug of [
 test("all 15 Blender architectural assets remain valid Draco GLB files", async ({ request }) => {
   const manifestResponse = await request.get("/models/stage/manifest.json");
   expect(manifestResponse.ok()).toBeTruthy();
-  const manifest = (await manifestResponse.json()) as { id: string; bytes: number; src: string }[];
+  const manifest = (await manifestResponse.json()) as {
+    id: string;
+    bytes: number;
+    src: string;
+    textureCount: number;
+    compression: string;
+  }[];
   expect(manifest).toHaveLength(15);
   for (const entry of manifest) {
     const response = await request.get(entry.src);
@@ -67,6 +81,12 @@ test("all 15 Blender architectural assets remain valid Draco GLB files", async (
     const data = await response.body();
     expect(data.subarray(0, 4).toString()).toBe("glTF");
     expect(data.length).toBe(entry.bytes);
-    expect(data.length).toBeLessThanOrEqual(256 * 1024);
+    expect(data.length).toBeLessThanOrEqual(2 * 1024 * 1024);
+    expect(entry.textureCount).toBeGreaterThanOrEqual(3);
+    expect(entry.compression).toBe("KHR_draco_mesh_compression");
+    const jsonLength = data.readUInt32LE(12);
+    const gltf = JSON.parse(data.toString("utf8", 20, 20 + jsonLength));
+    expect(gltf.images?.length).toBeGreaterThanOrEqual(3);
+    expect(gltf.images.every((image: { uri?: string }) => !image.uri)).toBeTruthy();
   }
 });

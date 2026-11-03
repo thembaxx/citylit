@@ -15,9 +15,15 @@ for (const entry of manifest) {
   assert.equal(raw.toString("utf8", 0, 4), "glTF");
   assert.equal(raw.readUInt32LE(4), 2);
   assert.equal(raw.length, entry.bytes);
-  assert.ok(raw.length <= 256 * 1024);
+  assert.ok(raw.length <= 2 * 1024 * 1024);
+  assert.ok(entry.textureCount >= 3, `${entry.id} has no scanned PBR materials`);
   const json = JSON.parse(raw.toString("utf8", 20, 20 + raw.readUInt32LE(12)));
   assert.ok(json.extensionsRequired.includes("KHR_draco_mesh_compression"));
+  assert.ok((json.images?.length ?? 0) >= 3, `${entry.id} is missing embedded PBR scans`);
+  assert.ok(
+    json.images.every((img) => !img.uri),
+    "Unexpected runtime texture fetch",
+  );
   const document = await io.readBinary(raw);
   assert.ok(
     document
@@ -33,3 +39,5 @@ for (const entry of manifest) {
 console.log(
   `${manifest.length} Draco-compressed Blender assets decoded; size and metadata checks passed.`,
 );
+
+assert.ok(manifest.reduce((total, entry) => total + entry.bytes, 0) <= 22 * 1024 * 1024);

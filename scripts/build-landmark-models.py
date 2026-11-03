@@ -86,9 +86,21 @@ def beam(a, b, radius=0.025, mat=AMBER):
     obj.rotation_euler = (end - start).to_track_quat("Z", "Y").to_euler()
 
 
-def base():
-    cylinder(0, 0, -0.10, 1.35, 0.12, LIGHT, vertices=48)
-    cylinder(0, 0, -0.015, 1.23, 0.055, AMBER, vertices=48)
+def base(name):
+    # Organic terrain models retain the rounded diorama footprint. Built
+    # architecture sits on a restrained, low-profile porcelain display slab
+    # with bevelled edges instead of the old orange toy-platform rings.
+    if name in {"table-mountain", "hole", "park"}:
+        cylinder(0, 0, -0.10, 1.35, 0.12, LIGHT, vertices=64)
+        return
+    porcelain = material("Studio porcelain plinth", (.87, .86, .83), roughness=.79)
+    slab = box(0, 0, -0.12, 2.78, 2.16, .13, porcelain)
+    bevel = slab.modifiers.new("Polished architectural plinth edge", "BEVEL")
+    bevel.width = .035
+    bevel.segments = 3
+    bpy.context.view_layer.objects.active = slab
+    bpy.ops.object.modifier_apply(modifier=bevel.name)
+    box(0, 0, -.044, 2.70, 2.08, .025, porcelain)
 
 
 def park():
@@ -273,7 +285,7 @@ manifest = []
 for name, build in BUILDERS.items():
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
-    base()
+    base(name)
     if name in fidelity.SUPPORTED:
         fidelity.build(name, box, cylinder, beam, material, add, bpy)
     elif name in remaining.SUPPORTED:

@@ -323,13 +323,14 @@ def build(name, box, cylinder, beam, material, add, bpy):
             opening(x-.11,front-.10,ground+.59,.14,.21,pale)
             box(x+.12,front-.105,ground+.22,.12,.035,.38,wood)
             box(x+.12,front-.13,ground+.23,.010,.016,.03,warm)
-            # A shallow pitched roof with distinct ridge and eaves.
+            # Continuous roof planes (not disconnected diagonal sticks),
+            # plus thin gutters and a separate visible roof ridge.
             for side in (-1,1):
-                beam((x+side*.23,.20,ground+.83),
-                     (x,.20,ground+1.04),.035,brick)
-                beam((x+side*.23,-.20,ground+.83),
-                     (x,-.20,ground+1.04),.035,brick)
-            box(x,.15,ground+.91,.45,.81,.09,brick)
+                roof = box(x+side*.12,.15,ground+.94,.33,.88,.048,brick)
+                roof.rotation_euler.y = side*.68
+                beam((x+side*.24,-.30,ground+.84),
+                     (x+side*.24,.60,ground+.84),.013,metal)
+            beam((x,-.30,ground+1.047),(x,.60,ground+1.047),.018,brick)
             for step in range(3):
                 box(x+.12,front-.23-step*.065,
                     ground-.025-step*.018,.22,.13,.04,pale)

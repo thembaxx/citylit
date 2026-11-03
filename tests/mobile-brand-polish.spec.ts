@@ -54,5 +54,5 @@ test("Khwezi remains interactive and the PWA SVG uses the revised branding", asy
   await expect(hop).toBeVisible();
   await hop.click();
   await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Turn Khwezi" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Turn Khwezi" }).first()).toBeVisible();
 });

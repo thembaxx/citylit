@@ -308,7 +308,7 @@ function Ring({
                   onFeature={index === selected ? onFeature : undefined}
                 />
               ) : (
-                <SafeStageModel model={item.model} />
+                <SafeStageModel model={item.model} active={index === selected} />
               )}
               {index === selected && !item.name.toLowerCase().includes("mcgregor museum") && (
                 <MiniatureStreet compact={size.width < 760} />

@@ -227,7 +227,9 @@ function Ring({
       },
       onComplete: invalidate,
     });
-    return () => tween.kill();
+    return () => {
+      tween.kill();
+    };
   }, [camera, feature, selected, reduced, invalidate, items]);
   useEffect(() => {
     if (!ring.current) return;

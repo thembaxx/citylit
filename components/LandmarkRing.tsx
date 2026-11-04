@@ -488,6 +488,7 @@ export default function LandmarkRing({
   const [feature, setFeature] = useState<MuseumFeature>("architecture");
   const [zoom, setZoom] = useState(1);
   const [mobileInspectorOpen, setMobileInspectorOpen] = useState(false);
+  const inspectorToggleRef = useRef<HTMLButtonElement>(null);
   const [view, setView] = useState<StageView>("overview");
   const [spin, setSpin] = useState(0);
   const [showContext, setShowContext] = useState(false);
@@ -523,6 +524,8 @@ export default function LandmarkRing({
       role="group"
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {
+        // Tapping the model dismisses the inspector; its toolbar stops bubbling.
+        if (mobileInspectorOpen) setMobileInspectorOpen(false);
         if (event.button === 0) {
           // Capture immediately so dragging continues across scene overlays.
           event.currentTarget.setPointerCapture(event.pointerId);
@@ -596,8 +599,15 @@ export default function LandmarkRing({
         onPointerDown={(event) => event.stopPropagation()}
         onPointerMove={(event) => event.stopPropagation()}
         onPointerUp={(event) => event.stopPropagation()}
+        onKeyDown={(event) => {
+          if (event.key !== "Escape" || !mobileInspectorOpen) return;
+          event.stopPropagation();
+          setMobileInspectorOpen(false);
+          inspectorToggleRef.current?.focus();
+        }}
       >
         <button
+          ref={inspectorToggleRef}
           type="button"
           className="atlas-inspector-toggle"
           aria-label={mobileInspectorOpen ? "Close 3D inspector" : "Open 3D inspector"}

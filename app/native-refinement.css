@@ -587,7 +587,6 @@ select:focus-visible {
   scroll-margin-bottom: calc(96px + env(safe-area-inset-bottom));
 }
 
-
 /* November 2026 — expressive, mobile-first native polish.
    EasyUI-inspired spring/tactile surfaces, with no additional animation runtime. */
 .reference-guide {
@@ -736,7 +735,9 @@ select:focus-visible {
     border-radius: 27px;
     border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
     background: color-mix(in srgb, var(--surface) 84%, transparent);
-    box-shadow: 0 14px 38px rgb(10 13 23 / 24%), inset 0 1px rgb(255 255 255 / 14%);
+    box-shadow:
+      0 14px 38px rgb(10 13 23 / 24%),
+      inset 0 1px rgb(255 255 255 / 14%);
     backdrop-filter: saturate(1.5) blur(24px);
     -webkit-backdrop-filter: saturate(1.5) blur(24px);
   }
@@ -748,7 +749,9 @@ select:focus-visible {
     border-radius: 21px;
   }
   .atlas-native-dock a[aria-current="page"] {
-    box-shadow: inset 0 1px rgb(255 255 255 / 15%), 0 4px 18px rgb(15 20 35 / 11%);
+    box-shadow:
+      inset 0 1px rgb(255 255 255 / 15%),
+      0 4px 18px rgb(15 20 35 / 11%);
     background: color-mix(in srgb, var(--guide-accent) 23%, var(--surface));
   }
   .atlas-native-dock a svg {
@@ -804,7 +807,14 @@ select:focus-visible {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-beacon-card, .atlas-button, .atlas-mascot-action),
+  .reference-guide
+    :is(
+      .atlas-city-card-link,
+      .atlas-place-card-link,
+      .atlas-beacon-card,
+      .atlas-button,
+      .atlas-mascot-action
+    ),
   .atlas-native-dock :is(a, svg) {
     animation: none !important;
     transition: none !important;
@@ -821,7 +831,6 @@ select:focus-visible {
     outline-offset: -3px;
   }
 }
-
 
 /* The shared fixed WebGL canvas can be elevated for Khwezi on other routes.
    Keep the stage's HTML controls in front of it without changing canvas rendering. */

@@ -1,0 +1,68 @@
+/* Mobile-first interaction guardrails for the existing atlas and 3D inspector.
+   Keep the guide/Khwezi scene intact; only elevate HTML controls above WebGL. */
+:root {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.reference-stage-guide .atlas-ring-scene .atlas-inspector-toolbar {
+  z-index: 90;
+  pointer-events: auto;
+}
+.reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open {
+  z-index: 91;
+  max-width: min(260px, calc(100vw - 32px));
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+.reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open button {
+  min-height: 44px;
+}
+.reference-guide :is(.atlas-search, .atlas-province-select, .category-page-search) {
+  min-width: 0;
+}
+
+@media (pointer: coarse), (max-width: 767px) {
+  :where(.reference-guide, .reference-stage-guide, .game-screen)
+    :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea) {
+    font-size: 16px !important; /* Avoid iOS Safari focus zoom. */
+  }
+  .reference-guide .atlas-breadcrumb,
+  .reference-guide .atlas-section-heading,
+  .reference-stage-guide .atlas-stage-actions {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .reference-stage-guide .atlas-ring-scene .atlas-inspector-toolbar {
+    right: max(12px, env(safe-area-inset-right));
+  }
+  .reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open {
+    max-height: min(48dvh, 320px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Keep the expanded inspector inside the model region at 320px. */
+  .reference-stage-guide .atlas-ring-scene:not(.is-heritage-hero) .atlas-inspector-panel.is-open {
+    top: calc(100% + 1px);
+  }
+  .reference-guide :is(.atlas-button, .atlas-text-link, .atlas-place-filters button) {
+    min-height: 44px;
+  }
+}
+
+/* Preserve the warm headline accent while meeting WCAG AA contrast in day mode. */
+:root[data-theme="day"] .discovery-guide :is(h1, h2) > em {
+  color: #ad4f0d;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) .discovery-guide :is(h1, h2) > em {
+    color: #ad4f0d;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reference-stage-guide .atlas-inspector-toolbar button {
+    animation: none;
+    transition: none;
+  }
+}

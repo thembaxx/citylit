@@ -93,12 +93,23 @@ function Model({
     ears.current.rotation.z = sleeping ? -0.28 : Math.sin(t * 1.3) * 0.065;
     ears.current.rotation.x = active ? Math.sin(t * 1.1 + 0.5) * 0.05 : 0;
     const blinkTime = t % 5.4;
-    const blink = blinkTime > 5.08 && blinkTime < 5.33
-      ? Math.max(0.12, Math.abs(Math.cos(((blinkTime - 5.08) / 0.25) * Math.PI)))
-      : 1;
+    const blink =
+      blinkTime > 5.08 && blinkTime < 5.33
+        ? Math.max(0.12, Math.abs(Math.cos(((blinkTime - 5.08) / 0.25) * Math.PI)))
+        : 1;
     eyes.current.scale.y = sleeping ? 0.14 : blink;
-    eyes.current.position.x = THREE.MathUtils.damp(eyes.current.position.x, active ? gaze.current.x * 0.045 : 0, 6, delta);
-    eyes.current.position.y = THREE.MathUtils.damp(eyes.current.position.y, active ? 1.7 - gaze.current.y * 0.035 : 1.7, 6, delta);
+    eyes.current.position.x = THREE.MathUtils.damp(
+      eyes.current.position.x,
+      active ? gaze.current.x * 0.045 : 0,
+      6,
+      delta,
+    );
+    eyes.current.position.y = THREE.MathUtils.damp(
+      eyes.current.position.y,
+      active ? 1.7 - gaze.current.y * 0.035 : 1.7,
+      6,
+      delta,
+    );
     wave.current.rotation.z =
       pose === "welcome" && active
         ? -0.34 - Math.sin(t * 4) * 0.18
@@ -138,11 +149,19 @@ function Model({
           {[-1, 1].map((side) => (
             <group key={side} position={[side * 0.25, 0, 0]} rotation={[0, 0, side * -0.15]}>
               {/* Rounded ear shells, inset pads and a warm rim highlight. */}
-              <mesh position={[0, 0.53, 0]} rotation={[0, 0, side * -0.07]} scale={[0.175, 0.59, 0.135]}>
+              <mesh
+                position={[0, 0.53, 0]}
+                rotation={[0, 0, side * -0.07]}
+                scale={[0.175, 0.59, 0.135]}
+              >
                 <sphereGeometry args={[1, 32, 24]} />
                 <meshStandardMaterial color={brand.colors.ivory} roughness={0.5} />
               </mesh>
-              <mesh position={[0, 0.55, 0.118]} rotation={[0, 0, side * -0.07]} scale={[0.104, 0.435, 0.03]}>
+              <mesh
+                position={[0, 0.55, 0.118]}
+                rotation={[0, 0, side * -0.07]}
+                scale={[0.104, 0.435, 0.03]}
+              >
                 <sphereGeometry args={[1, 24, 18]} />
                 <meshStandardMaterial color={brand.colors.blush} roughness={0.55} />
               </mesh>
@@ -291,8 +310,14 @@ export default function KhweziView({
       onPointerMove={(event) => {
         if (!moving || event.pointerType !== "mouse") return;
         const bounds = event.currentTarget.getBoundingClientRect();
-        gaze.current.x = Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2));
-        gaze.current.y = Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2));
+        gaze.current.x = Math.max(
+          -1,
+          Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2),
+        );
+        gaze.current.y = Math.max(
+          -1,
+          Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2),
+        );
       }}
       onPointerLeave={() => {
         gaze.current.x = 0;

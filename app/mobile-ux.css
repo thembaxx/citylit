@@ -78,7 +78,7 @@
   .reference-stage-guide .atlas-ring-scene .atlas-inspector-panel[popover]:popover-open {
     position: fixed;
     inset: auto;
-    display: none;
+    display: grid;
     margin: 0;
     width: min(226px, calc(100vw - 32px));
     padding: 8px;
@@ -92,9 +92,6 @@
     touch-action: pan-y;
   }
 
-  .reference-stage-guide .atlas-inspector-panel[popover]:popover-open {
-    display: grid;
-  }
 
   .reference-stage-guide .atlas-inspector-panel[popover] .atlas-inspector-features {
     width: 100%;

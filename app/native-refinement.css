@@ -563,15 +563,28 @@ button,
   }
 }
 
-/* Maintain 16px editable controls across mobile and desktop to prevent iOS focus zoom. */
-input,
-textarea,
-select,
-[contenteditable="true"],
-[role="combobox"],
-[role="textbox"],
-[role="searchbox"],
-[role="spinbutton"] {
+/* One control type scale for the whole app: readable on desktop, no iOS focus zoom.
+   Exclude native controls that do not display editable text. */
+:is(
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="color"],
+    [type="file"],
+    [type="hidden"],
+    [type="button"],
+    [type="submit"],
+    [type="reset"]
+  ),
+  select,
+  textarea,
+  [contenteditable="true"],
+  [role="combobox"],
+  [role="textbox"],
+  [role="searchbox"],
+  [role="spinbutton"]
+) {
   font-size: 16px !important;
   line-height: 1.5;
 }
@@ -645,8 +658,6 @@ select:focus-visible {
   transform: scale(0.97);
 }
 .reference-guide :is(input, select, textarea, [role="combobox"], [role="textbox"]) {
-  font-size: 16px !important;
-  line-height: 1.5;
   min-height: 44px;
   scroll-margin-bottom: calc(98px + env(safe-area-inset-bottom));
 }

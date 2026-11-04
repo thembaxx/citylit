@@ -22,6 +22,8 @@
 .reference-guide .atlas-city-map-hero,
 .reference-guide .atlas-stage,
 .reference-guide .atlas-section,
+.reference-guide .atlas-reading,
+.reference-guide .atlas-category-guide,
 .reference-guide .atlas-footer,
 .reference-guide .atlas-breadcrumb {
   padding-inline: var(--citylit-page-gutter);

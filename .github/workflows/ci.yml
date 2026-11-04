@@ -2,6 +2,7 @@ name: CI
 # CI runs automatically for pull requests, pushes and merge queues.
 on:
   push:
+    branches: [main]
   pull_request:
   merge_group:
   workflow_dispatch:

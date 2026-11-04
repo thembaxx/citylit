@@ -1,0 +1,34 @@
+/* Installed Citylit: content fills the display, controls stay clear of system UI. */
+:root {
+  --citylit-safe-top: env(safe-area-inset-top, 0px);
+  --citylit-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (display-mode: standalone), (display-mode: fullscreen) {
+  .canvas-root, .game-screen {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+  .game-nav {
+    height: auto;
+    min-height: calc(62px + var(--citylit-safe-top));
+    padding-top: calc(14px + var(--citylit-safe-top));
+    padding-inline: max(16px, env(safe-area-inset-left, 0px))
+      max(16px, env(safe-area-inset-right, 0px));
+  }
+}
+@media (max-width: 767px) and (display-mode: standalone),
+       (max-width: 767px) and (display-mode: fullscreen) {
+  .reference-guide { scroll-padding-top: calc(78px + var(--citylit-safe-top)); }
+  .reference-guide .atlas-nav {
+    height: auto;
+    min-height: calc(65px + var(--citylit-safe-top));
+    padding-top: calc(8px + var(--citylit-safe-top));
+  }
+  .reference-guide .atlas-hero {
+    padding-top: calc(110px + var(--citylit-safe-top));
+  }
+  .reference-guide .atlas-native-dock {
+    bottom: max(10px, var(--citylit-safe-bottom));
+  }
+  .game-controls { padding-bottom: max(20px, var(--citylit-safe-bottom)); }
+}

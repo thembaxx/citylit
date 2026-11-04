@@ -13,7 +13,7 @@ const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
   loading: () => (
     <p className="stage-loading" role="status">
-      Lighting the stage… The guides below are ready to explore.
+      Loading 3D…
     </p>
   ),
 });
@@ -67,6 +67,9 @@ export default function CityStage({
           };
         });
   const item = items[index];
+  const availableFacts = ["openingHours", "price", "admission", "booking", "accessNotes"]
+    .filter((key) => item.place?.facts?.[key]?.value != null)
+    .slice(0, 3);
   const pick = (value: number) => {
     setIndex((value + items.length) % items.length);
     setMessage("");
@@ -111,7 +114,6 @@ export default function CityStage({
           <h1 id="stage-title">
             {city.name} {mode}
           </h1>
-          <p>Drag to turn the ring. Tap a model or choose its name.</p>
         </header>
         <div className="atlas-stage-content">
           <div
@@ -125,14 +127,11 @@ export default function CityStage({
             ))}
           </div>
           <article className="atlas-stage-sheet" aria-live="polite">
-            <p className="atlas-eyebrow">
-              {city.name} / {mode === "places" ? "PLACE" : "LANDMARK"} {index + 1} OF {items.length}
-            </p>
             <h2>{item.name}</h2>
             <p className="atlas-stage-description">{item.description}</p>
             <div className="atlas-stage-actions">
               <Link href={item.href} className="atlas-button atlas-primary">
-                Open the full guide <ArrowUpRight size={17} />
+                Open guide <ArrowUpRight size={17} />
               </Link>
               {item.place && (
                 <button onClick={add} aria-pressed={!!selected} className="atlas-button">
@@ -141,26 +140,9 @@ export default function CityStage({
                 </button>
               )}
             </div>
-            <dl className="atlas-stage-facts">
-              <div>
-                <dt>
-                  {item.place?.coordinateAccuracy === "venue"
-                    ? "Venue reference"
-                    : "City reference"}
-                </dt>
-                <dd>
-                  {Math.abs((item.place?.coords || city.coords)[1]).toFixed(2)}° S /{" "}
-                  {(item.place?.coords || city.coords)[0].toFixed(2)}° E
-                </dd>
-              </div>
-              <div>
-                <dt>Chapter</dt>
-                <dd>{city.province}</dd>
-              </div>
-              {["openingHours", "price", "admission", "booking", "accessNotes"]
-                .filter((key) => item.place?.facts?.[key]?.value != null)
-                .slice(0, 3)
-                .flatMap((key) => {
+            {availableFacts.length > 0 && (
+              <dl className="atlas-stage-facts">
+                {availableFacts.flatMap((key) => {
                   const fact = item.place?.facts?.[key];
                   return fact && fact.value !== null ? (
                     <div key={key} className="stage-fact-wide">
@@ -180,7 +162,8 @@ export default function CityStage({
                     []
                   );
                 })}
-            </dl>
+              </dl>
+            )}
             <p role="status" className="stage-message">
               {message}
             </p>
@@ -196,8 +179,7 @@ export default function CityStage({
               </button>
             </div>
             <p className="atlas-stage-note">
-              Models are illustrative. Check the guide for photographs, source dates and visitor
-              information. Hours and access can change.
+              Models are illustrative. Confirm visiting details in the guide.
             </p>
           </article>
           <nav className="atlas-stage-switch">

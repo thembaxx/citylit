@@ -75,7 +75,7 @@
 @media (max-width: 767px) {
   /* A popover lives in the browser's top layer, above Safari's composited WebGL
      canvas. Inline top/right/max-height keep it next to Inspect as the guide scrolls. */
-  .reference-stage-guide .atlas-inspector-panel[popover] {
+  .reference-stage-guide .atlas-ring-scene .atlas-inspector-panel[popover]:popover-open {
     position: fixed;
     inset: auto;
     display: none;

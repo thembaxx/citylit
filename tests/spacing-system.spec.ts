@@ -7,13 +7,13 @@ test("guide margins and cards follow the same spacing system across viewport siz
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto("/destinations");
-    await expect(page.locator(".atlas-directory-header")).toBeVisible();
+    await expect(page.locator(".atlas-directory")).toBeVisible();
     await expect(page.locator(".atlas-city-card-link").first()).toBeVisible();
 
     const measures = await page.evaluate(() => {
       const guide = document.querySelector<HTMLElement>(".reference-guide")!;
       const nav = document.querySelector<HTMLElement>(".atlas-nav")!;
-      const heading = document.querySelector<HTMLElement>(".atlas-directory-header")!;
+      const heading = document.querySelector<HTMLElement>(".atlas-directory")!;
       const card = document.querySelector<HTMLElement>(".atlas-card-copy")!;
       const style = (element: Element) => getComputedStyle(element);
       return {

@@ -539,10 +539,7 @@ export default function LandmarkRing({
       const scene = host.getBoundingClientRect();
       const trigger = toggle.getBoundingClientRect();
       const viewportBottom = Math.min(scene.bottom, window.innerHeight);
-      const top = Math.max(
-        8,
-        Math.min(trigger.bottom + 8, viewportBottom - 96),
-      );
+      const top = Math.max(8, Math.min(trigger.bottom + 8, viewportBottom - 96));
       const available = Math.max(88, Math.min(340, viewportBottom - top - 12));
       panel.style.top = `${Math.round(top)}px`;
       panel.style.right = `${Math.max(12, Math.round(window.innerWidth - trigger.right))}px`;

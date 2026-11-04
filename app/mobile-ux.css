@@ -50,6 +50,16 @@
   }
 }
 
+/* Preserve the warm headline accent while meeting WCAG AA contrast in day mode. */
+:root[data-theme="day"] .discovery-guide :is(h1, h2) > em {
+  color: #ad4f0d;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) .discovery-guide :is(h1, h2) > em {
+    color: #ad4f0d;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reference-stage-guide .atlas-inspector-toolbar button {
     animation: none;

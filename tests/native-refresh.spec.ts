@@ -8,7 +8,7 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   const dock = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(dock).toBeVisible();
   await expect(dock.getByRole("link")).toHaveCount(4);
-  await expect(dock.getByRole("link", { name: "Discover" })).toHaveAttribute(
+  await expect(dock.getByRole("link", { name: "Home" })).toHaveAttribute(
     "aria-current",
     "page",
   );
@@ -70,7 +70,9 @@ test("reduced motion leaves the guide logo and mascot controllable", async ({ pa
 test("new icon and logo are available to installed users", async ({ request }) => {
   const icon = await request.get("/app-icon.svg");
   expect(icon.ok()).toBe(true);
-  expect(await icon.text()).toContain("#F3C975");
+  const iconSource = await icon.text();
+  expect(iconSource).toContain("#B39AFF");
+  expect(iconSource).toContain("#FFE09A");
   expect((await request.get("/brand/wordmark.svg")).ok()).toBe(true);
   expect((await request.get("/brand/apple-touch-icon.png")).ok()).toBe(true);
 });

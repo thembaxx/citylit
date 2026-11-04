@@ -225,7 +225,7 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   await page.goto("/?view=guide");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
   const headerWordmark = page.locator(".atlas-nav .wordmark");
-  await expect(headerWordmark).toHaveAccessibleName("citylit");
+  await expect(headerWordmark).toHaveAccessibleName("Citylit");
   const brandSymbol = headerWordmark.locator(".citylit-logo-symbol");
   await expect(brandSymbol).toHaveCount(1);
   await expect(brandSymbol).toHaveAttribute("aria-hidden", "true");

@@ -79,7 +79,6 @@ export default function GuideShell({
           <Link href="/" className="atlas-wordmark">
             <BrandWordmark />
           </Link>
-          <p>A little curiosity. A whole country.</p>
         </div>
         <div className="atlas-footer-links">
           <Link href="/destinations">

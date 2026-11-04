@@ -55,7 +55,7 @@ export default function PlacesBrowser({
         <span className="sr-only">Search places</span>
         <input
           type="search"
-          placeholder="Find a museum, a garden, somewhere to stay…"
+          placeholder="Search places"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
@@ -65,8 +65,11 @@ export default function PlacesBrowser({
           </button>
         )}
       </label>
-      <p className="atlas-results" role="status">
-        {selected.length} place{selected.length === 1 ? "" : "s"} to discover
+      <p
+        className={query || category !== "All places" ? "atlas-results" : "sr-only"}
+        role="status"
+      >
+        {selected.length} place{selected.length === 1 ? "" : "s"}
       </p>
       <div className="atlas-city-grid">
         {selected.map((place) => (
@@ -75,8 +78,7 @@ export default function PlacesBrowser({
       </div>
       {!selected.length && (
         <div className="atlas-empty">
-          <h3>A little further afield?</h3>
-          <p>No places match those filters. Try another search.</p>
+          <h3>No places found</h3>
           <button
             className="atlas-button"
             onClick={() => {

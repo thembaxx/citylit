@@ -37,18 +37,8 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
     >
       <div className="atlas-section-heading">
         <div>
-          <p className="atlas-eyebrow">THE CITY COLLECTION</p>
-          <h2 id="city-directory-title">
-            Twelve cities,
-            <br />
-            <em>one glow.</em>
-          </h2>
+          <h2 id="city-directory-title">Cities</h2>
         </div>
-        <p>
-          From familiar skylines to somewhere new.
-          <br />
-          Find a place that feels like you.
-        </p>
       </div>
       <div className="atlas-directory-tools">
         <label className="atlas-search">
@@ -58,7 +48,7 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="A city, a province, a little curiosity…"
+            placeholder="Search cities"
           />
           {query && (
             <button aria-label="Clear city search" onClick={() => setQuery("")}>
@@ -75,9 +65,11 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
           </select>
         </label>
       </div>
-      <p className="atlas-results" role="status">
-        {selected.length} city guide{selected.length === 1 ? "" : "s"}
-        {province !== "All provinces" ? ` in ${province}` : " across South Africa"}
+      <p
+        className={query || province !== "All provinces" ? "atlas-results" : "sr-only"}
+        role="status"
+      >
+        {selected.length} cit{selected.length === 1 ? "y" : "ies"}
       </p>
       <div className="atlas-city-grid">
         {(compact && !query && province === "All provinces" ? selected.slice(0, 6) : selected).map(
@@ -89,7 +81,6 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
       {!selected.length && (
         <div className="atlas-empty">
           <h3>No cities found.</h3>
-          <p>Try another name or browse all twelve guides.</p>
           <button
             className="atlas-button"
             onClick={() => {
@@ -103,7 +94,7 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
       )}
       {compact && !query && province === "All provinces" && (
         <a className="atlas-text-link" href="/destinations">
-          Explore all twelve city guides <ArrowUpRight size={16} aria-hidden="true" />
+          All cities <ArrowUpRight size={16} aria-hidden="true" />
         </a>
       )}
     </section>

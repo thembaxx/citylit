@@ -98,11 +98,6 @@
 .discovery-guide textarea {
   font: inherit;
 }
-.discovery-guide input,
-.discovery-guide select,
-.discovery-guide textarea {
-  font-size: 16px;
-}
 .discovery-guide a,
 .discovery-guide button {
   touch-action: manipulation;
@@ -533,7 +528,6 @@
   outline: 0 !important;
   padding: 12px 0;
   width: 100%;
-  font-size: 16px;
 }
 .atlas-search input::placeholder {
   color: var(--muted);
@@ -560,7 +554,6 @@
   padding: 12px 16px;
   min-height: 54px;
   width: 100%;
-  font-size: 16px;
   cursor: pointer;
 }
 .discovery-guide .atlas-results {

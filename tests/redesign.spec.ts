@@ -56,7 +56,16 @@ test("every landmark has a real detail destination and unmatched stories open", 
   const paths = new Set(
     cities.flatMap((city) => city.landmarks.map((name) => landmarkPath(city, name))),
   );
-  for (const path of paths) expect((await request.get(path)).status(), path).toBe(200);
+  // A sequential HTTP request for every landmark can exhaust the 90s
+  // E2E budget under CI load. Keep full route coverage with bounded concurrency.
+  const allPaths = [...paths];
+  for (let i = 0; i < allPaths.length; i += 6) {
+    await Promise.all(
+      allPaths
+        .slice(i, i + 6)
+        .map(async (path) => expect((await request.get(path)).status(), path).toBe(200)),
+    );
+  }
   await page.goto("/johannesburg");
   await page.locator(".atlas-landmark-link").filter({ hasText: "Ponte City" }).click();
   await expect(page).toHaveURL(/landmark=ponte-city/);

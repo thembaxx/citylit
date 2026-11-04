@@ -21,7 +21,9 @@ test("Retina mobile uses capped pixel density", async ({ browser }, testInfo) =>
     // framebuffer pixels per CSS pixel, without forcing 1x blur.
     expect(ratio).toBeGreaterThanOrEqual(1.45);
     expect(ratio).toBeLessThanOrEqual(1.55);
-    await expect(page.locator(".webgl-fallback")).toHaveCount(0);
+    // A fallback node may remain mounted but hidden by the renderer.
+    // Only an actually visible fallback means the 3D experience failed.
+    await expect(page.locator(".webgl-fallback")).toBeHidden();
   } finally {
     await context.close();
   }

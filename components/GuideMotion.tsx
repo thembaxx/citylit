@@ -28,14 +28,15 @@ export default function GuideMotion({ essential }: { essential: boolean }) {
         { y: 0, opacity: 1, duration: 0.75, ease: "power3.out" },
       );
 
-      // Reveals never change layout dimensions or interfere with WebGL dragging.
+      // Keep content fully opaque during reveals. Fading text panels reduces
+      // their effective contrast below WCAG AA while the animation runs.
+      // Translation alone preserves the motion without weakening readability.
       host.querySelectorAll(REVEAL_TARGETS).forEach((element) => {
         gsap.fromTo(
           element,
-          { y: 16, opacity: 0.85 },
+          { y: 16 },
           {
             y: 0,
-            opacity: 1,
             duration: 0.68,
             ease: "power3.out",
             scrollTrigger: {

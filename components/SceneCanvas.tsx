@@ -1,7 +1,14 @@
 "use client";
 import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import { View } from "@react-three/drei";
-import { Component, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import {
+  Component,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
 import { CornersIn, CornersOut } from "@phosphor-icons/react";
 import * as THREE from "three";
 
@@ -79,7 +86,11 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
           {fullscreen ? <CornersIn size={18} /> : <CornersOut size={18} />}
         </button>
       )}
-      {fullscreenNotice && <p className="citylit-immersive-notice" role="status">{fullscreenNotice}</p>}
+      {fullscreenNotice && (
+        <p className="citylit-immersive-notice" role="status">
+          {fullscreenNotice}
+        </p>
+      )}
       <WebGLBoundary>
         <Canvas
           eventSource={ref as React.RefObject<HTMLDivElement>}

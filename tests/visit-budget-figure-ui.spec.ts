@@ -23,6 +23,8 @@ test("day-budget figure teaches how an extra stop changes a fixed day", async ({
 
   await expect(page.getByRole("region", { name: "Explain" })).toBeVisible();
   const transfer = page.getByRole("group", { name: "Apply the time budget" });
+  await transfer.getByRole("button", { name: "Increases" }).click();
+  await expect(page.getByText(/Review the time-budget formula/)).toBeVisible();
   await transfer.getByRole("button", { name: "Decreases" }).click();
   await expect(page.getByText(/Correct: extra travel uses more/)).toBeVisible();
 

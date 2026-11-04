@@ -52,13 +52,16 @@ test("home and city guides prioritize discovery, not marketing filler", async ({
     "font-size",
     "16px",
   );
-  await expect(page.locator(".atlas-hero-sub, .atlas-hero-hint, .atlas-how, .atlas-end-note")).toHaveCount(
-    0,
-  );
+  await expect(
+    page.locator(".atlas-hero-sub, .atlas-hero-hint, .atlas-how, .atlas-end-note"),
+  ).toHaveCount(0);
   await page.goto("/johannesburg");
   await expect(page.getByRole("heading", { name: "Landmarks", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Places", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Explore places" })).toHaveAttribute("href", "#places");
+  await expect(page.getByRole("link", { name: "Explore places" })).toHaveAttribute(
+    "href",
+    "#places",
+  );
   await expect(page.getByRole("link", { name: "Landmarks", exact: true })).toHaveAttribute(
     "href",
     "/johannesburg/landmarks",

@@ -7,6 +7,7 @@ import { venuePath } from "../lib/discovery-guide";
 import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 import { ItineraryFeasibility } from "./ItineraryFeasibility";
+import { VisitBudgetFigure } from "./VisitBudgetFigure";
 
 async function requestItineraryTravel(coordinates: number[][]) {
   const response = await fetch("/api/itinerary", {
@@ -84,6 +85,7 @@ export default function PlanVisit({
         <Clock size={16} aria-hidden="true" /> An editorial starting point. Check opening days,
         travel time and bookings before setting out.
       </p>
+      <VisitBudgetFigure />
       <div className="atlas-plan-grid">
         {stops.map((place, index) => (
           <article key={place.id} className="atlas-plan-stop">

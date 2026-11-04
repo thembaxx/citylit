@@ -182,7 +182,7 @@ export function VisitBudgetFigure() {
                       type="button"
                       key={answer}
                       aria-pressed={transfer === answer}
-                      disabled={transfer !== null}
+                      disabled={transfer === "less"}
                       onClick={() => setTransfer(answer)}
                       className={styles.choice}
                     >

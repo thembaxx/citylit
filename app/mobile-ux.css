@@ -66,3 +66,42 @@
     transition: none;
   }
 }
+
+/* Pressed camera presets use dark ink on amber in both themes (AA contrast). */
+.reference-stage-guide .atlas-inspector-toolbar button[aria-pressed="true"] {
+  color: #17130e;
+}
+
+@media (max-width: 767px) {
+  /* A popover lives in the browser's top layer, above Safari's composited WebGL
+     canvas. Inline top/right/max-height keep it next to Inspect as the guide scrolls. */
+  .reference-stage-guide .atlas-inspector-panel[popover] {
+    position: fixed;
+    inset: auto;
+    display: none;
+    margin: 0;
+    width: min(226px, calc(100vw - 32px));
+    padding: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: 0 18px 54px rgb(0 0 0 / 32%);
+    pointer-events: auto;
+    touch-action: pan-y;
+  }
+
+  .reference-stage-guide .atlas-inspector-panel[popover]:popover-open {
+    display: grid;
+  }
+
+  .reference-stage-guide .atlas-inspector-panel[popover] .atlas-inspector-features {
+    width: 100%;
+  }
+
+  .reference-stage-guide .atlas-inspector-panel[popover] .atlas-inspector-features button {
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+}

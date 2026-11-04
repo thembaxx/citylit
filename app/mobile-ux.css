@@ -42,9 +42,7 @@
     -webkit-overflow-scrolling: touch;
   }
   /* Keep the expanded inspector inside the model region at 320px. */
-  .reference-stage-guide
-    .atlas-ring-scene:not(.is-heritage-hero)
-    .atlas-inspector-panel.is-open {
+  .reference-stage-guide .atlas-ring-scene:not(.is-heritage-hero) .atlas-inspector-panel.is-open {
     top: calc(100% + 1px);
   }
   .reference-guide :is(.atlas-button, .atlas-text-link, .atlas-place-filters button) {

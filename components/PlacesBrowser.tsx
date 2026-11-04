@@ -65,10 +65,7 @@ export default function PlacesBrowser({
           </button>
         )}
       </label>
-      <p
-        className={query || category !== "All places" ? "atlas-results" : "sr-only"}
-        role="status"
-      >
+      <p className={query || category !== "All places" ? "atlas-results" : "sr-only"} role="status">
         {selected.length} place{selected.length === 1 ? "" : "s"}
       </p>
       <div className="atlas-city-grid">

@@ -5,9 +5,13 @@ export function visitBudget(
   travelPerLeg: number,
   budgetMinutes: number,
 ) {
-  if (![stops, minutesPerVisit, travelPerLeg, budgetMinutes].every(
-    (value) => Number.isInteger(value) && value >= 0,
-  ) || stops > 20 || budgetMinutes < 1) {
+  if (
+    ![stops, minutesPerVisit, travelPerLeg, budgetMinutes].every(
+      (value) => Number.isInteger(value) && value >= 0,
+    ) ||
+    stops > 20 ||
+    budgetMinutes < 1
+  ) {
     throw new RangeError("Invalid visit-budget values");
   }
   const visitMinutes = stops * minutesPerVisit;

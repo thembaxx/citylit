@@ -8,10 +8,7 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   const dock = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(dock).toBeVisible();
   await expect(dock.getByRole("link")).toHaveCount(4);
-  await expect(dock.getByRole("link", { name: "Home" })).toHaveAttribute(
-    "aria-current",
-    "page",
-  );
+  await expect(dock.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
   await expect(page.locator(".atlas-nav .atlas-about-link")).toHaveCount(0);
   const choose = page.getByRole("combobox", { name: "Choose a city on the map" });
   await expect(choose).toHaveCSS("font-size", "16px");

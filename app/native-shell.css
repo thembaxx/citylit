@@ -4,7 +4,8 @@
   --citylit-safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 @media (display-mode: standalone), (display-mode: fullscreen) {
-  .canvas-root, .game-screen {
+  .canvas-root,
+  .game-screen {
     height: 100dvh;
     min-height: 100dvh;
   }
@@ -17,8 +18,10 @@
   }
 }
 @media (max-width: 767px) and (display-mode: standalone),
-       (max-width: 767px) and (display-mode: fullscreen) {
-  .reference-guide { scroll-padding-top: calc(78px + var(--citylit-safe-top)); }
+  (max-width: 767px) and (display-mode: fullscreen) {
+  .reference-guide {
+    scroll-padding-top: calc(78px + var(--citylit-safe-top));
+  }
   .reference-guide .atlas-nav {
     height: auto;
     min-height: calc(65px + var(--citylit-safe-top));
@@ -30,11 +33,15 @@
   .reference-guide .atlas-native-dock {
     bottom: max(10px, var(--citylit-safe-bottom));
   }
-  .game-controls { padding-bottom: max(20px, var(--citylit-safe-bottom)); }
+  .game-controls {
+    padding-bottom: max(20px, var(--citylit-safe-bottom));
+  }
 }
 
 /* The full-screen affordance appears only on compact interactive 3D chapters. */
-.citylit-immersive-toggle { display: none; }
+.citylit-immersive-toggle {
+  display: none;
+}
 @media (max-width: 767px) {
   .canvas-root:has(.game-screen) > .citylit-immersive-toggle {
     display: grid;
@@ -55,8 +62,13 @@
     display: none;
   }
 }
-.citylit-immersive-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.citylit-immersive-notice { display: none; }
+.citylit-immersive-toggle:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.citylit-immersive-notice {
+  display: none;
+}
 .canvas-root:has(.game-screen) > .citylit-immersive-notice {
   display: block;
   position: fixed;

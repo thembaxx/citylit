@@ -1,7 +1,7 @@
 "use client";
 import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import {
   ArrowCounterClockwise,
@@ -488,7 +488,9 @@ export default function LandmarkRing({
   const [feature, setFeature] = useState<MuseumFeature>("architecture");
   const [zoom, setZoom] = useState(1);
   const [mobileInspectorOpen, setMobileInspectorOpen] = useState(false);
+  const [useInspectorTopLayer, setUseInspectorTopLayer] = useState(false);
   const inspectorToggleRef = useRef<HTMLButtonElement>(null);
+  const inspectorPanelRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<StageView>("overview");
   const [spin, setSpin] = useState(0);
   const [showContext, setShowContext] = useState(false);
@@ -513,6 +515,57 @@ export default function LandmarkRing({
     setView("overview");
     setMobileInspectorOpen(false);
   }, [selected]);
+
+  // Safari can composite the shared fixed WebGL canvas above scrolled content.
+  // A mobile popover enters the browser top layer, independent of z-index.
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () =>
+      setUseInspectorTopLayer(
+        media.matches && typeof HTMLDivElement.prototype.showPopover === "function",
+      );
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!useInspectorTopLayer || !host) return;
+    const panel = inspectorPanelRef.current;
+    const toggle = inspectorToggleRef.current;
+    if (!panel || !toggle) return;
+
+    const position = () => {
+      const scene = host.getBoundingClientRect();
+      const trigger = toggle.getBoundingClientRect();
+      const viewportBottom = Math.min(scene.bottom, window.innerHeight);
+      const top = Math.max(
+        8,
+        Math.min(trigger.bottom + 8, viewportBottom - 96),
+      );
+      const available = Math.max(88, Math.min(340, viewportBottom - top - 12));
+      panel.style.top = `${Math.round(top)}px`;
+      panel.style.right = `${Math.max(12, Math.round(window.innerWidth - trigger.right))}px`;
+      panel.style.maxHeight = `${Math.round(available)}px`;
+    };
+
+    position();
+    if (mobileInspectorOpen && !panel.matches(":popover-open")) panel.showPopover();
+    if (!mobileInspectorOpen && panel.matches(":popover-open")) panel.hidePopover();
+
+    if (!mobileInspectorOpen) return;
+    const guide = host.closest(".reference-guide");
+    const observer = new ResizeObserver(position);
+    observer.observe(host);
+    guide?.addEventListener("scroll", position, { passive: true });
+    window.addEventListener("resize", position);
+    return () => {
+      observer.disconnect();
+      guide?.removeEventListener("scroll", position);
+      window.removeEventListener("resize", position);
+    };
+  }, [host, mobileInspectorOpen, useInspectorTopLayer]);
+
   return (
     <div
       ref={setHost}
@@ -619,7 +672,14 @@ export default function LandmarkRing({
           <span>Inspect</span>
         </button>
         <div
+          ref={inspectorPanelRef}
           id="atlas-inspector-panel"
+          popover={useInspectorTopLayer ? "auto" : undefined}
+          onToggle={(event) => {
+            if (useInspectorTopLayer && !event.currentTarget.matches(":popover-open")) {
+              setMobileInspectorOpen(false);
+            }
+          }}
           className={
             mobileInspectorOpen ? "atlas-inspector-panel is-open" : "atlas-inspector-panel"
           }

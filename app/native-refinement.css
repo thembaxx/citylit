@@ -821,3 +821,63 @@ select:focus-visible {
     outline-offset: -3px;
   }
 }
+
+
+/* The shared fixed WebGL canvas can be elevated for Khwezi on other routes.
+   Keep the stage's HTML controls in front of it without changing canvas rendering. */
+.reference-stage-guide main {
+  z-index: 30;
+}
+.reference-stage-guide .atlas-inspector-toolbar {
+  z-index: 40;
+}
+
+@media (max-width: 767px) {
+  /* Give the model its own space instead of absolutely placing it over
+     the place picker and guide actions. CSS order matches the visual order. */
+  .reference-stage-guide .atlas-stage {
+    display: flex;
+    flex-direction: column;
+  }
+  .reference-stage-guide .atlas-stage-heading {
+    order: 0;
+  }
+  .reference-stage-guide .atlas-ring-scene,
+  .reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-ring-scene {
+    --stage-visual-height: clamp(340px, 54svh, 470px);
+    --stage-inline-padding: clamp(16px, 3.4vw, 48px);
+    order: 1;
+    position: relative;
+    inset: auto;
+    top: auto;
+    bottom: auto;
+    width: calc(100% + var(--stage-inline-padding) + var(--stage-inline-padding));
+    height: var(--stage-visual-height);
+    margin: 12px calc(0px - var(--stage-inline-padding)) 16px;
+    flex: 0 0 auto;
+  }
+  .reference-stage-guide .atlas-stage-content,
+  .reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-stage-content {
+    order: 2;
+    margin-top: 0;
+  }
+  .reference-stage-guide .atlas-ring-scene .atlas-inspector-toolbar,
+  .reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-toolbar {
+    top: 12px;
+    bottom: auto;
+    right: max(12px, env(safe-area-inset-right));
+  }
+  /* Keep the expanded inspector within the dedicated model region. It scrolls
+     rather than covering the place buttons, including the heritage variant. */
+  .reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open,
+  .reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-panel.is-open {
+    position: absolute;
+    top: calc(100% + 8px);
+    bottom: auto;
+    right: 0;
+    max-height: calc(var(--stage-visual-height) - 80px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}

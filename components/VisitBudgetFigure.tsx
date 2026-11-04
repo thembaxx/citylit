@@ -52,7 +52,7 @@ export function VisitBudgetFigure() {
         {prediction !== null && (
           <>
             <section aria-label="Try" className={styles.block}>
-              <p className={styles.step}>2 · Try</p>
+              <p className={styles.step}>2 · Try · Add a stop</p>
               <div className={styles.controls}>
                 <label>
                   Stops <output>{stops}</output>
@@ -155,7 +155,7 @@ export function VisitBudgetFigure() {
               <button
                 type="button"
                 className={styles.action}
-                disabled={stops === INITIAL.stops}
+                disabled={stops <= INITIAL.stops}
                 onClick={() => setReveal(true)}
               >
                 Explain the result

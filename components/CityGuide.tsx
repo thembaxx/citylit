@@ -7,7 +7,7 @@ import {
   MapPin,
   CalendarBlank,
 } from "@phosphor-icons/react/dist/ssr";
-import { cities, places, landmarkSources } from "../lib/data";
+import { cities, landmarkSources } from "../lib/data";
 import { landmarkPath, planningStops, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import { CityCard, PhotoCredit } from "./GuideCards";
@@ -15,7 +15,6 @@ import PlacesBrowser from "./PlacesBrowser";
 import PlanVisit from "./PlanVisit";
 
 export default function CityGuide({ city }: { city: GuideCity }) {
-  const local = places.filter((place) => place.city === city.slug);
   const neighbours = cities.filter(
     (other) => other.slug !== city.slug && other.province === city.province,
   );

@@ -1,0 +1,26 @@
+name: Temporary mobile CSS formatting check
+on:
+  push:
+    branches:
+      - feature/teachable-figure-visit-budget
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: pnpm install --frozen-lockfile
+      - name: Format CSS and emit exact content
+        run: |
+          ./node_modules/.bin/oxfmt --write app/mobile-ux.css
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          name = 'app/mobile-ux.css'
+          print('FMT_RESULT|' + name + '|' + json.dumps(Path(name).read_text(), ensure_ascii=True))
+          PY

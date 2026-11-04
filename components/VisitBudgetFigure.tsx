@@ -58,7 +58,6 @@ export function VisitBudgetFigure() {
                   Stops <output>{stops}</output>
                   <input
                     type="range"
-
                     aria-label="Stops"
                     min="1"
                     max="4"
@@ -75,7 +74,6 @@ export function VisitBudgetFigure() {
                   Visit minutes per stop <output>{minutes} min</output>
                   <input
                     type="range"
-
                     aria-label="Visit minutes per stop"
                     min="20"
                     max="120"
@@ -92,7 +90,6 @@ export function VisitBudgetFigure() {
                   Minutes between stops <output>{travel} min</output>
                   <input
                     type="range"
-
                     aria-label="Minutes between stops"
                     min="0"
                     max="60"

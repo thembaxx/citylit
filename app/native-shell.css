@@ -32,3 +32,40 @@
   }
   .game-controls { padding-bottom: max(20px, var(--citylit-safe-bottom)); }
 }
+
+/* The full-screen affordance appears only on compact interactive 3D chapters. */
+.citylit-immersive-toggle { display: none; }
+@media (max-width: 767px) {
+  .canvas-root:has(.game-screen) > .citylit-immersive-toggle {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    z-index: 32;
+    top: calc(72px + var(--citylit-safe-top));
+    right: max(14px, env(safe-area-inset-right, 0px));
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    box-shadow: 0 8px 22px rgb(0 0 0 / 15%);
+  }
+  .canvas-root:has(dialog[open]) > .citylit-immersive-toggle {
+    display: none;
+  }
+}
+.citylit-immersive-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.citylit-immersive-notice {
+  position: fixed;
+  z-index: 33;
+  top: calc(122px + var(--citylit-safe-top));
+  right: max(14px, env(safe-area-inset-right, 0px));
+  max-width: min(260px, 80vw);
+  border-radius: 12px;
+  padding: 8px 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+}

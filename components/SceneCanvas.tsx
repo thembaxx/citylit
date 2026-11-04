@@ -1,7 +1,15 @@
 "use client";
 import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import { View } from "@react-three/drei";
-import { Component, useRef, useSyncExternalStore, type ReactNode } from "react";
+import {
+  Component,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
+import { CornersIn, CornersOut } from "@phosphor-icons/react";
 import * as THREE from "three";
 
 const qualityQuery = "(max-width: 760px), (pointer: coarse)";
@@ -41,10 +49,48 @@ class WebGLBoundary extends Component<{ children: ReactNode }, { failed: boolean
 export default function SceneCanvas({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const lowPower = useSyncExternalStore(subscribeQuality, getLowPower, () => false);
+  const [canFullscreen, setCanFullscreen] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [fullscreenNotice, setFullscreenNotice] = useState("");
+  useEffect(() => {
+    const sync = () => {
+      setCanFullscreen(document.fullscreenEnabled === true);
+      setFullscreen(Boolean(document.fullscreenElement));
+    };
+    sync();
+    document.addEventListener("fullscreenchange", sync);
+    return () => document.removeEventListener("fullscreenchange", sync);
+  }, []);
+  const toggleFullscreen = async () => {
+    setFullscreenNotice("");
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await document.documentElement.requestFullscreen();
+    } catch {
+      setFullscreenNotice("Fullscreen is unavailable. Install Citylit for an app-like view.");
+    }
+  };
   return (
     // Demand rendering must also track Views inside the guide's scroll container.
     <div ref={ref} className="canvas-root" onScrollCapture={() => invalidate()}>
       {children}
+      {canFullscreen && (
+        <button
+          type="button"
+          className="citylit-immersive-toggle"
+          onClick={() => void toggleFullscreen()}
+          aria-label={fullscreen ? "Exit fullscreen atlas" : "Make atlas fullscreen"}
+          aria-pressed={fullscreen}
+          title={fullscreen ? "Exit fullscreen" : "Fullscreen atlas"}
+        >
+          {fullscreen ? <CornersIn size={18} /> : <CornersOut size={18} />}
+        </button>
+      )}
+      {fullscreenNotice && (
+        <p className="citylit-immersive-notice" role="status">
+          {fullscreenNotice}
+        </p>
+      )}
       <WebGLBoundary>
         <Canvas
           eventSource={ref as React.RefObject<HTMLDivElement>}

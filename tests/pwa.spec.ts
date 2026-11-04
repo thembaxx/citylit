@@ -26,6 +26,7 @@ test("manifest, launch metadata, shortcuts and generated worker release are usab
     id: "/",
     scope: "/",
     display: "standalone",
+    display_override: ["standalone", "minimal-ui"],
     lang: "en-ZA",
     share_target: { action: "/explore", method: "GET" },
   });

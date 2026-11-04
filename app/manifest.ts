@@ -53,7 +53,7 @@ export default function manifest(): MetadataRoute.Manifest {
       },
     ],
     display: "standalone",
-    display_override: ["fullscreen", "standalone"],
+    display_override: ["standalone", "minimal-ui"],
     share_target: {
       action: "/explore",
       method: "GET",

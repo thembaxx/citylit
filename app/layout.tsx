@@ -6,6 +6,7 @@ import "./discovery-guide.css";
 import "./native-refinement.css";
 import "./spacing-system.css";
 import "./mobile-ux.css";
+import "./native-shell.css";
 import PwaProvider from "../components/PwaProvider";
 import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";

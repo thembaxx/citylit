@@ -1,0 +1,85 @@
+/* Installed Citylit: content fills the display, controls stay clear of system UI. */
+:root {
+  --citylit-safe-top: env(safe-area-inset-top, 0px);
+  --citylit-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (display-mode: standalone), (display-mode: fullscreen) {
+  .canvas-root,
+  .game-screen {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+  .game-nav {
+    height: auto;
+    min-height: calc(62px + var(--citylit-safe-top));
+    padding-top: calc(14px + var(--citylit-safe-top));
+    padding-inline: max(16px, env(safe-area-inset-left, 0px))
+      max(16px, env(safe-area-inset-right, 0px));
+  }
+}
+@media (max-width: 767px) and (display-mode: standalone),
+  (max-width: 767px) and (display-mode: fullscreen) {
+  .reference-guide {
+    scroll-padding-top: calc(78px + var(--citylit-safe-top));
+  }
+  .reference-guide .atlas-nav {
+    height: auto;
+    min-height: calc(65px + var(--citylit-safe-top));
+    padding-top: calc(8px + var(--citylit-safe-top));
+  }
+  .reference-guide .atlas-hero {
+    padding-top: calc(110px + var(--citylit-safe-top));
+  }
+  .reference-guide .atlas-native-dock {
+    bottom: max(10px, var(--citylit-safe-bottom));
+  }
+  .game-controls {
+    padding-bottom: max(20px, var(--citylit-safe-bottom));
+  }
+}
+
+/* The full-screen affordance appears only on compact interactive 3D chapters. */
+.citylit-immersive-toggle {
+  display: none;
+}
+@media (max-width: 767px) {
+  .canvas-root:has(.game-screen) > .citylit-immersive-toggle {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    z-index: 32;
+    top: calc(72px + var(--citylit-safe-top));
+    right: max(14px, env(safe-area-inset-right, 0px));
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    box-shadow: 0 8px 22px rgb(0 0 0 / 15%);
+  }
+  .canvas-root:has(dialog[open]) > .citylit-immersive-toggle {
+    display: none;
+  }
+}
+.citylit-immersive-toggle:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.citylit-immersive-notice {
+  display: none;
+}
+.canvas-root:has(.game-screen) > .citylit-immersive-notice {
+  display: block;
+  position: fixed;
+  z-index: 33;
+  top: calc(122px + var(--citylit-safe-top));
+  right: max(14px, env(safe-area-inset-right, 0px));
+  max-width: min(260px, 80vw);
+  border-radius: 12px;
+  padding: 8px 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+}

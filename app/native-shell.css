@@ -56,7 +56,9 @@
   }
 }
 .citylit-immersive-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.citylit-immersive-notice {
+.citylit-immersive-notice { display: none; }
+.canvas-root:has(.game-screen) > .citylit-immersive-notice {
+  display: block;
   position: fixed;
   z-index: 33;
   top: calc(122px + var(--citylit-safe-top));

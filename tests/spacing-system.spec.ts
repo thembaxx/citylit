@@ -52,7 +52,11 @@ test("3D stage buttons remain separated from the model and spacious enough to ta
       const chips = document.querySelector(".atlas-stage-chips")!.getBoundingClientRect();
       const sheet = document.querySelector(".atlas-stage-sheet")!;
       const sheetStyle = getComputedStyle(sheet);
-      const actions = [...document.querySelectorAll<HTMLElement>(".atlas-stage-actions a, .atlas-stage-actions button")];
+      const actions = [
+        ...document.querySelectorAll<HTMLElement>(
+          ".atlas-stage-actions a, .atlas-stage-actions button",
+        ),
+      ];
       return {
         sceneBottom: scene.bottom,
         chipsTop: chips.top,

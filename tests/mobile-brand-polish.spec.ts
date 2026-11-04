@@ -7,14 +7,13 @@ test("mobile navigation, readable controls and narrow screen layout", async ({ p
   const dock = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(dock).toBeVisible();
   await expect(dock.locator("a")).toHaveCount(4);
-  await expect(dock.getByRole("link", { name: "Cities" })).toHaveAttribute(
-    "aria-current",
-    "page",
-  );
+  await expect(dock.getByRole("link", { name: "Cities" })).toHaveAttribute("aria-current", "page");
 
-  const fontSizes = await page.locator("input, textarea, select").evaluateAll((elements) =>
-    elements.map((element) => Number.parseFloat(getComputedStyle(element).fontSize)),
-  );
+  const fontSizes = await page
+    .locator("input, textarea, select")
+    .evaluateAll((elements) =>
+      elements.map((element) => Number.parseFloat(getComputedStyle(element).fontSize)),
+    );
   expect(fontSizes.length).toBeGreaterThan(0);
   expect(fontSizes.every((size) => size >= 16)).toBe(true);
 
@@ -27,16 +26,17 @@ test("mobile navigation, readable controls and narrow screen layout", async ({ p
     }));
     expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport + 1);
     expect(dimensions.content).toBeGreaterThan(0);
-    const tapTargets = await dock.locator("a").evaluateAll((anchors) =>
-      anchors.map((anchor) => anchor.getBoundingClientRect().height),
-    );
+    const tapTargets = await dock
+      .locator("a")
+      .evaluateAll((anchors) => anchors.map((anchor) => anchor.getBoundingClientRect().height));
     expect(tapTargets.every((height) => height >= 44)).toBe(true);
   }
 
   await page.emulateMedia({ reducedMotion: "reduce" });
-  const transitionDuration = await dock.locator("a").first().evaluate(
-    (anchor) => getComputedStyle(anchor).transitionDuration,
-  );
+  const transitionDuration = await dock
+    .locator("a")
+    .first()
+    .evaluate((anchor) => getComputedStyle(anchor).transitionDuration);
   expect(transitionDuration).toBe("0s");
 });
 

@@ -62,7 +62,10 @@ export default function GuideShell({
           />
           <span>Cities</span>
         </Link>
-        <Link href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`} aria-current={pathname.startsWith("/explore") ? "page" : undefined}>
+        <Link
+          href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
+          aria-current={pathname.startsWith("/explore") ? "page" : undefined}
+        >
           <BookmarkSimple size={21} aria-hidden="true" />
           <span>My day</span>
         </Link>

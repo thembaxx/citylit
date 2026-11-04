@@ -19,9 +19,7 @@ export default function DestinationsPage() {
           <br />
           <em>next chapter.</em>
         </h1>
-        <p className="atlas-city-intro">
-          Choose a city. Find somewhere new.
-        </p>
+        <p className="atlas-city-intro">Choose a city. Find somewhere new.</p>
       </header>
       <CityDirectory />
     </GuideShell>

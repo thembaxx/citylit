@@ -62,7 +62,7 @@ test("the stage opens a landmark guide and shares the real day planner", async (
   );
   await page.reload();
   await expect(page.getByRole("button", { name: "In my day", exact: true })).toBeVisible();
-  await page.getByRole("link", { name: "Open the full guide", exact: true }).click();
+  await page.getByRole("link", { name: "Open guide", exact: true }).click();
   await expect(page).toHaveURL(/\/cape-town\/parks-zoos\/table-mountain$/);
   await expect(page.locator("h1")).toHaveText("Table Mountain.");
   await page.goto("/cape-town/places");
@@ -103,7 +103,7 @@ test("narrow-screen stages remain navigable with procedural city detail", async 
   await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
-  await expect(page.getByRole("link", { name: "Open the full guide" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
   expect(errors).toEqual([]);
 });
 

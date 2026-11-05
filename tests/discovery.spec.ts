@@ -230,7 +230,9 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   await expect(brandSymbol).toHaveCount(1);
   await expect(brandSymbol).toHaveAttribute("aria-hidden", "true");
   await expect(page.locator(".map-pin")).toHaveCount(0);
-  await expect(page.locator("a.province-active")).toHaveCount(9);
+  await expect(
+    page.getByRole("button", { name: "Choose Johannesburg", exact: true }),
+  ).toBeVisible();
   expect(
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);

@@ -25,7 +25,7 @@ export default function CityGuide({ city }: { city: GuideCity }) {
         .slice((cities.indexOf(city) + 1) % 9, ((cities.indexOf(city) + 1) % 9) + 2);
   return (
     <GuideShell>
-      <div className="atlas-breadcrumb">
+      <div className="atlas-breadcrumb atlas-city-breadcrumb">
         <Link href="/destinations">
           <ArrowLeft size={15} /> All city guides
         </Link>

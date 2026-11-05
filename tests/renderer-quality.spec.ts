@@ -1,5 +1,13 @@
 import { expect, test } from "@playwright/test";
-import { DPR_CAPS, RendererQualityPolicy } from "../lib/renderer-quality";
+import { DPR_CAPS, RendererQualityPolicy, isSoftwareRenderer } from "../lib/renderer-quality";
+
+test("software WebGL detection never mistakes a real hardware GPU for a rasterizer", () => {
+  expect(isSoftwareRenderer("ANGLE SwiftShader Device")).toBe(true);
+  expect(isSoftwareRenderer("Mesa llvmpipe (LLVM 20)")).toBe(true);
+  expect(isSoftwareRenderer("softpipe")).toBe(true);
+  expect(isSoftwareRenderer("Apple M-series GPU")).toBe(false);
+  expect(isSoftwareRenderer("NVIDIA RTX 5070")).toBe(false);
+});
 
 const slow = { frames: 70, averageFrameMs: 58, slowFrameRatio: 0.5 };
 const smooth = { frames: 70, averageFrameMs: 30, slowFrameRatio: 0.02 };

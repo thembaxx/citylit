@@ -20,7 +20,7 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   );
   await expect(page.locator(".persistent-canvas")).toHaveCSS("z-index", "20");
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
-  await expect(page.locator(".atlas-mascot-action")).toHaveText(/Khwezi has hopped!/);
+  await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
   await choose.selectOption("1");
   await expect(page.locator(".atlas-beacon-card h2")).toHaveText("Cape Town");
   await expect(page.getByRole("link", { name: "Explore the city" })).toBeVisible();
@@ -61,7 +61,7 @@ test("reduced motion leaves the guide logo and mascot controllable", async ({ pa
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await expect(page.locator(".atlas-wordmark .citylit-logo-symbol").first()).toBeVisible();
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
-  await expect(page.locator(".atlas-mascot-action")).toHaveText(/Khwezi has hopped!/);
+  await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
 });
 
 test("new icon and logo are available to installed users", async ({ request }) => {

@@ -572,7 +572,7 @@ export default function LandmarkRing({
       className={museumSelected ? "atlas-ring-scene is-heritage-hero" : "atlas-ring-scene"}
       data-active-model={museumSelected ? "museum" : items[selected]?.model}
       data-active-model-status={
-        museumSelected ? "ready" : (modelStatuses[items[selected]?.model] ?? "loading")
+        museumSelected ? "ready" : (modelStatuses[items[selected]?.name] ?? "loading")
       }
       role="group"
       aria-label="Interactive illustrative landmark models"

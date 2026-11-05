@@ -1,9 +1,6 @@
 import { expect, test } from "@playwright/test";
 import * as THREE from "three";
-import {
-  createProceduralLandmark,
-  disposeProceduralLandmark,
-} from "../lib/procedural-landmarks";
+import { createProceduralLandmark, disposeProceduralLandmark } from "../lib/procedural-landmarks";
 
 test("Table Mountain has a broad flat plateau and steep differentiated slopes", () => {
   const scene = createProceduralLandmark("Table Mountain", "table-mountain");

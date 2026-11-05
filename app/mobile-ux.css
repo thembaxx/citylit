@@ -230,7 +230,6 @@
   }
 }
 
-
 /* Visual-audit follow-up: keep the city selector out of the heading's space.
    Absolute foreground positioning previously let a taller card overlap the
    headline at tablet and desktop widths. Preserve the atlas backdrop. */

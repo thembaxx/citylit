@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import * as THREE from "three";
+import { stageModel } from "../lib/stage-models";
 import { createProceduralLandmark, disposeProceduralLandmark } from "../lib/procedural-landmarks";
 import { createProceduralCategory } from "../lib/procedural-atlas-categories";
 
@@ -58,4 +59,27 @@ test("five atlas categories are distinct, animated and dispose cleanly", () => {
     disposeProceduralLandmark(scene);
   }
   expect(signatures.size).toBe(5);
+});
+
+test("venue categories resolve to location-appropriate geometry families", () => {
+  const archetypes: [string, string, string][] = [
+    ["Howick Falls", "", "waterfall"],
+    ["Sudwala Caves", "", "cave"],
+    ["Village Museum", "", "museum"],
+    ["Bakone Malapa", "", "village"],
+    ["Sand du Plessis Theatre", "", "theatre"],
+    ["The Boardwalk", "", "entertainment"],
+    ["Boutique Hotel", "Lodging", "hotel"],
+  ];
+  for (const [name, category, kind] of archetypes) {
+    expect(stageModel(name, category)).toBe(kind);
+    const scene = createProceduralLandmark(name, kind);
+    expect(() => scene.userData.tick?.(1.3, 0)).not.toThrow();
+    let meshes = 0;
+    scene.traverse((node) => {
+      if (node instanceof THREE.Mesh) meshes++;
+    });
+    expect(meshes, name).toBeGreaterThan(6);
+    disposeProceduralLandmark(scene);
+  }
 });

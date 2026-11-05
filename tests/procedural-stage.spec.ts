@@ -36,7 +36,17 @@ for (const [city, landmark] of references) {
         contentType: "image/png",
       });
     }
-    await page.getByRole("button", { name: "Switch to night lighting" }).click();
+    const lightingControl = page.getByRole("button", { name: "Switch to night lighting" });
+    // Mobile keeps inspector actions in a collapsed drawer; reveal the real UI
+    // before testing its accessible lighting control.
+    if (!(await lightingControl.isVisible())) {
+      await page.getByRole("button", { name: "Open 3D inspector" }).click();
+      await expect(page.getByRole("button", { name: "Close 3D inspector" })).toHaveAttribute(
+        "aria-expanded",
+        "true",
+      );
+    }
+    await lightingControl.click();
     await expect(page.getByRole("button", { name: "Switch to daylight" })).toBeVisible();
     expect(glbRequests).toEqual([]);
     expect(errors).toEqual([]);

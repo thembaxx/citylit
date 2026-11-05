@@ -12,6 +12,8 @@ export function stageModel(name: string, category = "") {
   if (/stadium|moses mabhida|peter mokaba/.test(value)) return "stadium";
   if (/big hole|diamond/.test(value)) return "hole";
   if (/lighthouse|cape point/.test(value)) return "lighthouse";
+  if (/hotel|lodge|guesthouse|guest house|accommodation/.test(value) || category === "Lodging")
+    return "hotel";
   if (/sudwala|cave|grotto/.test(value)) return "cave";
   if (/waterfall|falls/.test(value)) return "waterfall";
   if (/castle|fort|voortrekker|constitution hill/.test(value)) return "fort";
@@ -26,10 +28,6 @@ export function stageModel(name: string, category = "") {
   )
     return "park";
   if (/monument|memorial|freedom|mandela|route 67/.test(value)) return "arch";
-  if (
-    /tower|church|cathedral|hall|campanile|clock|moederkerk/.test(value) ||
-    category === "Lodging"
-  )
-    return "tower";
+  if (/tower|church|cathedral|hall|campanile|clock|moederkerk/.test(value)) return "tower";
   return "dome";
 }

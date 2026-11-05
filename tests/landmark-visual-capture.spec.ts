@@ -18,15 +18,20 @@ test.describe("hero landmark actual screenshot evidence", () => {
       test.slow();
       await page.emulateMedia({ reducedMotion: "reduce" });
       const errors: string[] = [];
-      page.on("pageerror", error => errors.push(error.message));
+      page.on("pageerror", (error) => errors.push(error.message));
       await page.goto(`/${city}/landmarks`);
       await page.getByRole("button", { name: landmark, exact: true }).click();
       const scene = page.locator(".atlas-ring-scene");
       await expect(scene).toHaveAttribute("data-active-model-status", "ready", { timeout: 30000 });
       await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(landmark);
-      const target = testInfo.outputPath(`citylit-real-${city}-${landmark.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.png`);
+      const target = testInfo.outputPath(
+        `citylit-real-${city}-${landmark.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.png`,
+      );
       await scene.screenshot({ path: target, animations: "disabled", timeout: 30000 });
-      await testInfo.attach(`Real CityLit canvas: ${landmark}`, { path: target, contentType: "image/png" });
+      await testInfo.attach(`Real CityLit canvas: ${landmark}`, {
+        path: target,
+        contentType: "image/png",
+      });
       expect(errors).toEqual([]);
     });
   }

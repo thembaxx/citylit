@@ -66,7 +66,9 @@ test("real features survive the fidelity pass without thousands of separate mesh
     expect(pit).toBeInstanceOf(THREE.Mesh);
     expect(pool).toBeInstanceOf(THREE.Mesh);
     expect((pool as THREE.Mesh).material).toBeInstanceOf(THREE.ShaderMaterial);
-    expect((pool as THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>).material.uniforms.uDayTint).toBeDefined();
+    expect(
+      (pool as THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>).material.uniforms.uDayTint,
+    ).toBeDefined();
   } finally {
     disposeProceduralLandmark(mine);
   }

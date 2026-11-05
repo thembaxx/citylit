@@ -9,10 +9,11 @@ import gsap from "gsap";
 import ProvinceMap, { provinceLabels, type LabelRefs } from "./ProvinceMap";
 import { provinceColors, availableProvinces } from "../lib/province-colors";
 import { cities } from "../lib/data";
-import ExpandedLandmark from "./ExpandedLandmark";
+import AtlasProceduralModel from "./AtlasProceduralModel";
+import MuseumHeroAsset from "./MuseumHeroAsset";
+import { stageModel } from "../lib/stage-models";
+import { useKhwezi } from "./KhweziProvider";
 import StudioEnvironment from "./StudioEnvironment";
-import SurfaceFinishes from "./SurfaceFinishes";
-import { Landmark, CategoryModel } from "./Models";
 const viewMemory = new Map<string, number[]>();
 const labelOffsets: Record<string, [number, number]> = {
   NC: [0, 0],
@@ -51,7 +52,14 @@ function World({
   labels,
   spin,
   controlsElement,
-}: Props & { visible: boolean; labels: LabelRefs; spin: number; controlsElement: HTMLElement }) {
+  moving,
+}: Props & {
+  visible: boolean;
+  labels: LabelRefs;
+  spin: number;
+  controlsElement: HTMLElement;
+  moving: boolean;
+}) {
   const { camera, invalidate, setDpr, size } = useThree();
   const reduced = useReducedMotion();
   const group = useRef<THREE.Group>(null);
@@ -60,7 +68,9 @@ function World({
   const previousReset = useRef(reset);
   const memoryKey = `${mode}:${city}:${index}:${category}`;
   const [travel, setTravel] = useState(false);
-  const gentle = !!reduced || !animate || !visible;
+  const gentle = !!reduced || !moving || !animate || !visible;
+  const cityLandmarks = cities[city]?.landmarks ?? [];
+  const landmarkName = cityLandmarks[index % cityLandmarks.length] ?? "City landmark";
   useEffect(() => {
     const changed = previousMode.current !== mode;
     previousMode.current = mode;
@@ -218,15 +228,19 @@ function World({
         {mode === "map" ? (
           <ProvinceMap onCity={onCity} reduced={gentle} labels={labels} />
         ) : (
-          <SurfaceFinishes key={`${mode}:${city}:${index}:${category}`}>
+          <group key={`${mode}:${city}:${index}:${category}`}>
             {mode === "category" ? (
-              <CategoryModel index={category} reduced={gentle} />
-            ) : city < 3 ? (
-              <Landmark city={city} index={index} reduced={gentle} />
+              <AtlasProceduralModel category={category} reduced={gentle} />
+            ) : cities[city]?.slug === "kimberley" && landmarkName === "McGregor Museum" ? (
+              <MuseumHeroAsset reduced={gentle} />
             ) : (
-              <ExpandedLandmark city={city} index={index % 3} reduced={gentle} />
+              <AtlasProceduralModel
+                name={landmarkName}
+                model={stageModel(landmarkName)}
+                reduced={gentle}
+              />
             )}
-          </SurfaceFinishes>
+          </group>
         )}
       </group>
       <OrbitControls
@@ -250,6 +264,8 @@ function World({
   );
 }
 export default function Scene(props: Props) {
+  // Scene is under KhweziProvider; the shared canvas View.Port is outside its context.
+  const { moving } = useKhwezi();
   const ref = useRef<HTMLDivElement>(null);
   const labels = useRef<Record<string, HTMLDivElement | null>>({});
   const [visible, setVisible] = useState(true);
@@ -304,6 +320,7 @@ export default function Scene(props: Props) {
             labels={labels}
             spin={spin}
             controlsElement={controlsElement}
+            moving={moving}
           />
         )}
       </View>

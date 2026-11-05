@@ -108,18 +108,18 @@ test("GLB signature, manifest metadata, and range integrity fail closed", async 
   }
   await assert.rejects(
     checkProduction(
-        fixture({
-          "/models/stage/dome.glb": ["bad!", "model/gltf-binary"],
-        }),
-      ),
+      fixture({
+        "/models/stage/dome.glb": ["bad!", "model/gltf-binary"],
+      }),
+    ),
     /invalid GLB signature/,
   );
   await assert.rejects(
     checkProduction(
-        fixture({
-          "/models/stage/dome.glb": ["glTF", "text/plain"],
-        }),
-      ),
+      fixture({
+        "/models/stage/dome.glb": ["glTF", "text/plain"],
+      }),
+    ),
     /unexpected content type/,
   );
   const original = fixture();

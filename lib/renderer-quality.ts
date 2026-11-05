@@ -2,6 +2,11 @@
  * Conservative, hysteretic quality policy for a demand-rendered Three.js scene.
  * Measurements describe rendered frame cadence, not GPU execution time.
  */
+/** Never use high-resolution render targets on software WebGL rasterizers. */
+export function isSoftwareRenderer(name: string): boolean {
+  return /swiftshader|llvmpipe|softpipe|software rasterizer/i.test(name);
+}
+
 export type RendererTier = "saver" | "balanced" | "detail";
 export type SampleWindow = {
   frames: number;

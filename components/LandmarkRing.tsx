@@ -437,6 +437,9 @@ function Ring({
                         index === (selected - 1 + items.length) % items.length))) && (
                     <SafeStageModel
                       model={item.model}
+                      name={item.name}
+                      night={night}
+                      reduced={reduced}
                       active={index === selected}
                       onStatus={onModelStatus}
                     />

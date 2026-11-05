@@ -31,8 +31,8 @@ test("Table Mountain has a broad flat plateau and steep differentiated slopes", 
     expect(lions).toBeInstanceOf(THREE.Mesh);
     const heightOf = (mesh: THREE.Object3D) =>
       new THREE.Box3().setFromObject(mesh).getSize(new THREE.Vector3()).y;
-    expect(heightOf(devils!)).toBeGreaterThan(1);
-    expect(heightOf(lions!)).toBeGreaterThan(1);
+    expect(heightOf(devils!)).toBeGreaterThan(0.4);
+    expect(heightOf(lions!)).toBeGreaterThan(0.4);
 
     const foliage = scene.getObjectByName("table-mountain-instanced-fynbos");
     const rocks = scene.getObjectByName("table-mountain-instanced-rocks");

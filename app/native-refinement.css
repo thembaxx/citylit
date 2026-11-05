@@ -955,13 +955,65 @@ select:focus-visible {
   }
 }
 
-/* The beacon card and mascot remain tappable above the interactive home map. */
+/* Keep the mascot hit target visible and above the map, but do not override
+   the desktop hero's absolute positioning or create horizontal overflow. */
 .reference-guide .atlas-hero-bottom {
   z-index: 8;
 }
 .reference-guide .atlas-beacon-card {
   position: relative;
   z-index: 2;
+  overflow: visible;
+}
+.reference-guide {
+  overflow-x: clip;
+}
+/* The fixed map is decorative outside its clickable markers. Contain its
+   positioned labels so off-viewport map coordinates cannot widen the guide. */
+.reference-guide .atlas-map-backdrop {
+  overflow: clip;
+  contain: layout paint;
+}
+@media (max-width: 767px) {
+  /* Keep the mobile hero's decorative and absolutely positioned layers within
+     the actual viewport while leaving the controls in the document flow. */
+  .reference-guide .atlas-hero {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+  .reference-guide .atlas-beacon-card {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 360px) {
+  /* At 320px the mascot and its button are real flow content, not an
+     absolute target that extends beyond the viewport or covers the picker. */
+  .reference-guide .atlas-beacon-content {
+    padding-right: 0;
+  }
+  .reference-guide .atlas-beacon-mascot {
+    position: static;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  .reference-guide .atlas-mascot-view {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 82px;
+  }
+  .reference-guide .atlas-mascot-action {
+    flex: 0 0 auto;
+    max-width: calc(100% - 84px);
+    white-space: normal;
+    text-wrap: balance;
+  }
 }
 .reference-guide .atlas-beacon-mascot {
   z-index: 3;

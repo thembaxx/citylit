@@ -50,6 +50,24 @@ Open http://localhost:3000. For production, run `pnpm build && pnpm start`.
 
 Choose a city beacon or use the searchable city collection. Open a landmark story or place card for photos, background, source-linked visitor information and directions. The **Plan a visit** section links to suggested stops and lets you add them to **My day**, where you can arrange or remove stops. Saves and plans stay in your browser. Place search and filters survive browser back navigation; the server-rendered guide also supports navigation without JavaScript.
 
+## Procedural landmark and place gallery
+
+The city **Landmarks** and **Places** gallery uses Three.js r187 geometry and WebGL shaders.
+Its shared catalog renderer builds each scene from the real place name and a matching
+architecture/nature category: five individually authored reference landmarks
+(Table Mountain, Union Buildings, Moses Mabhida, Nelson Mandela Bridge and the
+Big Hole) plus procedural civic, historic, natural, waterfront and stadium scenes.
+The model builder is in `lib/procedural-landmarks.js`; it retains the supplied
+`tree()`, `drift()` and geometric helper functions. Runtime scenes use no
+downloaded GLB or image textures. The original high-detail McGregor Museum hero
+and archived Draco assets are kept intact for heritage and backwards compatibility.
+
+Motion is deliberately capped at 30 frames per second for the selected gallery
+model and stops with reduced motion or a hidden tab. Night lighting changes the
+emissive facades; a procedural water shader animates ripples. The models are
+**illustrative**, not surveyed recreations of each physical venue; researched
+site and visitor information remains in the accompanying guide.
+
 ## Optional 3D atlas
 
 - Nine real province boundaries, projected and extruded. Provinces without data share a muted sage color. All nine provinces now contain seeded destinations and are elevated, individually colored and clickable, with outlined mono labels and small dot markers. Labels use a contrasting navy backplate; map pins are unnumbered. The destination chooser lists all twelve cities.

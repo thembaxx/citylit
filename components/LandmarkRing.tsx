@@ -3,6 +3,7 @@ import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { useKhwezi } from "./KhweziProvider";
 import {
   ArrowCounterClockwise,
   ArrowClockwise,
@@ -437,6 +438,9 @@ function Ring({
                         index === (selected - 1 + items.length) % items.length))) && (
                     <SafeStageModel
                       model={item.model}
+                      name={item.name}
+                      night={night}
+                      reduced={reduced}
                       active={index === selected}
                       onStatus={onModelStatus}
                     />
@@ -500,7 +504,8 @@ export default function LandmarkRing({
       previous[model] === status ? previous : { ...previous, [model]: status },
     );
   }, []);
-  const reduced = !!useReducedMotion();
+  const { moving } = useKhwezi();
+  const reduced = !!useReducedMotion() || !moving;
   const museumSelected = items[selected]?.name.toLowerCase().includes("mcgregor museum");
   const features: { id: MuseumFeature; label: string }[] = [
     { id: "architecture", label: "Architecture" },
@@ -569,7 +574,7 @@ export default function LandmarkRing({
       className={museumSelected ? "atlas-ring-scene is-heritage-hero" : "atlas-ring-scene"}
       data-active-model={museumSelected ? "museum" : items[selected]?.model}
       data-active-model-status={
-        museumSelected ? "ready" : (modelStatuses[items[selected]?.model] ?? "loading")
+        museumSelected ? "ready" : (modelStatuses[items[selected]?.name] ?? "loading")
       }
       role="group"
       aria-label="Interactive illustrative landmark models"

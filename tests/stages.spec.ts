@@ -6,11 +6,12 @@ test("the stage opens a landmark guide and shares the real day planner", async (
   await page.emulateMedia({ reducedMotion: "reduce" });
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  const model = page.waitForResponse(
-    (response) => response.url().includes("/models/stage/") && response.status() === 200,
-  );
   await page.goto("/cape-town/landmarks");
-  await model;
+  await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
+    "data-active-model-status",
+    "ready",
+    { timeout: 30000 },
+  );
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
   await expect(page.getByRole("button", { name: "Table Mountain", exact: true })).toHaveAttribute(
     "aria-pressed",
@@ -76,7 +77,7 @@ test("the stage opens a landmark guide and shares the real day planner", async (
   expect(errors).toEqual([]);
 });
 
-test("stage routes resolve all twelve cities, reject unknown cities and serve cacheable models", async ({
+test("stage routes resolve all twelve cities, reject unknown cities and retain cacheable legacy archives", async ({
   request,
 }) => {
   for (const city of cities) {

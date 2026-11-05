@@ -1,6 +1,6 @@
 "use client";
-import { Component, Suspense, useCallback, type ReactNode } from "react";
-import StageModel from "./StageModel";
+import { Component, useCallback, type ReactNode } from "react";
+import ProceduralStageModel from "./ProceduralStageModel";
 
 /** An original, low-poly marker when a landmark asset is unavailable. */
 function LandmarkPlaceholder() {
@@ -47,20 +47,31 @@ class LandmarkAssetBoundary extends Component<
  */
 export default function SafeStageModel({
   model,
+  name = model,
+  night = false,
+  reduced = false,
   active = true,
   onStatus,
 }: {
   model: string;
+  name?: string;
+  night?: boolean;
+  reduced?: boolean;
   active?: boolean;
   onStatus?: (model: string, status: "ready" | "error") => void;
 }) {
-  const onReady = useCallback(() => onStatus?.(model, "ready"), [model, onStatus]);
-  const onFailure = useCallback(() => onStatus?.(model, "error"), [model, onStatus]);
+  const onReady = useCallback(() => onStatus?.(name, "ready"), [name, onStatus]);
+  const onFailure = useCallback(() => onStatus?.(name, "error"), [name, onStatus]);
   return (
-    <LandmarkAssetBoundary key={model} onFailure={onFailure}>
-      <Suspense fallback={<LandmarkPlaceholder />}>
-        <StageModel model={model} active={active} onReady={onReady} />
-      </Suspense>
+    <LandmarkAssetBoundary key={`${model}:${name}`} onFailure={onFailure}>
+      <ProceduralStageModel
+        name={name}
+        model={model}
+        night={night}
+        reduced={reduced}
+        active={active}
+        onReady={onReady}
+      />
     </LandmarkAssetBoundary>
   );
 }

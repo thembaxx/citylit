@@ -48,7 +48,7 @@ test("Kimberley museum exposes functional, accessible architectural inspector to
 
   await page.getByRole("button", { name: "The Big Hole", exact: true }).click();
   await expect(tools.getByRole("button", { name: "Explode architectural layers" })).toHaveCount(0);
-  await expect(page.getByRole("link", { name: "Open the full guide" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
   expect(errors).toEqual([]);
 });
 

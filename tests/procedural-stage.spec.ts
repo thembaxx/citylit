@@ -37,13 +37,24 @@ test("procedural places have a scene in all twelve city catalogues", async ({ pa
   test.slow();
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const city of [
-    "johannesburg", "cape-town", "durban", "pretoria", "stellenbosch",
-    "pietermaritzburg", "gqeberha", "bloemfontein", "mbombela",
-    "polokwane", "kimberley", "mahikeng",
+    "johannesburg",
+    "cape-town",
+    "durban",
+    "pretoria",
+    "stellenbosch",
+    "pietermaritzburg",
+    "gqeberha",
+    "bloemfontein",
+    "mbombela",
+    "polokwane",
+    "kimberley",
+    "mahikeng",
   ]) {
     await page.goto(`/${city}/places`);
     await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
-      "data-active-model-status", "ready", { timeout: 30000 },
+      "data-active-model-status",
+      "ready",
+      { timeout: 30000 },
     );
     await expect(page.locator(".atlas-stage-sheet h2")).not.toBeEmpty();
   }

@@ -51,9 +51,7 @@ export default function ProceduralStageModel({
 
   useFrame(({ clock }) => {
     if (!active || reduced || document.hidden) return;
-    const tick = subject.userData.tick as
-      | ((time: number, night: number) => void)
-      | undefined;
+    const tick = subject.userData.tick as ((time: number, night: number) => void) | undefined;
     tick?.(clock.elapsedTime, night ? 1 : 0);
   });
 

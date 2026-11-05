@@ -101,7 +101,13 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
           </mesh>
         ))}
       </group>
-      <QuietParticles accent={accent} animate={animate} night={night} reading={reading} pointer={pointer} />
+      <QuietParticles
+        accent={accent}
+        animate={animate}
+        night={night}
+        reading={reading}
+        pointer={pointer}
+      />
       <mesh ref={halo} position={[0, -0.2, -4]} raycast={() => {}}>
         <torusGeometry args={[2.4, 0.012, 8, 64]} />
         <meshBasicMaterial

@@ -46,6 +46,15 @@ test("PBR material maps share deterministic textures under the mobile memory lim
     expect(a.map).toBeInstanceOf(THREE.DataTexture);
     expect(a.bumpMap).toBeInstanceOf(THREE.DataTexture);
     expect(a.roughnessMap).toBeInstanceOf(THREE.DataTexture);
+    if (["sandstone", "limestone", "concrete", "cliff"].includes(kind)) {
+      expect(a.normalMap).toBeInstanceOf(THREE.DataTexture);
+      // Normal data must be linear, not decoded as a color texture.
+      expect(a.normalMap!.colorSpace).toBe(THREE.NoColorSpace);
+      const pixels = (a.normalMap as THREE.DataTexture).image.data as Uint8Array;
+      expect(pixels.some((channel, index) => index % 4 < 2 && channel !== 128)).toBe(true);
+    } else {
+      expect(a.normalMap).toBeNull();
+    }
     expect(a.map!.colorSpace).toBe(THREE.SRGBColorSpace);
   }
   expect(landmarkPbrTextureBytes()).toBeLessThanOrEqual(MOBILE_LANDMARK_BUDGET.textureBytes);

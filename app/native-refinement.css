@@ -968,9 +968,25 @@ select:focus-visible {
 .reference-guide {
   overflow-x: clip;
 }
+/* The fixed map is decorative outside its clickable markers. Contain its
+   positioned labels so off-viewport map coordinates cannot widen the guide. */
 .reference-guide .atlas-map-backdrop {
   overflow: clip;
-  contain: paint;
+  contain: layout paint;
+}
+@media (max-width: 767px) {
+  /* Keep the mobile hero's decorative and absolutely positioned layers within
+     the actual viewport while leaving the controls in the document flow. */
+  .reference-guide .atlas-hero {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+  .reference-guide .atlas-beacon-card {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 @media (max-width: 360px) {
   /* At 320px the mascot and its button are real flow content, not an

@@ -344,3 +344,33 @@
     padding-right: 0;
   }
 }
+
+/* Keep the narrow beacon in normal document flow, not at an absolute
+   position that shifts controls under the WebGL overlay or beyond 390px. */
+@media (max-width: 767px) {
+  .reference-guide .atlas-hero-bottom {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .reference-guide .atlas-beacon-card {
+    position: relative;
+    inset: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    pointer-events: auto;
+  }
+  .reference-guide .atlas-beacon-mascot {
+    pointer-events: auto;
+  }
+  .reference-guide .atlas-mascot-action {
+    pointer-events: auto;
+  }
+}

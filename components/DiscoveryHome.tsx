@@ -68,7 +68,7 @@ export default function DiscoveryHome() {
                   setMascotPose((current) => (current === "saved" ? "welcome" : "saved"))
                 }
               >
-                {mascotPose === "saved" ? "Khwezi has hopped!" : "Make Khwezi hop"}
+                {mascotPose === "saved" ? "Say hello" : "Make Khwezi hop"}
               </MagneticButton>
             </div>
             <div className="atlas-beacon-actions">

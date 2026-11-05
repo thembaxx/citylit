@@ -12,7 +12,7 @@ const cases = [
 ] as const;
 
 test.describe("hero landmark actual screenshot evidence", () => {
-  test.skip(!process.env.CITYLIT_CAPTURE_VISUALS, "Enable with CITYLIT_CAPTURE_VISUALS=1.");
+  test.skip(process.env.CITYLIT_CAPTURE_VISUALS !== "1", "Enable with CITYLIT_CAPTURE_VISUALS=1.");
   for (const [city, landmark] of cases) {
     test(`${city} / ${landmark} genuine renderer screenshot`, async ({ page }, testInfo) => {
       test.slow();

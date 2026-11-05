@@ -52,10 +52,16 @@ function World({
   labels,
   spin,
   controlsElement,
-}: Props & { visible: boolean; labels: LabelRefs; spin: number; controlsElement: HTMLElement }) {
+  moving,
+}: Props & {
+  visible: boolean;
+  labels: LabelRefs;
+  spin: number;
+  controlsElement: HTMLElement;
+  moving: boolean;
+}) {
   const { camera, invalidate, setDpr, size } = useThree();
   const reduced = useReducedMotion();
-  const { moving } = useKhwezi();
   const group = useRef<THREE.Group>(null);
   const controls = useRef<ComponentRef<typeof OrbitControls>>(null);
   const previousMode = useRef(mode);
@@ -258,6 +264,8 @@ function World({
   );
 }
 export default function Scene(props: Props) {
+  // Scene is under KhweziProvider; the shared canvas View.Port is outside its context.
+  const { moving } = useKhwezi();
   const ref = useRef<HTMLDivElement>(null);
   const labels = useRef<Record<string, HTMLDivElement | null>>({});
   const [visible, setVisible] = useState(true);
@@ -312,6 +320,7 @@ export default function Scene(props: Props) {
             labels={labels}
             spin={spin}
             controlsElement={controlsElement}
+            moving={moving}
           />
         )}
       </View>

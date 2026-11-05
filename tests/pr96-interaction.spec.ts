@@ -16,7 +16,7 @@ test("Khwezi action is genuinely clickable above the live city map", async ({ pa
   expect(clearHitTarget, "map backdrop must not intercept the mascot button").toBe(true);
 
   await hop.click();
-  await expect(page.locator(".atlas-mascot-action")).toHaveText(/Khwezi has hopped!/);
+  await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
 });
 
 test("safe-area layout keeps interactive guide elements within a compact viewport", async ({

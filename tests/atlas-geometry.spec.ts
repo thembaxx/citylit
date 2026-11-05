@@ -65,7 +65,7 @@ test("venue categories resolve to location-appropriate geometry families", () =>
   const archetypes: [string, string, string][] = [
     ["Howick Falls", "", "waterfall"],
     ["Sudwala Caves", "", "cave"],
-    ["Village Museum", "", "museum"],
+    ["Village Museum", "", "village"],
     ["Bakone Malapa", "", "village"],
     ["Sand du Plessis Theatre", "", "theatre"],
     ["The Boardwalk", "", "entertainment"],

@@ -1,7 +1,7 @@
 "use client";
 
 import { useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import * as THREE from "three";
 
 // All displacement happens in the vertex shader: there are no per-particle JS updates.
@@ -44,7 +44,7 @@ export default function QuietParticles({
   animate: boolean;
   night: boolean;
   reading: boolean;
-  pointer: React.RefObject<{ x: number; y: number }>;
+  pointer: RefObject<{ x: number; y: number }>;
 }) {
   const { viewport } = useThree();
   const material = useRef<THREE.ShaderMaterial>(null);

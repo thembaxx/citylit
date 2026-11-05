@@ -25,6 +25,15 @@ test("Table Mountain has a broad flat plateau and steep differentiated slopes", 
     expect(Math.max(...heights) - Math.min(...heights)).toBeLessThan(0.14);
     expect(baseCount).toBeGreaterThan(20);
 
+    const devils = scene.getObjectByName("table-mountain-devils-peak");
+    const lions = scene.getObjectByName("table-mountain-lions-head");
+    expect(devils).toBeInstanceOf(THREE.Mesh);
+    expect(lions).toBeInstanceOf(THREE.Mesh);
+    const heightOf = (mesh: THREE.Object3D) =>
+      new THREE.Box3().setFromObject(mesh).getSize(new THREE.Vector3()).y;
+    expect(heightOf(devils!)).toBeGreaterThan(1);
+    expect(heightOf(lions!)).toBeGreaterThan(1);
+
     const foliage = scene.getObjectByName("table-mountain-instanced-fynbos");
     const rocks = scene.getObjectByName("table-mountain-instanced-rocks");
     expect(foliage).toBeInstanceOf(THREE.InstancedMesh);
@@ -48,6 +57,14 @@ test("Moses Mabhida has an oval stadium roof under its signature arch", () => {
     expect(bowled.length).toBeGreaterThanOrEqual(2);
     const outer = bowled[0];
     expect(outer.scale.x / outer.scale.z).toBeGreaterThan(1.3);
+    const roof = scene.getObjectByName("moses-mabhida-radial-roof");
+    expect(roof).toBeInstanceOf(THREE.Mesh);
+    const roofGeometry = (roof as THREE.Mesh).geometry as THREE.BufferGeometry;
+    expect(roofGeometry.name).toBe("MosesMabhidaRoofMembrane");
+    expect(roofGeometry.getAttribute("position").count).toBeGreaterThan(350);
+    expect(roofGeometry.getAttribute("color").count).toBe(
+      roofGeometry.getAttribute("position").count,
+    );
     expect(() => scene.userData.tick?.(2, 0)).not.toThrow();
   } finally {
     disposeProceduralLandmark(scene);

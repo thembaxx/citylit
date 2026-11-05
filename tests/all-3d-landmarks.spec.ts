@@ -64,7 +64,7 @@ for (const citySlug of [
 
     await page.getByRole("button", { name: "Next discovery" }).click();
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[1]);
-    await expect(page.getByRole("link", { name: "Open the full guide" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
     expect(errors).toEqual([]);
   });
 }

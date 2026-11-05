@@ -153,3 +153,50 @@
     transform: translateY(0) scale(1);
   }
 }
+
+/* The fixed interactive map must never steal taps from the foreground guide.
+   Keep the map usable through the hero's pointer-events:none empty regions. */
+.reference-guide .atlas-hero {
+  position: relative;
+  z-index: 5;
+  pointer-events: none;
+}
+.reference-guide .atlas-beacon-card {
+  position: absolute;
+  z-index: 6;
+  isolation: isolate;
+  pointer-events: auto;
+}
+.reference-guide .atlas-mascot-action {
+  position: relative;
+  z-index: 7;
+  pointer-events: auto;
+}
+
+/* Popovers enter the browser top layer; other models remain behind controls.
+   Explicit hit targets also work on iOS's composited WebGL-backed scroll views. */
+.reference-stage-guide .atlas-inspector-panel[popover]:popover-open {
+  z-index: 2147483647;
+  pointer-events: auto;
+  max-height: min(65dvh, calc(100dvh - 48px - env(safe-area-inset-top)));
+}
+.reference-stage-guide .atlas-inspector-panel[popover]:popover-open button {
+  min-height: 44px;
+  pointer-events: auto;
+}
+
+.webgl-context-warning {
+  position: fixed;
+  z-index: 95;
+  top: calc(72px + env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  left: max(16px, env(safe-area-inset-left));
+  max-width: 480px;
+  margin-inline: auto;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 18%);
+  pointer-events: none;
+}

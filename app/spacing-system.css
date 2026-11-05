@@ -422,3 +422,21 @@
     transform: none !important;
   }
 }
+
+/* Reference-led stage polish: visible keyboard focus and explicit active cameras.
+   Do not alter the Three.js canvas, camera math or inspector stacking. */
+.reference-stage-guide .atlas-stage-chips button:focus-visible,
+.reference-stage-guide .atlas-stage-controls button:focus-visible {
+  outline: 3px solid var(--guide-accent, currentColor);
+  outline-offset: 3px;
+}
+.reference-stage-guide .atlas-stage-chips button[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+@media (max-width: 600px) {
+  .reference-stage-guide .atlas-stage-chips button,
+  .reference-stage-guide .atlas-stage-controls button {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+}

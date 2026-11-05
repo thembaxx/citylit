@@ -54,7 +54,10 @@ export async function checkProduction(request = fetch) {
       throw new Error(path + ": expected 200 or 206, got " + response.status);
     if (!response.headers.get("content-type")?.includes("model/gltf-binary"))
       throw new Error(path + ": unexpected content type");
-    if (response.status === 206 && !/^bytes 0-3\/\d+$/.test(response.headers.get("content-range") || ""))
+    if (
+      response.status === 206 &&
+      !/^bytes 0-3\/\d+$/.test(response.headers.get("content-range") || "")
+    )
       throw new Error(path + ": invalid binary range response");
     const reader = response.body?.getReader();
     if (!reader) throw new Error(path + ": empty response");

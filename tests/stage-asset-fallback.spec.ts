@@ -13,7 +13,7 @@ test("a failed Blender landmark asset does not disable the ring or researched gu
   await page.goto("/cape-town/landmarks");
   await failedModel;
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
-  await expect(page.getByRole("link", { name: "Open the full guide" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
   await expect(page.locator(".atlas-ring-scene")).toBeVisible();
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
     "data-active-model-status",

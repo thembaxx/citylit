@@ -27,10 +27,7 @@ for (const [city, landmark] of references) {
     const scene = page.locator(".atlas-ring-scene");
     await expect(scene).toHaveAttribute("data-active-model-status", "ready", { timeout: 30000 });
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(landmark);
-    if (
-      process.env.CITYLIT_CAPTURE_VISUALS === "1" &&
-      landmark !== "Nelson Mandela Bridge"
-    ) {
+    if (process.env.CITYLIT_CAPTURE_VISUALS === "1" && landmark !== "Nelson Mandela Bridge") {
       const filename = `citylit-real-${city}-${landmark.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.png`;
       const capture = testInfo.outputPath(filename);
       await scene.screenshot({ path: capture, animations: "disabled", timeout: 30000 });

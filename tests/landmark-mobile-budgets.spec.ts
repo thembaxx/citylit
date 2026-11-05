@@ -31,7 +31,14 @@ test("five reference landmark models stay within static mobile budgets", () => {
 });
 
 test("PBR material maps share deterministic textures under the mobile memory limit", () => {
-  for (const kind of ["sandstone", "limestone", "terracotta", "concrete", "cliff", "membrane"] as const) {
+  for (const kind of [
+    "sandstone",
+    "limestone",
+    "terracotta",
+    "concrete",
+    "cliff",
+    "membrane",
+  ] as const) {
     const a = pbrSurface(kind);
     const b = pbrSurface(kind);
     expect(a).toBe(b);

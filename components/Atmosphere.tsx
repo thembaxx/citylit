@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import * as THREE from "three";
 import { cities } from "../lib/data";
+import QuietParticles from "./QuietParticles";
 type Props = { mode: string; city: number; category: number; night: boolean; animate: boolean };
 const ink = ["#ff7a59", "#ffd166", "#8bd450", "#f48cb6", "#c084fc", "#3ec8c2"];
 function Dreamscape({ mode, city, category, night, animate }: Props) {
@@ -100,6 +101,7 @@ function Dreamscape({ mode, city, category, night, animate }: Props) {
           </mesh>
         ))}
       </group>
+      <QuietParticles accent={accent} animate={animate} night={night} reading={reading} pointer={pointer} />
       <mesh ref={halo} position={[0, -0.2, -4]} raycast={() => {}}>
         <torusGeometry args={[2.4, 0.012, 8, 64]} />
         <meshBasicMaterial

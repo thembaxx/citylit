@@ -3,6 +3,7 @@ import { View, PerspectiveCamera, Line } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { useKhwezi } from "./KhweziProvider";
 import {
   ArrowCounterClockwise,
   ArrowClockwise,
@@ -503,7 +504,8 @@ export default function LandmarkRing({
       previous[model] === status ? previous : { ...previous, [model]: status },
     );
   }, []);
-  const reduced = !!useReducedMotion();
+  const { moving } = useKhwezi();
+  const reduced = !!useReducedMotion() || !moving;
   const museumSelected = items[selected]?.name.toLowerCase().includes("mcgregor museum");
   const features: { id: MuseumFeature; label: string }[] = [
     { id: "architecture", label: "Architecture" },

@@ -188,6 +188,21 @@ for (const width of [320, 768, 1024, 1440]) {
         const overflow = await page
           .locator(".discovery-guide")
           .evaluate((el) => el.scrollWidth > el.clientWidth + 1);
+        if (overflow) {
+          const culprits = await page.locator(".discovery-guide").evaluate((root) => {
+            const edge = root.getBoundingClientRect().right;
+            return Array.from(root.querySelectorAll("*"))
+              .map((node) => ({
+                tag: node.tagName,
+                className: typeof node.className === "string" ? node.className.slice(0, 90) : "",
+                overflowRight: Math.round(node.getBoundingClientRect().right - edge),
+              }))
+              .filter((node) => node.overflowRight > 1)
+              .sort((a, b) => b.overflowRight - a.overflowRight)
+              .slice(0, 8);
+          });
+          console.log("Citylit layout overflow:", route, width, theme, JSON.stringify(culprits));
+        }
         expect(overflow, `${route} at ${width}px, ${theme}`).toBe(false);
         if (width === 1440 && route === "/")
           await expect(page.locator(".atlas-beacon-card")).toBeInViewport({ ratio: 1 });

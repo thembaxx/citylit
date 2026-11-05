@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useThree } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, View, PerformanceMonitor } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, View } from "@react-three/drei";
 import { useCallback, useEffect, useRef, useState, type ComponentRef } from "react";
 import { useReducedMotion } from "motion/react";
 import * as THREE from "three";
@@ -60,7 +60,7 @@ function World({
   controlsElement: HTMLElement;
   moving: boolean;
 }) {
-  const { camera, invalidate, setDpr, size } = useThree();
+  const { camera, invalidate, size } = useThree();
   const reduced = useReducedMotion();
   const group = useRef<THREE.Group>(null);
   const controls = useRef<ComponentRef<typeof OrbitControls>>(null);
@@ -187,17 +187,6 @@ function World({
       />
       <directionalLight position={[-4.5, 3.2, -2]} intensity={0.55} color="#ffd0a8" />
       <pointLight position={[0.4, 2.4, 2.2]} intensity={6} distance={9} color="#ffe3bf" />
-      <PerformanceMonitor
-        onDecline={() => setDpr(1)}
-        onIncline={() =>
-          setDpr(
-            Math.min(
-              window.devicePixelRatio || 1,
-              window.matchMedia("(max-width: 760px), (pointer: coarse)").matches ? 1 : 1.5,
-            ),
-          )
-        }
-      />
       <group
         ref={group}
         onPointerDown={() => {
@@ -299,7 +288,15 @@ export default function Scene(props: Props) {
       role="region"
       aria-label="Toy map of South Africa. Drag to spin, scroll or pinch to zoom, swipe to discover, tap a toy to step inside."
       onPointerDown={(event) => {
+        // Horizontal drags on the canvas rotate the scene; only the visible
+        // landmark caption is a swipe target for changing landmarks.
+        const target = event.target;
+        if (event.pointerType !== "touch" || !(target instanceof Element)) return;
+        if (!target.closest(".landmark-caption")) return;
         gesture.current = { x: event.clientX, y: event.clientY, t: performance.now() };
+      }}
+      onPointerCancel={() => {
+        gesture.current = null;
       }}
       onPointerUp={(event) => {
         const start = gesture.current;

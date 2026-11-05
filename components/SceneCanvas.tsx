@@ -11,6 +11,7 @@ import {
 } from "react";
 import { CornersIn, CornersOut } from "@phosphor-icons/react";
 import * as THREE from "three";
+import RendererTelemetry from "./RendererTelemetry";
 
 const qualityQuery = "(max-width: 760px), (pointer: coarse)";
 function subscribeQuality(onChange: () => void) {
@@ -52,6 +53,7 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
   const [canFullscreen, setCanFullscreen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [fullscreenNotice, setFullscreenNotice] = useState("");
+  const [contextLost, setContextLost] = useState(false);
   useEffect(() => {
     const sync = () => {
       setCanFullscreen(document.fullscreenEnabled === true);
@@ -91,6 +93,11 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
           {fullscreenNotice}
         </p>
       )}
+      {contextLost && (
+        <p className="webgl-context-warning" role="status">
+          3D rendering was interrupted. City guides remain available while WebGL recovers.
+        </p>
+      )}
       <WebGLBoundary>
         <Canvas
           eventSource={ref as React.RefObject<HTMLDivElement>}
@@ -121,6 +128,7 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
             </div>
           }
         >
+          <RendererTelemetry mobile={lowPower} onContextState={setContextLost} />
           <FrameClear />
           <View.Port />
         </Canvas>

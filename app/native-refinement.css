@@ -965,12 +965,38 @@ select:focus-visible {
   z-index: 2;
   overflow: visible;
 }
+.reference-guide {
+  overflow-x: clip;
+}
 .reference-guide .atlas-map-backdrop {
   overflow: clip;
+  contain: paint;
 }
 @media (max-width: 360px) {
+  /* At 320px the mascot and its button are real flow content, not an
+     absolute target that extends beyond the viewport or covers the picker. */
+  .reference-guide .atlas-beacon-content {
+    padding-right: 0;
+  }
   .reference-guide .atlas-beacon-mascot {
-    right: 13px;
+    position: static;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  .reference-guide .atlas-mascot-view {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 82px;
+  }
+  .reference-guide .atlas-mascot-action {
+    flex: 0 0 auto;
+    max-width: calc(100% - 84px);
+    white-space: normal;
+    text-wrap: balance;
   }
 }
 .reference-guide .atlas-beacon-mascot {

@@ -172,6 +172,8 @@ jobs:
       - name: Run desktop Firefox theme regression in the preinstalled browser
         run: pnpm exec playwright test --project=desktop-firefox-theme
         env:
+          # GitHub mounts /github/home as pwuser; Firefox launched as root requires /root.
+          HOME: /root
           CITYLIT_CAPTURE_VISUALS: "0"
       - name: Preserve Firefox failure diagnostics
         if: failure()

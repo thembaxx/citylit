@@ -4,21 +4,32 @@ export function stageModel(name: string, category = "") {
   if (/orlando|cooling tower/.test(value)) return "cooling-towers";
   if (/ushaka|u.shaka|aquarium/.test(value)) return "aquarium";
   if (/robben island/.test(value)) return "fort";
-  if (/table mountain|naval hill|mountain|kopje/.test(value)) return "table-mountain";
+  if (/table mountain|naval hill|mountain|kopje|jonkershoek|god.s window/.test(value))
+    return "table-mountain";
   if (/union buildings/.test(value)) return "union-buildings";
   if (/ponte/.test(value)) return "ponte";
   if (/bridge/.test(value)) return "bridge";
   if (/stadium|moses mabhida|peter mokaba/.test(value)) return "stadium";
   if (/big hole|diamond/.test(value)) return "hole";
   if (/lighthouse|cape point/.test(value)) return "lighthouse";
-  if (/castle|fort|voortrekker/.test(value)) return "fort";
+  if (/sudwala|cave|grotto/.test(value)) return "cave";
+  if (/waterfall|falls/.test(value)) return "waterfall";
+  if (/castle|fort|voortrekker|constitution hill/.test(value)) return "fort";
+  if (/bakone|village|dorp street|mapungubwe/.test(value)) return "village";
+  if (/museum|gallery|oliewenhuis|bayworld|heritage/.test(value)) return "museum";
+  if (/theatre|theater|playhouse|performing arts/.test(value) || category === "Theatres")
+    return "theatre";
+  if (/meropa|boardwalk|casino|palms/.test(value) || category === "Clubs") return "entertainment";
   if (
-    /garden|park|zoo|reserve|dam|waterfall|falls|beach/.test(value) ||
+    /garden|park|zoo|reserve|dam|beach|wildebeest kuil/.test(value) ||
     category === "Parks & zoos"
   )
     return "park";
-  if (/monument|memorial|freedom|mandela/.test(value)) return "arch";
-  if (/tower|church|cathedral|hall|campanile|clock/.test(value) || category === "Lodging")
+  if (/monument|memorial|freedom|mandela|route 67/.test(value)) return "arch";
+  if (
+    /tower|church|cathedral|hall|campanile|clock|moederkerk/.test(value) ||
+    category === "Lodging"
+  )
     return "tower";
   return "dome";
 }

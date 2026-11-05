@@ -955,16 +955,23 @@ select:focus-visible {
   }
 }
 
-/* Keep the absolute mascot hit target inside the hero stacking layer.
-   Other cards remain clipped, but this beacon must not clip its action button. */
+/* Keep the mascot hit target visible and above the map, but do not override
+   the desktop hero's absolute positioning or create horizontal overflow. */
 .reference-guide .atlas-hero-bottom {
-  position: relative;
   z-index: 8;
 }
 .reference-guide .atlas-beacon-card {
   position: relative;
   z-index: 2;
   overflow: visible;
+}
+.reference-guide .atlas-map-backdrop {
+  overflow: clip;
+}
+@media (max-width: 360px) {
+  .reference-guide .atlas-beacon-mascot {
+    right: 13px;
+  }
 }
 .reference-guide .atlas-beacon-mascot {
   z-index: 3;

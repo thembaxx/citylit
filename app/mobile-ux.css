@@ -229,3 +229,119 @@
     max-width: 100%;
   }
 }
+
+
+/* Visual-audit follow-up: keep the city selector out of the heading's space.
+   Absolute foreground positioning previously let a taller card overlap the
+   headline at tablet and desktop widths. Preserve the atlas backdrop. */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .reference-guide .atlas-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: clamp(22px, 3vw, 40px);
+    min-height: max(740px, 100svh);
+    padding-block: 112px 48px;
+  }
+  .reference-guide .atlas-hero-copy,
+  .reference-guide .atlas-hero h1,
+  .reference-guide .atlas-hero-bottom {
+    position: static;
+  }
+  .reference-guide .atlas-hero h1 {
+    font-size: clamp(56px, 8vw, 90px);
+    max-width: 100%;
+    white-space: normal;
+  }
+  .reference-guide .atlas-hero-bottom {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .reference-guide .atlas-beacon-card {
+    position: relative;
+    inset: auto;
+    width: min(100%, 380px);
+  }
+}
+@media (min-width: 1101px) {
+  .reference-guide .atlas-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
+    align-items: end;
+    gap: clamp(24px, 4vw, 64px);
+    min-height: max(720px, 100svh);
+    padding-block: 112px 64px;
+  }
+  .reference-guide .atlas-hero-copy,
+  .reference-guide .atlas-hero h1,
+  .reference-guide .atlas-hero-bottom {
+    position: static;
+  }
+  .reference-guide .atlas-hero h1 {
+    font-size: clamp(68px, 7.4vw, 124px);
+    max-width: 100%;
+    white-space: normal;
+  }
+  .reference-guide .atlas-hero-bottom {
+    display: block;
+    width: 100%;
+  }
+  .reference-guide .atlas-beacon-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+}
+
+/* Keep the complete interactive mascot and its label inside the city card. */
+.reference-guide .atlas-beacon-card {
+  min-height: 260px;
+  padding-bottom: 24px;
+}
+.reference-guide .atlas-beacon-content {
+  padding-right: 112px;
+}
+.reference-guide .atlas-beacon-mascot {
+  right: 12px;
+  width: 100px;
+}
+.reference-guide .atlas-mascot-action {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: center;
+  line-height: 1.25;
+}
+@media (max-width: 400px) {
+  .reference-guide .atlas-beacon-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    align-items: start;
+    gap: 10px;
+  }
+  .reference-guide .atlas-beacon-content {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 0;
+    padding-right: 0;
+  }
+  .reference-guide .atlas-beacon-mascot {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    width: 96px;
+  }
+  .reference-guide .atlas-beacon-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 0;
+    padding-right: 0;
+  }
+}

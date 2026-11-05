@@ -36,17 +36,17 @@ for (const [city, landmark] of references) {
         contentType: "image/png",
       });
     }
-    const lightingControl = page.getByRole("button", { name: "Switch to night lighting" });
-    // Mobile keeps inspector actions in a collapsed drawer; reveal the real UI
-    // before testing its accessible lighting control.
-    if (!(await lightingControl.isVisible())) {
-      await page.getByRole("button", { name: "Open 3D inspector" }).click();
-      await expect(page.getByRole("button", { name: "Close 3D inspector" })).toHaveAttribute(
-        "aria-expanded",
-        "true",
-      );
+    // At narrow widths inspector actions are intentionally hidden behind the
+    // mobile Inspect control. Open the real panel before checking lighting.
+    if ((page.viewportSize()?.width ?? 1440) < 768) {
+      const inspect = page.getByRole("button", { name: "Open 3D inspector" });
+      await expect(inspect).toBeVisible();
+      await inspect.click();
+      await expect(page.locator(".atlas-inspector-panel.is-open")).toBeVisible();
     }
-    await lightingControl.click();
+    const lighting = page.getByRole("button", { name: "Switch to night lighting" });
+    await expect(lighting).toBeVisible();
+    await lighting.click();
     await expect(page.getByRole("button", { name: "Switch to daylight" })).toBeVisible();
     expect(glbRequests).toEqual([]);
     expect(errors).toEqual([]);

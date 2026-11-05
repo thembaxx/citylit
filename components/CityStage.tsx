@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Plus, Check, Path } from "@phosphor-icons/react";
 import { places, landmarkSources, type Place } from "../lib/data";
 import { landmarkPath, landmarkVenue, venuePath, type GuideCity } from "../lib/discovery-guide";
@@ -41,6 +41,7 @@ export default function CityStage({
 }) {
   const { state, update } = useDiscovery();
   const [index, setIndex] = useState(0);
+  const chipsRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState("");
   const local = places.filter((place) => place.city === city.slug);
   const items: StageItem[] =
@@ -73,6 +74,22 @@ export default function CityStage({
   const pick = (value: number) => {
     setIndex((value + items.length) % items.length);
     setMessage("");
+  };
+  const onChipKeyDown = (event: KeyboardEvent<HTMLButtonElement>, current: number) => {
+    const next =
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? items.length - 1
+          : event.key === "ArrowRight"
+            ? (current + 1) % items.length
+            : event.key === "ArrowLeft"
+              ? (current - 1 + items.length) % items.length
+              : null;
+    if (next === null) return;
+    event.preventDefault();
+    pick(next);
+    chipsRef.current?.querySelectorAll<HTMLButtonElement>("button")[next]?.focus();
   };
   const selected = item.place && state.itinerary.includes(item.place.id);
   const add = () => {
@@ -117,18 +134,34 @@ export default function CityStage({
         </header>
         <div className="atlas-stage-content">
           <div
+            ref={chipsRef}
             className="atlas-stage-chips"
+            role="group"
             aria-label={`Choose a ${mode === "places" ? "place" : "landmark"}`}
           >
             {items.map((row, i) => (
-              <button key={row.name} aria-pressed={index === i} onClick={() => pick(i)}>
+              <button
+                type="button"
+                key={row.name}
+                aria-pressed={index === i}
+                aria-controls="stage-detail"
+                onKeyDown={(event) => onChipKeyDown(event, i)}
+                onClick={() => pick(i)}
+              >
                 {row.name}
               </button>
             ))}
           </div>
-          <article className="atlas-stage-sheet" aria-live="polite">
-            <h2>{item.name}</h2>
-            <p className="atlas-stage-description">{item.description}</p>
+          <article id="stage-detail" className="atlas-stage-sheet">
+            <div
+              key={item.href}
+              className="atlas-stage-reveal"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <h2>{item.name}</h2>
+              <p className="atlas-stage-description">{item.description}</p>
+            </div>
             <div className="atlas-stage-actions">
               <Link href={item.href} className="atlas-button atlas-primary">
                 Open guide <ArrowUpRight size={17} />

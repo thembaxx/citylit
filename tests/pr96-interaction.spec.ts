@@ -26,11 +26,21 @@ test("safe-area layout keeps interactive guide elements within a compact viewpor
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/?view=guide");
   await expect(page.getByRole("combobox", { name: "Choose a city on the map" })).toBeVisible();
-  const overflow = await page.evaluate(() => {
+  const layout = await page.evaluate(() => {
     const guide = document.querySelector(".reference-guide");
-    return guide ? guide.scrollWidth - guide.clientWidth : 999;
+    if (!guide) return { overflow: 999, offenders: [] };
+    const right = guide.getBoundingClientRect().right;
+    const offenders = Array.from(guide.querySelectorAll("*"))
+      .filter((element) => element.getBoundingClientRect().right > right + 1)
+      .slice(0, 12)
+      .map((element) => ({
+        element: element.tagName.toLowerCase(),
+        className: typeof element.className === "string" ? element.className : "",
+        right: Math.round(element.getBoundingClientRect().right),
+      }));
+    return { overflow: guide.scrollWidth - guide.clientWidth, offenders };
   });
-  expect(overflow).toBeLessThanOrEqual(1);
+  expect(layout.overflow, JSON.stringify(layout.offenders)).toBeLessThanOrEqual(1);
   await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeVisible();
 });
 

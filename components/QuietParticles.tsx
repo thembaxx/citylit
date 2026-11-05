@@ -55,8 +55,8 @@ export default function QuietParticles({
     const phases = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       // Deterministic edge distribution keeps the central interface quiet.
-      const a = ((i * 0.61803398875) % 1);
-      const b = ((i * 0.754877666) % 1);
+      const a = (i * 0.61803398875) % 1;
+      const b = (i * 0.754877666) % 1;
       positions[i * 3] = (i % 2 ? 1 : -1) * (0.68 + a * 0.28) * viewport.width * 0.5;
       positions[i * 3 + 1] = (b - 0.5) * viewport.height * 0.86;
       positions[i * 3 + 2] = -5.5;
@@ -64,12 +64,15 @@ export default function QuietParticles({
     }
     return { positions, phases };
   }, [count, viewport.width, viewport.height]);
-  const uniforms = useMemo(() => ({
-    uTime: { value: 0 },
-    uPointer: { value: new THREE.Vector2() },
-    uColor: { value: new THREE.Color(accent) },
-    uOpacity: { value: night ? 0.24 : 0.15 },
-  }), []); // Shader uniforms are updated below without reallocating.
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uPointer: { value: new THREE.Vector2() },
+      uColor: { value: new THREE.Color(accent) },
+      uOpacity: { value: night ? 0.24 : 0.15 },
+    }),
+    [],
+  ); // Shader uniforms are updated below without reallocating.
   useFrame((_, delta) => {
     const shader = material.current;
     if (!shader) return;

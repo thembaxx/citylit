@@ -12,15 +12,17 @@ test("Retina mobile uses capped pixel density", async ({ browser }, testInfo) =>
     await page.goto("http://localhost:3000/johannesburg/landmarks");
     const canvas = page.locator(".persistent-canvas canvas");
     await expect(canvas).toBeVisible({ timeout: 30000 });
-    const ratio = await canvas.evaluate((element) => {
-      if (!(element instanceof HTMLCanvasElement)) return 0;
-      const width = element.getBoundingClientRect().width;
-      return width > 0 ? element.width / width : 0;
-    });
-    // The low-power path caps high-density screens to 1.5 physical
-    // framebuffer pixels per CSS pixel, without forcing 1x blur.
-    expect(ratio).toBeGreaterThanOrEqual(1.45);
-    expect(ratio).toBeLessThanOrEqual(1.55);
+    // Canvas visibility precedes R3F's renderer resize and DPR negotiation.
+    // Poll the actual backing buffer rather than sampling its initial 1× size.
+    const framebufferRatio = () =>
+      canvas.evaluate((element) => {
+        if (!(element instanceof HTMLCanvasElement)) return 0;
+        const width = element.getBoundingClientRect().width;
+        return width > 0 ? element.width / width : 0;
+      });
+    // The low-power path must render Retina at 1.5×, not settle at 1×.
+    await expect.poll(framebufferRatio, { timeout: 30000 }).toBeGreaterThanOrEqual(1.45);
+    expect(await framebufferRatio()).toBeLessThanOrEqual(1.55);
     // A fallback node may remain mounted but hidden by the renderer.
     // Only an actually visible fallback means the 3D experience failed.
     await expect(page.locator(".webgl-fallback")).toBeHidden();

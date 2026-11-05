@@ -83,10 +83,7 @@ test("GLB checks work with multi-megabyte models and bounded requests", async ()
     }
     return request(url, options);
   });
-  assert.deepEqual(requested, [
-    "/models/stage/table-mountain.glb",
-    "/models/stage/dome.glb",
-  ]);
+  assert.deepEqual(requested, ["/models/stage/table-mountain.glb", "/models/stage/dome.glb"]);
   assert.ok(result.checked.includes("/models/stage/dome.glb"));
 });
 
@@ -101,22 +98,28 @@ test("GLB signature, manifest metadata, and range integrity fail closed", async 
     [{ src: "/models/stage/dome.glb", bytes: "4101264" }, ...actual.slice(1)],
   ]) {
     await assert.rejects(
-      checkProduction(fixture({
-        "/models/stage/manifest.json": [bad, "application/json"],
-      })),
+      checkProduction(
+        fixture({
+          "/models/stage/manifest.json": [bad, "application/json"],
+        }),
+      ),
       /Model manifest is invalid/,
     );
   }
   await assert.rejects(
-    checkProduction(fixture({
-      "/models/stage/dome.glb": ["bad!", "model/gltf-binary"],
-    })),
+    checkProduction(
+        fixture({
+          "/models/stage/dome.glb": ["bad!", "model/gltf-binary"],
+        }),
+      ),
     /invalid GLB signature/,
   );
   await assert.rejects(
-    checkProduction(fixture({
-      "/models/stage/dome.glb": ["glTF", "text/plain"],
-    })),
+    checkProduction(
+        fixture({
+          "/models/stage/dome.glb": ["glTF", "text/plain"],
+        }),
+      ),
     /unexpected content type/,
   );
   const original = fixture();

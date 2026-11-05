@@ -61,7 +61,7 @@ export default function SafeStageModel({
   onStatus?: (model: string, status: "ready" | "error") => void;
 }) {
   const onReady = useCallback(() => onStatus?.(name, "ready"), [name, onStatus]);
-  const onFailure = useCallback(() => onStatus?.(name, "error"), [model, onStatus]);
+  const onFailure = useCallback(() => onStatus?.(name, "error"), [name, onStatus]);
   return (
     <LandmarkAssetBoundary key={`${model}:${name}`} onFailure={onFailure}>
       <ProceduralStageModel

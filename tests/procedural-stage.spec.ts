@@ -6,11 +6,12 @@ const references = [
   ["pretoria", "Union Buildings"],
   ["durban", "Moses Mabhida"],
   ["johannesburg", "Nelson Mandela Bridge"],
+  ["johannesburg", "Ponte City"],
   ["kimberley", "The Big Hole"],
 ] as const;
 
 for (const [city, landmark] of references) {
-  test(`procedural landmark: ${landmark} in ${city}`, async ({ page }) => {
+  test(`procedural landmark: ${landmark} in ${city}`, async ({ page }, testInfo) => {
     test.slow();
     await page.emulateMedia({ reducedMotion: "reduce" });
     const errors: string[] = [];
@@ -26,6 +27,15 @@ for (const [city, landmark] of references) {
     const scene = page.locator(".atlas-ring-scene");
     await expect(scene).toHaveAttribute("data-active-model-status", "ready", { timeout: 30000 });
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(landmark);
+    if (process.env.CITYLIT_CAPTURE_VISUALS === "1" && landmark !== "Nelson Mandela Bridge") {
+      const filename = `citylit-real-${city}-${landmark.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.png`;
+      const capture = testInfo.outputPath(filename);
+      await scene.screenshot({ path: capture, animations: "disabled", timeout: 30000 });
+      await testInfo.attach(`Real CityLit scene: ${landmark}`, {
+        path: capture,
+        contentType: "image/png",
+      });
+    }
     await page.getByRole("button", { name: "Switch to night lighting" }).click();
     await expect(page.getByRole("button", { name: "Switch to daylight" })).toBeVisible();
     expect(glbRequests).toEqual([]);

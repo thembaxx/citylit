@@ -89,11 +89,8 @@ test("essential motion keeps exploring usable", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/johannesburg");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await page.getByRole("checkbox", { name: /Essential motion/ }).check();
+  // Reduced-motion preference is now respected directly; no settings modal.
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
-  await page.getByRole("button", { name: "Close", exact: true }).click();
-  await expect(page.locator(".modal-backdrop")).toHaveCount(0);
   await page.locator(".landmark-caption").press("ArrowRight");
   await expect(page.locator(".landmark-open h3")).toHaveText("Nelson Mandela Bridge");
 });
@@ -103,12 +100,10 @@ test("touch swipe changes landmarks; drag and pinch manipulate 3D without naviga
   test.skip(testInfo.project.name !== "mobile-chromium", "Touch-specific browser check");
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/cape-town");
   await expect(page.locator(".three-view")).toBeVisible();
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await page.getByRole("checkbox", { name: /Essential motion/ }).check();
-  await page.getByRole("button", { name: "Close", exact: true }).click();
-  await expect(page.getByRole("dialog", { name: "Experience settings" })).toHaveCount(0);
+  await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   const cdp = await page.context().newCDPSession(page);
   await page.locator(".landmark-caption").scrollIntoViewIfNeeded();
   const caption = (await page.locator(".landmark-caption").boundingBox())!;
@@ -199,7 +194,7 @@ test("fullscreen chapters fit compact and landscape phones, with category naviga
   }
 });
 
-test("themes persist, contrast is readable, and feedback is optional", async ({ page }) => {
+test("theme contrast, switching, and incidental feedback remain accessible", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
   await page.addInitScript(() => {
     const scope = window as typeof window & { audioStarts: number; vibrations: number };
@@ -265,33 +260,17 @@ test("themes persist, contrast is readable, and feedback is optional", async ({ 
   }
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "day");
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await page.getByRole("button", { name: "Enable sounds", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Mute sounds", exact: true })).toHaveAttribute(
-    "aria-pressed",
-    "true",
-  );
+  // The simplified guide exposes theme directly. The separate experience
+  // settings dialog and its sound/haptic toggles are no longer in the UI.
+  await expect(page.getByRole("button", { name: "Switch to night theme" })).toBeVisible();
+  await page.getByRole("button", { name: "Switch to night theme" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
+  await expect(page.getByRole("button", { name: "Switch to day theme" })).toBeVisible();
   expect(
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
-  ).toBe(1);
-  await page.getByRole("button", { name: /Touch feedback on/ }).click();
-  await expect(page.getByRole("button", { name: /Touch feedback off/ })).toHaveAttribute(
-    "aria-pressed",
-    "false",
-  );
-  const vibrations = await page.evaluate(
-    () => (window as typeof window & { vibrations: number }).vibrations,
-  );
-  await page.getByRole("button", { name: "Close", exact: true }).click();
-  await page.getByRole("button", { name: "Switch to night theme" }).click();
+  ).toBe(0);
   expect(
     await page.evaluate(() => (window as typeof window & { vibrations: number }).vibrations),
-  ).toBe(vibrations);
-  await page.reload();
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Enable sounds", exact: true })).toBeVisible();
-  expect(
-    await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);
 });
 

@@ -4,7 +4,7 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/?view=guide");
   const dock = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(dock).toBeVisible();
   await expect(dock.getByRole("link")).toHaveCount(4);
@@ -20,7 +20,7 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   );
   await expect(page.locator(".persistent-canvas")).toHaveCSS("z-index", "20");
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
-  await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
+  await expect(page.locator(".atlas-mascot-action")).toHaveText(/Khwezi has hopped!/);
   await choose.selectOption("1");
   await expect(page.locator(".atlas-beacon-card h2")).toHaveText("Cape Town");
   await expect(page.getByRole("link", { name: "Explore the city" })).toBeVisible();
@@ -40,7 +40,7 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
 for (const width of [320, 360, 390, 768, 1440]) {
   test(`brand and guide fit ${width}px screens`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
-    await page.goto("/");
+    await page.goto("/?view=guide");
     await expect(page.locator(".reference-guide h1")).toBeVisible();
     const overflow = await page
       .locator(".reference-guide")
@@ -57,11 +57,11 @@ for (const width of [320, 360, 390, 768, 1440]) {
 
 test("reduced motion leaves the guide logo and mascot controllable", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
+  await page.goto("/?view=guide");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await expect(page.locator(".atlas-wordmark .citylit-logo-symbol").first()).toBeVisible();
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
-  await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
+  await expect(page.locator(".atlas-mascot-action")).toHaveText(/Khwezi has hopped!/);
 });
 
 test("new icon and logo are available to installed users", async ({ request }) => {

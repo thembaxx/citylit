@@ -54,7 +54,8 @@ test("Moses Mabhida has an oval stadium roof under its signature arch", () => {
       if (child instanceof THREE.Mesh && child.geometry instanceof THREE.LatheGeometry)
         bowled.push(child);
     });
-    expect(bowled.length).toBeGreaterThanOrEqual(2);
+    // The folded PTFE canopy is now a BufferGeometry, not a second LatheGeometry.
+    expect(bowled.length).toBeGreaterThanOrEqual(1);
     const outer = bowled[0];
     expect(outer.scale.x / outer.scale.z).toBeGreaterThan(1.3);
     const roof = scene.getObjectByName("moses-mabhida-radial-roof");

@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef } from "react";
 import {
   DPR_CAPS,
   RendererQualityPolicy,
+  isSoftwareRenderer,
   type RendererDiagnostics,
   type RendererTier,
 } from "../lib/renderer-quality";
@@ -36,12 +37,25 @@ export default function RendererTelemetry({
   onContextState: (lost: boolean) => void;
 }) {
   const { gl, setDpr, invalidate } = useThree();
-  const policy = useMemo(() => new RendererQualityPolicy(mobile, saveDataEnabled()), [mobile]);
+  const software = useMemo(() => {
+    const context = gl.getContext();
+    const extension = context.getExtension("WEBGL_debug_renderer_info");
+    const renderer = context.getParameter(
+      extension ? extension.UNMASKED_RENDERER_WEBGL : context.RENDERER,
+    );
+    return isSoftwareRenderer(String(renderer));
+  }, [gl]);
+  const policy = useMemo(
+    () => new RendererQualityPolicy(mobile, saveDataEnabled() || software),
+    [mobile, software],
+  );
   const frame = useRef<FrameWindow>({ previous: 0, frames: 0, totalMs: 0, slow: 0 });
 
   useEffect(() => {
     const canvas = gl.domElement;
     const root = canvas.closest<HTMLElement>(".canvas-root");
+    const previousShadows = gl.shadowMap.enabled;
+    if (software) gl.shadowMap.enabled = false;
     const cap = Math.min(window.devicePixelRatio || 1, DPR_CAPS[policy.tier]);
     setDpr(cap);
     if (root) {
@@ -91,8 +105,9 @@ export default function RendererTelemetry({
         delete root.dataset.webglStatus;
       }
       delete window.__citylitRendererDiagnostics;
+      gl.shadowMap.enabled = previousShadows;
     };
-  }, [gl, policy, setDpr, invalidate, onContextState]);
+  }, [gl, policy, software, setDpr, invalidate, onContextState]);
 
   useFrame(() => {
     const current = frame.current;

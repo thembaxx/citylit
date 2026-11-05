@@ -32,9 +32,10 @@ were not stored in GitHub, so they are review evidence, not repository baselines
 
 ### PR #93 after-change screenshot capture
 
-On each pull request Chromium shard, Playwright opens the real Next.js
-production build, selects the actual landmark by name, checks the model status,
-and writes a PNG of `.atlas-ring-scene`. Files are uploaded as
+On each pull request Chromium shard, the existing procedural-landmark
+regression opens the real Next.js production build, selects the actual
+landmark by name, checks the model status, and writes a PNG of
+`.atlas-ring-scene` without loading a second copy of the route. Files are uploaded as
 `landmark-screenshots-<project>-<shard>-<attempt>` GitHub Actions artifacts.
 
 The files themselves use `citylit-real-<city>-<landmark>.png`. The review
@@ -45,8 +46,8 @@ still needed to evaluate aesthetics; source-photo pixel-diffs are inappropriate.
 Capture manually:
 
 ```sh
-CITYLIT_CAPTURE_VISUALS=1 pnpm exec playwright test tests/landmark-visual-capture.spec.ts --project=desktop-chromium
-CITYLIT_CAPTURE_VISUALS=1 pnpm exec playwright test tests/landmark-visual-capture.spec.ts --project=mobile-chromium
+CITYLIT_CAPTURE_VISUALS=1 pnpm exec playwright test tests/procedural-stage.spec.ts --grep "procedural landmark" --project=desktop-chromium
+CITYLIT_CAPTURE_VISUALS=1 pnpm exec playwright test tests/procedural-stage.spec.ts --grep "procedural landmark" --project=mobile-chromium
 ```
 
 ## Mobile performance / compatibility gates

@@ -954,3 +954,22 @@ select:focus-visible {
     box-shadow: 0 12px 32px rgb(8 13 18 / 9%);
   }
 }
+
+/* The beacon card and mascot remain tappable above the interactive home map. */
+.reference-guide .atlas-hero-bottom {
+  z-index: 8;
+}
+.reference-guide .atlas-beacon-card {
+  position: relative;
+  z-index: 2;
+}
+.reference-guide .atlas-beacon-mascot {
+  z-index: 3;
+  pointer-events: auto;
+}
+.reference-guide .atlas-mascot-action {
+  position: relative;
+  z-index: 4;
+  min-height: 44px;
+  pointer-events: auto;
+}

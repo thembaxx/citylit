@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import * as THREE from "three";
 import {
   createProceduralLandmark,
   disposeProceduralLandmark,
@@ -28,7 +29,7 @@ test("twelve atlas city models produce real geometry and animation controllers",
     const scene = createProceduralLandmark(name);
     let meshes = 0;
     scene.traverse((child) => {
-      if (child.type === "Mesh" || child.type === "InstancedMesh") meshes++;
+      if (child instanceof THREE.Mesh) meshes++;
     });
     expect(meshes, name).toBeGreaterThan(2);
     expect(scene.userData.placeName).toBe(name);
@@ -44,16 +45,15 @@ test("five atlas categories are distinct, animated and dispose cleanly", () => {
     signatures.add(scene.name);
     let geometryCount = 0;
     scene.traverse((child) => {
-      if ("geometry" in child && child.geometry) geometryCount++;
+      if (child instanceof THREE.Mesh && child.geometry) geometryCount++;
     });
     expect(geometryCount, scene.name).toBeGreaterThan(10);
     expect(() => scene.userData.tick?.(2.5)).not.toThrow();
     if (index === 3) {
       let movingWater = false;
       scene.traverse((child) => {
-        const surface = "material" in child && child.material;
-        if (surface && !Array.isArray(surface) && surface.isShaderMaterial) {
-          movingWater = surface.uniforms.uTime.value === 2.5;
+        if (child instanceof THREE.Mesh && child.material instanceof THREE.ShaderMaterial) {
+          movingWater = child.material.uniforms.uTime.value === 2.5;
         }
       });
       expect(movingWater).toBe(true);

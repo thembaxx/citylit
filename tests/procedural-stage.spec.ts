@@ -17,7 +17,9 @@ for (const [city, landmark] of references) {
     page.on("pageerror", (error) => errors.push(error.message));
     const glbRequests: string[] = [];
     page.on("request", (request) => {
-      if (/\\/models\\/stage\\/.*\\.glb/.test(request.url())) glbRequests.push(request.url());
+      if (request.url().includes("/models/stage/") && request.url().endsWith(".glb")) {
+        glbRequests.push(request.url());
+      }
     });
     await page.goto(`/${city}/landmarks`);
     await page.getByRole("button", { name: landmark, exact: true }).click();

@@ -2167,6 +2167,8 @@
 }
 .reference-guide > main > .atlas-breadcrumb {
   padding-top: 100px;
+}
+.reference-guide > main > .atlas-city-breadcrumb {
   margin-bottom: -110px;
 }
 .reference-guide .atlas-city-facts {

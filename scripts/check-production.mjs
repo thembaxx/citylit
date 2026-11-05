@@ -38,6 +38,43 @@ export async function checkProduction(request = fetch) {
     checked.push(path);
     return new TextDecoder().decode(Buffer.concat(chunks));
   }
+  // Read only the GLB signature, not the entire multi-megabyte model.
+  // The 200 fallback supports CDNs that do not honor Range.
+  async function checkGlb(path) {
+    const url = new URL(path, origin);
+    if (url.origin !== origin || !/^\/models\/stage\/[a-z-]+\.glb$/.test(url.pathname))
+      throw new Error("Model asset escaped the allowed path.");
+    const response = await request(url, {
+      redirect: "manual",
+      cache: "no-store",
+      signal: AbortSignal.timeout(15000),
+      headers: { "user-agent": "Citylit-uptime/1.0", range: "bytes=0-3" },
+    });
+    if (response.status !== 200 && response.status !== 206)
+      throw new Error(path + ": expected 200 or 206, got " + response.status);
+    if (!response.headers.get("content-type")?.includes("model/gltf-binary"))
+      throw new Error(path + ": unexpected content type");
+    if (response.status === 206 && !/^bytes 0-3\/\d+$/.test(response.headers.get("content-range") || ""))
+      throw new Error(path + ": invalid binary range response");
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error(path + ": empty response");
+    const chunks = [];
+    let size = 0;
+    try {
+      while (size < 4) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const needed = 4 - size;
+        chunks.push(value.subarray(0, needed));
+        size += value.length;
+      }
+    } finally {
+      await reader.cancel();
+    }
+    if (Buffer.concat(chunks).subarray(0, 4).toString("ascii") !== "glTF")
+      throw new Error(path + ": invalid GLB signature");
+    checked.push(path);
+  }
   const health = JSON.parse(await get("/api/health", "application/json"));
   if (health.status !== "ok" || !/^[a-f0-9]{40}$/.test(health.revision || "")) {
     throw new Error("Production health or build revision is invalid.");
@@ -66,12 +103,20 @@ export async function checkProduction(request = fetch) {
     !Array.isArray(models) ||
     models.length < 15 ||
     !models.every(
-      (model) => /^\/models\/stage\/[a-z-]+\.glb$/.test(model.src) && model.bytes < 150 * 1024,
+      (model) =>
+        model &&
+        typeof model.src === "string" &&
+        /^\/models\/stage\/[a-z-]+\.glb$/.test(model.src) &&
+        Number.isSafeInteger(model.bytes) &&
+        model.bytes >= 12,
     )
   )
     throw new Error("Model manifest is invalid.");
-  if (!(await get(models[0].src, "model/gltf-binary")).startsWith("glTF"))
-    throw new Error("Model asset is invalid.");
+  // Check the first asset and the largest listed model, without imposing an
+  // obsolete 150 KB geometry budget or downloading whole binary models.
+  await checkGlb(models[0].src);
+  const largest = models.reduce((a, b) => (b.bytes > a.bytes ? b : a));
+  if (largest.src !== models[0].src) await checkGlb(largest.src);
   if (!(await get("/draco/draco_decoder.wasm", "application/wasm")).startsWith("\0asm"))
     throw new Error("Model decoder is invalid.");
   const manifest = JSON.parse(await get("/manifest.webmanifest", "application/manifest+json"));

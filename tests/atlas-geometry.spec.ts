@@ -1,9 +1,6 @@
 import { expect, test } from "@playwright/test";
 import * as THREE from "three";
-import {
-  createProceduralLandmark,
-  disposeProceduralLandmark,
-} from "../lib/procedural-landmarks";
+import { createProceduralLandmark, disposeProceduralLandmark } from "../lib/procedural-landmarks";
 import { createProceduralCategory } from "../lib/procedural-atlas-categories";
 
 // One landmark from each city's catalogue; the interactive atlas now resolves

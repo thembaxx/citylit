@@ -4,10 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { createProceduralCategory } from "../lib/procedural-atlas-categories";
-import {
-  createProceduralLandmark,
-  disposeProceduralLandmark,
-} from "../lib/procedural-landmarks";
+import { createProceduralLandmark, disposeProceduralLandmark } from "../lib/procedural-landmarks";
 
 /**
  * Share the same high-detail Three.js assets between the atlas and the city

@@ -89,11 +89,8 @@ test("essential motion keeps exploring usable", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/johannesburg");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await page.getByRole("checkbox", { name: /Essential motion/ }).check();
+  // Reduced-motion preference is now respected directly; no settings modal.
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
-  await page.getByRole("button", { name: "Close", exact: true }).click();
-  await expect(page.locator(".modal-backdrop")).toHaveCount(0);
   await page.locator(".landmark-caption").press("ArrowRight");
   await expect(page.locator(".landmark-open h3")).toHaveText("Nelson Mandela Bridge");
 });
@@ -103,12 +100,10 @@ test("touch swipe changes landmarks; drag and pinch manipulate 3D without naviga
   test.skip(testInfo.project.name !== "mobile-chromium", "Touch-specific browser check");
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/cape-town");
   await expect(page.locator(".three-view")).toBeVisible();
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-  await page.getByRole("checkbox", { name: /Essential motion/ }).check();
-  await page.getByRole("button", { name: "Close", exact: true }).click();
-  await expect(page.getByRole("dialog", { name: "Experience settings" })).toHaveCount(0);
+  await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   const cdp = await page.context().newCDPSession(page);
   await page.locator(".landmark-caption").scrollIntoViewIfNeeded();
   const caption = (await page.locator(".landmark-caption").boundingBox())!;

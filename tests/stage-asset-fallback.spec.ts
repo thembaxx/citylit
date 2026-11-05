@@ -1,23 +1,26 @@
 import { expect, test } from "@playwright/test";
 
-test("a failed Blender landmark asset does not disable the ring or researched guide", async ({
+test("procedural landmarks remain interactive when legacy GLB requests are unavailable", async ({
   page,
 }) => {
-  await page.route("**/models/stage/table-mountain.glb", (route) =>
-    route.fulfill({ status: 503, contentType: "text/plain", body: "Temporarily unavailable" }),
-  );
-  const failedModel = page.waitForResponse(
-    (response) =>
-      response.url().includes("/models/stage/table-mountain.glb") && response.status() === 503,
-  );
+  let legacyRequests = 0;
+  await page.route("**/models/stage/*.glb", (route) => {
+    legacyRequests += 1;
+    return route.fulfill({ status: 503, contentType: "text/plain", body: "Offline" });
+  });
   await page.goto("/cape-town/landmarks");
-  await failedModel;
+  await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
+    "data-active-model-status",
+    "ready",
+    { timeout: 30000 },
+  );
+  expect(legacyRequests).toBe(0);
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
   await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
   await expect(page.locator(".atlas-ring-scene")).toBeVisible();
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
     "data-active-model-status",
-    "error",
+    "ready",
   );
   await page.getByRole("button", { name: "Next discovery" }).click();
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Bo-Kaap");

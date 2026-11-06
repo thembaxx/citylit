@@ -62,7 +62,7 @@
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.187.0",
     "draco3d": "1.5.9",
-    "mapshaper": "^0.7.98",
+    "mapshaper": "^0.7.101",
     "oxfmt": "^0.75.0",
     "oxlint": "^1.90.0",
     "tailwindcss": "^4.3.3",

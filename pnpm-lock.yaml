@@ -245,8 +245,8 @@ importers:
         specifier: 1.5.9
         version: 1.5.9
       mapshaper:
-        specifier: ^0.7.98
-        version: 0.7.98(@types/geojson@7946.0.16)(@types/node@26.6.5)
+        specifier: ^0.7.101
+        version: 0.7.101(@types/geojson@7946.0.16)(@types/node@26.6.5)
       oxfmt:
         specifier: ^0.75.0
         version: 0.75.0
@@ -1922,8 +1922,8 @@ packages:
     resolution: {integrity: sha512-gApO66EMtoDZuio680RUBvskR7ahFd/NNhLN4tBAs+Y7FeT4gQV8zVFgYVMRmFxQznOEzecW19w6xOd9XjZjiA==}
     engines: {node: '>=16.14.0', npm: '>=8.1.0'}
 
-  mapshaper@0.7.98:
-    resolution: {integrity: sha512-uTYMKQtprwogg3xh14xohZEntsvoRNZyI4Dx3axZctrzbAsXtDT3d2S9fFaAQzYkW8zWFGHlx2JYat0Pp9etSw==}
+  mapshaper@0.7.101:
+    resolution: {integrity: sha512-h3uNgkr9Zu5fGBSn7+14kY8KhZjh387zoXLLoX1N74vow6v/l/zFwFEzdt/xNeHp4rlIhvSgcKEN12u/ORro5Q==}
     engines: {node: '>=20.11.0'}
     hasBin: true
 
@@ -3917,7 +3917,7 @@ snapshots:
       quickselect: 3.0.0
       tinyqueue: 3.0.0
 
-  mapshaper@0.7.98(@types/geojson@7946.0.16)(@types/node@26.6.5):
+  mapshaper@0.7.101(@types/geojson@7946.0.16)(@types/node@26.6.5):
     dependencies:
       '@bokuweb/zstd-wasm': 0.0.27
       '@ngageoint/geopackage': 4.2.10(@types/node@26.6.5)

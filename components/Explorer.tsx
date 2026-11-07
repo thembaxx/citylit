@@ -156,6 +156,7 @@ export default function Explorer() {
   const [showSaved, setShowSaved] = useState(false),
     [help, setHelp] = useState(false),
     [showSettings, setShowSettings] = useState(false),
+    [settingsTab, setSettingsTab] = useState<"appearance" | "map" | "about">("appearance"),
     [spot, setSpot] = useState<number | null>(null),
     [bloom, setBloom] = useState(false);
   useEffect(() => {
@@ -461,7 +462,7 @@ export default function Explorer() {
             className="icon-button"
             aria-label="Experience settings"
             aria-haspopup="dialog"
-            onClick={() => setShowSettings(true)}
+            onClick={() => { setSettingsTab("appearance"); setShowSettings(true); }}
           >
             <GearSix size={18} weight={showSettings ? "fill" : "regular"} />
           </button>
@@ -916,95 +917,90 @@ export default function Explorer() {
               >
                 <X size={18} weight="bold" />
               </button>
-              <span className="tiny-label">YOUR OWN LITTLE ADVENTURE</span>
+              <span className="tiny-label">{showSettings ? "PREFERENCES" : help ? "A LITTLE HELP" : "YOUR OWN LITTLE ADVENTURE"}</span>
               <h2>
-                {showSettings
-                  ? "Your kind of magic."
-                  : help
-                    ? "Follow a little curiosity."
-                    : "Your discoveries."}
+                {showSettings ? "Settings" : help ? "Follow a little curiosity." : "Your discoveries."}
               </h2>
               {showSettings ? (
-                <div className="experience-settings">
-                  <p>A little delight, on your terms.</p>
-                  <PwaPanel />
-                  <button
-                    className="preference-button sound-toggle"
-                    aria-label={sound ? "Mute sounds" : "Enable sounds"}
-                    aria-pressed={sound}
-                    onClick={toggleSound}
-                  >
-                    {sound ? (
-                      <SpeakerHigh size={18} weight="fill" />
-                    ) : (
-                      <SpeakerSlash size={18} weight="regular" />
-                    )}
-                    <span>
-                      Quiet sound effects
-                      <small>
-                        {sound ? "On · two little notes" : "Off · always quiet on reload"}
-                      </small>
-                    </span>
-                  </button>
-                  <button
-                    className="preference-button"
-                    aria-pressed={haptics}
-                    onClick={toggleHaptics}
-                  >
-                    <Vibrate size={18} weight={haptics ? "fill" : "regular"} />
-                    <span>
-                      Touch feedback {haptics ? "on" : "off"}
-                      <small>Where your device supports vibration</small>
-                    </span>
-                  </button>
-                  <label className="setting-row">
-                    <input
-                      type="checkbox"
-                      checked={discovery.essential}
-                      onChange={(e) => updateDiscovery({ essential: e.target.checked })}
-                    />
-                    Essential motion: keep transitions, stop continuous movement
-                  </label>
-                  {reduced && <p>Your device’s reduced-motion preference is respected.</p>}
-                  <div className="settings-play">
-                    <p className="tiny-label">How the toys work</p>
-                    <p>
-                      Drag a toy to turn it. Pinch or scroll to lean in. A quick swipe finds the
-                      next one.
-                    </p>
-                    <p>
-                      Tap the toy, or its name, to open that place. Explore city is the only door
-                      into the chapters.
-                    </p>
-                    <p>Hold a toy a moment longer. Some of them answer.</p>
-                    <p>
-                      Map geometry: geoBoundaries / OCHA / MDB, adapted,{" "}
-                      <a
-                        href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
-                        target="_blank"
-                        rel="noreferrer"
+                <div className="experience-settings reference-settings">
+                  <div className="reference-settings-tabs" role="tablist" aria-label="Settings sections">
+                    {(["appearance", "map", "about"] as const).map((tab) => (
+                      <button
+                        key={tab}
+                        type="button"
+                        role="tab"
+                        aria-selected={settingsTab === tab}
+                        onClick={() => setSettingsTab(tab)}
                       >
-                        CC BY 3.0 IGO
-                      </a>
-                      . Citylit toys are original illustrations.
-                    </p>
+                        {tab === "appearance" ? "Appearance" : tab === "map" ? "Map" : "About"}
+                      </button>
+                    ))}
                   </div>
-                  <button
-                    className="pill-button"
-                    onClick={() => {
-                      setShowSettings(false);
-                      setHelp(true);
-                    }}
-                  >
-                    How to explore <ArrowUpRight size={14} />
-                  </button>
-                  <Link className="brand-link" href="/brand">
-                    Meet Khwezi &amp; the Citylit story <ArrowUpRight size={14} />
-                  </Link>
-                  <div className="settings-information">
-                    <Link href="/about">About &amp; sources</Link>
-                    <Link href="/privacy">Privacy &amp; data</Link>
-                  </div>
+                  {settingsTab === "appearance" ? (
+                    <>
+                      <p className="reference-settings-label">Theme</p>
+                      <div className="reference-theme-options">
+                        <button type="button" aria-pressed={night} onClick={() => { if (!night) switchTheme(); }}>
+                          <Moon size={21} /> <span>Dark</span>
+                        </button>
+                        <button type="button" aria-pressed={!night} onClick={() => { if (night) switchTheme(); }}>
+                          <Sun size={21} /> <span>Light</span>
+                        </button>
+                      </div>
+                      <label className="reference-setting-toggle">
+                        <span><SpeakerHigh size={18} /> Sound effects</span>
+                        <input type="checkbox" checked={sound} onChange={toggleSound} />
+                      </label>
+                      <label className="reference-setting-toggle">
+                        <span><Vibrate size={18} /> Touch feedback</span>
+                        <input type="checkbox" checked={haptics} onChange={toggleHaptics} />
+                      </label>
+                      <label className="reference-setting-toggle">
+                        <span><Moon size={18} /> Reduce continuous motion</span>
+                        <input
+                          type="checkbox"
+                          checked={discovery.essential}
+                          onChange={(e) => updateDiscovery({ essential: e.target.checked })}
+                        />
+                      </label>
+                      {reduced && <p>Your device’s reduced-motion preference is respected.</p>}
+                      <PwaPanel />
+                    </>
+                  ) : settingsTab === "map" ? (
+                    <>
+                      <p className="reference-settings-label">Explore the atlas</p>
+                      <p>Choose a city to open its interactive landmark scene, or browse every destination.</p>
+                      <div className="reference-settings-city-list">
+                        {cities.slice(0, 8).map((item) => (
+                          <Link key={item.slug} href={`/${item.slug}`}>
+                            <MapPin size={16} />
+                            <span>{item.name}<small>{item.province}</small></span>
+                            <ArrowUpRight size={15} />
+                          </Link>
+                        ))}
+                      </div>
+                      <Link className="pill-button" href="/destinations">Browse all cities <ArrowUpRight size={14} /></Link>
+                    </>
+                  ) : (
+                    <>
+                      <p>Citylit is a playful guide to South African places, stories and small discoveries.</p>
+                      <div className="settings-play">
+                        <p className="tiny-label">Map and artwork credits</p>
+                        <p>
+                          Map geometry: geoBoundaries / OCHA / MDB, adapted,{" "}
+                          <a href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/" target="_blank" rel="noreferrer">
+                            CC BY 3.0 IGO
+                          </a>
+                          . Citylit toys are original illustrations.
+                        </p>
+                      </div>
+                      <Link className="brand-link" href="/brand">Meet Khwezi &amp; the Citylit story <ArrowUpRight size={14} /></Link>
+                      <div className="settings-information">
+                        <Link href="/about">About &amp; sources</Link>
+                        <Link href="/privacy">Privacy &amp; data</Link>
+                      </div>
+                    </>
+                  )}
                 </div>
               ) : help ? (
                 <KhweziMoment pose="gesture" />

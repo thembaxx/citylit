@@ -55,3 +55,31 @@ test("landmark inspection resolves the inner subject beneath its display wrapper
   assert.ok(tower.position.distanceTo(new THREE.Vector3(0, 2, 0)) < 1e-8);
   assert.ok(podium.position.distanceTo(new THREE.Vector3(1, 0, 0)) < 1e-8);
 });
+
+test("exploded directions remain outward when the landmark assembly is rotated", () => {
+  const display = new THREE.Group();
+  display.rotation.y = Math.PI / 2;
+  const subject = new THREE.Group();
+  const first = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial());
+  const second = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial());
+  first.position.set(-1, 0, 0);
+  second.position.set(1, 0, 0);
+  subject.add(first, second);
+  display.add(subject);
+
+  display.updateMatrixWorld(true);
+  const before = new THREE.Vector3();
+  first.getWorldPosition(before);
+  const centre = new THREE.Vector3();
+  new THREE.Box3().setFromObject(subject).getCenter(centre);
+  const outward = before.clone().sub(centre).normalize();
+
+  prepareLandmarkExplodedView(display);
+  setLandmarkExplodedView(display, 1);
+
+  const after = new THREE.Vector3();
+  first.getWorldPosition(after);
+  const displacement = after.sub(before);
+  assert.ok(displacement.dot(outward) > 0);
+  assert.ok(new THREE.Vector3().crossVectors(displacement, outward).length() < 1e-8);
+});

@@ -28,7 +28,8 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="night"]) :is(.reference-guide, .game-screen, .field-guide, .category-page) {
+  :root:not([data-theme="night"])
+    :is(.reference-guide, .game-screen, .field-guide, .category-page) {
     --citylit-purple: #7046c8;
     --citylit-purple-strong: #6035b7;
     --citylit-amber: #a95012;
@@ -38,8 +39,16 @@
     color-scheme: light;
   }
 }
-.reference-guide :is(.atlas-nav, .atlas-native-dock, .atlas-footer,
-  .atlas-section, .atlas-chapter-nav, .atlas-city-hero, .atlas-breadcrumb) {
+.reference-guide
+  :is(
+    .atlas-nav,
+    .atlas-native-dock,
+    .atlas-footer,
+    .atlas-section,
+    .atlas-chapter-nav,
+    .atlas-city-hero,
+    .atlas-breadcrumb
+  ) {
   border-color: var(--citylit-border);
 }
 .reference-guide .atlas-nav {
@@ -51,16 +60,29 @@
   gap: clamp(12px, 2vw, 28px);
 }
 .reference-guide .atlas-nav nav > a {
-  transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 .reference-guide .atlas-nav .atlas-day-link {
   border-radius: 999px;
   background: var(--citylit-panel);
 }
-.reference-guide :is(.atlas-button, .atlas-text-link, .atlas-chapter-nav a,
-  .atlas-place-filters button, .atlas-directory-tools select) {
-  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease,
-    transform 160ms ease, box-shadow 160ms ease;
+.reference-guide
+  :is(
+    .atlas-button,
+    .atlas-text-link,
+    .atlas-chapter-nav a,
+    .atlas-place-filters button,
+    .atlas-directory-tools select
+  ) {
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
 }
 .reference-guide .atlas-button {
   min-height: 48px;
@@ -89,13 +111,22 @@
   border-color: var(--citylit-focus);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--citylit-purple) 16%, transparent);
 }
-.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-plan-stop,
-  .atlas-empty, .atlas-beacon-card) {
+.reference-guide
+  :is(
+    .atlas-city-card-link,
+    .atlas-place-card-link,
+    .atlas-plan-stop,
+    .atlas-empty,
+    .atlas-beacon-card
+  ) {
   border: 1px solid var(--citylit-border);
   border-radius: var(--citylit-radius-md);
   background: var(--citylit-panel);
   overflow: hidden;
-  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link) {
   height: calc(100% - 32px);
@@ -206,7 +237,9 @@
 .reference-guide .atlas-native-dock a {
   min-height: 58px;
   border-radius: 15px;
-  transition: color 160ms ease, background 160ms ease;
+  transition:
+    color 160ms ease,
+    background 160ms ease;
 }
 .reference-guide .atlas-native-dock a[aria-current="page"] {
   color: var(--citylit-purple);
@@ -229,7 +262,10 @@
 .game-screen :is(.pill-button, .preference-button, .navigation-options button) {
   min-height: 44px;
   border-radius: 999px;
-  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
 }
 .game-screen .detail-scroll,
 .game-screen .modal,
@@ -253,8 +289,16 @@
 .field-guide :is(.hub-tabs, .passport-settings) {
   border-color: var(--citylit-border);
 }
-.field-guide :is(.hub-tabs button, .day-actions button, .adventure-card-actions button,
-  .collection-card button, .adventure-card > button, .shared-trip button, .pill-button) {
+.field-guide
+  :is(
+    .hub-tabs button,
+    .day-actions button,
+    .adventure-card-actions button,
+    .collection-card button,
+    .adventure-card > button,
+    .shared-trip button,
+    .pill-button
+  ) {
   min-height: 44px;
   border-radius: 999px;
 }
@@ -273,7 +317,10 @@
   min-height: 48px;
 }
 .category-page .category-place-card {
-  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
 }
 .category-page .category-place-card:focus-within {
   border-color: var(--citylit-focus);
@@ -301,8 +348,7 @@
 }
 @media (max-width: 767px) {
   .reference-guide .atlas-nav {
-    padding-inline: max(16px, env(safe-area-inset-left))
-      max(16px, env(safe-area-inset-right));
+    padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
   }
   .reference-guide .atlas-nav nav {
     gap: 10px;

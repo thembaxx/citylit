@@ -466,9 +466,9 @@ export default function AdventureHub() {
                     </ol>
                     <div className="collection-card-actions">
                       <button
-                        onClick={() => {
+                        onClick={async () => {
                           let rejected = false;
-                          void update((previous) => {
+                          const saved = await update((previous) => {
                             const first = places.find((place) => place.id === previous.itinerary[0]);
                             if (
                               (first && first.city !== city) ||
@@ -487,22 +487,16 @@ export default function AdventureHub() {
                             return { itinerary };
                           });
                           if (rejected) {
-                            setMessage(
-                              "Clear the current day or remove stops before adding this collection.",
-                            );
+                            setMessage("Clear the current day or remove stops before adding this collection.");
                             setTab("day");
                             return;
                           }
-                          }).then((saved) => {
-                            if (!saved) {
-                              setMessage(
-                                "Your day could not be updated. Check its destination, stop limit and browser storage.",
-                              );
-                              return;
-                            }
-                            setMessage("Collection added to your day.");
-                            setTab("day");
-                          });
+                          if (!saved) {
+                            setMessage("This browser could not save your day. Allow site storage and try again.");
+                            return;
+                          }
+                          setMessage("Collection added to your day.");
+                          setTab("day");
                         }}
                       >
                         Make this my day <ArrowUpRight size={15} />

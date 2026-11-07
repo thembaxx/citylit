@@ -374,3 +374,155 @@
     pointer-events: auto;
   }
 }
+
+
+/* Compact inspector refresh: one predictable control surface, no stacked mini-cards. */
+.reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open {
+  box-sizing: border-box;
+  width: min(286px, calc(100vw - 32px));
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 97%, #090a0e);
+  box-shadow: 0 14px 34px rgb(0 0 0 / 24%);
+}
+
+.reference-stage-guide .atlas-inspector-toggle {
+  border-color: color-mix(in srgb, var(--line) 88%, transparent);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.reference-stage-guide .atlas-inspector-actions {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  width: 100%;
+  gap: 3px;
+  padding: 3px;
+  border: 0;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--bg) 52%, transparent);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.reference-stage-guide .atlas-inspector-actions button {
+  min-width: 0;
+  min-height: 42px;
+  border-radius: 10px;
+}
+
+.reference-stage-guide .atlas-inspector-features {
+  box-sizing: border-box;
+  width: 100%;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.reference-stage-guide .atlas-inspector-features span {
+  padding: 0 2px 5px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.reference-stage-guide .atlas-inspector-features button {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  font-size: 12px;
+  font-weight: 550;
+}
+
+.reference-stage-guide .atlas-inspector-features button[aria-pressed="true"] {
+  color: #17130e;
+  border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+  background: var(--guide-glow);
+}
+
+.reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"] {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"] span {
+  grid-column: 1 / -1;
+}
+
+.reference-stage-guide .atlas-inspector-features[aria-label="Surroundings visibility"] button {
+  width: 100%;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.reference-stage-guide .atlas-inspector-note {
+  margin: 0;
+  max-width: none;
+  text-align: left;
+  font-size: 11px;
+}
+
+@media (max-width: 767px) {
+  .reference-stage-guide .atlas-ring-scene .atlas-inspector-toolbar {
+    top: 145px;
+    right: max(12px, env(safe-area-inset-right));
+  }
+
+  .reference-stage-guide .atlas-ring-scene .atlas-inspector-panel[popover]:popover-open {
+    width: min(286px, calc(100vw - 32px));
+    max-height: min(56dvh, calc(100dvh - 112px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+    padding: 12px;
+    gap: 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .reference-stage-guide .atlas-inspector-actions {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .reference-stage-guide .atlas-inspector-features button {
+    min-width: 0;
+    min-height: 40px;
+    padding-inline: 5px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .reference-stage-guide .atlas-inspector-note {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0 2px;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    color: var(--muted);
+  }
+
+  .reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-panel[popover]:popover-open {
+    max-height: min(56dvh, calc(100dvh - 112px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reference-stage-guide .atlas-inspector-panel[popover]:popover-open {
+    animation: none;
+  }
+}

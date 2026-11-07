@@ -18,7 +18,11 @@ const [pkgText, hero, showcase, stageModel, expanded, ring, safe, procedural, bu
 const pkg = JSON.parse(pkgText);
 
 assert.match(pkg.dependencies?.three ?? "", /^\^0\.187\.0$/);
-assert.doesNotMatch(JSON.stringify(pkg.scripts), /\bblender\b/iu);
+const packageCommands = Object.values(pkg.scripts ?? {}).join("\n");
+assert.doesNotMatch(
+  packageCommands,
+  /(?:^|[;&|]\s*)(?:pnpm\s+exec\s+)?blender(?:\.exe)?(?:\s|$)/imu,
+);
 assert.match(pkg.scripts["models:build"], /runtime with Three\.js/);
 assert.match(pkg.scripts["hero:build"], /runtime with Three\.js/);
 

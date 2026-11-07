@@ -459,14 +459,39 @@ export default function AdventureHub() {
                     <div className="collection-card-actions">
                       <button
                         onClick={() => {
-                          if (trip.length && trip[0].city !== city) {
-                            setMessage("Clear the current day before adding a different city.");
+                          let rejected = false;
+                          const saved = update((previous) => {
+                            const first = places.find((place) => place.id === previous.itinerary[0]);
+                            if (
+                              (first && first.city !== city) ||
+                              c.placeIds.some(
+                                (id) => places.find((place) => place.id === id)?.city !== city,
+                              )
+                            ) {
+                              rejected = true;
+                              return {};
+                            }
+                            const itinerary = Array.from(new Set([...previous.itinerary, ...c.placeIds]));
+                            if (itinerary.length > MAX_TRIP_STOPS) {
+                              rejected = true;
+                              return {};
+                            }
+                            return { itinerary };
+                          });
+                          if (rejected) {
+                            setMessage(
+                              "Clear the current day or remove stops before adding this collection.",
+                            );
                             setTab("day");
                             return;
                           }
-                          update({
-                            itinerary: Array.from(new Set([...state.itinerary, ...c.placeIds])),
-                          });
+                          if (!saved) {
+                            setMessage(
+                              "This browser could not save your day. Allow site storage and try again.",
+                            );
+                            return;
+                          }
+                          setMessage("Collection added to your day.");
                           setTab("day");
                         }}
                       >

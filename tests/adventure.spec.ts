@@ -1,6 +1,16 @@
 import { test, expect } from "./legacy-fixture";
 import { cities, places } from "../lib/data";
 import { suggestions, orderItinerary, activeEvents, distanceKm } from "../lib/adventure";
+import { normalizeDiscovery } from "../lib/client-data";
+
+test("discovery normalization keeps an itinerary within one city", () => {
+  const johannesburg = places.filter((place) => place.city === "johannesburg");
+  const capeTown = places.find((place) => place.city === "cape-town")!;
+  const normalized = normalizeDiscovery({
+    itinerary: [johannesburg[0].id, capeTown.id, johannesburg[1].id],
+  });
+  expect(normalized.itinerary).toEqual([johannesburg[0].id, johannesburg[1].id]);
+});
 
 test("catalog has all provinces and planning never treats unknown admission as free", () => {
   expect(new Set(cities.map((c) => c.provinceCode)).size).toBe(9);

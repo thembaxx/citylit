@@ -83,7 +83,7 @@ The hook exposes the current normalized snapshot and a synchronous `update(chang
 
 ### Reachable invalid states and defects
 
-**D-1 — Mixed-city persisted itinerary can be silently truncated by collection application (confirmed reachable edge case, P2).**
+**D-1 — Mixed-city persisted itinerary can be silently truncated by collection application (confirmed reachable edge case, P2; fix proposed in PR #112).**
 
 The Collections handler in `components/AdventureHub.tsx` checks only the first stop's city, unions `state.itinerary` with `c.placeIds`, calls `update({ itinerary: ... })`, and changes to the Day tab without checking the resulting count or write result. `lib/client-data.ts` normalizes IDs and caps the itinerary at 30, but does not enforce that all stops belong to one city. A mixed-city itinerary loaded from persisted localStorage is therefore accepted; if its first stop matches the selected collection city, the handler can append collection IDs and the normalizer silently truncates after 30. Catalog verification found 89 places across 12 cities, with a maximum of 19 places in any one city, so overflow is not reachable from a valid same-city itinerary alone. The reproducible path requires an already-invalid mixed-city persisted itinerary (for example stale/corrupt storage or an invalid prior write).
 
@@ -145,7 +145,7 @@ Tracking issue: [#109](https://github.com/thembaxx/citylit/issues/109).
 - `parseSharedTrip` caps imports at 30 and filters IDs to the requested city.
 - `add(id)` checks duplicate, city and 30-stop limit before writing.
 - `normalizeDiscovery` enforces catalog membership, uniqueness and the 30-stop cap, but its truncation is silent; it is a defensive normalizer, not a user-facing transition guard.
-- Collection application is the confirmed exception: see D-1.
+- Collection application previously was the confirmed exception: see D-1. PR #112 proposes the normalization and transition guard; keep this finding open until regression tests and CI pass.
 
 ## 5. Itinerary-feasibility state machine
 
@@ -384,5 +384,6 @@ The current suite has broad happy-path coverage in `tests/adventure.spec.ts` and
 | Date | Change | Tests | Status |
 |---|---|---|---|
 | 2026-11-07 | Initial audit and issues #108–#110 created; qualified D-1 after verifying per-city catalog size | Source review only; no local test execution available in this session | Audit in progress |
+| 2026-11-07 | PR #112: normalize mixed-city itineraries, guard collection transition, add normalization regression test | Test added; execution and CI verification pending | Proposed, not yet verified |
 
 **Do not mark a defect fixed until** its implementation, focused regression test, relevant type/lint/build checks and browser-level verification are complete. Update the finding, transition table and verification log in the same PR.

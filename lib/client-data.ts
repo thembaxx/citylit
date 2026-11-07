@@ -51,10 +51,14 @@ export function normalizeDiscovery(value: unknown): Discovery {
     value && typeof value === "object" && !Array.isArray(value)
       ? (value as Record<string, unknown>)
       : {};
+  const itinerary = ids(input.itinerary, MAX_TRIP_STOPS);
+  const itineraryCity = itinerary.length ? byId.get(itinerary[0])?.city : undefined;
   return {
     saved: ids(Array.isArray(value) ? value : input.saved),
     visited: ids(input.visited),
-    itinerary: ids(input.itinerary, MAX_TRIP_STOPS),
+    // A day belongs to one city. Keep the first valid stop's city when migrating
+    // older or externally modified local data; never persist a mixed-city day.
+    itinerary: itinerary.filter((id) => byId.get(id)?.city === itineraryCity),
     passport: typeof input.passport === "boolean" ? input.passport : true,
     essential: typeof input.essential === "boolean" ? input.essential : false,
   };

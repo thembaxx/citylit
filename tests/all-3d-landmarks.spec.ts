@@ -78,4 +78,4 @@ for (const citySlug of [
     expect(errors).toEqual([]);
   });
 }
-\n
+

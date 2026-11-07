@@ -16,6 +16,9 @@ for (const [city, landmark] of references) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
     const glbRequests: string[] = [];
     page.on("request", (request) => {
       if (request.url().includes("/models/stage/") && request.url().endsWith(".glb")) {

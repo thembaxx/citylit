@@ -8,6 +8,7 @@ import {
   disposeProceduralLandmark,
   setProceduralNight,
 } from "../lib/procedural-landmarks";
+import { prepareLandmarkExplodedView, setLandmarkExplodedView } from "../lib/landmark-exploded-view.js";
 
 /**
  * One genuine Three.js scene per place, with no downloaded GLB or image textures.
@@ -20,6 +21,7 @@ export default function ProceduralStageModel({
   night = false,
   reduced = false,
   onReady,
+  explodedProgress = 0,
 }: {
   name: string;
   model: string;
@@ -27,14 +29,19 @@ export default function ProceduralStageModel({
   night?: boolean;
   reduced?: boolean;
   onReady?: () => void;
+  /** 0 keeps the landmark assembled; 1 separates its authored top-level layers. */
+  explodedProgress?: number;
 }) {
   const { invalidate } = useThree();
   const subject = useMemo(() => createProceduralLandmark(name, model), [name, model]);
 
   useEffect(() => {
+    prepareLandmarkExplodedView(subject);
+    setLandmarkExplodedView(subject, explodedProgress);
+    subject.userData.setExplodedView = (progress: number) => setLandmarkExplodedView(subject, progress);
     setProceduralNight(subject, night);
     invalidate();
-  }, [subject, night, invalidate]);
+  }, [subject, night, explodedProgress, invalidate]);
 
   useEffect(() => {
     onReady?.();

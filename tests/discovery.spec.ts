@@ -385,3 +385,24 @@ test("place context expands attributed about copy and links confirmed facts and 
   );
   await expect(page.locator(".venue-facts li")).toHaveCount(3);
 });
+
+
+test("online and offline guide tabs preserve concurrent discovery mutations", async ({ page, context }) => {
+  const offline = await context.newPage();
+  await Promise.all([
+    page.goto("/cape-town/parks-zoos/kirstenbosch"),
+    offline.goto("/offline.html?view=all&city=cape-town"),
+  ]);
+  const onlineSave = page.getByRole("button", { name: "Save this discovery", exact: true });
+  const offlineSave = offline.locator("#zeitz-mocaa").getByRole("button", { name: "Save discovery", exact: true });
+  await expect(onlineSave).toBeVisible();
+  await expect(offlineSave).toBeVisible();
+  await Promise.all([onlineSave.click(), offlineSave.click()]);
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Saved discovery", exact: true })).toBeVisible();
+  await offline.reload();
+  await expect(
+    offline.locator("#zeitz-mocaa").getByRole("button", { name: "Saved", exact: true }),
+  ).toBeVisible();
+  await offline.close();
+});

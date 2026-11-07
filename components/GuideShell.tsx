@@ -26,7 +26,7 @@ export default function GuideShell({
   const isHome = pathname === "/";
   return (
     <div className={`discovery-guide reference-guide${stage ? " reference-stage-guide" : ""}`}>
-      {!stage && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
+      {!stage && !isHome && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
       <GuideMotion essential={state.essential} />
       <a className="guide-skip" href="#guide-main">
         Skip to content

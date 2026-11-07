@@ -31,6 +31,12 @@ for (const key of ["table", "union", "stadium", "hole"]) {
   assert.ok(builders.includes(key), `Missing procedural landmark builder key: ${key}`);
 }
 assert.match(builders, /ponte/i);
+assert.match(builders, /citylit-geological-strata-v1/);
+assert.match(builders, /moses-mabhida-single-signature-arch/);
+assert.match(builders, /ponte-city-inner-atrium-wall/);
+assert.match(builders, /ponte-city-inner-atrium-gallery-floors/);
+assert.match(builders, /ponte-city-external-balcony-lips/);
+assert.match(builders, /ponte-city-vertical-concrete-fins/);
 
 console.log("Three.js-only model pipeline audit passed", {
   three: pkg.dependencies.three,

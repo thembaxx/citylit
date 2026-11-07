@@ -83,9 +83,9 @@ The hook exposes the current normalized snapshot and a synchronous `update(chang
 
 ### Reachable invalid states and defects
 
-**D-1 — Collection application silently truncates a day (confirmed, P1).**
+**D-1 — Mixed-city persisted itinerary can be silently truncated by collection application (confirmed reachable edge case, P2).**
 
-The Collections handler in `components/AdventureHub.tsx` unions `state.itinerary` with `c.placeIds`, calls `update({ itinerary: ... })`, and changes to the Day tab without checking the resulting count or the write result. `lib/client-data.ts` then normalizes the list with `ids(input.itinerary, MAX_TRIP_STOPS)`, which silently truncates after 30. The catalog has collections of two and three stops. A 28-stop day plus a three-stop collection therefore reaches a 31-stop candidate and silently loses one selected stop.
+The Collections handler in `components/AdventureHub.tsx` checks only the first stop's city, unions `state.itinerary` with `c.placeIds`, calls `update({ itinerary: ... })`, and changes to the Day tab without checking the resulting count or write result. `lib/client-data.ts` normalizes IDs and caps the itinerary at 30, but does not enforce that all stops belong to one city. A mixed-city itinerary loaded from persisted localStorage is therefore accepted; if its first stop matches the selected collection city, the handler can append collection IDs and the normalizer silently truncates after 30. Catalog verification found 89 places across 12 cities, with a maximum of 19 places in any one city, so overflow is not reachable from a valid same-city itinerary alone. The reproducible path requires an already-invalid mixed-city persisted itinerary (for example stale/corrupt storage or an invalid prior write).
 
 Tracking issue: [#108](https://github.com/thembaxx/citylit/issues/108).
 
@@ -354,7 +354,7 @@ The sheet focuses its close button on mount and registers an Escape listener. A 
 
 | Priority | Finding | Impact | Evidence | Issue |
 |---|---|---|---|---|
-| P1 | Collection transition silently truncates stops beyond 30 | User loses selected stops without feedback | AdventureHub collection handler + `normalizeDiscovery` + collection catalog | [#108](https://github.com/thembaxx/citylit/issues/108) |
+| P2 | Mixed-city persisted itinerary can be silently truncated by collection application | User can lose stops when an invalid mixed-city document is accepted | AdventureHub first-stop-only guard + `normalizeDiscovery` omits city invariant; catalog max city size is 19 | [#108](https://github.com/thembaxx/citylit/issues/108) |
 | P1 | Discovery localStorage read/modify/write is not cross-tab atomic; offline client rewrites stale whole-document state | Saved places, visits or trip changes can be lost | `useDiscovery.ts`, `AdventureHub.tsx`, `offline.js` | [#109](https://github.com/thembaxx/citylit/issues/109) |
 | P2 | Feasibility settings document is read/modify/write without cross-tab serialization | Plan edits can be lost or cleared plans resurrected | `itinerary-feasibility.ts`, `ItineraryFeasibility.tsx` | [#110](https://github.com/thembaxx/citylit/issues/110) |
 
@@ -364,7 +364,7 @@ The current suite has broad happy-path coverage in `tests/adventure.spec.ts` and
 
 | Test ID | Scenario | Expected invariant |
 |---|---|---|
-| SM-DISC-01 | Apply 3-stop collection to a 28-stop day | Reject atomically; keep all 28; explicit message |
+| SM-DISC-01 | Load mixed-city persisted itinerary, then apply a collection that would exceed 30 | Reject or normalize the invalid document according to a documented migration policy; never silently truncate |
 | SM-DISC-02 | Apply 3-stop collection to a 27-stop day | Exactly 30 unique stops |
 | SM-DISC-03 | Duplicate IDs in collection union | Duplicates consume no capacity |
 | SM-DISC-04 | Two contexts add different saved IDs concurrently | Both IDs survive |
@@ -383,6 +383,6 @@ The current suite has broad happy-path coverage in `tests/adventure.spec.ts` and
 
 | Date | Change | Tests | Status |
 |---|---|---|---|
-| 2026-11-07 | Initial audit and issues #108–#110 created | Source review only; no local test execution available in this session | Audit in progress |
+| 2026-11-07 | Initial audit and issues #108–#110 created; qualified D-1 after verifying per-city catalog size | Source review only; no local test execution available in this session | Audit in progress |
 
 **Do not mark a defect fixed until** its implementation, focused regression test, relevant type/lint/build checks and browser-level verification are complete. Update the finding, transition table and verification log in the same PR.

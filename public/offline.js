@@ -262,14 +262,22 @@ function card(place, detail) {
   );
   actions.append(
     button(itinerary.includes(place.id) ? "Remove from day" : "Add to day", () => {
+      let rejected = false;
       void writeState((previous) => {
         if (previous.itinerary.includes(place.id))
           return { itinerary: previous.itinerary.filter((id) => id !== place.id) };
         const first = places.find((p) => p.id === previous.itinerary[0]);
-        if (previous.itinerary.length >= 30 || (first && first.city !== place.city)) return {};
+        if (previous.itinerary.length >= 30 || (first && first.city !== place.city)) {
+          rejected = true;
+          return {};
+        }
         return { itinerary: [...previous.itinerary, place.id] };
       }).then((ok) => {
-        if (ok) actionStatus.textContent = "Your day is kept on this device.";
+        actionStatus.textContent = rejected
+          ? "Your day is full or belongs to another destination. Remove a stop before adding this place."
+          : ok
+            ? "Your day is kept on this device."
+            : "Your browser could not save this change.";
         show();
       });
     }),

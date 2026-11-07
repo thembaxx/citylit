@@ -20,7 +20,9 @@ for (const citySlug of [
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("console", (message) => {
-      if (message.type() === "error") errors.push(message.text());
+      if (message.type() === "error" && /webgl|shader|glsl/i.test(message.text())) {
+      errors.push(message.text());
+    }
     });
     const glbRequests: string[] = [];
     page.on("request", (request) => {

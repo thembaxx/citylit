@@ -234,7 +234,7 @@ export default function DiscoveryHome() {
               </section>
             </>
           )}
-        </main>
+        </div>
       </div>
     </GuideShell>
   );

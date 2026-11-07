@@ -2,7 +2,18 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const read = (path) => readFile(new URL("../" + path, import.meta.url), "utf8");
-const [pkgText, hero, showcase, stageModel, expanded, ring, safe, procedural, builders, pbr] = await Promise.all([
+const [
+  pkgText,
+  hero,
+  showcase,
+  stageModel,
+  expanded,
+  ring,
+  safe,
+  procedural,
+  builders,
+  pbr,
+] = await Promise.all([
   read("package.json"),
   read("components/MuseumHeroAsset.tsx"),
   read("components/MuseumShowcase.tsx"),

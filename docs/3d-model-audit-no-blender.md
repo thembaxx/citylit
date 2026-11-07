@@ -54,7 +54,7 @@ The repository declares `three: ^0.187.0` and matching `@types/three: ^0.187.0`.
 - Dependency installation and lockfile supply-chain policy both passed. Installed versions included Node 24.22.2, pnpm 12.10.1, Three.js 0.187.0, and Oxfmt 0.75.0.
 - `pnpm format:check` failed because Oxfmt reported formatting differences in exactly `components/StageModel.tsx`, `lib/procedural-landmarks.js`, and `scripts/audit-procedural-models.mjs`. Its output explicitly instructs running Oxfmt without `--check` to apply the canonical formatting.
 - The formatter failure caused the following checks to be skipped: data audit, procedural model audit, lint, typecheck, monitor tests, Python checks, ingestion/image security regression tests, production build, browser build handoff, mobile WebKit, desktop Firefox, and genuine landmark screenshot shards.
-- The separate Security workflow passed.
+- The separate Security workflow passed for this head: [run 42363853204](https://github.com/thembaxx/citylit/actions/runs/42363853204), run number 1107.
 - CodeRabbit status is successful, but it does not replace skipped CI checks.
 - No merge, production deployment, successful shader compilation, screenshot comparison, or real-device GPU measurement has been verified.
 

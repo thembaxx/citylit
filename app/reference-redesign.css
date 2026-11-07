@@ -3,21 +3,22 @@
    Screen-specific composition is delivered in follow-up implementation stages. */
 
 :root {
-  --citylit-reference-bg: #09090e;
-  --citylit-reference-panel: #15141d;
-  --citylit-reference-panel-raised: #1c1a26;
-  --citylit-reference-border: rgb(255 255 255 / 9%);
-  --citylit-reference-text: #f5f1f8;
-  --citylit-reference-muted: #a7a1b1;
-  --citylit-reference-purple: #9b5cff;
-  --citylit-reference-purple-soft: #bd91ff;
-  --citylit-reference-gold: #f3b85f;
-  --citylit-reference-shadow: 0 18px 48px rgb(0 0 0 / 30%);
+  --citylit-reference-bg: #10231b;
+  --citylit-reference-panel: #192d23;
+  --citylit-reference-panel-raised: #244032;
+  --citylit-reference-border: rgb(235 242 222 / 13%);
+  --citylit-reference-text: #f2f0e5;
+  --citylit-reference-muted: #bac5b7;
+  --citylit-reference-purple: #a8cf91;
+  --citylit-reference-purple-soft: #c3dda7;
+  --citylit-reference-gold: #e0a15d;
+  --citylit-reference-accent-ink: #10231b;
+  --citylit-reference-shadow: 0 18px 48px rgb(5 19 12 / 24%);
 }
 
 :where(.reference-guide, .field-guide, .game-screen, .category-page) {
   --citylit-purple: var(--citylit-reference-purple);
-  --citylit-purple-strong: #8043e8;
+  --citylit-purple-strong: #608b68;
   --citylit-amber: var(--citylit-reference-gold);
   --citylit-border: var(--citylit-reference-border);
   --citylit-panel: var(--citylit-reference-panel);
@@ -37,15 +38,16 @@
 }
 
 :root[data-theme="day"] :where(.reference-guide, .field-guide, .game-screen, .category-page) {
-  --citylit-reference-bg: #f5f1eb;
-  --citylit-reference-panel: #fffdf9;
-  --citylit-reference-panel-raised: #eee8f3;
-  --citylit-reference-border: rgb(30 23 43 / 12%);
-  --citylit-reference-text: #211d29;
-  --citylit-reference-muted: #696271;
-  --citylit-reference-purple: #7042c5;
-  --citylit-reference-purple-soft: #6035b7;
-  --citylit-reference-gold: #a65c16;
+  --citylit-reference-bg: #f1f2e8;
+  --citylit-reference-panel: #fbfcf4;
+  --citylit-reference-panel-raised: #e5eadb;
+  --citylit-reference-border: rgb(31 56 39 / 14%);
+  --citylit-reference-text: #1d3327;
+  --citylit-reference-muted: #5d6d60;
+  --citylit-reference-purple: #4d7957;
+  --citylit-reference-purple-soft: #365f42;
+  --citylit-reference-gold: #995f2f;
+  --citylit-reference-accent-ink: #fff;
   color: var(--citylit-reference-text);
   color-scheme: light;
 }
@@ -87,7 +89,7 @@
 .reference-guide .atlas-hero {
   min-height: min(860px, 100svh);
   background:
-    radial-gradient(ellipse at 73% 44%, rgb(137 75 218 / 13%), transparent 48%),
+    radial-gradient(ellipse at 73% 44%, rgb(119 164 111 / 13%), transparent 48%),
     linear-gradient(180deg, transparent 62%, var(--citylit-reference-bg) 100%);
 }
 
@@ -159,8 +161,8 @@
 .reference-guide .atlas-place-filters button[aria-pressed="true"] {
   border-color: var(--citylit-reference-purple);
   background: var(--citylit-reference-purple);
-  color: white;
-  box-shadow: 0 0 22px rgb(155 92 255 / 25%);
+  color: var(--citylit-reference-accent-ink);
+  box-shadow: 0 0 22px rgb(111 163 103 / 22%);
 }
 
 .reference-guide .atlas-card-copy h3,
@@ -191,7 +193,7 @@
 
 .reference-guide .atlas-native-dock a[aria-current="page"] {
   color: var(--citylit-reference-purple-soft);
-  background: rgb(155 92 255 / 12%);
+  background: color-mix(in srgb, var(--citylit-reference-purple) 16%, transparent);
 }
 
 .reference-guide .atlas-button.atlas-primary,
@@ -210,14 +212,14 @@
 .reference-guide .atlas-button.atlas-primary,
 .field-guide .day-actions button:first-child {
   border-color: transparent;
-  background: linear-gradient(115deg, #a66bff, #7542d7);
-  color: white;
-  box-shadow: 0 8px 24px rgb(132 77 220 / 24%);
+  background: var(--citylit-reference-purple);
+  color: var(--citylit-reference-accent-ink);
+  box-shadow: 0 8px 24px rgb(78 126 79 / 20%);
 }
 
 .field-guide {
   background:
-    radial-gradient(ellipse at 80% 5%, rgb(137 75 218 / 12%), transparent 36%),
+    radial-gradient(ellipse at 80% 5%, rgb(143 190 123 / 12%), transparent 36%),
     var(--citylit-reference-bg);
   color: var(--citylit-reference-text);
 }
@@ -242,14 +244,30 @@
   color: var(--citylit-reference-muted);
 }
 
-.field-guide :is(.adventure-card, .collection-card, .event-card, .shared-trip, .quality-summary, .incoming-discovery) {
+.field-guide
+  :is(
+    .adventure-card,
+    .collection-card,
+    .event-card,
+    .shared-trip,
+    .quality-summary,
+    .incoming-discovery
+  ) {
   border: 1px solid var(--citylit-reference-border);
   border-radius: 22px;
   background: var(--citylit-reference-panel);
   box-shadow: 0 12px 32px rgb(0 0 0 / 20%);
 }
 
-.field-guide :is(.hub-tabs button, .day-actions button, .adventure-card-actions button, .collection-card button, .adventure-card > button, .shared-trip button) {
+.field-guide
+  :is(
+    .hub-tabs button,
+    .day-actions button,
+    .adventure-card-actions button,
+    .collection-card button,
+    .adventure-card > button,
+    .shared-trip button
+  ) {
   border: 1px solid var(--citylit-reference-border);
   background: var(--citylit-reference-panel-raised);
   color: var(--citylit-reference-text);
@@ -259,7 +277,7 @@
 .field-guide .hub-tabs button[aria-selected="true"] {
   border-color: var(--citylit-reference-purple);
   background: var(--citylit-reference-purple);
-  color: white;
+  color: var(--citylit-reference-accent-ink);
 }
 
 .game-screen {
@@ -295,7 +313,8 @@
   letter-spacing: -0.04em;
 }
 
-:where(.reference-guide, .field-guide, .game-screen, .category-page) :is(button, a, input, select, textarea):focus-visible {
+:where(.reference-guide, .field-guide, .game-screen, .category-page)
+  :is(button, a, input, select, textarea):focus-visible {
   outline: 2px solid var(--citylit-reference-purple-soft);
   outline-offset: 3px;
 }
@@ -345,14 +364,19 @@
   }
 }
 
-
 /* Discovery home — reference composition */
 .reference-home {
   min-height: 100%;
   padding: 0 clamp(18px, 4vw, 64px) 120px;
   background:
-    radial-gradient(ellipse at 78% 6%, rgb(133 76 220 / 10%), transparent 42%),
-    var(--citylit-reference-bg);
+    radial-gradient(ellipse at 78% 6%, rgb(143 190 123 / 12%), transparent 42%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--citylit-reference-bg) 84%, transparent) 0,
+      color-mix(in srgb, var(--citylit-reference-bg) 90%, transparent) 38rem,
+      var(--citylit-reference-bg) 74rem
+    );
+  isolation: isolate;
 }
 .reference-home-header {
   width: min(100%, 1240px);
@@ -411,16 +435,21 @@
 .reference-eyebrow {
   margin: 0 0 12px;
   color: var(--citylit-reference-purple-soft);
-  font: 700 10px/1.5 Manrope, sans-serif;
-  letter-spacing: .15em;
+  font:
+    700 10px/1.5 Manrope,
+    sans-serif;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 .reference-home-hero h1 {
   max-width: 900px;
   margin: 0;
   color: var(--citylit-reference-text);
-  font: 450 clamp(42px, 6.1vw, 76px)/.99 Fraunces, Georgia, serif;
-  letter-spacing: -.055em;
+  font:
+    450 clamp(42px, 6.1vw, 76px)/0.99 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.055em;
   text-wrap: balance;
 }
 .reference-home-hero h1 em {
@@ -430,6 +459,34 @@
   margin: 16px 0 30px;
   color: var(--citylit-reference-muted);
   font-size: 15px;
+}
+.reference-home-3d-link {
+  width: fit-content;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 0 14px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  color: var(--citylit-reference-text);
+  background: color-mix(in srgb, var(--citylit-reference-panel) 84%, transparent);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+.reference-home-3d-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--citylit-reference-purple);
+  background: var(--citylit-reference-panel);
+}
+.reference-home-3d-link svg:first-child {
+  color: var(--citylit-reference-purple-soft);
 }
 .reference-search {
   width: min(100%, 680px);
@@ -446,7 +503,7 @@
 }
 .reference-search:focus-within {
   border-color: var(--citylit-reference-purple);
-  box-shadow: 0 0 0 3px rgb(155 92 255 / 12%);
+  box-shadow: 0 0 0 3px rgb(111 163 103 / 12%);
 }
 .reference-search input {
   flex: 1;
@@ -456,7 +513,9 @@
   outline: 0;
   background: transparent;
   color: var(--citylit-reference-text);
-  font: 500 13px Manrope, sans-serif;
+  font:
+    500 13px Manrope,
+    sans-serif;
 }
 .reference-search input::placeholder {
   color: var(--citylit-reference-muted);
@@ -484,13 +543,15 @@
   border-radius: 999px;
   color: var(--citylit-reference-text);
   background: var(--citylit-reference-panel);
-  font: 650 11px Manrope, sans-serif;
+  font:
+    650 11px Manrope,
+    sans-serif;
 }
 .reference-filter-row button[aria-pressed="true"] {
   border-color: transparent;
-  color: white;
-  background: linear-gradient(115deg, #9d60f2, #7040d2);
-  box-shadow: 0 5px 18px rgb(132 77 220 / 26%);
+  color: var(--citylit-reference-accent-ink);
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 5px 18px rgb(78 126 79 / 20%);
 }
 .reference-featured {
   overflow: hidden;
@@ -550,8 +611,11 @@
 }
 .reference-featured-copy h2 {
   margin: 0;
-  font: 450 clamp(32px, 5vw, 56px)/1 Fraunces, Georgia, serif;
-  letter-spacing: -.045em;
+  font:
+    450 clamp(32px, 5vw, 56px)/1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.045em;
 }
 .reference-featured-arrow {
   position: absolute;
@@ -598,8 +662,11 @@
 .reference-section-heading h2 {
   margin: 0;
   color: var(--citylit-reference-text);
-  font: 450 clamp(26px, 3.3vw, 34px)/1.1 Fraunces, Georgia, serif;
-  letter-spacing: -.04em;
+  font:
+    450 clamp(26px, 3.3vw, 34px)/1.1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.04em;
 }
 .reference-section-heading > span {
   color: var(--citylit-reference-muted);
@@ -649,7 +716,7 @@
 }
 .reference-quick-links {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   padding-top: 32px;
 }
@@ -808,12 +875,667 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Atlas / map scene treatment */
+.game-screen {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgb(119 164 111 / 12%), transparent 48%),
+    var(--citylit-reference-bg);
+  color: var(--citylit-reference-text);
+}
+.game-screen .game-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 38%, rgb(119 164 111 / 10%), transparent 55%),
+    var(--citylit-reference-bg);
+}
+.game-screen .game-nav {
+  min-height: 68px;
+  padding-inline: clamp(16px, 4vw, 38px);
+  border-bottom: 1px solid var(--citylit-reference-border);
+  background: color-mix(in srgb, var(--citylit-reference-bg) 82%, transparent);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+}
+.game-screen .game-back {
+  min-height: 42px;
+  color: var(--citylit-reference-text);
+  font:
+    600 11px Manrope,
+    sans-serif;
+}
+.game-screen .game-back .citylit-logo-symbol {
+  width: 34px;
+  height: 34px;
+}
+.game-screen .return-to-guide {
+  color: var(--citylit-reference-muted);
+  font-size: 10px;
+}
+.game-screen .utility-nav {
+  gap: 7px;
+}
+.game-screen .utility-nav .icon-button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 50%;
+  color: var(--citylit-reference-text);
+  background: var(--citylit-reference-panel);
+}
+.game-screen .game-heading {
+  text-align: left;
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 18px clamp(18px, 4vw, 48px) 0;
+}
+.game-screen .game-heading h1 {
+  color: var(--citylit-reference-text);
+  font:
+    450 clamp(34px, 5.5vw, 58px)/1.02 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.05em;
+  text-transform: none;
+}
+.game-screen .province-subtitle,
+.game-screen .roman-chapter {
+  color: var(--citylit-reference-muted);
+  font:
+    500 10px/1.6 Manrope,
+    sans-serif;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.game-screen .game-search {
+  min-height: 48px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: var(--citylit-reference-panel);
+  color: var(--citylit-reference-muted);
+}
+.game-screen .game-search input {
+  color: var(--citylit-reference-text);
+  font:
+    500 12px Manrope,
+    sans-serif;
+}
+.game-screen .game-stage {
+  min-height: 250px;
+}
+.game-screen .game-controls {
+  max-width: 900px;
+  padding: 12px clamp(14px, 3vw, 28px) max(22px, env(safe-area-inset-bottom));
+}
+.game-map .map-legend {
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 92%, transparent);
+  color: var(--citylit-reference-muted);
+  font:
+    600 10px Manrope,
+    sans-serif;
+}
+.game-map .map-legend > button,
+.game-map .map-legend > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  color: var(--citylit-reference-text);
+  font: inherit;
+}
+.game-map .map-legend i {
+  width: 7px;
+  height: 7px;
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 0 12px rgb(111 163 103 / 30%);
+}
+.game-map .province-picker {
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(52dvh, 420px);
+  overflow: auto;
+  padding: 12px 16px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 96%, transparent);
+  box-shadow: var(--citylit-reference-shadow);
+  backdrop-filter: blur(24px);
+}
+.game-map .province-picker a {
+  min-height: 42px;
+  color: var(--citylit-reference-text);
+  border-color: var(--citylit-reference-border);
+  font:
+    600 11px Manrope,
+    sans-serif;
+}
+.game-map .province-picker a span {
+  margin-left: auto;
+  color: var(--citylit-reference-muted);
+}
+.game-city .landmark-caption {
+  max-width: 620px;
+  padding: 14px 18px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 90%, transparent);
+  box-shadow: var(--citylit-reference-shadow);
+  backdrop-filter: blur(20px);
+}
+.game-city .landmark-open h3 {
+  color: var(--citylit-reference-text);
+  font:
+    450 clamp(24px, 4vw, 34px)/1.1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.035em;
+  text-transform: none;
+}
+.game-screen .carousel-progress {
+  margin: 12px 0;
+}
+.game-screen .carousel-progress span,
+.game-screen .carousel-progress button:after {
+  background: var(--citylit-reference-border);
+}
+.game-screen .carousel-progress .selected,
+.game-screen .carousel-progress button.selected:after {
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 0 12px rgb(111 163 103 / 30%);
+}
+.game-screen .pill-button {
+  min-height: 44px;
+  border: 0;
+  color: var(--citylit-reference-accent-ink);
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 8px 24px rgb(78 126 79 / 20%);
+  font:
+    700 11px Manrope,
+    sans-serif;
+}
+@media (max-width: 700px) {
+  .game-screen .game-nav {
+    min-height: 60px;
+    padding: 8px 14px;
+  }
+  .game-screen .return-to-guide {
+    display: none;
+  }
+  .game-screen .utility-nav {
+    gap: 4px;
+  }
+  .game-screen .utility-nav .icon-button {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+  }
+  .game-screen .game-heading {
+    padding-top: 14px;
+  }
+  .game-screen .game-heading h1 {
+    font-size: clamp(31px, 8vw, 42px);
+  }
+  .game-map .map-legend {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .game-city .landmark-caption {
+    padding: 12px 14px;
+  }
+}
+
+/* Landmark editorial detail */
+.reference-guide .atlas-landmark-story {
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  padding: 24px clamp(18px, 4vw, 52px) 72px;
+}
+.reference-guide .atlas-landmark-story > .atlas-eyebrow {
+  margin: 12px 0 10px;
+}
+.reference-guide .atlas-landmark-story > h1 {
+  margin: 0;
+  color: var(--citylit-reference-text);
+  font:
+    450 clamp(40px, 7vw, 76px)/0.98 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.06em;
+  text-transform: none;
+}
+.reference-guide .atlas-landmark-story > .atlas-city-intro {
+  max-width: 680px;
+  margin: 13px 0 24px;
+  color: var(--citylit-reference-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.reference-guide .atlas-landmark-story .gallery-hero {
+  min-height: clamp(270px, 52vw, 560px);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--citylit-reference-shadow);
+}
+.reference-guide .atlas-landmark-story .gallery-hero::after {
+  background: linear-gradient(180deg, transparent 55%, rgb(5 5 9 / 55%));
+}
+.reference-guide .atlas-landmark-story .gallery-hero > span {
+  color: white;
+}
+.reference-guide .atlas-landmark-story .gallery-thumbs button {
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.reference-guide .atlas-landmark-story .gallery-thumbs button.selected {
+  border-color: var(--citylit-reference-purple);
+  box-shadow: 0 0 0 2px rgb(111 163 103 / 16%);
+}
+.reference-guide .atlas-landmark-story .photo-credit,
+.reference-guide .atlas-landmark-story .atlas-photo-credit {
+  color: var(--citylit-reference-muted);
+  font-size: 9px;
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts > div {
+  padding: 16px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 17px;
+  background: var(--citylit-reference-panel);
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts dt {
+  color: var(--citylit-reference-muted);
+  font:
+    700 9px Manrope,
+    sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts dd {
+  margin: 7px 0 0;
+  color: var(--citylit-reference-text);
+  font:
+    450 20px/1.15 Fraunces,
+    Georgia,
+    serif;
+}
+.reference-guide .atlas-landmark-story .atlas-story-about,
+.reference-guide .atlas-landmark-story .atlas-story-next {
+  margin-top: 22px;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 22px;
+  background: var(--citylit-reference-panel);
+}
+.reference-guide .atlas-landmark-story .atlas-story-about h2,
+.reference-guide .atlas-landmark-story .atlas-story-next h2 {
+  color: var(--citylit-reference-text);
+  font:
+    450 clamp(26px, 4vw, 38px)/1.08 Fraunces,
+    Georgia,
+    serif;
+  text-transform: none;
+}
+.reference-guide .atlas-landmark-story .atlas-story-about p,
+.reference-guide .atlas-landmark-story .atlas-story-next p {
+  margin-top: 10px;
+  color: var(--citylit-reference-muted);
+  font-size: 12px;
+  line-height: 1.75;
+}
+.reference-guide .atlas-landmark-story .atlas-story-about a,
+.reference-guide .atlas-landmark-story .atlas-story-next a {
+  color: var(--citylit-reference-purple-soft);
+}
+.reference-guide .atlas-landmark-story .atlas-story-next .atlas-button {
+  margin: 10px 8px 0 0;
+  color: var(--citylit-reference-accent-ink);
+  background: var(--citylit-reference-purple);
+}
+@media (max-width: 700px) {
+  .reference-guide .atlas-landmark-story {
+    padding-top: 12px;
+  }
+  .reference-guide .atlas-landmark-story .gallery-hero {
+    min-height: 290px;
+    aspect-ratio: 1.05;
+    border-radius: 19px;
+  }
+  .reference-guide .atlas-landmark-story .atlas-story-facts {
+    grid-template-columns: 1fr;
+  }
+  .reference-guide .atlas-landmark-story .atlas-story-facts > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .reference-guide .atlas-landmark-story .atlas-story-facts dd {
+    margin: 0;
+    text-align: right;
+  }
+}
+
+/* Citylit's spacing rhythm and EasyUI planner interactions. */
+:where(.reference-guide, .field-guide, .game-screen, .category-page) {
+  --citylit-space-1: 4px;
+  --citylit-space-2: 8px;
+  --citylit-space-3: 12px;
+  --citylit-space-4: 16px;
+  --citylit-space-5: 20px;
+  --citylit-space-6: 24px;
+  --citylit-space-8: 32px;
+  --citylit-space-10: 40px;
+  --citylit-radius-control: 14px;
+  --citylit-radius-card: 22px;
+  --citylit-radius-feature: 28px;
+}
+.reference-home {
+  padding-bottom: calc(var(--citylit-space-10) + 56px);
+}
+.reference-home-hero {
+  padding-bottom: var(--citylit-space-6);
+}
+.reference-home-3d-link {
+  margin-top: var(--citylit-space-3);
+}
+.reference-popular,
+.reference-results {
+  padding-top: clamp(36px, 5vw, 56px);
+}
+.reference-section-heading {
+  margin-bottom: var(--citylit-space-4);
+}
+.reference-city-strip {
+  gap: clamp(12px, 1.8vw, 20px);
+}
+.reference-city-image {
+  margin-bottom: var(--citylit-space-2);
+}
+.reference-quick-links {
+  gap: var(--citylit-space-3);
+  padding-top: var(--citylit-space-8);
+}
+.reference-result-list {
+  gap: var(--citylit-space-3);
+  margin-top: var(--citylit-space-3);
+}
+.field-guide .field-guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(8px, 2vw, 18px);
+}
+.field-guide .field-guide-header > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.field-guide .field-guide-header > a:first-child {
+  margin-right: auto;
+}
+.field-guide .field-guide-intro {
+  margin-block: var(--citylit-space-2) var(--citylit-space-5);
+  line-height: 1.65;
+}
+.field-guide .hub-tabs {
+  margin-block: var(--citylit-space-5) var(--citylit-space-6);
+}
+.field-guide .adventure-section > h2 {
+  margin-bottom: var(--citylit-space-4);
+}
+.field-guide .adventure-grid {
+  gap: var(--citylit-space-4);
+}
+.field-guide .trip-stops {
+  gap: var(--citylit-space-3);
+}
+.field-guide .adventure-card-actions button,
+.field-guide .day-actions button {
+  min-height: 44px;
+}
+.field-guide .trip-stops .stop-actions button {
+  width: 44px;
+  height: 44px;
+}
+.reference-trip-empty {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--citylit-space-3) var(--citylit-space-4);
+  margin-top: var(--citylit-space-4);
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: var(--citylit-radius-card);
+  background: color-mix(in srgb, var(--citylit-reference-panel) 92%, transparent);
+}
+.reference-trip-empty > svg {
+  margin-top: 2px;
+  color: var(--citylit-reference-purple);
+}
+.reference-trip-empty h3 {
+  margin: 0;
+  color: var(--citylit-reference-text);
+  font:
+    600 clamp(19px, 4vw, 25px)/1.2 Manrope,
+    sans-serif;
+  letter-spacing: -0.035em;
+}
+.reference-trip-empty p {
+  margin: 6px 0 0;
+  color: var(--citylit-reference-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.reference-trip-empty-actions {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--citylit-space-2);
+  margin-top: var(--citylit-space-1);
+}
+.field-guide .reference-trip-empty .pill-button {
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 16px;
+  background: var(--citylit-reference-purple);
+  color: var(--citylit-reference-accent-ink);
+}
+.field-guide .reference-trip-empty .pill-button + .pill-button {
+  border: 1px solid var(--citylit-reference-border);
+  color: var(--citylit-reference-text);
+  background: transparent;
+}
+.easyui-tabs-root {
+  min-width: 0;
+}
+.field-guide .hub-tabs.easyui-tabs-list {
+  width: 100%;
+  min-width: 0;
+  justify-content: stretch;
+  gap: 4px;
+  overflow: visible;
+}
+.field-guide .hub-tabs.easyui-tabs-list .easyui-tab {
+  position: relative;
+  min-width: 0;
+  min-height: 44px;
+  flex: 1 1 0;
+  justify-content: center;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--citylit-reference-muted);
+  background: transparent;
+  font:
+    650 11px/1 Manrope,
+    sans-serif;
+  white-space: nowrap;
+}
+.field-guide .hub-tabs.easyui-tabs-list .easyui-tab[aria-selected="true"] {
+  color: var(--citylit-reference-accent-ink);
+  background: transparent;
+}
+.easyui-tab-indicator {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border: 1px solid color-mix(in srgb, var(--citylit-reference-purple) 78%, transparent);
+  border-radius: inherit;
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 4px 14px rgb(40 86 50 / 15%);
+}
+.easyui-tab-content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+}
+.easyui-tab-badge {
+  display: inline-grid;
+  min-width: 18px;
+  height: 18px;
+  place-items: center;
+  padding-inline: 4px;
+  border-radius: 999px;
+  color: var(--citylit-reference-text);
+  background: color-mix(in srgb, var(--citylit-reference-bg) 78%, transparent);
+  font-size: 10px;
+  line-height: 1;
+}
+.easyui-tab:focus-visible {
+  outline: 2px solid var(--citylit-reference-purple-soft);
+  outline-offset: 3px;
+}
+.easyui-magnetic-button {
+  touch-action: manipulation;
+}
+.field-guide .adventure-card-actions .adventure-card-add[aria-pressed="true"] {
+  border-color: color-mix(
+    in srgb,
+    var(--citylit-reference-purple) 65%,
+    var(--citylit-reference-border)
+  );
+  color: var(--citylit-reference-accent-ink);
+  background: var(--citylit-reference-purple);
+}
+@supports (corner-shape: squircle) {
+  .reference-guide .atlas-beacon-card,
+  .reference-guide .atlas-empty,
+  .reference-guide .atlas-plan-stop,
+  .reference-guide .atlas-city-card-link,
+  .reference-guide .atlas-place-card-link,
+  .field-guide :is(.adventure-card, .collection-card, .event-card, .shared-trip),
+  .reference-featured,
+  .reference-city-image,
+  .reference-quick-links a,
+  .reference-result-card,
+  .reference-trip-empty,
+  .reference-saved-empty,
+  .field-guide .trip-stops li,
+  .easyui-tab-indicator,
+  .easyui-tab-badge {
+    corner-shape: squircle;
+  }
+  .reference-guide .atlas-beacon-card,
+  .reference-guide .atlas-empty,
+  .reference-guide .atlas-plan-stop,
+  .reference-guide .atlas-city-card-link,
+  .reference-guide .atlas-place-card-link,
+  .field-guide :is(.adventure-card, .collection-card, .event-card, .shared-trip),
+  .reference-trip-empty,
+  .reference-saved-empty {
+    border-radius: var(--citylit-radius-card);
+  }
+  .reference-featured {
+    border-radius: var(--citylit-radius-feature);
+  }
+  .reference-city-image,
+  .reference-quick-links a,
+  .reference-result-card,
+  .field-guide .trip-stops li {
+    border-radius: var(--citylit-radius-control);
+  }
+  .field-guide .adventure-card-actions button,
+  .field-guide .day-actions button,
+  .field-guide .trip-stops .stop-actions button {
+    corner-shape: squircle;
+  }
+}
+@media (max-width: 700px) {
+  .reference-home {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+  .reference-home-hero h1 {
+    max-width: 15ch;
+    font-size: clamp(34px, 9vw, 45px);
+    line-height: 1.06;
+  }
+  .reference-filter-row {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin-right: 0;
+    padding: 0 0 5px;
+  }
+  .reference-filter-row button {
+    flex: 0 1 auto;
+    min-height: 40px;
+    padding-inline: 13px;
+  }
+  .field-guide .hub-tabs.easyui-tabs-list {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 4px;
+    padding: 5px;
+    border-radius: 18px;
+  }
+  .field-guide .hub-tabs.easyui-tabs-list .easyui-tab {
+    grid-column: span 2;
+    width: 100%;
+    min-height: 44px;
+    padding-inline: 5px;
+    font-size: 10px;
+  }
+  .field-guide .hub-tabs.easyui-tabs-list .easyui-tab:nth-last-child(-n + 2) {
+    grid-column: span 3;
+  }
+  .reference-trip-empty-actions {
+    grid-column: 1 / -1;
+  }
+  .field-guide .reference-trip-empty .pill-button {
+    flex: 1 1 100%;
+  }
+  .reference-quick-links {
+    gap: var(--citylit-space-2);
+    padding-top: var(--citylit-space-6);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .reference-city-image img {
     transition: none;
   }
 }
-
 
 /* Atlas settings: compact segmented preferences panel */
 .game-screen .modal {
@@ -831,7 +1553,7 @@
 .game-screen .modal .tiny-label {
   color: var(--citylit-reference-purple-soft);
   font-size: 9px;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
 }
 .reference-settings {
   gap: 13px;
@@ -860,9 +1582,9 @@
   font-weight: 700;
 }
 .reference-settings-tabs button[aria-selected="true"] {
-  color: white;
-  background: linear-gradient(115deg, #9d60f2, #7040d2);
-  box-shadow: 0 4px 15px rgb(132 77 220 / 22%);
+  color: var(--citylit-reference-accent-ink);
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 4px 15px rgb(78 126 79 / 20%);
 }
 .reference-settings-label {
   margin: 3px 0 0 !important;
@@ -890,7 +1612,9 @@
 }
 .reference-theme-options button[aria-pressed="true"] {
   border-color: var(--citylit-reference-purple);
-  box-shadow: 0 0 0 2px rgb(155 92 255 / 14%), 0 8px 24px rgb(155 92 255 / 12%);
+  box-shadow:
+    0 0 0 2px rgb(111 163 103 / 14%),
+    0 8px 24px rgb(111 163 103 / 12%);
 }
 .reference-theme-options button svg {
   color: var(--citylit-reference-purple-soft);
@@ -923,7 +1647,9 @@
   border: 1px solid var(--citylit-reference-border);
   border-radius: 999px;
   background: #4a4652;
-  transition: background 160ms ease, border-color 160ms ease;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
 }
 .reference-setting-toggle input::before {
   content: "";
@@ -991,9 +1717,8 @@
   justify-content: center;
   min-height: 43px;
   background: var(--citylit-reference-purple);
-  color: white;
+  color: var(--citylit-reference-accent-ink);
 }
-
 
 /* Saved places and itinerary surfaces */
 .field-guide .field-guide-header {
@@ -1044,8 +1769,8 @@
 }
 .field-guide .hub-tabs button[aria-current="page"] {
   border: 0;
-  color: white;
-  background: linear-gradient(115deg, #9d60f2, #7040d2);
+  color: var(--citylit-reference-accent-ink);
+  background: var(--citylit-reference-purple);
 }
 .field-guide .adventure-section > h2 {
   margin: 0 0 16px;
@@ -1066,8 +1791,10 @@
 }
 .field-guide .adventure-card h3 {
   margin: 4px 0 5px;
-  font: 650 14px/1.3 Manrope, sans-serif;
-  letter-spacing: -.02em;
+  font:
+    650 14px/1.3 Manrope,
+    sans-serif;
+  letter-spacing: -0.02em;
 }
 .field-guide .adventure-card p {
   font-size: 11px;
@@ -1105,8 +1832,10 @@
 }
 .field-guide .trip-stops li > div:first-of-type h3 {
   margin: 0 0 4px;
-  font: 700 12px/1.35 Manrope, sans-serif;
-  letter-spacing: -.01em;
+  font:
+    700 12px/1.35 Manrope,
+    sans-serif;
+  letter-spacing: -0.01em;
 }
 .field-guide .trip-stops li > div:first-of-type p {
   margin: 0;
@@ -1119,7 +1848,7 @@
   width: 27px;
   height: 27px;
   border-radius: 50%;
-  color: white;
+  color: var(--citylit-reference-accent-ink);
   background: var(--citylit-reference-purple);
   font-size: 10px;
   font-weight: 800;
@@ -1153,7 +1882,10 @@
 .reference-saved-empty h3 {
   margin: 0;
   color: var(--citylit-reference-text);
-  font: 450 23px/1.15 Fraunces, Georgia, serif;
+  font:
+    450 23px/1.15 Fraunces,
+    Georgia,
+    serif;
 }
 .reference-saved-empty p {
   max-width: 340px;
@@ -1163,7 +1895,7 @@
 .reference-saved-empty .pill-button {
   margin-top: 6px;
   background: var(--citylit-reference-purple);
-  color: white;
+  color: var(--citylit-reference-accent-ink);
 }
 @media (max-width: 700px) {
   .field-guide .hub-tabs button {
@@ -1175,334 +1907,5 @@
   .field-guide .trip-stops .stop-actions {
     grid-column: 2;
     justify-content: flex-end;
-  }
-}
-
-
-/* Atlas / map scene treatment */
-.game-screen {
-  background:
-    radial-gradient(ellipse at 50% 42%, rgb(126 75 193 / 12%), transparent 48%),
-    var(--citylit-reference-bg);
-  color: var(--citylit-reference-text);
-}
-.game-screen .game-atmosphere {
-  background:
-    radial-gradient(ellipse at 50% 38%, rgb(124 79 189 / 10%), transparent 55%),
-    var(--citylit-reference-bg);
-}
-.game-screen .game-nav {
-  min-height: 68px;
-  padding-inline: clamp(16px, 4vw, 38px);
-  border-bottom: 1px solid var(--citylit-reference-border);
-  background: color-mix(in srgb, var(--citylit-reference-bg) 82%, transparent);
-  backdrop-filter: blur(22px) saturate(1.2);
-  -webkit-backdrop-filter: blur(22px) saturate(1.2);
-}
-.game-screen .game-back {
-  min-height: 42px;
-  color: var(--citylit-reference-text);
-  font: 600 11px Manrope, sans-serif;
-}
-.game-screen .game-back .citylit-logo-symbol {
-  width: 34px;
-  height: 34px;
-}
-.game-screen .return-to-guide {
-  color: var(--citylit-reference-muted);
-  font-size: 10px;
-}
-.game-screen .utility-nav {
-  gap: 7px;
-}
-.game-screen .utility-nav .icon-button {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  min-height: 40px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 50%;
-  color: var(--citylit-reference-text);
-  background: var(--citylit-reference-panel);
-}
-.game-screen .game-heading {
-  text-align: left;
-  max-width: 1120px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 18px clamp(18px, 4vw, 48px) 0;
-}
-.game-screen .game-heading h1 {
-  color: var(--citylit-reference-text);
-  font: 450 clamp(34px, 5.5vw, 58px)/1.02 Fraunces, Georgia, serif;
-  letter-spacing: -.05em;
-  text-transform: none;
-}
-.game-screen .province-subtitle,
-.game-screen .roman-chapter {
-  color: var(--citylit-reference-muted);
-  font: 500 10px/1.6 Manrope, sans-serif;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-}
-.game-screen .game-search {
-  min-height: 48px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 999px;
-  background: var(--citylit-reference-panel);
-  color: var(--citylit-reference-muted);
-}
-.game-screen .game-search input {
-  color: var(--citylit-reference-text);
-  font: 500 12px Manrope, sans-serif;
-}
-.game-screen .game-stage {
-  min-height: 250px;
-}
-.game-screen .game-controls {
-  max-width: 900px;
-  padding: 12px clamp(14px, 3vw, 28px) max(22px, env(safe-area-inset-bottom));
-}
-.game-map .map-legend {
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--citylit-reference-panel) 92%, transparent);
-  color: var(--citylit-reference-muted);
-  font: 600 10px Manrope, sans-serif;
-}
-.game-map .map-legend > button,
-.game-map .map-legend > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 34px;
-  color: var(--citylit-reference-text);
-  font: inherit;
-}
-.game-map .map-legend i {
-  width: 7px;
-  height: 7px;
-  background: var(--citylit-reference-purple);
-  box-shadow: 0 0 12px rgb(155 92 255 / 45%);
-}
-.game-map .province-picker {
-  width: min(320px, calc(100vw - 32px));
-  max-height: min(52dvh, 420px);
-  overflow: auto;
-  padding: 12px 16px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--citylit-reference-panel) 96%, transparent);
-  box-shadow: var(--citylit-reference-shadow);
-  backdrop-filter: blur(24px);
-}
-.game-map .province-picker a {
-  min-height: 42px;
-  color: var(--citylit-reference-text);
-  border-color: var(--citylit-reference-border);
-  font: 600 11px Manrope, sans-serif;
-}
-.game-map .province-picker a span {
-  margin-left: auto;
-  color: var(--citylit-reference-muted);
-}
-.game-city .landmark-caption {
-  max-width: 620px;
-  padding: 14px 18px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--citylit-reference-panel) 90%, transparent);
-  box-shadow: var(--citylit-reference-shadow);
-  backdrop-filter: blur(20px);
-}
-.game-city .landmark-open h3 {
-  color: var(--citylit-reference-text);
-  font: 450 clamp(24px, 4vw, 34px)/1.1 Fraunces, Georgia, serif;
-  letter-spacing: -.035em;
-  text-transform: none;
-}
-.game-screen .carousel-progress {
-  margin: 12px 0;
-}
-.game-screen .carousel-progress span,
-.game-screen .carousel-progress button:after {
-  background: var(--citylit-reference-border);
-}
-.game-screen .carousel-progress .selected,
-.game-screen .carousel-progress button.selected:after {
-  background: var(--citylit-reference-purple);
-  box-shadow: 0 0 12px rgb(155 92 255 / 40%);
-}
-.game-screen .pill-button {
-  min-height: 44px;
-  border: 0;
-  color: white;
-  background: linear-gradient(115deg, #a66bff, #7542d7);
-  box-shadow: 0 8px 24px rgb(132 77 220 / 24%);
-  font: 700 11px Manrope, sans-serif;
-}
-@media (max-width: 700px) {
-  .game-screen .game-nav {
-    min-height: 60px;
-    padding: 8px 14px;
-  }
-  .game-screen .return-to-guide {
-    display: none;
-  }
-  .game-screen .utility-nav {
-    gap: 4px;
-  }
-  .game-screen .utility-nav .icon-button {
-    width: 36px;
-    min-width: 36px;
-    height: 36px;
-    min-height: 36px;
-  }
-  .game-screen .game-heading {
-    padding-top: 14px;
-  }
-  .game-screen .game-heading h1 {
-    font-size: clamp(31px, 8vw, 42px);
-  }
-  .game-map .map-legend {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .game-city .landmark-caption {
-    padding: 12px 14px;
-  }
-}
-
-
-/* Landmark editorial detail */
-.reference-guide .atlas-landmark-story {
-  width: min(100%, 1080px);
-  margin: 0 auto;
-  padding: 24px clamp(18px, 4vw, 52px) 72px;
-}
-.reference-guide .atlas-landmark-story > .atlas-eyebrow {
-  margin: 12px 0 10px;
-}
-.reference-guide .atlas-landmark-story > h1 {
-  margin: 0;
-  color: var(--citylit-reference-text);
-  font: 450 clamp(40px, 7vw, 76px)/.98 Fraunces, Georgia, serif;
-  letter-spacing: -.06em;
-  text-transform: none;
-}
-.reference-guide .atlas-landmark-story > .atlas-city-intro {
-  max-width: 680px;
-  margin: 13px 0 24px;
-  color: var(--citylit-reference-muted);
-  font-size: 13px;
-  line-height: 1.7;
-}
-.reference-guide .atlas-landmark-story .gallery-hero {
-  min-height: clamp(270px, 52vw, 560px);
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--citylit-reference-shadow);
-}
-.reference-guide .atlas-landmark-story .gallery-hero::after {
-  background: linear-gradient(180deg, transparent 55%, rgb(5 5 9 / 55%));
-}
-.reference-guide .atlas-landmark-story .gallery-hero > span {
-  color: white;
-}
-.reference-guide .atlas-landmark-story .gallery-thumbs button {
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.reference-guide .atlas-landmark-story .gallery-thumbs button.selected {
-  border-color: var(--citylit-reference-purple);
-  box-shadow: 0 0 0 2px rgb(155 92 255 / 16%);
-}
-.reference-guide .atlas-landmark-story .photo-credit,
-.reference-guide .atlas-landmark-story .atlas-photo-credit {
-  color: var(--citylit-reference-muted);
-  font-size: 9px;
-}
-.reference-guide .atlas-landmark-story .atlas-story-facts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin: 24px 0;
-}
-.reference-guide .atlas-landmark-story .atlas-story-facts > div {
-  padding: 16px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 17px;
-  background: var(--citylit-reference-panel);
-}
-.reference-guide .atlas-landmark-story .atlas-story-facts dt {
-  color: var(--citylit-reference-muted);
-  font: 700 9px Manrope, sans-serif;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-.reference-guide .atlas-landmark-story .atlas-story-facts dd {
-  margin: 7px 0 0;
-  color: var(--citylit-reference-text);
-  font: 450 20px/1.15 Fraunces, Georgia, serif;
-}
-.reference-guide .atlas-landmark-story .atlas-story-about,
-.reference-guide .atlas-landmark-story .atlas-story-next {
-  margin-top: 22px;
-  padding: clamp(18px, 3vw, 28px);
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 22px;
-  background: var(--citylit-reference-panel);
-}
-.reference-guide .atlas-landmark-story .atlas-story-about h2,
-.reference-guide .atlas-landmark-story .atlas-story-next h2 {
-  color: var(--citylit-reference-text);
-  font: 450 clamp(26px, 4vw, 38px)/1.08 Fraunces, Georgia, serif;
-  text-transform: none;
-}
-.reference-guide .atlas-landmark-story .atlas-story-about p,
-.reference-guide .atlas-landmark-story .atlas-story-next p {
-  margin-top: 10px;
-  color: var(--citylit-reference-muted);
-  font-size: 12px;
-  line-height: 1.75;
-}
-.reference-guide .atlas-landmark-story .atlas-story-about a,
-.reference-guide .atlas-landmark-story .atlas-story-next a {
-  color: var(--citylit-reference-purple-soft);
-}
-.reference-guide .atlas-landmark-story .atlas-story-next .atlas-button {
-  margin: 10px 8px 0 0;
-  color: white;
-  background: var(--citylit-reference-purple);
-}
-@media (max-width: 700px) {
-  .reference-guide .atlas-landmark-story {
-    padding-top: 12px;
-  }
-  .reference-guide .atlas-landmark-story .gallery-hero {
-    min-height: 290px;
-    aspect-ratio: 1.05;
-    border-radius: 19px;
-  }
-  .reference-guide .atlas-landmark-story .atlas-story-facts {
-    grid-template-columns: 1fr;
-  }
-  .reference-guide .atlas-landmark-story .atlas-story-facts > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-  }
-  .reference-guide .atlas-landmark-story .atlas-story-facts dd {
-    margin: 0;
-    text-align: right;
   }
 }

@@ -7,6 +7,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookmarkSimple,
+  Cube,
   MagnifyingGlass,
   MapPin,
   X,
@@ -87,9 +88,7 @@ export default function DiscoveryHome() {
               <br />
               <em>most iconic places.</em>
             </h1>
-            <p className="reference-home-subtitle">
-              Discover. Learn. Experience.
-            </p>
+            <p className="reference-home-subtitle">Discover. Learn. Experience.</p>
 
             <label className="reference-search">
               <MagnifyingGlass size={20} aria-hidden="true" />
@@ -108,7 +107,7 @@ export default function DiscoveryHome() {
               )}
             </label>
 
-            <div className="reference-filter-row" aria-label="Explore categories">
+            <div className="reference-filter-row" role="group" aria-label="Explore categories">
               {(["All", "Landmarks", "Cities", "Nature"] as const).map((item) => (
                 <button
                   key={item}
@@ -120,6 +119,10 @@ export default function DiscoveryHome() {
                 </button>
               ))}
             </div>
+            <Link className="reference-home-3d-link" href="/?view=3d">
+              <Cube size={17} aria-hidden="true" /> Explore the 3D landscape
+              <ArrowUpRight size={15} aria-hidden="true" />
+            </Link>
           </section>
 
           {resultsVisible ? (
@@ -129,7 +132,11 @@ export default function DiscoveryHome() {
                   <p className="reference-eyebrow">Search results</p>
                   <h2>Find your next place.</h2>
                 </div>
-                <span>{(showCities ? visibleCities.length : 0) + (showLandmarks ? visibleLandmarks.length : 0)} results</span>
+                <span>
+                  {(showCities ? visibleCities.length : 0) +
+                    (showLandmarks ? visibleLandmarks.length : 0)}{" "}
+                  results
+                </span>
               </div>
               {showLandmarks && visibleLandmarks.length > 0 && (
                 <div className="reference-result-list">
@@ -137,9 +144,18 @@ export default function DiscoveryHome() {
                     const record = landmarkSources.find((item) => item.name === name);
                     const photo = record?.images[0];
                     return (
-                      <Link key={`${city.slug}-${name}`} href={landmarkPath(city, name)} className="reference-result-card">
+                      <Link
+                        key={`${city.slug}-${name}`}
+                        href={landmarkPath(city, name)}
+                        className="reference-result-card"
+                      >
                         {photo && <Image src={photo.src} alt={photo.alt} width={88} height={76} />}
-                        <span><strong>{name}</strong><small>{city.name}, {city.province}</small></span>
+                        <span>
+                          <strong>{name}</strong>
+                          <small>
+                            {city.name}, {city.province}
+                          </small>
+                        </span>
                         <ArrowUpRight size={18} />
                       </Link>
                     );
@@ -151,9 +167,16 @@ export default function DiscoveryHome() {
                   {visibleCities.map((city) => {
                     const photo = cityPhoto(city);
                     return (
-                      <Link key={city.slug} href={`/${city.slug}`} className="reference-result-card">
+                      <Link
+                        key={city.slug}
+                        href={`/${city.slug}`}
+                        className="reference-result-card"
+                      >
                         {photo && <Image src={photo.src} alt={photo.alt} width={88} height={76} />}
-                        <span><strong>{city.name}</strong><small>{city.province}</small></span>
+                        <span>
+                          <strong>{city.name}</strong>
+                          <small>{city.province}</small>
+                        </span>
                         <ArrowUpRight size={18} />
                       </Link>
                     );
@@ -164,7 +187,15 @@ export default function DiscoveryHome() {
                 (!showLandmarks || visibleLandmarks.length === 0) && (
                   <div className="reference-empty">
                     <p>No places found for “{query}”.</p>
-                    <button type="button" onClick={() => { setQuery(""); setFilter("All"); }}>Clear search</button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setQuery("");
+                        setFilter("All");
+                      }}
+                    >
+                      Clear search
+                    </button>
                   </div>
                 )}
             </section>
@@ -191,13 +222,17 @@ export default function DiscoveryHome() {
                       <ArrowUpRight size={20} />
                     </Link>
                     <div className="reference-featured-copy">
-                      <p>{featured.city.name}, {featured.city.province}</p>
+                      <p>
+                        {featured.city.name}, {featured.city.province}
+                      </p>
                       <h2>{featured.landmark.name}</h2>
                     </div>
                   </div>
                   <div className="reference-featured-footer">
                     <span>Discover the stories behind South Africa’s landmarks</span>
-                    <Link href={landmarkPath(featured.city, featured.landmark.name)}>Explore landmark <ArrowRight size={16} /></Link>
+                    <Link href={landmarkPath(featured.city, featured.landmark.name)}>
+                      Explore landmark <ArrowRight size={16} />
+                    </Link>
                   </div>
                 </section>
               )}
@@ -209,15 +244,28 @@ export default function DiscoveryHome() {
                       <p className="reference-eyebrow">Start somewhere</p>
                       <h2 id="reference-popular-title">Popular destinations</h2>
                     </div>
-                    <Link href="/destinations">See all <ArrowUpRight size={16} /></Link>
+                    <Link href="/destinations">
+                      See all <ArrowUpRight size={16} />
+                    </Link>
                   </div>
                   <div className="reference-city-strip">
                     {cities.slice(0, 6).map((city) => {
                       const photo = cityPhoto(city);
                       return (
-                        <Link key={city.slug} href={`/${city.slug}`} className="reference-city-tile">
+                        <Link
+                          key={city.slug}
+                          href={`/${city.slug}`}
+                          className="reference-city-tile"
+                        >
                           <span className="reference-city-image">
-                            {photo && <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 700px) 42vw, 220px" />}
+                            {photo && (
+                              <Image
+                                src={photo.src}
+                                alt={photo.alt}
+                                fill
+                                sizes="(max-width: 700px) 42vw, 220px"
+                              />
+                            )}
                           </span>
                           <strong>{city.name}</strong>
                           <small>{city.province}</small>
@@ -229,8 +277,15 @@ export default function DiscoveryHome() {
               )}
 
               <section className="reference-quick-links" aria-label="More ways to explore">
-                <Link href="/destinations"><MapPin size={19} /> Browse all cities <ArrowUpRight size={16} /></Link>
-                <Link href="/explore?tab=day"><BookmarkSimple size={19} /> Open My Day <ArrowUpRight size={16} /></Link>
+                <Link href="/destinations">
+                  <MapPin size={19} /> Browse all cities <ArrowUpRight size={16} />
+                </Link>
+                <Link href="/explore?tab=day">
+                  <BookmarkSimple size={19} /> Plan a day <ArrowUpRight size={16} />
+                </Link>
+                <Link href="/?view=3d">
+                  <Cube size={19} /> Explore in 3D <ArrowUpRight size={16} />
+                </Link>
               </section>
             </>
           )}

@@ -16,7 +16,6 @@ import {
   MapPin,
   Moon,
   SpeakerHigh,
-  SpeakerSlash,
   Sun,
   Vibrate,
   X,
@@ -463,7 +462,10 @@ export default function Explorer() {
             className="icon-button"
             aria-label="Experience settings"
             aria-haspopup="dialog"
-            onClick={() => { setSettingsTab("appearance"); setShowSettings(true); }}
+            onClick={() => {
+              setSettingsTab("appearance");
+              setShowSettings(true);
+            }}
           >
             <GearSix size={18} weight={showSettings ? "fill" : "regular"} />
           </button>
@@ -918,13 +920,27 @@ export default function Explorer() {
               >
                 <X size={18} weight="bold" />
               </button>
-              <span className="tiny-label">{showSettings ? "PREFERENCES" : help ? "A LITTLE HELP" : "YOUR OWN LITTLE ADVENTURE"}</span>
+              <span className="tiny-label">
+                {showSettings
+                  ? "PREFERENCES"
+                  : help
+                    ? "A LITTLE HELP"
+                    : "YOUR OWN LITTLE ADVENTURE"}
+              </span>
               <h2>
-                {showSettings ? "Settings" : help ? "Follow a little curiosity." : "Your discoveries."}
+                {showSettings
+                  ? "Settings"
+                  : help
+                    ? "Follow a little curiosity."
+                    : "Your discoveries."}
               </h2>
               {showSettings ? (
                 <div className="experience-settings reference-settings">
-                  <div className="reference-settings-tabs" role="tablist" aria-label="Settings sections">
+                  <div
+                    className="reference-settings-tabs"
+                    role="tablist"
+                    aria-label="Settings sections"
+                  >
                     {(["appearance", "map", "about"] as const).map((tab) => (
                       <button
                         key={tab}
@@ -941,23 +957,41 @@ export default function Explorer() {
                     <>
                       <p className="reference-settings-label">Theme</p>
                       <div className="reference-theme-options">
-                        <button type="button" aria-pressed={night} onClick={() => { if (!night) switchTheme(); }}>
+                        <button
+                          type="button"
+                          aria-pressed={night}
+                          onClick={() => {
+                            if (!night) switchTheme();
+                          }}
+                        >
                           <Moon size={21} /> <span>Dark</span>
                         </button>
-                        <button type="button" aria-pressed={!night} onClick={() => { if (night) switchTheme(); }}>
+                        <button
+                          type="button"
+                          aria-pressed={!night}
+                          onClick={() => {
+                            if (night) switchTheme();
+                          }}
+                        >
                           <Sun size={21} /> <span>Light</span>
                         </button>
                       </div>
                       <label className="reference-setting-toggle">
-                        <span><SpeakerHigh size={18} /> Sound effects</span>
+                        <span>
+                          <SpeakerHigh size={18} /> Sound effects
+                        </span>
                         <input type="checkbox" checked={sound} onChange={toggleSound} />
                       </label>
                       <label className="reference-setting-toggle">
-                        <span><Vibrate size={18} /> Touch feedback</span>
+                        <span>
+                          <Vibrate size={18} /> Touch feedback
+                        </span>
                         <input type="checkbox" checked={haptics} onChange={toggleHaptics} />
                       </label>
                       <label className="reference-setting-toggle">
-                        <span><Moon size={18} /> Reduce continuous motion</span>
+                        <span>
+                          <Moon size={18} /> Reduce continuous motion
+                        </span>
                         <input
                           type="checkbox"
                           checked={discovery.essential}
@@ -970,32 +1004,49 @@ export default function Explorer() {
                   ) : settingsTab === "map" ? (
                     <>
                       <p className="reference-settings-label">Explore the atlas</p>
-                      <p>Choose a city to open its interactive landmark scene, or browse every destination.</p>
+                      <p>
+                        Choose a city to open its interactive landmark scene, or browse every
+                        destination.
+                      </p>
                       <div className="reference-settings-city-list">
                         {cities.slice(0, 8).map((item) => (
                           <Link key={item.slug} href={`/${item.slug}`}>
                             <MapPin size={16} />
-                            <span>{item.name}<small>{item.province}</small></span>
+                            <span>
+                              {item.name}
+                              <small>{item.province}</small>
+                            </span>
                             <ArrowUpRight size={15} />
                           </Link>
                         ))}
                       </div>
-                      <Link className="pill-button" href="/destinations">Browse all cities <ArrowUpRight size={14} /></Link>
+                      <Link className="pill-button" href="/destinations">
+                        Browse all cities <ArrowUpRight size={14} />
+                      </Link>
                     </>
                   ) : (
                     <>
-                      <p>Citylit is a playful guide to South African places, stories and small discoveries.</p>
+                      <p>
+                        Citylit is a playful guide to South African places, stories and small
+                        discoveries.
+                      </p>
                       <div className="settings-play">
                         <p className="tiny-label">Map and artwork credits</p>
                         <p>
                           Map geometry: geoBoundaries / OCHA / MDB, adapted,{" "}
-                          <a href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/" target="_blank" rel="noreferrer">
+                          <a
+                            href="https://www.geoboundaries.org/api/current/gbOpen/ZAF/ADM1/"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
                             CC BY 3.0 IGO
                           </a>
                           . Citylit toys are original illustrations.
                         </p>
                       </div>
-                      <Link className="brand-link" href="/brand">Meet Khwezi &amp; the Citylit story <ArrowUpRight size={14} /></Link>
+                      <Link className="brand-link" href="/brand">
+                        Meet Khwezi &amp; the Citylit story <ArrowUpRight size={14} />
+                      </Link>
                       <div className="settings-information">
                         <Link href="/about">About &amp; sources</Link>
                         <Link href="/privacy">Privacy &amp; data</Link>

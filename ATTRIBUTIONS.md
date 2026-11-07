@@ -39,3 +39,5 @@ Additional source pages include SANBI national garden listings, Visit Stellenbos
 ## UI interactions
 
 The magnetic button interaction in `components/ui/MagneticButton.tsx` is adapted from [EasyUI](https://github.com/Surajmaurya1/easyui), Copyright (c) 2026 Suraj Maurya, distributed under the [MIT License](https://github.com/Surajmaurya1/easyui/blob/main/LICENSE). It is adapted for Citylit's existing Motion package, accessible focus states, coarse-pointer behavior and reduced-motion preference.
+
+The animated planner tabs in `components/ui/AnimatedTabs.tsx` are adapted from [EasyUI's Animated Tabs](https://github.com/Surajmaurya1/easyui/blob/main/src/components/ui/AnimatedTabs.tsx), Copyright (c) 2026 Suraj Maurya, distributed under the [MIT License](https://github.com/Surajmaurya1/easyui/blob/main/LICENSE). Citylit's version uses its existing Motion package and visual tokens, with tab roles, linked panels, arrow-key navigation and reduced-motion support.

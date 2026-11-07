@@ -51,6 +51,9 @@
   ) {
   border-color: var(--citylit-border);
 }
+.reference-guide .atlas-directory {
+  padding-inline: var(--citylit-page-gutter);
+}
 .reference-guide .atlas-nav {
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(18px);

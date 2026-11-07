@@ -36,6 +36,7 @@ for (const key of ["table", "union", "stadium", "hole"]) {
 }
 assert.match(builders, /ponte/i);
 assert.match(builders, /citylit-geological-strata-v1/);
+assert.match(builders, /domeRibs/);
 assert.match(builders, /moses-mabhida-single-signature-arch/);
 assert.match(builders, /ponte-city-inner-atrium-wall/);
 assert.match(builders, /ponte-city-inner-atrium-gallery-floors/);

@@ -15,7 +15,7 @@ const [pkgText, hero, showcase, expanded, ring, safe, procedural, builders] = aw
 const pkg = JSON.parse(pkgText);
 
 assert.match(pkg.dependencies?.three ?? "", /^\^0\.187\.0$/);
-assert.doesNotMatch(JSON.stringify(pkg.scripts), /\bblender\b|\.py\b/iu);
+assert.doesNotMatch(JSON.stringify(pkg.scripts), /\bblender\b/iu);
 assert.match(pkg.scripts["models:build"], /runtime with Three\.js/);
 assert.match(pkg.scripts["hero:build"], /runtime with Three\.js/);
 

@@ -13,6 +13,7 @@ import {
   GearSix,
   Heart,
   MagnifyingGlass,
+  MapPin,
   Moon,
   SpeakerHigh,
   SpeakerSlash,

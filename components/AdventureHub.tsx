@@ -110,20 +110,29 @@ export default function AdventureHub() {
       setMessage(`Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`);
       return;
     }
+    let rejected = false;
     void update((previous) => {
-      if (previous.itinerary.includes(id)) return {};
+      if (previous.itinerary.includes(id)) {
+        rejected = true;
+        return {};
+      }
       const first = places.find((place) => place.id === previous.itinerary[0]);
       const target = places.find((place) => place.id === id);
       if (
         (first && target && first.city !== target.city) ||
         previous.itinerary.length >= MAX_TRIP_STOPS
-      ) return {};
+      ) {
+        rejected = true;
+        return {};
+      }
       return { itinerary: [...previous.itinerary, id] };
     }).then((saved) =>
       setMessage(
-        saved
-          ? "Added to your day."
-          : "Your day could not be updated. Check its destination, stop limit and browser storage.",
+        rejected
+          ? "Already in your day, or your day is full or belongs to another destination."
+          : saved
+            ? "Added to your day."
+            : "Your day could not be updated. Check browser storage.",
       ),
     );
   };

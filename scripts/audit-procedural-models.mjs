@@ -26,7 +26,7 @@ assert.doesNotMatch(
 assert.match(pkg.scripts["models:build"], /runtime with Three\.js/);
 assert.match(pkg.scripts["hero:build"], /runtime with Three\.js/);
 
-assert.match(hero, /<MuseumShowcase \.\.\.props\s*\/>/);
+assert.match(hero, /<MuseumShowcase \{\.\.\.props\}\s*\/>/);
 assert.doesNotMatch(hero, /useGLTF|GLTFLoader|\.glb|\/draco\//i);
 assert.doesNotMatch(stageModel, /useGLTF|GLTFLoader|\.glb|\/draco\//i);
 assert.match(stageModel, /ProceduralStageModel/);

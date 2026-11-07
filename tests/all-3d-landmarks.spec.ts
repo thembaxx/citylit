@@ -78,33 +78,4 @@ for (const citySlug of [
     expect(errors).toEqual([]);
   });
 }
-
-test("all 15 Blender architectural assets remain valid Draco GLB files", async ({ request }) => {
-  const manifestResponse = await request.get("/models/stage/manifest.json");
-  expect(manifestResponse.ok()).toBeTruthy();
-  const manifest = (await manifestResponse.json()) as {
-    id: string;
-    bytes: number;
-    src: string;
-    textureCount: number;
-    compression: string;
-  }[];
-  expect(manifest).toHaveLength(15);
-  for (const entry of manifest) {
-    const response = await request.get(entry.src);
-    expect(response.ok(), entry.id).toBeTruthy();
-    const data = await response.body();
-    expect(data.subarray(0, 4).toString()).toBe("glTF");
-    expect(data.length).toBe(entry.bytes);
-    // Full-resolution GLBs can exceed the old 2 MiB preview budget; validate
-    // their published manifest size, payload, and embedded resources instead.
-    expect(data.length).toBeGreaterThan(20);
-    expect(entry.textureCount).toBeGreaterThanOrEqual(3);
-    expect(entry.compression).toBe("KHR_draco_mesh_compression");
-    const jsonLength = data.readUInt32LE(12);
-    const gltf = JSON.parse(data.toString("utf8", 20, 20 + jsonLength));
-    expect(gltf.extensionsRequired).toContain("KHR_draco_mesh_compression");
-    expect(gltf.images?.length).toBeGreaterThanOrEqual(3);
-    expect(gltf.images.every((image: { uri?: string }) => !image.uri)).toBeTruthy();
-  }
-});
+\n

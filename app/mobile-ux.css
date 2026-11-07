@@ -518,7 +518,9 @@
     color: var(--muted);
   }
 
-  .reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-panel[popover]:popover-open {
+  .reference-stage-guide
+    .atlas-ring-scene.is-heritage-hero
+    .atlas-inspector-panel[popover]:popover-open {
     max-height: min(
       56dvh,
       calc(100dvh - 112px - env(safe-area-inset-top) - env(safe-area-inset-bottom))

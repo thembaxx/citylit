@@ -24,7 +24,7 @@ for (const citySlug of [
     });
     const glbRequests: string[] = [];
     page.on("request", (request) => {
-      if (/\\/models\\/(?:stage|hero)\\/.*\\.glb(?:$|\\?)/i.test(request.url())) {
+      if ((request.url().includes("/models/stage/") || request.url().includes("/models/hero/")) && request.url().endsWith(".glb")) {
         glbRequests.push(request.url());
       }
     });

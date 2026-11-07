@@ -1378,3 +1378,131 @@
     padding: 12px 14px;
   }
 }
+
+
+/* Landmark editorial detail */
+.reference-guide .atlas-landmark-story {
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  padding: 24px clamp(18px, 4vw, 52px) 72px;
+}
+.reference-guide .atlas-landmark-story > .atlas-eyebrow {
+  margin: 12px 0 10px;
+}
+.reference-guide .atlas-landmark-story > h1 {
+  margin: 0;
+  color: var(--citylit-reference-text);
+  font: 450 clamp(40px, 7vw, 76px)/.98 Fraunces, Georgia, serif;
+  letter-spacing: -.06em;
+  text-transform: none;
+}
+.reference-guide .atlas-landmark-story > .atlas-city-intro {
+  max-width: 680px;
+  margin: 13px 0 24px;
+  color: var(--citylit-reference-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.reference-guide .atlas-landmark-story .gallery-hero {
+  min-height: clamp(270px, 52vw, 560px);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--citylit-reference-shadow);
+}
+.reference-guide .atlas-landmark-story .gallery-hero::after {
+  background: linear-gradient(180deg, transparent 55%, rgb(5 5 9 / 55%));
+}
+.reference-guide .atlas-landmark-story .gallery-hero > span {
+  color: white;
+}
+.reference-guide .atlas-landmark-story .gallery-thumbs button {
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.reference-guide .atlas-landmark-story .gallery-thumbs button.selected {
+  border-color: var(--citylit-reference-purple);
+  box-shadow: 0 0 0 2px rgb(155 92 255 / 16%);
+}
+.reference-guide .atlas-landmark-story .photo-credit,
+.reference-guide .atlas-landmark-story .atlas-photo-credit {
+  color: var(--citylit-reference-muted);
+  font-size: 9px;
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts > div {
+  padding: 16px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 17px;
+  background: var(--citylit-reference-panel);
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts dt {
+  color: var(--citylit-reference-muted);
+  font: 700 9px Manrope, sans-serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.reference-guide .atlas-landmark-story .atlas-story-facts dd {
+  margin: 7px 0 0;
+  color: var(--citylit-reference-text);
+  font: 450 20px/1.15 Fraunces, Georgia, serif;
+}
+.reference-guide .atlas-landmark-story .atlas-story-about,
+.reference-guide .atlas-landmark-story .atlas-story-next {
+  margin-top: 22px;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 22px;
+  background: var(--citylit-reference-panel);
+}
+.reference-guide .atlas-landmark-story .atlas-story-about h2,
+.reference-guide .atlas-landmark-story .atlas-story-next h2 {
+  color: var(--citylit-reference-text);
+  font: 450 clamp(26px, 4vw, 38px)/1.08 Fraunces, Georgia, serif;
+  text-transform: none;
+}
+.reference-guide .atlas-landmark-story .atlas-story-about p,
+.reference-guide .atlas-landmark-story .atlas-story-next p {
+  margin-top: 10px;
+  color: var(--citylit-reference-muted);
+  font-size: 12px;
+  line-height: 1.75;
+}
+.reference-guide .atlas-landmark-story .atlas-story-about a,
+.reference-guide .atlas-landmark-story .atlas-story-next a {
+  color: var(--citylit-reference-purple-soft);
+}
+.reference-guide .atlas-landmark-story .atlas-story-next .atlas-button {
+  margin: 10px 8px 0 0;
+  color: white;
+  background: var(--citylit-reference-purple);
+}
+@media (max-width: 700px) {
+  .reference-guide .atlas-landmark-story {
+    padding-top: 12px;
+  }
+  .reference-guide .atlas-landmark-story .gallery-hero {
+    min-height: 290px;
+    aspect-ratio: 1.05;
+    border-radius: 19px;
+  }
+  .reference-guide .atlas-landmark-story .atlas-story-facts {
+    grid-template-columns: 1fr;
+  }
+  .reference-guide .atlas-landmark-story .atlas-story-facts > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .reference-guide .atlas-landmark-story .atlas-story-facts dd {
+    margin: 0;
+    text-align: right;
+  }
+}

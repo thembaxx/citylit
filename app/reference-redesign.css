@@ -1177,3 +1177,204 @@
     justify-content: flex-end;
   }
 }
+
+
+/* Atlas / map scene treatment */
+.game-screen {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgb(126 75 193 / 12%), transparent 48%),
+    var(--citylit-reference-bg);
+  color: var(--citylit-reference-text);
+}
+.game-screen .game-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 38%, rgb(124 79 189 / 10%), transparent 55%),
+    var(--citylit-reference-bg);
+}
+.game-screen .game-nav {
+  min-height: 68px;
+  padding-inline: clamp(16px, 4vw, 38px);
+  border-bottom: 1px solid var(--citylit-reference-border);
+  background: color-mix(in srgb, var(--citylit-reference-bg) 82%, transparent);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+}
+.game-screen .game-back {
+  min-height: 42px;
+  color: var(--citylit-reference-text);
+  font: 600 11px Manrope, sans-serif;
+}
+.game-screen .game-back .citylit-logo-symbol {
+  width: 34px;
+  height: 34px;
+}
+.game-screen .return-to-guide {
+  color: var(--citylit-reference-muted);
+  font-size: 10px;
+}
+.game-screen .utility-nav {
+  gap: 7px;
+}
+.game-screen .utility-nav .icon-button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 50%;
+  color: var(--citylit-reference-text);
+  background: var(--citylit-reference-panel);
+}
+.game-screen .game-heading {
+  text-align: left;
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 18px clamp(18px, 4vw, 48px) 0;
+}
+.game-screen .game-heading h1 {
+  color: var(--citylit-reference-text);
+  font: 450 clamp(34px, 5.5vw, 58px)/1.02 Fraunces, Georgia, serif;
+  letter-spacing: -.05em;
+  text-transform: none;
+}
+.game-screen .province-subtitle,
+.game-screen .roman-chapter {
+  color: var(--citylit-reference-muted);
+  font: 500 10px/1.6 Manrope, sans-serif;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.game-screen .game-search {
+  min-height: 48px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: var(--citylit-reference-panel);
+  color: var(--citylit-reference-muted);
+}
+.game-screen .game-search input {
+  color: var(--citylit-reference-text);
+  font: 500 12px Manrope, sans-serif;
+}
+.game-screen .game-stage {
+  min-height: 250px;
+}
+.game-screen .game-controls {
+  max-width: 900px;
+  padding: 12px clamp(14px, 3vw, 28px) max(22px, env(safe-area-inset-bottom));
+}
+.game-map .map-legend {
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 92%, transparent);
+  color: var(--citylit-reference-muted);
+  font: 600 10px Manrope, sans-serif;
+}
+.game-map .map-legend > button,
+.game-map .map-legend > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  color: var(--citylit-reference-text);
+  font: inherit;
+}
+.game-map .map-legend i {
+  width: 7px;
+  height: 7px;
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 0 12px rgb(155 92 255 / 45%);
+}
+.game-map .province-picker {
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(52dvh, 420px);
+  overflow: auto;
+  padding: 12px 16px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 96%, transparent);
+  box-shadow: var(--citylit-reference-shadow);
+  backdrop-filter: blur(24px);
+}
+.game-map .province-picker a {
+  min-height: 42px;
+  color: var(--citylit-reference-text);
+  border-color: var(--citylit-reference-border);
+  font: 600 11px Manrope, sans-serif;
+}
+.game-map .province-picker a span {
+  margin-left: auto;
+  color: var(--citylit-reference-muted);
+}
+.game-city .landmark-caption {
+  max-width: 620px;
+  padding: 14px 18px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 90%, transparent);
+  box-shadow: var(--citylit-reference-shadow);
+  backdrop-filter: blur(20px);
+}
+.game-city .landmark-open h3 {
+  color: var(--citylit-reference-text);
+  font: 450 clamp(24px, 4vw, 34px)/1.1 Fraunces, Georgia, serif;
+  letter-spacing: -.035em;
+  text-transform: none;
+}
+.game-screen .carousel-progress {
+  margin: 12px 0;
+}
+.game-screen .carousel-progress span,
+.game-screen .carousel-progress button:after {
+  background: var(--citylit-reference-border);
+}
+.game-screen .carousel-progress .selected,
+.game-screen .carousel-progress button.selected:after {
+  background: var(--citylit-reference-purple);
+  box-shadow: 0 0 12px rgb(155 92 255 / 40%);
+}
+.game-screen .pill-button {
+  min-height: 44px;
+  border: 0;
+  color: white;
+  background: linear-gradient(115deg, #a66bff, #7542d7);
+  box-shadow: 0 8px 24px rgb(132 77 220 / 24%);
+  font: 700 11px Manrope, sans-serif;
+}
+@media (max-width: 700px) {
+  .game-screen .game-nav {
+    min-height: 60px;
+    padding: 8px 14px;
+  }
+  .game-screen .return-to-guide {
+    display: none;
+  }
+  .game-screen .utility-nav {
+    gap: 4px;
+  }
+  .game-screen .utility-nav .icon-button {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+  }
+  .game-screen .game-heading {
+    padding-top: 14px;
+  }
+  .game-screen .game-heading h1 {
+    font-size: clamp(31px, 8vw, 42px);
+  }
+  .game-map .map-legend {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .game-city .landmark-caption {
+    padding: 12px 14px;
+  }
+}

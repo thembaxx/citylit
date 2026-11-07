@@ -79,7 +79,7 @@ export default function DiscoveryHome() {
           </div>
         </header>
 
-        <main className="reference-home-main">
+        <div className="reference-home-main">
           <section className="reference-home-hero" aria-labelledby="reference-home-title">
             <p className="reference-eyebrow">A little closer to somewhere wonderful</p>
             <h1 id="reference-home-title">

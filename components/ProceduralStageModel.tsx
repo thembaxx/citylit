@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import {
@@ -37,15 +37,26 @@ export default function ProceduralStageModel({
 }) {
   const { invalidate } = useThree();
   const subject = useMemo(() => createProceduralLandmark(name, model), [name, model]);
+  const explodedTarget = useRef(explodedProgress);
+  const explodedCurrent = useRef(explodedProgress);
 
   useEffect(() => {
     prepareLandmarkExplodedView(subject);
-    setLandmarkExplodedView(subject, explodedProgress);
+    setLandmarkExplodedView(subject, explodedCurrent.current);
     subject.userData.setExplodedView = (progress: number) =>
       setLandmarkExplodedView(subject, progress);
     setProceduralNight(subject, night);
     invalidate();
-  }, [subject, night, explodedProgress, invalidate]);
+  }, [subject, night, invalidate]);
+
+  useEffect(() => {
+    explodedTarget.current = explodedProgress;
+    if (reduced) {
+      explodedCurrent.current = explodedProgress;
+      setLandmarkExplodedView(subject, explodedProgress);
+    }
+    invalidate();
+  }, [subject, explodedProgress, reduced, invalidate]);
 
   useEffect(() => {
     onReady?.();
@@ -60,8 +71,27 @@ export default function ProceduralStageModel({
     return () => window.clearInterval(timer);
   }, [active, reduced, invalidate]);
 
-  useFrame(({ clock }) => {
-    if (!active || reduced || document.hidden) return;
+  useFrame(({ clock }, delta) => {
+    if (!active || document.hidden) return;
+    if (reduced) {
+      if (explodedCurrent.current !== explodedTarget.current) {
+        explodedCurrent.current = explodedTarget.current;
+        setLandmarkExplodedView(subject, explodedCurrent.current);
+      }
+      return;
+    }
+    const next = THREE.MathUtils.damp(
+      explodedCurrent.current,
+      explodedTarget.current,
+      8.5,
+      Math.min(delta, 0.05),
+    );
+    if (Math.abs(next - explodedTarget.current) < 0.001) {
+      explodedCurrent.current = explodedTarget.current;
+    } else {
+      explodedCurrent.current = next;
+    }
+    setLandmarkExplodedView(subject, explodedCurrent.current);
     const tick = subject.userData.tick as ((time: number, night: number) => void) | undefined;
     tick?.(clock.elapsedTime, night ? 1 : 0);
   });

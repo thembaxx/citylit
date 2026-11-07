@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import {
@@ -8,6 +8,10 @@ import {
   disposeProceduralLandmark,
   setProceduralNight,
 } from "../lib/procedural-landmarks";
+import {
+  prepareLandmarkExplodedView,
+  setLandmarkExplodedView,
+} from "../lib/landmark-exploded-view.js";
 
 /**
  * One genuine Three.js scene per place, with no downloaded GLB or image textures.
@@ -20,6 +24,7 @@ export default function ProceduralStageModel({
   night = false,
   reduced = false,
   onReady,
+  explodedProgress = 0,
 }: {
   name: string;
   model: string;
@@ -27,14 +32,32 @@ export default function ProceduralStageModel({
   night?: boolean;
   reduced?: boolean;
   onReady?: () => void;
+  /** 0 keeps the landmark assembled; 1 separates its authored top-level layers. */
+  explodedProgress?: number;
 }) {
-  const { invalidate } = useThree();
+  const { gl, invalidate } = useThree();
   const subject = useMemo(() => createProceduralLandmark(name, model), [name, model]);
+  const explodedTarget = useRef(explodedProgress);
+  const explodedCurrent = useRef(explodedProgress);
 
   useEffect(() => {
+    prepareLandmarkExplodedView(subject);
+    setLandmarkExplodedView(subject, explodedCurrent.current);
     setProceduralNight(subject, night);
     invalidate();
   }, [subject, night, invalidate]);
+
+  useEffect(() => {
+    explodedTarget.current = explodedProgress;
+    if (reduced) {
+      explodedCurrent.current = explodedProgress;
+      setLandmarkExplodedView(subject, explodedProgress);
+    }
+    if (active) {
+      gl.domElement.dataset.explodedProgress = explodedCurrent.current.toFixed(3);
+    }
+    invalidate();
+  }, [subject, explodedProgress, reduced, active, gl, invalidate]);
 
   useEffect(() => {
     onReady?.();
@@ -49,8 +72,29 @@ export default function ProceduralStageModel({
     return () => window.clearInterval(timer);
   }, [active, reduced, invalidate]);
 
-  useFrame(({ clock }) => {
-    if (!active || reduced || document.hidden) return;
+  useFrame(({ clock }, delta) => {
+    if (!active || document.hidden) return;
+    if (reduced) {
+      if (explodedCurrent.current !== explodedTarget.current) {
+        explodedCurrent.current = explodedTarget.current;
+        setLandmarkExplodedView(subject, explodedCurrent.current);
+        gl.domElement.dataset.explodedProgress = explodedCurrent.current.toFixed(3);
+      }
+      return;
+    }
+    const next = THREE.MathUtils.damp(
+      explodedCurrent.current,
+      explodedTarget.current,
+      8.5,
+      Math.min(delta, 0.05),
+    );
+    const settled = Math.abs(next - explodedTarget.current) < 0.001;
+    const previous = explodedCurrent.current;
+    explodedCurrent.current = settled ? explodedTarget.current : next;
+    if (explodedCurrent.current !== previous) {
+      setLandmarkExplodedView(subject, explodedCurrent.current);
+      gl.domElement.dataset.explodedProgress = explodedCurrent.current.toFixed(3);
+    }
     const tick = subject.userData.tick as ((time: number, night: number) => void) | undefined;
     tick?.(clock.elapsedTime, night ? 1 : 0);
   });

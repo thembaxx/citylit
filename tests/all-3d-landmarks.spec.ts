@@ -36,6 +36,16 @@ for (const citySlug of [
 
     await toolbar.getByRole("button", { name: "Switch to night lighting" }).click();
     await expect(toolbar.getByRole("button", { name: "Switch to daylight" })).toBeVisible();
+    const explode = toolbar.getByRole("button", { name: "Exploded view" });
+    const sceneCanvas = page.locator(".atlas-ring-scene canvas");
+    await expect(explode).toBeVisible();
+    await expect(explode).toHaveAttribute("aria-pressed", "false");
+    await explode.click();
+    await expect(explode).toHaveAttribute("aria-pressed", "true");
+    await expect(sceneCanvas).toHaveAttribute("data-exploded-progress", "1.000");
+    await explode.click();
+    await expect(explode).toHaveAttribute("aria-pressed", "false");
+    await expect(sceneCanvas).toHaveAttribute("data-exploded-progress", "0.000");
     await toolbar.getByRole("button", { name: "Rotate selected miniature" }).click();
     await toolbar.getByRole("button", { name: "Zoom in" }).click();
     await toolbar.getByRole("button", { name: "Close-up" }).click();

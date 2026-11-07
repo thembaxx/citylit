@@ -54,20 +54,23 @@ export default function PlanVisit({
       );
       return;
     }
+    let rejected = false;
     void update((previous) => {
+      if (previous.itinerary.includes(place.id))
+        return { itinerary: previous.itinerary.filter((id) => id !== place.id) };
       const first = places.find((item) => item.id === previous.itinerary[0]);
-      if (!included && first && first.city !== city) return {};
-      if (!included && previous.itinerary.length >= MAX_TRIP_STOPS) return {};
-      return {
-        itinerary: previous.itinerary.includes(place.id)
-          ? previous.itinerary.filter((id) => id !== place.id)
-          : [...previous.itinerary, place.id],
-      };
+      if ((first && first.city !== city) || previous.itinerary.length >= MAX_TRIP_STOPS) {
+        rejected = true;
+        return {};
+      }
+      return { itinerary: [...previous.itinerary, place.id] };
     }).then((saved) => {
       setMessage(
-        saved
-          ? `${place.name} ${included ? "removed from" : "added to"} your day.`
-          : "This browser could not save your day. Allow site storage and try again.",
+        rejected
+          ? "Your day is full or belongs to another destination. Review it before adding this stop."
+          : saved
+            ? `${place.name} ${included ? "removed from" : "added to"} your day.`
+            : "This browser could not save your day. Allow site storage and try again.",
       );
     });
   };

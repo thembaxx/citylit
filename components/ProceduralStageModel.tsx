@@ -35,7 +35,7 @@ export default function ProceduralStageModel({
   /** 0 keeps the landmark assembled; 1 separates its authored top-level layers. */
   explodedProgress?: number;
 }) {
-  const { invalidate } = useThree();
+  const { gl, invalidate } = useThree();
   const subject = useMemo(() => createProceduralLandmark(name, model), [name, model]);
   const explodedTarget = useRef(explodedProgress);
   const explodedCurrent = useRef(explodedProgress);
@@ -43,8 +43,6 @@ export default function ProceduralStageModel({
   useEffect(() => {
     prepareLandmarkExplodedView(subject);
     setLandmarkExplodedView(subject, explodedCurrent.current);
-    subject.userData.setExplodedView = (progress: number) =>
-      setLandmarkExplodedView(subject, progress);
     setProceduralNight(subject, night);
     invalidate();
   }, [subject, night, invalidate]);
@@ -55,8 +53,11 @@ export default function ProceduralStageModel({
       explodedCurrent.current = explodedProgress;
       setLandmarkExplodedView(subject, explodedProgress);
     }
+    if (active) {
+      gl.domElement.dataset.explodedProgress = explodedCurrent.current.toFixed(3);
+    }
     invalidate();
-  }, [subject, explodedProgress, reduced, invalidate]);
+  }, [subject, explodedProgress, reduced, active, gl, invalidate]);
 
   useEffect(() => {
     onReady?.();
@@ -77,6 +78,7 @@ export default function ProceduralStageModel({
       if (explodedCurrent.current !== explodedTarget.current) {
         explodedCurrent.current = explodedTarget.current;
         setLandmarkExplodedView(subject, explodedCurrent.current);
+        gl.domElement.dataset.explodedProgress = explodedCurrent.current.toFixed(3);
       }
       return;
     }
@@ -86,12 +88,13 @@ export default function ProceduralStageModel({
       8.5,
       Math.min(delta, 0.05),
     );
-    if (Math.abs(next - explodedTarget.current) < 0.001) {
-      explodedCurrent.current = explodedTarget.current;
-    } else {
-      explodedCurrent.current = next;
+    const settled = Math.abs(next - explodedTarget.current) < 0.001;
+    const previous = explodedCurrent.current;
+    explodedCurrent.current = settled ? explodedTarget.current : next;
+    if (explodedCurrent.current !== previous) {
+      setLandmarkExplodedView(subject, explodedCurrent.current);
+      gl.domElement.dataset.explodedProgress = explodedCurrent.current.toFixed(3);
     }
-    setLandmarkExplodedView(subject, explodedCurrent.current);
     const tick = subject.userData.tick as ((time: number, night: number) => void) | undefined;
     tick?.(clock.elapsedTime, night ? 1 : 0);
   });

@@ -993,3 +993,187 @@
   background: var(--citylit-reference-purple);
   color: white;
 }
+
+
+/* Saved places and itinerary surfaces */
+.field-guide .field-guide-header {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  min-height: 66px;
+  padding: 10px clamp(16px, 4vw, 30px);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 0 0 20px 20px;
+  background: color-mix(in srgb, var(--citylit-reference-bg) 88%, transparent);
+  backdrop-filter: blur(22px);
+}
+.field-guide .field-guide-header > a {
+  color: var(--citylit-reference-muted);
+  font-size: 11px;
+  font-weight: 650;
+  text-decoration: none;
+}
+.field-guide .field-guide-intro {
+  max-width: 540px;
+  font-size: 12px;
+}
+.field-guide .hub-tabs {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  margin: 24px 0 18px;
+  padding: 5px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: var(--citylit-reference-bg);
+  scrollbar-width: none;
+}
+.field-guide .hub-tabs::-webkit-scrollbar {
+  display: none;
+}
+.field-guide .hub-tabs button {
+  flex: 1 0 auto;
+  min-height: 38px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--citylit-reference-muted);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 700;
+}
+.field-guide .hub-tabs button[aria-current="page"] {
+  border: 0;
+  color: white;
+  background: linear-gradient(115deg, #9d60f2, #7040d2);
+}
+.field-guide .adventure-section > h2 {
+  margin: 0 0 16px;
+  font-size: clamp(25px, 4vw, 34px);
+}
+.field-guide .adventure-grid {
+  gap: 11px;
+}
+.field-guide .adventure-card {
+  overflow: hidden;
+  border-radius: 18px;
+}
+.field-guide .adventure-card > a {
+  display: block;
+  padding: 16px 16px 10px;
+  color: var(--citylit-reference-text);
+  text-decoration: none;
+}
+.field-guide .adventure-card h3 {
+  margin: 4px 0 5px;
+  font: 650 14px/1.3 Manrope, sans-serif;
+  letter-spacing: -.02em;
+}
+.field-guide .adventure-card p {
+  font-size: 11px;
+  line-height: 1.55;
+}
+.field-guide .adventure-card .address {
+  margin-top: 7px;
+  font-size: 10px;
+}
+.field-guide .adventure-card-actions {
+  display: flex;
+  gap: 7px;
+  padding: 0 12px 12px;
+}
+.field-guide .adventure-card-actions button {
+  min-height: 36px;
+  border-radius: 999px;
+  font-size: 10px;
+}
+.field-guide .trip-stops {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+.field-guide .trip-stops li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 18px;
+  background: var(--citylit-reference-panel);
+}
+.field-guide .trip-stops li > div:first-of-type h3 {
+  margin: 0 0 4px;
+  font: 700 12px/1.35 Manrope, sans-serif;
+  letter-spacing: -.01em;
+}
+.field-guide .trip-stops li > div:first-of-type p {
+  margin: 0;
+  color: var(--citylit-reference-muted);
+  font-size: 10px;
+}
+.field-guide .trip-stops .stop-number {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  color: white;
+  background: var(--citylit-reference-purple);
+  font-size: 10px;
+  font-weight: 800;
+}
+.field-guide .trip-stops .stop-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.field-guide .trip-stops .stop-actions button {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  padding: 0;
+  border-radius: 10px;
+}
+.reference-saved-empty {
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+  padding: 34px 20px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 22px;
+  background: var(--citylit-reference-panel);
+  text-align: center;
+}
+.reference-saved-empty > svg {
+  color: var(--citylit-reference-purple-soft);
+}
+.reference-saved-empty h3 {
+  margin: 0;
+  color: var(--citylit-reference-text);
+  font: 450 23px/1.15 Fraunces, Georgia, serif;
+}
+.reference-saved-empty p {
+  max-width: 340px;
+  color: var(--citylit-reference-muted);
+  font-size: 11px;
+}
+.reference-saved-empty .pill-button {
+  margin-top: 6px;
+  background: var(--citylit-reference-purple);
+  color: white;
+}
+@media (max-width: 700px) {
+  .field-guide .hub-tabs button {
+    padding: 0 13px;
+  }
+  .field-guide .trip-stops li {
+    grid-template-columns: 26px minmax(0, 1fr);
+  }
+  .field-guide .trip-stops .stop-actions {
+    grid-column: 2;
+    justify-content: flex-end;
+  }
+}

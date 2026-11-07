@@ -8,7 +8,10 @@ import {
   disposeProceduralLandmark,
   setProceduralNight,
 } from "../lib/procedural-landmarks";
-import { prepareLandmarkExplodedView, setLandmarkExplodedView } from "../lib/landmark-exploded-view.js";
+import {
+  prepareLandmarkExplodedView,
+  setLandmarkExplodedView,
+} from "../lib/landmark-exploded-view.js";
 
 /**
  * One genuine Three.js scene per place, with no downloaded GLB or image textures.

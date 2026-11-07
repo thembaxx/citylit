@@ -22,6 +22,8 @@ assert.match(pkg.scripts["hero:build"], /runtime with Three\.js/);
 
 assert.match(hero, /<MuseumShowcase \.\.\.props\s*\/>/);
 assert.doesNotMatch(hero, /useGLTF|GLTFLoader|\.glb|\/draco\//i);
+assert.doesNotMatch(stageModel, /useGLTF|GLTFLoader|\.glb|\/draco\//i);
+assert.match(stageModel, /ProceduralStageModel/);
 assert.match(showcase, /makeMuseumSurfaces/);
 assert.match(expanded, /MuseumHeroAsset/);
 assert.match(ring, /SafeStageModel/);

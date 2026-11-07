@@ -53,9 +53,9 @@ The repository already declares `three: ^0.187.0` and matching `@types/three: ^0
 
 ## Migration progress (2026-11-07)
 
-- **Completed on the audit branch:** museum hero now delegates directly to the existing procedural Three.js `MuseumShowcase`; its GLB/Draco loader, cloned GLB materials, and model-specific disposal path are removed.
+- **Completed on the audit branch:** museum hero now delegates directly to the existing procedural Three.js `MuseumShowcase`; its GLB/Draco loader, cloned GLB materials, and model-specific disposal path are removed. The legacy `StageModel` entry point is also a backwards-compatible wrapper around `ProceduralStageModel`, not a GLTF loader.
 - **Completed on the audit branch:** `models:build` and `hero:build` no longer invoke Python or Blender; they explain that geometry is generated at runtime. Both audit commands now run `scripts/audit-procedural-models.mjs`.
-- **Completed on the audit branch:** replaced the museum asset-manifest/Draco test with a browser regression test that checks museum interaction and asserts no museum GLB request. Removed the test that required 15 Blender-authored Draco files.
+- **Completed on the audit branch:** replaced the museum asset-manifest/Draco test with a browser regression test that checks museum interaction and asserts no museum GLB request. Removed the test that required 15 Blender-authored Draco files. The twelve-city inspection test now asserts that stage and hero GLB files are never requested.
 - **Completed on the audit branch:** Moses Mabhida now has one continuous signature arch instead of two parallel arch sweeps.
 - **Completed on the audit branch:** Ponte City now includes an explicit inner atrium wall, instanced inner gallery floors, exterior balcony lips, and vertical concrete fins while retaining instanced facade details.
 - **Completed on the audit branch:** Table Mountain and Big Hole receive a custom GLSL geological-bedding pass layered onto their PBR materials.

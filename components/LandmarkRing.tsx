@@ -471,6 +471,7 @@ function Ring({
   );
 }
 
+/** Presents the selected landmark ring, inspection controls, and contextual scene. */
 export default function LandmarkRing({
   items,
   selected,
@@ -725,7 +726,7 @@ export default function LandmarkRing({
             </button>
             <button
               type="button"
-              aria-label={exploded ? "Assemble landmark layers" : "Explode landmark layers"}
+              aria-label="Exploded view"
               aria-pressed={exploded}
               title="Exploded view"
               onClick={() => setExploded((value) => !value)}

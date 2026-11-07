@@ -35,11 +35,13 @@ test("landmark inspection clamps invalid progress and is deterministic", () => {
 test("landmark inspection resolves the inner subject beneath its display wrapper", () => {
   const display = new THREE.Group();
   const subject = new THREE.Group();
+  const geometryRoot = new THREE.Group();
   const tower = new THREE.Group();
   const podium = new THREE.Group();
   tower.position.set(0, 2, 0);
   podium.position.set(1, 0, 0);
-  subject.add(tower, podium);
+  geometryRoot.add(tower, podium);
+  subject.add(geometryRoot);
   display.add(subject);
   prepareLandmarkExplodedView(display);
   setLandmarkExplodedView(display, 1);

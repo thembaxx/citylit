@@ -61,7 +61,7 @@ The repository already declares `three: ^0.187.0` and matching `@types/three: ^0
 - **Completed on the audit branch:** Table Mountain and Big Hole receive a custom GLSL geological-bedding pass layered onto their PBR materials.
 - **Completed on the audit branch:** Union Buildings cupolas now have radial sandstone ribs, drum rims, and finials.
 - **Added:** a static Node audit that checks the Three.js version, procedural stage wiring, named builder entry points, new geometry features, museum loader removal, and absence of Blender from package build commands.
-- **Not yet completed:** Blender-authored scripts and legacy GLB files remain in the repository as unused/legacy assets pending a full reference audit. Additional Table Mountain / Big Hole / stadium / Union Buildings details still need visual review. The generic category models need named-place fidelity upgrades. CI has been triggered, but jobs have not yet returned results.
+- **Not yet completed:** Blender-authored scripts and legacy GLB files remain in the repository as unused/legacy assets pending a full reference audit. Additional Table Mountain / Big Hole / stadium / Union Buildings details still need visual review. The generic category models need named-place fidelity upgrades. The latest CI attempt fails at `pnpm format:check` on `components/StageModel.tsx`, `lib/procedural-landmarks.js`, and `scripts/audit-procedural-models.mjs`; downstream audit, lint, typecheck, build, and browser jobs are skipped. Security passes. The branch is not merge-ready.
 
 ## Proposed implementation stages
 
@@ -84,3 +84,14 @@ The repository already declares `three: ^0.187.0` and matching `@types/three: ^0
 ## Scope note
 
 This audit documents confirmed repository structure and a migration plan. It does not claim that the GLB assets have already been removed or that any visual upgrade has been implemented or device-verified.
+
+
+## Latest verification snapshot
+
+- Commit under review: `987249db3457fefba606cf1ea7dd78812fd12fbc`.
+- Security workflow: passed.
+- CI quality/build job: failed at formatting before any application checks ran.
+- Formatter reports three files: `components/StageModel.tsx`, `lib/procedural-landmarks.js`, and `scripts/audit-procedural-models.mjs`.
+- `data:audit`, `models:audit`, lint, typecheck, monitor tests, build, and browser screenshot/test shards were skipped after the formatting failure.
+- CodeRabbit status is successful; it is not a substitute for the skipped checks.
+- No merge, production deployment, shader compilation pass, screenshot comparison, or real-device GPU measurement has been verified.

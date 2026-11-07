@@ -398,6 +398,8 @@ test("online and offline guide tabs preserve concurrent discovery mutations", as
   await expect(onlineSave).toBeVisible();
   await expect(offlineSave).toBeVisible();
   await Promise.all([onlineSave.click(), offlineSave.click()]);
+  await expect(onlineSave).toHaveAttribute("aria-pressed", "true");
+  await expect(offline.locator("#zeitz-mocaa button").first()).toHaveAttribute("aria-pressed", "true");
   await page.reload();
   await expect(page.getByRole("button", { name: "Saved discovery", exact: true })).toBeVisible();
   await offline.reload();

@@ -18,8 +18,8 @@ for (const [city, landmark] of references) {
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("console", (message) => {
       if (message.type() === "error" && /webgl|shader|glsl/i.test(message.text())) {
-      errors.push(message.text());
-    }
+        errors.push(message.text());
+      }
     });
     const glbRequests: string[] = [];
     page.on("request", (request) => {

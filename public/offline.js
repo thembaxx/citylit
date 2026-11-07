@@ -245,36 +245,33 @@ function card(place, detail) {
     button(
       saved.includes(place.id) ? "Saved" : "Save discovery",
       () => {
-        saved = saved.includes(place.id)
-          ? saved.filter((id) => id !== place.id)
-          : [...saved, place.id];
-        if (writeState())
-          actionStatus.textContent = saved.includes(place.id)
-            ? "A spark saved on this device."
-            : "Discovery released.";
-        show();
+        void writeState((previous) => ({
+          saved: previous.saved.includes(place.id)
+            ? previous.saved.filter((id) => id !== place.id)
+            : [...previous.saved, place.id],
+        })).then((ok) => {
+          if (ok)
+            actionStatus.textContent = saved.includes(place.id)
+              ? "A spark saved on this device."
+              : "Discovery released.";
+          show();
+        });
       },
       saved.includes(place.id),
     ),
   );
   actions.append(
     button(itinerary.includes(place.id) ? "Remove from day" : "Add to day", () => {
-      if (itinerary.includes(place.id)) itinerary = itinerary.filter((id) => id !== place.id);
-      else {
-        if (itinerary.length >= 30) {
-          actionStatus.textContent = "Your day already has 30 stops.";
-          return;
-        }
-        const first = places.find((p) => p.id === itinerary[0]);
-        if (first && first.city !== place.city) {
-          actionStatus.textContent =
-            "Your day belongs to another destination. Remove its stops before changing cities.";
-          return;
-        }
-        itinerary.push(place.id);
-      }
-      if (writeState()) actionStatus.textContent = "Your day is kept on this device.";
-      show();
+      void writeState((previous) => {
+        if (previous.itinerary.includes(place.id))
+          return { itinerary: previous.itinerary.filter((id) => id !== place.id) };
+        const first = places.find((p) => p.id === previous.itinerary[0]);
+        if (previous.itinerary.length >= 30 || (first && first.city !== place.city)) return {};
+        return { itinerary: [...previous.itinerary, place.id] };
+      }).then((ok) => {
+        if (ok) actionStatus.textContent = "Your day is kept on this device.";
+        show();
+      });
     }),
   );
   if (!detail) {
@@ -317,11 +314,14 @@ function card(place, detail) {
       button(
         visited.includes(place.id) ? "Visited" : "Mark visited",
         () => {
-          visited = visited.includes(place.id)
-            ? visited.filter((id) => id !== place.id)
-            : [...visited, place.id];
-          if (writeState()) actionStatus.textContent = "Your passport is kept on this device.";
-          show();
+          void writeState((previous) => ({
+            visited: previous.visited.includes(place.id)
+              ? previous.visited.filter((id) => id !== place.id)
+              : [...previous.visited, place.id],
+          })).then((ok) => {
+            if (ok) actionStatus.textContent = "Your passport is kept on this device.";
+            show();
+          });
         },
         visited.includes(place.id),
       ),
@@ -484,8 +484,9 @@ fetch("/data/places.json")
       option.value = slug(value);
       category.append(option);
     }
-    readState();
-    restoreUrl();
+    void readState().then(restoreUrl).catch(() => {
+      status.textContent = "Your browser could not open the saved guide. Check site storage and reload.";
+    });
   })
   .catch(() => {
     status.textContent = "No cached guide yet. Connect once to prepare your Citylit pocket guide.";
@@ -508,9 +509,16 @@ for (const filter of [search, city, category])
   });
 window.addEventListener("popstate", restoreUrl);
 window.addEventListener("storage", () => {
-  readState();
-  show();
+  void readState().then(show).catch(() => {
+    actionStatus.textContent = "Your saved guide could not be refreshed.";
+  });
 });
+if (typeof BroadcastChannel !== "undefined") {
+  const discoveryChannel = new BroadcastChannel("citylit-discovery");
+  discoveryChannel.onmessage = () => {
+    void readState().then(show).catch(() => {});
+  };
+}
 const connection = () => {
   document.getElementById("connection").textContent = navigator.onLine
     ? "POCKET GUIDE · live features available when connected"

@@ -36,6 +36,15 @@ for (const citySlug of [
 
     await toolbar.getByRole("button", { name: "Switch to night lighting" }).click();
     await expect(toolbar.getByRole("button", { name: "Switch to daylight" })).toBeVisible();
+    const explode = toolbar.getByRole("button", { name: "Explode landmark layers" });
+    await expect(explode).toBeVisible();
+    await explode.click();
+    const assemble = toolbar.getByRole("button", { name: "Assemble landmark layers" });
+    await expect(assemble).toHaveAttribute("aria-pressed", "true");
+    await assemble.click();
+    await expect(
+      toolbar.getByRole("button", { name: "Explode landmark layers" }),
+    ).toHaveAttribute("aria-pressed", "false");
     await toolbar.getByRole("button", { name: "Rotate selected miniature" }).click();
     await toolbar.getByRole("button", { name: "Zoom in" }).click();
     await toolbar.getByRole("button", { name: "Close-up" }).click();

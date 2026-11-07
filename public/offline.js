@@ -92,44 +92,107 @@ const publicUrl = (value) => {
     return false;
   }
 };
-function readState() {
+const discoveryDb = (() => {
+  let pending;
+  return () => {
+    if (typeof indexedDB === "undefined") return Promise.reject(new Error("IndexedDB unavailable"));
+    pending ??= new Promise((resolve, reject) => {
+      const request = indexedDB.open("citylit-state", 1);
+      request.onupgradeneeded = () => {
+        if (!request.result.objectStoreNames.contains("documents"))
+          request.result.createObjectStore("documents");
+      };
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+      request.onblocked = () => reject(new Error("Database upgrade blocked"));
+    }).catch((error) => {
+      pending = undefined;
+      throw error;
+    });
+    return pending;
+  };
+})();
+function legacyDiscovery() {
   try {
-    const raw = localStorage.getItem("citylit-discovery-v2") || "{}",
-      value = raw.length <= 200000 ? JSON.parse(raw) : {};
-    state = value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    const raw = localStorage.getItem("citylit-discovery-v2") || "{}";
+    const value = raw.length <= 200000 ? JSON.parse(raw) : {};
     const legacy = localStorage.getItem("mzansi-saved") || "[]";
-    saved = ids(
-      Array.isArray(value)
-        ? value
-        : state.saved || (legacy.length <= 200000 ? JSON.parse(legacy) : []),
-    );
-    visited = ids(state.visited);
-    itinerary = ids(state.itinerary).slice(0, 30);
+    const source = value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    return {
+      saved: ids(Array.isArray(value) ? value : source.saved || (legacy.length <= 200000 ? JSON.parse(legacy) : [])),
+      visited: ids(source.visited),
+      itinerary: ids(source.itinerary).slice(0, 30),
+      passport: typeof source.passport === "boolean" ? source.passport : true,
+      essential: typeof source.essential === "boolean" ? source.essential : false,
+    };
   } catch {
-    state = {};
-    saved = [];
-    visited = [];
-    itinerary = [];
+    return { saved: [], visited: [], itinerary: [], passport: true, essential: false };
   }
 }
-function writeState() {
+function applyDiscovery(value) {
+  state = value;
+  saved = ids(value.saved);
+  visited = ids(value.visited);
+  const candidate = ids(value.itinerary).slice(0, 30);
+  const first = places.find((place) => place.id === candidate[0]);
+  itinerary = first ? candidate.filter((id) => places.find((place) => place.id === id)?.city === first.city) : [];
+}
+async function readState() {
+  const db = await discoveryDb();
+  const value = await new Promise((resolve, reject) => {
+    const transaction = db.transaction("documents", "readonly");
+    const request = transaction.objectStore("documents").get("discovery");
+    request.onsuccess = () => resolve(request.result || null);
+    transaction.onerror = () => reject(transaction.error);
+  });
+  if (value) {
+    applyDiscovery(value);
+    return;
+  }
+  await writeState(() => ({}));
+}
+async function writeState(change) {
   try {
-    localStorage.setItem(
-      "citylit-discovery-v2",
-      JSON.stringify({
-        saved,
-        visited,
-        itinerary,
-        passport: typeof state.passport === "boolean" ? state.passport : true,
-        essential: typeof state.essential === "boolean" ? state.essential : false,
-      }),
-    );
-    localStorage.setItem("mzansi-saved", JSON.stringify(saved));
+    const db = await discoveryDb();
+    const next = await new Promise((resolve, reject) => {
+      const transaction = db.transaction("documents", "readwrite");
+      const store = transaction.objectStore("documents");
+      const request = store.get("discovery");
+      let result;
+      request.onsuccess = () => {
+        const previous = request.result || legacyDiscovery();
+        const patch = typeof change === "function" ? change(previous) : change;
+        const candidate = {
+          ...previous,
+          ...patch,
+        };
+        const firstId = ids(candidate.itinerary)[0];
+        const first = places.find((place) => place.id === firstId);
+        result = {
+          saved: ids(candidate.saved),
+          visited: ids(candidate.visited),
+          itinerary: first
+            ? ids(candidate.itinerary).filter((id) => places.find((place) => place.id === id)?.city === first.city).slice(0, 30)
+            : [],
+          passport: typeof candidate.passport === "boolean" ? candidate.passport : true,
+          essential: typeof candidate.essential === "boolean" ? candidate.essential : false,
+        };
+        store.put(result, "discovery");
+      };
+      transaction.oncomplete = () => resolve(result);
+      transaction.onerror = () => reject(transaction.error);
+      transaction.onabort = () => reject(transaction.error || new Error("Discovery write aborted"));
+    });
+    applyDiscovery(next);
+    try {
+      localStorage.setItem("citylit-discovery-v2", JSON.stringify(next));
+      localStorage.setItem("mzansi-saved", JSON.stringify(next.saved));
+    } catch {
+      // IndexedDB is authoritative; compatibility mirrors are best-effort.
+    }
     return true;
   } catch {
-    actionStatus.textContent =
-      "Your browser could not keep this change. Free some storage and try again.";
-    readState();
+    actionStatus.textContent = "Your browser could not keep this change. Allow site storage and try again.";
     return false;
   }
 }
@@ -182,36 +245,41 @@ function card(place, detail) {
     button(
       saved.includes(place.id) ? "Saved" : "Save discovery",
       () => {
-        saved = saved.includes(place.id)
-          ? saved.filter((id) => id !== place.id)
-          : [...saved, place.id];
-        if (writeState())
-          actionStatus.textContent = saved.includes(place.id)
-            ? "A spark saved on this device."
-            : "Discovery released.";
-        show();
+        void writeState((previous) => ({
+          saved: previous.saved.includes(place.id)
+            ? previous.saved.filter((id) => id !== place.id)
+            : [...previous.saved, place.id],
+        })).then((ok) => {
+          if (ok)
+            actionStatus.textContent = saved.includes(place.id)
+              ? "A spark saved on this device."
+              : "Discovery released.";
+          show();
+        });
       },
       saved.includes(place.id),
     ),
   );
   actions.append(
     button(itinerary.includes(place.id) ? "Remove from day" : "Add to day", () => {
-      if (itinerary.includes(place.id)) itinerary = itinerary.filter((id) => id !== place.id);
-      else {
-        if (itinerary.length >= 30) {
-          actionStatus.textContent = "Your day already has 30 stops.";
-          return;
+      let rejected = false;
+      void writeState((previous) => {
+        if (previous.itinerary.includes(place.id))
+          return { itinerary: previous.itinerary.filter((id) => id !== place.id) };
+        const first = places.find((p) => p.id === previous.itinerary[0]);
+        if (previous.itinerary.length >= 30 || (first && first.city !== place.city)) {
+          rejected = true;
+          return {};
         }
-        const first = places.find((p) => p.id === itinerary[0]);
-        if (first && first.city !== place.city) {
-          actionStatus.textContent =
-            "Your day belongs to another destination. Remove its stops before changing cities.";
-          return;
-        }
-        itinerary.push(place.id);
-      }
-      if (writeState()) actionStatus.textContent = "Your day is kept on this device.";
-      show();
+        return { itinerary: [...previous.itinerary, place.id] };
+      }).then((ok) => {
+        actionStatus.textContent = rejected
+          ? "Your day is full or belongs to another destination. Remove a stop before adding this place."
+          : ok
+            ? "Your day is kept on this device."
+            : "Your browser could not save this change.";
+        show();
+      });
     }),
   );
   if (!detail) {
@@ -254,11 +322,14 @@ function card(place, detail) {
       button(
         visited.includes(place.id) ? "Visited" : "Mark visited",
         () => {
-          visited = visited.includes(place.id)
-            ? visited.filter((id) => id !== place.id)
-            : [...visited, place.id];
-          if (writeState()) actionStatus.textContent = "Your passport is kept on this device.";
-          show();
+          void writeState((previous) => ({
+            visited: previous.visited.includes(place.id)
+              ? previous.visited.filter((id) => id !== place.id)
+              : [...previous.visited, place.id],
+          })).then((ok) => {
+            if (ok) actionStatus.textContent = "Your passport is kept on this device.";
+            show();
+          });
         },
         visited.includes(place.id),
       ),
@@ -421,8 +492,9 @@ fetch("/data/places.json")
       option.value = slug(value);
       category.append(option);
     }
-    readState();
-    restoreUrl();
+    void readState().then(restoreUrl).catch(() => {
+      status.textContent = "Your browser could not open the saved guide. Check site storage and reload.";
+    });
   })
   .catch(() => {
     status.textContent = "No cached guide yet. Connect once to prepare your Citylit pocket guide.";
@@ -445,9 +517,16 @@ for (const filter of [search, city, category])
   });
 window.addEventListener("popstate", restoreUrl);
 window.addEventListener("storage", () => {
-  readState();
-  show();
+  void readState().then(show).catch(() => {
+    actionStatus.textContent = "Your saved guide could not be refreshed.";
+  });
 });
+if (typeof BroadcastChannel !== "undefined") {
+  const discoveryChannel = new BroadcastChannel("citylit-discovery");
+  discoveryChannel.onmessage = () => {
+    void readState().then(show).catch(() => {});
+  };
+}
 const connection = () => {
   document.getElementById("connection").textContent = navigator.onLine
     ? "POCKET GUIDE · live features available when connected"

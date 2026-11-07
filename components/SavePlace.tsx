@@ -13,10 +13,13 @@ export default function SavePlace({ id, name }: { id: string; name: string }) {
         aria-pressed={saved}
         aria-label={`${saved ? "Unsave" : "Save"} ${name}`}
         onClick={() => {
-          const ok = update((previous) => ({
-            saved: saved ? previous.saved.filter((value) => value !== id) : [...previous.saved, id],
-          }));
-          setError(ok ? "" : "Unable to save. Allow site storage and try again.");
+          void update((previous) => ({
+            saved: previous.saved.includes(id)
+              ? previous.saved.filter((value) => value !== id)
+              : [...previous.saved, id],
+          })).then((ok) =>
+            setError(ok ? "" : "Unable to save. Allow site storage and try again."),
+          );
         }}
       >
         {saved ? <Check size={18} /> : <BookmarkSimple size={18} />}

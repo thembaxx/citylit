@@ -1,30 +1,49 @@
 "use client";
-import { useMemo, useSyncExternalStore } from "react";
-const key = "citylit-discovery-v2";
+import { useCallback, useEffect, useMemo, useSyncExternalStore } from "react";
 export type { Discovery } from "../lib/client-data";
 import { normalizeDiscovery, type Discovery } from "../lib/client-data";
+import { mutateDiscovery, readDiscoveryDocument } from "../lib/discovery-store";
+
 const fallback = normalizeDiscovery(null);
+let rawSnapshot = "{}";
 const listeners = new Set<() => void>();
 let listening = false;
+let channel: BroadcastChannel | undefined;
+
+function publish(value: Discovery, broadcast = true) {
+  rawSnapshot = JSON.stringify(value);
+  listeners.forEach((listener) => listener());
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("citylit:discovery-changed"));
+    if (broadcast) channel?.postMessage("changed");
+  }
+}
+
+function refresh() {
+  void readDiscoveryDocument().then((value) => publish(value, false)).catch(() => {
+    // Keep the last known snapshot visible; mutations still fail closed.
+  });
+}
+
 function subscribe(fn: () => void) {
   listeners.add(fn);
   if (!listening && typeof window !== "undefined") {
-    window.addEventListener("storage", () => listeners.forEach((l) => l()));
-    // Root providers and lazy-loaded screens can live in separate client bundles.
-    window.addEventListener("citylit:discovery-changed", () => listeners.forEach((l) => l()));
+    window.addEventListener("storage", () => refresh());
+    window.addEventListener("citylit:discovery-changed", () => listeners.forEach((listener) => listener()));
+    if (typeof BroadcastChannel !== "undefined") {
+      channel = new BroadcastChannel("citylit-discovery");
+      channel.onmessage = refresh;
+    }
     listening = true;
+    refresh();
   }
-  return () => {
-    listeners.delete(fn);
-  };
+  return () => listeners.delete(fn);
 }
+
 function snapshot() {
-  try {
-    return localStorage.getItem(key) || localStorage.getItem("mzansi-saved") || "{}";
-  } catch {
-    return "{}";
-  }
+  return rawSnapshot;
 }
+
 export function useDiscovery() {
   const raw = useSyncExternalStore(subscribe, snapshot, () => "{}");
   const state = useMemo<Discovery>(() => {
@@ -34,28 +53,20 @@ export function useDiscovery() {
       return fallback;
     }
   }, [raw]);
-  const update = (change: Partial<Discovery> | ((previous: Discovery) => Partial<Discovery>)) => {
-    // Read the latest store when an action fires, including updates from another component.
-    let previous = state;
-    try {
-      previous = normalizeDiscovery(JSON.parse(snapshot()));
-    } catch {}
-    const next = normalizeDiscovery({
-      ...previous,
-      ...(typeof change === "function" ? change(previous) : change),
-    });
-    try {
-      localStorage.setItem(key, JSON.stringify(next));
-    } catch {
-      return false;
-    }
-    try {
-      localStorage.setItem("mzansi-saved", JSON.stringify(next.saved));
-    } catch {}
-    if (next.saved.some((id) => !previous.saved.includes(id)))
-      window.dispatchEvent(new CustomEvent("citylit:spark-saved"));
-    window.dispatchEvent(new Event("citylit:discovery-changed"));
-    return true;
-  };
+  const update = useCallback(
+    async (change: Partial<Discovery> | ((previous: Discovery) => Partial<Discovery>)) => {
+      try {
+        const next = await mutateDiscovery(change);
+        publish(next);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    [],
+  );
+  useEffect(() => {
+    refresh();
+  }, []);
   return { state, update };
 }

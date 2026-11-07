@@ -347,9 +347,6 @@
   }
 }
 @media (max-width: 767px) {
-  .reference-guide .atlas-nav {
-    padding-inline: max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-right));
-  }
   .reference-guide .atlas-nav nav {
     gap: 10px;
   }

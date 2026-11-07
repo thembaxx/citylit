@@ -54,16 +54,22 @@ export default function PlanVisit({
       );
       return;
     }
-    const saved = update((previous) => ({
-      itinerary: included
-        ? previous.itinerary.filter((id) => id !== place.id)
-        : [...previous.itinerary, place.id],
-    }));
-    setMessage(
-      saved
-        ? `${place.name} ${included ? "removed from" : "added to"} your day.`
-        : "This browser could not save your day. Allow site storage and try again.",
-    );
+    void update((previous) => {
+      const first = places.find((item) => item.id === previous.itinerary[0]);
+      if (!included && first && first.city !== city) return {};
+      if (!included && previous.itinerary.length >= MAX_TRIP_STOPS) return {};
+      return {
+        itinerary: previous.itinerary.includes(place.id)
+          ? previous.itinerary.filter((id) => id !== place.id)
+          : [...previous.itinerary, place.id],
+      };
+    }).then((saved) => {
+      setMessage(
+        saved
+          ? `${place.name} ${included ? "removed from" : "added to"} your day.`
+          : "This browser could not save your day. Allow site storage and try again.",
+      );
+    });
   };
   return (
     <section className="atlas-plan atlas-section" id="plan" aria-labelledby="visit-title">

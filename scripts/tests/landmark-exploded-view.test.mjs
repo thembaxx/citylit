@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import * as THREE from "three";
-import { prepareLandmarkExplodedView, setLandmarkExplodedView, restoreLandmarkAssembly } from "../../lib/landmark-exploded-view.js";
+import {
+  prepareLandmarkExplodedView,
+  setLandmarkExplodedView,
+  restoreLandmarkAssembly,
+} from "../../lib/landmark-exploded-view.js";
 
 test("landmark exploded view separates parts and restores authored transforms", () => {
   const root = new THREE.Group();

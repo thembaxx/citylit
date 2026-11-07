@@ -10,17 +10,17 @@ const listeners = new Set<() => void>();
 let listening = false;
 let channel: BroadcastChannel | undefined;
 
-function publish(value: Discovery) {
+function publish(value: Discovery, broadcast = true) {
   rawSnapshot = JSON.stringify(value);
   listeners.forEach((listener) => listener());
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("citylit:discovery-changed"));
-    channel?.postMessage("changed");
+    if (broadcast) channel?.postMessage("changed");
   }
 }
 
 function refresh() {
-  void readDiscoveryDocument().then(publish).catch(() => {
+  void readDiscoveryDocument().then((value) => publish(value, false)).catch(() => {
     // Keep the last known snapshot visible; mutations still fail closed.
   });
 }

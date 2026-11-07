@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
   MapPin,
+  BookmarkSimple,
   ArrowUpRight,
   Heart,
   Check,

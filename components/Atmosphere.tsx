@@ -7,7 +7,7 @@ import * as THREE from "three";
 import { cities } from "../lib/data";
 import QuietParticles from "./QuietParticles";
 type Props = { mode: string; city: number; category: number; night: boolean; animate: boolean };
-const ink = ["#ff7a59", "#ffd166", "#8bd450", "#f48cb6", "#c084fc", "#3ec8c2"];
+const ink = ["#c5764c", "#e1b268", "#9fba86", "#d8c2a0", "#7c9b88", "#8aa8a0"];
 function Dreamscape({ mode, city, category, night, animate }: Props) {
   const { invalidate, viewport } = useThree();
   const root = useRef<THREE.Group>(null);

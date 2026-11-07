@@ -24,8 +24,8 @@ export default function GuideMotion({ essential }: { essential: boolean }) {
     const context = gsap.context(() => {
       gsap.fromTo(
         host.querySelectorAll("h1"),
-        { y: 16, opacity: 0.85 },
-        { y: 0, opacity: 1, duration: 0.75, ease: "power3.out" },
+        { y: 12 },
+        { y: 0, duration: 0.56, ease: "power3.out" },
       );
 
       // Keep content fully opaque during reveals. Fading text panels reduces
@@ -34,10 +34,10 @@ export default function GuideMotion({ essential }: { essential: boolean }) {
       host.querySelectorAll(REVEAL_TARGETS).forEach((element) => {
         gsap.fromTo(
           element,
-          { y: 16 },
+          { y: 12 },
           {
             y: 0,
-            duration: 0.68,
+            duration: 0.56,
             ease: "power3.out",
             scrollTrigger: {
               trigger: element,

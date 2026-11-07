@@ -429,7 +429,7 @@ button,
     position: fixed;
     z-index: 60;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: center;
     left: max(12px, env(safe-area-inset-left));
     right: max(12px, env(safe-area-inset-right));

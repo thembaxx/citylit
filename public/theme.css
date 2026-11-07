@@ -1,22 +1,21 @@
-/* Shared by the live app, loading/recovery screens and downloaded guide.
-   Cream and ink surfaces follow the supplied Citylit reference in every runtime state. */
+/* Shared by the live app, loading/recovery screens and downloaded guide. */
 :root {
-  --night-bg: #0e0f13;
-  --day-bg: #f4efe6;
-  --night-ink: #f3eee4;
-  --day-ink: #1b1a1f;
-  --night-muted: #aba69b;
-  --day-muted: #6b665e;
-  --night-accent: #b74720;
-  --day-accent: #ba4029;
-  --night-accent-ink: #ffb089;
-  --day-accent-ink: #b43922;
-  --night-line: #34353b;
-  --day-line: #d9d2c8;
-  --night-surface: #191a21;
-  --day-surface: #fcfaf6;
-  --night-surface-glass: #191a21f5;
-  --day-surface-glass: #fcfaf6f5;
+  --night-bg: #10231b;
+  --day-bg: #f1f2e8;
+  --night-ink: #f2f0e5;
+  --day-ink: #1d3327;
+  --night-muted: #bac5b7;
+  --day-muted: #5d6d60;
+  --night-accent: #a8cf91;
+  --day-accent: #4d7957;
+  --night-accent-ink: #10231b;
+  --day-accent-ink: #fff;
+  --night-line: #2f4a39;
+  --day-line: #d3ddcd;
+  --night-surface: #192d23;
+  --day-surface: #fbfcf4;
+  --night-surface-glass: #192d23f5;
+  --day-surface-glass: #fbfcf4f5;
   color-scheme: dark;
   --bg: var(--night-bg);
   --ink: var(--night-ink);

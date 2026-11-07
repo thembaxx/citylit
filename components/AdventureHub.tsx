@@ -40,6 +40,8 @@ import { readyWorker, workerRequest } from "../lib/pwa";
 import { usePwa } from "./PwaProvider";
 import { useDiscovery } from "./useDiscovery";
 import { ItineraryFeasibility } from "./ItineraryFeasibility";
+import { AnimatedTabs } from "./ui/AnimatedTabs";
+import MagneticButton from "./ui/MagneticButton";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 
 async function requestItineraryTravel(coordinates: number[][]) {
@@ -119,6 +121,54 @@ export default function AdventureHub() {
         ? "Added to your day."
         : "This browser could not save your day. Allow site storage and try again.",
     );
+  };
+  const addMany = (placeIds: string[]) => {
+    const additions = Array.from(new Set(placeIds)).filter(
+      (id) => !state.itinerary.includes(id) && places.some((place) => place.id === id),
+    );
+    const firstNewPlace = places.find((place) => place.id === additions[0]);
+    if (!additions.length) {
+      setMessage("These places are already in your day.");
+      setTab("day");
+      return;
+    }
+    if (trip.length && firstNewPlace && trip[0].city !== firstNewPlace.city) {
+      setMessage("Your day is in another city. Clear it before changing destinations.");
+      setTab("day");
+      return;
+    }
+    const available = MAX_TRIP_STOPS - state.itinerary.length;
+    if (additions.length > available) {
+      setMessage(
+        `This collection adds ${additions.length} places, but your day has room for ${available}. Remove a stop first.`,
+      );
+      setTab("day");
+      return;
+    }
+    const saved = update((previous) => ({
+      itinerary: Array.from(new Set([...previous.itinerary, ...additions])),
+    }));
+    setMessage(
+      saved
+        ? `Added ${additions.length} ${additions.length === 1 ? "place" : "places"} to your day.`
+        : "This browser could not save your day. Allow site storage and try again.",
+    );
+    setTab("day");
+  };
+  const moveStop = (placeId: string, direction: -1 | 1) => {
+    const ids = trip.map((place) => place.id);
+    const index = ids.indexOf(placeId);
+    const nextIndex = index + direction;
+    if (index < 0 || nextIndex < 0 || nextIndex >= ids.length) return;
+    [ids[index], ids[nextIndex]] = [ids[nextIndex], ids[index]];
+    update({ itinerary: ids });
+    const name = places.find((place) => place.id === placeId)?.name || "Stop";
+    setMessage(`${name} moved ${direction < 0 ? "earlier" : "later"}.`);
+  };
+  const removeStop = (placeId: string) => {
+    const name = places.find((place) => place.id === placeId)?.name || "Place";
+    update({ itinerary: state.itinerary.filter((id) => id !== placeId) });
+    setMessage(`${name} removed from your day.`);
   };
   const share = async (ids: string[]) => {
     const url = new URL(
@@ -205,10 +255,17 @@ export default function AdventureHub() {
         <span className="address">{p.address}</span>
       </Link>
       <div className="adventure-card-actions">
-        <button aria-label={`Add ${p.name} to day`} onClick={() => add(p.id)}>
-          <Plus size={16} />
-          Add to day
-        </button>
+        <MagneticButton
+          className="adventure-card-add"
+          aria-label={
+            state.itinerary.includes(p.id) ? `${p.name} is in your day` : `Add ${p.name} to day`
+          }
+          aria-pressed={state.itinerary.includes(p.id)}
+          onClick={() => add(p.id)}
+        >
+          {state.itinerary.includes(p.id) ? <Check size={16} /> : <Plus size={16} />}
+          {state.itinerary.includes(p.id) ? "In your day" : "Add to day"}
+        </MagneticButton>
         <button
           aria-label={`Save ${p.name}`}
           aria-pressed={state.saved.includes(p.id)}
@@ -246,17 +303,35 @@ export default function AdventureHub() {
       <header className="field-guide-header">
         <ThemeToggle onChange={setNight} />
         <Link href="/">
-          <UiIcon name="arrow-left" /> Back to the map
+          <UiIcon name="arrow-left" /> Explore
         </Link>
         <Link href="/offline.html">
           <Download size={16} />
-          Offline guide
+          Offline
         </Link>
       </header>
       <span className="tiny-label">EVERY CITY HAS A SPARK.</span>
-      <h1>{tab === "saved" || tab === "day" ? "My day" : tab === "passport" ? "My discoveries" : "Your next chapter."}</h1>
+      <h1>
+        {tab === "saved"
+          ? "Saved places"
+          : tab === "day"
+            ? "My day"
+            : tab === "passport"
+              ? "My discoveries"
+              : tab === "collections"
+                ? "Local collections"
+                : "Discover places"}
+      </h1>
       <p className="field-guide-intro">
-        {tab === "saved" ? "Places you have saved for another day." : tab === "day" ? "Shape your next adventure, one stop at a time." : "Find your next little adventure. Collect a few sparks and make a day of it."}
+        {tab === "saved"
+          ? "Places you have saved for another day."
+          : tab === "day"
+            ? "Choose a few places and make a day of it."
+            : tab === "collections"
+              ? "Ready-made trails to help you find your way around."
+              : tab === "passport"
+                ? "Your saved discoveries and travel settings."
+                : `Find something to love in ${cities.find((item) => item.slug === city)?.name || "South Africa"}.`}
       </p>
       {hasIncoming && (
         <section className="incoming-discovery" aria-label="Shared discovery">
@@ -292,7 +367,7 @@ export default function AdventureHub() {
         </section>
       )}
       <label className="select-city">
-        Destination
+        Choose a city
         <select
           value={city}
           onChange={(e) => {
@@ -307,28 +382,32 @@ export default function AdventureHub() {
           ))}
         </select>
       </label>
-      <nav className="hub-tabs" aria-label="Field guide sections">
-        {[
+      <AnimatedTabs
+        ariaLabel="Your guide"
+        idPrefix="planner"
+        value={tab}
+        onChange={setTab}
+        items={[
           ["discover", "Discover"],
           ["collections", "Collections"],
           ["saved", "Saved"],
-          ["day", "Itineraries"],
+          ["day", "My day"],
           ["passport", "Passport"],
-        ].map(([id, label]) => (
-          <button
-            key={id}
-            onClick={() => setTab(id)}
-            aria-current={tab === id ? "page" : undefined}
-          >
-            {label}
-          </button>
-        ))}
-      </nav>
+        ].map(([id, label]) => ({
+          id,
+          label,
+          badge: id === "day" && state.itinerary.length ? state.itinerary.length : undefined,
+        }))}
+      />
       <p className="hub-message" role="status">
         {message}
       </p>
       <motion.div
         key={tab}
+        id="planner-panel"
+        role="tabpanel"
+        aria-labelledby={`planner-tab-${tab}`}
+        tabIndex={0}
         initial={{ opacity: 0, y: reduced ? 0 : 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: reduced ? 0 : 0.2 }}
@@ -364,9 +443,9 @@ export default function AdventureHub() {
                   </select>
                 </label>
               </div>
-              <button className="pill-button" onClick={() => setVariant((v) => v + 1)}>
+              <MagneticButton className="pill-button" onClick={() => setVariant((v) => v + 1)}>
                 Find another adventure <Sparkles size={16} />
-              </button>
+              </MagneticButton>
               <p className="planning-note">
                 A starting point, not a timed booking. Visit durations are editorial estimates;
                 check tickets and opening hours with each venue.
@@ -459,19 +538,7 @@ export default function AdventureHub() {
                       })}
                     </ol>
                     <div className="collection-card-actions">
-                      <button
-                        onClick={() => {
-                          if (trip.length && trip[0].city !== city) {
-                            setMessage("Clear the current day before adding a different city.");
-                            setTab("day");
-                            return;
-                          }
-                          update({
-                            itinerary: Array.from(new Set([...state.itinerary, ...c.placeIds])),
-                          });
-                          setTab("day");
-                        }}
-                      >
+                      <button onClick={() => addMany(c.placeIds)}>
                         Make this my day <ArrowUpRight size={15} />
                       </button>
                       <button onClick={() => share(c.placeIds)}>
@@ -497,15 +564,24 @@ export default function AdventureHub() {
               <div className="reference-saved-empty">
                 <BookmarkSimple size={28} />
                 <h3>Your saved places will live here.</h3>
-                <p>Save a landmark or venue while exploring, then come back when you are ready to plan.</p>
-                <button className="pill-button" onClick={() => setTab("discover")}>Discover places <ArrowUpRight size={15} /></button>
+                <p>
+                  Save a landmark or venue while exploring, then come back when you are ready to
+                  plan.
+                </p>
+                <button className="pill-button" onClick={() => setTab("discover")}>
+                  Discover places <ArrowUpRight size={15} />
+                </button>
               </div>
             )}
           </section>
         )}
         {tab === "day" && (
           <section className="adventure-section">
-            <h2>Build a day</h2>
+            <h2>
+              {trip.length
+                ? `Your day · ${trip.length} ${trip.length === 1 ? "stop" : "stops"}`
+                : "Build a day"}
+            </h2>
             {shared.length > 0 && (
               <div className="shared-trip">
                 <p>A shared adventure with {shared.length} stops.</p>
@@ -525,35 +601,45 @@ export default function AdventureHub() {
                 </button>
               </div>
             )}
-            <p>
-              Start with a collection or add places as you explore. Stops can be reordered;
-              geography ordering uses verified pins only.
-            </p>
-            <div className="day-actions">
-              <button
-                onClick={() => {
-                  update({
-                    itinerary: orderItinerary(state.itinerary, origin || undefined).map(
-                      (p) => p.id,
-                    ),
-                  });
-                  setMessage(
-                    "Verified pins grouped by proximity; approximate pins kept at the end.",
-                  );
-                }}
-                disabled={!trip.length}
-              >
-                <MapPin size={16} />
-                Group nearby stops
-              </button>
-              <button onClick={() => share(state.itinerary)} disabled={!trip.length}>
-                <Share2 size={16} />
-                Share day
-              </button>
-              <button onClick={() => update({ itinerary: [] })} disabled={!trip.length}>
-                Clear day
-              </button>
-            </div>
+            {trip.length > 0 && (
+              <p>
+                Stops can be reordered. Nearby grouping uses verified venue pins and keeps city
+                reference pins at the end.
+              </p>
+            )}
+            {trip.length > 0 && (
+              <div className="day-actions">
+                <button
+                  onClick={() => {
+                    update({
+                      itinerary: orderItinerary(state.itinerary, origin || undefined).map(
+                        (p) => p.id,
+                      ),
+                    });
+                    setMessage(
+                      "Verified pins grouped by proximity; approximate pins kept at the end.",
+                    );
+                  }}
+                  disabled={!trip.length}
+                >
+                  <MapPin size={16} />
+                  Group nearby stops
+                </button>
+                <button onClick={() => share(state.itinerary)} disabled={!trip.length}>
+                  <Share2 size={16} />
+                  Share day
+                </button>
+                <button
+                  onClick={() => {
+                    update({ itinerary: [] });
+                    setMessage("Your day has been cleared.");
+                  }}
+                  disabled={!trip.length}
+                >
+                  Clear day
+                </button>
+              </div>
+            )}
             <ol className="trip-stops">
               {trip.map((p, i) => (
                 <li key={p.id}>
@@ -576,25 +662,19 @@ export default function AdventureHub() {
                     </a>
                   </div>
                   <div className="stop-actions">
-                    {[-1, 1].map((d) => (
+                    {([-1, 1] as const).map((d) => (
                       <button
                         key={d}
                         disabled={i + d < 0 || i + d >= trip.length}
                         aria-label={`Move ${p.name} ${d < 0 ? "up" : "down"}`}
-                        onClick={() => {
-                          const ids = [...state.itinerary];
-                          [ids[i], ids[i + d]] = [ids[i + d], ids[i]];
-                          update({ itinerary: ids });
-                        }}
+                        onClick={() => moveStop(p.id, d)}
                       >
                         {d < 0 ? <MoveUp size={16} /> : <MoveDown size={16} />}
                       </button>
                     ))}
                     <button
                       aria-label={`Remove ${p.name} from day`}
-                      onClick={() =>
-                        update({ itinerary: state.itinerary.filter((id) => id !== p.id) })
-                      }
+                      onClick={() => removeStop(p.id)}
                     >
                       <X size={16} />
                     </button>
@@ -602,7 +682,23 @@ export default function AdventureHub() {
                 </li>
               ))}
             </ol>
-            {!trip.length && <p>Your day is a blank page. Choose a collection to get started.</p>}
+            {!trip.length && shared.length === 0 && (
+              <div className="reference-trip-empty">
+                <MapPin size={26} aria-hidden="true" />
+                <div>
+                  <h3>Start with a place that makes you curious.</h3>
+                  <p>Find places one by one, or start with a ready-made collection.</p>
+                </div>
+                <div className="reference-trip-empty-actions">
+                  <button className="pill-button" onClick={() => setTab("discover")}>
+                    Find places <ArrowUpRight size={15} />
+                  </button>
+                  <button className="pill-button" onClick={() => setTab("collections")}>
+                    Browse collections <ArrowUpRight size={15} />
+                  </button>
+                </div>
+              </div>
+            )}
             {trip.length > 0 && (
               <p className="planning-note">
                 About {trip.reduce((n, p) => n + Number(p.facts?.durationMinutes?.value || 90), 0)}{" "}

@@ -10,13 +10,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Citylit design direction
 
-Use [the reference brief](docs/redesign/reference-brief.md), its retained complete HTML and the linked Claude conversation as the visual source. The design centers on the living South Africa map, city/province framing, cream/ink/amber surfaces, Fraunces/Manrope typography, and interactive landmark/place stages. Use squircle controls and Phosphor icons. Preserve the real catalog, source attribution, accessibility, offline behavior and day-planning state; do not replace them with prototype drafts or placeholder policies.
+Use [the reference brief](docs/redesign/reference-brief.md), its retained complete HTML and the linked Claude conversation as the interaction and content source. The current visual direction is a living South Africa map with forest, limestone, sage and amber surfaces, Fraunces/Manrope typography, and interactive landmark/place stages. Use squircle controls and Phosphor icons. Preserve the real catalog, source attribution, accessibility, offline behavior and day-planning state; do not replace them with prototype drafts or placeholder policies.
 
 ## Quiet UX / DX / AX defaults
 
 - Each screen should make its primary action obvious without a tagline or helper paragraph. Use real content and plain labels; keep the South Africa map, existing brand, and purposeful 3D interactions.
 - Keep user-facing source disclaimers, factual context, accessibility labels, empty/error feedback, offline support, saved-day state and responsive safe areas.
 - The single 16px editable-control rule lives in `app/native-refinement.css`. This covers text inputs, select, textarea, editable content and textbox-like ARIA controls across themes and viewports. Do not add per-page font-size overrides.
-- Use existing semantic color tokens and Phosphor icons. Avoid installing a new design system or duplicating UI logic simply to achieve visual polish.
+- Use EasyUI (Surajmaurya1/easyui) as the primary source for new React interaction components. Add source-owned components under `components/ui/` and adapt them to Citylit's existing Motion package, semantic tokens, Phosphor icons, accessibility and reduced-motion behavior. Avoid adding a parallel component runtime or duplicating UI logic for visual polish.
 - Protect touch and keyboard interactions: meaningful focus states, accessible names, 44px targets where practical, WCAG AA contrast, reduced-motion support, and Inspect popovers above WebGL.
 - Verify affected flows at 320px, 390px and desktop; run formatter, lint, types, build and browser regressions. Do not report a check as passed until it has actually completed.

@@ -118,14 +118,17 @@ export default function PlaceActions({ place }: { place: Place }) {
               setMessage(`Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`);
               return;
             }
-            const saved = update((previous) => ({
-              itinerary: Array.from(new Set([...previous.itinerary, place.id])),
-            }));
-            setMessage(
-              saved
-                ? "Added to your day."
-                : "This browser could not save your day. Allow site storage and try again.",
-            );
+            void update((previous) => ({
+              itinerary: previous.itinerary.includes(place.id)
+                ? previous.itinerary
+                : Array.from(new Set([...previous.itinerary, place.id])),
+            })).then((saved) => {
+              setMessage(
+                saved
+                  ? "Added to your day."
+                  : "This browser could not save your day. Allow site storage and try again.",
+              );
+            });
           }}
         >
           <Plus size={16} />
@@ -134,18 +137,19 @@ export default function PlaceActions({ place }: { place: Place }) {
         <button
           aria-pressed={visited}
           onClick={() => {
-            const saved = update((previous) => ({
-              visited: visited
+            void update((previous) => ({
+              visited: previous.visited.includes(place.id)
                 ? previous.visited.filter((id) => id !== place.id)
-                : Array.from(new Set([...previous.visited, place.id])),
-            }));
-            setMessage(
-              saved
-                ? visited
-                  ? "Visit removed."
-                  : "A chapter visited."
-                : "This browser could not save your visit. Allow site storage and try again.",
-            );
+                : [...previous.visited, place.id],
+            })).then((saved) => {
+              setMessage(
+                saved
+                  ? visited
+                    ? "Visit removed."
+                    : "A chapter visited."
+                  : "This browser could not save your visit. Allow site storage and try again.",
+              );
+            });
           }}
         >
           <Check size={16} />

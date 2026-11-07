@@ -8,6 +8,7 @@ import "./spacing-system.css";
 import "./mobile-ux.css";
 import "./native-shell.css";
 import "./unified-design-system.css";
+import "./reference-redesign.css";
 import PwaProvider from "../components/PwaProvider";
 import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";

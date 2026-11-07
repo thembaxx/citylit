@@ -19,6 +19,15 @@ for (const citySlug of [
     test.slow();
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") errors.push(message.text());
+    });
+    const glbRequests: string[] = [];
+    page.on("request", (request) => {
+      if (/\\/models\\/(?:stage|hero)\\/.*\\.glb(?:$|\\?)/i.test(request.url())) {
+        glbRequests.push(request.url());
+      }
+    });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/${citySlug}/landmarks`);
     const city = cities.find((item) => item.slug === citySlug)!;
@@ -75,6 +84,7 @@ for (const citySlug of [
     await page.getByRole("button", { name: "Next discovery" }).click();
     await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[1]);
     await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
+    expect(glbRequests).toEqual([]);
     expect(errors).toEqual([]);
   });
 }

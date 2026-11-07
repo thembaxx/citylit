@@ -41,7 +41,8 @@ export default function ProceduralStageModel({
   useEffect(() => {
     prepareLandmarkExplodedView(subject);
     setLandmarkExplodedView(subject, explodedProgress);
-    subject.userData.setExplodedView = (progress: number) => setLandmarkExplodedView(subject, progress);
+    subject.userData.setExplodedView = (progress: number) =>
+      setLandmarkExplodedView(subject, progress);
     setProceduralNight(subject, night);
     invalidate();
   }, [subject, night, explodedProgress, invalidate]);

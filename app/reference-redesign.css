@@ -813,3 +813,183 @@
     transition: none;
   }
 }
+
+
+/* Atlas settings: compact segmented preferences panel */
+.game-screen .modal {
+  width: min(100%, 440px);
+  max-height: min(82dvh, 760px);
+  padding: 28px 22px 22px;
+  border-radius: 26px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 96%, transparent);
+}
+.game-screen .modal h2 {
+  margin: 8px 42px 18px 0;
+  font-size: clamp(25px, 6vw, 32px);
+  line-height: 1.08;
+}
+.game-screen .modal .tiny-label {
+  color: var(--citylit-reference-purple-soft);
+  font-size: 9px;
+  letter-spacing: .15em;
+}
+.reference-settings {
+  gap: 13px;
+}
+.reference-settings > p {
+  color: var(--citylit-reference-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.reference-settings-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: var(--citylit-reference-bg);
+}
+.reference-settings-tabs button {
+  min-height: 36px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--citylit-reference-muted);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 700;
+}
+.reference-settings-tabs button[aria-selected="true"] {
+  color: white;
+  background: linear-gradient(115deg, #9d60f2, #7040d2);
+  box-shadow: 0 4px 15px rgb(132 77 220 / 22%);
+}
+.reference-settings-label {
+  margin: 3px 0 0 !important;
+  color: var(--citylit-reference-text) !important;
+  font-size: 11px !important;
+  font-weight: 750;
+}
+.reference-theme-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.reference-theme-options button {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 8px;
+  min-height: 86px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 17px;
+  color: var(--citylit-reference-text);
+  background: var(--citylit-reference-panel-raised);
+  font-size: 11px;
+  font-weight: 700;
+}
+.reference-theme-options button[aria-pressed="true"] {
+  border-color: var(--citylit-reference-purple);
+  box-shadow: 0 0 0 2px rgb(155 92 255 / 14%), 0 8px 24px rgb(155 92 255 / 12%);
+}
+.reference-theme-options button svg {
+  color: var(--citylit-reference-purple-soft);
+}
+.reference-setting-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 49px;
+  padding: 8px 2px;
+  border-bottom: 1px solid var(--citylit-reference-border);
+  color: var(--citylit-reference-text);
+  font-size: 11px;
+}
+.reference-setting-toggle > span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.reference-setting-toggle > span svg {
+  color: var(--citylit-reference-purple-soft);
+}
+.reference-setting-toggle input {
+  appearance: none;
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex: 0 0 auto;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: #4a4652;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.reference-setting-toggle input::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 160ms ease;
+}
+.reference-setting-toggle input:checked {
+  border-color: var(--citylit-reference-purple);
+  background: var(--citylit-reference-purple);
+}
+.reference-setting-toggle input:checked::before {
+  transform: translateX(18px);
+}
+.reference-settings-city-list {
+  display: grid;
+  gap: 5px;
+  max-height: 310px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.reference-settings-city-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 7px 10px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 13px;
+  color: var(--citylit-reference-text);
+  background: var(--citylit-reference-panel-raised);
+  font-size: 11px;
+  text-decoration: none;
+}
+.reference-settings-city-list a > svg:first-child {
+  color: var(--citylit-reference-purple-soft);
+}
+.reference-settings-city-list a > svg:last-child {
+  margin-left: auto;
+  color: var(--citylit-reference-muted);
+}
+.reference-settings-city-list a span {
+  display: grid;
+  gap: 2px;
+}
+.reference-settings-city-list a small {
+  color: var(--citylit-reference-muted);
+  font-size: 9px;
+}
+.reference-settings .settings-play {
+  padding: 13px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 15px;
+  background: var(--citylit-reference-panel-raised);
+}
+.reference-settings .settings-play p {
+  font-size: 11px;
+}
+.reference-settings .pill-button {
+  justify-content: center;
+  min-height: 43px;
+  background: var(--citylit-reference-purple);
+  color: white;
+}

@@ -35,7 +35,16 @@ function legacySnapshot() {
 
 /** Read the canonical document, migrating the legacy localStorage snapshot once. */
 export async function readDiscoveryDocument(): Promise<Discovery> {
-  return mutateDiscovery(() => ({}));
+  const db = await openDatabase();
+  const existing = await new Promise<Discovery | undefined>((resolve, reject) => {
+    const transaction = db.transaction(storeName, "readonly");
+    const request = transaction.objectStore(storeName).get(discoveryKey);
+    request.onsuccess = () =>
+      resolve(request.result ? normalizeDiscovery(request.result) : undefined);
+    transaction.onerror = () => reject(transaction.error || new Error("Could not read local data"));
+    transaction.onabort = () => reject(transaction.error || new Error("Local data read was aborted"));
+  });
+  return existing || mutateDiscovery(() => ({}));
 }
 
 /**

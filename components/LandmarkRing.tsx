@@ -724,15 +724,13 @@ export default function LandmarkRing({
               <ArrowClockwise size={19} />
             </button>
             <button
-                type="button"
-                aria-label={
-                  exploded ? "Assemble landmark layers" : "Explode landmark layers"
-                }
-                aria-pressed={exploded}
-                title="Exploded view"
-                onClick={() => setExploded((value) => !value)}
-              >
-                <Stack size={19} />
+              type="button"
+              aria-label={exploded ? "Assemble landmark layers" : "Explode landmark layers"}
+              aria-pressed={exploded}
+              title="Exploded view"
+              onClick={() => setExploded((value) => !value)}
+            >
+              <Stack size={19} />
             </button>
             <button
               type="button"

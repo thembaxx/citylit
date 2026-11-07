@@ -94,9 +94,9 @@ The Collections handler in `components/AdventureHub.tsx` checks only the first s
 
 Tracking issue: [#108](https://github.com/thembaxx/citylit/issues/108).
 
-**D-2 — Cross-context discovery updates can be lost (confirmed concurrency defect, P1; remediation proposed in PR #113).**
+**D-2 — Cross-context discovery updates can be lost (confirmed concurrency defect, P1; remediation proposed in PR #114).**
 
-Before PR #113, `useDiscovery.update` used a localStorage read/modify/write sequence, and `public/offline.js` held stale module-level arrays and rewrote the whole document. These independent operations could overwrite each other across tabs and online/offline clients. The former implementation is retained as the defect evidence; the current PR introduces a shared IndexedDB canonical document and transaction-based mutation path.
+Before PR #114, `useDiscovery.update` used a localStorage read/modify/write sequence, and `public/offline.js` held stale module-level arrays and rewrote the whole document. These independent operations could overwrite each other across tabs and online/offline clients. The former implementation is retained as the defect evidence; the current PR introduces a shared IndexedDB canonical document and transaction-based mutation path.
 
 `lib/discovery-store.ts` performs each mutation in one IndexedDB readwrite transaction: read the latest `discovery` record, execute the functional updater synchronously against that record, normalize, and `put` before the transaction completes. IndexedDB serializes overlapping readwrite transactions on the same object store across same-origin tabs/pages. Online React consumers now receive an asynchronous result and publish only after commit. The offline guide uses the same database/store/key and performs the same read-modify-write inside its own transaction. Both clients update localStorage only as a compatibility mirror after a successful commit and notify other tabs through storage events/BroadcastChannel.
 
@@ -362,7 +362,7 @@ The sheet focuses its close button on mount and registers an Escape listener. A 
 | Priority | Finding | Impact | Evidence | Issue |
 |---|---|---|---|---|
 | P2 | Mixed-city persisted itinerary can be silently truncated by collection application | User can lose stops when an invalid mixed-city document is accepted | AdventureHub first-stop-only guard + `normalizeDiscovery` omits city invariant; catalog max city size is 19 | [#108](https://github.com/thembaxx/citylit/issues/108) |
-| P1 | Discovery localStorage read/modify/write was not cross-tab atomic; online/offline remediation proposed | Saved places, visits or trip changes could be lost | Historical `useDiscovery.ts` and `offline.js`; replacement transactional store in PR #113 | [#109](https://github.com/thembaxx/citylit/issues/109) |
+| P1 | Discovery localStorage read/modify/write was not cross-tab atomic; online/offline remediation proposed | Saved places, visits or trip changes could be lost | Historical `useDiscovery.ts` and `offline.js`; replacement transactional store in PR #114 | [#109](https://github.com/thembaxx/citylit/issues/109) |
 | P2 | Feasibility settings document is read/modify/write without cross-tab serialization | Plan edits can be lost or cleared plans resurrected | `itinerary-feasibility.ts`, `ItineraryFeasibility.tsx` | [#110](https://github.com/thembaxx/citylit/issues/110) |
 
 ## 12. Regression coverage required
@@ -393,6 +393,6 @@ The current suite has broad happy-path coverage in `tests/adventure.spec.ts` and
 |---|---|---|---|
 | 2026-11-07 | Initial audit and issues #108–#110 created; qualified D-1 after verifying per-city catalog size | Source review only; no local test execution available in this session | Audit in progress |
 | 2026-11-07 | PR #112: normalize mixed-city itineraries, guard collection transition, add normalization regression test | Test added; CI was queued at last check | Proposed, not yet verified |
-| 2026-11-07 | PR #113: introduce shared IndexedDB discovery document; convert online and offline mutations to transactional updaters; add cross-client Playwright regression | Regression test added; CI pending | Proposed, not yet verified |
+| 2026-11-07 | PR #114: introduce shared IndexedDB discovery document; convert online and offline mutations to transactional updaters; add cross-client Playwright regression | Regression test added; CI pending | Proposed, not yet verified |
 
 **Do not mark a defect fixed until** its implementation, focused regression test, relevant type/lint/build checks and browser-level verification are complete. Update the finding, transition table and verification log in the same PR.

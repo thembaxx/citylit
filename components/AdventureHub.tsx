@@ -110,13 +110,21 @@ export default function AdventureHub() {
       setMessage(`Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`);
       return;
     }
-    const saved = update((previous) => ({
-      itinerary: Array.from(new Set([...previous.itinerary, id])),
-    }));
-    setMessage(
-      saved
-        ? "Added to your day."
-        : "This browser could not save your day. Allow site storage and try again.",
+    void update((previous) => {
+      if (previous.itinerary.includes(id)) return {};
+      const first = places.find((place) => place.id === previous.itinerary[0]);
+      const target = places.find((place) => place.id === id);
+      if (
+        (first && target && first.city !== target.city) ||
+        previous.itinerary.length >= MAX_TRIP_STOPS
+      ) return {};
+      return { itinerary: [...previous.itinerary, id] };
+    }).then((saved) =>
+      setMessage(
+        saved
+          ? "Added to your day."
+          : "Your day could not be updated. Check its destination, stop limit and browser storage.",
+      ),
     );
   };
   const share = async (ids: string[]) => {
@@ -212,11 +220,11 @@ export default function AdventureHub() {
           aria-label={`Save ${p.name}`}
           aria-pressed={state.saved.includes(p.id)}
           onClick={() =>
-            update({
-              saved: state.saved.includes(p.id)
-                ? state.saved.filter((id) => id !== p.id)
-                : [...state.saved, p.id],
-            })
+            void update((previous) => ({
+              saved: previous.saved.includes(p.id)
+                ? previous.saved.filter((id) => id !== p.id)
+                : [...previous.saved, p.id],
+            }))
           }
         >
           <Heart size={16} fill={state.saved.includes(p.id) ? "currentColor" : "none"} />
@@ -271,11 +279,11 @@ export default function AdventureHub() {
                 <button
                   aria-pressed={state.saved.includes(incoming.id)}
                   onClick={() =>
-                    update({
-                      saved: state.saved.includes(incoming.id)
-                        ? state.saved.filter((id) => id !== incoming.id)
-                        : [...state.saved, incoming.id],
-                    })
+                    void update((previous) => ({
+                      saved: previous.saved.includes(incoming.id)
+                        ? previous.saved.filter((id) => id !== incoming.id)
+                        : [...previous.saved, incoming.id],
+                    }))
                   }
                 >
                   {state.saved.includes(incoming.id) ? "Saved discovery" : "Save shared discovery"}
@@ -460,7 +468,7 @@ export default function AdventureHub() {
                       <button
                         onClick={() => {
                           let rejected = false;
-                          const saved = update((previous) => {
+                          void update((previous) => {
                             const first = places.find((place) => place.id === previous.itinerary[0]);
                             if (
                               (first && first.city !== city) ||
@@ -485,14 +493,16 @@ export default function AdventureHub() {
                             setTab("day");
                             return;
                           }
-                          if (!saved) {
-                            setMessage(
-                              "This browser could not save your day. Allow site storage and try again.",
-                            );
-                            return;
-                          }
-                          setMessage("Collection added to your day.");
-                          setTab("day");
+                          }).then((saved) => {
+                            if (!saved) {
+                              setMessage(
+                                "Your day could not be updated. Check its destination, stop limit and browser storage.",
+                              );
+                              return;
+                            }
+                            setMessage("Collection added to your day.");
+                            setTab("day");
+                          });
                         }}
                       >
                         Make this my day <ArrowUpRight size={15} />
@@ -518,10 +528,15 @@ export default function AdventureHub() {
                     const same = shared.filter(
                       (id) => places.find((p) => p.id === id)?.city === first.city,
                     );
-                    update({ itinerary: same });
-                    setCity(first.city);
-                    setShared([]);
-                    setMessage("Shared day imported.");
+                    void update({ itinerary: same }).then((saved) => {
+                      if (!saved) {
+                        setMessage("This browser could not save your day. Allow site storage and try again.");
+                        return;
+                      }
+                      setCity(first.city);
+                      setShared([]);
+                      setMessage("Shared day imported.");
+                    });
                   }}
                 >
                   Import shared day
@@ -535,14 +550,15 @@ export default function AdventureHub() {
             <div className="day-actions">
               <button
                 onClick={() => {
-                  update({
-                    itinerary: orderItinerary(state.itinerary, origin || undefined).map(
+                  void update((previous) => ({
+                    itinerary: orderItinerary(previous.itinerary, origin || undefined).map(
                       (p) => p.id,
                     ),
-                  });
-                  setMessage(
-                    "Verified pins grouped by proximity; approximate pins kept at the end.",
-                  );
+                  })).then((saved) => setMessage(
+                    saved
+                      ? "Verified pins grouped by proximity; approximate pins kept at the end."
+                      : "This browser could not save your day. Allow site storage and try again.",
+                  ));
                 }}
                 disabled={!trip.length}
               >
@@ -553,7 +569,7 @@ export default function AdventureHub() {
                 <Share2 size={16} />
                 Share day
               </button>
-              <button onClick={() => update({ itinerary: [] })} disabled={!trip.length}>
+              <button onClick={() => void update({ itinerary: [] })} disabled={!trip.length}>
                 Clear day
               </button>
             </div>
@@ -585,9 +601,11 @@ export default function AdventureHub() {
                         disabled={i + d < 0 || i + d >= trip.length}
                         aria-label={`Move ${p.name} ${d < 0 ? "up" : "down"}`}
                         onClick={() => {
-                          const ids = [...state.itinerary];
-                          [ids[i], ids[i + d]] = [ids[i + d], ids[i]];
-                          update({ itinerary: ids });
+                          void update((previous) => {
+                            const ids = [...previous.itinerary];
+                            [ids[i], ids[i + d]] = [ids[i + d], ids[i]];
+                            return { itinerary: ids };
+                          });
                         }}
                       >
                         {d < 0 ? <MoveUp size={16} /> : <MoveDown size={16} />}
@@ -596,7 +614,9 @@ export default function AdventureHub() {
                     <button
                       aria-label={`Remove ${p.name} from day`}
                       onClick={() =>
-                        update({ itinerary: state.itinerary.filter((id) => id !== p.id) })
+                        void update((previous) => ({
+                          itinerary: previous.itinerary.filter((id) => id !== p.id),
+                        }))
                       }
                     >
                       <X size={16} />
@@ -624,7 +644,7 @@ export default function AdventureHub() {
                 <input
                   type="checkbox"
                   checked={state.passport}
-                  onChange={(e) => update({ passport: e.target.checked })}
+                  onChange={(e) => void update({ passport: e.target.checked })}
                 />
                 Collect illustrated stamps
               </label>
@@ -632,7 +652,7 @@ export default function AdventureHub() {
                 <input
                   type="checkbox"
                   checked={state.essential}
-                  onChange={(event) => update({ essential: event.target.checked })}
+                  onChange={(event) => void update({ essential: event.target.checked })}
                 />
                 Essential motion
               </label>
@@ -679,11 +699,11 @@ export default function AdventureHub() {
                     </Link>
                     <button
                       onClick={() =>
-                        update({
-                          visited: state.visited.includes(p.id)
-                            ? state.visited.filter((id) => id !== p.id)
-                            : [...state.visited, p.id],
-                        })
+                        void update((previous) => ({
+                          visited: previous.visited.includes(p.id)
+                            ? previous.visited.filter((id) => id !== p.id)
+                            : [...previous.visited, p.id],
+                        }))
                       }
                     >
                       {state.visited.includes(p.id) ? "Undo visited" : "Mark as visited"}

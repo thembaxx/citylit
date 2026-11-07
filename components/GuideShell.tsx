@@ -23,14 +23,15 @@ export default function GuideShell({
   const { state } = useDiscovery();
   const pathname = usePathname();
   const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
+  const isHome = pathname === "/";
   return (
     <div className={`discovery-guide reference-guide${stage ? " reference-stage-guide" : ""}`}>
-      {!stage && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
+      {!stage && !isHome && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
       <GuideMotion essential={state.essential} />
       <a className="guide-skip" href="#guide-main">
         Skip to content
       </a>
-      <header className="atlas-nav">
+      {!isHome && <header className="atlas-nav">
         <Link className="atlas-wordmark" href="/" aria-label="Citylit home">
           <BrandWordmark />
         </Link>
@@ -45,7 +46,7 @@ export default function GuideShell({
           </Link>
           <ThemeToggle />
         </nav>
-      </header>
+      </header>}
       <main id="guide-main" tabIndex={-1}>
         {children}
       </main>

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
   MapPin,
+  BookmarkSimple,
   ArrowUpRight,
   Heart,
   Check,
@@ -67,7 +68,7 @@ export default function AdventureHub() {
     [tab, setTab] = useState(
       params.get("trip")
         ? "day"
-        : ["day", "passport"].includes(params.get("tab") || "")
+        : ["day", "passport", "saved", "collections"].includes(params.get("tab") || "")
           ? params.get("tab")!
           : "discover",
     ),
@@ -196,7 +197,7 @@ export default function AdventureHub() {
     <article className="adventure-card" key={p.id}>
       <Link href={placePath(p)}>
         <span className="tiny-label">
-          {p.category}
+          {p.category} · {cities.find((item) => item.slug === p.city)?.short || p.city}
           {near && origin ? ` · ${distanceKm(origin, p.coords).toFixed(1)} km` : ""}
         </span>
         <h3>{p.name}</h3>
@@ -253,9 +254,9 @@ export default function AdventureHub() {
         </Link>
       </header>
       <span className="tiny-label">EVERY CITY HAS A SPARK.</span>
-      <h1>Your next chapter.</h1>
+      <h1>{tab === "saved" || tab === "day" ? "My day" : tab === "passport" ? "My discoveries" : "Your next chapter."}</h1>
       <p className="field-guide-intro">
-        Find your next little adventure. Collect a few sparks and make a day of it.
+        {tab === "saved" ? "Places you have saved for another day." : tab === "day" ? "Shape your next adventure, one stop at a time." : "Find your next little adventure. Collect a few sparks and make a day of it."}
       </p>
       {hasIncoming && (
         <section className="incoming-discovery" aria-label="Shared discovery">
@@ -310,7 +311,8 @@ export default function AdventureHub() {
         {[
           ["discover", "Discover"],
           ["collections", "Collections"],
-          ["day", "Build a day"],
+          ["saved", "Saved"],
+          ["day", "Itineraries"],
           ["passport", "Passport"],
         ].map(([id, label]) => (
           <button
@@ -479,6 +481,26 @@ export default function AdventureHub() {
                   </article>
                 ))}
             </div>
+          </section>
+        )}
+        {tab === "saved" && (
+          <section className="adventure-section">
+            <h2>Saved places</h2>
+            {state.saved.length ? (
+              <div className="adventure-grid">
+                {state.saved
+                  .map((id) => places.find((place) => place.id === id))
+                  .filter((place): place is Place => !!place)
+                  .map((place) => card(place))}
+              </div>
+            ) : (
+              <div className="reference-saved-empty">
+                <BookmarkSimple size={28} />
+                <h3>Your saved places will live here.</h3>
+                <p>Save a landmark or venue while exploring, then come back when you are ready to plan.</p>
+                <button className="pill-button" onClick={() => setTab("discover")}>Discover places <ArrowUpRight size={15} /></button>
+              </div>
+            )}
           </section>
         )}
         {tab === "day" && (

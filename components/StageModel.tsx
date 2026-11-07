@@ -27,10 +27,15 @@ export default function StageModel({
   onReady?: () => void;
 }) {
   const name = labels[model] ?? model.replace(/[-_]/g, " ");
+
   return (
     <>
       {active && (
-        <MuseumGroundShadow name="stage-contact-shadow" positionY={-0.18} dimensions={[4.2, 3.6]} />
+        <MuseumGroundShadow
+          name="stage-contact-shadow"
+          positionY={-0.18}
+          dimensions={[4.2, 3.6]}
+        />
       )}
       <ProceduralStageModel
         name={name}

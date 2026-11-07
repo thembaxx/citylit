@@ -51,7 +51,7 @@ The discovery document is a normalized value:
 - `passport: boolean` (defaults to `true`)
 - `essential: boolean` (defaults to `false`)
 
-The hook exposes the current normalized snapshot and a synchronous `update(change)` operation. The backing key is `citylit-discovery-v2`; `mzansi-saved` is a compatibility mirror/fallback.
+The hook exposes the current normalized snapshot and an asynchronous `update(change)` operation. The canonical document is stored in IndexedDB database `citylit-state`, object store `documents`, key `discovery`. `citylit-discovery-v2` and `mzansi-saved` are best-effort compatibility mirrors; the former is imported once when no IndexedDB record exists.
 
 ### Invariants
 
@@ -62,13 +62,18 @@ The hook exposes the current normalized snapshot and a synchronous `update(chang
 5. Saved and visited are independent sets; saving is not equivalent to visiting.
 6. `passport` and `essential` are booleans.
 7. Storage failure must not be reported as a successful persisted update.
-8. Concurrent mutations must not silently discard an independent committed mutation. **Not currently guaranteed across tabs.**
+8. All online and offline mutations must commit through the same IndexedDB readwrite transaction; no caller may persist a render-time whole-document snapshot.
+9. A failed/aborted transaction must not update compatibility mirrors or announce success.
+10. `localStorage` mirrors are never authoritative after IndexedDB migration.
 
 ### Transition table
 
 | Current state | Event | Guard | Next state / side effect |
 |---|---|---|---|
-| Any valid document | `SAVE(id)` | Catalog ID | Add ID to saved, unique |
+| Any valid document | `SAVE(id)` | Catalog ID; IndexedDB transaction commits | Add ID to saved, unique |
+| Any valid document | `MUTATE(change)` | IndexedDB available; readwrite transaction commits | Derive patch from the transaction's latest document, normalize, commit, then mirror and broadcast |
+| Any valid document | `MUTATE_FAILURE` | Database unavailable, quota/error/abort | Keep last published snapshot; return failure; do not mirror or announce success |
+| Legacy localStorage only | `HYDRATE` | No IndexedDB document exists | Atomically import normalized legacy snapshot into IndexedDB once |
 | Any valid document | `UNSAVE(id)` | — | Remove ID from saved |
 | Any valid document | `VISIT(id)` | Catalog ID | Add ID to visited, unique |
 | Any valid document | `UNVISIT(id)` | — | Remove ID from visited |
@@ -89,11 +94,13 @@ The Collections handler in `components/AdventureHub.tsx` checks only the first s
 
 Tracking issue: [#108](https://github.com/thembaxx/citylit/issues/108).
 
-**D-2 — Cross-context read/modify/write can lose updates (confirmed concurrency defect, P1).**
+**D-2 — Cross-context discovery updates can be lost (confirmed concurrency defect, P1; remediation proposed in PR #113).**
 
-`useDiscovery.update` reads the latest localStorage snapshot, computes a merged document, then writes it. localStorage provides atomic individual operations, not an atomic read-modify-write transaction across tabs. Two tabs can both read revision A, independently produce B and C, then write B followed by C; B's independent change is lost. The offline page has a second implementation: module-level arrays are loaded by `readState()` and the entire document is written later by `writeState()`. A storage event refreshes the other tab after a write but cannot prevent the lost-update interleaving.
+Before PR #113, `useDiscovery.update` used a localStorage read/modify/write sequence, and `public/offline.js` held stale module-level arrays and rewrote the whole document. These independent operations could overwrite each other across tabs and online/offline clients. The former implementation is retained as the defect evidence; the current PR introduces a shared IndexedDB canonical document and transaction-based mutation path.
 
-In addition, object patches built from render-time `state` (for example the collection union, save/visit toggles, reordering and removal in `AdventureHub.tsx`) can replace a newer list with a stale list. The functional updater form is safer for deriving changes from the latest snapshot, but it does not make the cross-tab localStorage transaction atomic.
+`lib/discovery-store.ts` performs each mutation in one IndexedDB readwrite transaction: read the latest `discovery` record, execute the functional updater synchronously against that record, normalize, and `put` before the transaction completes. IndexedDB serializes overlapping readwrite transactions on the same object store across same-origin tabs/pages. Online React consumers now receive an asynchronous result and publish only after commit. The offline guide uses the same database/store/key and performs the same read-modify-write inside its own transaction. Both clients update localStorage only as a compatibility mirror after a successful commit and notify other tabs through storage events/BroadcastChannel.
+
+Mutations fail closed when IndexedDB is unavailable or the transaction aborts; the app does not fall back to a non-atomic whole-document localStorage write. Legacy localStorage is imported only when the canonical IndexedDB record is absent. Existing open tabs running an older deployed JavaScript bundle cannot be made transactional by this code and remain a rollout caveat until reloaded.
 
 Tracking issue: [#109](https://github.com/thembaxx/citylit/issues/109).
 
@@ -144,7 +151,7 @@ Tracking issue: [#109](https://github.com/thembaxx/citylit/issues/109).
 
 - `parseSharedTrip` caps imports at 30 and filters IDs to the requested city.
 - `add(id)` checks duplicate, city and 30-stop limit before writing.
-- `normalizeDiscovery` enforces catalog membership, uniqueness and the 30-stop cap, but its truncation is silent; it is a defensive normalizer, not a user-facing transition guard.
+- `normalizeDiscovery` enforces catalog membership, uniqueness, the 30-stop cap and the single-city rule.
 - Collection application previously was the confirmed exception: see D-1. PR #112 proposes the normalization and transition guard; keep this finding open until regression tests and CI pass.
 
 ## 5. Itinerary-feasibility state machine
@@ -309,7 +316,7 @@ Worker requests use independent MessageChannels, so replies are correlated per r
 | Any | popstate | — | Restore URL and render |
 | Any | storage event | — | Re-read storage and render |
 
-The offline guide shares the online discovery key but duplicates the persistence implementation. Its stale in-memory arrays are part of D-2's lost-update path.
+The offline guide and online app now share the IndexedDB database, object store and key. The offline page's module-level arrays are a rendered snapshot only; every mutation derives from the latest committed record in an IndexedDB transaction. The localStorage compatibility mirror is not read once the IndexedDB record exists.
 
 ## 9. Khwezi motion, delight and transient UI state
 
@@ -355,7 +362,7 @@ The sheet focuses its close button on mount and registers an Escape listener. A 
 | Priority | Finding | Impact | Evidence | Issue |
 |---|---|---|---|---|
 | P2 | Mixed-city persisted itinerary can be silently truncated by collection application | User can lose stops when an invalid mixed-city document is accepted | AdventureHub first-stop-only guard + `normalizeDiscovery` omits city invariant; catalog max city size is 19 | [#108](https://github.com/thembaxx/citylit/issues/108) |
-| P1 | Discovery localStorage read/modify/write is not cross-tab atomic; offline client rewrites stale whole-document state | Saved places, visits or trip changes can be lost | `useDiscovery.ts`, `AdventureHub.tsx`, `offline.js` | [#109](https://github.com/thembaxx/citylit/issues/109) |
+| P1 | Discovery localStorage read/modify/write was not cross-tab atomic; online/offline remediation proposed | Saved places, visits or trip changes could be lost | Historical `useDiscovery.ts` and `offline.js`; replacement transactional store in PR #113 | [#109](https://github.com/thembaxx/citylit/issues/109) |
 | P2 | Feasibility settings document is read/modify/write without cross-tab serialization | Plan edits can be lost or cleared plans resurrected | `itinerary-feasibility.ts`, `ItineraryFeasibility.tsx` | [#110](https://github.com/thembaxx/citylit/issues/110) |
 
 ## 12. Regression coverage required
@@ -368,6 +375,7 @@ The current suite has broad happy-path coverage in `tests/adventure.spec.ts` and
 | SM-DISC-02 | Apply 3-stop collection to a 27-stop day | Exactly 30 unique stops |
 | SM-DISC-03 | Duplicate IDs in collection union | Duplicates consume no capacity |
 | SM-DISC-04 | Two contexts add different saved IDs concurrently | Both IDs survive |
+| SM-DISC-04A | Online app and offline guide save different places concurrently | Both IDs survive after reload in both clients |
 | SM-DISC-05 | Online and offline clients mutate different fields concurrently | Both field changes survive |
 | SM-DISC-06 | Rapid add/remove/reorder with two contexts | Unique IDs, <=30 stops, one city |
 | SM-FEAS-01 | Two contexts save different plan keys concurrently | Both plans survive |
@@ -384,6 +392,7 @@ The current suite has broad happy-path coverage in `tests/adventure.spec.ts` and
 | Date | Change | Tests | Status |
 |---|---|---|---|
 | 2026-11-07 | Initial audit and issues #108–#110 created; qualified D-1 after verifying per-city catalog size | Source review only; no local test execution available in this session | Audit in progress |
-| 2026-11-07 | PR #112: normalize mixed-city itineraries, guard collection transition, add normalization regression test | Test added; execution and CI verification pending | Proposed, not yet verified |
+| 2026-11-07 | PR #112: normalize mixed-city itineraries, guard collection transition, add normalization regression test | Test added; CI was queued at last check | Proposed, not yet verified |
+| 2026-11-07 | PR #113: introduce shared IndexedDB discovery document; convert online and offline mutations to transactional updaters; add cross-client Playwright regression | Regression test added; CI pending | Proposed, not yet verified |
 
 **Do not mark a defect fixed until** its implementation, focused regression test, relevant type/lint/build checks and browser-level verification are complete. Update the finding, transition table and verification log in the same PR.

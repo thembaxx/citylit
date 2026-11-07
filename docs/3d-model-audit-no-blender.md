@@ -59,8 +59,9 @@ The repository already declares `three: ^0.187.0` and matching `@types/three: ^0
 - **Completed on the audit branch:** Moses Mabhida now has one continuous signature arch instead of two parallel arch sweeps.
 - **Completed on the audit branch:** Ponte City now includes an explicit inner atrium wall, instanced inner gallery floors, exterior balcony lips, and vertical concrete fins while retaining instanced facade details.
 - **Completed on the audit branch:** Table Mountain and Big Hole receive a custom GLSL geological-bedding pass layered onto their PBR materials.
+- **Completed on the audit branch:** Union Buildings cupolas now have radial sandstone ribs, drum rims, and finials.
 - **Added:** a static Node audit that checks the Three.js version, procedural stage wiring, named builder entry points, new geometry features, museum loader removal, and absence of Blender from package build commands.
-- **Not yet completed:** Blender-authored scripts and legacy GLB files remain in the repository as unused/legacy assets pending a full reference audit. Union Buildings and additional Table Mountain / Big Hole / stadium details still need visual review. The generic category models need named-place fidelity upgrades. CI has been triggered, but jobs have not yet returned results.
+- **Not yet completed:** Blender-authored scripts and legacy GLB files remain in the repository as unused/legacy assets pending a full reference audit. Additional Table Mountain / Big Hole / stadium / Union Buildings details still need visual review. The generic category models need named-place fidelity upgrades. CI has been triggered, but jobs have not yet returned results.
 
 ## Proposed implementation stages
 

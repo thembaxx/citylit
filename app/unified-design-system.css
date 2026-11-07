@@ -138,7 +138,7 @@
 }
 .reference-guide .atlas-card-copy {
   padding: clamp(18px, 2vw, 24px);
-  gap: 10px;
+  gap: 12px;
 }
 .reference-guide .atlas-card-copy h3,
 .reference-guide .atlas-card-copy h3 {

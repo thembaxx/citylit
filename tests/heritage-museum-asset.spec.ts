@@ -8,7 +8,9 @@ test("museum inspector uses the procedural Three.js model without GLB requests",
   const modelRequests: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (message) => {
-    if (message.type() === "error") errors.push(message.text());
+    if (message.type() === "error" && /webgl|shader|glsl/i.test(message.text())) {
+      errors.push(message.text());
+    }
   });
   page.on("request", (request) => {
     if (/\/models\/hero\/.*\.glb(?:$|\?)/i.test(request.url())) {

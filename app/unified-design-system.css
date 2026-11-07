@@ -1,0 +1,402 @@
+/* Citylit unified interface system — shared visual language across discovery,
+   city guides, place browsing, planning and landmark overlays. No scene logic changes. */
+.reference-guide,
+.game-screen,
+.field-guide,
+.category-page {
+  --citylit-purple: #a78bfa;
+  --citylit-purple-strong: #8b5cf6;
+  --citylit-amber: #ffc46b;
+  --citylit-radius-sm: 12px;
+  --citylit-radius-md: 18px;
+  --citylit-radius-lg: 24px;
+  --citylit-border: color-mix(in srgb, var(--line) 82%, transparent);
+  --citylit-panel: color-mix(in srgb, var(--bg) 94%, var(--ink) 3%);
+  --citylit-panel-raised: color-mix(in srgb, var(--bg) 88%, var(--ink) 7%);
+  --citylit-focus: color-mix(in srgb, var(--citylit-purple) 76%, white);
+  --guide-accent: var(--citylit-amber);
+  --guide-surface: var(--citylit-panel);
+  color-scheme: dark;
+}
+:root[data-theme="day"] :is(.reference-guide, .game-screen, .field-guide, .category-page) {
+  --citylit-purple: #7046c8;
+  --citylit-purple-strong: #6035b7;
+  --citylit-amber: #a95012;
+  --citylit-border: color-mix(in srgb, var(--line) 90%, transparent);
+  --citylit-panel: color-mix(in srgb, var(--bg) 96%, #8a6b45 4%);
+  --citylit-panel-raised: color-mix(in srgb, var(--bg) 91%, #8a6b45 9%);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"])
+    :is(.reference-guide, .game-screen, .field-guide, .category-page) {
+    --citylit-purple: #7046c8;
+    --citylit-purple-strong: #6035b7;
+    --citylit-amber: #a95012;
+    --citylit-border: color-mix(in srgb, var(--line) 90%, transparent);
+    --citylit-panel: color-mix(in srgb, var(--bg) 96%, #8a6b45 4%);
+    --citylit-panel-raised: color-mix(in srgb, var(--bg) 91%, #8a6b45 9%);
+    color-scheme: light;
+  }
+}
+.reference-guide
+  :is(
+    .atlas-nav,
+    .atlas-native-dock,
+    .atlas-footer,
+    .atlas-section,
+    .atlas-chapter-nav,
+    .atlas-city-hero,
+    .atlas-breadcrumb
+  ) {
+  border-color: var(--citylit-border);
+}
+.reference-guide .atlas-directory {
+  padding-inline: var(--citylit-page-gutter);
+}
+.reference-guide .atlas-nav {
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.reference-guide .atlas-nav nav {
+  gap: clamp(12px, 2vw, 28px);
+}
+.reference-guide .atlas-nav nav > a {
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+.reference-guide .atlas-nav .atlas-day-link {
+  border-radius: 999px;
+  background: var(--citylit-panel);
+}
+.reference-guide
+  :is(
+    .atlas-button,
+    .atlas-text-link,
+    .atlas-chapter-nav a,
+    .atlas-place-filters button,
+    .atlas-directory-tools select
+  ) {
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+.reference-guide .atlas-button {
+  min-height: 48px;
+  border-radius: 999px;
+  border-color: var(--citylit-border);
+  padding-inline: 20px;
+  font-size: 13px !important;
+  font-weight: 650;
+}
+.reference-guide .atlas-button.atlas-primary {
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--guide-accent) 18%, transparent);
+}
+.reference-guide :is(.atlas-search, .atlas-province-select select, .atlas-map-select select) {
+  border: 1px solid var(--citylit-border);
+  border-radius: 999px;
+  background: var(--citylit-panel);
+  min-height: 50px;
+}
+.reference-guide .atlas-search {
+  padding-inline: 18px;
+}
+.reference-guide .atlas-province-select select {
+  padding-inline: 18px 38px;
+}
+.reference-guide :is(.atlas-search, .atlas-province-select, .atlas-map-select):focus-within {
+  border-color: var(--citylit-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--citylit-purple) 16%, transparent);
+}
+.reference-guide
+  :is(
+    .atlas-city-card-link,
+    .atlas-place-card-link,
+    .atlas-plan-stop,
+    .atlas-empty,
+    .atlas-beacon-card
+  ) {
+  border: 1px solid var(--citylit-border);
+  border-radius: var(--citylit-radius-md);
+  background: var(--citylit-panel);
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link) {
+  height: calc(100% - 32px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+}
+.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link):focus-visible {
+  outline: 2px solid var(--citylit-focus);
+  outline-offset: 3px;
+}
+.reference-guide .atlas-card-copy {
+  padding: clamp(18px, 2vw, 24px);
+  gap: 12px;
+}
+.reference-guide .atlas-card-copy h3,
+.reference-guide .atlas-card-copy h3 {
+  letter-spacing: -0.035em;
+}
+.reference-guide .atlas-card-meta {
+  border-color: var(--citylit-border);
+}
+.reference-guide .atlas-card-arrow {
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 50%;
+  background: rgb(15 16 21 / 72%);
+  backdrop-filter: blur(12px);
+}
+.reference-guide .atlas-place-filters button {
+  min-height: 42px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border-color: var(--citylit-border);
+  background: var(--citylit-panel);
+}
+
+.reference-guide .atlas-place-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.reference-guide .atlas-card-copy > p:not(.atlas-eyebrow) {
+  color: var(--muted);
+  line-height: 1.65;
+}
+.reference-guide .atlas-city-card,
+.reference-guide .atlas-place-card {
+  min-width: 0;
+}
+.reference-guide .atlas-city-card-link,
+.reference-guide .atlas-place-card-link {
+  display: flex;
+  height: calc(100% - 32px);
+  flex-direction: column;
+}
+.reference-guide .atlas-city-photo,
+.reference-guide .atlas-place-photo {
+  flex-shrink: 0;
+}
+.reference-guide .atlas-place-filters button[aria-pressed="true"] {
+  color: var(--bg);
+  border-color: var(--citylit-purple);
+  background: var(--citylit-purple);
+}
+
+.reference-guide .atlas-place-filters button[aria-pressed="true"] {
+  color: var(--bg);
+  border-color: var(--citylit-purple);
+  background: var(--citylit-purple);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--citylit-purple) 20%, transparent);
+}
+.reference-guide .atlas-plan-stop {
+  padding: 20px;
+  gap: 16px;
+}
+.reference-guide .atlas-plan-stop > .atlas-button {
+  align-self: stretch;
+}
+.reference-guide .atlas-plan-stop > .atlas-button[aria-pressed="true"] {
+  color: var(--citylit-purple);
+  border-color: var(--citylit-purple);
+  background: color-mix(in srgb, var(--citylit-purple) 9%, transparent);
+}
+.reference-guide .atlas-empty {
+  padding: clamp(28px, 5vw, 56px) 24px;
+}
+.reference-guide :is(.atlas-map-select select, input, textarea, select) {
+  accent-color: var(--citylit-purple);
+}
+.reference-guide :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--citylit-focus);
+  outline-offset: 3px;
+}
+.reference-guide :is(.spot-layer, .spot-sheet, .detail-scroll, .place-detail) {
+  border-color: var(--citylit-border);
+}
+.reference-guide :is(.spot-sheet, .place-detail) {
+  border-radius: var(--citylit-radius-lg);
+  background: var(--citylit-panel);
+}
+.reference-guide .atlas-native-dock {
+  border: 1px solid var(--citylit-border);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  box-shadow: 0 12px 36px rgb(0 0 0 / 22%);
+  backdrop-filter: blur(22px) saturate(1.15);
+  -webkit-backdrop-filter: blur(22px) saturate(1.15);
+}
+.reference-guide .atlas-native-dock a {
+  min-height: 58px;
+  border-radius: 15px;
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+.reference-guide .atlas-native-dock a[aria-current="page"] {
+  color: var(--citylit-purple);
+  background: color-mix(in srgb, var(--citylit-purple) 11%, transparent);
+}
+
+/* Standalone atlas, saved-day and category experiences share the same tokens. */
+.game-screen .game-nav {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom: 1px solid var(--citylit-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.game-screen .icon-button {
+  width: 42px;
+  min-height: 42px;
+  border: 1px solid var(--citylit-border);
+  border-radius: 14px;
+}
+.game-screen :is(.pill-button, .preference-button, .navigation-options button) {
+  min-height: 44px;
+  border-radius: 999px;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+.game-screen .detail-scroll,
+.game-screen .modal,
+.game-screen .experience-settings {
+  border: 1px solid var(--citylit-border);
+  border-radius: var(--citylit-radius-lg);
+  background: var(--citylit-panel);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 22%);
+}
+.game-screen .detail-chips > * {
+  border-radius: 999px;
+}
+.field-guide .field-guide-header {
+  border-color: var(--citylit-border);
+}
+.field-guide :is(.adventure-card, .collection-card, .event-card, .shared-trip, .quality-summary) {
+  border: 1px solid var(--citylit-border);
+  border-radius: var(--citylit-radius-md);
+  background: var(--citylit-panel);
+}
+.field-guide :is(.hub-tabs, .passport-settings) {
+  border-color: var(--citylit-border);
+}
+.field-guide
+  :is(
+    .hub-tabs button,
+    .day-actions button,
+    .adventure-card-actions button,
+    .collection-card button,
+    .adventure-card > button,
+    .shared-trip button,
+    .pill-button
+  ) {
+  min-height: 44px;
+  border-radius: 999px;
+}
+.field-guide :is(.hub-tabs button[aria-current], .place-filters button[aria-pressed="true"]) {
+  border-color: var(--citylit-purple);
+  color: var(--citylit-purple);
+  background: color-mix(in srgb, var(--citylit-purple) 10%, transparent);
+}
+.category-page .category-page-search,
+.category-page .category-place-card {
+  border: 1px solid var(--citylit-border);
+  border-radius: var(--citylit-radius-md);
+  background: var(--citylit-panel);
+}
+.category-page .category-page-search {
+  min-height: 48px;
+}
+.category-page .category-place-card {
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+.category-page .category-place-card:focus-within {
+  border-color: var(--citylit-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--citylit-purple) 14%, transparent);
+}
+.category-page :is(.place-filters button, .category-page-tabs button, .pill-button) {
+  min-height: 42px;
+  border-radius: 999px;
+}
+.category-page .place-filters button[aria-pressed="true"] {
+  border-color: var(--citylit-purple);
+  color: var(--bg);
+  background: var(--citylit-purple);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link):hover {
+    border-color: color-mix(in srgb, var(--citylit-purple) 62%, var(--citylit-border));
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgb(0 0 0 / 16%);
+  }
+  .reference-guide .atlas-button:hover {
+    border-color: var(--citylit-purple);
+  }
+}
+@media (max-width: 767px) {
+  .reference-guide .atlas-nav nav {
+    gap: 10px;
+  }
+  .reference-guide .atlas-nav nav > a {
+    min-height: 44px;
+  }
+  .reference-guide .atlas-native-dock {
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    padding: 5px;
+  }
+  .reference-guide .atlas-native-dock a {
+    min-width: 0;
+    min-height: 54px;
+    gap: 3px;
+  }
+  .reference-guide .atlas-section-heading {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .reference-guide .atlas-directory-tools {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .reference-guide .atlas-province-select {
+    min-width: 0;
+    width: 100%;
+  }
+  .reference-guide .atlas-city-grid {
+    gap: 18px;
+  }
+  .reference-guide .atlas-plan-stop {
+    padding: 16px;
+  }
+  .reference-guide .atlas-plan-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reference-guide *,
+  .reference-guide *::before,
+  .reference-guide *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

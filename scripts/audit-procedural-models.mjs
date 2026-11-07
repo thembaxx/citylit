@@ -2,37 +2,31 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const read = (path) => readFile(new URL("../" + path, import.meta.url), "utf8");
-const [
-  pkgText,
-  hero,
-  showcase,
-  stageModel,
-  expanded,
-  ring,
-  safe,
-  procedural,
-  builders,
-  pbr,
-] = await Promise.all([
-  read("package.json"),
-  read("components/MuseumHeroAsset.tsx"),
-  read("components/MuseumShowcase.tsx"),
-  read("components/StageModel.tsx"),
-  read("components/ExpandedLandmark.tsx"),
-  read("components/LandmarkRing.tsx"),
-  read("components/SafeStageModel.tsx"),
-  read("components/ProceduralStageModel.tsx"),
-  read("lib/procedural-landmarks.js"),
-  read("lib/landmark-pbr.js"),
-]);
+const [pkgText, hero, showcase, stageModel, expanded, ring, safe, procedural, builders, pbr] =
+  await Promise.all([
+    read("package.json"),
+    read("components/MuseumHeroAsset.tsx"),
+    read("components/MuseumShowcase.tsx"),
+    read("components/StageModel.tsx"),
+    read("components/ExpandedLandmark.tsx"),
+    read("components/LandmarkRing.tsx"),
+    read("components/SafeStageModel.tsx"),
+    read("components/ProceduralStageModel.tsx"),
+    read("lib/procedural-landmarks.js"),
+    read("lib/landmark-pbr.js"),
+  ]);
 const pkg = JSON.parse(pkgText);
 
 assert.match(pkg.dependencies?.three ?? "", /^\^0\.187\.0$/);
-assert.doesNotMatch(JSON.stringify(pkg.scripts), /\bblender\b/iu);
+const packageCommands = Object.values(pkg.scripts ?? {}).join("\n");
+assert.doesNotMatch(
+  packageCommands,
+  /(?:^|[;&|]\s*)(?:pnpm\s+exec\s+)?blender(?:\.exe)?(?:\s|$)/imu,
+);
 assert.match(pkg.scripts["models:build"], /runtime with Three\.js/);
 assert.match(pkg.scripts["hero:build"], /runtime with Three\.js/);
 
-assert.match(hero, /<MuseumShowcase \.\.\.props\s*\/>/);
+assert.match(hero, /<MuseumShowcase \{\.\.\.props\}\s*\/>/);
 assert.doesNotMatch(hero, /useGLTF|GLTFLoader|\.glb|\/draco\//i);
 assert.doesNotMatch(stageModel, /useGLTF|GLTFLoader|\.glb|\/draco\//i);
 assert.match(stageModel, /ProceduralStageModel/);

@@ -86,19 +86,19 @@
   border-color: var(--citylit-focus);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--citylit-purple) 16%, transparent);
 }
-.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-landmark-link,
-  .atlas-plan-stop, .atlas-empty, .atlas-beacon-card) {
+.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-plan-stop,
+  .atlas-empty, .atlas-beacon-card) {
   border: 1px solid var(--citylit-border);
   border-radius: var(--citylit-radius-md);
   background: var(--citylit-panel);
   overflow: hidden;
   transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
-.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-landmark-link) {
+.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link) {
   height: calc(100% - 32px);
   box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
 }
-.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-landmark-link):focus-visible {
+.reference-guide :is(.atlas-city-card-link, .atlas-place-card-link):focus-visible {
   outline: 2px solid var(--citylit-focus);
   outline-offset: 3px;
 }
@@ -107,7 +107,7 @@
   gap: 10px;
 }
 .reference-guide .atlas-card-copy h3,
-.reference-guide .atlas-landmark-link h3 {
+.reference-guide .atlas-card-copy h3 {
   letter-spacing: -0.035em;
 }
 .reference-guide .atlas-card-meta {
@@ -119,13 +119,6 @@
   background: rgb(15 16 21 / 72%);
   backdrop-filter: blur(12px);
 }
-.reference-guide .atlas-landmark-link {
-  border-radius: var(--citylit-radius-md);
-  background: var(--citylit-panel);
-}
-.reference-guide .atlas-landmark-link > div:last-child {
-  padding: clamp(16px, 2vw, 24px);
-}
 .reference-guide .atlas-place-filters button {
   min-height: 42px;
   padding: 9px 16px;
@@ -133,6 +126,37 @@
   border-color: var(--citylit-border);
   background: var(--citylit-panel);
 }
+
+.reference-guide .atlas-place-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.reference-guide .atlas-card-copy > p:not(.atlas-eyebrow) {
+  color: var(--muted);
+  line-height: 1.65;
+}
+.reference-guide .atlas-city-card,
+.reference-guide .atlas-place-card {
+  min-width: 0;
+}
+.reference-guide .atlas-city-card-link,
+.reference-guide .atlas-place-card-link {
+  display: flex;
+  height: calc(100% - 32px);
+  flex-direction: column;
+}
+.reference-guide .atlas-city-photo,
+.reference-guide .atlas-place-photo {
+  flex-shrink: 0;
+}
+.reference-guide .atlas-place-filters button[aria-pressed="true"] {
+  color: var(--bg);
+  border-color: var(--citylit-purple);
+  background: var(--citylit-purple);
+}
+
 .reference-guide .atlas-place-filters button[aria-pressed="true"] {
   color: var(--bg);
   border-color: var(--citylit-purple);
@@ -186,7 +210,7 @@
   background: color-mix(in srgb, var(--citylit-purple) 11%, transparent);
 }
 @media (hover: hover) and (pointer: fine) {
-  .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link, .atlas-landmark-link):hover {
+  .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link):hover {
     border-color: color-mix(in srgb, var(--citylit-purple) 62%, var(--citylit-border));
     transform: translateY(-3px);
     box-shadow: 0 14px 32px rgb(0 0 0 / 16%);
@@ -229,7 +253,7 @@
     min-width: 0;
     width: 100%;
   }
-  .reference-guide :is(.atlas-city-grid, .atlas-landmark-grid) {
+  .reference-guide .atlas-city-grid {
     gap: 18px;
   }
   .reference-guide .atlas-plan-stop {

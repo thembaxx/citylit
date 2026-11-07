@@ -28,6 +28,11 @@
 .reference-guide .atlas-breadcrumb {
   padding-inline: var(--citylit-page-gutter);
 }
+
+/* Keep fixed navigation aligned with the directory and page content. */
+.reference-guide .atlas-nav {
+  padding-inline: var(--citylit-page-gutter);
+}
 .reference-guide .atlas-section:not(.atlas-directory):not(.atlas-venue) {
   padding-block: var(--citylit-section-space);
 }

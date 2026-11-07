@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const read = (path) => readFile(new URL("../" + path, import.meta.url), "utf8");
-const [pkgText, hero, showcase, stageModel, expanded, ring, safe, procedural, builders] = await Promise.all([
+const [pkgText, hero, showcase, stageModel, expanded, ring, safe, procedural, builders, pbr] = await Promise.all([
   read("package.json"),
   read("components/MuseumHeroAsset.tsx"),
   read("components/MuseumShowcase.tsx"),
@@ -12,6 +12,7 @@ const [pkgText, hero, showcase, stageModel, expanded, ring, safe, procedural, bu
   read("components/SafeStageModel.tsx"),
   read("components/ProceduralStageModel.tsx"),
   read("lib/procedural-landmarks.js"),
+  read("lib/landmark-pbr.js"),
 ]);
 const pkg = JSON.parse(pkgText);
 
@@ -40,6 +41,7 @@ assert.match(builders, /ponte-city-inner-atrium-wall/);
 assert.match(builders, /ponte-city-inner-atrium-gallery-floors/);
 assert.match(builders, /ponte-city-external-balcony-lips/);
 assert.match(builders, /ponte-city-vertical-concrete-fins/);
+assert.match(pbr, /const SIZE = 128;/);
 
 console.log("Three.js-only model pipeline audit passed", {
   three: pkg.dependencies.three,

@@ -1,6 +1,9 @@
 /* Citylit unified interface system — shared visual language across discovery,
    city guides, place browsing, planning and landmark overlays. No scene logic changes. */
-.reference-guide {
+.reference-guide,
+.game-screen,
+.field-guide,
+.category-page {
   --citylit-purple: #a78bfa;
   --citylit-purple-strong: #8b5cf6;
   --citylit-amber: #ffc46b;
@@ -15,7 +18,7 @@
   --guide-surface: var(--citylit-panel);
   color-scheme: dark;
 }
-:root[data-theme="day"] .reference-guide {
+:root[data-theme="day"] :is(.reference-guide, .game-screen, .field-guide, .category-page) {
   --citylit-purple: #7046c8;
   --citylit-purple-strong: #6035b7;
   --citylit-amber: #a95012;
@@ -25,7 +28,7 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="night"]) .reference-guide {
+  :root:not([data-theme="night"]) :is(.reference-guide, .game-screen, .field-guide, .category-page) {
     --citylit-purple: #7046c8;
     --citylit-purple-strong: #6035b7;
     --citylit-amber: #a95012;
@@ -209,6 +212,83 @@
   color: var(--citylit-purple);
   background: color-mix(in srgb, var(--citylit-purple) 11%, transparent);
 }
+
+/* Standalone atlas, saved-day and category experiences share the same tokens. */
+.game-screen .game-nav {
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom: 1px solid var(--citylit-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.game-screen .icon-button {
+  width: 42px;
+  min-height: 42px;
+  border: 1px solid var(--citylit-border);
+  border-radius: 14px;
+}
+.game-screen :is(.pill-button, .preference-button, .navigation-options button) {
+  min-height: 44px;
+  border-radius: 999px;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+.game-screen .detail-scroll,
+.game-screen .modal,
+.game-screen .experience-settings {
+  border: 1px solid var(--citylit-border);
+  border-radius: var(--citylit-radius-lg);
+  background: var(--citylit-panel);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 22%);
+}
+.game-screen .detail-chips > * {
+  border-radius: 999px;
+}
+.field-guide .field-guide-header {
+  border-color: var(--citylit-border);
+}
+.field-guide :is(.adventure-card, .collection-card, .event-card, .shared-trip, .quality-summary) {
+  border: 1px solid var(--citylit-border);
+  border-radius: var(--citylit-radius-md);
+  background: var(--citylit-panel);
+}
+.field-guide :is(.hub-tabs, .passport-settings) {
+  border-color: var(--citylit-border);
+}
+.field-guide :is(.hub-tabs button, .day-actions button, .adventure-card-actions button,
+  .collection-card button, .adventure-card > button, .shared-trip button, .pill-button) {
+  min-height: 44px;
+  border-radius: 999px;
+}
+.field-guide :is(.hub-tabs button[aria-current], .place-filters button[aria-pressed="true"]) {
+  border-color: var(--citylit-purple);
+  color: var(--citylit-purple);
+  background: color-mix(in srgb, var(--citylit-purple) 10%, transparent);
+}
+.category-page .category-page-search,
+.category-page .category-place-card {
+  border: 1px solid var(--citylit-border);
+  border-radius: var(--citylit-radius-md);
+  background: var(--citylit-panel);
+}
+.category-page .category-page-search {
+  min-height: 48px;
+}
+.category-page .category-place-card {
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.category-page .category-place-card:focus-within {
+  border-color: var(--citylit-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--citylit-purple) 14%, transparent);
+}
+.category-page :is(.place-filters button, .category-page-tabs button, .pill-button) {
+  min-height: 42px;
+  border-radius: 999px;
+}
+.category-page .place-filters button[aria-pressed="true"] {
+  border-color: var(--citylit-purple);
+  color: var(--bg);
+  background: var(--citylit-purple);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .reference-guide :is(.atlas-city-card-link, .atlas-place-card-link):hover {
     border-color: color-mix(in srgb, var(--citylit-purple) 62%, var(--citylit-border));

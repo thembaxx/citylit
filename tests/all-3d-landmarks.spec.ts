@@ -21,13 +21,17 @@ for (const citySlug of [
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("console", (message) => {
       if (message.type() === "error" && /webgl|shader|glsl/i.test(message.text())) {
-      errors.push(message.text());
-    }
+        errors.push(message.text());
+      }
     });
     const glbRequests: string[] = [];
     page.on("request", (request) => {
-      if ((request.url().includes("/models/stage/") || request.url().includes("/models/hero/")) && request.url().endsWith(".glb")) {
-        glbRequests.push(request.url());
+      const url = request.url();
+      if (
+        (url.includes("/models/stage/") || url.includes("/models/hero/")) &&
+        url.endsWith(".glb")
+      ) {
+        glbRequests.push(url);
       }
     });
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -90,4 +94,3 @@ for (const citySlug of [
     expect(errors).toEqual([]);
   });
 }
-

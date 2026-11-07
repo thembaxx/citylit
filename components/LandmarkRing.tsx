@@ -442,6 +442,7 @@ function Ring({
                       night={night}
                       reduced={reduced}
                       active={index === selected}
+                      explodedProgress={index === selected && exploded ? 1 : 0}
                       onStatus={onModelStatus}
                     />
                   )
@@ -722,19 +723,17 @@ export default function LandmarkRing({
             >
               <ArrowClockwise size={19} />
             </button>
-            {museumSelected && (
-              <button
+            <button
                 type="button"
                 aria-label={
-                  exploded ? "Assemble roof and landscape" : "Explode architectural layers"
+                  exploded ? "Assemble landmark layers" : "Explode landmark layers"
                 }
                 aria-pressed={exploded}
                 title="Exploded view"
                 onClick={() => setExploded((value) => !value)}
               >
                 <Stack size={19} />
-              </button>
-            )}
+            </button>
             <button
               type="button"
               title="Reset inspection"

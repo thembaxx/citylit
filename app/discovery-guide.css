@@ -2711,6 +2711,120 @@
   line-height: 1.4;
   color: var(--muted);
 }
+.atlas-inspector-mechanisms {
+  width: 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--surface) 91%, transparent);
+  box-shadow: 0 12px 36px rgb(20 20 25 / 10%);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+.atlas-mechanisms-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 2px 3px 8px;
+}
+.atlas-mechanisms-head > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+.atlas-joint {
+  display: grid;
+  gap: 3px;
+  padding: 2px;
+}
+.atlas-joint-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding-left: 6px;
+}
+.atlas-joint-head > span {
+  color: var(--ink);
+  font-size: 10.5px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+.atlas-joint-head button {
+  min-width: 52px;
+  min-height: 34px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.atlas-joint-head button[aria-pressed="true"] {
+  color: var(--accent-ink);
+  background: var(--guide-glow);
+  border-color: transparent;
+}
+.atlas-joint input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.atlas-joint input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+}
+.atlas-joint input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+}
+.atlas-joint input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -7px;
+  border: 2px solid var(--surface);
+  border-radius: 7px;
+  background: var(--accent-ink);
+  box-shadow: 0 2px 8px rgb(20 20 25 / 22%);
+}
+.atlas-joint input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--surface);
+  border-radius: 7px;
+  background: var(--accent-ink);
+}
+.atlas-joint input[type="range"]:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+.atlas-inspector-mechanisms .atlas-joint-restore {
+  flex: none;
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent-ink) 8%, transparent);
+  color: var(--accent-ink);
+  font-size: 10px;
+  font-weight: 650;
+}
 @media (max-width: 767px) {
   /* The dock is opt-in on small screens: no overlays over landmark title or chips. */
   .atlas-inspector-toolbar {
@@ -2743,6 +2857,13 @@
     border: 1px solid var(--line);
     background: var(--surface);
     box-shadow: 0 14px 48px rgb(25 20 16 / 17%);
+    /* Tall mechanism stacks stay reachable on short phones instead of
+       spilling past the viewport. The toggle above remains fixed. */
+    max-height: calc(100dvh - 210px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--ink) 25%, transparent) transparent;
   }
   .atlas-inspector-actions {
     display: grid;
@@ -2767,6 +2888,21 @@
     min-height: 33px;
     padding: 5px 7px;
     font-size: 10px;
+  }
+  .atlas-inspector-mechanisms {
+    width: 172px;
+    gap: 3px;
+    padding: 6px;
+    border-radius: 17px;
+  }
+  .atlas-joint-head button {
+    min-height: 33px;
+  }
+  .atlas-inspector-mechanisms .atlas-joint-restore {
+    min-height: 32px;
+  }
+  .atlas-joint input[type="range"] {
+    height: 34px;
   }
   /* Preserve announcements in the accessibility tree without blocking taps. */
   .atlas-inspector-note {

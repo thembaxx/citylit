@@ -53,6 +53,7 @@ export default function SafeStageModel({
   active = true,
   onStatus,
   explodedProgress = 0,
+  jointValues,
 }: {
   model: string;
   name?: string;
@@ -61,6 +62,7 @@ export default function SafeStageModel({
   active?: boolean;
   onStatus?: (model: string, status: "ready" | "error") => void;
   explodedProgress?: number;
+  jointValues?: Record<string, number>;
 }) {
   const onReady = useCallback(() => onStatus?.(name, "ready"), [name, onStatus]);
   const onFailure = useCallback(() => onStatus?.(name, "error"), [name, onStatus]);
@@ -74,6 +76,7 @@ export default function SafeStageModel({
         active={active}
         onReady={onReady}
         explodedProgress={explodedProgress}
+        jointValues={jointValues}
       />
     </LandmarkAssetBoundary>
   );

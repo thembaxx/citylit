@@ -52,7 +52,7 @@ for (const citySlug of [
     await toolbar.getByRole("button", { name: "Switch to night lighting" }).click();
     await expect(toolbar.getByRole("button", { name: "Switch to daylight" })).toBeVisible();
     const explode = toolbar.getByRole("button", { name: "Exploded view" });
-    const sceneCanvas = page.locator(".atlas-ring-scene canvas");
+    const sceneCanvas = page.locator(".persistent-canvas canvas");
     await expect(explode).toBeVisible();
     await expect(explode).toHaveAttribute("aria-pressed", "false");
     await explode.click();
@@ -63,8 +63,8 @@ for (const citySlug of [
     await expect(sceneCanvas).toHaveAttribute("data-exploded-progress", "0.000");
     await toolbar.getByRole("button", { name: "Rotate selected miniature" }).click();
     await toolbar.getByRole("button", { name: "Zoom in" }).click();
-    await toolbar.getByRole("button", { name: "Close-up" }).click();
-    await expect(toolbar.getByRole("button", { name: "Close-up" })).toHaveAttribute(
+    await toolbar.getByRole("button", { name: "Close-up", exact: true }).click();
+    await expect(toolbar.getByRole("button", { name: "Close-up", exact: true })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
@@ -82,9 +82,9 @@ for (const citySlug of [
     await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
     await contextToggle.click();
     await expect(
-      toolbar.getByRole("button", { name: "Hide illustrative surroundings" }),
+      toolbar.getByRole("button", { name: "Hide surroundings and day trail" }),
     ).toHaveAttribute("aria-pressed", "true");
-    await toolbar.getByRole("button", { name: "Hide illustrative surroundings" }).click();
+    await toolbar.getByRole("button", { name: "Hide surroundings and day trail" }).click();
     await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
 
     await page.getByRole("button", { name: "Next discovery" }).click();

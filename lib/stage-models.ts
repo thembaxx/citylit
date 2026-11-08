@@ -11,12 +11,13 @@ export function stageModel(name: string, category = "") {
   if (/bridge/.test(value)) return "bridge";
   if (/stadium|moses mabhida|peter mokaba/.test(value)) return "stadium";
   if (/big hole|diamond/.test(value)) return "hole";
+  if (/voortrekker/.test(value)) return "voortrekker";
   if (/lighthouse|cape point/.test(value)) return "lighthouse";
   if (/hotel|lodge|guesthouse|guest house|accommodation/.test(value) || category === "Lodging")
     return "hotel";
   if (/sudwala|cave|grotto/.test(value)) return "cave";
   if (/waterfall|falls/.test(value)) return "waterfall";
-  if (/castle|fort|voortrekker|constitution hill/.test(value)) return "fort";
+  if (/castle|fort|constitution hill/.test(value)) return "fort";
   if (/bakone|village|dorp street|mapungubwe/.test(value)) return "village";
   if (/museum|gallery|oliewenhuis|bayworld|heritage/.test(value)) return "museum";
   if (/theatre|theater|playhouse|performing arts/.test(value) || category === "Theatres")

@@ -1,0 +1,2298 @@
+{
+  "generatedAt": "2026-11-08T19:30:44.185Z",
+  "average": 83,
+  "missingSpecs": [],
+  "cases": [
+    {
+      "model": "table-mountain",
+      "label": "Table Mountain",
+      "score": {
+        "model": "table-mountain",
+        "total": 85,
+        "possible": 100,
+        "percent": 85,
+        "grade": "B",
+        "axes": {
+          "craft": {
+            "earned": 13,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 22,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 15,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 6,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 0,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 5,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Declared joints attached",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Joint travel",
+            "earned": 6,
+            "possible": 6
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 147,
+        "triangles": 84004,
+        "geometryBytes": 2513596,
+        "textureBytes": 262144,
+        "instances": 110
+      },
+      "craft": {
+        "chamfered": 7,
+        "cues": 0,
+        "pbr": 3,
+        "emissive": 145,
+        "colors": 17
+      },
+      "physics": {
+        "model": "table-mountain",
+        "label": "Table Mountain",
+        "provenance": "Illustrative procedural study of the Table Mountain massif; not a survey.",
+        "material": "cliff",
+        "real": {
+          "width": 3000,
+          "height": 1085,
+          "depth": 2400,
+          "unit": "m"
+        },
+        "metresPerUnit": 869.565,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.315,
+          "depth": 3.417
+        },
+        "meshes": 143,
+        "drawCalls": 145,
+        "triangles": 84004,
+        "materials": 29,
+        "textures": 4,
+        "instanced": [
+          {
+            "name": "table-mountain-instanced-fynbos",
+            "count": 80
+          },
+          {
+            "name": "table-mountain-instanced-rocks",
+            "count": 30
+          }
+        ],
+        "namedParts": 7,
+        "volumeM3": 5173319609,
+        "massTonnes": 5866544437,
+        "centerOfMass": {
+          "x": -0.13,
+          "y": 0.534,
+          "z": -0.085
+        },
+        "support": {
+          "points": 4,
+          "area": 11.788,
+          "stabilityMargin": 1.595,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [
+          {
+            "id": "cable-car-up",
+            "label": "Cable car · ascent",
+            "type": "path",
+            "travelUnits": 4.9396356140913875,
+            "travelMetres": 4295.335316601207
+          },
+          {
+            "id": "cable-car-down",
+            "label": "Cable car · descent",
+            "type": "path",
+            "travelUnits": 4.9396356140913875,
+            "travelMetres": 4295.335316601207
+          }
+        ],
+        "collisions": {
+          "rest": 364,
+          "extremes": [
+            {
+              "id": "cable-car-up",
+              "label": "Cable car · ascent",
+              "collisions": []
+            },
+            {
+              "id": "cable-car-down",
+              "label": "Cable car · descent",
+              "collisions": []
+            }
+          ],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "stadium",
+      "label": "Moses Mabhida Stadium",
+      "score": {
+        "model": "stadium",
+        "total": 86,
+        "possible": 100,
+        "percent": 86,
+        "grade": "B",
+        "axes": {
+          "craft": {
+            "earned": 21,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 17,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 13,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 6,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 5,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Declared joints attached",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Joint travel",
+            "earned": 6,
+            "possible": 6
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 243,
+        "triangles": 25480,
+        "geometryBytes": 1531000,
+        "textureBytes": 196608,
+        "instances": 0
+      },
+      "craft": {
+        "chamfered": 8,
+        "cues": 4,
+        "pbr": 2,
+        "emissive": 239,
+        "colors": 29
+      },
+      "physics": {
+        "model": "stadium",
+        "label": "Moses Mabhida Stadium",
+        "provenance": "Illustrative procedural study of the stadium bowl and signature arch.",
+        "material": "membrane",
+        "real": {
+          "width": 320,
+          "height": 106,
+          "depth": 280,
+          "unit": "m"
+        },
+        "metresPerUnit": 93.73,
+        "bounds": {
+          "width": 3.414,
+          "height": 1.587,
+          "depth": 3.45
+        },
+        "meshes": 232,
+        "drawCalls": 239,
+        "triangles": 25480,
+        "materials": 32,
+        "textures": 3,
+        "instanced": [],
+        "namedParts": 3,
+        "volumeM3": 2754387,
+        "massTonnes": 2220780,
+        "centerOfMass": {
+          "x": -0.002,
+          "y": 0.341,
+          "z": -0.03
+        },
+        "support": {
+          "points": 96,
+          "area": 7.69,
+          "stabilityMargin": 1.463,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [
+          {
+            "id": "arch-car",
+            "label": "Arch cable car",
+            "type": "path",
+            "travelUnits": 16.917774777081327,
+            "travelMetres": 1585.7078362123777
+          },
+          {
+            "id": "roof-lift",
+            "label": "Roof membrane",
+            "type": "prismatic",
+            "travelUnits": 0.45,
+            "travelMetres": 42.17862784544503
+          }
+        ],
+        "collisions": {
+          "rest": 475,
+          "extremes": [
+            {
+              "id": "arch-car",
+              "label": "Arch cable car",
+              "collisions": []
+            },
+            {
+              "id": "roof-lift",
+              "label": "Roof membrane",
+              "collisions": []
+            }
+          ],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "union-buildings",
+      "label": "Union Buildings",
+      "score": {
+        "model": "union-buildings",
+        "total": 90,
+        "possible": 100,
+        "percent": 90,
+        "grade": "A",
+        "axes": {
+          "craft": {
+            "earned": 21,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 19,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 15,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 6,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 2,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Declared joints attached",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Joint travel",
+            "earned": 6,
+            "possible": 6
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 321,
+        "triangles": 27532,
+        "geometryBytes": 1917448,
+        "textureBytes": 720896,
+        "instances": 36
+      },
+      "craft": {
+        "chamfered": 19,
+        "cues": 4,
+        "pbr": 94,
+        "emissive": 318,
+        "colors": 24
+      },
+      "physics": {
+        "model": "union-buildings",
+        "label": "Union Buildings",
+        "provenance": "Illustrative procedural study of Baker's symmetrical sandstone wings.",
+        "material": "sandstone",
+        "real": {
+          "width": 285,
+          "height": 60,
+          "depth": 180,
+          "unit": "m"
+        },
+        "metresPerUnit": 82.609,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.601,
+          "depth": 2.048
+        },
+        "meshes": 310,
+        "drawCalls": 319,
+        "triangles": 27555,
+        "materials": 24,
+        "textures": 11,
+        "instanced": [
+          {
+            "name": "union-buildings-terraced-garden-parterres",
+            "count": 36
+          }
+        ],
+        "namedParts": 3,
+        "volumeM3": 1153594,
+        "massTonnes": 1155068,
+        "centerOfMass": {
+          "x": -0.039,
+          "y": 0.337,
+          "z": -0.113
+        },
+        "support": {
+          "points": 184,
+          "area": 5.113,
+          "stabilityMargin": 0.903,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [
+          {
+            "id": "wing-east",
+            "label": "East wing",
+            "type": "prismatic",
+            "travelUnits": 0.5,
+            "travelMetres": 41.304347826086946
+          },
+          {
+            "id": "wing-west",
+            "label": "West wing",
+            "type": "prismatic",
+            "travelUnits": 0.5,
+            "travelMetres": 41.304347826086946
+          }
+        ],
+        "collisions": {
+          "rest": 856,
+          "extremes": [
+            {
+              "id": "wing-east",
+              "label": "East wing",
+              "collisions": []
+            },
+            {
+              "id": "wing-west",
+              "label": "West wing",
+              "collisions": []
+            }
+          ],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "bridge",
+      "label": "Nelson Mandela Bridge",
+      "score": {
+        "model": "bridge",
+        "total": 82,
+        "possible": 100,
+        "percent": 82,
+        "grade": "B",
+        "axes": {
+          "craft": {
+            "earned": 20,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 17,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 10,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 5,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Static monument (no joints declared)",
+            "earned": 10,
+            "possible": 10
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 238,
+        "triangles": 24980,
+        "geometryBytes": 1634008,
+        "textureBytes": 32768,
+        "instances": 0
+      },
+      "craft": {
+        "chamfered": 26,
+        "cues": 4,
+        "pbr": 0,
+        "emissive": 236,
+        "colors": 26
+      },
+      "physics": {
+        "model": "bridge",
+        "label": "Nelson Mandela Bridge",
+        "provenance": "Illustrative procedural study of the cable-stayed bridge and approaches.",
+        "material": "concrete",
+        "real": {
+          "width": 284,
+          "height": 27,
+          "depth": 30,
+          "unit": "m"
+        },
+        "metresPerUnit": 82.319,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.577,
+          "depth": 2.171
+        },
+        "meshes": 229,
+        "drawCalls": 236,
+        "triangles": 24980,
+        "materials": 32,
+        "textures": 1,
+        "instanced": [],
+        "namedParts": 0,
+        "volumeM3": 335700,
+        "massTonnes": 342270,
+        "centerOfMass": {
+          "x": -0.164,
+          "y": 0.347,
+          "z": -0.264
+        },
+        "support": {
+          "points": 116,
+          "area": 6.615,
+          "stabilityMargin": 0.822,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [],
+        "collisions": {
+          "rest": 428,
+          "extremes": [],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "hole",
+      "label": "The Big Hole",
+      "score": {
+        "model": "hole",
+        "total": 78,
+        "possible": 100,
+        "percent": 78,
+        "grade": "C",
+        "axes": {
+          "craft": {
+            "earned": 13,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 17,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 13,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 6,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 0,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 5,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Declared joints attached",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Joint travel",
+            "earned": 6,
+            "possible": 6
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 183,
+        "triangles": 16544,
+        "geometryBytes": 927716,
+        "textureBytes": 262144,
+        "instances": 0
+      },
+      "craft": {
+        "chamfered": 6,
+        "cues": 0,
+        "pbr": 1,
+        "emissive": 177,
+        "colors": 20
+      },
+      "physics": {
+        "model": "hole",
+        "label": "The Big Hole",
+        "provenance": "Illustrative procedural study of the open-pit mine and headframe.",
+        "material": "cliff",
+        "real": {
+          "width": 1600,
+          "height": 215,
+          "depth": 1600,
+          "unit": "m"
+        },
+        "metresPerUnit": 464.352,
+        "bounds": {
+          "width": 3.446,
+          "height": 1.625,
+          "depth": 3.45
+        },
+        "meshes": 181,
+        "drawCalls": 182,
+        "triangles": 16574,
+        "materials": 60,
+        "textures": 4,
+        "instanced": [],
+        "namedParts": 3,
+        "volumeM3": 848829268,
+        "massTonnes": 971243636,
+        "centerOfMass": {
+          "x": -0.024,
+          "y": 0.402,
+          "z": 0.014
+        },
+        "support": {
+          "points": 4,
+          "area": 11.888,
+          "stabilityMargin": 1.699,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [
+          {
+            "id": "sheave",
+            "label": "Headframe sheave",
+            "type": "revolute",
+            "travelUnits": 16.53391231405932,
+            "travelMetres": 7677.554284023793
+          },
+          {
+            "id": "skip",
+            "label": "Mine skip",
+            "type": "path",
+            "travelUnits": 6.592419889539803,
+            "travelMetres": 3061.2029750503475
+          }
+        ],
+        "collisions": {
+          "rest": 260,
+          "extremes": [
+            {
+              "id": "sheave",
+              "label": "Headframe sheave",
+              "collisions": []
+            },
+            {
+              "id": "skip",
+              "label": "Mine skip",
+              "collisions": []
+            }
+          ],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "ponte",
+      "label": "Ponte City",
+      "score": {
+        "model": "ponte",
+        "total": 95,
+        "possible": 100,
+        "percent": 95,
+        "grade": "A",
+        "axes": {
+          "craft": {
+            "earned": 20,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 25,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 15,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 3,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Declared joints attached",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Joint travel",
+            "earned": 6,
+            "possible": 6
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 87,
+        "triangles": 118720,
+        "geometryBytes": 781528,
+        "textureBytes": 262144,
+        "instances": 2094
+      },
+      "craft": {
+        "chamfered": 3,
+        "cues": 4,
+        "pbr": 9,
+        "emissive": 87,
+        "colors": 29
+      },
+      "physics": {
+        "model": "ponte",
+        "label": "Ponte City",
+        "provenance": "Illustrative procedural study of Ponte City's cylindrical ring and atrium.",
+        "material": "concrete",
+        "real": {
+          "width": 55,
+          "height": 173,
+          "depth": 55,
+          "unit": "m"
+        },
+        "metresPerUnit": 15.942,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.573,
+          "depth": 3.45
+        },
+        "meshes": 75,
+        "drawCalls": 87,
+        "triangles": 118720,
+        "materials": 29,
+        "textures": 4,
+        "instanced": [
+          {
+            "name": "ponte-city-54-storey-glazing",
+            "count": 1944
+          },
+          {
+            "name": "ponte-city-floor-bands",
+            "count": 54
+          },
+          {
+            "name": "ponte-city-inner-atrium-gallery-floors",
+            "count": 54
+          },
+          {
+            "name": "ponte-city-external-balcony-lips",
+            "count": 18
+          },
+          {
+            "name": "ponte-city-vertical-concrete-fins",
+            "count": 24
+          }
+        ],
+        "namedParts": 8,
+        "volumeM3": 13888,
+        "massTonnes": 14000,
+        "centerOfMass": {
+          "x": 0.002,
+          "y": 0.524,
+          "z": -0.004
+        },
+        "support": {
+          "points": 12,
+          "area": 11.902,
+          "stabilityMargin": 1.721,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [
+          {
+            "id": "lift",
+            "label": "Atrium lift",
+            "type": "prismatic",
+            "travelUnits": 2.2,
+            "travelMetres": 35.072463768115945
+          }
+        ],
+        "collisions": {
+          "rest": 177,
+          "extremes": [
+            {
+              "id": "lift",
+              "label": "Atrium lift",
+              "collisions": []
+            }
+          ],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "voortrekker",
+      "label": "Voortrekker Monument",
+      "score": {
+        "model": "voortrekker",
+        "total": 88,
+        "possible": 100,
+        "percent": 88,
+        "grade": "B",
+        "axes": {
+          "craft": {
+            "earned": 13,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 25,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 15,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 6,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 0,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Static monument (no joints declared)",
+            "earned": 10,
+            "possible": 10
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 82,
+        "triangles": 19916,
+        "geometryBytes": 908128,
+        "textureBytes": 524288,
+        "instances": 116
+      },
+      "craft": {
+        "chamfered": 19,
+        "cues": 0,
+        "pbr": 22,
+        "emissive": 81,
+        "colors": 25
+      },
+      "physics": {
+        "model": "voortrekker",
+        "label": "Voortrekker Monument",
+        "provenance": "Illustrative procedural study of the granite monument, frieze base and wagon laager.",
+        "material": "sandstone",
+        "real": {
+          "width": 40,
+          "height": 62,
+          "depth": 40,
+          "unit": "m"
+        },
+        "metresPerUnit": 11.594,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.383,
+          "depth": 3.45
+        },
+        "meshes": 76,
+        "drawCalls": 81,
+        "triangles": 19916,
+        "materials": 25,
+        "textures": 8,
+        "instanced": [
+          {
+            "name": "voortrekker-frieze-relief",
+            "count": 36
+          },
+          {
+            "name": "voortrekker-narrow-windows",
+            "count": 8
+          },
+          {
+            "name": "voortrekker-wagon-laager",
+            "count": 12
+          },
+          {
+            "name": "voortrekker-wagon-canopies",
+            "count": 12
+          },
+          {
+            "name": "voortrekker-wagon-wheels",
+            "count": 48
+          }
+        ],
+        "namedParts": 7,
+        "volumeM3": 4172,
+        "massTonnes": 4465,
+        "centerOfMass": {
+          "x": -0.004,
+          "y": 0.466,
+          "z": 0.005
+        },
+        "support": {
+          "points": 20,
+          "area": 11.903,
+          "stabilityMargin": 1.72,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [],
+        "collisions": {
+          "rest": 122,
+          "extremes": [],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "lighthouse",
+      "label": "Lighthouse",
+      "score": {
+        "model": "lighthouse",
+        "total": 78,
+        "possible": 100,
+        "percent": 78,
+        "grade": "C",
+        "axes": {
+          "craft": {
+            "earned": 10,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 20,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 13,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 3,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 0,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Declared joints attached",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Joint travel",
+            "earned": 6,
+            "possible": 6
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 77,
+        "triangles": 5972,
+        "geometryBytes": 503976,
+        "textureBytes": 262144,
+        "instances": 0
+      },
+      "craft": {
+        "chamfered": 2,
+        "cues": 0,
+        "pbr": 1,
+        "emissive": 76,
+        "colors": 18
+      },
+      "physics": {
+        "model": "lighthouse",
+        "label": "Lighthouse",
+        "provenance": "Illustrative procedural lighthouse archetype for coastal places.",
+        "material": "limestone",
+        "real": {
+          "width": 12,
+          "height": 22,
+          "depth": 12,
+          "unit": "m"
+        },
+        "metresPerUnit": 3.478,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.766,
+          "depth": 3.45
+        },
+        "meshes": 77,
+        "drawCalls": 77,
+        "triangles": 5972,
+        "materials": 19,
+        "textures": 4,
+        "instanced": [],
+        "namedParts": 7,
+        "volumeM3": 102,
+        "massTonnes": 116,
+        "centerOfMass": {
+          "x": -0.003,
+          "y": 0.582,
+          "z": -0.009
+        },
+        "support": {
+          "points": 36,
+          "area": 11.902,
+          "stabilityMargin": 1.716,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [
+          {
+            "id": "beam",
+            "label": "Lantern beam",
+            "type": "revolute",
+            "travelUnits": 0.006283185307179587,
+            "travelMetres": 0.02185455759018987
+          }
+        ],
+        "collisions": {
+          "rest": 194,
+          "extremes": [
+            {
+              "id": "beam",
+              "label": "Lantern beam",
+              "collisions": []
+            }
+          ],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "tower",
+      "label": "Civic tower",
+      "score": {
+        "model": "tower",
+        "total": 88,
+        "possible": 100,
+        "percent": 88,
+        "grade": "B",
+        "axes": {
+          "craft": {
+            "earned": 20,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 20,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 13,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 15,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 3,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 3,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Declared joints attached",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Joint travel",
+            "earned": 6,
+            "possible": 6
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 90,
+        "triangles": 7028,
+        "geometryBytes": 535368,
+        "textureBytes": 262144,
+        "instances": 0
+      },
+      "craft": {
+        "chamfered": 2,
+        "cues": 4,
+        "pbr": 1,
+        "emissive": 90,
+        "colors": 23
+      },
+      "physics": {
+        "model": "tower",
+        "label": "Civic tower",
+        "provenance": "Illustrative civic-hall archetype; not a specific surveyed building.",
+        "material": "sandstone",
+        "real": {
+          "width": 40,
+          "height": 55,
+          "depth": 40,
+          "unit": "m"
+        },
+        "metresPerUnit": 11.594,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.661,
+          "depth": 3.45
+        },
+        "meshes": 83,
+        "drawCalls": 90,
+        "triangles": 7028,
+        "materials": 25,
+        "textures": 4,
+        "instanced": [],
+        "namedParts": 9,
+        "volumeM3": 2975,
+        "massTonnes": 3357,
+        "centerOfMass": {
+          "x": 0.01,
+          "y": 0.303,
+          "z": 0
+        },
+        "support": {
+          "points": 12,
+          "area": 11.902,
+          "stabilityMargin": 1.715,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [
+          {
+            "id": "clock-minute",
+            "label": "Clock minute hand",
+            "type": "revolute",
+            "travelUnits": 1.5853320991291329,
+            "travelMetres": 18.3806620188885
+          },
+          {
+            "id": "clock-hour",
+            "label": "Clock hour hand",
+            "type": "revolute",
+            "travelUnits": 0.1348071512864909,
+            "travelMetres": 1.562981464191199
+          }
+        ],
+        "collisions": {
+          "rest": 178,
+          "extremes": [
+            {
+              "id": "clock-minute",
+              "label": "Clock minute hand",
+              "collisions": []
+            },
+            {
+              "id": "clock-hour",
+              "label": "Clock hour hand",
+              "collisions": []
+            }
+          ],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "dome",
+      "label": "dome",
+      "score": {
+        "model": "dome",
+        "total": 72,
+        "possible": 100,
+        "percent": 72,
+        "grade": "C",
+        "axes": {
+          "craft": {
+            "earned": 7,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 25,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 10,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 10,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 3,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 0,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Static monument (no joints declared)",
+            "earned": 10,
+            "possible": 10
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 77,
+        "triangles": 7028,
+        "geometryBytes": 510544,
+        "textureBytes": 0,
+        "instances": 28
+      },
+      "craft": {
+        "chamfered": 2,
+        "cues": 0,
+        "pbr": 0,
+        "emissive": 77,
+        "colors": 17
+      },
+      "physics": {
+        "model": "dome",
+        "label": "dome",
+        "provenance": "Generic procedural archetype without a published-dimension spec.",
+        "material": "concrete",
+        "real": null,
+        "metresPerUnit": 1,
+        "bounds": {
+          "width": 3.45,
+          "height": 1.627,
+          "depth": 3.45
+        },
+        "meshes": 76,
+        "drawCalls": 77,
+        "triangles": 7028,
+        "materials": 18,
+        "textures": 0,
+        "instanced": [
+          {
+            "name": "instanced",
+            "count": 28
+          }
+        ],
+        "namedParts": 0,
+        "volumeM3": 3,
+        "massTonnes": 3,
+        "centerOfMass": {
+          "x": -0.006,
+          "y": 0.434,
+          "z": -0.083
+        },
+        "support": {
+          "points": 8,
+          "area": 11.902,
+          "stabilityMargin": 1.642,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [],
+        "collisions": {
+          "rest": 160,
+          "extremes": [],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    },
+    {
+      "model": "fort",
+      "label": "fort",
+      "score": {
+        "model": "fort",
+        "total": 75,
+        "possible": 100,
+        "percent": 75,
+        "grade": "C",
+        "axes": {
+          "craft": {
+            "earned": 10,
+            "possible": 25
+          },
+          "geometry": {
+            "earned": 25,
+            "possible": 25
+          },
+          "materials": {
+            "earned": 10,
+            "possible": 15
+          },
+          "physics": {
+            "earned": 20,
+            "possible": 20
+          },
+          "articulation": {
+            "earned": 10,
+            "possible": 15
+          }
+        },
+        "checks": [
+          {
+            "axis": "craft",
+            "label": "Chamfered edges",
+            "earned": 6,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Human-scale cues",
+            "earned": 0,
+            "possible": 8
+          },
+          {
+            "axis": "craft",
+            "label": "Named parts",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "craft",
+            "label": "Material differentiation",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "geometry",
+            "label": "Triangle budget",
+            "earned": 12,
+            "possible": 12
+          },
+          {
+            "axis": "geometry",
+            "label": "Draw-call budget",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "geometry",
+            "label": "Instanced detail",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Texture budget",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "PBR surfaces",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "materials",
+            "label": "Night lighting",
+            "earned": 5,
+            "possible": 5
+          },
+          {
+            "axis": "physics",
+            "label": "Stable support",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Joint clearances",
+            "earned": 8,
+            "possible": 8
+          },
+          {
+            "axis": "physics",
+            "label": "Support margin",
+            "earned": 4,
+            "possible": 4
+          },
+          {
+            "axis": "articulation",
+            "label": "Named spec",
+            "earned": 0,
+            "possible": 5
+          },
+          {
+            "axis": "articulation",
+            "label": "Static monument (no joints declared)",
+            "earned": 10,
+            "possible": 10
+          }
+        ]
+      },
+      "profile": {
+        "drawCalls": 78,
+        "triangles": 7380,
+        "geometryBytes": 642168,
+        "textureBytes": 0,
+        "instances": 21
+      },
+      "craft": {
+        "chamfered": 8,
+        "cues": 0,
+        "pbr": 0,
+        "emissive": 78,
+        "colors": 16
+      },
+      "physics": {
+        "model": "fort",
+        "label": "fort",
+        "provenance": "Generic procedural archetype without a published-dimension spec.",
+        "material": "concrete",
+        "real": null,
+        "metresPerUnit": 1,
+        "bounds": {
+          "width": 3.45,
+          "height": 0.978,
+          "depth": 3.45
+        },
+        "meshes": 77,
+        "drawCalls": 78,
+        "triangles": 7380,
+        "materials": 17,
+        "textures": 0,
+        "instanced": [
+          {
+            "name": "instanced",
+            "count": 21
+          }
+        ],
+        "namedParts": 0,
+        "volumeM3": 2,
+        "massTonnes": 2,
+        "centerOfMass": {
+          "x": 0.005,
+          "y": 0.249,
+          "z": -0.008
+        },
+        "support": {
+          "points": 4,
+          "area": 11.902,
+          "stabilityMargin": 1.717,
+          "inside": true,
+          "footprintRadius": 1.725
+        },
+        "joints": [],
+        "collisions": {
+          "rest": 183,
+          "extremes": [],
+          "newAtExtremes": 0
+        },
+        "stable": true
+      }
+    }
+  ]
+}

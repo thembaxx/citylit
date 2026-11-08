@@ -15,6 +15,7 @@ import {
   Moon,
   Pause,
   Play,
+  SlidersHorizontal,
   Sun,
 } from "@phosphor-icons/react";
 import * as THREE from "three";
@@ -30,6 +31,7 @@ import JourneyTrail from "./JourneyTrail";
 import WalkableDistrict from "./WalkableDistrict";
 import { AnimatedTabs } from "./ui/AnimatedTabs";
 import type { StageItem } from "./CityStage";
+import { landmarkJointLabels } from "../lib/landmark-specs.js";
 
 // Small, original geometry adds a sense of place without introducing licensed GLB files.
 // This is illustrative scenery, never a real street or geospatial representation.
@@ -258,6 +260,7 @@ function Ring({
   accent,
   touring,
   onTourComplete,
+  jointValues,
 }: {
   items: StageItem[];
   selected: number;
@@ -279,6 +282,7 @@ function Ring({
   accent: string;
   touring: boolean;
   onTourComplete: () => void;
+  jointValues: Record<string, number>;
 }) {
   const ring = useRef<THREE.Group>(null);
   const { size, invalidate, camera } = useThree();
@@ -517,6 +521,7 @@ function Ring({
                       reduced={reduced}
                       active={index === selected}
                       explodedProgress={index === selected && exploded ? 1 : 0}
+                      jointValues={index === selected ? jointValues : undefined}
                       onStatus={onModelStatus}
                     />
                   )
@@ -575,6 +580,7 @@ export default function LandmarkRing({
   const [touring, setTouring] = useState(false);
   const touringRef = useRef(false);
   const [modelStatuses, setModelStatuses] = useState<Record<string, "ready" | "error">>({});
+  const [jointValues, setJointValues] = useState<Record<string, number>>({});
   const onModelStatus = useCallback((model: string, status: "ready" | "error") => {
     setModelStatuses((previous) =>
       previous[model] === status ? previous : { ...previous, [model]: status },
@@ -623,6 +629,14 @@ export default function LandmarkRing({
     { id: "windows", label: "Windows" },
     { id: "gardens", label: "Gardens" },
   ];
+  const joints = useMemo(
+    () => (museumSelected ? [] : landmarkJointLabels(items[selected]?.model ?? "")),
+    [items, selected, museumSelected],
+  );
+  const manualJointCount = joints.reduce(
+    (count: number, joint: { id: string }) => (joint.id in jointValues ? count + 1 : count),
+    0,
+  );
   useEffect(() => {
     stopTour();
     setExploded(false);
@@ -630,6 +644,7 @@ export default function LandmarkRing({
     setZoom(1);
     setView("overview");
     setMobileInspectorOpen(false);
+    setJointValues({});
   }, [selected, stopTour]);
 
   // Safari can composite the shared fixed WebGL canvas above scrolled content.
@@ -798,6 +813,7 @@ export default function LandmarkRing({
                 accent={accent}
                 touring={touring}
                 onTourComplete={finishTour}
+                jointValues={jointValues}
               />
             )}
           </View>
@@ -931,6 +947,7 @@ export default function LandmarkRing({
                 setFeature("architecture");
                 setView("overview");
                 setShowContext(false);
+                setJointValues({});
               }}
             >
               <ArrowCounterClockwise size={19} />
@@ -960,6 +977,70 @@ export default function LandmarkRing({
                   {option.label}
                 </button>
               ))}
+            </div>
+          )}
+          {!museumSelected && joints.length > 0 && (
+            <div className="atlas-inspector-mechanisms" aria-label="Landmark mechanisms">
+              <div className="atlas-mechanisms-head">
+                <span>
+                  <SlidersHorizontal size={15} /> Mechanisms
+                </span>
+                {manualJointCount > 0 && (
+                  <button
+                    type="button"
+                    className="atlas-joint-restore"
+                    aria-label="Restore authored motion"
+                    onClick={() => setJointValues({})}
+                  >
+                    Restore
+                  </button>
+                )}
+              </div>
+              {joints.map((joint: { id: string; label: string }) => {
+                const manual = typeof jointValues[joint.id] === "number";
+                return (
+                  <div className="atlas-joint" key={joint.id}>
+                    <div className="atlas-joint-head">
+                      <span>{joint.label}</span>
+                      <button
+                        type="button"
+                        aria-pressed={manual}
+                        aria-label={
+                          manual
+                            ? `Return ${joint.label} to authored motion`
+                            : `Control ${joint.label} manually`
+                        }
+                        onClick={() =>
+                          setJointValues((previous) => {
+                            const next = { ...previous };
+                            if (joint.id in next) delete next[joint.id];
+                            else next[joint.id] = 0.5;
+                            return next;
+                          })
+                        }
+                      >
+                        {manual ? "Manual" : "Auto"}
+                      </button>
+                    </div>
+                    {manual && (
+                      <input
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={jointValues[joint.id] ?? 0.5}
+                        aria-label={`${joint.label} position`}
+                        onChange={(event) =>
+                          setJointValues((previous) => ({
+                            ...previous,
+                            [joint.id]: Number(event.target.value),
+                          }))
+                        }
+                      />
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
           {!museumSelected && (

@@ -12,6 +12,13 @@ import {
   prepareLandmarkExplodedView,
   setLandmarkExplodedView,
 } from "../lib/landmark-exploded-view.js";
+import { applyLandmarkLod } from "../lib/landmark-craft.js";
+import {
+  applyLandmarkRig,
+  clearLandmarkJoint,
+  landmarkJointState,
+  setLandmarkJoint,
+} from "../lib/landmark-rig.js";
 
 /**
  * One genuine Three.js scene per place, with no downloaded GLB or image textures.
@@ -25,6 +32,7 @@ export default function ProceduralStageModel({
   reduced = false,
   onReady,
   explodedProgress = 0,
+  jointValues,
 }: {
   name: string;
   model: string;
@@ -34,6 +42,8 @@ export default function ProceduralStageModel({
   onReady?: () => void;
   /** 0 keeps the landmark assembled; 1 separates its authored top-level layers. */
   explodedProgress?: number;
+  /** Manual joint overrides; an absent id keeps the authored animation. */
+  jointValues?: Record<string, number>;
 }) {
   const { gl, invalidate } = useThree();
   const subject = useMemo(() => createProceduralLandmark(name, model), [name, model]);
@@ -62,6 +72,21 @@ export default function ProceduralStageModel({
   useEffect(() => {
     onReady?.();
   }, [onReady, subject]);
+
+  useEffect(() => {
+    const tier = window.__citylitRendererDiagnostics?.tier;
+    applyLandmarkLod(subject, tier === "saver" ? 0 : tier === "balanced" ? 1 : 2);
+  }, [subject]);
+
+  useEffect(() => {
+    for (const joint of landmarkJointState(subject)) {
+      const value = jointValues?.[joint.id];
+      if (typeof value === "number") setLandmarkJoint(subject, joint.id, value);
+      else clearLandmarkJoint(subject, joint.id);
+    }
+    if (reduced) applyLandmarkRig(subject, jointValues ?? {});
+    invalidate();
+  }, [subject, jointValues, reduced, invalidate]);
 
   useEffect(() => {
     if (reduced || !active) return;

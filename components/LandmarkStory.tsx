@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowUpRight, Cube } from "@phosphor-icons/react/dist/ssr";
 import { landmarkSources } from "../lib/data";
 import { type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
@@ -22,6 +22,17 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           <span className="atlas-title-period">.</span>
         </h1>
         <p className="atlas-city-intro">{city.descriptions[index]}</p>
+        <div className="atlas-story-actions">
+          <Link
+            className="atlas-button atlas-primary"
+            href={`/${city.slug}/landmarks?landmark=${encodeURIComponent(name)}`}
+          >
+            <Cube size={18} /> Explore in 3D
+          </Link>
+          <Link className="atlas-button" href={`/${city.slug}#plan`}>
+            Add this city to a day <ArrowUpRight size={16} />
+          </Link>
+        </div>
         {record?.images.length ? (
           <Gallery images={record.images} context="landmark" name={name} />
         ) : null}

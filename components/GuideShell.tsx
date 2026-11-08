@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, BookmarkSimple, Compass, House, MapPin } from "@phosphor-icons/react";
+import { ArrowUpRight, BookmarkSimple, GameController, House, MapPin } from "@phosphor-icons/react";
 import { usePathname } from "next/navigation";
 import BrandWordmark from "./BrandWordmark";
 import type { ReactNode } from "react";
@@ -37,7 +37,15 @@ export default function GuideShell({
             <BrandWordmark />
           </Link>
           <nav aria-label="Main navigation">
-            <Link href="/destinations">Cities</Link>
+            <Link
+              href="/destinations"
+              aria-current={pathname === "/destinations" ? "page" : undefined}
+            >
+              Cities
+            </Link>
+            <Link href="/?view=3d" data-transition-label="Play the atlas">
+              <GameController size={17} aria-hidden="true" /> Play atlas
+            </Link>
             <Link
               href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
               className="atlas-day-link"
@@ -83,8 +91,8 @@ export default function GuideShell({
           <Link href="/destinations">
             All city guides <ArrowUpRight size={14} />
           </Link>
-          <Link href="/?view=3d">
-            <Compass size={16} /> The 3D atlas
+          <Link href="/?view=3d" data-transition-label="Play the atlas">
+            The 3D atlas <ArrowUpRight size={14} />
           </Link>
           <Link href="/about">About &amp; sources</Link>
           <Link href="/privacy">Privacy &amp; data</Link>

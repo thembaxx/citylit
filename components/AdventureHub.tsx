@@ -302,9 +302,20 @@ export default function AdventureHub() {
       />
       <header className="field-guide-header">
         <ThemeToggle onChange={setNight} />
-        <Link href="/">
+        <Link href="/" data-transition-label="Return to the living atlas">
           <UiIcon name="arrow-left" /> Explore
         </Link>
+        <nav className="journey-header-links" aria-label="Journey navigation">
+          <Link href="/destinations" data-transition-label="Explore all cities">
+            <MapPin size={16} /> Cities
+          </Link>
+          <Link
+            href={`/explore?city=${city}&tab=day`}
+            aria-current={tab === "day" ? "page" : undefined}
+          >
+            <BookmarkSimple size={16} /> My day
+          </Link>
+        </nav>
         <Link href="/offline.html">
           <Download size={16} />
           Offline

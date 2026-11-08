@@ -843,6 +843,237 @@ select:focus-visible {
   }
 }
 
+/* Playable landmark walk: EasyUI tabs keep mode switching familiar while the
+   field HUD stays legible over the scene and touch controls remain in reach. */
+.atlas-ring-scene.is-walking {
+  cursor: default;
+  touch-action: manipulation;
+}
+.atlas-ring-scene.is-walking .atlas-guide-companion,
+.atlas-ring-scene.is-walking .atlas-inspector-toolbar {
+  display: none;
+}
+.atlas-ring-scene > [role="tabpanel"] {
+  position: absolute;
+  inset: 0;
+}
+.atlas-exploration-tabs {
+  position: absolute;
+  z-index: 5;
+  top: clamp(112px, 15vh, 168px);
+  left: clamp(16px, 3.2vw, 48px);
+  pointer-events: auto;
+}
+.atlas-exploration-tabs .hub-tabs.easyui-tabs-list {
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--citylit-reference-text) 17%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--citylit-reference-bg) 77%, transparent);
+  backdrop-filter: blur(14px);
+}
+.atlas-exploration-tabs .easyui-tab {
+  min-height: 42px;
+  border-radius: 16px;
+}
+.atlas-exploration-tabs .easyui-tab-indicator {
+  border-radius: 14px;
+}
+.atlas-exploration-tabs .easyui-tab-content {
+  gap: 8px;
+}
+.city-walk-view {
+  width: 100%;
+  height: 100%;
+}
+.city-walk-hud {
+  position: absolute;
+  z-index: 4;
+  inset: auto clamp(14px, 3.2vw, 48px) clamp(14px, 2.5vh, 28px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 14px 20px;
+  padding: clamp(14px, 2.2vw, 24px);
+  border: 1px solid color-mix(in srgb, var(--citylit-reference-text) 16%, transparent);
+  border-radius: 26px;
+  background: color-mix(in srgb, var(--citylit-reference-bg) 88%, transparent);
+  color: var(--citylit-reference-text);
+  box-shadow: 0 18px 54px rgb(10 20 16 / 17%);
+  backdrop-filter: blur(18px) saturate(1.12);
+  pointer-events: auto;
+}
+.city-walk-header {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.city-walk-eyebrow {
+  color: var(--citylit-reference-gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+.city-walk-header h2 {
+  margin: 4px 0 0;
+  font:
+    500 clamp(23px, 3vw, 34px)/1.08 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.025em;
+}
+.city-walk-close,
+.city-walk-controls button,
+.city-walk-footer button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid color-mix(in srgb, var(--citylit-reference-text) 20%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 86%, transparent);
+  color: inherit;
+  cursor: pointer;
+}
+.city-walk-tip {
+  display: grid;
+  align-self: center;
+  gap: 2px;
+  min-width: 0;
+}
+.city-walk-tip strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.city-walk-tip span,
+.city-walk-footer > span {
+  color: var(--citylit-reference-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+.city-walk-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 46px);
+  grid-template-rows: repeat(2, 44px);
+  justify-self: end;
+  gap: 5px;
+}
+.city-walk-controls button {
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  user-select: none;
+}
+.city-walk-controls button:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.city-walk-controls button:nth-child(3) {
+  grid-column: 1;
+  grid-row: 2;
+}
+.city-walk-controls button:nth-child(4) {
+  grid-column: 2;
+  grid-row: 2;
+}
+.city-walk-controls button:nth-child(5) {
+  grid-column: 3;
+  grid-row: 2;
+}
+.city-walk-controls button:active,
+.city-walk-footer button:active {
+  transform: scale(0.96);
+}
+.city-walk-footer {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--citylit-reference-text) 12%, transparent);
+}
+.city-walk-footer > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.city-walk-footer button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+.city-walk-footer .city-walk-discover {
+  border-color: transparent;
+  background: var(--citylit-reference-gold);
+  color: var(--citylit-reference-bg);
+}
+.city-walk-close,
+.city-walk-controls button,
+.city-walk-footer button,
+.atlas-exploration-tabs .easyui-tab {
+  corner-shape: squircle;
+}
+.city-walk-hud :is(button):focus-visible,
+.atlas-exploration-tabs .easyui-tab:focus-visible {
+  outline: 3px solid var(--citylit-reference-gold);
+  outline-offset: 3px;
+}
+@media (max-width: 560px) {
+  .atlas-exploration-tabs {
+    top: 138px;
+  }
+  .city-walk-hud {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px 12px;
+    padding: 14px;
+  }
+  .city-walk-controls {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-self: center;
+  }
+  .city-walk-tip {
+    grid-column: 1;
+  }
+  .city-walk-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .city-walk-footer > div {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .city-walk-footer button {
+    flex: 1;
+  }
+}
+@supports not (corner-shape: squircle) {
+  .city-walk-hud,
+  .city-walk-close,
+  .city-walk-controls button,
+  .city-walk-footer button,
+  .atlas-exploration-tabs .easyui-tab,
+  .atlas-exploration-tabs .easyui-tab-indicator {
+    border-radius: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .city-walk-controls button:active,
+  .city-walk-footer button:active {
+    transform: none;
+  }
+}
+
 /* The shared fixed WebGL canvas can be elevated for Khwezi on other routes.
    Keep the stage's HTML controls in front of it without changing canvas rendering. */
 .reference-stage-guide main {
@@ -1024,4 +1255,154 @@ select:focus-visible {
   z-index: 4;
   min-height: 44px;
   pointer-events: auto;
+}
+
+/* One portal layer bridges guide pages, game screens, and in-app view changes.
+   It lives beside the persistent WebGL canvas at the root of the app. */
+.journey-transition {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 46%, rgb(221 169 94 / 17%), transparent 30rem),
+    radial-gradient(ellipse at 50% 120%, rgb(71 130 105 / 25%), transparent 45rem), #10231b;
+  color: #f2f0e5;
+  pointer-events: auto;
+  contain: strict;
+}
+.journey-transition::before,
+.journey-transition::after {
+  position: absolute;
+  inset: -25%;
+  content: "";
+  pointer-events: none;
+}
+.journey-transition::before {
+  opacity: 0.16;
+  background-image: repeating-radial-gradient(
+    ellipse at 50% 52%,
+    transparent 0 34px,
+    rgb(213 222 196 / 24%) 35px 36px,
+    transparent 37px 66px
+  );
+  transform: rotate(-12deg) scale(1.15, 0.82);
+}
+.journey-transition::after {
+  background: linear-gradient(90deg, #10231b 0%, transparent 50%, #10231b 100%);
+  opacity: 0.18;
+}
+.journey-transition-orbit {
+  position: absolute;
+  width: min(62vw, 400px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(226 196 143 / 20%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 28px rgb(226 196 143 / 3%),
+    0 0 0 64px rgb(226 196 143 / 2%),
+    inset 0 0 80px rgb(226 196 143 / 4%);
+  corner-shape: squircle;
+}
+.journey-transition-orbit::before,
+.journey-transition-orbit::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--citylit-reference-gold);
+  box-shadow: 0 0 22px 7px rgb(224 161 93 / 45%);
+  content: "";
+}
+.journey-transition-orbit::before {
+  transform: translate(-50%, calc(-50% - min(31vw, 200px)));
+}
+.journey-transition-orbit::after {
+  width: 4px;
+  height: 4px;
+  background: #a8c4aa;
+  box-shadow: 0 0 16px 5px rgb(168 196 170 / 38%);
+  transform: translate(calc(-50% + min(31vw, 200px)), -50%);
+}
+.journey-transition-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  width: min(100% - 48px, 460px);
+  gap: 10px;
+  text-align: center;
+  text-wrap: balance;
+}
+.journey-transition-mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+  border: 1px solid rgb(224 161 93 / 36%);
+  border-radius: 18px;
+  background: rgb(224 161 93 / 10%);
+  color: #e0a15d;
+  corner-shape: squircle;
+}
+.journey-transition-kicker {
+  color: #b9c6b2;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.18em;
+}
+.journey-transition-copy strong {
+  font:
+    500 clamp(28px, 5vw, 46px)/1.05 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.035em;
+}
+.field-guide .journey-header-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.7vw, 20px);
+}
+.field-guide .journey-header-links a {
+  color: var(--citylit-reference-muted);
+}
+.field-guide .journey-header-links a[aria-current="page"] {
+  color: var(--citylit-reference-gold);
+}
+@media (max-width: 520px) {
+  .field-guide .field-guide-header {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .field-guide .journey-header-links {
+    order: 4;
+    flex: 1 0 100%;
+    justify-content: space-around;
+    border-top: 1px solid var(--citylit-reference-border);
+  }
+  .field-guide .field-guide-header > a:first-of-type {
+    margin-right: auto;
+  }
+}
+@supports not (corner-shape: squircle) {
+  .journey-transition-mark {
+    border-radius: 18px;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .journey-transition {
+    background: #10231b;
+  }
+  .journey-transition::before,
+  .journey-transition::after {
+    display: none;
+  }
 }

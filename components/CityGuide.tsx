@@ -7,8 +7,8 @@ import {
   MapPin,
   CalendarBlank,
 } from "@phosphor-icons/react/dist/ssr";
-import { cities, landmarkSources } from "../lib/data";
-import { landmarkPath, planningStops, type GuideCity } from "../lib/discovery-guide";
+import { cities, landmarkSources, places } from "../lib/data";
+import { cityPhoto, landmarkPath, planningStops, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import { CityCard, PhotoCredit } from "./GuideCards";
 import PlacesBrowser from "./PlacesBrowser";
@@ -23,6 +23,8 @@ export default function CityGuide({ city }: { city: GuideCity }) {
     : cities
         .filter((other) => other.slug !== city.slug)
         .slice((cities.indexOf(city) + 1) % 9, ((cities.indexOf(city) + 1) % 9) + 2);
+  const photo = cityPhoto(city);
+  const placeCount = places.filter((place) => place.city === city.slug).length;
   return (
     <GuideShell>
       <div className="atlas-breadcrumb atlas-city-breadcrumb">
@@ -34,36 +36,71 @@ export default function CityGuide({ city }: { city: GuideCity }) {
           {city.province}
         </Link>
       </div>
-      <section className="atlas-city-hero atlas-city-map-hero">
-        <div>
+      <section className="atlas-city-hero atlas-city-map-hero atlas-city-hero-redesign">
+        <div className="atlas-city-hero-copy">
+          <p className="atlas-eyebrow">{city.province} · CITY GUIDE</p>
           <h1>
             {city.name}
             <span className="atlas-title-period">.</span>
           </h1>
           <p className="atlas-city-intro">{city.intro}</p>
+          <p className="atlas-city-inventory">
+            <span>{city.landmarks.length} landmarks</span>
+            <span aria-hidden="true">·</span>
+            <span>{placeCount} researched places</span>
+          </p>
           <div className="atlas-city-actions">
-            <a href="#places" className="atlas-button atlas-primary">
-              Explore places <ArrowUpRight size={18} />
+            <Link href={`/${city.slug}/landmarks`} className="atlas-button atlas-primary">
+              Explore in 3D <ArrowUpRight size={18} />
+            </Link>
+            <a href="#places" className="atlas-button">
+              Find a place <MapPin size={18} />
             </a>
             <a href="#plan" className="atlas-button">
               <CalendarBlank size={18} /> Plan a visit
             </a>
           </div>
         </div>
+        {photo && (
+          <div className="atlas-city-hero-art" aria-label={`Photograph from ${city.name}`}>
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              priority
+              sizes="(max-width: 760px) 100vw, 48vw"
+            />
+            <PhotoCredit photo={photo} />
+          </div>
+        )}
       </section>
       <nav className="atlas-chapter-nav" aria-label={`${city.name} guide sections`}>
+        <a href="#landmarks">
+          <Compass size={17} /> Stories
+        </a>
+        <a href="#places">
+          <MapPin size={17} /> Places
+        </a>
+        <a href="#plan">
+          <CalendarBlank size={17} /> My day
+        </a>
+        <span className="atlas-chapter-divider" aria-hidden="true" />
         <Link href={`/${city.slug}/landmarks`}>
-          <Compass size={17} /> Landmarks
+          <Compass size={17} /> 3D landmarks
         </Link>
         <Link href={`/${city.slug}/places`}>
-          <MapPin size={17} /> Places
+          <MapPin size={17} /> 3D places
         </Link>
       </nav>
       <section className="atlas-section" id="landmarks" aria-labelledby="landmarks-title">
         <div className="atlas-section-heading">
           <div>
             <h2 id="landmarks-title">Landmarks</h2>
+            <p>Stories and places that help you read the city.</p>
           </div>
+          <Link href={`/${city.slug}/landmarks`} className="atlas-text-link">
+            Explore all in 3D <ArrowUpRight size={17} />
+          </Link>
         </div>
         <div className="atlas-landmark-grid">
           {city.landmarks.map((name, index) => {
@@ -103,6 +140,7 @@ export default function CityGuide({ city }: { city: GuideCity }) {
         <div className="atlas-section-heading">
           <div>
             <h2 id="places-title">Places</h2>
+            <p>Research-backed places, with practical details and sources.</p>
           </div>
         </div>
         <PlacesBrowser city={city.slug} />

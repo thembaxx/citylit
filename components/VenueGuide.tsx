@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowUpRight, Cube, MapPin } from "@phosphor-icons/react/dist/ssr";
 import type { Place } from "../lib/data";
 import { venuePath, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
@@ -35,6 +35,15 @@ export default function VenueGuide({ city, place }: { city: GuideCity; place: Pl
           </div>
           <SavePlace id={place.id} name={place.name} />
         </header>
+        <div className="atlas-venue-explore">
+          <Link
+            className="atlas-button atlas-primary"
+            href={`/${city.slug}/places?place=${encodeURIComponent(place.id)}`}
+          >
+            <Cube size={18} /> Explore in 3D
+          </Link>
+          <span>See how this place sits among {city.name}&apos;s other discoveries.</span>
+        </div>
         <div className="atlas-venue-columns">
           <div className="atlas-venue-story">
             <Gallery images={place.images} context={place.imageContext} name={place.name} />

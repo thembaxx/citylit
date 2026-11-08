@@ -432,7 +432,12 @@ export default function Explorer() {
             </>
           )}
         </button>
-        <Link className="return-to-guide" prefetch={false} href={`${pathname}?view=guide`}>
+        <Link
+          className="return-to-guide"
+          prefetch={false}
+          href={`${pathname}?view=guide`}
+          data-transition-label="Read the city guide"
+        >
           Read guide <ArrowUpRight size={13} />
         </Link>
         <div className="utility-nav">
@@ -440,6 +445,7 @@ export default function Explorer() {
             className="icon-button"
             href={`/explore?city=${city.slug}`}
             aria-label="Plan an adventure"
+            data-transition-label={`Plan a day in ${city.name}`}
           >
             <Compass size={18} weight="regular" />
           </Link>

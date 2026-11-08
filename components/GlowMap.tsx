@@ -10,6 +10,36 @@ import useTheme from "./useTheme";
 import StageModel from "./StageModel";
 import { stageModel } from "../lib/stage-models";
 import { useReducedMotion } from "motion/react";
+import { useKhwezi } from "./KhweziProvider";
+
+const landVertex = `
+  uniform float uTime;
+  uniform float uMotion;
+  attribute float aPhase;
+  varying float vPulse;
+  void main() {
+    vec3 p = position;
+    p.y += sin(uTime * 0.42 + aPhase * 6.283) * 0.035 * uMotion;
+    vec4 viewPosition = modelViewMatrix * vec4(p, 1.0);
+    gl_Position = projectionMatrix * viewPosition;
+    gl_PointSize = (1.6 + 2.0 * (0.5 + 0.5 * sin(aPhase * 15.0 + uTime * 0.9))) * (5.0 / -viewPosition.z);
+    vPulse = 0.58 + 0.42 * sin(aPhase * 22.0 + uTime * 0.65) * sin(aPhase * 22.0 + uTime * 0.65);
+  }
+`;
+const landFragment = `
+  uniform float uNight;
+  uniform float uOpacity;
+  varying float vPulse;
+  void main() {
+    float radius = length(gl_PointCoord - 0.5);
+    float glow = 1.0 - smoothstep(0.08, 0.5, radius);
+    vec3 day = mix(vec3(0.36, 0.31, 0.22), vec3(0.70, 0.80, 0.56), vPulse);
+    vec3 night = mix(vec3(0.22, 0.37, 0.34), vec3(0.87, 0.64, 0.39), vPulse);
+    gl_FragColor = vec4(mix(day, night, uNight), glow * (0.62 + vPulse * 0.3) * uOpacity);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+  }
+`;
 
 const x = (lon: number) => (lon - 25) * 0.48;
 const z = (lat: number) => -(lat + 28.7) * 0.48;
@@ -51,13 +81,15 @@ function Terrain({
   const vector = useMemo(() => new THREE.Vector3(), []);
   const pulses = useRef<(THREE.Mesh | null)[]>([]);
   const reducedMotion = useReducedMotion();
-  const positions = useMemo(() => {
+  const nightMix = useRef(night ? 1 : 0);
+  const land = useMemo(() => {
     const polygons = boundaries.features.flatMap((feature) =>
       feature.geometry.type === "Polygon"
         ? [feature.geometry.coordinates as unknown as number[][][]]
         : (feature.geometry.coordinates as unknown as number[][][][]),
     );
     const vertices: number[] = [];
+    const phases: number[] = [];
     for (let lon = 16.4; lon < 33; lon += 0.2)
       for (let lat = -34.9; lat < -22; lat += 0.2) {
         if (
@@ -66,12 +98,28 @@ function Terrain({
               insideRing([lon, lat], polygon[0]) &&
               !polygon.slice(1).some((ring) => insideRing([lon, lat], ring)),
           )
-        )
+        ) {
           vertices.push(x(lon), Math.sin(lon * 3) * Math.cos(lat * 2) * 0.045, z(lat));
+          phases.push(Math.abs(Math.sin(lon * 12.9898 + lat * 78.233) * 43758.5453) % 1);
+        }
       }
-    return new Float32Array(vertices);
+    return { positions: new Float32Array(vertices), phases: new Float32Array(phases) };
   }, []);
-  useFrame(({ clock }) => {
+  const landMaterial = useRef<THREE.ShaderMaterial>(null);
+  useFrame(({ clock }, delta) => {
+    nightMix.current =
+      animate && !reducedMotion
+        ? THREE.MathUtils.damp(nightMix.current, night ? 1 : 0, 3.2, delta)
+        : night
+          ? 1
+          : 0;
+    if (landMaterial.current) {
+      landMaterial.current.uniforms.uTime.value = animate && !reducedMotion ? clock.elapsedTime : 0;
+      landMaterial.current.uniforms.uNight.value = nightMix.current;
+      landMaterial.current.uniforms.uOpacity.value = 0.65 * opacity;
+      landMaterial.current.uniforms.uMotion.value =
+        animate && !reducedMotion && interactive ? 1 : 0;
+    }
     cities.forEach((city, index) => {
       const label = labels.current[index];
       if (!label) return;
@@ -153,14 +201,22 @@ function Terrain({
       />
       <points>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+          <bufferAttribute attach="attributes-position" args={[land.positions, 3]} />
+          <bufferAttribute attach="attributes-aPhase" args={[land.phases, 1]} />
         </bufferGeometry>
-        <pointsMaterial
-          color={night ? "#a4a092" : "#7b7362"}
-          size={0.047}
-          sizeAttenuation
+        <shaderMaterial
+          ref={landMaterial}
+          vertexShader={landVertex}
+          fragmentShader={landFragment}
+          uniforms={{
+            uTime: { value: 0 },
+            uNight: { value: night ? 1 : 0 },
+            uOpacity: { value: 0.65 * opacity },
+            uMotion: { value: 1 },
+          }}
           transparent
-          opacity={0.65 * opacity}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
         />
       </points>
       {cities.map((city, index) => (
@@ -199,6 +255,20 @@ function Terrain({
               opacity={(index === selected ? 0.8 : 0.35) * opacity}
             />
           </mesh>
+          {index === selected && (
+            <mesh position={[0, 1.08, 0]}>
+              <cylinderGeometry args={[0.018, 0.21, 2.1, 20, 1, true]} />
+              <meshBasicMaterial
+                color={night ? "#e8bc77" : "#a8ce87"}
+                transparent
+                opacity={0.11 * opacity}
+                side={THREE.DoubleSide}
+                depthWrite={false}
+                blending={THREE.AdditiveBlending}
+                toneMapped={false}
+              />
+            </mesh>
+          )}
           <mesh>
             <sphereGeometry args={[0.055, 8, 8]} />
             <meshBasicMaterial
@@ -237,6 +307,7 @@ export default function GlowMap({
   const labels = useRef<(HTMLButtonElement | null)[]>([]);
   const [host, setHost] = useState<HTMLElement | null>(null);
   const { night } = useTheme();
+  const { feedback } = useKhwezi();
   return (
     <div
       className="glow-map"
@@ -271,7 +342,10 @@ export default function GlowMap({
             disabled={!interactive}
             className={`glow-city-marker ${selected === index ? "is-selected" : ""} ${index < 3 ? "is-major" : ""}`}
             onPointerDown={(event) => event.stopPropagation()}
-            onClick={() => onSelect(index)}
+            onClick={() => {
+              feedback("tap");
+              onSelect(index);
+            }}
           >
             <span className="glow-marker-dot" />
             <span className="glow-marker-name">{city.short}</span>

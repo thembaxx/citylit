@@ -1,33 +1,48 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
-  ArrowRight,
   ArrowUpRight,
   BookmarkSimple,
-  Cube,
+  GameController,
   MagnifyingGlass,
-  MapPin,
   X,
 } from "@phosphor-icons/react";
-import { cities, landmarkSources } from "../lib/data";
-import { cityPhoto, landmarkPath } from "../lib/discovery-guide";
+import { cities, landmarkSources, places } from "../lib/data";
 import GuideShell from "./GuideShell";
 import ThemeToggle from "./ThemeToggle";
 import BrandWordmark from "./BrandWordmark";
+import { useKhwezi } from "./KhweziProvider";
+import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
+import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
+import LivingAtlasFollowups from "./LivingAtlasFollowups";
+import { useDiscovery } from "./useDiscovery";
 
-type DiscoveryFilter = "All" | "Landmarks" | "Cities" | "Nature";
-
-const featured = {
-  city: cities.find((city) => city.slug === "cape-town")!,
-  landmark: landmarkSources.find((item) => item.name === "Table Mountain"),
+const moodPatterns: Partial<Record<AtlasMood, RegExp>> = {
+  views: /mountain|point|beach|ocean|coast|waterfront|view|peak|lookout|cliff|bay|lighthouse/i,
+  green: /garden|park|reserve|forest|botanic|bird|island|nature|beach/i,
+  stories: /museum|heritage|history|culture|monument|fort|castle|mandela|district|art|memorial/i,
 };
+
+function cityMoodScore(city: (typeof cities)[number], pattern: RegExp) {
+  const placesInCity = places.filter((place) => place.city === city.slug);
+  const words = [
+    ...city.landmarks,
+    ...placesInCity.flatMap((place) => [place.name, place.description, place.category]),
+  ];
+  return words.reduce((score, word) => score + Number(pattern.test(word)), 0);
+}
 
 export default function DiscoveryHome() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<DiscoveryFilter>("All");
+  const [mood, setMood] = useState<AtlasMood>("explore");
+  const [selectedCity, setSelectedCity] = useState<number | null>(null);
+  const [surpriseCity, setSurpriseCity] = useState<string | null>(null);
+  const { feedback } = useKhwezi();
+  const { state } = useDiscovery();
+  const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
   const normalizedQuery = query.trim().toLowerCase();
 
   const matchingCities = useMemo(
@@ -59,36 +74,128 @@ export default function DiscoveryHome() {
     [normalizedQuery, filter],
   );
 
-  const showCities = filter === "All" || filter === "Cities";
-  const showLandmarks = filter === "All" || filter === "Landmarks" || filter === "Nature";
+  const matchingPlaces = useMemo(
+    () =>
+      places.filter((place) => {
+        const city = cities.find((row) => row.slug === place.city);
+        return (
+          `${place.name} ${place.city} ${city?.name || ""} ${city?.province || ""} ${place.category} ${place.description} ${place.district || ""}`
+            .toLowerCase()
+            .includes(normalizedQuery) &&
+          (filter !== "Nature" || place.category === "Parks & zoos")
+        );
+      }),
+    [normalizedQuery, filter],
+  );
+
+  const suggestedCities = useMemo(() => {
+    if (mood === "surprise") {
+      return [cities.find((city) => city.slug === surpriseCity) || cities[0]];
+    }
+    const pattern = moodPatterns[mood];
+    if (!pattern) return cities.slice(0, 4);
+    return [...cities]
+      .map((city, index) => ({ city, index, score: cityMoodScore(city, pattern) }))
+      .sort((a, b) => b.score - a.score || a.index - b.index)
+      .slice(0, 4)
+      .map(({ city }) => city);
+  }, [mood, surpriseCity]);
+
+  const selectedCityData = selectedCity === null ? null : cities[selectedCity];
   const resultsVisible = normalizedQuery.length > 0;
-  const visibleCities = resultsVisible ? matchingCities : cities.slice(0, 3);
-  const visibleLandmarks = resultsVisible ? matchingLandmarks : [];
+
+  const selectMood = (id: string) => {
+    const nextMood = id as AtlasMood;
+    if (nextMood !== mood) feedback("swipe");
+    setMood(nextMood);
+    if (nextMood === "explore") {
+      setSelectedCity(null);
+      return;
+    }
+    if (nextMood === "surprise") {
+      const options = cities.filter((_, index) => index !== selectedCity);
+      const nextCity = options[Math.floor(Math.random() * options.length)] || cities[0];
+      setSurpriseCity(nextCity.slug);
+      setSelectedCity(cities.findIndex((city) => city.slug === nextCity.slug));
+      return;
+    }
+    const nextCity = [...cities]
+      .map((city, index) => ({
+        city,
+        index,
+        score: cityMoodScore(city, moodPatterns[nextMood]!),
+      }))
+      .sort((a, b) => b.score - a.score || a.index - b.index)[0]?.city;
+    setSelectedCity(
+      Math.max(
+        0,
+        cities.findIndex((city) => city.slug === nextCity?.slug),
+      ),
+    );
+  };
+
+  const selectCity = (slug: string, clearMood = true) => {
+    const index = cities.findIndex((city) => city.slug === slug);
+    if (index >= 0) {
+      if (index !== selectedCity) feedback("tap");
+      setSelectedCity(index);
+      if (clearMood) setMood("explore");
+    }
+  };
 
   return (
-    <GuideShell>
-      <div className="reference-home">
+    <GuideShell
+      mapSelection={{
+        selected: selectedCity,
+        onSelect: (index) => selectCity(cities[index].slug),
+      }}
+    >
+      <div className="reference-home living-atlas-home">
         <header className="reference-home-header">
           <Link href="/" aria-label="Citylit home">
             <BrandWordmark />
           </Link>
           <div className="reference-home-actions">
-            <Link href="/destinations" className="reference-header-link">
-              Explore cities <ArrowUpRight size={16} />
+            <Link
+              href="/destinations"
+              className="reference-header-link"
+              data-transition-label="Explore all cities"
+            >
+              Cities <ArrowUpRight size={16} />
+            </Link>
+            <Link
+              href="/?view=3d"
+              className="reference-header-link"
+              data-transition-label="Play the atlas"
+            >
+              <GameController size={16} /> Play atlas
+            </Link>
+            <Link
+              href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
+              className="reference-header-link"
+              data-transition-label="Open your day"
+            >
+              <BookmarkSimple size={16} /> My day{" "}
+              {state.itinerary.length ? `(${state.itinerary.length})` : ""}
             </Link>
             <ThemeToggle />
           </div>
         </header>
 
-        <div className="reference-home-main">
-          <section className="reference-home-hero" aria-labelledby="reference-home-title">
-            <p className="reference-eyebrow">A little closer to somewhere wonderful</p>
+        <div className="reference-home-main living-atlas-main">
+          <section
+            className="reference-home-hero living-atlas-hero"
+            aria-labelledby="reference-home-title"
+          >
+            <p className="reference-eyebrow">The Living Atlas · South Africa</p>
             <h1 id="reference-home-title">
-              Explore South Africa’s
+              Follow your
               <br />
-              <em>most iconic places.</em>
+              <em>curiosity.</em>
             </h1>
-            <p className="reference-home-subtitle">Discover. Learn. Experience.</p>
+            <p className="reference-home-subtitle">
+              Twelve cities. Countless ways to find your way in.
+            </p>
 
             <label className="reference-search">
               <MagnifyingGlass size={20} aria-hidden="true" />
@@ -96,197 +203,50 @@ export default function DiscoveryHome() {
               <input
                 type="search"
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search landmarks, cities..."
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                }}
+                placeholder="Find a place, story, or city"
                 autoComplete="off"
               />
               {query && (
-                <button type="button" aria-label="Clear search" onClick={() => setQuery("")}>
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  onClick={() => {
+                    setQuery("");
+                  }}
+                >
                   <X size={17} />
                 </button>
               )}
             </label>
-
-            <div className="reference-filter-row" role="group" aria-label="Explore categories">
-              {(["All", "Landmarks", "Cities", "Nature"] as const).map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  aria-pressed={filter === item}
-                  onClick={() => setFilter(item)}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-            <Link className="reference-home-3d-link" href="/?view=3d">
-              <Cube size={17} aria-hidden="true" /> Explore the 3D landscape
-              <ArrowUpRight size={15} aria-hidden="true" />
-            </Link>
           </section>
 
           {resultsVisible ? (
-            <section className="reference-results" aria-live="polite">
-              <div className="reference-section-heading">
-                <div>
-                  <p className="reference-eyebrow">Search results</p>
-                  <h2>Find your next place.</h2>
-                </div>
-                <span>
-                  {(showCities ? visibleCities.length : 0) +
-                    (showLandmarks ? visibleLandmarks.length : 0)}{" "}
-                  results
-                </span>
-              </div>
-              {showLandmarks && visibleLandmarks.length > 0 && (
-                <div className="reference-result-list">
-                  {visibleLandmarks.map(({ name, city }) => {
-                    const record = landmarkSources.find((item) => item.name === name);
-                    const photo = record?.images[0];
-                    return (
-                      <Link
-                        key={`${city.slug}-${name}`}
-                        href={landmarkPath(city, name)}
-                        className="reference-result-card"
-                      >
-                        {photo && <Image src={photo.src} alt={photo.alt} width={88} height={76} />}
-                        <span>
-                          <strong>{name}</strong>
-                          <small>
-                            {city.name}, {city.province}
-                          </small>
-                        </span>
-                        <ArrowUpRight size={18} />
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-              {showCities && visibleCities.length > 0 && (
-                <div className="reference-result-list">
-                  {visibleCities.map((city) => {
-                    const photo = cityPhoto(city);
-                    return (
-                      <Link
-                        key={city.slug}
-                        href={`/${city.slug}`}
-                        className="reference-result-card"
-                      >
-                        {photo && <Image src={photo.src} alt={photo.alt} width={88} height={76} />}
-                        <span>
-                          <strong>{city.name}</strong>
-                          <small>{city.province}</small>
-                        </span>
-                        <ArrowUpRight size={18} />
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-              {(!showCities || visibleCities.length === 0) &&
-                (!showLandmarks || visibleLandmarks.length === 0) && (
-                  <div className="reference-empty">
-                    <p>No places found for “{query}”.</p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setQuery("");
-                        setFilter("All");
-                      }}
-                    >
-                      Clear search
-                    </button>
-                  </div>
-                )}
-            </section>
+            <DiscoverySearchResults
+              key={`${normalizedQuery}:${filter}`}
+              query={query}
+              filter={filter}
+              cities={matchingCities}
+              landmarks={matchingLandmarks}
+              places={matchingPlaces}
+              onFilterChange={setFilter}
+              onClear={() => {
+                setQuery("");
+                setFilter("All");
+              }}
+            />
           ) : (
             <>
-              {(filter === "All" || filter === "Landmarks") && featured.landmark?.images[0] && (
-                <section className="reference-featured" aria-label="Featured landmark">
-                  <div className="reference-featured-image">
-                    <Image
-                      src={featured.landmark.images[0].src}
-                      alt={featured.landmark.images[0].alt}
-                      fill
-                      priority
-                      sizes="(max-width: 700px) 100vw, 70vw"
-                    />
-                    <span className="reference-featured-badge">
-                      <span aria-hidden="true">★</span> Featured
-                    </span>
-                    <Link
-                      href={landmarkPath(featured.city, featured.landmark.name)}
-                      className="reference-featured-arrow"
-                      aria-label={`Explore ${featured.landmark.name}`}
-                    >
-                      <ArrowUpRight size={20} />
-                    </Link>
-                    <div className="reference-featured-copy">
-                      <p>
-                        {featured.city.name}, {featured.city.province}
-                      </p>
-                      <h2>{featured.landmark.name}</h2>
-                    </div>
-                  </div>
-                  <div className="reference-featured-footer">
-                    <span>Discover the stories behind South Africa’s landmarks</span>
-                    <Link href={landmarkPath(featured.city, featured.landmark.name)}>
-                      Explore landmark <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </section>
-              )}
-
-              {showCities && (
-                <section className="reference-popular" aria-labelledby="reference-popular-title">
-                  <div className="reference-section-heading">
-                    <div>
-                      <p className="reference-eyebrow">Start somewhere</p>
-                      <h2 id="reference-popular-title">Popular destinations</h2>
-                    </div>
-                    <Link href="/destinations">
-                      See all <ArrowUpRight size={16} />
-                    </Link>
-                  </div>
-                  <div className="reference-city-strip">
-                    {cities.slice(0, 6).map((city) => {
-                      const photo = cityPhoto(city);
-                      return (
-                        <Link
-                          key={city.slug}
-                          href={`/${city.slug}`}
-                          className="reference-city-tile"
-                        >
-                          <span className="reference-city-image">
-                            {photo && (
-                              <Image
-                                src={photo.src}
-                                alt={photo.alt}
-                                fill
-                                sizes="(max-width: 700px) 42vw, 220px"
-                              />
-                            )}
-                          </span>
-                          <strong>{city.name}</strong>
-                          <small>{city.province}</small>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </section>
-              )}
-
-              <section className="reference-quick-links" aria-label="More ways to explore">
-                <Link href="/destinations">
-                  <MapPin size={19} /> Browse all cities <ArrowUpRight size={16} />
-                </Link>
-                <Link href="/explore?tab=day">
-                  <BookmarkSimple size={19} /> Plan a day <ArrowUpRight size={16} />
-                </Link>
-                <Link href="/?view=3d">
-                  <Cube size={19} /> Explore in 3D <ArrowUpRight size={16} />
-                </Link>
-              </section>
+              <LivingAtlasDiscovery
+                mood={mood}
+                suggestedCities={suggestedCities}
+                selectedCity={selectedCityData}
+                onMoodChange={selectMood}
+                onCitySelect={(slug) => selectCity(slug, false)}
+              />
+              <LivingAtlasFollowups />
             </>
           )}
         </div>

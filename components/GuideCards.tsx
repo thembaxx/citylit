@@ -26,6 +26,7 @@ export function CityCard({ city, index }: { city: GuideCity; index: number }) {
         href={`/${city.slug}`}
         className="atlas-city-card-link"
         aria-labelledby={`city-card-${city.slug}`}
+        data-transition-label={city.name}
       >
         <div className="atlas-city-photo">
           {photo && (

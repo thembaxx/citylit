@@ -3,6 +3,13 @@ import { stageCity, stageMetadata, type StageParams } from "../../../lib/stage-p
 export async function generateMetadata({ params }: { params: StageParams }) {
   return stageMetadata(params, "landmarks");
 }
-export default async function Page({ params }: { params: StageParams }) {
-  return <CityStage city={await stageCity(params)} mode="landmarks" />;
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: StageParams;
+  searchParams: Promise<{ landmark?: string }>;
+}) {
+  const [{ landmark }, city] = await Promise.all([searchParams, stageCity(params)]);
+  return <CityStage city={city} mode="landmarks" initialItem={landmark} />;
 }

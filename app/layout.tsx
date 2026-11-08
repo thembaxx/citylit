@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./discovery-guide.css";
@@ -14,6 +15,7 @@ import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";
 import KhweziProvider from "../components/KhweziProvider";
 import JsonLd from "../components/JsonLd";
+import JourneyTransition from "../components/JourneyTransition";
 import { SITE_URL, websiteSchema, isPreview } from "../lib/seo";
 export const viewport: Viewport = {
   width: "device-width",
@@ -32,9 +34,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: "Citylit",
   robots: { index: !isPreview, follow: !isPreview },
-  title: "Citylit — Every city has a spark.",
+  title: "Citylit — Follow your curiosity.",
   description:
-    "Play your way through South Africa. Discover twelve South African destinations in an interactive 3D atlas and build your own day.",
+    "Explore South Africa’s cities, landmarks, local places and stories in a tactile 3D atlas. Follow what interests you and build a day around it.",
   icons: {
     icon: [
       { url: "/app-icon.svg", type: "image/svg+xml" },
@@ -43,15 +45,15 @@ export const metadata: Metadata = {
     apple: "/brand/apple-touch-icon.png",
   },
   openGraph: {
-    title: "Citylit — Every city has a spark.",
+    title: "Citylit — Follow your curiosity.",
     description:
-      "Follow a little curiosity. Discover South Africa with Khwezi, your playful 3D guide.",
+      "Discover South Africa’s cities, landmarks and local stories in a living 3D atlas.",
     images: [
       {
         url: "/brand/social-card.png",
         width: 1200,
         height: 630,
-        alt: "Khwezi the springhare — Every city has a spark.",
+        alt: "Khwezi the springhare — Citylit’s guide to South Africa.",
       },
     ],
   },
@@ -73,6 +75,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
             <KhweziProvider>
               {children}
               <AppStatus />
+              <Suspense fallback={null}>
+                <JourneyTransition />
+              </Suspense>
             </KhweziProvider>
           </SceneCanvas>
         </PwaProvider>

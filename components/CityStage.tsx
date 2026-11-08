@@ -1,14 +1,16 @@
 "use client";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Plus, Check, Path } from "@phosphor-icons/react";
-import { places, landmarkSources, type Place } from "../lib/data";
+import { places, landmarkSources, categorySlug, type Place } from "../lib/data";
 import { landmarkPath, landmarkVenue, venuePath, type GuideCity } from "../lib/discovery-guide";
 import { stageModel } from "../lib/stage-models";
 import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 import GuideShell from "./GuideShell";
+import { useKhwezi } from "./KhweziProvider";
 const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
   loading: () => (
@@ -35,12 +37,15 @@ const factLabels: Record<string, string> = {
 export default function CityStage({
   city,
   mode,
+  initialItem,
 }: {
   city: GuideCity;
   mode: "landmarks" | "places";
+  initialItem?: string;
 }) {
   const { state, update } = useDiscovery();
-  const [index, setIndex] = useState(0);
+  const router = useRouter();
+  const { feedback } = useKhwezi();
   const chipsRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState("");
   const local = places.filter((place) => place.city === city.slug);
@@ -67,11 +72,22 @@ export default function CityStage({
             place,
           };
         });
+  const [index, setIndex] = useState(() => {
+    if (!initialItem) return 0;
+    const normalized = categorySlug(initialItem);
+    const match = items.findIndex((row) =>
+      mode === "places"
+        ? row.place?.id === initialItem || categorySlug(row.name) === normalized
+        : categorySlug(row.name) === normalized,
+    );
+    return match < 0 ? 0 : match;
+  });
   const item = items[index];
   const availableFacts = ["openingHours", "price", "admission", "booking", "accessNotes"]
     .filter((key) => item.place?.facts?.[key]?.value != null)
     .slice(0, 3);
-  const pick = (value: number) => {
+  const pick = (value: number, interaction: "tap" | "swipe" = "tap") => {
+    feedback(interaction);
     setIndex((value + items.length) % items.length);
     setMessage("");
   };
@@ -120,7 +136,14 @@ export default function CityStage({
   return (
     <GuideShell stage>
       <section className="atlas-stage" aria-labelledby="stage-title">
-        <LandmarkRing items={items} selected={index} onSelect={pick} itinerary={state.itinerary} />
+        <LandmarkRing
+          items={items}
+          selected={index}
+          onSelect={pick}
+          itinerary={state.itinerary}
+          accent={city.accentColor}
+          onOpenGuide={(nextIndex) => router.push(items[nextIndex]?.href ?? item.href)}
+        />
         <header className="atlas-stage-heading">
           <nav className="atlas-breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link>

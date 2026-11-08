@@ -1,17 +1,20 @@
 "use client";
-import { View, PerspectiveCamera, Line } from "@react-three/drei";
+import { View, PerspectiveCamera } from "@react-three/drei";
 import { useThree, useFrame, invalidate as redraw } from "@react-three/fiber";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { useKhwezi } from "./KhweziProvider";
 import {
   ArrowCounterClockwise,
   ArrowClockwise,
+  ArrowRight,
   Cube,
   Stack,
   MagnifyingGlassMinus,
   MagnifyingGlassPlus,
   Moon,
+  Pause,
+  Play,
   Sun,
 } from "@phosphor-icons/react";
 import * as THREE from "three";
@@ -21,6 +24,11 @@ import MuseumHeroAsset from "./MuseumHeroAsset";
 import { type MuseumFeature } from "./MuseumShowcase";
 import StudioEnvironment from "./StudioEnvironment";
 import ProceduralTree from "./ProceduralTree";
+import AtlasWorld from "./AtlasWorld";
+import KhweziView from "./KhweziView";
+import JourneyTrail from "./JourneyTrail";
+import WalkableDistrict from "./WalkableDistrict";
+import { AnimatedTabs } from "./ui/AnimatedTabs";
 import type { StageItem } from "./CityStage";
 
 // Small, original geometry adds a sense of place without introducing licensed GLB files.
@@ -247,10 +255,13 @@ function Ring({
   showContext,
   reduced,
   onModelStatus,
+  accent,
+  touring,
+  onTourComplete,
 }: {
   items: StageItem[];
   selected: number;
-  onSelect: (index: number) => void;
+  onSelect: (index: number, interaction?: "tap" | "swipe") => void;
   angle: React.RefObject<number>;
   itinerary: string[];
   dragging: React.RefObject<boolean>;
@@ -265,10 +276,14 @@ function Ring({
   showContext: boolean;
   reduced: boolean;
   onModelStatus: (model: string, status: "ready" | "error") => void;
+  accent: string;
+  touring: boolean;
+  onTourComplete: () => void;
 }) {
   const ring = useRef<THREE.Group>(null);
   const { size, invalidate, camera } = useThree();
   const radius = items.length < 4 ? 2.8 : 3.8;
+  const selectedName = items[selected]?.name ?? "";
   useEffect(() => {
     const museum = items[selected]?.name.toLowerCase().includes("mcgregor museum");
     const preset = museum
@@ -330,24 +345,83 @@ function Ring({
       tween.kill();
     };
   }, [selected, items.length, camera, angle, invalidate, settle]);
+  useEffect(() => {
+    if (!touring) return;
+    const museum = selectedName.toLowerCase().includes("mcgregor museum");
+    const close = size.width < 760;
+    const cameraPath = museum
+      ? [
+          [0, 3.2, 10.8],
+          [4.6, 2.8, 8.8],
+          [-3.6, 3.6, 8.9],
+          [0.65, 1.75, close ? 8.4 : 7.2],
+        ]
+      : [
+          [0, 2.9, 9.8],
+          [4.0, 2.4, 7.7],
+          [-3.2, 3.45, 7.9],
+          [0.55, 1.8, close ? 7.8 : 6.4],
+        ];
+    if (reduced) {
+      const finalShot = cameraPath[cameraPath.length - 1];
+      camera.position.set(finalShot[0], finalShot[1], finalShot[2]);
+      camera.lookAt(0, museum ? 0.08 : 0.55, 0);
+      invalidate();
+      onTourComplete();
+      return;
+    }
+    const timeline = gsap.timeline({
+      onComplete: onTourComplete,
+    });
+    cameraPath.forEach(([x, y, z], step) => {
+      timeline.to(camera.position, {
+        x,
+        y,
+        z,
+        duration: step === 0 ? 0.45 : 0.82,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          camera.lookAt(0, museum ? 0.08 : 0.55, 0);
+          invalidate();
+        },
+      });
+    });
+    return () => {
+      timeline.kill();
+    };
+  }, [touring, selected, selectedName, camera, size.width, invalidate, onTourComplete, reduced]);
   useFrame(() => {
     if (dragging.current && ring.current) {
       gsap.killTweensOf(ring.current.rotation);
       ring.current.rotation.y = angle.current;
     }
   });
-  const positions = items.map((_, i): [number, number, number] => [
-    Math.sin((i * Math.PI * 2) / items.length) * radius,
-    0.02,
-    Math.cos((i * Math.PI * 2) / items.length) * radius,
-  ]);
-  const route = itinerary.flatMap((id) => {
-    const index = items.findIndex((item) => item.place?.id === id);
-    return index >= 0 ? [positions[index]] : [];
-  });
+  const positions = useMemo(
+    () =>
+      items.map((_, i): [number, number, number] => [
+        Math.sin((i * Math.PI * 2) / items.length) * radius,
+        0.02,
+        Math.cos((i * Math.PI * 2) / items.length) * radius,
+      ]),
+    [items.length, radius],
+  );
+  const itemIds = items.map((item) => item.place?.id || "").join("|");
+  const placeIndexes = useMemo(
+    () => new Map(items.flatMap((item, i) => (item.place ? [[item.place.id, i] as const] : []))),
+    [itemIds],
+  );
+  const route = useMemo(
+    () =>
+      itinerary.flatMap((id) => {
+        const index = placeIndexes.get(id);
+        return index === undefined ? [] : [positions[index]];
+      }),
+    [itinerary, placeIndexes, positions],
+  );
   return (
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
+      <AtlasWorld night={night} accent={accent} animate={!reduced} />
       <StudioEnvironment intensity={night ? 0.15 : 0.42} />
       <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.15 : 0.24]} />
       <ambientLight intensity={night ? 0.08 : 0.09} />
@@ -456,14 +530,7 @@ function Ring({
             </group>
           ))}
           {showContext && route.length > 1 && (
-            <Line
-              points={route}
-              color="#d9660b"
-              lineWidth={2.5}
-              dashed
-              dashSize={0.12}
-              gapSize={0.08}
-            />
+            <JourneyTrail points={route} active animate={!reduced} accent={accent} />
           )}
         </group>
       </group>
@@ -477,11 +544,15 @@ export default function LandmarkRing({
   selected,
   onSelect,
   itinerary,
+  accent = "#e4a95f",
+  onOpenGuide,
 }: {
   items: StageItem[];
   selected: number;
-  onSelect: (index: number) => void;
+  onSelect: (index: number, interaction?: "tap" | "swipe") => void;
   itinerary: string[];
+  accent?: string;
+  onOpenGuide: (index: number) => void;
 }) {
   const [host, setHost] = useState<HTMLDivElement | null>(null);
   const angle = useRef(0);
@@ -500,13 +571,50 @@ export default function LandmarkRing({
   const [view, setView] = useState<StageView>("overview");
   const [spin, setSpin] = useState(0);
   const [showContext, setShowContext] = useState(false);
+  const [explorationMode, setExplorationMode] = useState("discover");
+  const [touring, setTouring] = useState(false);
+  const touringRef = useRef(false);
   const [modelStatuses, setModelStatuses] = useState<Record<string, "ready" | "error">>({});
   const onModelStatus = useCallback((model: string, status: "ready" | "error") => {
     setModelStatuses((previous) =>
       previous[model] === status ? previous : { ...previous, [model]: status },
     );
   }, []);
-  const { moving } = useKhwezi();
+  const { moving, feedback } = useKhwezi();
+  const journeyStopCount = itinerary.filter((id) =>
+    items.some((item) => item.place?.id === id),
+  ).length;
+  const hasJourney = journeyStopCount > 1;
+  const stopTour = useCallback(() => {
+    touringRef.current = false;
+    setTouring(false);
+  }, []);
+  const finishTour = useCallback(() => {
+    stopTour();
+    feedback("tap");
+  }, [stopTour, feedback]);
+  const toggleTour = () => {
+    const next = !touringRef.current;
+    touringRef.current = next;
+    setTouring(next);
+  };
+  const switchExplorationMode = (mode: string) => {
+    if (mode === explorationMode) return;
+    setExplorationMode(mode);
+    feedback("swipe");
+    window.dispatchEvent(
+      new CustomEvent("citylit:portal", {
+        detail: { label: mode === "walk" ? "Walk the city" : "Landmark discoveries" },
+      }),
+    );
+  };
+  const selectItem = useCallback(
+    (index: number, interaction: "tap" | "swipe" = "tap") => {
+      stopTour();
+      onSelect(index, interaction);
+    },
+    [onSelect, stopTour],
+  );
   const reduced = !!useReducedMotion() || !moving;
   const museumSelected = items[selected]?.name.toLowerCase().includes("mcgregor museum");
   const features: { id: MuseumFeature; label: string }[] = [
@@ -516,12 +624,13 @@ export default function LandmarkRing({
     { id: "gardens", label: "Gardens" },
   ];
   useEffect(() => {
+    stopTour();
     setExploded(false);
     setFeature("architecture");
     setZoom(1);
     setView("overview");
     setMobileInspectorOpen(false);
-  }, [selected]);
+  }, [selected, stopTour]);
 
   // Safari can composite the shared fixed WebGL canvas above scrolled content.
   // A mobile popover enters the browser top layer, independent of z-index.
@@ -573,7 +682,13 @@ export default function LandmarkRing({
   return (
     <div
       ref={setHost}
-      className={museumSelected ? "atlas-ring-scene is-heritage-hero" : "atlas-ring-scene"}
+      className={[
+        "atlas-ring-scene",
+        museumSelected && "is-heritage-hero",
+        explorationMode === "walk" && "is-walking",
+      ]
+        .filter(Boolean)
+        .join(" ")}
       data-active-model={museumSelected ? "museum" : items[selected]?.model}
       data-active-model-status={
         museumSelected ? "ready" : (modelStatuses[items[selected]?.name] ?? "loading")
@@ -581,6 +696,7 @@ export default function LandmarkRing({
       role="group"
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {
+        if (explorationMode === "walk") return;
         // Tapping the model dismisses the inspector; its toolbar stops bubbling.
         if (mobileInspectorOpen) setMobileInspectorOpen(false);
         if (event.button === 0) {
@@ -591,6 +707,7 @@ export default function LandmarkRing({
         }
       }}
       onPointerMove={(event) => {
+        if (explorationMode === "walk") return;
         if (!drag.current) return;
         const dx = event.clientX - drag.current.x,
           dy = event.clientY - drag.current.y;
@@ -603,6 +720,11 @@ export default function LandmarkRing({
         }
       }}
       onPointerUp={(event) => {
+        if (explorationMode === "walk") {
+          drag.current = null;
+          dragging.current = false;
+          return;
+        }
         if (!drag.current) return;
         const travel = event.clientX - drag.current.x;
         drag.current = null;
@@ -615,7 +737,7 @@ export default function LandmarkRing({
             nearest === selected && Math.abs(travel) > 24
               ? (selected + (travel > 0 ? items.length - 1 : 1)) % items.length
               : nearest;
-          onSelect(next);
+          onSelect(next, "swipe");
           setSettle((value) => value + 1);
         }
       }}
@@ -625,34 +747,77 @@ export default function LandmarkRing({
         setSettle((value) => value + 1);
       }}
     >
-      <View className="atlas-ring-view" index={2}>
-        {host && (
-          <Ring
+      <div className="atlas-exploration-switch" onPointerDown={(event) => event.stopPropagation()}>
+        <AnimatedTabs
+          className="atlas-exploration-tabs"
+          ariaLabel="Exploration mode"
+          idPrefix="atlas-exploration"
+          value={explorationMode}
+          onChange={switchExplorationMode}
+          items={[
+            { id: "discover", label: "Discover", icon: <Cube size={16} /> },
+            { id: "walk", label: "Walk the city", icon: <ArrowRight size={16} /> },
+          ]}
+        />
+      </div>
+      <div
+        id="atlas-exploration-panel"
+        role="tabpanel"
+        aria-labelledby={`atlas-exploration-tab-${explorationMode}`}
+      >
+        {explorationMode === "walk" ? (
+          <WalkableDistrict
             items={items}
-            selected={selected}
-            onSelect={(index) => {
-              if (!moved.current) onSelect(index);
-            }}
-            angle={angle}
-            itinerary={itinerary}
-            dragging={dragging}
-            settle={settle}
-            night={night}
-            exploded={exploded}
-            feature={feature}
-            onFeature={setFeature}
-            zoom={zoom}
-            spin={spin}
-            view={view}
-            showContext={showContext}
-            reduced={reduced}
-            onModelStatus={onModelStatus}
+            accent={accent}
+            onClose={() => setExplorationMode("discover")}
+            onOpenGuide={onOpenGuide}
           />
+        ) : (
+          <View className="atlas-ring-view" index={2}>
+            {host && (
+              <Ring
+                items={items}
+                selected={selected}
+                onSelect={(index, interaction = "tap") => {
+                  if (!moved.current) selectItem(index, interaction);
+                }}
+                angle={angle}
+                itinerary={itinerary}
+                dragging={dragging}
+                settle={settle}
+                night={night}
+                exploded={exploded}
+                feature={feature}
+                onFeature={setFeature}
+                zoom={zoom}
+                spin={spin}
+                view={view}
+                showContext={showContext}
+                reduced={reduced}
+                onModelStatus={onModelStatus}
+                accent={accent}
+                touring={touring}
+                onTourComplete={finishTour}
+              />
+            )}
+          </View>
         )}
-      </View>
+      </div>
+      <div
+        className="atlas-guide-companion"
+        role="group"
+        aria-label="Khwezi, your field guide"
+        onClickCapture={() => feedback("tap")}
+      >
+        <KhweziView pose="gesture" accent={accent} index={3} />
+        <span>
+          Khwezi <small>Your field guide</small>
+        </span>
+      </div>
       <div
         className="atlas-inspector-toolbar"
         aria-label="3D inspection tools"
+        onClickCapture={() => feedback("tap")}
         onPointerDown={(event) => event.stopPropagation()}
         onPointerMove={(event) => event.stopPropagation()}
         onPointerUp={(event) => event.stopPropagation()}
@@ -689,6 +854,27 @@ export default function LandmarkRing({
           }
         >
           <div className="atlas-inspector-actions">
+            <button
+              type="button"
+              aria-label={
+                reduced
+                  ? "Jump to cinematic close-up"
+                  : touring
+                    ? "Stop cinematic camera tour"
+                    : "Play cinematic camera tour"
+              }
+              aria-pressed={touring}
+              title={
+                reduced
+                  ? "Jump to a close-up"
+                  : touring
+                    ? "Stop cinematic tour"
+                    : "Cinematic camera tour"
+              }
+              onClick={toggleTour}
+            >
+              {touring ? <Pause size={19} /> : <Play size={19} />}
+            </button>
             <button
               type="button"
               aria-label={night ? "Switch to daylight" : "Switch to night lighting"}
@@ -738,6 +924,7 @@ export default function LandmarkRing({
               title="Reset inspection"
               aria-label="Reset inspection"
               onClick={() => {
+                stopTour();
                 setZoom(1);
                 setNight(false);
                 setExploded(false);
@@ -765,7 +952,10 @@ export default function LandmarkRing({
                   type="button"
                   key={option.id}
                   aria-pressed={view === option.id}
-                  onClick={() => setView(option.id)}
+                  onClick={() => {
+                    stopTour();
+                    setView(option.id);
+                  }}
                 >
                   {option.label}
                 </button>
@@ -777,12 +967,22 @@ export default function LandmarkRing({
               <button
                 type="button"
                 aria-label={
-                  showContext ? "Hide illustrative surroundings" : "Show illustrative surroundings"
+                  showContext
+                    ? "Hide surroundings and day trail"
+                    : hasJourney
+                      ? "Reveal my day trail"
+                      : "Show illustrative surroundings"
                 }
                 aria-pressed={showContext}
                 onClick={() => setShowContext((value) => !value)}
               >
-                {showContext ? "Hide surroundings" : "Show surroundings"}
+                {showContext
+                  ? hasJourney
+                    ? "Hide day trail"
+                    : "Hide surroundings"
+                  : hasJourney
+                    ? "Reveal my day"
+                    : "Show surroundings"}
               </button>
             </div>
           )}

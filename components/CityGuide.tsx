@@ -53,11 +53,8 @@ export default function CityGuide({ city }: { city: GuideCity }) {
             <Link href={`/${city.slug}/landmarks`} className="atlas-button atlas-primary">
               Explore in 3D <ArrowUpRight size={18} />
             </Link>
-            <a href="#places" className="atlas-button">
+            <a href="#places" className="atlas-text-link atlas-city-secondary-action">
               Find a place <MapPin size={18} />
-            </a>
-            <a href="#plan" className="atlas-button">
-              <CalendarBlank size={18} /> Plan a visit
             </a>
           </div>
         </div>
@@ -84,13 +81,6 @@ export default function CityGuide({ city }: { city: GuideCity }) {
         <a href="#plan">
           <CalendarBlank size={17} /> My day
         </a>
-        <span className="atlas-chapter-divider" aria-hidden="true" />
-        <Link href={`/${city.slug}/landmarks`}>
-          <Compass size={17} /> 3D landmarks
-        </Link>
-        <Link href={`/${city.slug}/places`}>
-          <MapPin size={17} /> 3D places
-        </Link>
       </nav>
       <section className="atlas-section" id="landmarks" aria-labelledby="landmarks-title">
         <div className="atlas-section-heading">

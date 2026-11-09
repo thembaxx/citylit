@@ -74,7 +74,12 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
   };
   return (
     // Demand rendering must also track Views inside the guide's scroll container.
-    <div ref={ref} className="canvas-root" onScrollCapture={() => invalidate()}>
+    <div
+      ref={ref}
+      className="canvas-root"
+      style={{ background: "var(--citylit-reference-bg)" }}
+      onScrollCapture={() => invalidate()}
+    >
       {children}
       {canFullscreen && (
         <button

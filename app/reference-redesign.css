@@ -53,9 +53,17 @@
 }
 
 .reference-guide {
-  background: var(--citylit-reference-bg);
+  /* Transparent so the fixed WebGL atlas can sit behind the guide instead of
+     painting over inputs and cards. The backing colour lives on .canvas-root. */
+  background: transparent;
   color: var(--citylit-reference-text);
   isolation: isolate;
+  z-index: 3;
+}
+/* Backing layer carries the reference palette so transparent guide text keeps
+   its contrast even where the atlas shows through. */
+.canvas-root {
+  background: var(--citylit-reference-bg);
 }
 
 .reference-guide .atlas-nav {
@@ -76,9 +84,13 @@
   border-radius: 999px;
 }
 
-.reference-guide .atlas-nav nav > a[aria-current="page"],
-.reference-guide .atlas-nav nav > a:hover {
+.reference-guide .atlas-nav nav > a[aria-current="page"] {
   color: var(--citylit-reference-text);
+}
+@media (hover: hover) and (pointer: fine) {
+  .reference-guide .atlas-nav nav > a:hover {
+    color: var(--citylit-reference-text);
+  }
 }
 
 .reference-guide .atlas-nav .atlas-day-link {
@@ -480,10 +492,12 @@
     background-color 180ms ease,
     transform 180ms ease;
 }
-.reference-home-3d-link:hover {
-  transform: translateY(-2px);
-  border-color: var(--citylit-reference-purple);
-  background: var(--citylit-reference-panel);
+@media (hover: hover) and (pointer: fine) {
+  .reference-home-3d-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--citylit-reference-purple);
+    background: var(--citylit-reference-panel);
+  }
 }
 .reference-home-3d-link svg:first-child {
   color: var(--citylit-reference-purple-soft);
@@ -1509,20 +1523,17 @@
   }
   .field-guide .hub-tabs.easyui-tabs-list {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 4px;
     padding: 5px;
     border-radius: 18px;
   }
   .field-guide .hub-tabs.easyui-tabs-list .easyui-tab {
-    grid-column: span 2;
+    grid-column: auto;
     width: 100%;
     min-height: 44px;
-    padding-inline: 5px;
-    font-size: 10px;
-  }
-  .field-guide .hub-tabs.easyui-tabs-list .easyui-tab:nth-last-child(-n + 2) {
-    grid-column: span 3;
+    padding-inline: 8px;
+    font-size: 11px;
   }
   .reference-trip-empty-actions {
     grid-column: 1 / -1;
@@ -1746,6 +1757,50 @@
   max-width: 540px;
   font-size: 12px;
 }
+/* Filters stay available without pushing the first place below the fold. */
+.field-guide .planner-refine {
+  margin: 0 0 18px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 72%, transparent);
+}
+.field-guide .planner-refine > summary {
+  min-height: 46px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--citylit-reference-text);
+  font-size: 12px;
+  font-weight: 650;
+  list-style: none;
+}
+.field-guide .planner-refine > summary::-webkit-details-marker {
+  display: none;
+}
+.field-guide .planner-refine > summary::after {
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  content: "";
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+}
+.field-guide .planner-refine[open] > summary::after {
+  transform: rotate(225deg);
+}
+.field-guide .planner-refine .preference-grid {
+  padding: 0 16px 6px;
+}
+.field-guide .planner-refine .planning-note {
+  padding: 0 16px;
+}
+.field-guide .planner-shuffle {
+  margin-top: 18px;
+}
 .field-guide .hub-tabs {
   display: flex;
   gap: 5px;
@@ -1806,7 +1861,7 @@
 }
 .field-guide .adventure-card .address {
   margin-top: 7px;
-  font-size: 10px;
+  font-size: 11px;
 }
 .field-guide .adventure-card-actions {
   display: flex;
@@ -1814,9 +1869,9 @@
   padding: 0 12px 12px;
 }
 .field-guide .adventure-card-actions button {
-  min-height: 36px;
+  min-height: 40px;
   border-radius: 999px;
-  font-size: 10px;
+  font-size: 11px;
 }
 .field-guide .trip-stops {
   display: grid;
@@ -2080,7 +2135,7 @@
 }
 .living-atlas-city-choices > button small {
   color: var(--citylit-reference-muted);
-  font-size: 9px;
+  font-size: 10px;
 }
 .living-atlas-city-choices > button[aria-pressed="true"] {
   border-color: color-mix(
@@ -2090,18 +2145,27 @@
   );
   background: color-mix(in srgb, var(--citylit-reference-gold) 13%, var(--citylit-reference-panel));
 }
-.living-atlas-city-choices > button:hover,
-.living-atlas-all-cities:hover {
-  transform: translateY(-1px);
-  border-color: var(--citylit-reference-gold);
+@media (hover: hover) and (pointer: fine) {
+  .living-atlas-city-choices > button:hover {
+    transform: translateY(-1px);
+    border-color: var(--citylit-reference-gold);
+  }
 }
 .living-atlas-all-cities {
   gap: 7px;
   min-width: auto;
+  border-color: transparent !important;
+  background: transparent !important;
   color: var(--citylit-reference-muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
+}
+@media (hover: hover) and (pointer: fine) {
+  .living-atlas-all-cities:hover {
+    transform: none !important;
+    color: var(--citylit-reference-text);
+  }
 }
 .living-atlas-all-cities svg {
   color: var(--citylit-reference-gold);
@@ -2190,7 +2254,7 @@
   border-radius: 12px;
   color: var(--citylit-reference-text);
   background: color-mix(in srgb, var(--citylit-reference-bg) 42%, transparent);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 650;
   text-decoration: none;
 }
@@ -2198,9 +2262,11 @@
   flex: 0 0 auto;
   color: var(--citylit-reference-gold);
 }
-.living-atlas-thread a:hover {
-  border-color: var(--citylit-reference-gold);
-  background: var(--citylit-reference-panel);
+@media (hover: hover) and (pointer: fine) {
+  .living-atlas-thread a:hover {
+    border-color: var(--citylit-reference-gold);
+    background: var(--citylit-reference-panel);
+  }
 }
 .living-atlas-thread a:focus-visible {
   outline: 2px solid var(--citylit-reference-gold);
@@ -2219,13 +2285,15 @@
   gap: 6px;
   min-height: 40px;
   color: var(--citylit-reference-muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   text-decoration: none;
 }
-.living-atlas-city-actions a:hover,
-.living-atlas-story-link:hover {
-  color: var(--citylit-reference-text);
+@media (hover: hover) and (pointer: fine) {
+  .living-atlas-city-actions a:hover,
+  .living-atlas-story-link:hover {
+    color: var(--citylit-reference-text);
+  }
 }
 .living-atlas-city-actions .living-atlas-primary-action {
   min-height: 42px;
@@ -2355,28 +2423,38 @@
     margin-bottom: 13px;
   }
   .living-atlas-count {
-    font-size: 10px;
+    font-size: 11px;
   }
   .living-atlas-mood-tabs {
     margin-inline: -3px;
   }
+  /* One scrolling row keeps the sliding indicator on a single track. */
   .living-atlas-mood-tabs .hub-tabs.easyui-tabs-list {
-    display: grid;
+    display: flex;
     width: 100%;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-width: 100%;
+    justify-content: flex-start;
     gap: 3px;
     padding: 4px;
     border-radius: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+  .living-atlas-mood-tabs .hub-tabs.easyui-tabs-list::-webkit-scrollbar {
+    display: none;
   }
   .living-atlas-mood-tabs .easyui-tab {
-    grid-column: span 2;
+    grid-column: auto;
+    flex: 0 0 auto;
     min-width: 0;
     min-height: 42px;
-    padding-inline: 4px;
-    font-size: 9px;
+    padding-inline: 12px;
+    font-size: 11px;
+    white-space: nowrap;
   }
   .living-atlas-mood-tabs .easyui-tab:nth-last-child(-n + 2) {
-    grid-column: span 3;
+    grid-column: auto;
   }
   .living-atlas-mood-tabs .easyui-tab-content {
     gap: 4px;
@@ -2417,7 +2495,7 @@
   }
   .living-atlas-city-actions a {
     min-height: 38px;
-    font-size: 9px;
+    font-size: 11px;
   }
   .living-atlas-city-actions .living-atlas-primary-action {
     min-height: 42px;
@@ -2437,7 +2515,7 @@
     font-size: 19px;
   }
   .living-atlas-story > div > p:last-child {
-    font-size: 9px;
+    font-size: 11px;
   }
   .living-atlas-story-link {
     grid-column: 2;
@@ -2449,6 +2527,46 @@
   .living-atlas-shortcuts {
     grid-template-columns: 1fr;
     padding-top: 16px;
+  }
+}
+/* Destinations: a compact masthead, then straight into the city grid. */
+.reference-guide .atlas-section.atlas-directory-header:not(.atlas-directory) {
+  padding-block: 56px 40px;
+}
+.reference-guide .atlas-directory.atlas-section {
+  padding-top: 40px;
+}
+@media (max-width: 700px) {
+  .reference-guide .atlas-section.atlas-directory-header:not(.atlas-directory) {
+    padding-block: 20px 22px;
+  }
+  .reference-guide .atlas-directory-header h1 {
+    margin: 12px 0 0;
+    font-size: clamp(36px, 11vw, 48px);
+    line-height: 1.04;
+  }
+  .reference-guide .atlas-directory-header .atlas-eyebrow {
+    margin-bottom: 6px;
+  }
+  .reference-guide .atlas-directory.atlas-section {
+    padding-top: 28px;
+  }
+  /* The heading is a column here; flex-end would push it to the right edge. */
+  .reference-guide .atlas-directory .atlas-section-heading {
+    align-items: flex-start;
+  }
+  .reference-guide .atlas-directory-tools {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+  .reference-guide .atlas-province-select {
+    width: auto;
+  }
+}
+@media (max-width: 430px) {
+  .reference-guide .atlas-directory-tools {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-width: 700px) {
@@ -2507,10 +2625,11 @@
   overflow: hidden;
   border: 1px solid var(--citylit-reference-border);
   border-radius: 32px;
+  /* Opaque so the fixed atlas labels never ghost through the city title. */
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--citylit-reference-panel) 96%, transparent),
-    color-mix(in srgb, var(--citylit-reference-panel-raised) 78%, transparent)
+    var(--citylit-reference-panel),
+    var(--citylit-reference-panel-raised)
   );
 }
 .atlas-city-hero-copy {
@@ -2575,8 +2694,14 @@
 .reference-guide .atlas-city-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  gap: 10px 22px;
   margin-top: 26px;
+}
+.reference-guide .atlas-city-actions .atlas-city-secondary-action {
+  min-height: 44px;
+  color: var(--citylit-reference-muted);
+  font-weight: 650;
 }
 .reference-guide .atlas-chapter-nav {
   position: sticky;
@@ -2607,10 +2732,19 @@
   text-decoration: none;
   white-space: nowrap;
 }
-.reference-guide .atlas-chapter-nav a:hover,
+.reference-guide .atlas-chapter-nav a:last-child {
+  margin-left: 0;
+  color: var(--citylit-reference-muted);
+}
 .reference-guide .atlas-chapter-nav a:focus-visible {
   color: var(--citylit-reference-text);
   background: var(--citylit-reference-panel-raised);
+}
+@media (hover: hover) and (pointer: fine) {
+  .reference-guide .atlas-chapter-nav a:hover {
+    color: var(--citylit-reference-text);
+    background: var(--citylit-reference-panel-raised);
+  }
 }
 .atlas-chapter-divider {
   width: 1px;
@@ -2652,15 +2786,6 @@
     border-color 180ms ease,
     background 180ms ease;
 }
-.reference-guide .atlas-landmark-card:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(
-    in srgb,
-    var(--citylit-reference-gold) 48%,
-    var(--citylit-reference-border)
-  );
-  background: var(--citylit-reference-panel-raised);
-}
 .reference-guide .atlas-landmark-photo {
   aspect-ratio: 1.48;
   overflow: hidden;
@@ -2668,8 +2793,19 @@
 .reference-guide .atlas-landmark-photo img {
   transition: transform 350ms ease;
 }
-.reference-guide .atlas-landmark-card:hover .atlas-landmark-photo img {
-  transform: scale(1.035);
+@media (hover: hover) and (pointer: fine) {
+  .reference-guide .atlas-landmark-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(
+      in srgb,
+      var(--citylit-reference-gold) 48%,
+      var(--citylit-reference-border)
+    );
+    background: var(--citylit-reference-panel-raised);
+  }
+  .reference-guide .atlas-landmark-card:hover .atlas-landmark-photo img {
+    transform: scale(1.035);
+  }
 }
 .reference-guide .atlas-landmark-link > div:last-child {
   padding: 18px;
@@ -2763,32 +2899,44 @@
   }
   .reference-guide .atlas-city-hero-redesign {
     grid-template-columns: minmax(0, 1fr);
-    gap: 22px;
+    gap: 18px;
     min-height: auto;
     margin-top: 4px;
-    padding: 24px;
+    padding: 20px;
     border-radius: 25px;
   }
+  /* The desktop negative margin tucks the breadcrumb under the map; on a
+     narrow screen it would print straight through the city title. */
+  .reference-guide > main > .atlas-city-breadcrumb {
+    margin-bottom: 0;
+    padding-top: 76px;
+    padding-bottom: 4px;
+  }
+  /* Copy first; the photograph supports the page instead of pushing the
+     title and primary action below the fold. */
   .reference-guide .atlas-city-hero-art {
-    min-height: 270px;
-    order: -1;
+    min-height: 0;
+    max-height: 200px;
+    aspect-ratio: 16 / 10;
+    order: 0;
     border-radius: 20px;
   }
   .reference-guide .atlas-city-hero-redesign h1 {
-    font-size: clamp(48px, 13vw, 70px);
+    font-size: clamp(42px, 12vw, 64px);
   }
   .reference-guide .atlas-city-actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     margin-top: 22px;
-  }
-  .reference-guide .atlas-city-actions > :first-child {
-    grid-column: 1 / -1;
   }
   .reference-guide .atlas-city-actions .atlas-button {
     width: 100%;
     min-height: 48px;
     padding-inline: 12px;
+  }
+  .reference-guide .atlas-city-actions .atlas-city-secondary-action {
+    align-self: flex-start;
   }
   .reference-guide .atlas-chapter-nav {
     top: 0;
@@ -2818,6 +2966,23 @@
     justify-content: center;
   }
 }
+/* Press feedback: acknowledge the tap instantly, before navigation resolves. */
+.reference-guide
+  :is(
+    .atlas-button,
+    .atlas-text-link,
+    .living-atlas-primary-action,
+    .living-atlas-city-choices > button,
+    .living-atlas-all-cities,
+    .living-atlas-story-link,
+    .atlas-chapter-nav a,
+    .atlas-exploration-tabs .easyui-tab,
+    .field-guide .adventure-card-actions button,
+    .field-guide .pill-button,
+    .atlas-native-dock a
+  ):active {
+  transform: scale(0.97);
+}
 @media (prefers-reduced-motion: reduce) {
   .reference-guide .atlas-landmark-card,
   .reference-guide .atlas-landmark-photo img {
@@ -2825,6 +2990,22 @@
   }
   .reference-guide .atlas-landmark-card:hover,
   .reference-guide .atlas-landmark-card:hover .atlas-landmark-photo img {
+    transform: none;
+  }
+  .reference-guide
+    :is(
+      .atlas-button,
+      .atlas-text-link,
+      .living-atlas-primary-action,
+      .living-atlas-city-choices > button,
+      .living-atlas-all-cities,
+      .living-atlas-story-link,
+      .atlas-chapter-nav a,
+      .atlas-exploration-tabs .easyui-tab,
+      .field-guide .adventure-card-actions button,
+      .field-guide .pill-button,
+      .atlas-native-dock a
+    ):active {
     transform: none;
   }
 }

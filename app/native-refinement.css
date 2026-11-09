@@ -860,8 +860,8 @@ select:focus-visible {
 .atlas-exploration-tabs {
   position: absolute;
   z-index: 5;
-  top: clamp(112px, 15vh, 168px);
-  left: clamp(16px, 3.2vw, 48px);
+  top: 12px;
+  left: 12px;
   pointer-events: auto;
 }
 .atlas-exploration-tabs .hub-tabs.easyui-tabs-list {
@@ -1029,9 +1029,6 @@ select:focus-visible {
   outline-offset: 3px;
 }
 @media (max-width: 560px) {
-  .atlas-exploration-tabs {
-    top: 138px;
-  }
   .city-walk-hud {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 10px 12px;
@@ -1083,53 +1080,63 @@ select:focus-visible {
   z-index: 40;
 }
 
+/* Give the model its own row instead of absolutely placing it over the
+   breadcrumb, title and place buttons. The order is heading → scene → content
+   at every width; only the row height changes on small screens. */
+.reference-stage-guide .atlas-stage {
+  display: flex;
+  flex-direction: column;
+}
+.reference-stage-guide .atlas-stage-heading {
+  order: 0;
+}
+.reference-stage-guide .atlas-ring-scene,
+.reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-ring-scene {
+  --stage-visual-height: clamp(380px, 54svh, 560px);
+  --stage-inline-padding: clamp(16px, 3.4vw, 48px);
+  order: 1;
+  position: relative;
+  inset: auto;
+  top: auto;
+  bottom: auto;
+  width: calc(100% + var(--stage-inline-padding) + var(--stage-inline-padding));
+  height: var(--stage-visual-height);
+  margin: 12px calc(0px - var(--stage-inline-padding)) 16px;
+  flex: 0 0 auto;
+}
+.reference-stage-guide .atlas-stage-content,
+.reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-stage-content {
+  order: 2;
+  margin-top: 0;
+}
+.reference-stage-guide .atlas-ring-scene .atlas-inspector-toolbar,
+.reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-toolbar {
+  top: 12px;
+  bottom: auto;
+  right: max(12px, env(safe-area-inset-right));
+}
+/* Keep the expanded inspector inside the dedicated model row so it never
+   covers the place buttons, including the heritage variant. */
+.reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open,
+.reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-panel.is-open {
+  position: absolute;
+  top: 64px;
+  bottom: auto;
+  right: max(12px, env(safe-area-inset-right));
+  max-height: calc(var(--stage-visual-height) - 88px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
 @media (max-width: 767px) {
-  /* Give the model its own space instead of absolutely placing it over
-     the place picker and guide actions. CSS order matches the visual order. */
-  .reference-stage-guide .atlas-stage {
-    display: flex;
-    flex-direction: column;
-  }
-  .reference-stage-guide .atlas-stage-heading {
-    order: 0;
-  }
   .reference-stage-guide .atlas-ring-scene,
   .reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-ring-scene {
-    --stage-visual-height: clamp(340px, 54svh, 470px);
-    --stage-inline-padding: clamp(16px, 3.4vw, 48px);
-    order: 1;
-    position: relative;
-    inset: auto;
-    top: auto;
-    bottom: auto;
-    width: calc(100% + var(--stage-inline-padding) + var(--stage-inline-padding));
-    height: var(--stage-visual-height);
-    margin: 12px calc(0px - var(--stage-inline-padding)) 16px;
-    flex: 0 0 auto;
+    --stage-visual-height: clamp(300px, 46svh, 420px);
   }
-  .reference-stage-guide .atlas-stage-content,
-  .reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-stage-content {
-    order: 2;
-    margin-top: 0;
-  }
-  .reference-stage-guide .atlas-ring-scene .atlas-inspector-toolbar,
-  .reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-toolbar {
-    top: 12px;
-    bottom: auto;
-    right: max(12px, env(safe-area-inset-right));
-  }
-  /* Keep the expanded inspector within the dedicated model region. It scrolls
-     rather than covering the place buttons, including the heritage variant. */
-  .reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open,
-  .reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-panel.is-open {
-    position: absolute;
-    top: calc(100% + 8px);
-    bottom: auto;
-    right: 0;
-    max-height: calc(var(--stage-visual-height) - 80px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
+  /* Clear the fixed mobile dock at the end of the guide's scroll container. */
+  .reference-guide {
+    padding-bottom: calc(92px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(92px + env(safe-area-inset-bottom));
   }
 }
 
@@ -1376,21 +1383,6 @@ select:focus-visible {
 }
 .field-guide .journey-header-links a[aria-current="page"] {
   color: var(--citylit-reference-gold);
-}
-@media (max-width: 520px) {
-  .field-guide .field-guide-header {
-    flex-wrap: wrap;
-    row-gap: 4px;
-  }
-  .field-guide .journey-header-links {
-    order: 4;
-    flex: 1 0 100%;
-    justify-content: space-around;
-    border-top: 1px solid var(--citylit-reference-border);
-  }
-  .field-guide .field-guide-header > a:first-of-type {
-    margin-right: auto;
-  }
 }
 @supports not (corner-shape: squircle) {
   .journey-transition-mark {

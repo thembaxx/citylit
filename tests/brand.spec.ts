@@ -157,7 +157,7 @@ test("empty searches introduce Khwezi; downloaded offline guides retain the masc
   await page.getByPlaceholder("Search places").fill("qzxqzxqzxqzx");
   await expect(page.locator('.empty [data-pose="search"]')).toBeVisible();
   await page.goto("/explore");
-  await page.getByRole("button", { name: "Passport", exact: true }).click();
+  await page.getByRole("tab", { name: "Passport", exact: true }).click();
   await page.getByRole("button", { name: "Save field guide offline", exact: true }).click();
   await expect(page.locator(".khwezi-toast")).toContainText("Your sparks travel with you.");
   await page.goto("/offline.html");

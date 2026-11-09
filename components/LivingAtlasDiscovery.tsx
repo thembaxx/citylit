@@ -7,11 +7,8 @@ import {
   ArrowUpRight,
   BookmarkSimple,
   BookOpen,
-  Buildings,
   Compass,
-  Cube,
   Leaf,
-  MapPin,
   Mountains,
   Sparkle,
 } from "@phosphor-icons/react";
@@ -68,13 +65,10 @@ export default function LivingAtlasDiscovery({
   return (
     <section className="living-atlas-explorer" aria-labelledby="living-atlas-explorer-title">
       <div className="living-atlas-panel-heading">
-        <div>
-          <p className="reference-eyebrow">Start with a feeling</p>
-          <h2 id="living-atlas-explorer-title">Where should we wander?</h2>
-        </div>
+        <h2 id="living-atlas-explorer-title">Where should we wander?</h2>
         <span className="living-atlas-count">
           <span className="living-atlas-pulse" aria-hidden="true" />
-          12 city lights · Drag to explore
+          12 cities
         </span>
       </div>
 
@@ -94,27 +88,20 @@ export default function LivingAtlasDiscovery({
         tabIndex={0}
         className="living-atlas-discovery-panel"
       >
-        <div className="living-atlas-panel-copy">
-          {mood === "explore" ? (
-            <>
-              <MapPin size={17} aria-hidden="true" />
-              <span>Choose a glowing city on the atlas, or start with one of these.</span>
-            </>
-          ) : (
-            <>
-              <Sparkle size={17} aria-hidden="true" />
-              <span>
-                {mood === "views"
-                  ? "Landscapes that make you stop and look."
-                  : mood === "green"
-                    ? "Open air, garden paths, and room to slow down."
-                    : mood === "stories"
-                      ? "Places with a story worth staying for."
-                      : "A new corner of the country, picked for you."}
-              </span>
-            </>
-          )}
-        </div>
+        {mood !== "explore" && (
+          <div className="living-atlas-panel-copy">
+            <Sparkle size={17} aria-hidden="true" />
+            <span>
+              {mood === "views"
+                ? "Landscapes that make you stop and look."
+                : mood === "green"
+                  ? "Open air, garden paths, and room to slow down."
+                  : mood === "stories"
+                    ? "Places with a story worth staying for."
+                    : "A new corner of the country, picked for you."}
+            </span>
+          </div>
+        )}
         <div className="living-atlas-city-choices" role="group" aria-label="Suggested cities">
           {suggestedCities.map((city) => (
             <button
@@ -173,29 +160,13 @@ export default function LivingAtlasDiscovery({
                   <Link href={`/${selectedCity.slug}`} className="living-atlas-primary-action">
                     Enter the city <ArrowRight size={16} aria-hidden="true" />
                   </Link>
-                  <Link href={`/${selectedCity.slug}/landmarks`}>
-                    Landmarks in 3D <Cube size={15} aria-hidden="true" />
-                  </Link>
                   <Link href={`/explore?city=${selectedCity.slug}&tab=day`}>
                     Plan a day <BookmarkSimple size={15} aria-hidden="true" />
                   </Link>
                 </div>
               </div>
             </motion.article>
-          ) : (
-            <motion.div
-              key="atlas-empty"
-              className="living-atlas-empty-card"
-              initial={reducedMotion ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={reducedMotion ? undefined : { opacity: 0 }}
-              transition={{ duration: reducedMotion ? 0 : 0.18 }}
-              role="status"
-            >
-              <Buildings size={21} aria-hidden="true" />
-              <span>Each light opens a city. Follow one and see where it leads.</span>
-            </motion.div>
-          )}
+          ) : null}
         </AnimatePresence>
       </div>
     </section>

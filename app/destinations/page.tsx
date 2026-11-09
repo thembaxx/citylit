@@ -14,12 +14,7 @@ export default function DestinationsPage() {
       <JsonLd value={schema} />
       <header className="atlas-directory-header atlas-section">
         <p className="atlas-eyebrow">12 CITIES · 9 PROVINCES</p>
-        <h1>
-          Find your
-          <br />
-          <em>next chapter.</em>
-        </h1>
-        <p className="atlas-city-intro">Choose a city. Find somewhere new.</p>
+        <h1>Find your next chapter.</h1>
       </header>
       <CityDirectory />
     </GuideShell>

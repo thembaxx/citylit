@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02",
+  "generatedAt": "2026-11-09",
   "places": 89,
   "cities": 12,
   "venuePins": 53,
@@ -24,8 +24,7 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs",
-        "source fetch"
+        "venue photographs"
       ]
     },
     {
@@ -114,7 +113,8 @@
     {
       "id": "kirstenbosch",
       "needs": [
-        "entrance verification"
+        "entrance verification",
+        "stale practical facts"
       ]
     },
     {
@@ -122,8 +122,7 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs",
-        "source fetch"
+        "venue photographs"
       ]
     },
     {
@@ -256,7 +255,7 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "source fetch"
+        "stale practical facts"
       ]
     },
     {
@@ -391,8 +390,7 @@
       "id": "kenneth-stainbank-nature-reserve",
       "needs": [
         "entrance verification",
-        "venue photographs",
-        "source fetch"
+        "venue photographs"
       ]
     },
     {
@@ -427,7 +425,8 @@
       "id": "stellenbosch-village-museum",
       "needs": [
         "venue pin",
-        "entrance verification"
+        "entrance verification",
+        "stale practical facts"
       ]
     },
     {
@@ -451,7 +450,8 @@
       "needs": [
         "entrance verification",
         "venue photographs",
-        "source fetch"
+        "source fetch",
+        "stale practical facts"
       ]
     },
     {
@@ -496,7 +496,8 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs"
+        "venue photographs",
+        "stale practical facts"
       ]
     },
     {
@@ -560,8 +561,7 @@
       "id": "the-big-hole",
       "needs": [
         "venue pin",
-        "entrance verification",
-        "source fetch"
+        "entrance verification"
       ]
     },
     {
@@ -591,8 +591,7 @@
       "id": "mafikeng-game-reserve",
       "needs": [
         "entrance verification",
-        "venue photographs",
-        "source fetch"
+        "venue photographs"
       ]
     },
     {
@@ -600,8 +599,7 @@
       "needs": [
         "venue pin",
         "entrance verification",
-        "venue photographs",
-        "source fetch"
+        "venue photographs"
       ]
     },
     {
@@ -614,8 +612,7 @@
       "id": "voortrekker-monument",
       "needs": [
         "venue pin",
-        "entrance verification",
-        "source fetch"
+        "entrance verification"
       ]
     },
     {

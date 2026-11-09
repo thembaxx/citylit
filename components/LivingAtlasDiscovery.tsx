@@ -11,10 +11,11 @@ import {
   Mountains,
   Sparkle,
 } from "@phosphor-icons/react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, useReducedMotion } from "motion/react";
 import { cities } from "../lib/data";
 import { cityPhoto } from "../lib/discovery-guide";
 import { AnimatedTabs, type EasyUITabItem } from "./ui/AnimatedTabs";
+import TiltCard from "./ui/TiltCard";
 
 export type AtlasMood = "explore" | "views" | "green" | "stories" | "surprise";
 
@@ -65,9 +66,10 @@ export default function LivingAtlasDiscovery({
       >
         <AnimatePresence mode="wait" initial={false}>
           {selectedCity ? (
-            <motion.article
+            <TiltCard
               key={selectedCity.slug}
               className="living-atlas-city-card"
+              maxTilt={2.6}
               initial={reducedMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={reducedMotion ? undefined : { opacity: 0 }}
@@ -99,7 +101,7 @@ export default function LivingAtlasDiscovery({
                   </Link>
                 </div>
               </div>
-            </motion.article>
+            </TiltCard>
           ) : null}
         </AnimatePresence>
       </div>

@@ -1092,7 +1092,7 @@ select:focus-visible {
 }
 .reference-stage-guide .atlas-ring-scene,
 .reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-ring-scene {
-  --stage-visual-height: clamp(380px, 54svh, 560px);
+  --stage-visual-height: clamp(410px, 58svh, 620px);
   --stage-inline-padding: clamp(16px, 3.4vw, 48px);
   order: 1;
   position: relative;
@@ -1131,7 +1131,7 @@ select:focus-visible {
 @media (max-width: 767px) {
   .reference-stage-guide .atlas-ring-scene,
   .reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-ring-scene {
-    --stage-visual-height: clamp(300px, 46svh, 420px);
+    --stage-visual-height: clamp(320px, 48svh, 440px);
   }
   /* Clear the fixed mobile dock at the end of the guide's scroll container. */
   .reference-guide {
@@ -1275,9 +1275,9 @@ select:focus-visible {
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(ellipse at 50% 46%, rgb(221 169 94 / 17%), transparent 30rem),
-    radial-gradient(ellipse at 50% 120%, rgb(71 130 105 / 25%), transparent 45rem), #10231b;
-  color: #f2f0e5;
+    radial-gradient(ellipse at 50% 46%, rgb(240 179 94 / 16%), transparent 30rem),
+    radial-gradient(ellipse at 50% 120%, rgb(136 146 172 / 18%), transparent 45rem), #0e0f13;
+  color: #f3f4f6;
   pointer-events: auto;
   contain: strict;
 }
@@ -1289,29 +1289,29 @@ select:focus-visible {
   pointer-events: none;
 }
 .journey-transition::before {
-  opacity: 0.16;
+  opacity: 0.14;
   background-image: repeating-radial-gradient(
     ellipse at 50% 52%,
     transparent 0 34px,
-    rgb(213 222 196 / 24%) 35px 36px,
+    rgb(220 224 235 / 22%) 35px 36px,
     transparent 37px 66px
   );
   transform: rotate(-12deg) scale(1.15, 0.82);
 }
 .journey-transition::after {
-  background: linear-gradient(90deg, #10231b 0%, transparent 50%, #10231b 100%);
-  opacity: 0.18;
+  background: linear-gradient(90deg, #0e0f13 0%, transparent 50%, #0e0f13 100%);
+  opacity: 0.22;
 }
 .journey-transition-orbit {
   position: absolute;
   width: min(62vw, 400px);
   aspect-ratio: 1;
-  border: 1px solid rgb(226 196 143 / 20%);
+  border: 1px solid rgb(240 179 94 / 20%);
   border-radius: 50%;
   box-shadow:
-    0 0 0 28px rgb(226 196 143 / 3%),
-    0 0 0 64px rgb(226 196 143 / 2%),
-    inset 0 0 80px rgb(226 196 143 / 4%);
+    0 0 0 28px rgb(240 179 94 / 3%),
+    0 0 0 64px rgb(240 179 94 / 2%),
+    inset 0 0 80px rgb(240 179 94 / 4%);
   corner-shape: squircle;
 }
 .journey-transition-orbit::before,
@@ -1324,7 +1324,7 @@ select:focus-visible {
   height: 7px;
   border-radius: 50%;
   background: var(--citylit-reference-gold);
-  box-shadow: 0 0 22px 7px rgb(224 161 93 / 45%);
+  box-shadow: 0 0 22px 7px rgb(240 179 94 / 45%);
   content: "";
 }
 .journey-transition-orbit::before {
@@ -1333,8 +1333,8 @@ select:focus-visible {
 .journey-transition-orbit::after {
   width: 4px;
   height: 4px;
-  background: #a8c4aa;
-  box-shadow: 0 0 16px 5px rgb(168 196 170 / 38%);
+  background: #c8cedc;
+  box-shadow: 0 0 16px 5px rgb(200 206 220 / 38%);
   transform: translate(calc(-50% + min(31vw, 200px)), -50%);
 }
 .journey-transition-copy {
@@ -1353,14 +1353,14 @@ select:focus-visible {
   width: 48px;
   height: 48px;
   margin-bottom: 8px;
-  border: 1px solid rgb(224 161 93 / 36%);
+  border: 1px solid rgb(240 179 94 / 36%);
   border-radius: 18px;
-  background: rgb(224 161 93 / 10%);
-  color: #e0a15d;
+  background: rgb(240 179 94 / 10%);
+  color: #f0b35e;
   corner-shape: squircle;
 }
 .journey-transition-kicker {
-  color: #b9c6b2;
+  color: #a6abb8;
   font-size: 10px;
   font-weight: 750;
   letter-spacing: 0.18em;
@@ -1391,7 +1391,7 @@ select:focus-visible {
 }
 @media (prefers-reduced-transparency: reduce) {
   .journey-transition {
-    background: #10231b;
+    background: #0e0f13;
   }
   .journey-transition::before,
   .journey-transition::after {

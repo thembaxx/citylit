@@ -16,12 +16,17 @@ const fragmentShader = `
   uniform vec3 uAccent;
   varying vec2 vUv;
   void main() {
-    float head = fract(uTime * 0.1);
-    float distanceToHead = abs(vUv.x - head);
-    distanceToHead = min(distanceToHead, 1.0 - distanceToHead);
-    float pulse = exp(-distanceToHead * distanceToHead * 920.0);
-    float line = 0.3 + pulse * 1.25;
-    gl_FragColor = vec4(uAccent * line, 0.2 + pulse * 0.78);
+    float headA = fract(uTime * 0.11);
+    float headB = fract(uTime * 0.11 + 0.5);
+    float trailA = fract(headA - vUv.x);
+    float trailB = fract(headB - vUv.x);
+    float cometA = exp(-trailA * 18.0) * smoothstep(0.0, 0.02, trailA);
+    float cometB = exp(-trailB * 22.0) * smoothstep(0.0, 0.02, trailB) * 0.65;
+    float pulse = max(cometA, cometB);
+    float ticks = 0.85 + 0.15 * sin(vUv.x * 96.0);
+    float line = (0.28 + pulse * 1.35) * ticks;
+    vec3 color = mix(uAccent, vec3(0.99, 0.94, 0.82), pulse * 0.42);
+    gl_FragColor = vec4(color * line, 0.22 + pulse * 0.76);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
   }

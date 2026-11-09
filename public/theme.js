@@ -12,7 +12,7 @@
   }
   function syncChrome() {
     const day = root.dataset.theme === "day";
-    const color = day ? "#f1f2e8" : "#10231b";
+    const color = day ? "#f4efe6" : "#0e0f13";
     document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
       if (meta.content !== color) meta.content = color;
     });

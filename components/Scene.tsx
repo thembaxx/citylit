@@ -93,8 +93,8 @@ function World({
     const lookY = mode === "map" ? 0.02 : 0.24;
     const tween = gsap.to(camera.position, {
       ...target,
-      duration: reduced ? 0 : changed ? 1.15 : 0.7,
-      ease: "power3.inOut",
+      duration: reduced ? 0 : changed ? 0.75 : 0.48,
+      ease: "power3.out",
       onUpdate: () => {
         camera.lookAt(0, lookY, 0);
         invalidate();
@@ -119,25 +119,25 @@ function World({
     const context = gsap.context(() => {
       gsap.fromTo(
         node.scale,
-        { x: fitted * 0.72, y: fitted * 0.2, z: fitted * 0.72 },
+        { x: fitted * 0.92, y: fitted * 0.92, z: fitted * 0.92 },
         {
           x: fitted,
           y: fitted,
           z: fitted,
-          duration: reduced ? 0 : 0.85,
+          duration: reduced ? 0 : 0.48,
           ease: "power3.out",
           onUpdate: invalidate,
         },
       );
       gsap.fromTo(
         node.rotation,
-        { y: -0.4 },
-        { y: 0, duration: reduced ? 0 : 1.05, ease: "power3.out", onUpdate: invalidate },
+        { y: -0.18 },
+        { y: 0, duration: reduced ? 0 : 0.52, ease: "power3.out", onUpdate: invalidate },
       );
       gsap.fromTo(
         node.position,
-        { y: -0.55 },
-        { y: 0, duration: reduced ? 0 : 0.9, ease: "power3.out", onUpdate: invalidate },
+        { y: -0.18 },
+        { y: 0, duration: reduced ? 0 : 0.48, ease: "power3.out", onUpdate: invalidate },
       );
     });
     return () => context.revert();

@@ -425,13 +425,13 @@ function Ring({
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
       <AtlasWorld night={night} accent={accent} animate={!reduced} />
-      <StudioEnvironment intensity={night ? 0.24 : 0.58} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.18 : 0.28]} />
-      <ambientLight intensity={night ? 0.09 : 0.11} />
+      <StudioEnvironment intensity={night ? 0.34 : 0.68} />
+      <hemisphereLight args={[night ? "#a8b6d4" : "#fff6e8", "#5a534d", night ? 0.24 : 0.34]} />
+      <ambientLight intensity={night ? 0.12 : 0.16} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.45 : 1.52}
-        color={night ? "#a2b8e0" : "#fff3dd"}
+        intensity={night ? 0.62 : 1.68}
+        color={night ? "#b6c8eb" : "#fff5e2"}
         castShadow
         shadow-mapSize-width={size.width < 760 ? 1024 : 2048}
         shadow-mapSize-height={size.width < 760 ? 1024 : 2048}

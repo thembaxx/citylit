@@ -1,21 +1,21 @@
 /* Shared by the live app, loading/recovery screens and downloaded guide. */
 :root {
-  --night-bg: #10231b;
-  --day-bg: #f1f2e8;
-  --night-ink: #f2f0e5;
-  --day-ink: #1d3327;
-  --night-muted: #bac5b7;
-  --day-muted: #5d6d60;
-  --night-accent: #a8cf91;
-  --day-accent: #4d7957;
-  --night-accent-ink: #10231b;
-  --day-accent-ink: #fff;
-  --night-line: #2f4a39;
-  --day-line: #d3ddcd;
-  --night-surface: #192d23;
-  --day-surface: #fbfcf4;
-  --night-surface-glass: #192d23f5;
-  --day-surface-glass: #fbfcf4f5;
+  --night-bg: #0e0f13;
+  --day-bg: #f4efe6;
+  --night-ink: #f3f4f6;
+  --day-ink: #171920;
+  --night-muted: #a6abb8;
+  --day-muted: #525663;
+  --night-accent: #f0b35e;
+  --day-accent: #252834;
+  --night-accent-ink: #0e0f13;
+  --day-accent-ink: #ffffff;
+  --night-line: #2a2d38;
+  --day-line: #d6d4cd;
+  --night-surface: #171920;
+  --day-surface: #fbf9f5;
+  --night-surface-glass: #171920e8;
+  --day-surface-glass: #fbf9f5e8;
   color-scheme: dark;
   --bg: var(--night-bg);
   --ink: var(--night-ink);

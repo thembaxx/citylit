@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { cityPhoto, venuePath, type GuideCity } from "../lib/discovery-guide";
 import { places, type Place, type Photo } from "../lib/data";
+import TiltCard from "./ui/TiltCard";
 
 export function PhotoCredit({ photo, city = false }: { photo: Photo; city?: boolean }) {
   return (
@@ -21,7 +22,7 @@ export function PhotoCredit({ photo, city = false }: { photo: Photo; city?: bool
 export function CityCard({ city, index }: { city: GuideCity; index: number }) {
   const photo = cityPhoto(city);
   return (
-    <article className="atlas-city-card">
+    <TiltCard className="atlas-city-card">
       <Link
         href={`/${city.slug}`}
         className="atlas-city-card-link"
@@ -52,13 +53,13 @@ export function CityCard({ city, index }: { city: GuideCity; index: number }) {
         </div>
       </Link>
       {photo && <PhotoCredit photo={photo} city />}
-    </article>
+    </TiltCard>
   );
 }
 export function PlaceCard({ place }: { place: Place }) {
   const photo = place.images[0];
   return (
-    <article className="atlas-place-card">
+    <TiltCard className="atlas-place-card">
       <Link
         href={venuePath(place)}
         className="atlas-place-card-link"
@@ -87,6 +88,6 @@ export function PlaceCard({ place }: { place: Place }) {
         </div>
       </Link>
       {photo && <PhotoCredit photo={photo} city={place.imageContext === "city"} />}
-    </article>
+    </TiltCard>
   );
 }

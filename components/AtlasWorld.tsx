@@ -23,16 +23,16 @@ const skyFragment = `
   void main() {
     vec3 direction = normalize(vDirection);
     float horizon = smoothstep(-0.55, 0.88, direction.y);
-    vec3 dusk = mix(vec3(0.025, 0.075, 0.071), vec3(0.13, 0.20, 0.19), horizon);
-    dusk = mix(dusk, vec3(0.39, 0.27, 0.19), pow(1.0 - abs(direction.y + 0.08), 12.0) * 0.26);
-    vec3 midnight = mix(vec3(0.012, 0.022, 0.039), vec3(0.055, 0.11, 0.15), horizon);
+    vec3 dusk = mix(vec3(0.055, 0.059, 0.075), vec3(0.135, 0.145, 0.178), horizon);
+    dusk = mix(dusk, vec3(0.32, 0.24, 0.18), pow(1.0 - abs(direction.y + 0.08), 12.0) * 0.22);
+    vec3 midnight = mix(vec3(0.024, 0.027, 0.036), vec3(0.072, 0.078, 0.102), horizon);
     float auroraLine = sin(direction.x * 8.0 + uTime * 0.14 + sin(direction.z * 7.0)) * 0.5 + 0.5;
     float aurora = smoothstep(0.75, 0.98, auroraLine) * smoothstep(-0.05, 0.38, direction.y) * uNight;
     vec3 color = mix(dusk, midnight, uNight);
-    color += vec3(0.10, 0.30, 0.23) * aurora * 0.45;
+    color += vec3(0.24, 0.20, 0.15) * aurora * 0.36;
     float stars = step(0.9978, hash(floor(direction * 310.0)));
     stars *= smoothstep(0.02, 0.58, direction.y) * uNight;
-    color += vec3(0.78, 0.81, 0.72) * stars * (0.65 + 0.35 * sin(uTime * 1.4 + direction.x * 12.0));
+    color += vec3(0.84, 0.86, 0.92) * stars * (0.65 + 0.35 * sin(uTime * 1.4 + direction.x * 12.0));
     gl_FragColor = vec4(color, 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
@@ -60,15 +60,16 @@ const terrainFragment = `
   void main() {
     vec2 centered = vUv - 0.5;
     float radius = length(centered);
-    float gridX = 1.0 - smoothstep(0.0, 0.035, abs(fract(vUv.x * 42.0) - 0.5));
-    float gridY = 1.0 - smoothstep(0.0, 0.035, abs(fract(vUv.y * 42.0) - 0.5));
-    float grid = max(gridX, gridY) * 0.11;
-    float contours = 1.0 - smoothstep(0.0, 0.045, abs(fract(radius * 54.0 + vHeight * 3.0 - uTime * 0.012) - 0.5));
-    float glow = exp(-radius * 8.5) * (0.18 + uNight * 0.13);
-    float edge = 1.0 - smoothstep(0.34, 0.52, radius);
-    vec3 ground = mix(vec3(0.018, 0.047, 0.043), vec3(0.025, 0.064, 0.062), uNight);
-    vec3 color = ground + uAccent * (grid * 0.34 + contours * 0.1 + glow) * edge;
-    float alpha = edge * (0.72 + grid * 0.4 + contours * 0.08);
+    float gridX = 1.0 - smoothstep(0.0, 0.032, abs(fract(vUv.x * 42.0) - 0.5));
+    float gridY = 1.0 - smoothstep(0.0, 0.032, abs(fract(vUv.y * 42.0) - 0.5));
+    float grid = max(gridX, gridY) * 0.1;
+    float contours = 1.0 - smoothstep(0.0, 0.04, abs(fract(radius * 54.0 + vHeight * 3.0 - uTime * 0.012) - 0.5));
+    float waveRing = exp(-pow((radius - fract(uTime * 0.04) * 0.36) * 28.0, 2.0)) * 0.14;
+    float glow = exp(-radius * 8.2) * (0.2 + uNight * 0.14) + waveRing;
+    float edge = 1.0 - smoothstep(0.32, 0.5, radius);
+    vec3 ground = mix(vec3(0.048, 0.052, 0.068), vec3(0.032, 0.035, 0.046), uNight);
+    vec3 color = ground + uAccent * (grid * 0.34 + contours * 0.11 + glow) * edge;
+    float alpha = edge * (0.78 + grid * 0.38 + contours * 0.09);
     gl_FragColor = vec4(color, alpha);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
@@ -85,8 +86,8 @@ const sparkVertex = `
     p.z += cos(uTime * 0.14 + aPhase * 6.283) * 0.09;
     vec4 viewPosition = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * viewPosition;
-    gl_PointSize = clamp(3.2 * (4.0 / -viewPosition.z), 1.4, 5.5);
-    vGlow = 0.38 + 0.62 * sin(uTime * 1.2 + aPhase * 31.0) * sin(uTime * 1.2 + aPhase * 31.0);
+    gl_PointSize = clamp(3.4 * (4.0 / -viewPosition.z), 1.4, 5.8);
+    vGlow = 0.4 + 0.6 * sin(uTime * 1.15 + aPhase * 31.0) * sin(uTime * 1.15 + aPhase * 31.0);
   }
 `;
 const sparkFragment = `
@@ -95,8 +96,12 @@ const sparkFragment = `
   varying float vGlow;
   void main() {
     float radius = length(gl_PointCoord - 0.5);
-    float alpha = (1.0 - smoothstep(0.06, 0.5, radius)) * vGlow * (0.34 + uNight * 0.2);
-    gl_FragColor = vec4(uAccent, alpha);
+    if (radius > 0.5) discard;
+    float core = exp(-radius * radius * 16.0);
+    float aura = 1.0 - smoothstep(0.06, 0.5, radius);
+    float alpha = mix(aura, core, 0.55) * vGlow * (0.36 + uNight * 0.22);
+    vec3 tint = mix(uAccent, vec3(0.98, 0.94, 0.84), core * 0.35);
+    gl_FragColor = vec4(tint, alpha);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
   }
@@ -185,20 +190,20 @@ export default function AtlasWorld({
       <mesh position={[0, -0.62, 0]} receiveShadow>
         <cylinderGeometry args={[4.68, 4.92, 0.18, 96, 1, false]} />
         <meshPhysicalMaterial
-          color={night ? "#1f342d" : "#2b463d"}
-          roughness={0.28}
-          metalness={0.42}
-          clearcoat={0.85}
-          clearcoatRoughness={0.22}
+          color={night ? "#181a22" : "#222531"}
+          roughness={0.25}
+          metalness={0.48}
+          clearcoat={0.88}
+          clearcoatRoughness={0.2}
         />
       </mesh>
       <mesh position={[0, -0.51, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[4.52, 0.014, 8, 128]} />
-        <meshBasicMaterial color={accent} transparent opacity={night ? 0.82 : 0.54} />
+        <meshBasicMaterial color={accent} transparent opacity={night ? 0.85 : 0.6} />
       </mesh>
       <mesh position={[0, -0.5, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[3.9, 0.008, 6, 128]} />
-        <meshBasicMaterial color="#b9d49a" transparent opacity={night ? 0.38 : 0.18} />
+        <meshBasicMaterial color="#d0d5e2" transparent opacity={night ? 0.36 : 0.2} />
       </mesh>
       <points position={[0, 0.25, 0]} frustumCulled={false} renderOrder={2} raycast={() => {}}>
         <bufferGeometry>

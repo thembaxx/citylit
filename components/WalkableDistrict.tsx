@@ -94,14 +94,14 @@ function DistrictScene({
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 2.15, 7.7]} fov={55} />
-      <hemisphereLight args={["#e8f1d8", "#554f41", 1.7]} />
-      <directionalLight position={[-5, 9, 4]} intensity={2.1} color="#fff0d2" castShadow />
+      <hemisphereLight args={["#e4e7f0", "#454854", 1.75]} />
+      <directionalLight position={[-5, 9, 4]} intensity={2.2} color="#fff2d6" castShadow />
       <group>
         <mesh renderOrder={-1}>
           <sphereGeometry args={[45, 32, 24]} />
           <shaderMaterial
             vertexShader={`varying vec3 vSkyPosition; void main() { vSkyPosition = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`}
-            fragmentShader={`varying vec3 vSkyPosition; void main() { float horizon = smoothstep(-0.3, 0.72, normalize(vSkyPosition).y); vec3 low = vec3(0.82, 0.72, 0.57); vec3 high = vec3(0.38, 0.62, 0.64); gl_FragColor = vec4(mix(low, high, horizon), 1.0); }`}
+            fragmentShader={`varying vec3 vSkyPosition; void main() { float horizon = smoothstep(-0.3, 0.72, normalize(vSkyPosition).y); vec3 low = vec3(0.24, 0.25, 0.30); vec3 high = vec3(0.09, 0.10, 0.14); gl_FragColor = vec4(mix(low, high, horizon), 1.0); }`}
             side={THREE.BackSide}
             depthWrite={false}
             toneMapped={false}
@@ -109,11 +109,11 @@ function DistrictScene({
         </mesh>
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.06, 0]} receiveShadow>
           <planeGeometry args={[40, 32]} />
-          <meshStandardMaterial color="#9bac83" roughness={1} />
+          <meshStandardMaterial color="#2a2d36" roughness={0.96} />
         </mesh>
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
           <planeGeometry args={[3.6, 19]} />
-          <meshStandardMaterial color="#485452" roughness={0.94} />
+          <meshStandardMaterial color="#1d1f26" roughness={0.92} />
         </mesh>
         {Array.from({ length: 8 }, (_, i) => (
           <mesh key={i} position={[0, 0.012, -7 + i * 2]}>
@@ -191,10 +191,10 @@ function DistrictScene({
           </group>
           <mesh position={[0, 0.035, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.36, 24]} />
-            <meshBasicMaterial color="#28342e" transparent opacity={0.22} />
+            <meshBasicMaterial color="#0e0f13" transparent opacity={0.32} />
           </mesh>
         </group>
-        <gridHelper args={[38, 38, "#748c72", "#879a7d"]} position={[0, -0.055, 0]} />
+        <gridHelper args={[38, 38, "#3e4250", "#323642"]} position={[0, -0.055, 0]} />
       </group>
     </>
   );

@@ -11,6 +11,7 @@ import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 import GuideShell from "./GuideShell";
 import { useKhwezi } from "./KhweziProvider";
+import MagneticButton from "./ui/MagneticButton";
 const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
   loading: () => (
@@ -227,15 +228,23 @@ export default function CityStage({
               {message}
             </p>
             <div className="atlas-stage-controls">
-              <button aria-label="Previous discovery" onClick={() => pick(index - 1)}>
+              <MagneticButton
+                aria-label="Previous discovery"
+                strength={0.18}
+                onClick={() => pick(index - 1)}
+              >
                 <ArrowLeft size={17} /> Prev
-              </button>
+              </MagneticButton>
               <span>
                 {String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
               </span>
-              <button aria-label="Next discovery" onClick={() => pick(index + 1)}>
+              <MagneticButton
+                aria-label="Next discovery"
+                strength={0.18}
+                onClick={() => pick(index + 1)}
+              >
                 Next <ArrowRight size={17} />
-              </button>
+              </MagneticButton>
             </div>
             <p className="atlas-stage-note">
               Models are illustrative. Confirm visiting details in the guide.

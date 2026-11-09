@@ -447,10 +447,10 @@ function Platform({ reduced }: { reduced: boolean }) {
   const { invalidate } = useThree();
   const layers = useMemo(
     () => [
-      { geo: roundedSlab(6.2, 5.6, 0.16, 0.28), y: -0.46, color: "#6a4128" },
-      { geo: roundedSlab(5.95, 5.35, 0.14, 0.3), y: -0.3, color: "#8b5734" },
-      { geo: roundedSlab(5.7, 5.1, 0.12, 0.32), y: -0.16, color: "#e7cb8e" },
-      { geo: roundedSlab(5.45, 4.85, 0.14, 0.34), y: -0.02, color: "#7ec44a" },
+      { geo: roundedSlab(6.2, 5.6, 0.16, 0.28), y: -0.46, color: "#1c1e26" },
+      { geo: roundedSlab(5.95, 5.35, 0.14, 0.3), y: -0.3, color: "#272a35" },
+      { geo: roundedSlab(5.7, 5.1, 0.12, 0.32), y: -0.16, color: "#363a48" },
+      { geo: roundedSlab(5.45, 4.85, 0.14, 0.34), y: -0.02, color: "#4a4f62" },
     ],
     [],
   );

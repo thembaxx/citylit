@@ -15,27 +15,76 @@ import { useKhwezi } from "./KhweziProvider";
 const landVertex = `
   uniform float uTime;
   uniform float uMotion;
+  uniform vec2 uSelectedPos;
+  uniform float uHasSelected;
   attribute float aPhase;
+  attribute float aElevation;
   varying float vPulse;
+  varying float vElevation;
+  varying float vFocus;
   void main() {
     vec3 p = position;
-    p.y += sin(uTime * 0.42 + aPhase * 6.283) * 0.035 * uMotion;
+    float dist = length(p.xz - uSelectedPos);
+    float focus = exp(-dist * 1.55) * uHasSelected;
+    p.y += (sin(uTime * 0.48 + aPhase * 6.283) * 0.032 + focus * 0.055 * (0.5 + 0.5 * sin(uTime * 1.8 - dist * 3.2))) * uMotion;
     vec4 viewPosition = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * viewPosition;
-    gl_PointSize = (1.6 + 2.0 * (0.5 + 0.5 * sin(aPhase * 15.0 + uTime * 0.9))) * (5.0 / -viewPosition.z);
-    vPulse = 0.58 + 0.42 * sin(aPhase * 22.0 + uTime * 0.65) * sin(aPhase * 22.0 + uTime * 0.65);
+    float baseSize = 1.65 + 1.95 * (0.5 + 0.5 * sin(aPhase * 15.0 + uTime * 0.85)) + focus * 1.45;
+    gl_PointSize = baseSize * (5.0 / -viewPosition.z);
+    vPulse = 0.56 + 0.44 * sin(aPhase * 22.0 + uTime * 0.65) * sin(aPhase * 22.0 + uTime * 0.65);
+    vElevation = aElevation;
+    vFocus = focus;
   }
 `;
 const landFragment = `
   uniform float uNight;
   uniform float uOpacity;
   varying float vPulse;
+  varying float vElevation;
+  varying float vFocus;
   void main() {
     float radius = length(gl_PointCoord - 0.5);
-    float glow = 1.0 - smoothstep(0.08, 0.5, radius);
-    vec3 day = mix(vec3(0.36, 0.31, 0.22), vec3(0.70, 0.80, 0.56), vPulse);
-    vec3 night = mix(vec3(0.22, 0.37, 0.34), vec3(0.87, 0.64, 0.39), vPulse);
-    gl_FragColor = vec4(mix(day, night, uNight), glow * (0.62 + vPulse * 0.3) * uOpacity);
+    if (radius > 0.5) discard;
+    float core = exp(-radius * radius * 18.0);
+    float halo = 1.0 - smoothstep(0.08, 0.5, radius);
+    float glow = mix(halo, core, 0.42);
+    vec3 dayBase = mix(vec3(0.28, 0.30, 0.36), vec3(0.54, 0.58, 0.68), vPulse);
+    vec3 dayHigh = mix(dayBase, vec3(0.84, 0.52, 0.20), vElevation * 0.45 + vFocus * 0.72);
+    vec3 nightBase = mix(vec3(0.32, 0.35, 0.44), vec3(0.86, 0.65, 0.38), vPulse);
+    vec3 nightHigh = mix(nightBase, vec3(0.98, 0.78, 0.46), vElevation * 0.40 + vFocus * 0.78);
+    vec3 color = mix(dayHigh, nightHigh, uNight);
+    float alpha = glow * (0.68 + vPulse * 0.28 + vFocus * 0.28) * uOpacity;
+    gl_FragColor = vec4(color, alpha);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+  }
+`;
+const beamVertex = `
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewPosition;
+  void main() {
+    vUv = uv;
+    vNormal = normalize(normalMatrix * normal);
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+    vViewPosition = -mvPosition.xyz;
+    gl_Position = projectionMatrix * mvPosition;
+  }
+`;
+const beamFragment = `
+  uniform vec3 uColor;
+  uniform float uOpacity;
+  uniform float uTime;
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewPosition;
+  void main() {
+    vec3 viewDir = normalize(vViewPosition);
+    float fresnel = pow(1.0 - abs(dot(vNormal, viewDir)), 1.6);
+    float verticalFade = smoothstep(0.0, 0.14, vUv.y) * pow(1.0 - vUv.y, 1.85);
+    float shimmer = 0.82 + 0.18 * sin(vUv.y * 14.0 - uTime * 2.2);
+    float alpha = verticalFade * (0.28 + fresnel * 0.72) * shimmer * uOpacity;
+    gl_FragColor = vec4(uColor, alpha);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
   }
@@ -90,6 +139,7 @@ function Terrain({
     );
     const vertices: number[] = [];
     const phases: number[] = [];
+    const elevations: number[] = [];
     for (let lon = 16.4; lon < 33; lon += 0.2)
       for (let lat = -34.9; lat < -22; lat += 0.2) {
         if (
@@ -99,13 +149,27 @@ function Terrain({
               !polygon.slice(1).some((ring) => insideRing([lon, lat], ring)),
           )
         ) {
-          vertices.push(x(lon), Math.sin(lon * 3) * Math.cos(lat * 2) * 0.045, z(lat));
+          const elev = Math.max(
+            0,
+            Math.min(1, (lon - 18) * 0.055 + (lat + 34) * 0.045 + Math.sin(lon * 2.4) * 0.15),
+          );
+          vertices.push(
+            x(lon),
+            Math.sin(lon * 3) * Math.cos(lat * 2) * 0.045 + elev * 0.04,
+            z(lat),
+          );
           phases.push(Math.abs(Math.sin(lon * 12.9898 + lat * 78.233) * 43758.5453) % 1);
+          elevations.push(elev);
         }
       }
-    return { positions: new Float32Array(vertices), phases: new Float32Array(phases) };
+    return {
+      positions: new Float32Array(vertices),
+      phases: new Float32Array(phases),
+      elevations: new Float32Array(elevations),
+    };
   }, []);
   const landMaterial = useRef<THREE.ShaderMaterial>(null);
+  const beamMaterial = useRef<THREE.ShaderMaterial>(null);
   useFrame(({ clock }, delta) => {
     nightMix.current =
       animate && !reducedMotion
@@ -113,12 +177,24 @@ function Terrain({
         : night
           ? 1
           : 0;
+    const activeCity = selected === null ? null : cities[selected];
     if (landMaterial.current) {
       landMaterial.current.uniforms.uTime.value = animate && !reducedMotion ? clock.elapsedTime : 0;
       landMaterial.current.uniforms.uNight.value = nightMix.current;
       landMaterial.current.uniforms.uOpacity.value = 0.65 * opacity;
       landMaterial.current.uniforms.uMotion.value =
         animate && !reducedMotion && interactive ? 1 : 0;
+      landMaterial.current.uniforms.uHasSelected.value = activeCity ? 1 : 0;
+      if (activeCity) {
+        landMaterial.current.uniforms.uSelectedPos.value.set(
+          x(activeCity.coords[0]),
+          z(activeCity.coords[1]),
+        );
+      }
+    }
+    if (beamMaterial.current) {
+      beamMaterial.current.uniforms.uTime.value = animate && !reducedMotion ? clock.elapsedTime : 0;
+      beamMaterial.current.uniforms.uOpacity.value = 0.22 * opacity;
     }
     cities.forEach((city, index) => {
       const label = labels.current[index];
@@ -158,8 +234,8 @@ function Terrain({
       x: targetX,
       y: distance * fit,
       z: targetZ + distance * fit,
-      duration: reduced ? 0 : 0.8,
-      ease: "power2.inOut",
+      duration: reduced ? 0 : 0.55,
+      ease: "power3.out",
       onUpdate: () => {
         controls.current?.update();
         invalidate();
@@ -170,7 +246,8 @@ function Terrain({
           x: targetX,
           y: 0,
           z: targetZ,
-          duration: reduced ? 0 : 0.8,
+          duration: reduced ? 0 : 0.55,
+          ease: "power3.out",
           onUpdate: () => {
             controls.current?.update();
             invalidate();
@@ -203,6 +280,7 @@ function Terrain({
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[land.positions, 3]} />
           <bufferAttribute attach="attributes-aPhase" args={[land.phases, 1]} />
+          <bufferAttribute attach="attributes-aElevation" args={[land.elevations, 1]} />
         </bufferGeometry>
         <shaderMaterial
           ref={landMaterial}
@@ -213,6 +291,8 @@ function Terrain({
             uNight: { value: night ? 1 : 0 },
             uOpacity: { value: 0.65 * opacity },
             uMotion: { value: 1 },
+            uSelectedPos: { value: new THREE.Vector2(0, 0) },
+            uHasSelected: { value: selected !== null ? 1 : 0 },
           }}
           transparent
           depthWrite={false}
@@ -257,11 +337,17 @@ function Terrain({
           </mesh>
           {index === selected && (
             <mesh position={[0, 1.08, 0]}>
-              <cylinderGeometry args={[0.018, 0.21, 2.1, 20, 1, true]} />
-              <meshBasicMaterial
-                color={night ? "#e8bc77" : "#a8ce87"}
+              <cylinderGeometry args={[0.02, 0.22, 2.1, 24, 1, true]} />
+              <shaderMaterial
+                ref={beamMaterial}
+                vertexShader={beamVertex}
+                fragmentShader={beamFragment}
+                uniforms={{
+                  uColor: { value: new THREE.Color(night ? "#f0b35e" : "#c86d24") },
+                  uOpacity: { value: 0.24 * opacity },
+                  uTime: { value: 0 },
+                }}
                 transparent
-                opacity={0.11 * opacity}
                 side={THREE.DoubleSide}
                 depthWrite={false}
                 blending={THREE.AdditiveBlending}
@@ -278,7 +364,7 @@ function Terrain({
             />
           </mesh>
           {index === selected && opacity > 0.65 && (
-            <group position={[0, 0.13, 0]} scale={0.34}>
+            <group position={[0, 0.14, 0]} scale={0.4}>
               <Suspense fallback={null}>
                 <StageModel model={stageModel(city.landmarks[0])} />
               </Suspense>
@@ -352,7 +438,6 @@ export default function GlowMap({
           </button>
         ))}
       </div>
-      <p className="glow-map-caption">Drag to explore · Select a city beacon</p>
     </div>
   );
 }

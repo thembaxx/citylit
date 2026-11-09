@@ -7,24 +7,16 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   await page.goto("/?view=guide");
   const dock = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(dock).toBeVisible();
-  await expect(dock.getByRole("link")).toHaveCount(4);
-  await expect(dock.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
+  await expect(dock.getByRole("link")).toHaveCount(3);
+  await expect(dock.getByRole("link", { name: "Explore" })).toHaveAttribute("aria-current", "page");
   await expect(page.locator(".atlas-nav .atlas-about-link")).toHaveCount(0);
-  const choose = page.getByRole("combobox", { name: "Choose a city on the map" });
-  await expect(choose).toHaveCSS("font-size", "16px");
-  await expect(choose).toBeVisible();
-  await expect(page.getByRole("button", { name: "Make Khwezi hop" })).toBeVisible();
-  await expect(page.locator(".atlas-beacon-mascot .khwezi-view")).toHaveAttribute(
-    "data-ready",
-    "true",
-  );
-  await expect(page.locator(".persistent-canvas")).toHaveCSS("z-index", "20");
-  await page.getByRole("button", { name: "Make Khwezi hop" }).click();
-  // The label becomes the reverse action after the successful pose change.
-  await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
-  await choose.selectOption("1");
-  await expect(page.locator(".atlas-beacon-card h2")).toHaveText("Cape Town");
-  await expect(page.getByRole("link", { name: "Explore the city" })).toBeVisible();
+  const search = page.getByRole("searchbox", { name: "Search landmarks and cities" });
+  await expect(search).toHaveCSS("font-size", "16px");
+  await expect(search).toBeVisible();
+  await expect(page.locator(".persistent-canvas")).toHaveCSS("z-index", "1");
+  await page.getByRole("button", { name: "Choose Cape Town", exact: true }).click();
+  await expect(page.locator(".living-atlas-city-card h3")).toHaveText("Cape Town");
+  await expect(page.getByRole("link", { name: "Enter the city" })).toBeVisible();
   const overflow = await page
     .locator(".reference-guide")
     .evaluate((el) => el.scrollWidth > el.clientWidth + 1);
@@ -60,7 +52,8 @@ test("reduced motion leaves the guide logo and mascot controllable", async ({ pa
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?view=guide");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
-  await expect(page.locator(".atlas-wordmark .citylit-logo-symbol").first()).toBeVisible();
+  await expect(page.locator(".citylit-logo-symbol").first()).toBeVisible();
+  await page.goto("/brand");
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
   // The label becomes the reverse action after the successful pose change.
   await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();

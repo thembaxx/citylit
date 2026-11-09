@@ -46,9 +46,11 @@ test("editable controls use 16px text across themes and viewport sizes", async (
 
 test("home and city guides prioritize discovery, not marketing filler", async ({ page }) => {
   await page.goto("/?view=guide");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Discover");
-  await expect(page.getByRole("heading", { name: "Cities", exact: true })).toBeVisible();
-  await expect(page.getByRole("searchbox", { name: "Search city guides" })).toHaveCSS(
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Follow your");
+  await expect(
+    page.getByRole("heading", { name: "Where should we wander?", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("searchbox", { name: "Search landmarks and cities" })).toHaveCSS(
     "font-size",
     "16px",
   );
@@ -58,11 +60,8 @@ test("home and city guides prioritize discovery, not marketing filler", async ({
   await page.goto("/johannesburg");
   await expect(page.getByRole("heading", { name: "Landmarks", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Places", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Explore places" })).toHaveAttribute(
-    "href",
-    "#places",
-  );
-  await expect(page.getByRole("link", { name: "Landmarks", exact: true })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "Find a place" })).toHaveAttribute("href", "#places");
+  await expect(page.getByRole("link", { name: "Explore in 3D", exact: true })).toHaveAttribute(
     "href",
     "/johannesburg/landmarks",
   );

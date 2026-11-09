@@ -45,7 +45,6 @@
     .atlas-native-dock,
     .atlas-footer,
     .atlas-section,
-    .atlas-chapter-nav,
     .atlas-city-hero,
     .atlas-breadcrumb
   ) {
@@ -73,13 +72,7 @@
   background: var(--citylit-panel);
 }
 .reference-guide
-  :is(
-    .atlas-button,
-    .atlas-text-link,
-    .atlas-chapter-nav a,
-    .atlas-place-filters button,
-    .atlas-directory-tools select
-  ) {
+  :is(.atlas-button, .atlas-text-link, .atlas-place-filters button, .atlas-directory-tools select) {
   transition:
     color 160ms ease,
     background-color 160ms ease,

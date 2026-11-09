@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, BookmarkSimple, GameController, House, MapPin } from "@phosphor-icons/react";
+import { BookmarkSimple, GameController, House, MapPin } from "@phosphor-icons/react";
 import { usePathname } from "next/navigation";
 import BrandWordmark from "./BrandWordmark";
 import type { ReactNode } from "react";
@@ -88,12 +88,6 @@ export default function GuideShell({
           </Link>
         </div>
         <div className="atlas-footer-links">
-          <Link href="/destinations">
-            All city guides <ArrowUpRight size={14} />
-          </Link>
-          <Link href="/?view=3d" data-transition-label="Play the atlas">
-            The 3D atlas <ArrowUpRight size={14} />
-          </Link>
           <Link href="/about">About &amp; sources</Link>
           <Link href="/privacy">Privacy &amp; data</Link>
         </div>

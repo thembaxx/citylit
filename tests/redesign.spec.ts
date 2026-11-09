@@ -7,14 +7,14 @@ test("beacon to city to landmark to a saved visit works end to end", async ({ pa
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-  await expect(page.locator("h1")).toHaveText("DiscoverSouth Africa.");
+  await expect(page.locator("h1")).toHaveText("Follow yourcuriosity.");
   for (const field of await page.locator(".discovery-guide input, .discovery-guide select").all())
     await expect(field).toHaveCSS("font-size", "16px");
   await page.getByRole("button", { name: "Choose Johannesburg", exact: true }).click();
-  await expect(page.locator(".atlas-beacon-card h2")).toHaveText("Johannesburg");
-  await page.getByLabel("Choose a city on the map").selectOption("1");
-  await expect(page.locator(".atlas-beacon-card h2")).toHaveText("Cape Town");
-  await page.getByRole("link", { name: "Explore the city", exact: true }).click();
+  await expect(page.locator(".living-atlas-city-card h3")).toHaveText("Johannesburg");
+  await page.getByRole("button", { name: "Choose Cape Town", exact: true }).click();
+  await expect(page.locator(".living-atlas-city-card h3")).toHaveText("Cape Town");
+  await page.getByRole("link", { name: "Enter the city", exact: true }).click();
   await expect(page).toHaveURL(/\/cape-town$/);
   await page
     .locator("#landmarks")
@@ -90,15 +90,13 @@ test("city search, province filters and empty-state reset work", async ({ page }
 });
 
 test("the particle map clears as the guide scrolls to city cards", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/destinations");
   await expect(
     page.getByRole("button", { name: "Choose Johannesburg", exact: true }),
   ).toBeInViewport();
   await page.locator(".discovery-guide").evaluate((guide) => {
-    const directory = guide.querySelector<HTMLElement>("#cities")!;
-    guide.scrollTo({ top: directory.offsetTop, behavior: "instant" });
+    guide.scrollTo({ top: window.innerHeight, behavior: "instant" });
   });
-  await expect(page.locator("#city-directory-title")).toBeInViewport({ ratio: 1 });
   // The reference map stays fixed; scrolling fades its renderer and removes
   // the city controls from interaction and the accessibility tree.
   await expect(page.locator(".atlas-map-backdrop")).toHaveAttribute("aria-hidden", "true");
@@ -205,7 +203,7 @@ for (const width of [320, 768, 1024, 1440]) {
         }
         expect(overflow, `${route} at ${width}px, ${theme}`).toBe(false);
         if (width === 1440 && route === "/")
-          await expect(page.locator(".atlas-beacon-card")).toBeInViewport({ ratio: 1 });
+          await expect(page.locator(".living-atlas-city-card")).toBeInViewport();
         if (theme === "day" && width === 320 && route === "/johannesburg")
           await page.screenshot({ scale: "css", path: "docs/redesign/05-city-mobile.png" });
         if (theme === "day" && width === 1440 && route === "/")

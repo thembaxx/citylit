@@ -266,7 +266,7 @@ h3 {
   white-space: nowrap;
 }
 .map-label-layer {
-  animation: signs-in 0.9s cubic-bezier(0.16, 1.2, 0.3, 1) 0.2s both;
+  animation: signs-in 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes signs-in {
   from {
@@ -678,7 +678,7 @@ h3 {
   width: 21px;
   background: #796aff3b;
   clip-path: polygon(15% 0, 100% 70%, 0 100%);
-  animation: drift 14s ease-in-out infinite;
+  animation: drift 8s ease-out 1;
   animation-delay: var(--delay);
   will-change: transform;
   pointer-events: none;
@@ -941,19 +941,7 @@ h3 {
   padding: 4px 20px 56px;
 }
 .place-detail > * {
-  animation: detail-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.place-detail > *:nth-child(2) {
-  animation-delay: 0.04s;
-}
-.place-detail > *:nth-child(3) {
-  animation-delay: 0.08s;
-}
-.place-detail > *:nth-child(4) {
-  animation-delay: 0.12s;
-}
-.place-detail > *:nth-child(5) {
-  animation-delay: 0.16s;
+  animation: detail-rise 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes detail-rise {
   from {
@@ -1921,14 +1909,14 @@ h3 {
   color: var(--muted);
 }
 [aria-label="Saved to discoveries"] svg {
-  animation: treasure-pop 0.4s cubic-bezier(0.2, 1.8, 0.4, 1);
+  animation: treasure-pop 0.28s cubic-bezier(0.2, 1.5, 0.4, 1);
 }
 @keyframes treasure-pop {
   0% {
-    transform: scale(0.65) rotate(-15deg);
+    transform: scale(0.88) rotate(-8deg);
   }
   65% {
-    transform: scale(1.2) rotate(8deg);
+    transform: scale(1.08) rotate(4deg);
   }
   100% {
     transform: scale(1) rotate(0);
@@ -3175,7 +3163,7 @@ button:disabled {
   border-color: transparent;
 }
 .visit-stamp {
-  animation: detail-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: detail-rise 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .visit-stamp {
   display: flex;
@@ -3950,7 +3938,7 @@ button:disabled {
   height: 18px;
   background: var(--accent);
   border-radius: 7px;
-  animation: gesture-nudge 2.2s ease-in-out 2;
+  animation: gesture-nudge 2.2s ease-in-out 1;
 }
 @keyframes gesture-nudge {
   25% {
@@ -4893,7 +4881,6 @@ button {
   bottom: -6%;
   height: 48%;
   background: radial-gradient(ellipse at 50% 100%, rgba(var(--city-glow), 0.45), transparent 64%);
-  animation: horizon-breathe 9s ease-in-out infinite;
   pointer-events: none;
 }
 .motes i {
@@ -4905,8 +4892,6 @@ button {
   left: calc(10% + (var(--i) * 12%));
   bottom: calc(22% + (var(--i) * 5%));
   opacity: 0.28;
-  animation: mote-drift 12s ease-in-out infinite;
-  animation-delay: calc(var(--i) * -1.5s);
 }
 .fade-hint {
   position: absolute;
@@ -4928,7 +4913,7 @@ button {
   max-width: calc(100% - 32px);
   overflow: hidden;
   text-overflow: ellipsis;
-  animation: hint-life 4.2s ease forwards;
+  animation: hint-life 3s ease forwards;
 }
 .spot-layer {
   position: absolute;
@@ -5094,26 +5079,6 @@ button {
 }
 .secret-bloom .ambient-glow {
   animation: bloom-pulse 1.6s ease;
-}
-@keyframes horizon-breathe {
-  0%,
-  100% {
-    opacity: 0.62;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-@keyframes mote-drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.15;
-  }
-  50% {
-    transform: translate3d(10px, -22px, 0);
-    opacity: 0.7;
-  }
 }
 @keyframes hint-life {
   0% {

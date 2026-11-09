@@ -313,12 +313,6 @@ export default function AdventureHub() {
           <Link href="/destinations" data-transition-label="Explore all cities">
             <MapPin size={16} /> Cities
           </Link>
-          <Link
-            href={`/explore?city=${city}&tab=day`}
-            aria-current={tab === "day" ? "page" : undefined}
-          >
-            <BookmarkSimple size={16} /> My day
-          </Link>
         </nav>
       </header>
       <h1>
@@ -400,15 +394,12 @@ export default function AdventureHub() {
       <p className="hub-message" role="status">
         {message}
       </p>
-      <motion.div
+      <div
         key={tab}
         id="planner-panel"
         role="tabpanel"
         aria-labelledby={`planner-tab-${tab}`}
         tabIndex={0}
-        initial={{ opacity: 0, y: reduced ? 0 : 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: reduced ? 0 : 0.2 }}
       >
         {tab === "discover" && (
           <>
@@ -445,13 +436,10 @@ export default function AdventureHub() {
                 </div>
                 <p className="planning-note">
                   A starting point, not a timed booking. Visit durations are editorial estimates;
-                  check tickets and opening hours with each venue.
+                  check tickets and opening hours with each venue.{" "}
+                  {budget === "under200" &&
+                    "Budget uses standard adult entry rates, excluding travel and conditional discounts."}
                 </p>
-                {budget === "under200" && (
-                  <p className="planning-note">
-                    Uses standard adult entry rates, excluding travel and conditional discounts.
-                  </p>
-                )}
               </details>
               <div className="adventure-grid">{picked.map((p) => card(p))}</div>
               {!picked.length && (
@@ -733,8 +721,9 @@ export default function AdventureHub() {
                     <motion.div
                       key={c.slug}
                       className="passport-stamp"
-                      initial={{ scale: reduced ? 1 : 0.8 }}
-                      animate={{ scale: 1 }}
+                      initial={{ scale: reduced ? 1 : 0.96, opacity: reduced ? 1 : 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: reduced ? 0 : 0.18, ease: "easeOut" }}
                     >
                       <Check size={25} />
                       <strong>{c.short}</strong>
@@ -785,7 +774,7 @@ export default function AdventureHub() {
             </button>
           </section>
         )}
-      </motion.div>
+      </div>
       <footer className="field-guide-footer">
         <Link href="/editorial">Data quality &amp; correction review</Link>
         <p>

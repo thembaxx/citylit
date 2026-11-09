@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("Khwezi action is genuinely clickable above the live city map", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/?view=guide");
+  await page.goto("/brand");
 
   const hop = page.getByRole("button", { name: "Make Khwezi hop" });
   await expect(hop).toBeVisible();
@@ -25,7 +25,7 @@ test("safe-area layout keeps interactive guide elements within a compact viewpor
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/?view=guide");
-  await expect(page.getByRole("combobox", { name: "Choose a city on the map" })).toBeVisible();
+  await expect(page.getByRole("searchbox", { name: "Search landmarks and cities" })).toBeVisible();
   const layout = await page.evaluate(() => {
     const guide = document.querySelector(".reference-guide");
     if (!guide) return { overflow: 999, offenders: [] };

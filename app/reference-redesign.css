@@ -43,7 +43,7 @@
   --citylit-reference-panel-raised: #e5eadb;
   --citylit-reference-border: rgb(31 56 39 / 14%);
   --citylit-reference-text: #1d3327;
-  --citylit-reference-muted: #5d6d60;
+  --citylit-reference-muted: #4f5f53;
   --citylit-reference-purple: #4d7957;
   --citylit-reference-purple-soft: #365f42;
   --citylit-reference-gold: #995f2f;
@@ -2094,76 +2094,22 @@
 }
 .living-atlas-city-choices {
   display: flex;
-  align-items: stretch;
-  gap: 8px;
-  overflow-x: auto;
-  margin: 0 -4px;
-  padding: 4px 4px 12px;
-  scrollbar-color: var(--citylit-reference-border) transparent;
-  scrollbar-width: thin;
-  overscroll-behavior-inline: contain;
+  justify-content: flex-end;
+  min-height: 24px;
 }
-.living-atlas-city-choices > button,
 .living-atlas-all-cities {
-  display: flex;
-  flex: 0 0 auto;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 2px;
-  min-width: 104px;
-  min-height: 48px;
-  padding: 7px 13px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 15px;
-  color: var(--citylit-reference-text);
-  background: color-mix(in srgb, var(--citylit-reference-panel) 84%, transparent);
-  text-align: left;
-  text-decoration: none;
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease;
-}
-.living-atlas-city-choices > button {
-  align-items: flex-start;
-  flex-direction: column;
-  cursor: pointer;
-}
-.living-atlas-city-choices > button span {
-  font-size: 11px;
-  font-weight: 700;
-}
-.living-atlas-city-choices > button small {
-  color: var(--citylit-reference-muted);
-  font-size: 10px;
-}
-.living-atlas-city-choices > button[aria-pressed="true"] {
-  border-color: color-mix(
-    in srgb,
-    var(--citylit-reference-gold) 72%,
-    var(--citylit-reference-border)
-  );
-  background: color-mix(in srgb, var(--citylit-reference-gold) 13%, var(--citylit-reference-panel));
-}
-@media (hover: hover) and (pointer: fine) {
-  .living-atlas-city-choices > button:hover {
-    transform: translateY(-1px);
-    border-color: var(--citylit-reference-gold);
-  }
-}
-.living-atlas-all-cities {
   gap: 7px;
-  min-width: auto;
-  border-color: transparent !important;
-  background: transparent !important;
+  min-height: 40px;
   color: var(--citylit-reference-muted);
   font-size: 11px;
   font-weight: 700;
+  text-decoration: none;
   white-space: nowrap;
 }
 @media (hover: hover) and (pointer: fine) {
   .living-atlas-all-cities:hover {
-    transform: none !important;
     color: var(--citylit-reference-text);
   }
 }
@@ -2189,8 +2135,7 @@
   border-radius: 15px;
   background: var(--citylit-reference-panel-raised);
 }
-.living-atlas-city-image img,
-.living-atlas-story-image img {
+.living-atlas-city-image img {
   object-fit: cover;
 }
 .living-atlas-city-copy {
@@ -2226,52 +2171,6 @@
   font-size: 11px;
   line-height: 1.5;
 }
-.living-atlas-thread {
-  display: grid;
-  gap: 6px;
-  margin: 0 0 9px;
-}
-.living-atlas-thread > p {
-  margin: 0;
-  color: var(--citylit-reference-muted);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.living-atlas-thread > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.living-atlas-thread a {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  min-height: 40px;
-  padding: 0 10px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 12px;
-  color: var(--citylit-reference-text);
-  background: color-mix(in srgb, var(--citylit-reference-bg) 42%, transparent);
-  font-size: 11px;
-  font-weight: 650;
-  text-decoration: none;
-}
-.living-atlas-thread a svg {
-  flex: 0 0 auto;
-  color: var(--citylit-reference-gold);
-}
-@media (hover: hover) and (pointer: fine) {
-  .living-atlas-thread a:hover {
-    border-color: var(--citylit-reference-gold);
-    background: var(--citylit-reference-panel);
-  }
-}
-.living-atlas-thread a:focus-visible {
-  outline: 2px solid var(--citylit-reference-gold);
-  outline-offset: 2px;
-}
 .living-atlas-city-actions {
   display: flex;
   align-items: center;
@@ -2290,8 +2189,7 @@
   text-decoration: none;
 }
 @media (hover: hover) and (pointer: fine) {
-  .living-atlas-city-actions a:hover,
-  .living-atlas-story-link:hover {
+  .living-atlas-city-actions a:hover {
     color: var(--citylit-reference-text);
   }
 }
@@ -2319,57 +2217,6 @@
   flex: 0 0 auto;
   color: var(--citylit-reference-gold);
 }
-.living-atlas-story {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-  margin-top: 24px;
-  padding: 12px;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 22px;
-  background: color-mix(in srgb, var(--citylit-reference-panel) 85%, transparent);
-  backdrop-filter: blur(14px);
-}
-.living-atlas-story-image {
-  position: relative;
-  display: block;
-  width: 112px;
-  height: 82px;
-  overflow: hidden;
-  border-radius: 14px;
-  background: var(--citylit-reference-panel-raised);
-}
-.living-atlas-story .reference-eyebrow {
-  margin-bottom: 3px;
-  font-size: 9px;
-}
-.living-atlas-story h2 {
-  margin: 0;
-  color: var(--citylit-reference-text);
-  font:
-    450 22px/1.1 Fraunces,
-    Georgia,
-    serif;
-}
-.living-atlas-story > div > p:last-child {
-  margin: 4px 0 0;
-  color: var(--citylit-reference-muted);
-  font-size: 10px;
-  line-height: 1.45;
-}
-.living-atlas-story-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding-inline: 12px;
-  color: var(--citylit-reference-gold);
-  font-size: 10px;
-  font-weight: 750;
-  text-decoration: none;
-  white-space: nowrap;
-}
 .living-atlas-shortcuts {
   padding-top: 20px;
 }
@@ -2379,12 +2226,9 @@
 }
 @supports (corner-shape: squircle) {
   .living-atlas-explorer,
-  .living-atlas-city-choices > button,
   .living-atlas-all-cities,
   .living-atlas-city-card,
   .living-atlas-city-image,
-  .living-atlas-story,
-  .living-atlas-story-image,
   .living-atlas-city-actions .living-atlas-primary-action {
     corner-shape: squircle;
   }
@@ -2486,10 +2330,6 @@
   .living-atlas-city-copy > p:not(.living-atlas-city-place) {
     margin-bottom: 8px;
   }
-  .living-atlas-thread a {
-    min-height: 40px;
-    max-width: 100%;
-  }
   .living-atlas-city-actions {
     gap: 4px 11px;
   }
@@ -2500,29 +2340,6 @@
   .living-atlas-city-actions .living-atlas-primary-action {
     min-height: 42px;
     padding-inline: 11px;
-  }
-  .living-atlas-story {
-    grid-template-columns: 76px minmax(0, 1fr);
-    gap: 12px;
-    margin-top: 18px;
-    padding: 10px;
-  }
-  .living-atlas-story-image {
-    width: 76px;
-    height: 76px;
-  }
-  .living-atlas-story h2 {
-    font-size: 19px;
-  }
-  .living-atlas-story > div > p:last-child {
-    font-size: 11px;
-  }
-  .living-atlas-story-link {
-    grid-column: 2;
-    justify-self: start;
-    min-height: 38px;
-    margin-top: -8px;
-    padding-left: 0;
   }
   .living-atlas-shortcuts {
     grid-template-columns: 1fr;
@@ -2599,14 +2416,6 @@
 .living-atlas-more-results svg {
   color: var(--citylit-reference-gold);
 }
-.living-atlas-city-choices[aria-label] {
-  scroll-snap-type: x proximity;
-}
-.living-atlas-city-choices > button,
-.living-atlas-all-cities {
-  scroll-snap-align: start;
-}
-
 /* Living Atlas: consistent story, city and stage rhythm */
 .reference-guide .atlas-breadcrumb {
   width: min(100% - 40px, 1280px);
@@ -2702,54 +2511,6 @@
   min-height: 44px;
   color: var(--citylit-reference-muted);
   font-weight: 650;
-}
-.reference-guide .atlas-chapter-nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  width: min(100% - 40px, 1280px);
-  margin: 20px auto 0;
-  padding: 9px;
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  border: 1px solid var(--citylit-reference-border);
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--citylit-reference-bg) 90%, transparent);
-  backdrop-filter: blur(16px);
-}
-.reference-guide .atlas-chapter-nav a {
-  min-height: 44px;
-  padding: 0 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 13px;
-  color: var(--citylit-reference-muted);
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-}
-.reference-guide .atlas-chapter-nav a:last-child {
-  margin-left: 0;
-  color: var(--citylit-reference-muted);
-}
-.reference-guide .atlas-chapter-nav a:focus-visible {
-  color: var(--citylit-reference-text);
-  background: var(--citylit-reference-panel-raised);
-}
-@media (hover: hover) and (pointer: fine) {
-  .reference-guide .atlas-chapter-nav a:hover {
-    color: var(--citylit-reference-text);
-    background: var(--citylit-reference-panel-raised);
-  }
-}
-.atlas-chapter-divider {
-  width: 1px;
-  margin: 8px 4px;
-  background: var(--citylit-reference-border);
 }
 .reference-guide .atlas-section {
   width: min(100% - 40px, 1280px);
@@ -2891,7 +2652,6 @@
 @media (max-width: 760px) {
   .reference-guide .atlas-breadcrumb,
   .reference-guide .atlas-city-hero-redesign,
-  .reference-guide .atlas-chapter-nav,
   .reference-guide .atlas-section,
   .reference-guide .atlas-stage-heading,
   .reference-guide .atlas-stage-content {
@@ -2938,15 +2698,6 @@
   .reference-guide .atlas-city-actions .atlas-city-secondary-action {
     align-self: flex-start;
   }
-  .reference-guide .atlas-chapter-nav {
-    top: 0;
-    width: 100%;
-    margin-top: 12px;
-    padding-inline: 16px;
-    border-right: 0;
-    border-left: 0;
-    border-radius: 0;
-  }
   .reference-guide .atlas-section {
     padding-block: 46px;
   }
@@ -2972,10 +2723,7 @@
     .atlas-button,
     .atlas-text-link,
     .living-atlas-primary-action,
-    .living-atlas-city-choices > button,
     .living-atlas-all-cities,
-    .living-atlas-story-link,
-    .atlas-chapter-nav a,
     .atlas-exploration-tabs .easyui-tab,
     .field-guide .adventure-card-actions button,
     .field-guide .pill-button,
@@ -2997,10 +2745,7 @@
       .atlas-button,
       .atlas-text-link,
       .living-atlas-primary-action,
-      .living-atlas-city-choices > button,
       .living-atlas-all-cities,
-      .living-atlas-story-link,
-      .atlas-chapter-nav a,
       .atlas-exploration-tabs .easyui-tab,
       .field-guide .adventure-card-actions button,
       .field-guide .pill-button,
@@ -3030,7 +2775,7 @@
     color-mix(in srgb, var(--citylit-reference-bg) 48%, transparent);
   backdrop-filter: blur(12px);
   pointer-events: none;
-  animation: atlas-guide-arrive 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: atlas-guide-arrive 250ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .atlas-guide-companion .khwezi-view {
   width: 128px;

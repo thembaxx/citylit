@@ -155,7 +155,8 @@ test("discovery works as a readable guide with JavaScript disabled", async ({
   try {
     const page = await context.newPage();
     await page.goto("/");
-    await expect(page.locator(".discovery-guide h1")).toHaveText("DiscoverSouth Africa.");
+    await expect(page.locator(".discovery-guide h1")).toHaveText("Follow yourcuriosity.");
+    await page.getByRole("link", { name: "All 12 cities" }).click();
     await page.locator('.atlas-city-card-link[href="/cape-town"]').click();
     await expect(page.locator(".discovery-guide h1")).toHaveText("Cape Town.");
     await page

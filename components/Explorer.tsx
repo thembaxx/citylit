@@ -223,7 +223,7 @@ export default function Explorer() {
   }, [city.slug, city.landmarks.length]);
   const changeQuery = (value: string) => {
     setQuery(value);
-    const search = new URLSearchParams(params);
+    const search = new URLSearchParams(window.location.search);
     search.set("view", "places");
     if (value) search.set("q", value);
     else search.delete("q");
@@ -503,9 +503,9 @@ export default function Explorer() {
         <header className="game-heading">
           <motion.div
             key={mode + city.slug}
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: reduced ? 0 : 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduced ? 0 : 0.35 }}
+            transition={{ duration: reduced ? 0 : 0.22, ease: "easeOut" }}
           >
             <h1>
               {mode === "map" ? (

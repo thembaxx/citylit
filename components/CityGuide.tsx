@@ -1,12 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Compass,
-  MapPin,
-  CalendarBlank,
-} from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { cities, landmarkSources, places } from "../lib/data";
 import { cityPhoto, landmarkPath, planningStops, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
@@ -71,26 +65,12 @@ export default function CityGuide({ city }: { city: GuideCity }) {
           </div>
         )}
       </section>
-      <nav className="atlas-chapter-nav" aria-label={`${city.name} guide sections`}>
-        <a href="#landmarks">
-          <Compass size={17} /> Stories
-        </a>
-        <a href="#places">
-          <MapPin size={17} /> Places
-        </a>
-        <a href="#plan">
-          <CalendarBlank size={17} /> My day
-        </a>
-      </nav>
       <section className="atlas-section" id="landmarks" aria-labelledby="landmarks-title">
         <div className="atlas-section-heading">
           <div>
             <h2 id="landmarks-title">Landmarks</h2>
             <p>Stories and places that help you read the city.</p>
           </div>
-          <Link href={`/${city.slug}/landmarks`} className="atlas-text-link">
-            Explore all in 3D <ArrowUpRight size={17} />
-          </Link>
         </div>
         <div className="atlas-landmark-grid">
           {city.landmarks.map((name, index) => {

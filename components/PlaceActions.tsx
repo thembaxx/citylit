@@ -160,9 +160,9 @@ export default function PlaceActions({ place }: { place: Place }) {
       {visited && state.passport && (
         <motion.div
           className="visit-stamp"
-          initial={{ scale: reduced ? 1 : 0.7, opacity: 0 }}
+          initial={{ scale: reduced ? 1 : 0.96, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 24 }}
+          transition={{ duration: reduced ? 0 : 0.2, ease: "easeOut" }}
         >
           <Check size={18} />
           Passport stamped · {place.name}

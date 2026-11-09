@@ -42,7 +42,13 @@ export default function CategoryPlaces(props: Props) {
   const pageRef = useRef<HTMLDivElement>(null);
   const params = useSearchParams();
   const [district, setDistrict] = useState(params.get("district") || "");
-  const filters = (params.get("filters") || "").split(",").filter(Boolean);
+  const [filters, setFilters] = useState<string[]>(() =>
+    (params.get("filters") || "").split(",").filter(Boolean),
+  );
+  useEffect(() => {
+    setDistrict(params.get("district") || "");
+    setFilters((params.get("filters") || "").split(",").filter(Boolean));
+  }, [params]);
   const filterPlaces = props.places.filter(
     (p) =>
       (!district || p.district === district) &&
@@ -59,10 +65,11 @@ export default function CategoryPlaces(props: Props) {
   );
   const unseeded = !props.places.length && !props.query && !filters.length && !district;
   const setFilter = (filter: string) => {
-    const search = new URLSearchParams(params);
+    const search = new URLSearchParams(window.location.search);
     const next = filters.includes(filter)
       ? filters.filter((v) => v !== filter)
       : [...filters, filter];
+    setFilters(next);
     if (next.length) search.set("filters", next.join(","));
     else search.delete("filters");
     window.history.replaceState(null, "", location.pathname + "?" + search);
@@ -105,9 +112,9 @@ export default function CategoryPlaces(props: Props) {
       ref={pageRef}
       className="category-page"
       aria-label={`${category} places in ${city.name}`}
-      initial={{ opacity: 0, y: reduced ? 0 : 14 }}
+      initial={{ opacity: 0, y: reduced ? 0 : 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: reduced ? 0 : 0.35 }}
+      transition={{ duration: reduced ? 0 : 0.22, ease: "easeOut" }}
     >
       <section className="category-page-hero" aria-labelledby="category-page-title">
         <header className="category-page-heading">
@@ -182,7 +189,7 @@ export default function CategoryPlaces(props: Props) {
                 value={district}
                 onChange={(e) => {
                   setDistrict(e.target.value);
-                  const search = new URLSearchParams(params);
+                  const search = new URLSearchParams(window.location.search);
                   if (e.target.value) search.set("district", e.target.value);
                   else search.delete("district");
                   window.history.replaceState(null, "", location.pathname + "?" + search);
@@ -209,19 +216,10 @@ export default function CategoryPlaces(props: Props) {
           {props.query ? " · across all categories" : ""}
         </p>
         <div className="category-place-grid">
-          {filterPlaces.map((place, index) => {
+          {filterPlaces.map((place) => {
             const saved = props.saved.includes(place.id);
             return (
-              <motion.article
-                className="place-card category-place-card"
-                key={place.id}
-                initial={{ opacity: 0, y: reduced ? 0 : 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: reduced ? 0 : 0.2,
-                  delay: reduced ? 0 : Math.min(index, 5) * 0.035,
-                }}
-              >
+              <article className="place-card category-place-card" key={place.id}>
                 <div className="place-icon">
                   <CategoryIcon index={categories.indexOf(place.category)} size={27} />
                 </div>
@@ -251,7 +249,7 @@ export default function CategoryPlaces(props: Props) {
                   <Heart size={17} fill={saved ? "currentColor" : "none"} />
                 </button>
                 <ArrowUpRight size={18} aria-hidden="true" />
-              </motion.article>
+              </article>
             );
           })}
         </div>
@@ -271,6 +269,7 @@ export default function CategoryPlaces(props: Props) {
                 else {
                   props.onQuery("");
                   setDistrict("");
+                  setFilters([]);
                   window.history.replaceState(null, "", location.pathname + "?view=places");
                 }
               }}

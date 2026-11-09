@@ -16,7 +16,6 @@ import BrandWordmark from "./BrandWordmark";
 import { useKhwezi } from "./KhweziProvider";
 import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
-import LivingAtlasFollowups from "./LivingAtlasFollowups";
 import { useDiscovery } from "./useDiscovery";
 
 const moodPatterns: Partial<Record<AtlasMood, RegExp>> = {
@@ -40,7 +39,6 @@ export default function DiscoveryHome() {
   const [mood, setMood] = useState<AtlasMood>("explore");
   // Start on the first suggestion so the preview is populated on load.
   const [selectedCity, setSelectedCity] = useState<number | null>(0);
-  const [surpriseCity, setSurpriseCity] = useState<string | null>(null);
   const { feedback } = useKhwezi();
   const { state } = useDiscovery();
   const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
@@ -89,19 +87,6 @@ export default function DiscoveryHome() {
     [normalizedQuery, filter],
   );
 
-  const suggestedCities = useMemo(() => {
-    if (mood === "surprise") {
-      return [cities.find((city) => city.slug === surpriseCity) || cities[0]];
-    }
-    const pattern = moodPatterns[mood];
-    if (!pattern) return cities.slice(0, 4);
-    return [...cities]
-      .map((city, index) => ({ city, index, score: cityMoodScore(city, pattern) }))
-      .sort((a, b) => b.score - a.score || a.index - b.index)
-      .slice(0, 4)
-      .map(({ city }) => city);
-  }, [mood, surpriseCity]);
-
   const selectedCityData = selectedCity === null ? null : cities[selectedCity];
   const resultsVisible = normalizedQuery.length > 0;
 
@@ -116,7 +101,6 @@ export default function DiscoveryHome() {
     if (nextMood === "surprise") {
       const options = cities.filter((_, index) => index !== selectedCity);
       const nextCity = options[Math.floor(Math.random() * options.length)] || cities[0];
-      setSurpriseCity(nextCity.slug);
       setSelectedCity(cities.findIndex((city) => city.slug === nextCity.slug));
       return;
     }
@@ -242,12 +226,9 @@ export default function DiscoveryHome() {
             <>
               <LivingAtlasDiscovery
                 mood={mood}
-                suggestedCities={suggestedCities}
                 selectedCity={selectedCityData}
                 onMoodChange={selectMood}
-                onCitySelect={(slug) => selectCity(slug, false)}
               />
-              <LivingAtlasFollowups />
             </>
           )}
         </div>

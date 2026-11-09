@@ -38,7 +38,8 @@ export default function DiscoveryHome() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<DiscoveryFilter>("All");
   const [mood, setMood] = useState<AtlasMood>("explore");
-  const [selectedCity, setSelectedCity] = useState<number | null>(null);
+  // Start on the first suggestion so the preview is populated on load.
+  const [selectedCity, setSelectedCity] = useState<number | null>(0);
   const [surpriseCity, setSurpriseCity] = useState<string | null>(null);
   const { feedback } = useKhwezi();
   const { state } = useDiscovery();
@@ -109,7 +110,7 @@ export default function DiscoveryHome() {
     if (nextMood !== mood) feedback("swipe");
     setMood(nextMood);
     if (nextMood === "explore") {
-      setSelectedCity(null);
+      setSelectedCity(0);
       return;
     }
     if (nextMood === "surprise") {

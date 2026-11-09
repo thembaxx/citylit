@@ -32,7 +32,6 @@ test("collections build a day, preserve visits and import shareable trips", asyn
   await page.goto("/explore?city=pietermaritzburg");
   await page.getByRole("button", { name: "Switch to night theme", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
-  await page.getByRole("button", { name: "Collections", exact: true }).click();
   await expect(page.locator(".collection-card")).toHaveCount(3);
   await page.getByRole("button", { name: "Make this my day" }).first().click();
   await expect(page.locator(".trip-stops li")).toHaveCount(1);
@@ -45,13 +44,13 @@ test("collections build a day, preserve visits and import shareable trips", asyn
   await page.getByRole("button", { name: "Mark visited", exact: true }).click();
   await expect(page.locator(".visit-stamp")).toContainText("Passport stamped");
   await page.goto("/explore?city=cape-town");
-  await page.getByRole("button", { name: "Passport", exact: true }).click();
+  await page.getByRole("tab", { name: "Passport", exact: true }).click();
   await expect(page.locator(".passport-stamp")).toContainText("Cape Town");
   await page.getByLabel("Essential motion", { exact: true }).check();
   await expect(page.getByLabel("Essential motion", { exact: true })).toBeChecked();
-  await expect(page.getByText("0 discovered · 1 marked visited.", { exact: false })).toBeVisible();
+  await expect(page.getByText("0 saved · 1 marked visited.", { exact: false })).toBeVisible();
   await page.reload();
-  await page.getByRole("button", { name: "Build a day", exact: true }).click();
+  await page.getByRole("tab", { name: "My day", exact: true }).click();
   await expect(page.locator(".trip-stops li")).toHaveCount(2);
 });
 
@@ -119,7 +118,7 @@ test("saved field guide works offline and keeps its source information", async (
   await page.goto("/cape-town/parks-zoos/kirstenbosch");
   await page.getByRole("button", { name: "Save this discovery", exact: true }).click();
   await page.goto("/explore?city=cape-town");
-  await page.getByRole("button", { name: "Passport", exact: true }).click();
+  await page.getByRole("tab", { name: "Passport", exact: true }).click();
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
   });

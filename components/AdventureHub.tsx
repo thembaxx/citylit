@@ -66,13 +66,16 @@ export default function AdventureHub() {
   const initialCity = cities.some((c) => c.slug === params.get("city"))
     ? params.get("city")!
     : cities[0].slug;
+  const requestedTab = params.get("trip") ? "day" : params.get("tab");
   const [city, setCity] = useState(initialCity),
     [tab, setTab] = useState(
-      params.get("trip")
-        ? "day"
-        : ["day", "passport", "saved", "collections"].includes(params.get("tab") || "")
-          ? params.get("tab")!
-          : "discover",
+      requestedTab === "saved"
+        ? "passport"
+        : requestedTab === "collections"
+          ? "discover"
+          : ["day", "passport", "discover"].includes(requestedTab || "")
+            ? requestedTab!
+            : "discover",
     ),
     [mood, setMood] = useState("culture"),
     [time, setTime] = useState(180),
@@ -89,6 +92,7 @@ export default function AdventureHub() {
     parseSharedTrip(params.get("trip"), initialCity),
   );
   const local = places.filter((p) => p.city === city);
+  const cityCollections = collections.filter((c) => c.city === city);
   const picked = suggestions(city, mood, time, budget, variant);
   const trip = state.itinerary
     .map((id) => places.find((p) => p.id === id))
@@ -316,33 +320,16 @@ export default function AdventureHub() {
             <BookmarkSimple size={16} /> My day
           </Link>
         </nav>
-        <Link href="/offline.html">
-          <Download size={16} />
-          Offline
-        </Link>
       </header>
-      <span className="tiny-label">EVERY CITY HAS A SPARK.</span>
       <h1>
-        {tab === "saved"
-          ? "Saved places"
-          : tab === "day"
-            ? "My day"
-            : tab === "passport"
-              ? "My discoveries"
-              : tab === "collections"
-                ? "Local collections"
-                : "Discover places"}
+        {tab === "day" ? "My day" : tab === "passport" ? "My discoveries" : "Discover places"}
       </h1>
       <p className="field-guide-intro">
-        {tab === "saved"
-          ? "Places you have saved for another day."
-          : tab === "day"
-            ? "Choose a few places and make a day of it."
-            : tab === "collections"
-              ? "Ready-made trails to help you find your way around."
-              : tab === "passport"
-                ? "Your saved discoveries and travel settings."
-                : `Find something to love in ${cities.find((item) => item.slug === city)?.name || "South Africa"}.`}
+        {tab === "day"
+          ? "Choose a few places and make a day of it."
+          : tab === "passport"
+            ? "Your saved discoveries and travel settings."
+            : `Find something to love in ${cities.find((item) => item.slug === city)?.name || "South Africa"}.`}
       </p>
       {hasIncoming && (
         <section className="incoming-discovery" aria-label="Shared discovery">
@@ -377,22 +364,24 @@ export default function AdventureHub() {
           )}
         </section>
       )}
-      <label className="select-city">
-        Choose a city
-        <select
-          value={city}
-          onChange={(e) => {
-            setCity(e.target.value);
-            setOrigin(null);
-          }}
-        >
-          {cities.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name} · {c.province}
-            </option>
-          ))}
-        </select>
-      </label>
+      {tab !== "passport" && (
+        <label className="select-city">
+          Choose a city
+          <select
+            value={city}
+            onChange={(e) => {
+              setCity(e.target.value);
+              setOrigin(null);
+            }}
+          >
+            {cities.map((c) => (
+              <option key={c.slug} value={c.slug}>
+                {c.name} · {c.province}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       <AnimatedTabs
         ariaLabel="Your guide"
         idPrefix="planner"
@@ -400,8 +389,6 @@ export default function AdventureHub() {
         onChange={setTab}
         items={[
           ["discover", "Discover"],
-          ["collections", "Collections"],
-          ["saved", "Saved"],
           ["day", "My day"],
           ["passport", "Passport"],
         ].map(([id, label]) => ({
@@ -426,52 +413,93 @@ export default function AdventureHub() {
         {tab === "discover" && (
           <>
             <section className="adventure-section">
-              <h2>Find my next adventure</h2>
-              <div className="preference-grid">
-                <label>
-                  Mood
-                  <select value={mood} onChange={(e) => setMood(e.target.value)}>
-                    <option value="culture">Art &amp; stories</option>
-                    <option value="nature">Fresh air</option>
-                    <option value="night">A night on stage</option>
-                    <option value="surprise">Surprise me</option>
-                  </select>
-                </label>
-                <label>
-                  Time
-                  <select value={time} onChange={(e) => setTime(Number(e.target.value))}>
-                    <option value={60}>An hour</option>
-                    <option value={180}>A few hours</option>
-                    <option value={360}>A day</option>
-                  </select>
-                </label>
-                <label>
-                  Budget
-                  <select value={budget} onChange={(e) => setBudget(e.target.value)}>
-                    <option value="any">Any budget</option>
-                    <option value="free">Confirmed free entry</option>
-                    <option value="under200">Confirmed adult entry up to R200</option>
-                  </select>
-                </label>
-              </div>
-              <MagneticButton className="pill-button" onClick={() => setVariant((v) => v + 1)}>
-                Find another adventure <Sparkles size={16} />
-              </MagneticButton>
-              <p className="planning-note">
-                A starting point, not a timed booking. Visit durations are editorial estimates;
-                check tickets and opening hours with each venue.
-              </p>
-              {budget === "under200" && (
+              <h2 className="sr-only">Places to add to your day</h2>
+              <details className="planner-refine">
+                <summary>Refine my adventure</summary>
+                <div className="preference-grid">
+                  <label>
+                    Mood
+                    <select value={mood} onChange={(e) => setMood(e.target.value)}>
+                      <option value="culture">Art &amp; stories</option>
+                      <option value="nature">Fresh air</option>
+                      <option value="night">A night on stage</option>
+                      <option value="surprise">Surprise me</option>
+                    </select>
+                  </label>
+                  <label>
+                    Time
+                    <select value={time} onChange={(e) => setTime(Number(e.target.value))}>
+                      <option value={60}>An hour</option>
+                      <option value={180}>A few hours</option>
+                      <option value={360}>A day</option>
+                    </select>
+                  </label>
+                  <label>
+                    Budget
+                    <select value={budget} onChange={(e) => setBudget(e.target.value)}>
+                      <option value="any">Any budget</option>
+                      <option value="free">Confirmed free entry</option>
+                      <option value="under200">Confirmed adult entry up to R200</option>
+                    </select>
+                  </label>
+                </div>
                 <p className="planning-note">
-                  Uses standard adult entry rates, excluding travel and conditional discounts.
+                  A starting point, not a timed booking. Visit durations are editorial estimates;
+                  check tickets and opening hours with each venue.
                 </p>
-              )}
+                {budget === "under200" && (
+                  <p className="planning-note">
+                    Uses standard adult entry rates, excluding travel and conditional discounts.
+                  </p>
+                )}
+              </details>
               <div className="adventure-grid">{picked.map((p) => card(p))}</div>
               {!picked.length && (
                 <p>
                   No places fit these preferences yet. Try more time, any budget or another
                   destination.
                 </p>
+              )}
+              <MagneticButton
+                className="pill-button planner-shuffle"
+                onClick={() => setVariant((v) => v + 1)}
+              >
+                Find another adventure <Sparkles size={16} />
+              </MagneticButton>
+            </section>
+            <section className="adventure-section">
+              <h2>Local collections</h2>
+              <p>Ready-made trails through {cities.find((item) => item.slug === city)?.name}.</p>
+              {cityCollections.length ? (
+                <div className="adventure-grid">
+                  {cityCollections.map((c) => (
+                    <article className="collection-card" key={c.id}>
+                      <Sparkles size={24} />
+                      <h3>{c.title}</h3>
+                      <p>{c.description}</p>
+                      <ol>
+                        {c.placeIds.map((id) => {
+                          const p = places.find((p) => p.id === id)!;
+                          return (
+                            <li key={id}>
+                              <Link href={placePath(p)}>{p.name}</Link>
+                            </li>
+                          );
+                        })}
+                      </ol>
+                      <div className="collection-card-actions">
+                        <button onClick={() => addMany(c.placeIds)}>
+                          Make this my day <ArrowUpRight size={15} />
+                        </button>
+                        <button onClick={() => share(c.placeIds)}>
+                          Share collection <Share2 size={15} />
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <p>No ready-made trail for this city yet. Add places from the list above.</p>
               )}
             </section>
             <section className="adventure-section">
@@ -527,65 +555,7 @@ export default function AdventureHub() {
             </section>
           </>
         )}
-        {tab === "collections" && (
-          <section className="adventure-section">
-            <h2>Small trails. Big stories.</h2>
-            <div className="adventure-grid">
-              {collections
-                .filter((c) => c.city === city)
-                .map((c) => (
-                  <article className="collection-card" key={c.id}>
-                    <Sparkles size={24} />
-                    <h3>{c.title}</h3>
-                    <p>{c.description}</p>
-                    <ol>
-                      {c.placeIds.map((id) => {
-                        const p = places.find((p) => p.id === id)!;
-                        return (
-                          <li key={id}>
-                            <Link href={placePath(p)}>{p.name}</Link>
-                          </li>
-                        );
-                      })}
-                    </ol>
-                    <div className="collection-card-actions">
-                      <button onClick={() => addMany(c.placeIds)}>
-                        Make this my day <ArrowUpRight size={15} />
-                      </button>
-                      <button onClick={() => share(c.placeIds)}>
-                        Share collection <Share2 size={15} />
-                      </button>
-                    </div>
-                  </article>
-                ))}
-            </div>
-          </section>
-        )}
-        {tab === "saved" && (
-          <section className="adventure-section">
-            <h2>Saved places</h2>
-            {state.saved.length ? (
-              <div className="adventure-grid">
-                {state.saved
-                  .map((id) => places.find((place) => place.id === id))
-                  .filter((place): place is Place => !!place)
-                  .map((place) => card(place))}
-              </div>
-            ) : (
-              <div className="reference-saved-empty">
-                <BookmarkSimple size={28} />
-                <h3>Your saved places will live here.</h3>
-                <p>
-                  Save a landmark or venue while exploring, then come back when you are ready to
-                  plan.
-                </p>
-                <button className="pill-button" onClick={() => setTab("discover")}>
-                  Discover places <ArrowUpRight size={15} />
-                </button>
-              </div>
-            )}
-          </section>
-        )}
+
         {tab === "day" && (
           <section className="adventure-section">
             <h2>
@@ -593,6 +563,23 @@ export default function AdventureHub() {
                 ? `Your day · ${trip.length} ${trip.length === 1 ? "stop" : "stops"}`
                 : "Build a day"}
             </h2>
+            {!trip.length && shared.length === 0 && (
+              <div className="reference-trip-empty">
+                <MapPin size={26} aria-hidden="true" />
+                <div>
+                  <h3>Start with a place that makes you curious.</h3>
+                  <p>Find places one by one, or start with a ready-made collection.</p>
+                </div>
+                <div className="reference-trip-empty-actions">
+                  <button className="pill-button" onClick={() => setTab("discover")}>
+                    Find places <ArrowUpRight size={15} />
+                  </button>
+                  <button className="pill-button" onClick={() => setTab("discover")}>
+                    Browse collections <ArrowUpRight size={15} />
+                  </button>
+                </div>
+              </div>
+            )}
             {shared.length > 0 && (
               <div className="shared-trip">
                 <p>A shared adventure with {shared.length} stops.</p>
@@ -693,23 +680,6 @@ export default function AdventureHub() {
                 </li>
               ))}
             </ol>
-            {!trip.length && shared.length === 0 && (
-              <div className="reference-trip-empty">
-                <MapPin size={26} aria-hidden="true" />
-                <div>
-                  <h3>Start with a place that makes you curious.</h3>
-                  <p>Find places one by one, or start with a ready-made collection.</p>
-                </div>
-                <div className="reference-trip-empty-actions">
-                  <button className="pill-button" onClick={() => setTab("discover")}>
-                    Find places <ArrowUpRight size={15} />
-                  </button>
-                  <button className="pill-button" onClick={() => setTab("collections")}>
-                    Browse collections <ArrowUpRight size={15} />
-                  </button>
-                </div>
-              </div>
-            )}
             {trip.length > 0 && (
               <p className="planning-note">
                 About {trip.reduce((n, p) => n + Number(p.facts?.durationMinutes?.value || 90), 0)}{" "}
@@ -750,8 +720,8 @@ export default function AdventureHub() {
               </label>
             </div>
             <p>
-              {state.saved.length} discovered · {state.visited.length} marked visited. Saved places
-              and visits are separate.
+              {state.saved.length} saved · {state.visited.length} marked visited. Saved places and
+              visits are separate.
             </p>
             {state.passport && (
               <div className="passport-stamps">
@@ -773,28 +743,42 @@ export default function AdventureHub() {
                   ))}
               </div>
             )}
-            <div className="adventure-grid">
-              {places
-                .filter((p) => state.saved.includes(p.id) || state.visited.includes(p.id))
-                .map((p) => (
-                  <article className="adventure-card" key={p.id}>
-                    <Link href={placePath(p)}>
-                      <h3>{p.name}</h3>
-                    </Link>
-                    <button
-                      onClick={() =>
-                        update({
-                          visited: state.visited.includes(p.id)
-                            ? state.visited.filter((id) => id !== p.id)
-                            : [...state.visited, p.id],
-                        })
-                      }
-                    >
-                      {state.visited.includes(p.id) ? "Undo visited" : "Mark as visited"}
-                    </button>
-                  </article>
-                ))}
-            </div>
+            {state.saved.length || state.visited.length ? (
+              <div className="adventure-grid">
+                {places
+                  .filter((p) => state.saved.includes(p.id) || state.visited.includes(p.id))
+                  .map((p) => (
+                    <article className="adventure-card" key={p.id}>
+                      <Link href={placePath(p)}>
+                        <h3>{p.name}</h3>
+                      </Link>
+                      <button
+                        onClick={() =>
+                          update({
+                            visited: state.visited.includes(p.id)
+                              ? state.visited.filter((id) => id !== p.id)
+                              : [...state.visited, p.id],
+                          })
+                        }
+                      >
+                        {state.visited.includes(p.id) ? "Undo visited" : "Mark as visited"}
+                      </button>
+                    </article>
+                  ))}
+              </div>
+            ) : (
+              <div className="reference-saved-empty">
+                <BookmarkSimple size={28} />
+                <h3>Your saved places will live here.</h3>
+                <p>
+                  Save a landmark or venue while exploring, then come back when you are ready to
+                  plan.
+                </p>
+                <button className="pill-button" onClick={() => setTab("discover")}>
+                  Discover places <ArrowUpRight size={15} />
+                </button>
+              </div>
+            )}
             <button className="pill-button" onClick={download}>
               <Download size={16} />
               Save field guide offline

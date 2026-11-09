@@ -88,7 +88,11 @@ export function AnimatedTabs({
               <span className="easyui-tab-content">
                 {item.icon}
                 {item.label}
-                {item.badge != null && <span className="easyui-tab-badge">{item.badge}</span>}
+                {item.badge != null && (
+                  <span className="easyui-tab-badge" aria-hidden="true">
+                    {item.badge}
+                  </span>
+                )}
               </span>
             </button>
           );

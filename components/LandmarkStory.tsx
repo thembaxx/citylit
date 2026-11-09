@@ -65,9 +65,6 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           </section>
         )}
         <div className="atlas-story-next">
-          <h2>
-            A spark for <em>your day.</em>
-          </h2>
           <p>
             This is a landmark story. Current visiting hours, entry arrangements and accessibility
             have not been confirmed here.

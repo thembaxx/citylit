@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Cube, MapPin } from "@phosphor-icons/react/dist/ssr";
 import type { Place } from "../lib/data";
-import { venuePath, type GuideCity } from "../lib/discovery-guide";
+import { type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import Gallery from "./Gallery";
 import PlaceContext from "./PlaceContext";
@@ -42,7 +42,6 @@ export default function VenueGuide({ city, place }: { city: GuideCity; place: Pl
           >
             <Cube size={18} /> Explore in 3D
           </Link>
-          <span>See how this place sits among {city.name}&apos;s other discoveries.</span>
         </div>
         <div className="atlas-venue-columns">
           <div className="atlas-venue-story">
@@ -50,7 +49,6 @@ export default function VenueGuide({ city, place }: { city: GuideCity; place: Pl
             <PlaceContext place={place} />
           </div>
           <aside className="atlas-visit-panel" aria-labelledby="visit-panel-title">
-            <p className="atlas-eyebrow">FROM CURIOSITY TO A DAY OUT</p>
             <h2 id="visit-panel-title">
               Plan your <em>visit.</em>
             </h2>
@@ -107,9 +105,6 @@ export default function VenueGuide({ city, place }: { city: GuideCity; place: Pl
             </Link>
           </aside>
         </div>
-        <Link className="atlas-text-link" href={`${venuePath(place)}?view=3d`}>
-          Open the original field guide <ArrowUpRight size={16} />
-        </Link>
       </article>
     </GuideShell>
   );

@@ -78,14 +78,14 @@ export default function JourneyTransition() {
       veil.style.opacity = "1";
       revealTween.current = gsap.to(veil, {
         clipPath: `circle(0px at ${x} ${y})`,
-        duration: 0.52,
-        ease: "power4.inOut",
+        duration: 0.24,
+        ease: "power3.out",
         onComplete: finish,
       });
     } else {
       revealTween.current = gsap.to(veil, {
         opacity: 0,
-        duration: 0.32,
+        duration: 0.18,
         ease: "power2.out",
         onComplete: finish,
       });
@@ -121,8 +121,8 @@ export default function JourneyTransition() {
           { clipPath: `circle(0px at ${x}px ${y}px)` },
           {
             clipPath: `circle(160vmax at ${x}px ${y}px)`,
-            duration: 0.26,
-            ease: "power3.in",
+            duration: 0.18,
+            ease: "power2.out",
             onComplete: complete,
           },
         );
@@ -130,7 +130,7 @@ export default function JourneyTransition() {
         coverTween.current = gsap.fromTo(
           veil,
           { opacity: 0 },
-          { opacity: 1, duration: 0.16, onComplete: complete },
+          { opacity: 1, duration: 0.14, onComplete: complete },
         );
       }
       if (!local) {
@@ -156,19 +156,19 @@ export default function JourneyTransition() {
         return;
       const link =
         event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null;
-      if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self"))
+      if (
+        !link ||
+        !link.dataset.transitionLabel ||
+        link.hasAttribute("download") ||
+        (link.target && link.target !== "_self")
+      )
         return;
       const destination = new URL(link.href, window.location.href);
       if (destination.origin !== window.location.origin) return;
       const key = `${destination.pathname}${destination.search}`;
       if (key === lastRoute.current) return;
-      const textLabel = link.textContent?.replace(/\s+/g, " ").trim() || "";
-      const ariaLabel = link.getAttribute("aria-label") || "";
       const nextLabel =
-        link.dataset.transitionLabel ||
-        (ariaLabel.length <= 48 ? ariaLabel : "") ||
-        (textLabel.length <= 48 ? textLabel : "") ||
-        routeLabel(destination.pathname, destination.search);
+        link.dataset.transitionLabel || routeLabel(destination.pathname, destination.search);
       cover(
         key,
         nextLabel,
@@ -225,19 +225,11 @@ export default function JourneyTransition() {
       if (covered.current) reveal();
       return;
     }
-
-    const veil = veilRef.current;
-    if (!veil) return;
-    pending.current = { key: routeKey, label: nextLabel };
-    veil.dataset.portalX = `${window.innerWidth / 2}px`;
-    veil.dataset.portalY = `${window.innerHeight / 2}px`;
-    veil.style.visibility = "visible";
-    veil.style.opacity = "1";
-    coverTween.current?.kill();
-    if (CSS.supports("clip-path", "circle(1px at 1px 1px)")) {
-      veil.style.clipPath = `circle(160vmax at ${veil.dataset.portalX} ${veil.dataset.portalY})`;
+    if (shouldFocus) {
+      document
+        .querySelector<HTMLElement>("#guide-main, main.game-screen")
+        ?.focus({ preventScroll: true });
     }
-    reveal();
   }, [routeKey, pathname, search, view, reduced, feedback, reveal]);
 
   return (
@@ -253,7 +245,6 @@ export default function JourneyTransition() {
           <span className="journey-transition-mark">
             <Compass size={22} weight="duotone" />
           </span>
-          <span className="journey-transition-kicker">FOLLOW YOUR CURIOSITY</span>
           <strong>{label}</strong>
         </div>
       </div>

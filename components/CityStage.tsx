@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState, type KeyboardEvent } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Plus, Check, Path } from "@phosphor-icons/react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Plus, Check } from "@phosphor-icons/react";
 import { places, landmarkSources, categorySlug, type Place } from "../lib/data";
 import { landmarkPath, landmarkVenue, venuePath, type GuideCity } from "../lib/discovery-guide";
 import { stageModel } from "../lib/stage-models";
@@ -146,10 +146,13 @@ export default function CityStage({
         />
         <header className="atlas-stage-heading">
           <nav className="atlas-breadcrumb" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
+            <Link href={`/${city.slug}`}>
+              <ArrowLeft size={15} /> {city.name}
+            </Link>
             <span>/</span>
-            <Link href={`/${city.slug}`}>{city.name}</Link>
-            <span>/ {mode}</span>
+            <Link href={`/${city.slug}/${mode === "places" ? "landmarks" : "places"}`}>
+              {mode === "places" ? "Landmarks" : "Places"} in 3D <ArrowUpRight size={14} />
+            </Link>
           </nav>
           <h1 id="stage-title">
             {city.name} {mode}
@@ -238,15 +241,6 @@ export default function CityStage({
               Models are illustrative. Confirm visiting details in the guide.
             </p>
           </article>
-          <nav className="atlas-stage-switch">
-            <Link href={`/${city.slug}/${mode === "places" ? "landmarks" : "places"}`}>
-              {mode === "places" ? "Landmarks" : "Places"} in 3D <ArrowUpRight size={15} />
-            </Link>
-            <Link href={`/explore?city=${city.slug}&tab=day`}>
-              <Path size={17} /> My day{" "}
-              {state.itinerary.length ? `(${state.itinerary.length})` : ""}
-            </Link>
-          </nav>
         </div>
       </section>
       <noscript>

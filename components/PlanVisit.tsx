@@ -76,10 +76,6 @@ export default function PlanVisit({
             <em>Room for the unexpected.</em>
           </h2>
         </div>
-        <p>
-          A few ideas to get you going in {cityName}.<br />
-          Pick a stop. Make it yours.
-        </p>
       </div>
       <p className="atlas-plan-note">
         <Clock size={16} aria-hidden="true" /> An editorial starting point. Check opening days,
@@ -89,14 +85,7 @@ export default function PlanVisit({
       <div className="atlas-plan-grid">
         {stops.map((place, index) => (
           <article key={place.id} className="atlas-plan-stop">
-            <span className="atlas-plan-time">
-              0{index + 1} /{" "}
-              {index === 0
-                ? "START SLOW"
-                : index === 1
-                  ? "FOLLOW YOUR CURIOSITY"
-                  : "ONE MORE DISCOVERY"}
-            </span>
+            <span className="atlas-plan-time">Stop 0{index + 1}</span>
             <Link href={venuePath(place)} className="atlas-plan-stop-link">
               <h3>{place.name}</h3>
               <p>{place.description}</p>

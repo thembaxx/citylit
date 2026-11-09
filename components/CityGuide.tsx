@@ -69,7 +69,6 @@ export default function CityGuide({ city }: { city: GuideCity }) {
         <div className="atlas-section-heading">
           <div>
             <h2 id="landmarks-title">Landmarks</h2>
-            <p>Stories and places that help you read the city.</p>
           </div>
         </div>
         <div className="atlas-landmark-grid">
@@ -110,7 +109,6 @@ export default function CityGuide({ city }: { city: GuideCity }) {
         <div className="atlas-section-heading">
           <div>
             <h2 id="places-title">Places</h2>
-            <p>Research-backed places, with practical details and sources.</p>
           </div>
         </div>
         <PlacesBrowser city={city.slug} />

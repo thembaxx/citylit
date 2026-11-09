@@ -178,9 +178,6 @@ export default function DiscoveryHome() {
               <br />
               <em>curiosity.</em>
             </h1>
-            <p className="reference-home-subtitle">
-              Twelve cities. Countless ways to find your way in.
-            </p>
 
             <label className="reference-search">
               <MagnifyingGlass size={20} aria-hidden="true" />

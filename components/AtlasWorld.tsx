@@ -114,7 +114,6 @@ export default function AtlasWorld({
   const sky = useRef<THREE.ShaderMaterial>(null);
   const terrain = useRef<THREE.ShaderMaterial>(null);
   const sparks = useRef<THREE.ShaderMaterial>(null);
-  const portal = useRef<THREE.Group>(null);
   const time = useRef(0);
   const nightMix = useRef(night ? 1 : 0);
   const color = useMemo(() => new THREE.Color(accent), [accent]);
@@ -127,15 +126,15 @@ export default function AtlasWorld({
     [accent],
   );
   const particles = useMemo(() => {
-    const count = 88;
+    const count = 56;
     const positions = new Float32Array(count * 3);
     const phases = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       const phase = (i * 0.61803398875) % 1;
       const angle = i * 2.3999632297;
-      const radius = 1.8 + ((i * 13) % 37) / 10;
+      const radius = 1.9 + ((i * 13) % 35) / 10;
       positions.set(
-        [Math.cos(angle) * radius, -0.2 + phase * 3.1, Math.sin(angle) * radius],
+        [Math.cos(angle) * radius, -0.15 + phase * 2.8, Math.sin(angle) * radius],
         i * 3,
       );
       phases[i] = phase;
@@ -156,7 +155,6 @@ export default function AtlasWorld({
     }
     if (terrain.current) terrain.current.uniforms.uAccent.value.copy(color);
     if (sparks.current) sparks.current.uniforms.uAccent.value.copy(color);
-    if (portal.current && animate) portal.current.rotation.z = Math.sin(time.current * 0.18) * 0.06;
   });
   return (
     <>
@@ -185,36 +183,23 @@ export default function AtlasWorld({
         />
       </mesh>
       <mesh position={[0, -0.62, 0]} receiveShadow>
-        <cylinderGeometry args={[4.65, 4.9, 0.16, 96, 1, false]} />
-        <meshPhysicalMaterial color="#273f38" roughness={0.34} metalness={0.48} clearcoat={0.8} />
+        <cylinderGeometry args={[4.68, 4.92, 0.18, 96, 1, false]} />
+        <meshPhysicalMaterial
+          color={night ? "#1f342d" : "#2b463d"}
+          roughness={0.28}
+          metalness={0.42}
+          clearcoat={0.85}
+          clearcoatRoughness={0.22}
+        />
       </mesh>
       <mesh position={[0, -0.51, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[4.48, 0.018, 8, 128]} />
-        <meshBasicMaterial color={accent} transparent opacity={night ? 0.88 : 0.58} />
+        <torusGeometry args={[4.52, 0.014, 8, 128]} />
+        <meshBasicMaterial color={accent} transparent opacity={night ? 0.82 : 0.54} />
       </mesh>
       <mesh position={[0, -0.5, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[3.86, 0.009, 6, 128]} />
-        <meshBasicMaterial color="#b9d49a" transparent opacity={night ? 0.45 : 0.2} />
+        <torusGeometry args={[3.9, 0.008, 6, 128]} />
+        <meshBasicMaterial color="#b9d49a" transparent opacity={night ? 0.38 : 0.18} />
       </mesh>
-      <group ref={portal} position={[0, 0.94, -1.15]}>
-        <mesh>
-          <torusGeometry args={[1.78, 0.012, 8, 128]} />
-          <meshBasicMaterial color={accent} transparent opacity={night ? 0.72 : 0.34} />
-        </mesh>
-        <mesh rotation={[0, 0, 0.18]}>
-          <torusGeometry args={[1.62, 0.006, 6, 128]} />
-          <meshBasicMaterial color="#c8d8aa" transparent opacity={night ? 0.44 : 0.16} />
-        </mesh>
-        <mesh position={[0, 0, -0.04]}>
-          <circleGeometry args={[1.54, 96]} />
-          <meshBasicMaterial
-            color={accent}
-            transparent
-            opacity={night ? 0.035 : 0.018}
-            depthWrite={false}
-          />
-        </mesh>
-      </group>
       <points position={[0, 0.25, 0]} frustumCulled={false} renderOrder={2} raycast={() => {}}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[particles.positions, 3]} />

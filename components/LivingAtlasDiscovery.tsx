@@ -42,10 +42,9 @@ export default function LivingAtlasDiscovery({
     <section className="living-atlas-explorer" aria-labelledby="living-atlas-explorer-title">
       <div className="living-atlas-panel-heading">
         <h2 id="living-atlas-explorer-title">Where should we wander?</h2>
-        <span className="living-atlas-count">
-          <span className="living-atlas-pulse" aria-hidden="true" />
-          12 cities
-        </span>
+        <Link href="/destinations" className="living-atlas-all-cities">
+          All 12 cities <ArrowRight size={15} aria-hidden="true" />
+        </Link>
       </div>
 
       <AnimatedTabs
@@ -64,26 +63,6 @@ export default function LivingAtlasDiscovery({
         tabIndex={0}
         className="living-atlas-discovery-panel"
       >
-        {mood !== "explore" && (
-          <div className="living-atlas-panel-copy">
-            <Sparkle size={17} aria-hidden="true" />
-            <span>
-              {mood === "views"
-                ? "Landscapes that make you stop and look."
-                : mood === "green"
-                  ? "Open air, garden paths, and room to slow down."
-                  : mood === "stories"
-                    ? "Places with a story worth staying for."
-                    : "A new corner of the country, picked for you."}
-            </span>
-          </div>
-        )}
-        <div className="living-atlas-city-choices">
-          <Link href="/destinations" className="living-atlas-all-cities">
-            All 12 cities <ArrowRight size={15} aria-hidden="true" />
-          </Link>
-        </div>
-
         <AnimatePresence mode="wait" initial={false}>
           {selectedCity ? (
             <motion.article

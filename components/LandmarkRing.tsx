@@ -26,7 +26,6 @@ import { type MuseumFeature } from "./MuseumShowcase";
 import StudioEnvironment from "./StudioEnvironment";
 import ProceduralTree from "./ProceduralTree";
 import AtlasWorld from "./AtlasWorld";
-import KhweziView from "./KhweziView";
 import JourneyTrail from "./JourneyTrail";
 import WalkableDistrict from "./WalkableDistrict";
 import { AnimatedTabs } from "./ui/AnimatedTabs";
@@ -307,8 +306,8 @@ function Ring({
       x: preset[0],
       y: preset[1],
       z: preset[2],
-      duration: reduced ? 0 : 0.72,
-      ease: "power3.inOut",
+      duration: reduced ? 0 : 0.42,
+      ease: "power3.out",
       onUpdate: () => {
         camera.lookAt(
           0,
@@ -332,7 +331,7 @@ function Ring({
       THREE.MathUtils.euclideanModulo(target - current + Math.PI, Math.PI * 2) - Math.PI;
     const tween = gsap.to(ring.current.rotation, {
       y: current + delta,
-      duration: reduced ? 0 : 0.75,
+      duration: reduced ? 0 : 0.45,
       ease: "power3.out",
       onUpdate: () => {
         angle.current = ring.current!.rotation.y;
@@ -426,12 +425,12 @@ function Ring({
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
       <AtlasWorld night={night} accent={accent} animate={!reduced} />
-      <StudioEnvironment intensity={night ? 0.15 : 0.42} />
-      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.15 : 0.24]} />
-      <ambientLight intensity={night ? 0.08 : 0.09} />
+      <StudioEnvironment intensity={night ? 0.24 : 0.58} />
+      <hemisphereLight args={[night ? "#97a8c8" : "#fff4e3", "#715b4a", night ? 0.18 : 0.28]} />
+      <ambientLight intensity={night ? 0.09 : 0.11} />
       <directionalLight
         position={[4, 7, 5]}
-        intensity={night ? 0.4 : 1.45}
+        intensity={night ? 0.45 : 1.52}
         color={night ? "#a2b8e0" : "#fff3dd"}
         castShadow
         shadow-mapSize-width={size.width < 760 ? 1024 : 2048}
@@ -445,7 +444,7 @@ function Ring({
       />
       <directionalLight
         position={[-4, 3, -2]}
-        intensity={night ? 0.16 : 0.34}
+        intensity={night ? 0.2 : 0.4}
         color={night ? "#99b4db" : "#ffa968"}
       />
       <pointLight
@@ -818,17 +817,6 @@ export default function LandmarkRing({
             )}
           </View>
         )}
-      </div>
-      <div
-        className="atlas-guide-companion"
-        role="group"
-        aria-label="Khwezi, your field guide"
-        onClickCapture={() => feedback("tap")}
-      >
-        <KhweziView pose="gesture" accent={accent} index={3} />
-        <span>
-          Khwezi <small>Your field guide</small>
-        </span>
       </div>
       <div
         className="atlas-inspector-toolbar"

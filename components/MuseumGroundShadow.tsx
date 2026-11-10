@@ -26,11 +26,11 @@ export default function MuseumGroundShadow({
         const v = (y + 0.5 - size * 0.5) / (size * 0.5);
         const ellipse = Math.sqrt(u * u * 0.94 + v * v * 1.05);
         const falloff = THREE.MathUtils.clamp((1 - ellipse) / 0.42, 0, 1);
-        const alpha = Math.round(110 * falloff * falloff * (3 - 2 * falloff));
+        const alpha = Math.round(128 * falloff * falloff * (3 - 2 * falloff));
         const i = (y * size + x) * 4;
-        pixels[i] = 49;
-        pixels[i + 1] = 39;
-        pixels[i + 2] = 31;
+        pixels[i] = 10;
+        pixels[i + 1] = 11;
+        pixels[i + 2] = 16;
         pixels[i + 3] = alpha;
       }
     }

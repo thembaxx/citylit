@@ -43,9 +43,16 @@
   background: var(--bg);
   color: var(--ink);
   font:
-    400 15px/1.65 Manrope,
+    400 15px/1.64 Manrope,
     system-ui,
     sans-serif;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   position: relative;
   isolation: auto;
 }
@@ -69,13 +76,20 @@
 .discovery-guide figure {
   margin: 0;
 }
+.discovery-guide p {
+  text-wrap: pretty;
+}
 .discovery-guide h1,
 .discovery-guide h2,
 .discovery-guide h3 {
   font-family: var(--guide-heading);
-  font-weight: 400;
-  letter-spacing: -0.045em;
-  line-height: 1.08;
+  font-optical-sizing: auto;
+  font-variation-settings:
+    "SOFT" 30,
+    "WONK" 0;
+  font-weight: 420;
+  letter-spacing: -0.046em;
+  line-height: 1.05;
   text-wrap: balance;
 }
 .discovery-guide h1 {

@@ -10,9 +10,9 @@
   --citylit-space-8: 32px;
   --citylit-space-10: 40px;
   --citylit-space-12: 48px;
-  --citylit-page-gutter: clamp(24px, 4.5vw, 68px);
-  --citylit-section-space: clamp(68px, 7.5vw, 112px);
-  --citylit-card-inset: clamp(22px, 2.2vw, 30px);
+  --citylit-page-gutter: clamp(20px, 4.5vw, 64px);
+  --citylit-section-space: clamp(64px, 7vw, 104px);
+  --citylit-card-inset: clamp(22px, 2.2vw, 28px);
 }
 
 /* The guide shares an edge alignment across headings, cards, photos and footer. */

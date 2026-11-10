@@ -12,7 +12,12 @@ const REVEAL_TARGETS = [
   ".atlas-visit-panel",
   ".atlas-stage-sheet",
   ".atlas-story-facts",
+  ".living-atlas-explorer",
 ].join(", ");
+
+const STAGGER_GROUPS = [".atlas-city-grid", ".atlas-landmark-grid", ".atlas-places-grid"].join(
+  ", ",
+);
 
 export default function GuideMotion({ essential }: { essential: boolean }) {
   const path = usePathname();
@@ -24,8 +29,8 @@ export default function GuideMotion({ essential }: { essential: boolean }) {
     const context = gsap.context(() => {
       gsap.fromTo(
         host.querySelectorAll("h1"),
-        { y: 8 },
-        { y: 0, duration: 0.24, ease: "power2.out" },
+        { y: 12 },
+        { y: 0, duration: 0.34, ease: "power3.out" },
       );
 
       // Keep content fully opaque during reveals. Fading text panels reduces
@@ -34,13 +39,34 @@ export default function GuideMotion({ essential }: { essential: boolean }) {
       host.querySelectorAll(REVEAL_TARGETS).forEach((element) => {
         gsap.fromTo(
           element,
-          { y: 8 },
+          { y: 12 },
           {
             y: 0,
-            duration: 0.24,
-            ease: "power2.out",
+            duration: 0.32,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: element,
+              scroller: host,
+              start: "top 92%",
+              once: true,
+            },
+          },
+        );
+      });
+
+      host.querySelectorAll(STAGGER_GROUPS).forEach((grid) => {
+        const cards = grid.querySelectorAll(":scope > *");
+        if (!cards.length) return;
+        gsap.fromTo(
+          cards,
+          { y: 14 },
+          {
+            y: 0,
+            duration: 0.36,
+            stagger: 0.045,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: grid,
               scroller: host,
               start: "top 92%",
               once: true,

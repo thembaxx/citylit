@@ -3,6 +3,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import { categories, places, type Place } from "../lib/data";
 import { PlaceCard } from "./GuideCards";
+import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 
 export default function PlacesBrowser({
   city,
@@ -38,18 +39,22 @@ export default function PlacesBrowser({
         .toLowerCase()
         .includes(query.toLowerCase().trim()),
   );
+  const availableCategories = [
+    "All places",
+    ...categories.filter((name) => local.some((place) => place.category === name)),
+  ];
   return (
     <div className="atlas-places-browser">
-      <div className="atlas-place-filters" role="group" aria-label="Filter places by category">
-        {[
-          "All places",
-          ...categories.filter((name) => local.some((place) => place.category === name)),
-        ].map((name) => (
-          <button key={name} aria-pressed={category === name} onClick={() => setCategory(name)}>
-            {name}
-          </button>
-        ))}
-      </div>
+      <AnimatedPillGroup
+        className="atlas-place-filters"
+        ariaLabel="Filter places by category"
+        activeId={category}
+        onChange={(name) => setCategory(name)}
+        items={availableCategories.map((name) => ({
+          id: name,
+          label: name,
+        }))}
+      />
       <label className="atlas-search">
         <MagnifyingGlass size={20} aria-hidden="true" />
         <span className="sr-only">Search places</span>

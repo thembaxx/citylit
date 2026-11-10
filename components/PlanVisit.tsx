@@ -8,6 +8,8 @@ import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 import { ItineraryFeasibility } from "./ItineraryFeasibility";
 import { VisitBudgetFigure } from "./VisitBudgetFigure";
+import MagneticButton from "./ui/MagneticButton";
+import TiltCard from "./ui/TiltCard";
 
 async function requestItineraryTravel(coordinates: number[][]) {
   const response = await fetch("/api/itinerary", {
@@ -71,20 +73,18 @@ export default function PlanVisit({
         <div>
           <p className="atlas-eyebrow">A DAY, YOUR WAY</p>
           <h2 id="visit-title">
-            A little plan.
-            <br />
-            <em>Room for the unexpected.</em>
+            Plan your <em>day.</em>
           </h2>
         </div>
       </div>
       <p className="atlas-plan-note">
-        <Clock size={16} aria-hidden="true" /> An editorial starting point. Check opening days,
-        travel time and bookings before setting out.
+        <Clock size={16} aria-hidden="true" /> Check opening days, travel time and bookings before
+        setting out.
       </p>
       <VisitBudgetFigure />
       <div className="atlas-plan-grid">
         {stops.map((place, index) => (
-          <article key={place.id} className="atlas-plan-stop">
+          <TiltCard key={place.id} className="atlas-plan-stop" maxTilt={2.4}>
             <span className="atlas-plan-time">Stop 0{index + 1}</span>
             <Link href={venuePath(place)} className="atlas-plan-stop-link">
               <h3>{place.name}</h3>
@@ -93,16 +93,17 @@ export default function PlanVisit({
                 Plan a visit <ArrowUpRight size={18} />
               </span>
             </Link>
-            <button
+            <MagneticButton
               className="atlas-button"
+              strength={0.16}
               aria-pressed={state.itinerary.includes(place.id)}
               onClick={() => toggle(place)}
             >
               {state.itinerary.includes(place.id) ? <Check size={18} /> : <Plus size={18} />}
               {state.itinerary.includes(place.id) ? "Added to my day" : "Add to my day"}
               <span className="sr-only">: {place.name}</span>
-            </button>
-          </article>
+            </MagneticButton>
+          </TiltCard>
         ))}
       </div>
       <div className="atlas-plan-bottom">

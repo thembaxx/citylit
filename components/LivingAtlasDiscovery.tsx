@@ -43,7 +43,11 @@ export default function LivingAtlasDiscovery({
     <section className="living-atlas-explorer" aria-labelledby="living-atlas-explorer-title">
       <div className="living-atlas-panel-heading">
         <h2 id="living-atlas-explorer-title">Where should we wander?</h2>
-        <Link href="/destinations" className="living-atlas-all-cities">
+        <Link
+          href="/destinations"
+          className="living-atlas-all-cities"
+          data-transition-label="All 12 cities"
+        >
           All 12 cities <ArrowRight size={15} aria-hidden="true" />
         </Link>
       </div>
@@ -69,11 +73,11 @@ export default function LivingAtlasDiscovery({
             <TiltCard
               key={selectedCity.slug}
               className="living-atlas-city-card"
-              maxTilt={2.6}
-              initial={reducedMotion ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={reducedMotion ? undefined : { opacity: 0 }}
-              transition={{ duration: reducedMotion ? 0 : 0.15, ease: "easeOut" }}
+              maxTilt={3.2}
+              initial={reducedMotion ? false : { opacity: 0, y: 8, scale: 0.985 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={reducedMotion ? undefined : { opacity: 0, y: -6, scale: 0.99 }}
+              transition={{ duration: reducedMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
               aria-label={`${selectedCity.name} city preview`}
             >
               <div className="living-atlas-city-image">
@@ -82,7 +86,7 @@ export default function LivingAtlasDiscovery({
                     src={cityPhoto(selectedCity)!.src}
                     alt={cityPhoto(selectedCity)!.alt}
                     fill
-                    sizes="(max-width: 700px) 76px, 92px"
+                    sizes="(max-width: 700px) 76px, 108px"
                   />
                 )}
               </div>
@@ -93,10 +97,17 @@ export default function LivingAtlasDiscovery({
                 <h3>{selectedCity.name}</h3>
                 <p>{selectedCity.intro}</p>
                 <div className="living-atlas-city-actions">
-                  <Link href={`/${selectedCity.slug}`} className="living-atlas-primary-action">
+                  <Link
+                    href={`/${selectedCity.slug}`}
+                    className="living-atlas-primary-action"
+                    data-transition-label={selectedCity.name}
+                  >
                     Enter the city <ArrowRight size={16} aria-hidden="true" />
                   </Link>
-                  <Link href={`/explore?city=${selectedCity.slug}&tab=day`}>
+                  <Link
+                    href={`/explore?city=${selectedCity.slug}&tab=day`}
+                    data-transition-label="Plan a day"
+                  >
                     Plan a day <BookmarkSimple size={15} aria-hidden="true" />
                   </Link>
                 </div>

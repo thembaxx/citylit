@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ArrowDown, ArrowUpRight } from "@phosphor-icons/react";
 import { cities, landmarkSources, type Place } from "../lib/data";
 import { cityPhoto, landmarkPath, venuePath } from "../lib/discovery-guide";
+import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 
 export type DiscoveryFilter = "All" | "Landmarks" | "Cities" | "Places" | "Nature";
 type City = (typeof cities)[number];
@@ -46,25 +47,19 @@ export default function DiscoverySearchResults({
 
   return (
     <>
-      <div
+      <AnimatedPillGroup
         className="reference-filter-row living-atlas-result-filters"
-        role="group"
-        aria-label="Filter search results"
-      >
-        {(["All", "Landmarks", "Places", "Cities", "Nature"] as const).map((item) => (
-          <button
-            key={item}
-            type="button"
-            aria-pressed={filter === item}
-            onClick={() => {
-              setShowAll(false);
-              onFilterChange(item);
-            }}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
+        ariaLabel="Filter search results"
+        activeId={filter}
+        onChange={(item) => {
+          setShowAll(false);
+          onFilterChange(item as DiscoveryFilter);
+        }}
+        items={(["All", "Landmarks", "Places", "Cities", "Nature"] as const).map((item) => ({
+          id: item,
+          label: item,
+        }))}
+      />
       <section className="reference-results" aria-live="polite">
         <div className="reference-section-heading">
           <div>

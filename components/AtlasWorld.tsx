@@ -190,20 +190,34 @@ export default function AtlasWorld({
       <mesh position={[0, -0.62, 0]} receiveShadow>
         <cylinderGeometry args={[4.68, 4.92, 0.18, 96, 1, false]} />
         <meshPhysicalMaterial
-          color={night ? "#181a22" : "#222531"}
-          roughness={0.25}
-          metalness={0.48}
-          clearcoat={0.88}
-          clearcoatRoughness={0.2}
+          color={night ? "#151720" : "#1f222d"}
+          roughness={0.22}
+          metalness={0.54}
+          clearcoat={0.92}
+          clearcoatRoughness={0.16}
+        />
+      </mesh>
+      <mesh position={[0, -0.525, 0]} receiveShadow>
+        <cylinderGeometry args={[3.45, 3.62, 0.03, 96, 1, false]} />
+        <meshPhysicalMaterial
+          color={night ? "#1d202b" : "#282c3a"}
+          roughness={0.28}
+          metalness={0.42}
+          clearcoat={0.75}
+          clearcoatRoughness={0.22}
         />
       </mesh>
       <mesh position={[0, -0.51, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[4.52, 0.014, 8, 128]} />
-        <meshBasicMaterial color={accent} transparent opacity={night ? 0.85 : 0.6} />
+        <torusGeometry args={[4.52, 0.015, 8, 128]} />
+        <meshBasicMaterial color={accent} transparent opacity={night ? 0.88 : 0.65} />
       </mesh>
       <mesh position={[0, -0.5, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[3.9, 0.008, 6, 128]} />
-        <meshBasicMaterial color="#d0d5e2" transparent opacity={night ? 0.36 : 0.2} />
+        <meshBasicMaterial color="#d0d5e2" transparent opacity={night ? 0.42 : 0.24} />
+      </mesh>
+      <mesh position={[0, -0.505, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[3.44, 0.01, 6, 128]} />
+        <meshBasicMaterial color={accent} transparent opacity={night ? 0.52 : 0.34} />
       </mesh>
       <points position={[0, 0.25, 0]} frustumCulled={false} renderOrder={2} raycast={() => {}}>
         <bufferGeometry>

@@ -1164,12 +1164,14 @@ select:focus-visible {
 }
 @keyframes citylit-stage-detail-in {
   from {
-    opacity: 0.3;
-    transform: translateY(9px);
+    opacity: 0.35;
+    transform: translateY(10px) scale(0.99);
+    filter: blur(3px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 @media (max-width: 767px) {

@@ -216,7 +216,38 @@ function RotatingMiniature({
 }) {
   const group = useRef<THREE.Group>(null);
   const previous = useRef(spin);
+  const wasSelected = useRef(selected);
   const { invalidate } = useThree();
+  useEffect(() => {
+    if (!group.current) return;
+    if (selected && !wasSelected.current && !reduced) {
+      gsap.fromTo(
+        group.current.position,
+        { y: -0.08 },
+        {
+          y: 0,
+          duration: 0.42,
+          ease: "back.out(2.2)",
+          onUpdate: invalidate,
+          onComplete: invalidate,
+        },
+      );
+      gsap.fromTo(
+        group.current.scale,
+        { x: 0.94, y: 0.94, z: 0.94 },
+        {
+          x: 1,
+          y: 1,
+          z: 1,
+          duration: 0.44,
+          ease: "back.out(2)",
+          onUpdate: invalidate,
+          onComplete: invalidate,
+        },
+      );
+    }
+    wasSelected.current = selected;
+  }, [selected, reduced, invalidate]);
   useEffect(() => {
     if (!selected) {
       previous.current = spin;

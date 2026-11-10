@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Plus, Check } from "@phosphor-icons/react";
 import { places, landmarkSources, categorySlug, type Place } from "../lib/data";
 import { landmarkPath, landmarkVenue, venuePath, type GuideCity } from "../lib/discovery-guide";
@@ -11,7 +11,9 @@ import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 import GuideShell from "./GuideShell";
 import { useKhwezi } from "./KhweziProvider";
+import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
+import TiltCard from "./ui/TiltCard";
 const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
   loading: () => (
@@ -47,7 +49,6 @@ export default function CityStage({
   const { state, update } = useDiscovery();
   const router = useRouter();
   const { feedback } = useKhwezi();
-  const chipsRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState("");
   const local = places.filter((place) => place.city === city.slug);
   const items: StageItem[] =
@@ -91,22 +92,6 @@ export default function CityStage({
     feedback(interaction);
     setIndex((value + items.length) % items.length);
     setMessage("");
-  };
-  const onChipKeyDown = (event: KeyboardEvent<HTMLButtonElement>, current: number) => {
-    const next =
-      event.key === "Home"
-        ? 0
-        : event.key === "End"
-          ? items.length - 1
-          : event.key === "ArrowRight"
-            ? (current + 1) % items.length
-            : event.key === "ArrowLeft"
-              ? (current - 1 + items.length) % items.length
-              : null;
-    if (next === null) return;
-    event.preventDefault();
-    pick(next);
-    chipsRef.current?.querySelectorAll<HTMLButtonElement>("button")[next]?.focus();
   };
   const selected = item.place && state.itinerary.includes(item.place.id);
   const add = () => {
@@ -160,26 +145,18 @@ export default function CityStage({
           </h1>
         </header>
         <div className="atlas-stage-content">
-          <div
-            ref={chipsRef}
+          <AnimatedPillGroup
             className="atlas-stage-chips"
-            role="group"
-            aria-label={`Choose a ${mode === "places" ? "place" : "landmark"}`}
-          >
-            {items.map((row, i) => (
-              <button
-                type="button"
-                key={row.name}
-                aria-pressed={index === i}
-                aria-controls="stage-detail"
-                onKeyDown={(event) => onChipKeyDown(event, i)}
-                onClick={() => pick(i)}
-              >
-                {row.name}
-              </button>
-            ))}
-          </div>
-          <article id="stage-detail" className="atlas-stage-sheet">
+            ariaLabel={`Choose a ${mode === "places" ? "place" : "landmark"}`}
+            activeId={item.name}
+            onChange={(_id, i) => pick(i)}
+            items={items.map((row) => ({
+              id: row.name,
+              label: row.name,
+              ariaControls: "stage-detail",
+            }))}
+          />
+          <TiltCard id="stage-detail" className="atlas-stage-sheet" maxTilt={1.6}>
             <div
               key={item.href}
               className="atlas-stage-reveal"
@@ -194,10 +171,15 @@ export default function CityStage({
                 Open guide <ArrowUpRight size={17} />
               </Link>
               {item.place && (
-                <button onClick={add} aria-pressed={!!selected} className="atlas-button">
+                <MagneticButton
+                  onClick={add}
+                  aria-pressed={!!selected}
+                  className="atlas-button"
+                  strength={0.16}
+                >
                   {selected ? <Check size={17} /> : <Plus size={17} />}
                   {selected ? "In my day" : "Add to my day"}
-                </button>
+                </MagneticButton>
               )}
             </div>
             {availableFacts.length > 0 && (
@@ -249,7 +231,7 @@ export default function CityStage({
             <p className="atlas-stage-note">
               Models are illustrative. Confirm visiting details in the guide.
             </p>
-          </article>
+          </TiltCard>
         </div>
       </section>
       <noscript>

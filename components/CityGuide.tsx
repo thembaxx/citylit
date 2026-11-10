@@ -7,6 +7,7 @@ import GuideShell from "./GuideShell";
 import { CityCard, PhotoCredit } from "./GuideCards";
 import PlacesBrowser from "./PlacesBrowser";
 import PlanVisit from "./PlanVisit";
+import TiltCard from "./ui/TiltCard";
 
 export default function CityGuide({ city }: { city: GuideCity }) {
   const neighbours = cities.filter(
@@ -44,7 +45,11 @@ export default function CityGuide({ city }: { city: GuideCity }) {
             <span>{placeCount} researched places</span>
           </p>
           <div className="atlas-city-actions">
-            <Link href={`/${city.slug}/landmarks`} className="atlas-button atlas-primary">
+            <Link
+              href={`/${city.slug}/landmarks`}
+              className="atlas-button atlas-primary"
+              data-transition-label={`${city.name} landmarks`}
+            >
               Explore in 3D <ArrowUpRight size={18} />
             </Link>
             <a href="#places" className="atlas-text-link atlas-city-secondary-action">
@@ -76,7 +81,7 @@ export default function CityGuide({ city }: { city: GuideCity }) {
             const record = landmarkSources.find((item) => item.name === name);
             const image = record?.images[0];
             return (
-              <article className="atlas-landmark-card" key={name}>
+              <TiltCard className="atlas-landmark-card" key={name} maxTilt={2.6}>
                 <Link
                   className="atlas-landmark-link"
                   href={landmarkPath(city, name)}
@@ -100,7 +105,7 @@ export default function CityGuide({ city }: { city: GuideCity }) {
                   </div>
                 </Link>
                 {image && <PhotoCredit photo={image} />}
-              </article>
+              </TiltCard>
             );
           })}
         </div>

@@ -136,7 +136,6 @@
   padding: clamp(20px, 2.2vw, 28px);
   gap: 14px;
 }
-.reference-guide .atlas-card-copy h3,
 .reference-guide .atlas-card-copy h3 {
   letter-spacing: -0.035em;
 }
@@ -184,12 +183,6 @@
 .reference-guide .atlas-place-photo {
   flex-shrink: 0;
 }
-.reference-guide .atlas-place-filters button[aria-pressed="true"] {
-  color: var(--bg);
-  border-color: var(--citylit-purple);
-  background: var(--citylit-purple);
-}
-
 .reference-guide .atlas-place-filters button[aria-pressed="true"] {
   color: var(--bg);
   border-color: var(--citylit-purple);

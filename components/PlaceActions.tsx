@@ -21,6 +21,7 @@ import {
 } from "../lib/client-data";
 import { useDiscovery } from "./useDiscovery";
 import CorrectionReport from "./CorrectionReport";
+import MagneticButton from "./ui/MagneticButton";
 export default function PlaceActions({ place }: { place: Place }) {
   const { state, update } = useDiscovery();
   const [form, setForm] = useState(false),
@@ -103,7 +104,8 @@ export default function PlaceActions({ place }: { place: Place }) {
     <section className="place-planning" aria-label="Plan this discovery">
       {place.visitNote && <p className="visit-note">{place.visitNote}</p>}
       <div className="day-actions">
-        <button
+        <MagneticButton
+          strength={0.14}
           onClick={() => {
             const first = places.find((p) => p.id === state.itinerary[0]);
             if (first && first.city !== place.city) {
@@ -130,8 +132,9 @@ export default function PlaceActions({ place }: { place: Place }) {
         >
           <Plus size={16} />
           Add to day
-        </button>
-        <button
+        </MagneticButton>
+        <MagneticButton
+          strength={0.14}
           aria-pressed={visited}
           onClick={() => {
             const saved = update((previous) => ({
@@ -150,7 +153,7 @@ export default function PlaceActions({ place }: { place: Place }) {
         >
           <Check size={16} />
           {visited ? "Visited" : "Mark visited"}
-        </button>
+        </MagneticButton>
         <button onClick={share}>
           <ShareNetwork size={16} weight="bold" />
           Share

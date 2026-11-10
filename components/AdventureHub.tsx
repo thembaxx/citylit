@@ -41,7 +41,9 @@ import { usePwa } from "./PwaProvider";
 import { useDiscovery } from "./useDiscovery";
 import { ItineraryFeasibility } from "./ItineraryFeasibility";
 import { AnimatedTabs } from "./ui/AnimatedTabs";
+import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
+import TiltCard from "./ui/TiltCard";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 
 async function requestItineraryTravel(coordinates: number[][]) {
@@ -248,7 +250,7 @@ export default function AdventureHub() {
     }
   };
   const card = (p: Place, near = false) => (
-    <article className="adventure-card" key={p.id}>
+    <TiltCard className="adventure-card" maxTilt={2.2} key={p.id}>
       <Link href={placePath(p)}>
         <span className="tiny-label">
           {p.category} · {cities.find((item) => item.slug === p.city)?.short || p.city}
@@ -284,7 +286,7 @@ export default function AdventureHub() {
           <Heart size={16} fill={state.saved.includes(p.id) ? "currentColor" : "none"} />
         </button>
       </div>
-    </article>
+    </TiltCard>
   );
   return (
     <main
@@ -407,32 +409,47 @@ export default function AdventureHub() {
               <h2 className="sr-only">Places to add to your day</h2>
               <details className="planner-refine">
                 <summary>Refine my adventure</summary>
-                <div className="preference-grid">
-                  <label>
-                    Mood
-                    <select value={mood} onChange={(e) => setMood(e.target.value)}>
-                      <option value="culture">Art &amp; stories</option>
-                      <option value="nature">Fresh air</option>
-                      <option value="night">A night on stage</option>
-                      <option value="surprise">Surprise me</option>
-                    </select>
-                  </label>
-                  <label>
-                    Time
-                    <select value={time} onChange={(e) => setTime(Number(e.target.value))}>
-                      <option value={60}>An hour</option>
-                      <option value={180}>A few hours</option>
-                      <option value={360}>A day</option>
-                    </select>
-                  </label>
-                  <label>
-                    Budget
-                    <select value={budget} onChange={(e) => setBudget(e.target.value)}>
-                      <option value="any">Any budget</option>
-                      <option value="free">Confirmed free entry</option>
-                      <option value="under200">Confirmed adult entry up to R200</option>
-                    </select>
-                  </label>
+                <div className="preference-grid planner-pill-filters">
+                  <div className="planner-pill-row">
+                    <span className="planner-pill-label">Mood</span>
+                    <AnimatedPillGroup
+                      ariaLabel="Filter by mood"
+                      activeId={mood}
+                      onChange={(id) => setMood(id)}
+                      items={[
+                        { id: "culture", label: "Art & stories" },
+                        { id: "nature", label: "Fresh air" },
+                        { id: "night", label: "Night on stage" },
+                        { id: "surprise", label: "Surprise me" },
+                      ]}
+                    />
+                  </div>
+                  <div className="planner-pill-row">
+                    <span className="planner-pill-label">Time</span>
+                    <AnimatedPillGroup
+                      ariaLabel="Filter by time"
+                      activeId={String(time)}
+                      onChange={(id) => setTime(Number(id))}
+                      items={[
+                        { id: "60", label: "An hour" },
+                        { id: "180", label: "A few hours" },
+                        { id: "360", label: "A day" },
+                      ]}
+                    />
+                  </div>
+                  <div className="planner-pill-row">
+                    <span className="planner-pill-label">Budget</span>
+                    <AnimatedPillGroup
+                      ariaLabel="Filter by budget"
+                      activeId={budget}
+                      onChange={(id) => setBudget(id)}
+                      items={[
+                        { id: "any", label: "Any budget" },
+                        { id: "free", label: "Free entry" },
+                        { id: "under200", label: "Up to R200" },
+                      ]}
+                    />
+                  </div>
                 </div>
                 <p className="planning-note">
                   A starting point, not a timed booking. Visit durations are editorial estimates;
@@ -461,7 +478,7 @@ export default function AdventureHub() {
               {cityCollections.length ? (
                 <div className="adventure-grid">
                   {cityCollections.map((c) => (
-                    <article className="collection-card" key={c.id}>
+                    <TiltCard className="collection-card" maxTilt={2.0} key={c.id}>
                       <Sparkles size={24} />
                       <h3>{c.title}</h3>
                       <p>{c.description}</p>
@@ -476,14 +493,14 @@ export default function AdventureHub() {
                         })}
                       </ol>
                       <div className="collection-card-actions">
-                        <button onClick={() => addMany(c.placeIds)}>
+                        <MagneticButton strength={0.14} onClick={() => addMany(c.placeIds)}>
                           Make this my day <ArrowUpRight size={15} />
-                        </button>
+                        </MagneticButton>
                         <button onClick={() => share(c.placeIds)}>
                           Share collection <Share2 size={15} />
                         </button>
                       </div>
-                    </article>
+                    </TiltCard>
                   ))}
                 </div>
               ) : (
@@ -493,10 +510,15 @@ export default function AdventureHub() {
             <section className="adventure-section">
               <h2>Nearby discoveries</h2>
               <p>Your location stays in this page and is never sent to Citylit.</p>
-              <button className="pill-button" disabled={busy} onClick={nearby}>
+              <MagneticButton
+                className="pill-button"
+                strength={0.15}
+                disabled={busy}
+                onClick={nearby}
+              >
                 <Navigation size={16} />
                 Use my location
-              </button>
+              </MagneticButton>
               <p role="status">{geoStatus}</p>
               {origin && (
                 <div className="adventure-grid">
@@ -521,7 +543,7 @@ export default function AdventureHub() {
             <section className="adventure-section">
               <h2>On the calendar</h2>
               {events.map((e) => (
-                <article className="event-card" key={e.id}>
+                <TiltCard className="event-card" maxTilt={1.8} key={e.id}>
                   <h3>{e.title}</h3>
                   <p>
                     {e.start} to {e.end}
@@ -535,7 +557,7 @@ export default function AdventureHub() {
                   <p className="planning-note">
                     Checked {e.checkedAt}. Confirm availability with the venue.
                   </p>
-                </article>
+                </TiltCard>
               ))}
               {!events.length && (
                 <p>No current events have been verified for this destination yet.</p>

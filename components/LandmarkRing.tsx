@@ -29,6 +29,7 @@ import AtlasWorld from "./AtlasWorld";
 import JourneyTrail from "./JourneyTrail";
 import WalkableDistrict from "./WalkableDistrict";
 import { AnimatedTabs } from "./ui/AnimatedTabs";
+import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import type { StageItem } from "./CityStage";
 import { landmarkJointLabels } from "../lib/landmark-specs.js";
 
@@ -849,6 +850,18 @@ export default function LandmarkRing({
           </View>
         )}
       </div>
+      {(exploded || manualJointCount > 0 || touring) && (
+        <div className="atlas-stage-live-badge" role="status" aria-live="polite">
+          <span className="atlas-live-dot" aria-hidden="true" />
+          <span>
+            {touring
+              ? "Cinematic tour active"
+              : exploded
+                ? "Exploded architectural view"
+                : `${manualJointCount} mechanism${manualJointCount === 1 ? "" : "s"} in manual mode`}
+          </span>
+        </div>
+      )}
       <div
         className="atlas-inspector-toolbar"
         aria-label="3D inspection tools"
@@ -977,25 +990,20 @@ export default function LandmarkRing({
               <span>
                 <Cube size={15} /> Camera presets
               </span>
-              {(
-                [
+              <AnimatedPillGroup
+                ariaLabel="Camera preset"
+                className="atlas-inspector-pill-group"
+                activeId={view}
+                onChange={(id) => {
+                  stopTour();
+                  setView(id as StageView);
+                }}
+                items={[
                   { id: "overview", label: "Overview" },
                   { id: "detail", label: "Close-up" },
                   { id: "overhead", label: "Overhead" },
-                ] as { id: StageView; label: string }[]
-              ).map((option) => (
-                <button
-                  type="button"
-                  key={option.id}
-                  aria-pressed={view === option.id}
-                  onClick={() => {
-                    stopTour();
-                    setView(option.id);
-                  }}
-                >
-                  {option.label}
-                </button>
-              ))}
+                ]}
+              />
             </div>
           )}
           {!museumSelected && joints.length > 0 && (
@@ -1091,16 +1099,16 @@ export default function LandmarkRing({
               <span>
                 <Cube size={15} /> Inspect details
               </span>
-              {features.map((option) => (
-                <button
-                  key={option.id}
-                  type="button"
-                  aria-pressed={feature === option.id}
-                  onClick={() => setFeature(option.id)}
-                >
-                  {option.label}
-                </button>
-              ))}
+              <AnimatedPillGroup
+                ariaLabel="Inspect details"
+                className="atlas-inspector-pill-group"
+                activeId={feature}
+                onChange={(id) => setFeature(id as MuseumFeature)}
+                items={features.map((option) => ({
+                  id: option.id,
+                  label: option.label,
+                }))}
+              />
             </div>
           )}
           <p className="atlas-inspector-note" role="status" aria-live="polite">

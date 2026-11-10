@@ -44,7 +44,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root[data-theme="day"] :where(.reference-guide, .field-guide, .game-screen, .category-page) {
+:root[data-theme="day"] {
   --citylit-reference-bg: #f4efe6;
   --citylit-reference-panel: #fbf9f5;
   --citylit-reference-panel-raised: #e6e2da;
@@ -56,8 +56,33 @@
   --citylit-reference-gold: #a45418;
   --citylit-reference-accent-ink: #fff;
   --citylit-reference-shadow: 0 18px 46px rgb(15 17 24 / 12%);
+}
+
+:root[data-theme="day"] :where(.reference-guide, .field-guide, .game-screen, .category-page) {
   color: var(--citylit-reference-text);
   color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) {
+    --citylit-reference-bg: #f4efe6;
+    --citylit-reference-panel: #fbf9f5;
+    --citylit-reference-panel-raised: #e6e2da;
+    --citylit-reference-border: rgb(23 25 32 / 14%);
+    --citylit-reference-text: #171920;
+    --citylit-reference-muted: #4f5462;
+    --citylit-reference-purple: #252834;
+    --citylit-reference-purple-soft: #393e50;
+    --citylit-reference-gold: #a45418;
+    --citylit-reference-accent-ink: #fff;
+    --citylit-reference-shadow: 0 18px 46px rgb(15 17 24 / 12%);
+  }
+
+  :root:not([data-theme="night"])
+    :where(.reference-guide, .field-guide, .game-screen, .category-page) {
+    color: var(--citylit-reference-text);
+    color-scheme: light;
+  }
 }
 
 .reference-guide {
@@ -2445,9 +2470,9 @@
 }
 /* Living Atlas: consistent story, city and stage rhythm */
 .reference-guide .atlas-breadcrumb {
-  width: min(100% - 40px, 1280px);
+  width: min(100%, calc(1280px + var(--citylit-page-gutter) * 2));
   margin-inline: auto;
-  padding: 12px 0;
+  padding: 12px var(--citylit-page-gutter);
 }
 .reference-guide > main > .atlas-city-breadcrumb {
   margin-bottom: 0;
@@ -2455,7 +2480,7 @@
   padding-bottom: 12px;
 }
 .reference-guide .atlas-city-hero-redesign {
-  width: min(100% - 40px, 1280px);
+  width: min(calc(100% - var(--citylit-page-gutter) * 2), 1280px);
   min-height: clamp(380px, 42vw, 540px);
   margin: 0 auto;
   padding: clamp(28px, 4.5vw, 56px);
@@ -2545,12 +2570,13 @@
   font-weight: 650;
 }
 .reference-guide .atlas-section {
-  width: min(100% - 40px, 1280px);
+  width: min(100%, calc(1280px + var(--citylit-page-gutter) * 2));
   margin-inline: auto;
-  padding-inline: 0;
+  padding-inline: var(--citylit-page-gutter);
   padding-block: clamp(56px, 6.5vw, 92px);
 }
 .reference-guide .atlas-plan.atlas-section {
+  width: min(calc(100% - var(--citylit-page-gutter) * 2), 1280px);
   padding: clamp(32px, 4.5vw, 52px);
   margin-block: clamp(20px, 3vw, 36px);
   border: 1px solid var(--citylit-reference-border);
@@ -2650,9 +2676,9 @@
   font-size: 12px;
 }
 .reference-guide .atlas-stage-heading {
-  width: min(100% - 40px, 1280px);
+  width: min(100%, calc(1280px + var(--citylit-page-gutter) * 2));
   margin: 0 auto;
-  padding-inline: 0;
+  padding-inline: var(--citylit-page-gutter);
 }
 .reference-guide .atlas-stage-heading .atlas-breadcrumb {
   width: 100%;
@@ -2668,10 +2694,10 @@
   letter-spacing: -0.035em;
 }
 .reference-guide .atlas-stage-content {
-  width: min(100% - 40px, 1280px);
+  width: min(calc(100% - var(--citylit-page-gutter) * 2), 1280px);
   max-width: 720px;
   margin-inline: auto 0;
-  margin-left: max(20px, calc((100% - 1280px) / 2));
+  margin-left: max(var(--citylit-page-gutter), calc((100% - 1280px) / 2));
 }
 .reference-guide .atlas-stage-chips {
   gap: 8px;
@@ -2713,12 +2739,16 @@
   outline-offset: 3px;
 }
 @media (max-width: 760px) {
-  .reference-guide .atlas-breadcrumb,
   .reference-guide .atlas-city-hero-redesign,
-  .reference-guide .atlas-section,
-  .reference-guide .atlas-stage-heading,
+  .reference-guide .atlas-plan.atlas-section,
   .reference-guide .atlas-stage-content {
-    width: min(100% - 32px, 1280px);
+    width: calc(100% - var(--citylit-page-gutter) * 2);
+    margin-inline: auto;
+  }
+  .reference-guide .atlas-breadcrumb,
+  .reference-guide .atlas-section:not(.atlas-plan),
+  .reference-guide .atlas-stage-heading {
+    width: 100%;
     margin-inline: auto;
   }
   .reference-guide .atlas-city-hero-redesign {
@@ -2835,5 +2865,115 @@
   inset: 0;
   z-index: 1;
   border-radius: inherit;
+  pointer-events: none;
+}
+
+/* EasyUI pill filters on /explore, /destinations, and 3D stage inspector */
+.field-guide .planner-pill-filters {
+  display: grid;
+  gap: 14px;
+  padding: 6px 16px 12px;
+}
+.field-guide .planner-pill-row {
+  display: grid;
+  gap: 8px;
+}
+.field-guide .planner-pill-label {
+  color: var(--citylit-reference-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.field-guide .planner-pill-row .easyui-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.field-guide .planner-pill-row .easyui-pill-button {
+  position: relative;
+  isolation: isolate;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: var(--citylit-reference-panel-raised);
+  color: var(--citylit-reference-text);
+  font-size: 12px;
+  font-weight: 650;
+}
+.field-guide .planner-pill-row .easyui-pill-button[aria-pressed="true"] {
+  border-color: var(--citylit-reference-purple);
+  background: var(--citylit-reference-purple);
+  color: var(--citylit-reference-accent-ink);
+}
+.field-guide .planner-pill-row .easyui-pill-indicator {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: var(--citylit-reference-purple);
+  pointer-events: none;
+}
+.field-guide .planner-pill-row .easyui-pill-content {
+  position: relative;
+  z-index: 1;
+}
+
+.reference-guide .atlas-province-pills {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  padding: 2px 2px 6px;
+  scrollbar-width: none;
+}
+.reference-guide .atlas-province-pills::-webkit-scrollbar {
+  display: none;
+}
+.reference-guide .atlas-province-pills .easyui-pill-button {
+  position: relative;
+  isolation: isolate;
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: var(--citylit-reference-panel);
+  color: var(--citylit-reference-text);
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.reference-guide .atlas-province-pills .easyui-pill-button[aria-pressed="true"] {
+  border-color: var(--citylit-reference-purple);
+  background: var(--citylit-reference-purple);
+  color: var(--citylit-reference-accent-ink);
+}
+
+.atlas-inspector-features .atlas-inspector-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.atlas-stage-live-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 86%, transparent);
+  color: var(--citylit-reference-text);
+  font-size: 11px;
+  font-weight: 650;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   pointer-events: none;
 }

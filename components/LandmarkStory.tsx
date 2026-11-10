@@ -4,6 +4,7 @@ import { landmarkSources } from "../lib/data";
 import { type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import Gallery from "./Gallery";
+import TiltCard from "./ui/TiltCard";
 
 export default function LandmarkStory({ city, index }: { city: GuideCity; index: number }) {
   const name = city.landmarks[index];
@@ -47,7 +48,7 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           </dl>
         ) : null}
         {record?.about && (
-          <section className="atlas-story-about">
+          <TiltCard className="atlas-story-about" maxTilt={1.6}>
             <h2>
               The story <em>behind it.</em>
             </h2>
@@ -62,9 +63,9 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
                 <a href={record.aboutLicense}>Wikipedia contributors · CC BY-SA 4.0 · excerpt</a>
               </p>
             )}
-          </section>
+          </TiltCard>
         )}
-        <div className="atlas-story-next">
+        <TiltCard className="atlas-story-next" maxTilt={1.5}>
           <p>
             This is a landmark story. Current visiting hours, entry arrangements and accessibility
             have not been confirmed here.
@@ -80,7 +81,7 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           <Link href={`/${city.slug}#plan`} className="atlas-button atlas-primary">
             Plan a day in {city.short} <ArrowUpRight size={16} />
           </Link>
-        </div>
+        </TiltCard>
       </article>
     </GuideShell>
   );

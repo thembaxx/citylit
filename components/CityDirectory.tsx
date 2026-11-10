@@ -3,6 +3,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowUpRight, MagnifyingGlass, X } from "@phosphor-icons/react";
 import { cities } from "../lib/data";
 import { CityCard } from "./GuideCards";
+import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 
 export default function CityDirectory({ compact = false }: { compact?: boolean }) {
   const pathname = usePathname();
@@ -65,6 +66,18 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
           </select>
         </label>
       </div>
+      {!compact && (
+        <AnimatedPillGroup
+          ariaLabel="Quick province filter"
+          className="atlas-province-pills"
+          activeId={province}
+          onChange={(id) => setProvince(id)}
+          items={provinces.map((name) => ({
+            id: name,
+            label: name === "All provinces" ? "All" : name,
+          }))}
+        />
+      )}
       <p
         className={query || province !== "All provinces" ? "atlas-results" : "sr-only"}
         role="status"

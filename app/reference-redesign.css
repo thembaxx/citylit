@@ -8785,3 +8785,34 @@ button.atlas-button:not(.atlas-primary) {
     pointer-events: auto;
   }
 }
+/* GuideShell header/dock cosmic refinement */
+.reference-guide .atlas-nav.citylit-app-header {
+  background: rgba(18, 19, 23, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.reference-guide .citylit-app-header .atlas-wordmark {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  color: var(--co-text-primary, #f8fafc);
+}
+.reference-guide .citylit-header-nav-link {
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 13px;
+  font-weight: 500;
+}
+.reference-guide .citylit-header-nav-link:hover {
+  color: var(--co-text-primary, #f8fafc);
+}
+.reference-guide .atlas-footer {
+  background: var(--co-surface-lowest, #0d0e12);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.reference-guide .atlas-footer .atlas-evidence {
+  color: var(--co-text-muted, #64748b);
+  font-size: 12px;
+}
+:root[data-theme="day"] .reference-guide .atlas-nav.citylit-app-header {
+  background: rgba(251, 249, 245, 0.82);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}

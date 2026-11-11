@@ -4547,3 +4547,410 @@
   height: 100%;
   cursor: pointer;
 }
+
+/* Bencho Magnetic Select */
+.bencho-magnetic-select-root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(22, 24, 34, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  width: 100%;
+}
+
+.bencho-magnetic-item {
+  position: relative;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 9999px;
+  outline: none;
+  transition: color 0.15s ease;
+  user-select: none;
+  min-height: 40px;
+}
+
+.bencho-magnetic-item:hover {
+  color: #f1f5f9;
+}
+
+.bencho-magnetic-item.is-selected {
+  color: #ffffff;
+}
+
+.bencho-magnetic-active-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--citylit-neon-purple);
+  box-shadow: 0 4px 14px var(--citylit-neon-purple-glow);
+  z-index: 1;
+}
+
+.bencho-magnetic-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bencho-magnetic-badge {
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+}
+
+/* Bencho Telemetry HUD (Screen 2 / 3D Stage) */
+.bencho-telemetry-hud {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 8;
+  width: 200px;
+  background: rgba(14, 16, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 10px 12px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+.bencho-telemetry-hud.is-compact {
+  width: auto;
+  padding: 6px 10px;
+}
+
+.bencho-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.bencho-hud-title-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bencho-hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+}
+
+.bencho-hud-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+}
+
+.bencho-hud-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.bencho-hud-body {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bencho-hud-landmark-row {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 6px;
+}
+
+.bencho-hud-landmark-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bencho-hud-city-name {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.bencho-hud-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.bencho-hud-metric-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(24, 26, 38, 0.7);
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.bencho-metric-title {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 8px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.bencho-metric-value {
+  font-size: 10px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.bencho-hud-waveform-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.bencho-waveform-icon {
+  color: var(--citylit-neon-purple);
+}
+
+.bencho-waveform-bars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 20px;
+  flex: 1;
+}
+
+.bencho-waveform-bar {
+  width: 2px;
+  background: var(--citylit-neon-purple);
+  border-radius: 1px;
+}
+
+.bencho-waveform-status {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #22c55e;
+}
+
+/* Bencho Comparison Slider */
+.bencho-comparison-slider-root {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  touch-action: none;
+  cursor: ew-resize;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+}
+
+.bencho-comparison-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bencho-layer-label {
+  position: absolute;
+  bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.bencho-before-label {
+  left: 12px;
+}
+
+.bencho-after-label {
+  right: 12px;
+}
+
+.bencho-comparison-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.bencho-divider-line {
+  flex: 1;
+  width: 2px;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.bencho-divider-knob {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(18, 20, 28, 0.85);
+  backdrop-filter: blur(12px);
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* Bencho Slosh Slider */
+.bencho-slosh-slider-root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.bencho-slosh-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bencho-slosh-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.bencho-slosh-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--citylit-gold-accent);
+}
+
+.bencho-slosh-track {
+  position: relative;
+  width: 100%;
+  height: 44px;
+  background: rgba(22, 24, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.bencho-slosh-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.85) 100%);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.bencho-slosh-detents {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bencho-slosh-tick {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.bencho-tick-mark {
+  width: 2px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1px;
+}
+
+.bencho-slosh-tick.is-passed .bencho-tick-mark {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.bencho-tick-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.bencho-slosh-thumb {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 5;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 0 2px var(--citylit-neon-purple);
+}
+
+.bencho-slosh-thumb:active {
+  cursor: grabbing;
+}
+
+.bencho-slosh-thumb-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--citylit-neon-purple);
+}

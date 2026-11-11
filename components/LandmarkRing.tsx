@@ -34,6 +34,7 @@ import WalkableDistrict from "./WalkableDistrict";
 import { AnimatedTabs } from "./ui/AnimatedTabs";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import LiquidToggle from "./ui/LiquidToggle";
+import BenchoTelemetryHud from "./ui/BenchoTelemetryHud";
 import { benchoAudio } from "../lib/bencho-audio";
 import type { StageItem } from "./CityStage";
 import { landmarkJointLabels } from "../lib/landmark-specs.js";
@@ -851,6 +852,17 @@ export default function LandmarkRing({
           </View>
         )}
       </div>
+
+      {/* Bencho Telemetry HUD */}
+      <BenchoTelemetryHud
+        landmarkName={items[selected]?.name ?? "Landmark"}
+        cityName={items[selected]?.place?.address ?? "South Africa"}
+        azimuthDeg={(45 + spin * 90) % 360}
+        scalePercent={Math.round(zoom * 100)}
+        cameraMode={view === "detail" ? "Close-up" : view === "overhead" ? "Overhead" : "Overview"}
+        pinType={items[selected]?.place?.coordinateAccuracy || "venue pin"}
+      />
+
       {(exploded || manualJointCount > 0 || touring) && (
         <div className="atlas-stage-live-badge" aria-hidden="true">
           <span className="atlas-live-dot" />

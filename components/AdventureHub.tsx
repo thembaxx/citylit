@@ -46,6 +46,8 @@ import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
 import TiltCard from "./ui/TiltCard";
 import DynamicIslandToast from "./ui/DynamicIslandToast";
+import BenchoMagneticSelect from "./ui/BenchoMagneticSelect";
+import BenchoSloshSlider from "./ui/BenchoSloshSlider";
 import { benchoAudio } from "../lib/bencho-audio";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 
@@ -454,17 +456,18 @@ export default function AdventureHub() {
                       ]}
                     />
                   </div>
-                  <div className="planner-pill-row">
-                    <span className="planner-pill-label">Time</span>
-                    <AnimatedPillGroup
-                      ariaLabel="Filter by time"
-                      activeId={String(time)}
-                      onChange={(id) => setTime(Number(id))}
-                      items={[
-                        { id: "60", label: "An hour" },
-                        { id: "180", label: "A few hours" },
-                        { id: "360", label: "A day" },
+                  <div className="planner-pill-row bencho-time-slider-row">
+                    <BenchoSloshSlider
+                      label="Available Time"
+                      value={time}
+                      onChange={(val) => setTime(val)}
+                      detents={[
+                        { value: 60, label: "1h" },
+                        { value: 180, label: "3h" },
+                        { value: 360, label: "All day" },
                       ]}
+                      min={60}
+                      max={360}
                     />
                   </div>
                   <div className="planner-pill-row">
@@ -598,27 +601,20 @@ export default function AdventureHub() {
 
         {tab === "day" && (
           <section className="adventure-section citylit-myday-section">
-            <div className="citylit-myday-pill-nav" role="tablist" aria-label="My day sections">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={daySubTab === "saved"}
-                className={`citylit-myday-pill ${daySubTab === "saved" ? "is-active" : ""}`}
-                onClick={() => setDaySubTab("saved")}
-              >
-                Saved
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={daySubTab === "itineraries"}
-                className={`citylit-myday-pill ${daySubTab === "itineraries" ? "is-active" : ""}`}
-                onClick={() => setDaySubTab("itineraries")}
-              >
-                Itineraries
-                {trip.length > 0 && <span className="citylit-myday-pill-count">{trip.length}</span>}
-              </button>
-            </div>
+            <BenchoMagneticSelect
+              ariaLabel="My day sections"
+              value={daySubTab}
+              onChange={(id) => setDaySubTab(id as "saved" | "itineraries")}
+              className="citylit-myday-pill-nav"
+              items={[
+                { id: "saved", label: "Saved" },
+                {
+                  id: "itineraries",
+                  label: "Itineraries",
+                  badge: trip.length > 0 ? trip.length : undefined,
+                },
+              ]}
+            />
 
             {daySubTab === "saved" ? (
               <div className="citylit-saved-view">

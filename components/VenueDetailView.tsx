@@ -15,6 +15,7 @@ import { useDiscovery } from "./useDiscovery";
 import { MAX_TRIP_STOPS } from "../lib/client-data";
 import SlideToConfirm from "./ui/SlideToConfirm";
 import DynamicIslandToast from "./ui/DynamicIslandToast";
+import BenchoComparisonSlider from "./ui/BenchoComparisonSlider";
 import { benchoAudio } from "../lib/bencho-audio";
 
 export type DetailTab = "overview" | "history" | "nearby" | "tips";
@@ -186,6 +187,34 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
         {activeTab === "overview" && (
           <div className="citylit-tab-panel">
             <p className="citylit-lead-desc">{place.description}</p>
+
+            {place.images.length > 1 && (
+              <div className="citylit-detail-comparison-section">
+                <h3 className="citylit-detail-section-title">Interactive Perspective Slider</h3>
+                <BenchoComparisonSlider
+                  beforeLabel="Perspective 1"
+                  afterLabel="Perspective 2"
+                  beforeLayer={
+                    <Image
+                      src={place.images[0].src}
+                      alt={place.images[0].alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 800px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  }
+                  afterLayer={
+                    <Image
+                      src={place.images[1].src}
+                      alt={place.images[1].alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 800px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  }
+                />
+              </div>
+            )}
 
             <Gallery images={place.images} context={place.imageContext} name={place.name} />
 

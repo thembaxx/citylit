@@ -3,7 +3,16 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Plus, Check } from "@phosphor-icons/react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Plus,
+  Check,
+  Leaf,
+  Mountains,
+  Buildings,
+} from "@phosphor-icons/react";
 import { places, landmarkSources, categorySlug, type Place } from "../lib/data";
 import { landmarkPath, landmarkVenue, venuePath, type GuideCity } from "../lib/discovery-guide";
 import { stageModel } from "../lib/stage-models";
@@ -36,6 +45,28 @@ const factLabels: Record<string, string> = {
   booking: "Booking",
   accessNotes: "Access",
 };
+
+function getLandmarkIcon(name: string, category?: string) {
+  const lower = (name + " " + (category || "")).toLowerCase();
+  if (
+    lower.includes("garden") ||
+    lower.includes("park") ||
+    lower.includes("botanical") ||
+    lower.includes("nature")
+  ) {
+    return <Leaf size={15} aria-hidden="true" weight="fill" />;
+  }
+  if (
+    lower.includes("cave") ||
+    lower.includes("mountain") ||
+    lower.includes("hill") ||
+    lower.includes("point") ||
+    lower.includes("rock")
+  ) {
+    return <Mountains size={15} aria-hidden="true" weight="fill" />;
+  }
+  return <Buildings size={15} aria-hidden="true" weight="fill" />;
+}
 
 export default function CityStage({
   city,
@@ -132,13 +163,11 @@ export default function CityStage({
         />
         <header className="atlas-stage-heading">
           <nav className="atlas-breadcrumb" aria-label="Breadcrumb">
-            <Link href={`/${city.slug}`}>
-              <ArrowLeft size={15} /> {city.name}
-            </Link>
+            <Link href="/">HOME</Link>
             <span>/</span>
-            <Link href={`/${city.slug}/${mode === "places" ? "landmarks" : "places"}`}>
-              {mode === "places" ? "Landmarks" : "Places"} in 3D <ArrowUpRight size={14} />
-            </Link>
+            <Link href={`/${city.slug}`}>{city.name.toUpperCase()}</Link>
+            <span>/</span>
+            <span>{mode.toUpperCase()}</span>
           </nav>
           <h1 id="stage-title">
             {city.name} {mode}
@@ -153,6 +182,7 @@ export default function CityStage({
             items={items.map((row) => ({
               id: row.name,
               label: row.name,
+              icon: getLandmarkIcon(row.name, row.place?.category),
               ariaControls: "stage-detail",
             }))}
           />
@@ -228,9 +258,6 @@ export default function CityStage({
                 Next <ArrowRight size={17} />
               </MagneticButton>
             </div>
-            <p className="atlas-stage-note">
-              Models are illustrative. Confirm visiting details in the guide.
-            </p>
           </TiltCard>
         </div>
       </section>

@@ -8,11 +8,14 @@ import {
   ArrowCounterClockwise,
   ArrowClockwise,
   ArrowRight,
+  CaretRight,
+  Check,
   Cube,
   Stack,
   MagnifyingGlassMinus,
   MagnifyingGlassPlus,
   Moon,
+  Mountains,
   Pause,
   Play,
   SlidersHorizontal,
@@ -618,10 +621,6 @@ export default function LandmarkRing({
     );
   }, []);
   const { moving, feedback } = useKhwezi();
-  const journeyStopCount = itinerary.filter((id) =>
-    items.some((item) => item.place?.id === id),
-  ).length;
-  const hasJourney = journeyStopCount > 1;
   const stopTour = useCallback(() => {
     touringRef.current = false;
     setTouring(false);
@@ -701,8 +700,8 @@ export default function LandmarkRing({
       const scene = host.getBoundingClientRect();
       const trigger = toggle.getBoundingClientRect();
       const viewportBottom = Math.min(scene.bottom, window.innerHeight);
-      const top = Math.max(8, Math.min(trigger.bottom + 8, viewportBottom - 96));
-      const available = Math.max(88, Math.min(340, viewportBottom - top - 12));
+      const top = Math.max(8, Math.min(trigger.bottom + 8, viewportBottom - 188));
+      const available = Math.max(150, Math.min(340, viewportBottom - top - 8));
       panel.style.top = `${Math.round(top)}px`;
       panel.style.right = `${Math.max(12, Math.round(window.innerWidth - trigger.right))}px`;
       panel.style.maxHeight = `${Math.round(available)}px`;
@@ -851,8 +850,8 @@ export default function LandmarkRing({
         )}
       </div>
       {(exploded || manualJointCount > 0 || touring) && (
-        <div className="atlas-stage-live-badge" role="status" aria-live="polite">
-          <span className="atlas-live-dot" aria-hidden="true" />
+        <div className="atlas-stage-live-badge" aria-hidden="true">
+          <span className="atlas-live-dot" />
           <span>
             {touring
               ? "Cinematic tour active"
@@ -901,28 +900,12 @@ export default function LandmarkRing({
             mobileInspectorOpen ? "atlas-inspector-panel is-open" : "atlas-inspector-panel"
           }
         >
-          <div className="atlas-inspector-actions">
-            <button
-              type="button"
-              aria-label={
-                reduced
-                  ? "Jump to cinematic close-up"
-                  : touring
-                    ? "Stop cinematic camera tour"
-                    : "Play cinematic camera tour"
-              }
-              aria-pressed={touring}
-              title={
-                reduced
-                  ? "Jump to a close-up"
-                  : touring
-                    ? "Stop cinematic tour"
-                    : "Cinematic camera tour"
-              }
-              onClick={toggleTour}
-            >
-              {touring ? <Pause size={19} /> : <Play size={19} />}
-            </button>
+          {/* Top Quick Actions Bar (Image 2 style) */}
+          <div
+            className="atlas-inspector-actions"
+            role="toolbar"
+            aria-label="Quick inspector actions"
+          >
             <button
               type="button"
               aria-label={night ? "Switch to daylight" : "Switch to night lighting"}
@@ -930,7 +913,7 @@ export default function LandmarkRing({
               title={night ? "Daylight" : "Night lighting"}
               onClick={() => setNight((value) => !value)}
             >
-              {night ? <Sun size={19} /> : <Moon size={19} />}
+              <Moon size={18} weight={night ? "fill" : "regular"} />
             </button>
             <button
               type="button"
@@ -939,7 +922,7 @@ export default function LandmarkRing({
               disabled={zoom >= 1.4}
               onClick={() => setZoom((value) => Math.min(1.4, +(value + 0.1).toFixed(2)))}
             >
-              <MagnifyingGlassPlus size={19} />
+              <MagnifyingGlassPlus size={18} />
             </button>
             <button
               type="button"
@@ -948,24 +931,7 @@ export default function LandmarkRing({
               disabled={zoom <= 0.8}
               onClick={() => setZoom((value) => Math.max(0.8, +(value - 0.1).toFixed(2)))}
             >
-              <MagnifyingGlassMinus size={19} />
-            </button>
-            <button
-              type="button"
-              title="Rotate selected miniature"
-              aria-label="Rotate selected miniature"
-              onClick={() => setSpin((value) => value + 1)}
-            >
-              <ArrowClockwise size={19} />
-            </button>
-            <button
-              type="button"
-              aria-label="Exploded view"
-              aria-pressed={exploded}
-              title="Exploded view"
-              onClick={() => setExploded((value) => !value)}
-            >
-              <Stack size={19} />
+              <MagnifyingGlassMinus size={18} />
             </button>
             <button
               type="button"
@@ -982,30 +948,152 @@ export default function LandmarkRing({
                 setJointValues({});
               }}
             >
-              <ArrowCounterClockwise size={19} />
+              <ArrowCounterClockwise size={18} />
             </button>
+            <button
+              type="button"
+              title="Rotate selected miniature"
+              aria-label="Rotate selected miniature"
+              onClick={() => setSpin((value) => value + 1)}
+            >
+              <ArrowClockwise size={18} />
+            </button>
+            <button
+              type="button"
+              aria-label={
+                reduced
+                  ? "Jump to cinematic close-up"
+                  : touring
+                    ? "Stop cinematic camera tour"
+                    : "Play cinematic camera tour"
+              }
+              aria-pressed={touring}
+              title={touring ? "Stop tour" : "Camera tour"}
+              onClick={toggleTour}
+            >
+              {touring ? <Pause size={18} /> : <Play size={18} />}
+            </button>
+            {museumSelected && (
+              <button
+                type="button"
+                aria-label={
+                  exploded ? "Assemble roof and landscape" : "Explode architectural layers"
+                }
+                aria-pressed={exploded}
+                title={exploded ? "Assemble layers" : "Explode layers"}
+                onClick={() => setExploded((value) => !value)}
+              >
+                <Stack size={18} />
+              </button>
+            )}
           </div>
+
+          {/* Visual Camera Presets Cards (Image 2 style) */}
           {!museumSelected && (
-            <div className="atlas-inspector-features" aria-label="Landmark camera views">
-              <span>
-                <Cube size={15} /> Camera presets
-              </span>
-              <AnimatedPillGroup
-                ariaLabel="Camera preset"
-                className="atlas-inspector-pill-group"
-                activeId={view}
-                onChange={(id) => {
-                  stopTour();
-                  setView(id as StageView);
-                }}
-                items={[
-                  { id: "overview", label: "Overview" },
-                  { id: "detail", label: "Close-up" },
-                  { id: "overhead", label: "Overhead" },
-                ]}
-              />
+            <div className="atlas-inspector-presets-section">
+              <div className="atlas-inspector-section-head">
+                <Cube size={15} />
+                <span>Camera presets</span>
+                <CaretRight size={14} className="atlas-inspector-chevron" />
+              </div>
+              <div
+                className="atlas-inspector-visual-cards"
+                role="group"
+                aria-label="Camera presets"
+              >
+                {/* Overview Preset Card */}
+                <button
+                  type="button"
+                  className={`atlas-preset-card ${view === "overview" ? "is-active" : ""}`}
+                  aria-pressed={view === "overview"}
+                  onClick={() => {
+                    stopTour();
+                    setView("overview");
+                  }}
+                >
+                  <div className="atlas-preset-thumb diorama-overview-thumb" aria-hidden="true">
+                    <svg viewBox="0 0 100 64" fill="none" className="preset-thumb-art">
+                      <ellipse cx="50" cy="46" rx="42" ry="14" fill="#a4b494" />
+                      <ellipse cx="50" cy="42" rx="38" ry="12" fill="#7fa873" />
+                      <circle cx="38" cy="34" r="7" fill="#8B5CF6" opacity="0.9" />
+                      <circle cx="50" cy="30" r="9" fill="#5B9E5A" />
+                      <circle cx="62" cy="34" r="7" fill="#A78BFA" opacity="0.8" />
+                      <circle cx="56" cy="37" r="5" fill="#4D804C" />
+                      <circle cx="44" cy="37" r="5" fill="#9333EA" opacity="0.8" />
+                    </svg>
+                    {view === "overview" && (
+                      <div className="atlas-preset-badge">
+                        <Check size={11} weight="bold" />
+                      </div>
+                    )}
+                  </div>
+                  <span className="atlas-preset-title">Overview</span>
+                </button>
+
+                {/* Close-up Preset Card */}
+                <button
+                  type="button"
+                  className={`atlas-preset-card ${view === "detail" ? "is-active" : ""}`}
+                  aria-pressed={view === "detail"}
+                  onClick={() => {
+                    stopTour();
+                    setView("detail");
+                  }}
+                >
+                  <div className="atlas-preset-thumb diorama-closeup-thumb" aria-hidden="true">
+                    <svg viewBox="0 0 100 64" fill="none" className="preset-thumb-art">
+                      <rect width="100" height="64" rx="10" fill="#2d372e" />
+                      <circle cx="34" cy="32" r="15" fill="#5B9E5A" />
+                      <circle cx="62" cy="28" r="18" fill="#8B5CF6" opacity="0.9" />
+                      <circle cx="78" cy="36" r="14" fill="#A78BFA" opacity="0.8" />
+                      <circle cx="22" cy="40" r="12" fill="#4D804C" />
+                    </svg>
+                    {view === "detail" && (
+                      <div className="atlas-preset-badge">
+                        <Check size={11} weight="bold" />
+                      </div>
+                    )}
+                  </div>
+                  <span className="atlas-preset-title">Close-up</span>
+                </button>
+              </div>
             </div>
           )}
+
+          {/* Toggles: Overhead & Show Surroundings (Image 2 style) */}
+          <div className="atlas-inspector-toggles">
+            <label className="atlas-inspector-toggle-row">
+              <div className="atlas-toggle-meta">
+                <Mountains size={18} />
+                <span>Overhead</span>
+              </div>
+              <input
+                type="checkbox"
+                checked={view === "overhead"}
+                onChange={() => {
+                  stopTour();
+                  setView(view === "overhead" ? "overview" : "overhead");
+                }}
+                className="citylit-toggle-switch"
+                aria-label="Toggle overhead camera"
+              />
+            </label>
+
+            <label className="atlas-inspector-toggle-row">
+              <div className="atlas-toggle-meta">
+                <Sun size={18} />
+                <span>Show surroundings</span>
+              </div>
+              <input
+                type="checkbox"
+                checked={showContext}
+                onChange={() => setShowContext((value) => !value)}
+                className="citylit-toggle-switch"
+                aria-label="Toggle show surroundings"
+              />
+            </label>
+          </div>
+
           {!museumSelected && joints.length > 0 && (
             <div className="atlas-inspector-mechanisms" aria-label="Landmark mechanisms">
               <div className="atlas-mechanisms-head">
@@ -1070,30 +1158,7 @@ export default function LandmarkRing({
               })}
             </div>
           )}
-          {!museumSelected && (
-            <div className="atlas-inspector-features" aria-label="Surroundings visibility">
-              <button
-                type="button"
-                aria-label={
-                  showContext
-                    ? "Hide surroundings and day trail"
-                    : hasJourney
-                      ? "Reveal my day trail"
-                      : "Show illustrative surroundings"
-                }
-                aria-pressed={showContext}
-                onClick={() => setShowContext((value) => !value)}
-              >
-                {showContext
-                  ? hasJourney
-                    ? "Hide day trail"
-                    : "Hide surroundings"
-                  : hasJourney
-                    ? "Reveal my day"
-                    : "Show surroundings"}
-              </button>
-            </div>
-          )}
+
           {museumSelected && (
             <div className="atlas-inspector-features">
               <span>
@@ -1111,6 +1176,7 @@ export default function LandmarkRing({
               />
             </div>
           )}
+
           <p className="atlas-inspector-note" role="status" aria-live="polite">
             {museumSelected
               ? exploded

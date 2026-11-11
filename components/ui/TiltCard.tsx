@@ -4,7 +4,7 @@
  * Spring-physics 3D tilt and specular glare surface inspired by Amicro (@amicro/tilt-card)
  * and adapted to Citylit's Motion runtime, semantic tokens, and reduced-motion rules.
  */
-import { useRef, type PointerEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import {
   motion,
   useMotionTemplate,
@@ -28,7 +28,12 @@ export default function TiltCard({
   ...props
 }: TiltCardProps) {
   const ref = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const [hydrated, setHydrated] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const reduced = !hydrated || !!reducedMotion;
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
   const rawRotateX = useMotionValue(0);
   const rawRotateY = useMotionValue(0);
   const glareX = useMotionValue(50);

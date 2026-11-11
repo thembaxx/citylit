@@ -12,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
-    "build": "node scripts/export-brand-assets.mjs && node scripts/export-ui-icons.mjs && node scripts/build-pwa.mjs && next build",
+    "build": "node scripts/export-brand-assets.mjs && node scripts/export-ui-icons.mjs && node scripts/build-pwa.mjs && next build --webpack",
     "start": "next start --hostname 0.0.0.0",
     "lint": "oxlint app components lib tests next.config.ts proxy.ts playwright.config.ts scripts/export-brand-assets.mjs scripts/export-ui-icons.mjs scripts/build-pwa.mjs public/offline.js public/sw.js public/theme.js scripts/check-production.mjs scripts/tests/production.test.mjs scripts/compress-stage-models.mjs scripts/audit-stage-models.mjs scripts/compress-museum-hero.mjs scripts/audit-museum-hero.mjs scripts/audit-site-informed-models.mjs scripts/audit-procedural-models.mjs scripts/landmark-cases.mjs scripts/landmark-review.mjs scripts/model-scorecard.mjs scripts/tests/landmark-catalogue.test.mjs",
     "format": "oxfmt app components lib tests next.config.ts proxy.ts playwright.config.ts .github .coderabbit.yaml vercel.json scripts/export-brand-assets.mjs scripts/export-ui-icons.mjs scripts/build-pwa.mjs public/offline.js public/sw.js public/theme.js public/offline.css public/theme.css scripts/check-production.mjs scripts/tests/production.test.mjs scripts/compress-stage-models.mjs scripts/audit-stage-models.mjs scripts/compress-museum-hero.mjs scripts/audit-museum-hero.mjs scripts/audit-site-informed-models.mjs scripts/audit-procedural-models.mjs scripts/landmark-cases.mjs scripts/landmark-review.mjs scripts/model-scorecard.mjs scripts/tests/landmark-catalogue.test.mjs",

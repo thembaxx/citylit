@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  BookmarkSimple,
   BookOpen,
   Compass,
+  Cube,
   Leaf,
   Mountains,
   Sparkle,
@@ -104,12 +104,16 @@ export default function LivingAtlasDiscovery({
                   >
                     Enter the city <ArrowRight size={16} aria-hidden="true" />
                   </Link>
-                  <Link
-                    href={`/explore?city=${selectedCity.slug}&tab=day`}
-                    data-transition-label="Plan a day"
-                  >
-                    Plan a day <BookmarkSimple size={15} aria-hidden="true" />
-                  </Link>
+                  {selectedCity.landmarks[0] && (
+                    <Link
+                      href={`/${selectedCity.slug}/landmarks`}
+                      className="living-atlas-3d-badge"
+                      data-transition-label={`${selectedCity.name} 3D stage`}
+                    >
+                      <Cube size={14} weight="duotone" aria-hidden="true" />
+                      3D · {selectedCity.landmarks[0]}
+                    </Link>
+                  )}
                 </div>
               </div>
             </TiltCard>

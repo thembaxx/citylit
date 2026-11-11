@@ -1,5 +1,6 @@
 "use client";
 import UiIcon from "./UiIcon";
+import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { MAX_TRIP_STOPS, parseSharedTrip } from "../lib/client-data";
@@ -72,12 +73,15 @@ export default function AdventureHub() {
   const [city, setCity] = useState(initialCity),
     [tab, setTab] = useState(
       requestedTab === "saved"
-        ? "passport"
+        ? "day"
         : requestedTab === "collections"
           ? "discover"
           : ["day", "passport", "discover"].includes(requestedTab || "")
             ? requestedTab!
             : "discover",
+    ),
+    [daySubTab, setDaySubTab] = useState<"saved" | "itineraries">(
+      requestedTab === "saved" ? "saved" : "itineraries",
     ),
     [mood, setMood] = useState("culture"),
     [time, setTime] = useState(180),
@@ -122,6 +126,7 @@ export default function AdventureHub() {
     const saved = update((previous) => ({
       itinerary: Array.from(new Set([...previous.itinerary, id])),
     }));
+    setDaySubTab("itineraries");
     setMessage(
       saved
         ? "Added to your day."
@@ -154,6 +159,7 @@ export default function AdventureHub() {
     const saved = update((previous) => ({
       itinerary: Array.from(new Set([...previous.itinerary, ...additions])),
     }));
+    setDaySubTab("itineraries");
     setMessage(
       saved
         ? `Added ${additions.length} ${additions.length === 1 ? "place" : "places"} to your day.`
@@ -317,9 +323,21 @@ export default function AdventureHub() {
           </Link>
         </nav>
       </header>
-      <h1>
-        {tab === "day" ? "My day" : tab === "passport" ? "My discoveries" : "Discover places"}
-      </h1>
+      <div className="citylit-myday-header-wrap">
+        <h1>
+          {tab === "day" ? "My day" : tab === "passport" ? "My discoveries" : "Discover places"}
+        </h1>
+        {tab === "day" && (
+          <button
+            type="button"
+            className="citylit-myday-plus-btn"
+            aria-label="Add places to your day"
+            onClick={() => setTab("discover")}
+          >
+            <Plus size={20} weight="bold" />
+          </button>
+        )}
+      </div>
       <p className="field-guide-intro">
         {tab === "day"
           ? "Choose a few places and make a day of it."
@@ -382,7 +400,12 @@ export default function AdventureHub() {
         ariaLabel="Your guide"
         idPrefix="planner"
         value={tab}
-        onChange={setTab}
+        onChange={(nextTab) => {
+          setTab(nextTab);
+          if (nextTab === "day" && trip.length > 0) {
+            setDaySubTab("itineraries");
+          }
+        }}
         items={[
           ["discover", "Discover"],
           ["day", "My day"],
@@ -567,136 +590,231 @@ export default function AdventureHub() {
         )}
 
         {tab === "day" && (
-          <section className="adventure-section">
-            <h2>
-              {trip.length
-                ? `Your day · ${trip.length} ${trip.length === 1 ? "stop" : "stops"}`
-                : "Build a day"}
-            </h2>
-            {!trip.length && shared.length === 0 && (
-              <div className="reference-trip-empty">
-                <MapPin size={26} aria-hidden="true" />
-                <div>
-                  <h3>Start with a place that makes you curious.</h3>
-                  <p>Find places one by one, or start with a ready-made collection.</p>
-                </div>
-                <div className="reference-trip-empty-actions">
-                  <button className="pill-button" onClick={() => setTab("discover")}>
-                    Find places <ArrowUpRight size={15} />
-                  </button>
-                  <button className="pill-button" onClick={() => setTab("discover")}>
-                    Browse collections <ArrowUpRight size={15} />
-                  </button>
-                </div>
-              </div>
-            )}
-            {shared.length > 0 && (
-              <div className="shared-trip">
-                <p>A shared adventure with {shared.length} stops.</p>
-                <button
-                  onClick={() => {
-                    const first = places.find((p) => p.id === shared[0])!;
-                    const same = shared.filter(
-                      (id) => places.find((p) => p.id === id)?.city === first.city,
+          <section className="adventure-section citylit-myday-section">
+            <div className="citylit-myday-pill-nav" role="tablist" aria-label="My day sections">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={daySubTab === "saved"}
+                className={`citylit-myday-pill ${daySubTab === "saved" ? "is-active" : ""}`}
+                onClick={() => setDaySubTab("saved")}
+              >
+                Saved
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={daySubTab === "itineraries"}
+                className={`citylit-myday-pill ${daySubTab === "itineraries" ? "is-active" : ""}`}
+                onClick={() => setDaySubTab("itineraries")}
+              >
+                Itineraries
+                {trip.length > 0 && <span className="citylit-myday-pill-count">{trip.length}</span>}
+              </button>
+            </div>
+
+            {daySubTab === "saved" ? (
+              <div className="citylit-saved-view">
+                <div className="citylit-saved-list">
+                  {(state.saved.length > 0
+                    ? state.saved
+                        .map((id) => places.find((p) => p.id === id))
+                        .filter((p): p is Place => !!p)
+                    : places.slice(0, 3)
+                  ).map((p) => {
+                    const placeCity = cities.find((c) => c.slug === p.city);
+                    const isSaved = state.saved.includes(p.id);
+                    return (
+                      <div className="citylit-saved-card" key={p.id}>
+                        <div className="citylit-saved-thumb">
+                          {p.images[0] && (
+                            <Image src={p.images[0].src} alt={p.images[0].alt} fill sizes="56px" />
+                          )}
+                        </div>
+                        <div className="citylit-saved-info">
+                          <Link href={placePath(p)}>
+                            <h3 className="citylit-saved-name">{p.name}</h3>
+                          </Link>
+                          <p className="citylit-saved-location">
+                            {placeCity
+                              ? `${placeCity.name}, ${placeCity.province}`
+                              : "South Africa"}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          className="citylit-saved-bookmark-btn"
+                          aria-label={isSaved ? `Remove ${p.name} from saved` : `Save ${p.name}`}
+                          onClick={() => {
+                            update({
+                              saved: isSaved
+                                ? state.saved.filter((id) => id !== p.id)
+                                : [...state.saved, p.id],
+                            });
+                            setMessage(
+                              isSaved ? `${p.name} removed from saved.` : `${p.name} saved.`,
+                            );
+                          }}
+                        >
+                          <BookmarkSimple size={22} weight={isSaved ? "fill" : "regular"} />
+                        </button>
+                      </div>
                     );
-                    update({ itinerary: same });
-                    setCity(first.city);
-                    setShared([]);
-                    setMessage("Shared day imported.");
-                  }}
-                >
-                  Import shared day
-                </button>
-              </div>
-            )}
-            {trip.length > 0 && (
-              <p>
-                Stops can be reordered. Nearby grouping uses verified venue pins and keeps city
-                reference pins at the end.
-              </p>
-            )}
-            {trip.length > 0 && (
-              <div className="day-actions">
-                <button
-                  onClick={() => {
-                    update({
-                      itinerary: orderItinerary(state.itinerary, origin || undefined).map(
-                        (p) => p.id,
-                      ),
-                    });
-                    setMessage(
-                      "Verified pins grouped by proximity; approximate pins kept at the end.",
-                    );
-                  }}
-                  disabled={!trip.length}
-                >
-                  <MapPin size={16} />
-                  Group nearby stops
-                </button>
-                <button onClick={() => share(state.itinerary)} disabled={!trip.length}>
-                  <Share2 size={16} />
-                  Share day
-                </button>
-                <button
-                  onClick={() => {
-                    update({ itinerary: [] });
-                    setMessage("Your day has been cleared.");
-                  }}
-                  disabled={!trip.length}
-                >
-                  Clear day
-                </button>
-              </div>
-            )}
-            <ol className="trip-stops">
-              {trip.map((p, i) => (
-                <li key={p.id}>
-                  <span className="stop-number">{i + 1}</span>
-                  <div>
-                    <Link href={placePath(p)}>
-                      <h3>{p.name}</h3>
-                    </Link>
-                    <p>{p.address}</p>
-                    <span className="planning-note">
-                      {p.facts?.durationMinutes?.value || 90} min planning estimate ·{" "}
-                      {p.coordinateAccuracy === "venue" ? "venue pin" : "city reference pin"}
-                    </span>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + " " + p.address)}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Directions <ArrowUpRight size={13} />
-                    </a>
+                  })}
+                </div>
+
+                <div className="citylit-adventure-callout">
+                  <div className="citylit-adventure-callout-icon">
+                    <Sparkles size={24} weight="bold" />
                   </div>
-                  <div className="stop-actions">
-                    {([-1, 1] as const).map((d) => (
-                      <button
-                        key={d}
-                        disabled={i + d < 0 || i + d >= trip.length}
-                        aria-label={`Move ${p.name} ${d < 0 ? "up" : "down"}`}
-                        onClick={() => moveStop(p.id, d)}
-                      >
-                        {d < 0 ? <MoveUp size={16} /> : <MoveDown size={16} />}
+                  <div className="citylit-adventure-callout-body">
+                    <h3>Plan your next adventure</h3>
+                    <p>Save places and build your perfect trip.</p>
+                  </div>
+                  <button
+                    type="button"
+                    className="citylit-adventure-callout-btn"
+                    onClick={() => setDaySubTab("itineraries")}
+                  >
+                    Create itinerary
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="citylit-itineraries-view">
+                <h2>
+                  {trip.length
+                    ? `Your day · ${trip.length} ${trip.length === 1 ? "stop" : "stops"}`
+                    : "Build a day"}
+                </h2>
+                {!trip.length && shared.length === 0 && (
+                  <div className="reference-trip-empty">
+                    <MapPin size={26} aria-hidden="true" />
+                    <div>
+                      <h3>Start with a place that makes you curious.</h3>
+                      <p>Find places one by one, or start with a ready-made collection.</p>
+                    </div>
+                    <div className="reference-trip-empty-actions">
+                      <button className="pill-button" onClick={() => setTab("discover")}>
+                        Find places <ArrowUpRight size={15} />
                       </button>
-                    ))}
+                      <button className="pill-button" onClick={() => setTab("discover")}>
+                        Browse collections <ArrowUpRight size={15} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {shared.length > 0 && (
+                  <div className="shared-trip">
+                    <p>A shared adventure with {shared.length} stops.</p>
                     <button
-                      aria-label={`Remove ${p.name} from day`}
-                      onClick={() => removeStop(p.id)}
+                      onClick={() => {
+                        const first = places.find((p) => p.id === shared[0])!;
+                        const same = shared.filter(
+                          (id) => places.find((p) => p.id === id)?.city === first.city,
+                        );
+                        update({ itinerary: same });
+                        setCity(first.city);
+                        setShared([]);
+                        setMessage("Shared day imported.");
+                      }}
                     >
-                      <X size={16} />
+                      Import shared day
                     </button>
                   </div>
-                </li>
-              ))}
-            </ol>
-            {trip.length > 0 && (
-              <p className="planning-note">
-                About {trip.reduce((n, p) => n + Number(p.facts?.durationMinutes?.value || 90), 0)}{" "}
-                minutes at venues, excluding travel. Confirm distances and routes in your maps app.
-              </p>
+                )}
+                {trip.length > 0 && (
+                  <p>
+                    Stops can be reordered. Nearby grouping uses verified venue pins and keeps city
+                    reference pins at the end.
+                  </p>
+                )}
+                {trip.length > 0 && (
+                  <div className="day-actions">
+                    <button
+                      onClick={() => {
+                        update({
+                          itinerary: orderItinerary(state.itinerary, origin || undefined).map(
+                            (p) => p.id,
+                          ),
+                        });
+                        setMessage(
+                          "Verified pins grouped by proximity; approximate pins kept at the end.",
+                        );
+                      }}
+                      disabled={!trip.length}
+                    >
+                      <MapPin size={16} />
+                      Group nearby stops
+                    </button>
+                    <button onClick={() => share(state.itinerary)} disabled={!trip.length}>
+                      <Share2 size={16} />
+                      Share day
+                    </button>
+                    <button
+                      onClick={() => {
+                        update({ itinerary: [] });
+                        setMessage("Your day has been cleared.");
+                      }}
+                      disabled={!trip.length}
+                    >
+                      Clear day
+                    </button>
+                  </div>
+                )}
+                <ol className="trip-stops">
+                  {trip.map((p, i) => (
+                    <li key={p.id}>
+                      <span className="stop-number">{i + 1}</span>
+                      <div>
+                        <Link href={placePath(p)}>
+                          <h3>{p.name}</h3>
+                        </Link>
+                        <p>{p.address}</p>
+                        <span className="planning-note">
+                          {p.facts?.durationMinutes?.value || 90} min planning estimate ·{" "}
+                          {p.coordinateAccuracy === "venue" ? "venue pin" : "city reference pin"}
+                        </span>
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + " " + p.address)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Directions <ArrowUpRight size={13} />
+                        </a>
+                      </div>
+                      <div className="stop-actions">
+                        {([-1, 1] as const).map((d) => (
+                          <button
+                            key={d}
+                            disabled={i + d < 0 || i + d >= trip.length}
+                            aria-label={`Move ${p.name} ${d < 0 ? "up" : "down"}`}
+                            onClick={() => moveStop(p.id, d)}
+                          >
+                            {d < 0 ? <MoveUp size={16} /> : <MoveDown size={16} />}
+                          </button>
+                        ))}
+                        <button
+                          aria-label={`Remove ${p.name} from day`}
+                          onClick={() => removeStop(p.id)}
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                {trip.length > 0 && (
+                  <p className="planning-note">
+                    About{" "}
+                    {trip.reduce((n, p) => n + Number(p.facts?.durationMinutes?.value || 90), 0)}{" "}
+                    minutes at venues, excluding travel. Confirm distances and routes in your maps
+                    app.
+                  </p>
+                )}
+                <ItineraryFeasibility places={trip} onRequestTravel={requestItineraryTravel} />
+              </div>
             )}
-            <ItineraryFeasibility places={trip} onRequestTravel={requestItineraryTravel} />
           </section>
         )}
         {tab === "passport" && (

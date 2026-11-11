@@ -387,7 +387,7 @@
 
 .reference-stage-guide .atlas-inspector-actions {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   width: 100%;
   gap: 3px;
   padding: 3px;
@@ -441,12 +441,16 @@
   background: var(--guide-glow);
 }
 
-.reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"] {
+.reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"],
+.reference-stage-guide .atlas-inspector-features .atlas-inspector-pill-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  gap: 5px;
 }
 
-.reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"] span {
+.reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"] > span,
+.reference-stage-guide .atlas-inspector-features .atlas-inspector-pill-group {
   grid-column: 1 / -1;
 }
 
@@ -482,11 +486,15 @@
   }
 
   .reference-stage-guide .atlas-inspector-actions {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
-  .reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"] {
+  .reference-stage-guide .atlas-inspector-features[aria-label="Landmark camera views"],
+  .reference-stage-guide .atlas-inspector-features .atlas-inspector-pill-group {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 5px;
   }
 
   .reference-stage-guide .atlas-inspector-features button {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowUpRight, Cube, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { cities, landmarkSources, places } from "../lib/data";
 import { cityPhoto, landmarkPath, planningStops, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
@@ -95,6 +95,9 @@ export default function CityGuide({ city }: { city: GuideCity }) {
                         fill
                         sizes="(max-width:640px) 86vw, 29vw"
                       />
+                      <span className="atlas-landmark-3d-tag" aria-hidden="true">
+                        <Cube size={13} weight="duotone" /> 3D
+                      </span>
                     </div>
                   )}
                   <div>

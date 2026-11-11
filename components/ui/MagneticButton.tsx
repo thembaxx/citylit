@@ -5,7 +5,7 @@
  * https://github.com/Surajmaurya1/easyui
  * Uses Citylit's existing motion package and design tokens, with no added dependency.
  */
-import { useRef, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import {
   motion,
   useMotionValue,
@@ -29,7 +29,12 @@ export default function MagneticButton({
   ...props
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
-  const reduced = useReducedMotion();
+  const [hydrated, setHydrated] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const reduced = !hydrated || !!reducedMotion;
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
   const dx = useMotionValue(0);
   const dy = useMotionValue(0);
   const x = useSpring(dx, { stiffness: 300, damping: 27, mass: 0.65 });

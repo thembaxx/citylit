@@ -57,7 +57,7 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
             </button>
           )}
         </label>
-        <label className="atlas-province-select">
+        <label className={`atlas-province-select${!compact ? " sr-only" : ""}`}>
           <span className="sr-only">Filter by province</span>
           <select value={province} onChange={(event) => setProvince(event.target.value)}>
             {provinces.map((name) => (

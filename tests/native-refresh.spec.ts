@@ -7,7 +7,7 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   await page.goto("/?view=guide");
   const dock = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(dock).toBeVisible();
-  await expect(dock.getByRole("link")).toHaveCount(3);
+  await expect(dock.getByRole("link")).toHaveCount(4);
   await expect(dock.getByRole("link", { name: "Explore" })).toHaveAttribute("aria-current", "page");
   await expect(page.locator(".atlas-nav .atlas-about-link")).toHaveCount(0);
   const search = page.getByRole("searchbox", { name: "Search landmarks and cities" });

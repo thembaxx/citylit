@@ -45,31 +45,33 @@ export default function PlacesBrowser({
   ];
   return (
     <div className="atlas-places-browser">
-      <AnimatedPillGroup
-        className="atlas-place-filters"
-        ariaLabel="Filter places by category"
-        activeId={category}
-        onChange={(name) => setCategory(name)}
-        items={availableCategories.map((name) => ({
-          id: name,
-          label: name,
-        }))}
-      />
-      <label className="atlas-search">
-        <MagnifyingGlass size={20} aria-hidden="true" />
-        <span className="sr-only">Search places</span>
-        <input
-          type="search"
-          placeholder="Search places"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
+      <div className="atlas-places-toolbar">
+        <label className="atlas-search">
+          <MagnifyingGlass size={20} aria-hidden="true" />
+          <span className="sr-only">Search places</span>
+          <input
+            type="search"
+            placeholder="Search places"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+          {query && (
+            <button aria-label="Clear place search" onClick={() => setQuery("")}>
+              <X size={16} />
+            </button>
+          )}
+        </label>
+        <AnimatedPillGroup
+          className="atlas-place-filters"
+          ariaLabel="Filter places by category"
+          activeId={category}
+          onChange={(name) => setCategory(name)}
+          items={availableCategories.map((name) => ({
+            id: name,
+            label: name,
+          }))}
         />
-        {query && (
-          <button aria-label="Clear place search" onClick={() => setQuery("")}>
-            <X size={16} />
-          </button>
-        )}
-      </label>
+      </div>
       <p className={query || category !== "All places" ? "atlas-results" : "sr-only"} role="status">
         {selected.length} place{selected.length === 1 ? "" : "s"}
       </p>

@@ -3,16 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  BookmarkSimple,
-  Check,
-  Cube,
-  MapPin,
-  ShareNetwork,
-  Star,
-} from "@phosphor-icons/react";
+import { ArrowLeft, ArrowUpRight, Cube, MapPin, ShareNetwork, Star } from "@phosphor-icons/react";
 import type { Place } from "../lib/data";
 import { type GuideCity } from "../lib/discovery-guide";
 import { places } from "../lib/data";
@@ -22,6 +13,9 @@ import PlaceActions from "./PlaceActions";
 import SavePlace from "./SavePlace";
 import { useDiscovery } from "./useDiscovery";
 import { MAX_TRIP_STOPS } from "../lib/client-data";
+import SlideToConfirm from "./ui/SlideToConfirm";
+import DynamicIslandToast from "./ui/DynamicIslandToast";
+import { benchoAudio } from "../lib/bencho-audio";
 
 export type DetailTab = "overview" | "history" | "nearby" | "tips";
 
@@ -303,23 +297,25 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
         )}
       </div>
 
-      {/* Sticky Bottom CTA (Image 3 Screen 4) */}
+      {/* Sticky Bottom CTA with Bencho SlideToConfirm micro-interaction */}
       <div className="citylit-detail-sticky-footer">
-        <button
-          type="button"
-          className="citylit-detail-cta-btn"
-          onClick={handleToggleDay}
-          aria-pressed={inDay}
-        >
-          {inDay ? <Check size={18} weight="bold" /> : <BookmarkSimple size={18} weight="fill" />}
-          <span>{inDay ? "In My Day" : "Add to My Day"}</span>
-        </button>
-        {message && (
-          <p role="status" className="citylit-detail-cta-status">
-            {message}
-          </p>
-        )}
+        <SlideToConfirm
+          label="Slide to add to My Day"
+          confirmedLabel="In your day · Tap to remove"
+          isConfirmed={inDay}
+          onConfirm={() => {
+            benchoAudio.playConfirm();
+            if (!inDay) handleToggleDay();
+          }}
+          onReset={() => {
+            benchoAudio.playClick(440);
+            if (inDay) handleToggleDay();
+          }}
+        />
       </div>
+
+      {/* Bencho Dynamic Island Toast */}
+      <DynamicIslandToast message={message} onDismiss={() => setMessage("")} />
     </article>
   );
 }

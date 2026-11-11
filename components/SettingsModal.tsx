@@ -15,6 +15,7 @@ import {
 import useTheme from "./useTheme";
 import { useDiscovery } from "./useDiscovery";
 import { cities } from "../lib/data";
+import LiquidToggle from "./ui/LiquidToggle";
 
 export type SettingsTab = "appearance" | "map" | "about";
 
@@ -187,33 +188,29 @@ export default function SettingsModal({
 
                   {/* Toggles */}
                   <div className="citylit-setting-rows">
-                    <label className="citylit-setting-row">
+                    <div className="citylit-setting-row">
                       <div className="citylit-setting-label">
                         <Sun size={19} className="citylit-setting-icon" />
                         <span>Show surroundings</span>
                       </div>
-                      <input
-                        type="checkbox"
+                      <LiquidToggle
                         checked={!discovery.essential}
                         onChange={toggleSurroundings}
-                        className="citylit-toggle-switch"
-                        aria-label="Toggle surroundings"
+                        ariaLabel="Toggle surroundings"
                       />
-                    </label>
+                    </div>
 
-                    <label className="citylit-setting-row">
+                    <div className="citylit-setting-row">
                       <div className="citylit-setting-label">
                         <ArrowCounterClockwise size={19} className="citylit-setting-icon" />
                         <span>Reduce motion</span>
                       </div>
-                      <input
-                        type="checkbox"
+                      <LiquidToggle
                         checked={discovery.essential}
                         onChange={toggleReducedMotion}
-                        className="citylit-toggle-switch"
-                        aria-label="Toggle reduced motion"
+                        ariaLabel="Toggle reduced motion"
                       />
-                    </label>
+                    </div>
 
                     <div className="citylit-setting-row citylit-setting-select">
                       <div className="citylit-setting-label">

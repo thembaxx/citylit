@@ -33,6 +33,8 @@ import JourneyTrail from "./JourneyTrail";
 import WalkableDistrict from "./WalkableDistrict";
 import { AnimatedTabs } from "./ui/AnimatedTabs";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
+import LiquidToggle from "./ui/LiquidToggle";
+import { benchoAudio } from "../lib/bencho-audio";
 import type { StageItem } from "./CityStage";
 import { landmarkJointLabels } from "../lib/landmark-specs.js";
 
@@ -1007,6 +1009,7 @@ export default function LandmarkRing({
                   className={`atlas-preset-card ${view === "overview" ? "is-active" : ""}`}
                   aria-pressed={view === "overview"}
                   onClick={() => {
+                    benchoAudio.playClick(580);
                     stopTour();
                     setView("overview");
                   }}
@@ -1036,6 +1039,7 @@ export default function LandmarkRing({
                   className={`atlas-preset-card ${view === "detail" ? "is-active" : ""}`}
                   aria-pressed={view === "detail"}
                   onClick={() => {
+                    benchoAudio.playClick(680);
                     stopTour();
                     setView("detail");
                   }}
@@ -1060,38 +1064,38 @@ export default function LandmarkRing({
             </div>
           )}
 
-          {/* Toggles: Overhead & Show Surroundings (Image 2 style) */}
+          {/* Toggles: Overhead & Show Surroundings (Bencho Liquid Toggle) */}
           <div className="atlas-inspector-toggles">
-            <label className="atlas-inspector-toggle-row">
+            <div className="atlas-inspector-toggle-row">
               <div className="atlas-toggle-meta">
                 <Mountains size={18} />
                 <span>Overhead</span>
               </div>
-              <input
-                type="checkbox"
+              <LiquidToggle
                 checked={view === "overhead"}
                 onChange={() => {
                   stopTour();
+                  benchoAudio.playLiquidToggle(view !== "overhead");
                   setView(view === "overhead" ? "overview" : "overhead");
                 }}
-                className="citylit-toggle-switch"
-                aria-label="Toggle overhead camera"
+                ariaLabel="Toggle overhead camera"
               />
-            </label>
+            </div>
 
-            <label className="atlas-inspector-toggle-row">
+            <div className="atlas-inspector-toggle-row">
               <div className="atlas-toggle-meta">
                 <Sun size={18} />
                 <span>Show surroundings</span>
               </div>
-              <input
-                type="checkbox"
+              <LiquidToggle
                 checked={showContext}
-                onChange={() => setShowContext((value) => !value)}
-                className="citylit-toggle-switch"
-                aria-label="Toggle show surroundings"
+                onChange={() => {
+                  benchoAudio.playLiquidToggle(!showContext);
+                  setShowContext((value) => !value);
+                }}
+                ariaLabel="Toggle show surroundings"
               />
-            </label>
+            </div>
           </div>
 
           {!museumSelected && joints.length > 0 && (

@@ -20,6 +20,7 @@ import { useKhwezi } from "./KhweziProvider";
 import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
 import { useDiscovery } from "./useDiscovery";
+import { benchoAudio } from "../lib/bencho-audio";
 
 const moodPatterns: Partial<Record<AtlasMood, RegExp>> = {
   views: /mountain|point|beach|ocean|coast|waterfront|view|peak|lookout|cliff|bay|lighthouse/i,
@@ -223,7 +224,10 @@ export default function DiscoveryHome() {
                   type="button"
                   className={`citylit-filter-pill ${filter === tab ? "is-active" : ""}`}
                   aria-pressed={filter === tab}
-                  onClick={() => setFilter(tab)}
+                  onClick={() => {
+                    benchoAudio.playClick(540);
+                    setFilter(tab);
+                  }}
                 >
                   {tab}
                 </button>

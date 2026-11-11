@@ -7,6 +7,7 @@ import BrandWordmark from "./BrandWordmark";
 import { useState, type ReactNode } from "react";
 import ThemeToggle from "./ThemeToggle";
 import SettingsModal from "./SettingsModal";
+import MagnifyingDock from "./ui/MagnifyingDock";
 import { useDiscovery } from "./useDiscovery";
 import { places } from "../lib/data";
 import GuideBackdrop, { type MapSelection } from "./GuideBackdrop";
@@ -66,41 +67,39 @@ export default function GuideShell({
         {children}
       </main>
 
-      {/* Floating 4-tab Bottom Dock */}
-      <nav className="atlas-native-dock citylit-bottom-dock" aria-label="Mobile navigation">
-        <Link
-          href="/"
-          aria-label="Home · Explore"
-          aria-current={isHome ? "page" : undefined}
-          className={isHome ? "is-active" : ""}
-        >
-          <House size={22} aria-hidden="true" weight={isHome ? "fill" : "regular"} />
-          <span>Home</span>
-          {isHome && <span className="citylit-dock-indicator" aria-hidden="true" />}
-        </Link>
-        <Link
-          href="/destinations"
-          aria-current={isCitiesActive ? "page" : undefined}
-          className={isCitiesActive ? "is-active" : ""}
-        >
-          <MapPin size={22} aria-hidden="true" weight={isCitiesActive ? "fill" : "regular"} />
-          <span>Cities</span>
-          {isCitiesActive && <span className="citylit-dock-indicator" aria-hidden="true" />}
-        </Link>
-        <Link
-          href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
-          aria-current={isDayActive ? "page" : undefined}
-          className={isDayActive ? "is-active" : ""}
-        >
-          <BookmarkSimple size={22} aria-hidden="true" weight={isDayActive ? "fill" : "regular"} />
-          <span>My day</span>
-          {isDayActive && <span className="citylit-dock-indicator" aria-hidden="true" />}
-        </Link>
-        <Link href="/?view=3d" className="citylit-dock-atlas">
-          <Cube size={22} aria-hidden="true" />
-          <span>Atlas</span>
-        </Link>
-      </nav>
+      {/* Bencho Magnifying Dock */}
+      <MagnifyingDock
+        items={[
+          {
+            href: "/",
+            label: "Home",
+            ariaLabel: "Home · Explore",
+            isActive: isHome,
+            icon: <House size={22} aria-hidden="true" weight="regular" />,
+            activeIcon: <House size={22} aria-hidden="true" weight="fill" />,
+          },
+          {
+            href: "/destinations",
+            label: "Cities",
+            isActive: isCitiesActive,
+            icon: <MapPin size={22} aria-hidden="true" weight="regular" />,
+            activeIcon: <MapPin size={22} aria-hidden="true" weight="fill" />,
+          },
+          {
+            href: `/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`,
+            label: "My day",
+            isActive: isDayActive,
+            icon: <BookmarkSimple size={22} aria-hidden="true" weight="regular" />,
+            activeIcon: <BookmarkSimple size={22} aria-hidden="true" weight="fill" />,
+          },
+          {
+            href: "/?view=3d",
+            label: "Atlas",
+            icon: <Cube size={22} aria-hidden="true" weight="regular" />,
+            className: "citylit-dock-atlas",
+          },
+        ]}
+      />
 
       <footer className="atlas-footer">
         <div>

@@ -45,6 +45,8 @@ import { AnimatedTabs } from "./ui/AnimatedTabs";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
 import TiltCard from "./ui/TiltCard";
+import DynamicIslandToast from "./ui/DynamicIslandToast";
+import { benchoAudio } from "../lib/bencho-audio";
 const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 
 async function requestItineraryTravel(coordinates: number[][]) {
@@ -127,6 +129,7 @@ export default function AdventureHub() {
       itinerary: Array.from(new Set([...previous.itinerary, id])),
     }));
     setDaySubTab("itineraries");
+    if (saved) benchoAudio.playConfirm();
     setMessage(
       saved
         ? "Added to your day."
@@ -160,6 +163,7 @@ export default function AdventureHub() {
       itinerary: Array.from(new Set([...previous.itinerary, ...additions])),
     }));
     setDaySubTab("itineraries");
+    if (saved) benchoAudio.playConfirm();
     setMessage(
       saved
         ? `Added ${additions.length} ${additions.length === 1 ? "place" : "places"} to your day.`
@@ -416,6 +420,9 @@ export default function AdventureHub() {
           badge: id === "day" && state.itinerary.length ? state.itinerary.length : undefined,
         }))}
       />
+      {/* Bencho Dynamic Island Status Pill */}
+      <DynamicIslandToast message={message} onDismiss={() => setMessage("")} />
+
       <p className="hub-message" role="status">
         {message}
       </p>

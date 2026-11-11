@@ -908,6 +908,12 @@ export default function LandmarkRing({
             mobileInspectorOpen ? "atlas-inspector-panel is-open" : "atlas-inspector-panel"
           }
         >
+          <div className="atlas-inspector-head">
+            <div className="atlas-inspector-head-title">
+              <Cube size={16} weight="duotone" aria-hidden="true" />
+              <span>Landmark Inspector</span>
+            </div>
+          </div>
           {/* Top Quick Actions Bar (Image 2 style) */}
           <div
             className="atlas-inspector-actions"

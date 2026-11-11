@@ -32,8 +32,9 @@ import {
   distanceKm,
   tripLink,
 } from "../lib/adventure";
-import ThemeToggle from "./ThemeToggle";
 import { useKhwezi } from "./KhweziProvider";
+import GuideShell from "./GuideShell";
+import useTheme from "./useTheme";
 
 import PwaPanel from "./PwaPanel";
 import { sharedPlace } from "../lib/pwa-share";
@@ -97,7 +98,7 @@ export default function AdventureHub() {
   const { state, update } = useDiscovery();
   const reduced = useReducedMotion();
   const [variant, setVariant] = useState(0);
-  const [night, setNight] = useState(true);
+  const { night } = useTheme();
   const [shared, setShared] = useState<string[]>(() =>
     parseSharedTrip(params.get("trip"), initialCity),
   );
@@ -301,630 +302,622 @@ export default function AdventureHub() {
     </TiltCard>
   );
   return (
-    <main
-      className="field-guide guide-planner"
-      onClickCapture={(event) => {
-        const button = (event.target as HTMLElement).closest("button");
-        if (button && !button.getAttribute("aria-label")?.startsWith("Save")) feedback("tap");
-      }}
-    >
-      <Atmosphere
-        mode="guide"
-        city={Math.max(
-          0,
-          cities.findIndex((c) => c.slug === city),
-        )}
-        category={0}
-        night={night}
-        animate={moving}
-      />
-      <header className="field-guide-header">
-        <ThemeToggle onChange={setNight} />
-        <Link href="/" data-transition-label="Return to the living atlas">
-          <UiIcon name="arrow-left" /> Explore
-        </Link>
-        <nav className="journey-header-links" aria-label="Journey navigation">
-          <Link href="/destinations" data-transition-label="Explore all cities">
-            <MapPin size={16} /> Cities
-          </Link>
-        </nav>
-      </header>
-      <div className="citylit-myday-header-wrap">
-        <h1>
-          {tab === "day" ? "My day" : tab === "passport" ? "My discoveries" : "Discover places"}
-        </h1>
-        {tab === "day" && (
-          <button
-            type="button"
-            className="citylit-myday-plus-btn"
-            aria-label="Add places to your day"
-            onClick={() => setTab("discover")}
-          >
-            <Plus size={20} weight="bold" />
-          </button>
-        )}
-      </div>
-      <p className="field-guide-intro">
-        {tab === "day"
-          ? "Choose a few places and make a day of it."
-          : tab === "passport"
-            ? "Your saved discoveries and travel settings."
-            : `Find something to love in ${cities.find((item) => item.slug === city)?.name || "South Africa"}.`}
-      </p>
-      {hasIncoming && (
-        <section className="incoming-discovery" aria-label="Shared discovery">
-          <span className="tiny-label">A SPARK SHARED WITH YOU</span>
-          {incoming ? (
-            <>
-              <h2>{incoming.name}</h2>
-              <p>{incoming.description}</p>
-              <div className="pwa-actions">
-                <Link href={placePath(incoming)}>
-                  Open discovery <UiIcon name="arrow-up-right" />
-                </Link>
-                <button
-                  aria-pressed={state.saved.includes(incoming.id)}
-                  onClick={() =>
-                    update({
-                      saved: state.saved.includes(incoming.id)
-                        ? state.saved.filter((id) => id !== incoming.id)
-                        : [...state.saved, incoming.id],
-                    })
-                  }
-                >
-                  {state.saved.includes(incoming.id) ? "Saved discovery" : "Save shared discovery"}
-                </button>
-              </div>
-            </>
-          ) : (
-            <p>
-              This link isn’t in the catalog yet. Choose a destination below to find a little
-              adventure.
-            </p>
-          )}
-        </section>
-      )}
-      {tab !== "passport" && (
-        <label className="select-city">
-          Choose a city
-          <select
-            value={city}
-            onChange={(e) => {
-              setCity(e.target.value);
-              setOrigin(null);
-            }}
-          >
-            {cities.map((c) => (
-              <option key={c.slug} value={c.slug}>
-                {c.name} · {c.province}
-              </option>
-            ))}
-          </select>
-        </label>
-      )}
-      <AnimatedTabs
-        ariaLabel="Your guide"
-        idPrefix="planner"
-        value={tab}
-        onChange={(nextTab) => {
-          setTab(nextTab);
-          if (nextTab === "day" && trip.length > 0) {
-            setDaySubTab("itineraries");
-          }
-        }}
-        items={[
-          ["discover", "Discover"],
-          ["day", "My day"],
-          ["passport", "Passport"],
-        ].map(([id, label]) => ({
-          id,
-          label,
-          badge: id === "day" && state.itinerary.length ? state.itinerary.length : undefined,
-        }))}
-      />
-      {/* Bencho Dynamic Island Status Pill */}
-      <DynamicIslandToast message={message} onDismiss={() => setMessage("")} />
-
-      <p className="hub-message" role="status">
-        {message}
-      </p>
+    <GuideShell backdrop={false}>
       <div
-        key={tab}
-        id="planner-panel"
-        role="tabpanel"
-        aria-labelledby={`planner-tab-${tab}`}
-        tabIndex={0}
+        className="field-guide guide-planner"
+        onClickCapture={(event) => {
+          const button = (event.target as HTMLElement).closest("button");
+          if (button && !button.getAttribute("aria-label")?.startsWith("Save")) feedback("tap");
+        }}
       >
-        {tab === "discover" && (
-          <>
-            <section className="adventure-section">
-              <h2 className="sr-only">Places to add to your day</h2>
-              <details className="planner-refine">
-                <summary>Refine my adventure</summary>
-                <div className="preference-grid planner-pill-filters">
-                  <div className="planner-pill-row">
-                    <span className="planner-pill-label">Mood</span>
-                    <AnimatedPillGroup
-                      ariaLabel="Filter by mood"
-                      activeId={mood}
-                      onChange={(id) => setMood(id)}
-                      items={[
-                        { id: "culture", label: "Art & stories" },
-                        { id: "nature", label: "Fresh air" },
-                        { id: "night", label: "Night on stage" },
-                        { id: "surprise", label: "Surprise me" },
-                      ]}
-                    />
-                  </div>
-                  <div className="planner-pill-row bencho-time-slider-row">
-                    <BenchoSloshSlider
-                      label="Available Time"
-                      value={time}
-                      onChange={(val) => setTime(val)}
-                      detents={[
-                        { value: 60, label: "1h" },
-                        { value: 180, label: "3h" },
-                        { value: 360, label: "All day" },
-                      ]}
-                      min={60}
-                      max={360}
-                    />
-                  </div>
-                  <div className="planner-pill-row">
-                    <span className="planner-pill-label">Budget</span>
-                    <AnimatedPillGroup
-                      ariaLabel="Filter by budget"
-                      activeId={budget}
-                      onChange={(id) => setBudget(id)}
-                      items={[
-                        { id: "any", label: "Any budget" },
-                        { id: "free", label: "Free entry" },
-                        { id: "under200", label: "Up to R200" },
-                      ]}
-                    />
-                  </div>
-                </div>
-                <p className="planning-note">
-                  A starting point, not a timed booking. Visit durations are editorial estimates;
-                  check tickets and opening hours with each venue.{" "}
-                  {budget === "under200" &&
-                    "Budget uses standard adult entry rates, excluding travel and conditional discounts."}
-                </p>
-              </details>
-              <div className="adventure-grid">{picked.map((p) => card(p))}</div>
-              {!picked.length && (
-                <p>
-                  No places fit these preferences yet. Try more time, any budget or another
-                  destination.
-                </p>
-              )}
-              <MagneticButton
-                className="pill-button planner-shuffle"
-                onClick={() => setVariant((v) => v + 1)}
-              >
-                Find another adventure <Sparkles size={16} />
-              </MagneticButton>
-            </section>
-            <section className="adventure-section">
-              <h2>Local collections</h2>
-              <p>Ready-made trails through {cities.find((item) => item.slug === city)?.name}.</p>
-              {cityCollections.length ? (
-                <div className="adventure-grid">
-                  {cityCollections.map((c) => (
-                    <TiltCard className="collection-card" maxTilt={2.0} key={c.id}>
-                      <Sparkles size={24} />
-                      <h3>{c.title}</h3>
-                      <p>{c.description}</p>
-                      <ol>
-                        {c.placeIds.map((id) => {
-                          const p = places.find((p) => p.id === id)!;
-                          return (
-                            <li key={id}>
-                              <Link href={placePath(p)}>{p.name}</Link>
-                            </li>
-                          );
-                        })}
-                      </ol>
-                      <div className="collection-card-actions">
-                        <MagneticButton strength={0.14} onClick={() => addMany(c.placeIds)}>
-                          Make this my day <ArrowUpRight size={15} />
-                        </MagneticButton>
-                        <button onClick={() => share(c.placeIds)}>
-                          Share collection <Share2 size={15} />
-                        </button>
-                      </div>
-                    </TiltCard>
-                  ))}
-                </div>
-              ) : (
-                <p>No ready-made trail for this city yet. Add places from the list above.</p>
-              )}
-            </section>
-            <section className="adventure-section">
-              <h2>Nearby discoveries</h2>
-              <p>Your location stays in this page and is never sent to Citylit.</p>
-              <MagneticButton
-                className="pill-button"
-                strength={0.15}
-                disabled={busy}
-                onClick={nearby}
-              >
-                <Navigation size={16} />
-                Use my location
-              </MagneticButton>
-              <p role="status">{geoStatus}</p>
-              {origin && (
-                <div className="adventure-grid">
-                  {places
-                    .filter(
-                      (p) => p.coordinateAccuracy === "venue" && distanceKm(origin, p.coords) <= 50,
-                    )
-                    .sort((a, b) => distanceKm(origin, a.coords) - distanceKm(origin, b.coords))
-                    .slice(0, 6)
-                    .map((p) => card(p, true))}
-                </div>
-              )}
-              {origin &&
-                !places.some(
-                  (p) => p.coordinateAccuracy === "venue" && distanceKm(origin, p.coords) <= 50,
-                ) && (
-                  <p>
-                    No verified venue pins within 50 km. Browse your chosen destination instead.
-                  </p>
-                )}
-            </section>
-            <section className="adventure-section">
-              <h2>On the calendar</h2>
-              {events.map((e) => (
-                <TiltCard className="event-card" maxTilt={1.8} key={e.id}>
-                  <h3>{e.title}</h3>
-                  <p>
-                    {e.start} to {e.end}
-                  </p>
-                  <Link href={placePath(places.find((p) => p.id === e.placeId)!)}>
-                    {places.find((p) => p.id === e.placeId)!.name}
+        <Atmosphere
+          mode="guide"
+          city={Math.max(
+            0,
+            cities.findIndex((c) => c.slug === city),
+          )}
+          category={0}
+          night={night}
+          animate={moving}
+        />
+        <div className="citylit-myday-header-wrap">
+          <h1>
+            {tab === "day" ? "My day" : tab === "passport" ? "My discoveries" : "Discover places"}
+          </h1>
+          {tab === "day" && (
+            <button
+              type="button"
+              className="citylit-myday-plus-btn"
+              aria-label="Add places to your day"
+              onClick={() => setTab("discover")}
+            >
+              <Plus size={20} weight="bold" />
+            </button>
+          )}
+        </div>
+        <p className="field-guide-intro">
+          {tab === "day"
+            ? "Choose a few places and make a day of it."
+            : tab === "passport"
+              ? "Your saved discoveries and travel settings."
+              : `Find something to love in ${cities.find((item) => item.slug === city)?.name || "South Africa"}.`}
+        </p>
+        {hasIncoming && (
+          <section className="incoming-discovery" aria-label="Shared discovery">
+            <span className="tiny-label">A SPARK SHARED WITH YOU</span>
+            {incoming ? (
+              <>
+                <h2>{incoming.name}</h2>
+                <p>{incoming.description}</p>
+                <div className="pwa-actions">
+                  <Link href={placePath(incoming)}>
+                    Open discovery <UiIcon name="arrow-up-right" />
                   </Link>
-                  <a href={e.source} target="_blank" rel="noreferrer">
-                    Programme &amp; tickets <ArrowUpRight size={14} />
-                  </a>
-                  <p className="planning-note">
-                    Checked {e.checkedAt}. Confirm availability with the venue.
-                  </p>
-                </TiltCard>
-              ))}
-              {!events.length && (
-                <p>No current events have been verified for this destination yet.</p>
-              )}
-            </section>
-          </>
-        )}
-
-        {tab === "day" && (
-          <section className="adventure-section citylit-myday-section">
-            <BenchoMagneticSelect
-              ariaLabel="My day sections"
-              value={daySubTab}
-              onChange={(id) => setDaySubTab(id as "saved" | "itineraries")}
-              className="citylit-myday-pill-nav"
-              items={[
-                { id: "saved", label: "Saved" },
-                {
-                  id: "itineraries",
-                  label: "Itineraries",
-                  badge: trip.length > 0 ? trip.length : undefined,
-                },
-              ]}
-            />
-
-            {daySubTab === "saved" ? (
-              <div className="citylit-saved-view">
-                <div className="citylit-saved-list">
-                  {(state.saved.length > 0
-                    ? state.saved
-                        .map((id) => places.find((p) => p.id === id))
-                        .filter((p): p is Place => !!p)
-                    : places.slice(0, 3)
-                  ).map((p) => {
-                    const placeCity = cities.find((c) => c.slug === p.city);
-                    const isSaved = state.saved.includes(p.id);
-                    return (
-                      <div className="citylit-saved-card" key={p.id}>
-                        <div className="citylit-saved-thumb">
-                          {p.images[0] && (
-                            <Image src={p.images[0].src} alt={p.images[0].alt} fill sizes="56px" />
-                          )}
-                        </div>
-                        <div className="citylit-saved-info">
-                          <Link href={placePath(p)}>
-                            <h3 className="citylit-saved-name">{p.name}</h3>
-                          </Link>
-                          <p className="citylit-saved-location">
-                            {placeCity
-                              ? `${placeCity.name}, ${placeCity.province}`
-                              : "South Africa"}
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          className="citylit-saved-bookmark-btn"
-                          aria-label={isSaved ? `Remove ${p.name} from saved` : `Save ${p.name}`}
-                          onClick={() => {
-                            update({
-                              saved: isSaved
-                                ? state.saved.filter((id) => id !== p.id)
-                                : [...state.saved, p.id],
-                            });
-                            setMessage(
-                              isSaved ? `${p.name} removed from saved.` : `${p.name} saved.`,
-                            );
-                          }}
-                        >
-                          <BookmarkSimple size={22} weight={isSaved ? "fill" : "regular"} />
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="citylit-adventure-callout">
-                  <div className="citylit-adventure-callout-icon">
-                    <Sparkles size={24} weight="bold" />
-                  </div>
-                  <div className="citylit-adventure-callout-body">
-                    <h3>Plan your next adventure</h3>
-                    <p>Save places and build your perfect trip.</p>
-                  </div>
                   <button
-                    type="button"
-                    className="citylit-adventure-callout-btn"
-                    onClick={() => setDaySubTab("itineraries")}
+                    aria-pressed={state.saved.includes(incoming.id)}
+                    onClick={() =>
+                      update({
+                        saved: state.saved.includes(incoming.id)
+                          ? state.saved.filter((id) => id !== incoming.id)
+                          : [...state.saved, incoming.id],
+                      })
+                    }
                   >
-                    Create itinerary
+                    {state.saved.includes(incoming.id)
+                      ? "Saved discovery"
+                      : "Save shared discovery"}
                   </button>
                 </div>
-              </div>
+              </>
             ) : (
-              <div className="citylit-itineraries-view">
-                <h2>
-                  {trip.length
-                    ? `Your day · ${trip.length} ${trip.length === 1 ? "stop" : "stops"}`
-                    : "Build a day"}
-                </h2>
-                {!trip.length && shared.length === 0 && (
-                  <div className="reference-trip-empty">
-                    <MapPin size={26} aria-hidden="true" />
-                    <div>
-                      <h3>Start with a place that makes you curious.</h3>
-                      <p>Find places one by one, or start with a ready-made collection.</p>
+              <p>
+                This link isn’t in the catalog yet. Choose a destination below to find a little
+                adventure.
+              </p>
+            )}
+          </section>
+        )}
+        {tab !== "passport" && (
+          <label className="select-city">
+            Choose a city
+            <select
+              value={city}
+              onChange={(e) => {
+                setCity(e.target.value);
+                setOrigin(null);
+              }}
+            >
+              {cities.map((c) => (
+                <option key={c.slug} value={c.slug}>
+                  {c.name} · {c.province}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
+        <AnimatedTabs
+          ariaLabel="Your guide"
+          idPrefix="planner"
+          value={tab}
+          onChange={(nextTab) => {
+            setTab(nextTab);
+            if (nextTab === "day" && trip.length > 0) {
+              setDaySubTab("itineraries");
+            }
+          }}
+          items={[
+            ["discover", "Discover"],
+            ["day", "My day"],
+            ["passport", "Passport"],
+          ].map(([id, label]) => ({
+            id,
+            label,
+            badge: id === "day" && state.itinerary.length ? state.itinerary.length : undefined,
+          }))}
+        />
+        {/* Bencho Dynamic Island Status Pill */}
+        <DynamicIslandToast message={message} onDismiss={() => setMessage("")} />
+
+        <p className="hub-message" role="status">
+          {message}
+        </p>
+        <div
+          key={tab}
+          id="planner-panel"
+          role="tabpanel"
+          aria-labelledby={`planner-tab-${tab}`}
+          tabIndex={0}
+        >
+          {tab === "discover" && (
+            <>
+              <section className="adventure-section">
+                <h2 className="sr-only">Places to add to your day</h2>
+                <details className="planner-refine">
+                  <summary>Refine my adventure</summary>
+                  <div className="preference-grid planner-pill-filters">
+                    <div className="planner-pill-row">
+                      <span className="planner-pill-label">Mood</span>
+                      <AnimatedPillGroup
+                        ariaLabel="Filter by mood"
+                        activeId={mood}
+                        onChange={(id) => setMood(id)}
+                        items={[
+                          { id: "culture", label: "Art & stories" },
+                          { id: "nature", label: "Fresh air" },
+                          { id: "night", label: "Night on stage" },
+                          { id: "surprise", label: "Surprise me" },
+                        ]}
+                      />
                     </div>
-                    <div className="reference-trip-empty-actions">
-                      <button className="pill-button" onClick={() => setTab("discover")}>
-                        Find places <ArrowUpRight size={15} />
-                      </button>
-                      <button className="pill-button" onClick={() => setTab("discover")}>
-                        Browse collections <ArrowUpRight size={15} />
-                      </button>
+                    <div className="planner-pill-row bencho-time-slider-row">
+                      <BenchoSloshSlider
+                        label="Available Time"
+                        value={time}
+                        onChange={(val) => setTime(val)}
+                        detents={[
+                          { value: 60, label: "1h" },
+                          { value: 180, label: "3h" },
+                          { value: 360, label: "All day" },
+                        ]}
+                        min={60}
+                        max={360}
+                      />
+                    </div>
+                    <div className="planner-pill-row">
+                      <span className="planner-pill-label">Budget</span>
+                      <AnimatedPillGroup
+                        ariaLabel="Filter by budget"
+                        activeId={budget}
+                        onChange={(id) => setBudget(id)}
+                        items={[
+                          { id: "any", label: "Any budget" },
+                          { id: "free", label: "Free entry" },
+                          { id: "under200", label: "Up to R200" },
+                        ]}
+                      />
                     </div>
                   </div>
-                )}
-                {shared.length > 0 && (
-                  <div className="shared-trip">
-                    <p>A shared adventure with {shared.length} stops.</p>
-                    <button
-                      onClick={() => {
-                        const first = places.find((p) => p.id === shared[0])!;
-                        const same = shared.filter(
-                          (id) => places.find((p) => p.id === id)?.city === first.city,
-                        );
-                        update({ itinerary: same });
-                        setCity(first.city);
-                        setShared([]);
-                        setMessage("Shared day imported.");
-                      }}
-                    >
-                      Import shared day
-                    </button>
-                  </div>
-                )}
-                {trip.length > 0 && (
+                  <p className="planning-note">
+                    A starting point, not a timed booking. Visit durations are editorial estimates;
+                    check tickets and opening hours with each venue.{" "}
+                    {budget === "under200" &&
+                      "Budget uses standard adult entry rates, excluding travel and conditional discounts."}
+                  </p>
+                </details>
+                <div className="adventure-grid">{picked.map((p) => card(p))}</div>
+                {!picked.length && (
                   <p>
-                    Stops can be reordered. Nearby grouping uses verified venue pins and keeps city
-                    reference pins at the end.
+                    No places fit these preferences yet. Try more time, any budget or another
+                    destination.
                   </p>
                 )}
-                {trip.length > 0 && (
-                  <div className="day-actions">
-                    <button
-                      onClick={() => {
-                        update({
-                          itinerary: orderItinerary(state.itinerary, origin || undefined).map(
-                            (p) => p.id,
-                          ),
-                        });
-                        setMessage(
-                          "Verified pins grouped by proximity; approximate pins kept at the end.",
-                        );
-                      }}
-                      disabled={!trip.length}
-                    >
-                      <MapPin size={16} />
-                      Group nearby stops
-                    </button>
-                    <button onClick={() => share(state.itinerary)} disabled={!trip.length}>
-                      <Share2 size={16} />
-                      Share day
-                    </button>
-                    <button
-                      onClick={() => {
-                        update({ itinerary: [] });
-                        setMessage("Your day has been cleared.");
-                      }}
-                      disabled={!trip.length}
-                    >
-                      Clear day
-                    </button>
+                <MagneticButton
+                  className="pill-button planner-shuffle"
+                  onClick={() => setVariant((v) => v + 1)}
+                >
+                  Find another adventure <Sparkles size={16} />
+                </MagneticButton>
+              </section>
+              <section className="adventure-section">
+                <h2>Local collections</h2>
+                <p>Ready-made trails through {cities.find((item) => item.slug === city)?.name}.</p>
+                {cityCollections.length ? (
+                  <div className="adventure-grid">
+                    {cityCollections.map((c) => (
+                      <TiltCard className="collection-card" maxTilt={2.0} key={c.id}>
+                        <Sparkles size={24} />
+                        <h3>{c.title}</h3>
+                        <p>{c.description}</p>
+                        <ol>
+                          {c.placeIds.map((id) => {
+                            const p = places.find((p) => p.id === id)!;
+                            return (
+                              <li key={id}>
+                                <Link href={placePath(p)}>{p.name}</Link>
+                              </li>
+                            );
+                          })}
+                        </ol>
+                        <div className="collection-card-actions">
+                          <MagneticButton strength={0.14} onClick={() => addMany(c.placeIds)}>
+                            Make this my day <ArrowUpRight size={15} />
+                          </MagneticButton>
+                          <button onClick={() => share(c.placeIds)}>
+                            Share collection <Share2 size={15} />
+                          </button>
+                        </div>
+                      </TiltCard>
+                    ))}
+                  </div>
+                ) : (
+                  <p>No ready-made trail for this city yet. Add places from the list above.</p>
+                )}
+              </section>
+              <section className="adventure-section">
+                <h2>Nearby discoveries</h2>
+                <p>Your location stays in this page and is never sent to Citylit.</p>
+                <MagneticButton
+                  className="pill-button"
+                  strength={0.15}
+                  disabled={busy}
+                  onClick={nearby}
+                >
+                  <Navigation size={16} />
+                  Use my location
+                </MagneticButton>
+                <p role="status">{geoStatus}</p>
+                {origin && (
+                  <div className="adventure-grid">
+                    {places
+                      .filter(
+                        (p) =>
+                          p.coordinateAccuracy === "venue" && distanceKm(origin, p.coords) <= 50,
+                      )
+                      .sort((a, b) => distanceKm(origin, a.coords) - distanceKm(origin, b.coords))
+                      .slice(0, 6)
+                      .map((p) => card(p, true))}
                   </div>
                 )}
-                <ol className="trip-stops">
-                  {trip.map((p, i) => (
-                    <li key={p.id}>
-                      <span className="stop-number">{i + 1}</span>
+                {origin &&
+                  !places.some(
+                    (p) => p.coordinateAccuracy === "venue" && distanceKm(origin, p.coords) <= 50,
+                  ) && (
+                    <p>
+                      No verified venue pins within 50 km. Browse your chosen destination instead.
+                    </p>
+                  )}
+              </section>
+              <section className="adventure-section">
+                <h2>On the calendar</h2>
+                {events.map((e) => (
+                  <TiltCard className="event-card" maxTilt={1.8} key={e.id}>
+                    <h3>{e.title}</h3>
+                    <p>
+                      {e.start} to {e.end}
+                    </p>
+                    <Link href={placePath(places.find((p) => p.id === e.placeId)!)}>
+                      {places.find((p) => p.id === e.placeId)!.name}
+                    </Link>
+                    <a href={e.source} target="_blank" rel="noreferrer">
+                      Programme &amp; tickets <ArrowUpRight size={14} />
+                    </a>
+                    <p className="planning-note">
+                      Checked {e.checkedAt}. Confirm availability with the venue.
+                    </p>
+                  </TiltCard>
+                ))}
+                {!events.length && (
+                  <p>No current events have been verified for this destination yet.</p>
+                )}
+              </section>
+            </>
+          )}
+
+          {tab === "day" && (
+            <section className="adventure-section citylit-myday-section">
+              <BenchoMagneticSelect
+                ariaLabel="My day sections"
+                value={daySubTab}
+                onChange={(id) => setDaySubTab(id as "saved" | "itineraries")}
+                className="citylit-myday-pill-nav"
+                items={[
+                  { id: "saved", label: "Saved" },
+                  {
+                    id: "itineraries",
+                    label: "Itineraries",
+                    badge: trip.length > 0 ? trip.length : undefined,
+                  },
+                ]}
+              />
+
+              {daySubTab === "saved" ? (
+                <div className="citylit-saved-view">
+                  <div className="citylit-saved-list">
+                    {(state.saved.length > 0
+                      ? state.saved
+                          .map((id) => places.find((p) => p.id === id))
+                          .filter((p): p is Place => !!p)
+                      : places.slice(0, 3)
+                    ).map((p) => {
+                      const placeCity = cities.find((c) => c.slug === p.city);
+                      const isSaved = state.saved.includes(p.id);
+                      return (
+                        <div className="citylit-saved-card" key={p.id}>
+                          <div className="citylit-saved-thumb">
+                            {p.images[0] && (
+                              <Image
+                                src={p.images[0].src}
+                                alt={p.images[0].alt}
+                                fill
+                                sizes="56px"
+                              />
+                            )}
+                          </div>
+                          <div className="citylit-saved-info">
+                            <Link href={placePath(p)}>
+                              <h3 className="citylit-saved-name">{p.name}</h3>
+                            </Link>
+                            <p className="citylit-saved-location">
+                              {placeCity
+                                ? `${placeCity.name}, ${placeCity.province}`
+                                : "South Africa"}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            className="citylit-saved-bookmark-btn"
+                            aria-label={isSaved ? `Remove ${p.name} from saved` : `Save ${p.name}`}
+                            onClick={() => {
+                              update({
+                                saved: isSaved
+                                  ? state.saved.filter((id) => id !== p.id)
+                                  : [...state.saved, p.id],
+                              });
+                              setMessage(
+                                isSaved ? `${p.name} removed from saved.` : `${p.name} saved.`,
+                              );
+                            }}
+                          >
+                            <BookmarkSimple size={22} weight={isSaved ? "fill" : "regular"} />
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="citylit-adventure-callout">
+                    <div className="citylit-adventure-callout-icon">
+                      <Sparkles size={24} weight="bold" />
+                    </div>
+                    <div className="citylit-adventure-callout-body">
+                      <h3>Plan your next adventure</h3>
+                      <p>Save places and build your perfect trip.</p>
+                    </div>
+                    <button
+                      type="button"
+                      className="citylit-adventure-callout-btn"
+                      onClick={() => setDaySubTab("itineraries")}
+                    >
+                      Create itinerary
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="citylit-itineraries-view">
+                  <h2>
+                    {trip.length
+                      ? `Your day · ${trip.length} ${trip.length === 1 ? "stop" : "stops"}`
+                      : "Build a day"}
+                  </h2>
+                  {!trip.length && shared.length === 0 && (
+                    <div className="reference-trip-empty">
+                      <MapPin size={26} aria-hidden="true" />
                       <div>
+                        <h3>Start with a place that makes you curious.</h3>
+                        <p>Find places one by one, or start with a ready-made collection.</p>
+                      </div>
+                      <div className="reference-trip-empty-actions">
+                        <button className="pill-button" onClick={() => setTab("discover")}>
+                          Find places <ArrowUpRight size={15} />
+                        </button>
+                        <button className="pill-button" onClick={() => setTab("discover")}>
+                          Browse collections <ArrowUpRight size={15} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  {shared.length > 0 && (
+                    <div className="shared-trip">
+                      <p>A shared adventure with {shared.length} stops.</p>
+                      <button
+                        onClick={() => {
+                          const first = places.find((p) => p.id === shared[0])!;
+                          const same = shared.filter(
+                            (id) => places.find((p) => p.id === id)?.city === first.city,
+                          );
+                          update({ itinerary: same });
+                          setCity(first.city);
+                          setShared([]);
+                          setMessage("Shared day imported.");
+                        }}
+                      >
+                        Import shared day
+                      </button>
+                    </div>
+                  )}
+                  {trip.length > 0 && (
+                    <p>
+                      Stops can be reordered. Nearby grouping uses verified venue pins and keeps
+                      city reference pins at the end.
+                    </p>
+                  )}
+                  {trip.length > 0 && (
+                    <div className="day-actions">
+                      <button
+                        onClick={() => {
+                          update({
+                            itinerary: orderItinerary(state.itinerary, origin || undefined).map(
+                              (p) => p.id,
+                            ),
+                          });
+                          setMessage(
+                            "Verified pins grouped by proximity; approximate pins kept at the end.",
+                          );
+                        }}
+                        disabled={!trip.length}
+                      >
+                        <MapPin size={16} />
+                        Group nearby stops
+                      </button>
+                      <button onClick={() => share(state.itinerary)} disabled={!trip.length}>
+                        <Share2 size={16} />
+                        Share day
+                      </button>
+                      <button
+                        onClick={() => {
+                          update({ itinerary: [] });
+                          setMessage("Your day has been cleared.");
+                        }}
+                        disabled={!trip.length}
+                      >
+                        Clear day
+                      </button>
+                    </div>
+                  )}
+                  <ol className="trip-stops">
+                    {trip.map((p, i) => (
+                      <li key={p.id}>
+                        <span className="stop-number">{i + 1}</span>
+                        <div>
+                          <Link href={placePath(p)}>
+                            <h3>{p.name}</h3>
+                          </Link>
+                          <p>{p.address}</p>
+                          <span className="planning-note">
+                            {p.facts?.durationMinutes?.value || 90} min planning estimate ·{" "}
+                            {p.coordinateAccuracy === "venue" ? "venue pin" : "city reference pin"}
+                          </span>
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + " " + p.address)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Directions <ArrowUpRight size={13} />
+                          </a>
+                        </div>
+                        <div className="stop-actions">
+                          {([-1, 1] as const).map((d) => (
+                            <button
+                              key={d}
+                              disabled={i + d < 0 || i + d >= trip.length}
+                              aria-label={`Move ${p.name} ${d < 0 ? "up" : "down"}`}
+                              onClick={() => moveStop(p.id, d)}
+                            >
+                              {d < 0 ? <MoveUp size={16} /> : <MoveDown size={16} />}
+                            </button>
+                          ))}
+                          <button
+                            aria-label={`Remove ${p.name} from day`}
+                            onClick={() => removeStop(p.id)}
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  {trip.length > 0 && (
+                    <p className="planning-note">
+                      About{" "}
+                      {trip.reduce((n, p) => n + Number(p.facts?.durationMinutes?.value || 90), 0)}{" "}
+                      minutes at venues, excluding travel. Confirm distances and routes in your maps
+                      app.
+                    </p>
+                  )}
+                  <ItineraryFeasibility places={trip} onRequestTravel={requestItineraryTravel} />
+                </div>
+              )}
+            </section>
+          )}
+          {tab === "passport" && (
+            <section className="adventure-section">
+              <h2>Your discovery passport</h2>
+              <PwaPanel />
+              <div className="passport-settings" role="group" aria-label="Passport preferences">
+                <label className="setting-row">
+                  <input
+                    type="checkbox"
+                    checked={state.passport}
+                    onChange={(e) => update({ passport: e.target.checked })}
+                  />
+                  Collect illustrated stamps
+                </label>
+                <label className="setting-row">
+                  <input
+                    type="checkbox"
+                    checked={state.essential}
+                    onChange={(event) => update({ essential: event.target.checked })}
+                  />
+                  Essential motion
+                </label>
+                <label className="setting-row">
+                  <input type="checkbox" checked={sound} onChange={toggleSound} />
+                  Quiet sound effects
+                </label>
+                <label className="setting-row">
+                  <input type="checkbox" checked={haptics} onChange={toggleHaptics} />
+                  Touch feedback where supported
+                </label>
+              </div>
+              <p>
+                {state.saved.length} saved · {state.visited.length} marked visited. Saved places and
+                visits are separate.
+              </p>
+              {state.passport && (
+                <div className="passport-stamps">
+                  {cities
+                    .filter((c) =>
+                      places.some((p) => p.city === c.slug && state.visited.includes(p.id)),
+                    )
+                    .map((c) => (
+                      <motion.div
+                        key={c.slug}
+                        className="passport-stamp"
+                        initial={{ scale: reduced ? 1 : 0.96, opacity: reduced ? 1 : 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: reduced ? 0 : 0.18, ease: "easeOut" }}
+                      >
+                        <Check size={25} />
+                        <strong>{c.short}</strong>
+                        <span>Visited chapter</span>
+                      </motion.div>
+                    ))}
+                </div>
+              )}
+              {state.saved.length || state.visited.length ? (
+                <div className="adventure-grid">
+                  {places
+                    .filter((p) => state.saved.includes(p.id) || state.visited.includes(p.id))
+                    .map((p) => (
+                      <article className="adventure-card" key={p.id}>
                         <Link href={placePath(p)}>
                           <h3>{p.name}</h3>
                         </Link>
-                        <p>{p.address}</p>
-                        <span className="planning-note">
-                          {p.facts?.durationMinutes?.value || 90} min planning estimate ·{" "}
-                          {p.coordinateAccuracy === "venue" ? "venue pin" : "city reference pin"}
-                        </span>
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + " " + p.address)}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Directions <ArrowUpRight size={13} />
-                        </a>
-                      </div>
-                      <div className="stop-actions">
-                        {([-1, 1] as const).map((d) => (
-                          <button
-                            key={d}
-                            disabled={i + d < 0 || i + d >= trip.length}
-                            aria-label={`Move ${p.name} ${d < 0 ? "up" : "down"}`}
-                            onClick={() => moveStop(p.id, d)}
-                          >
-                            {d < 0 ? <MoveUp size={16} /> : <MoveDown size={16} />}
-                          </button>
-                        ))}
                         <button
-                          aria-label={`Remove ${p.name} from day`}
-                          onClick={() => removeStop(p.id)}
+                          onClick={() =>
+                            update({
+                              visited: state.visited.includes(p.id)
+                                ? state.visited.filter((id) => id !== p.id)
+                                : [...state.visited, p.id],
+                            })
+                          }
                         >
-                          <X size={16} />
+                          {state.visited.includes(p.id) ? "Undo visited" : "Mark as visited"}
                         </button>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-                {trip.length > 0 && (
-                  <p className="planning-note">
-                    About{" "}
-                    {trip.reduce((n, p) => n + Number(p.facts?.durationMinutes?.value || 90), 0)}{" "}
-                    minutes at venues, excluding travel. Confirm distances and routes in your maps
-                    app.
+                      </article>
+                    ))}
+                </div>
+              ) : (
+                <div className="reference-saved-empty">
+                  <BookmarkSimple size={28} />
+                  <h3>Your saved places will live here.</h3>
+                  <p>
+                    Save a landmark or venue while exploring, then come back when you are ready to
+                    plan.
                   </p>
-                )}
-                <ItineraryFeasibility places={trip} onRequestTravel={requestItineraryTravel} />
-              </div>
-            )}
-          </section>
-        )}
-        {tab === "passport" && (
-          <section className="adventure-section">
-            <h2>Your discovery passport</h2>
-            <PwaPanel />
-            <div className="passport-settings" role="group" aria-label="Passport preferences">
-              <label className="setting-row">
-                <input
-                  type="checkbox"
-                  checked={state.passport}
-                  onChange={(e) => update({ passport: e.target.checked })}
-                />
-                Collect illustrated stamps
-              </label>
-              <label className="setting-row">
-                <input
-                  type="checkbox"
-                  checked={state.essential}
-                  onChange={(event) => update({ essential: event.target.checked })}
-                />
-                Essential motion
-              </label>
-              <label className="setting-row">
-                <input type="checkbox" checked={sound} onChange={toggleSound} />
-                Quiet sound effects
-              </label>
-              <label className="setting-row">
-                <input type="checkbox" checked={haptics} onChange={toggleHaptics} />
-                Touch feedback where supported
-              </label>
-            </div>
-            <p>
-              {state.saved.length} saved · {state.visited.length} marked visited. Saved places and
-              visits are separate.
-            </p>
-            {state.passport && (
-              <div className="passport-stamps">
-                {cities
-                  .filter((c) =>
-                    places.some((p) => p.city === c.slug && state.visited.includes(p.id)),
-                  )
-                  .map((c) => (
-                    <motion.div
-                      key={c.slug}
-                      className="passport-stamp"
-                      initial={{ scale: reduced ? 1 : 0.96, opacity: reduced ? 1 : 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: reduced ? 0 : 0.18, ease: "easeOut" }}
-                    >
-                      <Check size={25} />
-                      <strong>{c.short}</strong>
-                      <span>Visited chapter</span>
-                    </motion.div>
-                  ))}
-              </div>
-            )}
-            {state.saved.length || state.visited.length ? (
-              <div className="adventure-grid">
-                {places
-                  .filter((p) => state.saved.includes(p.id) || state.visited.includes(p.id))
-                  .map((p) => (
-                    <article className="adventure-card" key={p.id}>
-                      <Link href={placePath(p)}>
-                        <h3>{p.name}</h3>
-                      </Link>
-                      <button
-                        onClick={() =>
-                          update({
-                            visited: state.visited.includes(p.id)
-                              ? state.visited.filter((id) => id !== p.id)
-                              : [...state.visited, p.id],
-                          })
-                        }
-                      >
-                        {state.visited.includes(p.id) ? "Undo visited" : "Mark as visited"}
-                      </button>
-                    </article>
-                  ))}
-              </div>
-            ) : (
-              <div className="reference-saved-empty">
-                <BookmarkSimple size={28} />
-                <h3>Your saved places will live here.</h3>
-                <p>
-                  Save a landmark or venue while exploring, then come back when you are ready to
-                  plan.
-                </p>
-                <button className="pill-button" onClick={() => setTab("discover")}>
-                  Discover places <ArrowUpRight size={15} />
-                </button>
-              </div>
-            )}
-            <button className="pill-button" onClick={download}>
-              <Download size={16} />
-              Save field guide offline
-            </button>
-          </section>
-        )}
+                  <button className="pill-button" onClick={() => setTab("discover")}>
+                    Discover places <ArrowUpRight size={15} />
+                  </button>
+                </div>
+              )}
+              <button className="pill-button" onClick={download}>
+                <Download size={16} />
+                Save field guide offline
+              </button>
+            </section>
+          )}
+        </div>
       </div>
-      <footer className="field-guide-footer">
-        <Link href="/editorial">Data quality &amp; correction review</Link>
-        <p>
-          Your saves, passport and itinerary live in this browser. Shared links contain only place
-          IDs.
-        </p>
-      </footer>
-    </main>
+    </GuideShell>
   );
 }

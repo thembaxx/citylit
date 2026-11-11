@@ -1,20 +1,21 @@
 /* Shared by the live app, loading/recovery screens and downloaded guide. */
 :root {
-  --night-bg: #0e0f13;
+  /* Cosmic Obsidian & Amber — night defaults */
+  --night-bg: #121317;
   --day-bg: #f4efe6;
-  --night-ink: #f3f4f6;
+  --night-ink: #e3e2e7;
   --day-ink: #171920;
-  --night-muted: #a6abb8;
+  --night-muted: #ccc3d8;
   --day-muted: #525663;
-  --night-accent: #f0b35e;
+  --night-accent: #ffb95f;
   --day-accent: #252834;
-  --night-accent-ink: #0e0f13;
+  --night-accent-ink: #472a00;
   --day-accent-ink: #ffffff;
-  --night-line: #2a2d38;
+  --night-line: #4a4455;
   --day-line: #d6d4cd;
-  --night-surface: #171920;
+  --night-surface: #1a1b20;
   --day-surface: #fbf9f5;
-  --night-surface-glass: #171920e8;
+  --night-surface-glass: #1a1b20e8;
   --day-surface-glass: #fbf9f5e8;
   color-scheme: dark;
   --bg: var(--night-bg);
@@ -77,5 +78,5 @@ body {
 }
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-ink);
 }

@@ -60,6 +60,19 @@ export function LiquidToggle({
                   stiffness: 480,
                   damping: 24,
                   mass: 0.7,
+                  // Squash and stretch is a keyframe ramp, not a spring settle.
+                  scaleX: {
+                    type: "tween",
+                    duration: 0.44,
+                    times: [0, 0.32, 0.68, 1],
+                    ease: "easeInOut",
+                  },
+                  scaleY: {
+                    type: "tween",
+                    duration: 0.44,
+                    times: [0, 0.32, 0.68, 1],
+                    ease: "easeInOut",
+                  },
                 }
           }
           animate={{

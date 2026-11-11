@@ -30,7 +30,9 @@ test("catalog has all provinces and planning never treats unknown admission as f
 test("collections build a day, preserve visits and import shareable trips", async ({ page }) => {
   test.slow();
   await page.goto("/explore?city=pietermaritzburg");
-  await page.getByRole("button", { name: "Switch to night theme", exact: true }).click();
+  await page.getByRole("button", { name: "Open settings", exact: true }).click();
+  await page.getByRole("button", { name: "Dark", exact: true }).click();
+  await page.getByRole("button", { name: "Close settings", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
   await expect(page.locator(".collection-card")).toHaveCount(3);
   await page.getByRole("button", { name: "Make this my day" }).first().click();

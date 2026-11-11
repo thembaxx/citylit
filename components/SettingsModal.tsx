@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ArrowCounterClockwise,
@@ -35,8 +35,11 @@ export default function SettingsModal({
   const reducedMotion = useReducedMotion();
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Tab state
-  const activeTab = initialTab;
+  const [activeTab, setActiveTab] = useState<SettingsTab>(initialTab);
+
+  useEffect(() => {
+    if (isOpen) setActiveTab(initialTab);
+  }, [isOpen, initialTab]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -95,7 +98,7 @@ export default function SettingsModal({
               <h2 id="settings-sheet-title">Settings</h2>
               <button
                 type="button"
-                className="citylit-settings-close"
+                className="citylit-settings-close citylit-settings-close-btn"
                 onClick={onClose}
                 aria-label="Close settings"
               >
@@ -108,24 +111,33 @@ export default function SettingsModal({
               <button
                 type="button"
                 role="tab"
+                id="settings-tab-appearance"
                 aria-selected={activeTab === "appearance"}
+                aria-controls="settings-panel-appearance"
                 className={`citylit-settings-tab ${activeTab === "appearance" ? "is-active" : ""}`}
+                onClick={() => setActiveTab("appearance")}
               >
                 Appearance
               </button>
               <button
                 type="button"
                 role="tab"
+                id="settings-tab-map"
                 aria-selected={activeTab === "map"}
+                aria-controls="settings-panel-map"
                 className={`citylit-settings-tab ${activeTab === "map" ? "is-active" : ""}`}
+                onClick={() => setActiveTab("map")}
               >
                 Map
               </button>
               <button
                 type="button"
                 role="tab"
+                id="settings-tab-about"
                 aria-selected={activeTab === "about"}
+                aria-controls="settings-panel-about"
                 className={`citylit-settings-tab ${activeTab === "about" ? "is-active" : ""}`}
+                onClick={() => setActiveTab("about")}
               >
                 About
               </button>
@@ -134,7 +146,12 @@ export default function SettingsModal({
             {/* Tab Panel: Appearance */}
             <div className="citylit-settings-content">
               {activeTab === "appearance" && (
-                <div className="citylit-settings-section">
+                <div
+                  className="citylit-settings-section"
+                  id="settings-panel-appearance"
+                  role="tabpanel"
+                  aria-labelledby="settings-tab-appearance"
+                >
                   <span className="citylit-settings-subhead">Theme</span>
                   <div className="citylit-theme-grid">
                     {/* Dark */}
@@ -224,8 +241,13 @@ export default function SettingsModal({
               )}
 
               {activeTab === "map" && (
-                <div className="citylit-settings-section">
-                  <span className="citylit-settings-subhead">Living Atlas Coverage</span>
+                <div
+                  className="citylit-settings-section"
+                  id="settings-panel-map"
+                  role="tabpanel"
+                  aria-labelledby="settings-tab-map"
+                >
+                  <span className="citylit-settings-subhead">Living Atlas coverage</span>
                   <p className="citylit-settings-desc">
                     12 South African cities mapped in 3D geometry with interactive landmarks, venue
                     stories and daylight simulation.
@@ -243,7 +265,12 @@ export default function SettingsModal({
               )}
 
               {activeTab === "about" && (
-                <div className="citylit-settings-section">
+                <div
+                  className="citylit-settings-section"
+                  id="settings-panel-about"
+                  role="tabpanel"
+                  aria-labelledby="settings-tab-about"
+                >
                   <span className="citylit-settings-subhead">About Citylit</span>
                   <div className="citylit-about-card">
                     <p>

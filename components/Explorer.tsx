@@ -436,6 +436,7 @@ export default function Explorer() {
           className="return-to-guide"
           prefetch={false}
           href={`${pathname}?view=guide`}
+          aria-label="Read guide"
           data-transition-label="Read the city guide"
         >
           Read guide <ArrowUpRight size={13} />

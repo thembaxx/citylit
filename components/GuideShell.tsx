@@ -17,10 +17,12 @@ export default function GuideShell({
   children,
   mapSelection,
   stage = false,
+  backdrop = true,
 }: {
   children: ReactNode;
   mapSelection?: MapSelection;
   stage?: boolean;
+  backdrop?: boolean;
 }) {
   const { state } = useDiscovery();
   const pathname = usePathname();
@@ -33,41 +35,40 @@ export default function GuideShell({
 
   return (
     <div className={`discovery-guide reference-guide${stage ? " reference-stage-guide" : ""}`}>
-      {!stage && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
+      {backdrop && !stage && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
       <GuideMotion essential={state.essential} />
       <a className="guide-skip" href="#guide-main">
         Skip to content
       </a>
 
-      {!isHome && (
-        <header className="atlas-nav">
-          <Link className="atlas-wordmark" href="/" aria-label="Citylit home">
-            <BrandWordmark />
+      <header className="atlas-nav citylit-app-header">
+        <Link className="atlas-wordmark" href="/" aria-label="Citylit home">
+          <BrandWordmark />
+        </Link>
+        <nav aria-label="Main navigation">
+          <Link
+            href="/destinations"
+            className="citylit-header-nav-link"
+            aria-current={pathname === "/destinations" ? "page" : undefined}
+          >
+            <MapPin size={16} aria-hidden="true" /> Cities
           </Link>
-          <nav aria-label="Main navigation">
-            <Link
-              href="/destinations"
-              aria-current={pathname === "/destinations" ? "page" : undefined}
-            >
-              Cities
-            </Link>
-            <Link
-              href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
-              className="atlas-day-link"
-            >
-              <BookmarkSimple size={17} aria-hidden="true" /> My day
-              {state.itinerary.length ? ` (${state.itinerary.length})` : ""}
-            </Link>
-            <ThemeToggle onOpenSettings={() => setSettingsOpen(true)} />
-          </nav>
-        </header>
-      )}
+          <Link
+            href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
+            className="atlas-day-link citylit-header-nav-link"
+            aria-current={isDayActive ? "page" : undefined}
+          >
+            <BookmarkSimple size={16} aria-hidden="true" /> My day
+            {state.itinerary.length ? ` (${state.itinerary.length})` : ""}
+          </Link>
+          <ThemeToggle onOpenSettings={() => setSettingsOpen(true)} />
+        </nav>
+      </header>
 
       <main id="guide-main" tabIndex={-1}>
         {children}
       </main>
 
-      {/* Bencho Magnifying Dock */}
       <MagnifyingDock
         items={[
           {
@@ -117,7 +118,6 @@ export default function GuideShell({
         </p>
       </footer>
 
-      {/* Settings Modal */}
       <SettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
   );

@@ -232,7 +232,12 @@ test("theme contrast, switching, and incidental feedback remain accessible", asy
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);
   for (const theme of ["night", "day"]) {
-    if (theme === "day") await page.getByRole("button", { name: "Switch to day theme" }).click();
+    if (theme === "day") {
+      await page.getByRole("button", { name: "Open settings", exact: true }).click();
+      await page.getByRole("button", { name: "Light", exact: true }).click();
+      await page.getByRole("button", { name: "Close settings", exact: true }).click();
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+    }
     const ratios = await page.evaluate(() => {
       const css = getComputedStyle(document.documentElement);
       const luminance = (hex: string) => {
@@ -252,7 +257,7 @@ test("theme contrast, switching, and incidental feedback remain accessible", asy
       return [
         ratio(css.getPropertyValue("--ink"), css.getPropertyValue("--bg")),
         ratio(css.getPropertyValue("--muted"), css.getPropertyValue("--bg")),
-        ratio("#ffffff", css.getPropertyValue("--accent")),
+        ratio(css.getPropertyValue("--accent-ink"), css.getPropertyValue("--accent")),
         ratio("#f4f6ff", "#111c33"),
       ];
     });
@@ -260,12 +265,17 @@ test("theme contrast, switching, and incidental feedback remain accessible", asy
   }
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "day");
-  // The simplified guide exposes theme directly. The separate experience
-  // settings dialog and its sound/haptic toggles are no longer in the UI.
-  await expect(page.getByRole("button", { name: "Switch to night theme" })).toBeVisible();
-  await page.getByRole("button", { name: "Switch to night theme" }).click();
+  // Guide theme choices live in the settings sheet opened by the header gear.
+  await expect(page.getByRole("button", { name: "Open settings", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Open settings", exact: true }).click();
+  await page.getByRole("button", { name: "Dark", exact: true }).click();
+  await page.getByRole("button", { name: "Close settings", exact: true }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
-  await expect(page.getByRole("button", { name: "Switch to day theme" })).toBeVisible();
+  await page.getByRole("button", { name: "Open settings", exact: true }).click();
+  await page.getByRole("button", { name: "Light", exact: true }).click();
+  await page.getByRole("button", { name: "Close settings", exact: true }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "day");
   expect(
     await page.evaluate(() => (window as typeof window & { audioStarts: number }).audioStarts),
   ).toBe(0);

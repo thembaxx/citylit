@@ -1,18 +1,29 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { cities, places } from "../lib/data";
 import { landmarkPath, planningStops } from "../lib/discovery-guide";
+
+// Theme choices live in the guide settings sheet; the header control only
+// opens the sheet so that browsing settings never changes the theme.
+async function setGuideTheme(page: Page, theme: "day" | "night") {
+  if ((await page.locator("html").getAttribute("data-theme")) === theme) return;
+  await page.getByRole("button", { name: "Open settings", exact: true }).click();
+  await page.getByRole("button", { name: theme === "day" ? "Light" : "Dark", exact: true }).click();
+  await page.getByRole("button", { name: "Close settings", exact: true }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+}
 
 test("beacon to city to landmark to a saved visit works end to end", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-  await expect(page.locator("h1")).toHaveText("Follow yourcuriosity.");
+  await expect(page.locator("h1")).toContainText("Follow your curiosity");
   for (const field of await page.locator(".discovery-guide input, .discovery-guide select").all())
     await expect(field).toHaveCSS("font-size", "16px");
-  await page.getByRole("button", { name: "Choose Johannesburg", exact: true }).click();
+  await page.getByRole("tab", { name: "Explore", exact: true }).click();
   await expect(page.locator(".living-atlas-city-card h3")).toHaveText("Johannesburg");
-  await page.getByRole("button", { name: "Choose Cape Town", exact: true }).click();
+  await page.getByRole("tab", { name: "Big views", exact: true }).click();
   await expect(page.locator(".living-atlas-city-card h3")).toHaveText("Cape Town");
   await page.getByRole("link", { name: "Enter the city", exact: true }).click();
   await expect(page).toHaveURL(/\/cape-town$/);
@@ -43,7 +54,10 @@ test("beacon to city to landmark to a saved visit works end to end", async ({ pa
   await expect(
     page.getByRole("button", { name: "Unsave Table Mountain", exact: true }),
   ).toBeVisible();
-  await page.getByRole("link", { name: "Open my day", exact: true }).click();
+  await page
+    .locator(".citylit-bottom-dock")
+    .getByRole("link", { name: "My day", exact: true })
+    .click();
   await expect(page.locator(".trip-stops")).toContainText("Table Mountain");
   expect(errors).toEqual([]);
 });
@@ -177,12 +191,8 @@ for (const width of [320, 768, 1024, 1440]) {
     ]) {
       await page.goto(route);
       await expect(page.locator(".discovery-guide")).toBeVisible();
-      for (const theme of ["day", "night"]) {
-        // The accessible label changes during theme bootstrap; keep the action
-        // locator stable while waiting for hydration.
-        if ((await page.locator("html").getAttribute("data-theme")) !== theme)
-          await page.getByRole("button", { name: /Switch to .* theme/ }).click();
-        await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+      for (const theme of ["day", "night"] as const) {
+        await setGuideTheme(page, theme);
         const overflow = await page
           .locator(".discovery-guide")
           .evaluate((el) => el.scrollWidth > el.clientWidth + 1);
@@ -203,7 +213,7 @@ for (const width of [320, 768, 1024, 1440]) {
         }
         expect(overflow, `${route} at ${width}px, ${theme}`).toBe(false);
         if (width === 1440 && route === "/")
-          await expect(page.locator(".living-atlas-city-card")).toBeInViewport();
+          await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
         if (theme === "day" && width === 320 && route === "/johannesburg")
           await page.screenshot({ scale: "css", path: "docs/redesign/05-city-mobile.png" });
         if (theme === "day" && width === 1440 && route === "/")
@@ -240,10 +250,8 @@ test("primary guide screens have no serious accessibility violations", async ({ 
 test("planner and offline settings are accessible in both themes", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
   await page.goto("/explore?city=cape-town&tab=passport");
-  for (const theme of ["day", "night"]) {
-    if ((await page.locator("html").getAttribute("data-theme")) !== theme)
-      await page.getByRole("button", { name: /Switch to .* theme/ }).click();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+  for (const theme of ["day", "night"] as const) {
+    await setGuideTheme(page, theme);
     const result = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
       .analyze();

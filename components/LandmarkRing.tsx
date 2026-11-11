@@ -34,8 +34,9 @@ import WalkableDistrict from "./WalkableDistrict";
 import { AnimatedTabs } from "./ui/AnimatedTabs";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import LiquidToggle from "./ui/LiquidToggle";
-import BenchoTelemetryHud from "./ui/BenchoTelemetryHud";
+
 import { benchoAudio } from "../lib/bencho-audio";
+import useTheme from "./useTheme";
 import type { StageItem } from "./CityStage";
 import { landmarkJointLabels } from "../lib/landmark-specs.js";
 
@@ -602,7 +603,10 @@ export default function LandmarkRing({
   const dragging = useRef(false);
   const moved = useRef(false);
   const [settle, setSettle] = useState(0);
-  const [night, setNight] = useState(false);
+  // Follow the app theme until someone explicitly changes the stage lighting.
+  const themeNight = useTheme().night;
+  const [nightOverride, setNightOverride] = useState<boolean | null>(null);
+  const night = nightOverride ?? themeNight;
   const [exploded, setExploded] = useState(false);
   const [feature, setFeature] = useState<MuseumFeature>("architecture");
   const [zoom, setZoom] = useState(1);
@@ -853,16 +857,6 @@ export default function LandmarkRing({
         )}
       </div>
 
-      {/* Bencho Telemetry HUD */}
-      <BenchoTelemetryHud
-        landmarkName={items[selected]?.name ?? "Landmark"}
-        cityName={items[selected]?.place?.address ?? "South Africa"}
-        azimuthDeg={(45 + spin * 90) % 360}
-        scalePercent={Math.round(zoom * 100)}
-        cameraMode={view === "detail" ? "Close-up" : view === "overhead" ? "Overhead" : "Overview"}
-        pinType={items[selected]?.place?.coordinateAccuracy || "venue pin"}
-      />
-
       {(exploded || manualJointCount > 0 || touring) && (
         <div className="atlas-stage-live-badge" aria-hidden="true">
           <span className="atlas-live-dot" />
@@ -925,7 +919,7 @@ export default function LandmarkRing({
               aria-label={night ? "Switch to daylight" : "Switch to night lighting"}
               aria-pressed={night}
               title={night ? "Daylight" : "Night lighting"}
-              onClick={() => setNight((value) => !value)}
+              onClick={() => setNightOverride(!night)}
             >
               <Moon size={18} weight={night ? "fill" : "regular"} />
             </button>
@@ -954,7 +948,7 @@ export default function LandmarkRing({
               onClick={() => {
                 stopTour();
                 setZoom(1);
-                setNight(false);
+                setNightOverride(null);
                 setExploded(false);
                 setFeature("architecture");
                 setView("overview");

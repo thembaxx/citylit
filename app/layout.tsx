@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import "./discovery-guide.css";
 import "./native-refinement.css";
@@ -17,6 +18,18 @@ import KhweziProvider from "../components/KhweziProvider";
 import JsonLd from "../components/JsonLd";
 import JourneyTransition from "../components/JourneyTransition";
 import { SITE_URL, websiteSchema, isPreview } from "../lib/seo";
+
+const display = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const body = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -24,7 +37,7 @@ export const viewport: Viewport = {
   interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f4efe6" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0f13" },
+    { media: "(prefers-color-scheme: dark)", color: "#121317" },
   ],
   colorScheme: "dark light",
 };
@@ -62,7 +75,7 @@ export const metadata: Metadata = {
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const nonce = (await headers()).get("x-nonce") || undefined;
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
       <head>
         <link rel="stylesheet" href="/theme.css" />
         {/* Deliberately parser-blocking: a deferred script cannot prevent a wrong-theme paint. */}

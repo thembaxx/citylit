@@ -1,24 +1,30 @@
-/* Reference-led CityLit visual foundation.
+﻿/* Reference-led CityLit visual foundation.
    Keep existing route, catalog, map, Three.js, PWA and planner behavior intact.
    Screen-specific composition is delivered in follow-up implementation stages. */
 
 :root {
-  --citylit-reference-bg: #0e0f13;
-  --citylit-reference-panel: #171920;
-  --citylit-reference-panel-raised: #222530;
-  --citylit-reference-border: rgb(255 255 255 / 12%);
-  --citylit-reference-text: #f3f4f6;
-  --citylit-reference-muted: #a6abb8;
-  --citylit-reference-purple: #f0b35e;
-  --citylit-reference-purple-soft: #f6c987;
-  --citylit-reference-gold: #f0b35e;
-  --citylit-reference-accent-ink: #0e0f13;
-  --citylit-reference-shadow: 0 22px 54px rgb(0 0 0 / 38%);
+  /* Cosmic Obsidian & Amber */
+  --citylit-reference-bg: #121317;
+  --citylit-reference-panel: #1a1b20;
+  --citylit-reference-panel-raised: #1f1f24;
+  --citylit-reference-border: rgba(255, 255, 255, 0.08);
+  --citylit-reference-text: #e3e2e7;
+  --citylit-reference-muted: #ccc3d8;
+  --citylit-reference-dim: #958da1;
+  --citylit-reference-purple: #7c3aed;
+  --citylit-reference-purple-soft: #d2bbff;
+  --citylit-reference-gold: #ffb95f;
+  --citylit-reference-gold-strong: #ee9800;
+  --citylit-reference-accent-ink: #472a00;
+  --citylit-reference-shadow: 0 24px 60px rgb(0 0 0 / 46%);
+  --citylit-reference-radius: 22px;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", var(--font-body, "Plus Jakarta Sans", system-ui, sans-serif);
 }
 
 :where(.reference-guide, .field-guide, .game-screen, .category-page) {
   --citylit-purple: var(--citylit-reference-purple);
-  --citylit-purple-strong: #d4923a;
+  --citylit-purple-strong: #7c3aed;
   --citylit-amber: var(--citylit-reference-gold);
   --citylit-border: var(--citylit-reference-border);
   --citylit-panel: var(--citylit-reference-panel);
@@ -31,10 +37,11 @@
   --muted: var(--citylit-reference-muted);
   --line: var(--citylit-reference-border);
   --surface: var(--citylit-reference-panel);
-  --accent: var(--citylit-reference-purple);
+  --accent: var(--citylit-reference-gold);
+  --accent-ink: var(--citylit-reference-accent-ink);
   color: var(--citylit-reference-text);
   color-scheme: dark;
-  font-family: "Manrope", "DM Sans", sans-serif;
+  font-family: var(--font-body, "Plus Jakarta Sans", "Manrope", system-ui, sans-serif);
   font-feature-settings:
     "kern" 1,
     "liga" 1,
@@ -51,9 +58,11 @@
   --citylit-reference-border: rgb(23 25 32 / 14%);
   --citylit-reference-text: #171920;
   --citylit-reference-muted: #4f5462;
-  --citylit-reference-purple: #252834;
-  --citylit-reference-purple-soft: #393e50;
-  --citylit-reference-gold: #a45418;
+  --citylit-reference-dim: #68646f;
+  --citylit-reference-purple: #6d3fd4;
+  --citylit-reference-purple-soft: #5b2fc0;
+  --citylit-reference-gold: #9a5a10;
+  --citylit-reference-gold-strong: #8a4f0c;
   --citylit-reference-accent-ink: #fff;
   --citylit-reference-shadow: 0 18px 46px rgb(15 17 24 / 12%);
 }
@@ -71,9 +80,11 @@
     --citylit-reference-border: rgb(23 25 32 / 14%);
     --citylit-reference-text: #171920;
     --citylit-reference-muted: #4f5462;
-    --citylit-reference-purple: #252834;
-    --citylit-reference-purple-soft: #393e50;
-    --citylit-reference-gold: #a45418;
+    --citylit-reference-dim: #68646f;
+    --citylit-reference-purple: #6d3fd4;
+    --citylit-reference-purple-soft: #5b2fc0;
+    --citylit-reference-gold: #9a5a10;
+    --citylit-reference-gold-strong: #8a4f0c;
     --citylit-reference-accent-ink: #fff;
     --citylit-reference-shadow: 0 18px 46px rgb(15 17 24 / 12%);
   }
@@ -145,7 +156,7 @@
 .reference-guide .atlas-city-hero h1,
 .reference-guide .atlas-category-guide h1 {
   color: var(--citylit-reference-text);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
   font-optical-sizing: auto;
   font-variation-settings:
     "SOFT" 30,
@@ -287,7 +298,7 @@
 .field-guide h1,
 .field-guide h2 {
   color: var(--citylit-reference-text);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
   font-optical-sizing: auto;
   font-variation-settings:
     "SOFT" 30,
@@ -374,7 +385,7 @@
 }
 
 .game-screen .modal h2 {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
   font-weight: 450;
   letter-spacing: -0.04em;
 }
@@ -430,7 +441,7 @@
   }
 }
 
-/* Discovery home — reference composition */
+/* Discovery home â€” reference composition */
 .reference-home {
   min-height: 100%;
   padding: 0 clamp(20px, 4.5vw, 64px) calc(96px + env(safe-area-inset-bottom, 0px));
@@ -509,9 +520,7 @@
 .reference-eyebrow {
   margin: 0 0 12px;
   color: var(--citylit-reference-purple-soft);
-  font:
-    700 10px/1.5 Manrope,
-    sans-serif;
+  font: 700 10px/1.5 var(--font-body, "Plus Jakarta Sans", sans-serif);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -589,9 +598,7 @@
   outline: 0;
   background: transparent;
   color: var(--citylit-reference-text);
-  font:
-    500 13px Manrope,
-    sans-serif;
+  font: 500 13px var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 .reference-search input::placeholder {
   color: var(--citylit-reference-muted);
@@ -619,9 +626,7 @@
   border-radius: 999px;
   color: var(--citylit-reference-text);
   background: var(--citylit-reference-panel);
-  font:
-    650 11px Manrope,
-    sans-serif;
+  font: 650 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 .reference-filter-row button[aria-pressed="true"] {
   border-color: transparent;
@@ -975,9 +980,7 @@
 .game-screen .game-back {
   min-height: 42px;
   color: var(--citylit-reference-text);
-  font:
-    600 11px Manrope,
-    sans-serif;
+  font: 600 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 .game-screen .game-back .citylit-logo-symbol {
   width: 34px;
@@ -1021,9 +1024,7 @@
 .game-screen .province-subtitle,
 .game-screen .roman-chapter {
   color: var(--citylit-reference-muted);
-  font:
-    500 10px/1.6 Manrope,
-    sans-serif;
+  font: 500 10px/1.6 var(--font-body, "Plus Jakarta Sans", sans-serif);
   letter-spacing: 0.11em;
   text-transform: uppercase;
 }
@@ -1036,9 +1037,7 @@
 }
 .game-screen .game-search input {
   color: var(--citylit-reference-text);
-  font:
-    500 12px Manrope,
-    sans-serif;
+  font: 500 12px var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 .game-screen .game-stage {
   min-height: 250px;
@@ -1055,9 +1054,7 @@
   border-radius: 16px;
   background: color-mix(in srgb, var(--citylit-reference-panel) 92%, transparent);
   color: var(--citylit-reference-muted);
-  font:
-    600 10px Manrope,
-    sans-serif;
+  font: 600 10px var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 .game-map .map-legend > button,
 .game-map .map-legend > a {
@@ -1089,9 +1086,7 @@
   min-height: 42px;
   color: var(--citylit-reference-text);
   border-color: var(--citylit-reference-border);
-  font:
-    600 11px Manrope,
-    sans-serif;
+  font: 600 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 .game-map .province-picker a span {
   margin-left: auto;
@@ -1133,9 +1128,7 @@
   color: var(--citylit-reference-accent-ink);
   background: var(--citylit-reference-purple);
   box-shadow: 0 8px 24px rgb(240 179 94 / 18%);
-  font:
-    700 11px Manrope,
-    sans-serif;
+  font: 700 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 @media (max-width: 700px) {
   .game-screen .game-nav {
@@ -1143,7 +1136,18 @@
     padding: 8px 14px;
   }
   .game-screen .return-to-guide {
-    display: none;
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+    margin-right: 6px;
+    gap: 0;
+    border: 1px solid var(--citylit-reference-border);
+    border-radius: 50%;
+    color: var(--citylit-reference-text);
+    font-size: 0;
   }
   .game-screen .utility-nav {
     gap: 4px;
@@ -1237,9 +1241,7 @@
 }
 .reference-guide .atlas-landmark-story .atlas-story-facts dt {
   color: var(--citylit-reference-muted);
-  font:
-    700 9px Manrope,
-    sans-serif;
+  font: 700 9px var(--font-body, "Plus Jakarta Sans", sans-serif);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1410,9 +1412,7 @@
 .reference-trip-empty h3 {
   margin: 0;
   color: var(--citylit-reference-text);
-  font:
-    600 clamp(19px, 4vw, 25px)/1.2 Manrope,
-    sans-serif;
+  font: 600 clamp(19px, 4vw, 25px)/1.2 var(--font-body, "Plus Jakarta Sans", sans-serif);
   letter-spacing: -0.035em;
 }
 .reference-trip-empty p {
@@ -1461,9 +1461,7 @@
   border-radius: 999px;
   color: var(--citylit-reference-muted);
   background: transparent;
-  font:
-    650 11px/1 Manrope,
-    sans-serif;
+  font: 650 11px/1 var(--font-body, "Plus Jakarta Sans", sans-serif);
   white-space: nowrap;
 }
 .field-guide .hub-tabs.easyui-tabs-list .easyui-tab[aria-selected="true"] {
@@ -1956,9 +1954,7 @@
 }
 .field-guide .adventure-card h3 {
   margin: 6px 0 8px;
-  font:
-    650 15px/1.3 Manrope,
-    sans-serif;
+  font: 650 15px/1.3 var(--font-body, "Plus Jakarta Sans", sans-serif);
   letter-spacing: -0.02em;
 }
 .field-guide .adventure-card p {
@@ -1997,9 +1993,7 @@
 }
 .field-guide .trip-stops li > div:first-of-type h3 {
   margin: 0 0 4px;
-  font:
-    700 12px/1.35 Manrope,
-    sans-serif;
+  font: 700 12px/1.35 var(--font-body, "Plus Jakarta Sans", sans-serif);
   letter-spacing: -0.01em;
 }
 .field-guide .trip-stops li > div:first-of-type p {
@@ -2789,7 +2783,8 @@
     border-radius: 20px;
   }
   .reference-guide .atlas-city-hero-redesign h1 {
-    font-size: clamp(42px, 12vw, 64px);
+    font-size: clamp(29px, 8.8vw, 62px);
+    overflow-wrap: normal;
   }
   .reference-guide .atlas-city-actions {
     display: flex;
@@ -3951,6 +3946,49 @@
   gap: 10px;
 }
 
+.citylit-detail-top-actions .atlas-save-place {
+  display: flex;
+  align-items: center;
+}
+
+.citylit-detail-top-actions .atlas-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 15px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(17 16 22 / 74%);
+  box-shadow: inset 0 1px rgb(255 255 255 / 6%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.citylit-detail-top-actions .atlas-button[aria-pressed="true"] {
+  border-color: rgb(233 176 77 / 46%);
+  color: var(--citylit-gold);
+}
+
+.citylit-detail-top-actions .atlas-save-place p {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  max-width: 220px;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: var(--citylit-gold);
+  background: rgb(10 9 14 / 92%);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .citylit-detail-content {
   position: relative;
   display: flex;
@@ -4953,4 +4991,3557 @@
   height: 10px;
   border-radius: 50%;
   background: var(--citylit-neon-purple);
+}
+
+/* ==========================================================================
+   Citylit polish layer â€” near-black surfaces, violet selection, gold action.
+   This block owns the final cascade: it reconciles the mockup composition with
+   the real catalog, source credits, planner state and 3D inspector.
+   ========================================================================== */
+
+.reference-guide,
+.field-guide {
+  --citylit-surface: var(--citylit-reference-panel);
+  --citylit-surface-raised: var(--citylit-reference-panel-raised);
+  --citylit-hairline: var(--citylit-reference-border);
+  --citylit-text: var(--citylit-reference-text);
+  --citylit-quiet: var(--citylit-reference-muted);
+  --citylit-violet: var(--citylit-reference-purple);
+  --citylit-violet-strong: color-mix(in srgb, var(--citylit-reference-purple) 84%, #000);
+  --citylit-violet-soft: var(--citylit-reference-purple-soft);
+  --citylit-gold: var(--citylit-reference-gold);
+  --citylit-on-gold: #171006;
+  --citylit-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.canvas-root {
+  background:
+    radial-gradient(ellipse at 82% -4%, rgb(139 92 246 / 12%), transparent 42%),
+    radial-gradient(ellipse at 6% 4%, rgb(233 176 77 / 5%), transparent 34%),
+    var(--citylit-reference-bg);
+}
+
+/* --- App header ------------------------------------------------------- */
+
+.reference-guide .atlas-nav.citylit-app-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: none;
+  height: 64px;
+  margin: 0;
+  padding: 0 max(14px, env(safe-area-inset-left)) 0 max(16px, env(safe-area-inset-right));
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--citylit-reference-bg) 92%, transparent),
+    color-mix(in srgb, var(--citylit-reference-bg) 58%, transparent) 70%,
+    transparent
+  );
+  box-shadow: none;
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+}
+
+.reference-guide .citylit-app-header .atlas-wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--citylit-text);
+  text-decoration: none;
+}
+
+.reference-guide .citylit-app-header .citylit-logo-symbol {
+  width: 32px;
+  height: 32px;
+}
+
+.reference-guide .citylit-app-header .wordmark-letters {
+  color: var(--citylit-text);
+  font-size: 23px;
+}
+
+.reference-guide .citylit-app-header nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reference-guide .citylit-app-header .citylit-header-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 0 13px;
+  border-radius: 999px;
+  color: var(--citylit-quiet);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.reference-guide .citylit-app-header .citylit-header-nav-link:hover,
+.reference-guide .citylit-app-header .citylit-header-nav-link[aria-current="page"] {
+  color: var(--citylit-text);
+  background: color-mix(in srgb, var(--citylit-surface) 78%, transparent);
+}
+
+.reference-guide .citylit-app-header .citylit-header-theme-btn {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 50%;
+  color: var(--citylit-text);
+  background: color-mix(in srgb, var(--citylit-surface) 82%, transparent);
+  box-shadow: inset 0 1px rgb(255 255 255 / 7%);
+}
+
+@media (max-width: 899px) {
+  .reference-guide .citylit-app-header .citylit-header-nav-link {
+    display: none;
+  }
+}
+
+.reference-guide #guide-main {
+  padding-top: 64px;
+}
+
+.reference-guide .atlas-stage + * {
+  margin-top: 0;
+}
+
+/* --- Floating dock ---------------------------------------------------- */
+
+.reference-guide .atlas-native-dock.citylit-bottom-dock,
+.reference-guide.reference-stage-guide .atlas-native-dock.citylit-bottom-dock {
+  position: fixed;
+  inset: auto 0 max(10px, env(safe-area-inset-bottom)) 0;
+  left: 0;
+  right: 0;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2px;
+  width: min(420px, calc(100vw - 24px));
+  max-width: 420px;
+  min-height: 66px;
+  margin-inline: auto;
+  padding: 7px 10px;
+  transform: none;
+  border: 1px solid color-mix(in srgb, var(--citylit-text) 10%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--citylit-reference-panel) 95%, transparent);
+  box-shadow:
+    0 18px 46px rgb(0 0 0 / 34%),
+    inset 0 1px color-mix(in srgb, var(--citylit-text) 7%, transparent);
+  backdrop-filter: blur(30px) saturate(1.4);
+  -webkit-backdrop-filter: blur(30px) saturate(1.4);
+}
+
+.reference-guide .citylit-bottom-dock .bencho-dock-item-wrapper {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.reference-guide .citylit-bottom-dock .bencho-dock-item {
+  width: 100%;
+  min-height: 50px;
+  padding: 5px 6px 6px;
+  border-radius: 18px;
+  color: var(--citylit-quiet);
+  background: transparent;
+  text-decoration: none;
+}
+
+.reference-guide .citylit-bottom-dock .bencho-dock-item.is-active {
+  color: var(--citylit-text);
+}
+
+.reference-guide .citylit-bottom-dock .bencho-dock-item.is-active svg {
+  color: var(--citylit-violet-soft);
+  filter: drop-shadow(0 0 9px rgb(139 92 246 / 55%));
+}
+
+.reference-guide .citylit-bottom-dock .bencho-dock-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.reference-guide .citylit-bottom-dock .citylit-dock-pill.bencho-dock-pill {
+  bottom: -1px;
+  left: 28%;
+  right: 28%;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--citylit-violet);
+  box-shadow: 0 0 12px rgb(139 92 246 / 70%);
+}
+
+/* Keep page feet clear of the floating dock. */
+.reference-guide {
+  padding-bottom: 0;
+}
+
+.reference-guide .atlas-footer {
+  margin-top: clamp(40px, 8vw, 80px);
+  padding: 26px max(18px, env(safe-area-inset-left)) calc(118px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--citylit-hairline);
+  background: transparent;
+  color: var(--citylit-quiet);
+}
+
+.reference-guide .atlas-footer .wordmark-letters,
+.reference-guide .atlas-footer .citylit-logo-symbol {
+  color: var(--citylit-text);
+}
+
+.reference-guide .atlas-footer-links a {
+  color: var(--citylit-quiet);
+}
+
+.reference-guide .atlas-evidence {
+  max-width: 70ch;
+  color: var(--citylit-reference-dim);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* --- Home ------------------------------------------------------------- */
+
+.reference-home.living-atlas-home {
+  padding: 0 max(18px, env(safe-area-inset-left)) calc(128px + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(ellipse at 82% 4%, rgb(139 92 246 / 13%), transparent 40%),
+    radial-gradient(ellipse at 10% 26%, rgb(233 176 77 / 5%), transparent 36%),
+    linear-gradient(
+      180deg,
+      transparent 0,
+      color-mix(in srgb, var(--citylit-reference-bg) 88%, transparent) 30rem,
+      var(--citylit-reference-bg) 64rem
+    );
+}
+
+.reference-home .reference-home-main {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+}
+
+.reference-home .living-atlas-hero {
+  padding: 28px 0 6px;
+}
+
+.citylit-hero-eyebrow {
+  margin: 0 0 14px;
+  color: var(--citylit-violet-soft);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.reference-home .living-atlas-hero h1 {
+  max-width: 16ch;
+  margin: 0;
+  color: var(--citylit-text);
+  font:
+    430 clamp(37px, 9.6vw, 76px)/0.99 Fraunces,
+    Georgia,
+    serif;
+  font-variation-settings:
+    "SOFT" 36,
+    "WONK" 0;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.reference-home .living-atlas-hero h1 em {
+  color: inherit;
+  font-style: normal;
+}
+
+.reference-home .reference-home-subtitle {
+  margin: 14px 0 22px;
+  color: var(--citylit-quiet);
+  font-size: 14px;
+}
+
+.reference-home .reference-search,
+.reference-home .living-atlas-hero .reference-search {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 0;
+  padding: 0 18px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--citylit-surface) 82%, transparent);
+  box-shadow: inset 0 1px rgb(255 255 255 / 4%);
+}
+
+.reference-home .reference-search:focus-within {
+  border-color: color-mix(in srgb, var(--citylit-violet) 70%, white);
+  box-shadow: 0 0 0 3px rgb(139 92 246 / 18%);
+}
+
+.reference-home .reference-search input {
+  min-height: 52px;
+  color: var(--citylit-text);
+  font-size: 16px;
+}
+
+/* Filter pills (the composition's All / Landmarks / Cities / Nature row). */
+.citylit-filter-pills-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 2px 0 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.citylit-filter-pills-row::-webkit-scrollbar {
+  display: none;
+}
+
+.citylit-filter-pill {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-quiet);
+  background: color-mix(in srgb, var(--citylit-surface) 60%, transparent);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.citylit-filter-pill:hover {
+  color: var(--citylit-text);
+  border-color: rgb(255 255 255 / 18%);
+}
+
+.citylit-filter-pill.is-active {
+  color: #fff;
+  border-color: transparent;
+  background: var(--citylit-violet-strong);
+  box-shadow: 0 8px 22px rgb(139 92 246 / 32%);
+}
+
+/* Featured card. */
+.citylit-featured-section {
+  margin-top: 22px;
+}
+
+.citylit-featured-card {
+  position: relative;
+  width: 100%;
+  height: clamp(220px, 58vw, 330px);
+  overflow: hidden;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 24px;
+  background: var(--citylit-surface-raised);
+  box-shadow: 0 22px 50px rgb(0 0 0 / 42%);
+}
+
+.citylit-featured-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.citylit-featured-media::after {
+  content: "";
+  position: absolute;
+  inset: 34% 0 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgb(4 4 6 / 86%));
+}
+
+.citylit-featured-media > img {
+  object-fit: cover;
+  object-position: center 46%;
+}
+
+.citylit-featured-badge {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(14 13 20 / 72%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.citylit-featured-badge span {
+  color: var(--citylit-gold);
+}
+
+.citylit-featured-meta {
+  position: absolute;
+  z-index: 2;
+  left: 18px;
+  right: 74px;
+  bottom: 18px;
+  color: #fff;
+}
+
+.citylit-featured-meta h2 {
+  margin: 0;
+  color: #fff;
+  font:
+    440 clamp(26px, 6vw, 38px)/1.04 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.04em;
+}
+
+.citylit-featured-meta p {
+  margin: 5px 0 0;
+  color: rgb(255 255 255 / 72%);
+  font-size: 12px;
+}
+
+.citylit-featured-arrow-btn {
+  position: absolute;
+  z-index: 3;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 50%;
+  color: #fff;
+  background: rgb(17 16 24 / 72%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 180ms var(--citylit-ease);
+}
+
+.citylit-featured-arrow-btn:hover {
+  transform: translateX(2px);
+}
+
+.citylit-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.citylit-carousel-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 22%);
+}
+
+.citylit-carousel-dots .dot.is-active {
+  width: 20px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 82%);
+}
+
+/* Popular destinations. */
+.citylit-popular-section {
+  margin-top: 32px;
+}
+
+.citylit-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.citylit-section-head h2 {
+  margin: 0;
+  color: var(--citylit-text);
+  font:
+    440 clamp(22px, 5.2vw, 30px)/1.1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.035em;
+}
+
+.citylit-see-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 40px;
+  color: var(--citylit-violet-soft);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.citylit-popular-scroll {
+  display: flex;
+  gap: 12px;
+  margin-inline: max(-18px, calc(-1 * env(safe-area-inset-left)));
+  padding: 2px max(18px, env(safe-area-inset-left)) 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.citylit-popular-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.citylit-popular-card {
+  flex: 0 0 132px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-decoration: none;
+}
+
+.citylit-popular-thumb {
+  position: relative;
+  height: 88px;
+  overflow: hidden;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 16px;
+  background: var(--citylit-surface-raised);
+}
+
+.citylit-popular-thumb img {
+  object-fit: cover;
+  transition: transform 300ms var(--citylit-ease);
+}
+
+.citylit-popular-card:hover .citylit-popular-thumb img {
+  transform: scale(1.04);
+}
+
+.citylit-popular-name {
+  color: var(--citylit-text);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.citylit-popular-prov {
+  margin-top: -4px;
+  color: var(--citylit-reference-dim);
+  font-size: 11px;
+}
+
+/* Mood explorer. */
+.reference-home .living-atlas-explorer {
+  margin-top: 34px;
+  padding: 20px 18px;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--citylit-surface) 72%, transparent);
+  box-shadow: 0 20px 50px rgb(0 0 0 / 30%);
+}
+
+.reference-home .living-atlas-panel-heading h2 {
+  font-size: clamp(22px, 5.4vw, 30px);
+}
+
+.reference-home .living-atlas-all-cities svg {
+  color: var(--citylit-violet-soft);
+}
+
+.reference-home .living-atlas-mood-tabs .hub-tabs.easyui-tabs-list {
+  width: 100%;
+  justify-content: flex-start;
+  overflow-x: auto;
+  border-radius: 16px;
+  background: rgb(8 8 11 / 58%);
+}
+
+.reference-home .living-atlas-mood-tabs .easyui-tab {
+  flex: 0 0 auto;
+  min-height: 40px;
+  font-size: 12px;
+}
+
+.reference-home .living-atlas-mood-tabs .easyui-tab[aria-selected="true"] {
+  color: #fff;
+}
+
+.reference-home .living-atlas-mood-tabs .easyui-tab-indicator {
+  background: var(--citylit-violet-strong);
+  box-shadow: 0 6px 18px rgb(139 92 246 / 34%);
+}
+
+.reference-home .living-atlas-city-card {
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 20px;
+  background: var(--citylit-surface);
+  overflow: hidden;
+}
+
+.reference-home .living-atlas-city-card h3 {
+  color: var(--citylit-text);
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+}
+
+.reference-home .living-atlas-primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: var(--citylit-on-gold);
+  background: var(--citylit-gold);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.reference-home .living-atlas-3d-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* --- Gold primary action, violet selection ---------------------------- */
+
+.reference-guide .atlas-button.atlas-primary,
+.field-guide .reference-trip-empty .pill-button,
+.field-guide .citylit-adventure-callout-btn,
+.reference-guide .atlas-plan-submit {
+  border-color: transparent;
+  color: var(--citylit-on-gold);
+  background: linear-gradient(180deg, var(--citylit-reference-gold-strong), var(--citylit-gold));
+  box-shadow: 0 10px 26px rgb(233 176 77 / 22%);
+}
+
+.reference-guide .atlas-button.atlas-primary:hover {
+  filter: brightness(1.04);
+}
+
+/* --- City directory --------------------------------------------------- */
+
+.reference-guide .atlas-directory-header.atlas-section {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding: 36px max(18px, env(safe-area-inset-left)) 10px;
+}
+
+.reference-guide .atlas-directory-header .atlas-eyebrow {
+  color: var(--citylit-violet-soft);
+}
+
+.reference-guide .atlas-directory-header h1 {
+  margin: 6px 0 0;
+  color: var(--citylit-text);
+  font:
+    430 clamp(38px, 9vw, 72px)/1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.05em;
+}
+
+.reference-guide .atlas-directory {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding: 0 max(18px, env(safe-area-inset-left)) 8px;
+}
+
+.reference-guide .atlas-directory > .atlas-section-heading {
+  display: none;
+}
+
+.reference-guide .atlas-directory-tools {
+  margin-top: 6px;
+}
+
+.reference-guide .atlas-province-pills {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.reference-guide .atlas-province-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.reference-guide .atlas-province-pills .easyui-pill-button {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding-inline: 16px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-quiet);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reference-guide .atlas-province-pills .easyui-pill-button.is-active {
+  color: #fff;
+}
+
+.reference-guide .atlas-province-pills .easyui-pill-indicator {
+  border-radius: 999px;
+  background: var(--citylit-violet-strong);
+}
+
+.reference-guide .atlas-city-grid {
+  gap: 18px;
+}
+
+.reference-guide .atlas-city-card-link {
+  border-radius: 22px;
+  background: var(--citylit-surface);
+}
+
+.reference-guide .atlas-city-photo {
+  min-height: 190px;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+.reference-guide .atlas-city-card-link .atlas-card-copy h3 {
+  color: var(--citylit-text);
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 460;
+}
+
+.reference-guide .atlas-card-number {
+  border-radius: 999px;
+  background: rgb(8 8 11 / 62%);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.reference-guide .atlas-card-arrow {
+  border-color: rgb(255 255 255 / 18%);
+  background: rgb(14 13 20 / 66%);
+  color: #fff;
+}
+
+/* --- City page -------------------------------------------------------- */
+
+.reference-guide .atlas-city-breadcrumb,
+.reference-guide > main > .atlas-city-breadcrumb {
+  width: min(100%, 1120px);
+  margin: 10px auto 0;
+  padding: 0 max(18px, env(safe-area-inset-left)) 8px;
+  color: var(--citylit-reference-dim);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.reference-guide .atlas-city-breadcrumb a {
+  color: var(--citylit-reference-dim);
+  text-decoration: none;
+}
+
+.reference-guide .atlas-city-hero.atlas-city-hero-redesign {
+  /* The hero is a photo card in both themes: keep the surface dark so white
+     copy and source credits stay legible while the image loads. */
+  --citylit-gold: #e9b04d;
+  position: relative;
+  display: block;
+  width: min(calc(100% - 36px), 1120px);
+  min-height: min(560px, 76svh);
+  margin: 14px auto 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 26px;
+  background: #0b0b10;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 40%);
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-hero-art {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-hero-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(6 6 9 / 16%) 0,
+      rgb(6 6 9 / 6%) 32%,
+      rgb(6 6 9 / 62%) 68%,
+      rgb(6 6 9 / 94%) 100%
+    ),
+    linear-gradient(90deg, rgb(6 6 9 / 58%) 0, transparent 78%);
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-hero-art img {
+  object-fit: cover;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-photo-credit {
+  z-index: 3;
+  max-width: 68%;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgb(6 6 9 / 58%);
+  color: rgb(255 255 255 / 66%);
+  font-size: 9px;
+  text-align: right;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-hero-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: inherit;
+  max-width: 660px;
+  padding: clamp(24px, 5vw, 44px);
+  color: #fff;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-eyebrow {
+  color: var(--citylit-gold);
+}
+
+.reference-guide .atlas-city-hero-redesign h1 {
+  margin: 6px 0 10px;
+  color: #fff;
+  font:
+    430 clamp(46px, 11vw, 92px)/0.96 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.05em;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-title-period {
+  color: var(--citylit-gold);
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-intro {
+  max-width: 46ch;
+  margin: 0;
+  color: rgb(255 255 255 / 80%);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-inventory {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  color: rgb(255 255 255 / 68%);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.reference-guide .atlas-city-hero-redesign .atlas-city-secondary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(10 9 14 / 42%);
+  backdrop-filter: blur(12px);
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.reference-guide .atlas-section {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding-inline: max(18px, env(safe-area-inset-left));
+}
+
+.reference-guide .atlas-section-heading h2 {
+  color: var(--citylit-text);
+  font:
+    440 clamp(26px, 6vw, 40px)/1.06 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.04em;
+}
+
+.reference-guide .atlas-landmark-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+
+.reference-guide .atlas-landmark-card {
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--citylit-surface);
+}
+
+.reference-guide .atlas-landmark-link {
+  display: block;
+  padding: 0;
+  color: var(--citylit-text);
+  text-decoration: none;
+}
+
+.reference-guide .atlas-landmark-photo {
+  position: relative;
+  height: 170px;
+  overflow: hidden;
+}
+
+.reference-guide .atlas-landmark-link > div:last-child {
+  padding: 16px 18px 18px;
+}
+
+.reference-guide .atlas-landmark-link h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 6px;
+  color: var(--citylit-text);
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: 22px;
+  font-weight: 460;
+  letter-spacing: -0.02em;
+}
+
+.reference-guide .atlas-landmark-link p {
+  margin: 0;
+  color: var(--citylit-quiet);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.reference-guide .atlas-landmark-3d-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(10 9 14 / 66%);
+  backdrop-filter: blur(10px);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* --- Landmark / place stage ------------------------------------------ */
+
+.reference-stage-guide {
+  background: transparent;
+}
+
+.reference-guide .atlas-stage {
+  --stage-inline-padding: max(18px, env(safe-area-inset-left));
+  position: relative;
+  width: min(100%, 1120px);
+  min-height: 0;
+  margin-inline: auto;
+  padding: 14px var(--stage-inline-padding) calc(148px + env(safe-area-inset-bottom));
+}
+
+.reference-guide .atlas-stage-heading {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+.reference-guide .atlas-stage-heading .atlas-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 10px;
+  padding: 0;
+  color: var(--citylit-reference-dim);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.reference-guide .atlas-stage-heading .atlas-breadcrumb a {
+  color: var(--citylit-reference-dim);
+  text-decoration: none;
+}
+
+.reference-guide .atlas-stage-heading h1 {
+  max-width: 18ch;
+  margin: 0;
+  color: var(--citylit-text);
+  font:
+    430 clamp(34px, 8.6vw, 68px)/1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.045em;
+}
+
+.reference-guide .atlas-ring-scene {
+  touch-action: pan-y;
+}
+
+.reference-guide .atlas-exploration-switch {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  z-index: 7;
+  padding: 0;
+}
+
+.reference-guide .atlas-exploration-tabs .hub-tabs.easyui-tabs-list {
+  display: inline-flex;
+  width: auto;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  background: rgb(12 12 16 / 74%);
+  backdrop-filter: blur(16px);
+}
+
+.reference-guide .atlas-exploration-tabs .easyui-tab {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding-inline: 12px;
+  border-radius: 999px;
+  color: var(--citylit-quiet);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.reference-guide .atlas-exploration-tabs .easyui-tab[aria-selected="true"] {
+  color: #fff;
+}
+
+.reference-guide .atlas-exploration-tabs .easyui-tab-indicator {
+  border-radius: 999px;
+  background: var(--citylit-violet-strong);
+}
+
+.reference-guide .atlas-stage-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+  pointer-events: none;
+}
+
+.reference-guide .atlas-stage-chips {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin: 0 max(-18px, calc(-1 * env(safe-area-inset-left))) 14px;
+  padding: 2px max(18px, env(safe-area-inset-left)) 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  pointer-events: auto;
+}
+
+.reference-guide .atlas-stage-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.reference-guide .atlas-stage-chips .easyui-pill-button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  background: rgb(15 15 20 / 86%);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.reference-guide .atlas-stage-chips .easyui-pill-button.is-active {
+  color: var(--citylit-on-gold);
+}
+
+.reference-guide .atlas-stage-chips .easyui-pill-indicator {
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--citylit-reference-gold-strong), var(--citylit-gold));
+  box-shadow: 0 6px 18px rgb(233 176 77 / 24%);
+}
+
+.reference-guide .atlas-stage-chips .easyui-pill-button.is-active .easyui-pill-content {
+  color: var(--citylit-on-gold);
+}
+
+.reference-guide .atlas-stage-sheet {
+  padding: clamp(18px, 4.4vw, 24px);
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--citylit-surface) 92%, transparent);
+  box-shadow: 0 22px 54px rgb(0 0 0 / 42%);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.reference-guide .atlas-stage-sheet h2 {
+  margin: 0 0 8px;
+  color: var(--citylit-text);
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: clamp(24px, 6vw, 32px);
+  font-weight: 440;
+  letter-spacing: -0.035em;
+}
+
+.reference-guide .atlas-stage-description {
+  margin: 0;
+  color: var(--citylit-quiet);
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+.reference-guide .atlas-stage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.reference-guide .atlas-stage-actions .atlas-button {
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.reference-guide .atlas-stage-facts {
+  margin: 16px 0 0;
+  border-color: var(--citylit-hairline);
+  border-radius: 16px;
+  background: var(--citylit-hairline);
+}
+
+.reference-guide .atlas-stage-facts > div {
+  background: var(--citylit-surface-raised);
+}
+
+.reference-guide .atlas-stage-facts dt {
+  color: var(--citylit-reference-dim);
+}
+
+.reference-guide .atlas-stage-facts dd {
+  color: var(--citylit-text);
+}
+
+.reference-guide .atlas-stage-facts a {
+  color: var(--citylit-violet-soft);
+}
+
+.reference-guide .atlas-stage-controls {
+  margin: 16px 0 0;
+}
+
+.reference-guide .atlas-stage-controls button {
+  min-height: 44px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  background: var(--citylit-surface-raised);
+  color: var(--citylit-text);
+}
+
+.reference-guide .atlas-stage-controls span {
+  color: var(--citylit-reference-dim);
+}
+
+.reference-guide .stage-message:not(:empty) {
+  color: var(--citylit-gold);
+}
+
+/* Inspector sits over the stage like the reference â€œInspectâ€ pill. */
+.reference-guide .atlas-inspector-toolbar,
+.reference-guide.reference-stage-guide .atlas-ring-scene .atlas-inspector-toolbar,
+.reference-guide.reference-stage-guide .atlas-ring-scene.is-heritage-hero .atlas-inspector-toolbar {
+  position: absolute;
+  top: 12px;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: auto;
+  left: auto;
+  z-index: 90;
+}
+
+.reference-guide .atlas-inspector-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  background: rgb(18 18 24 / 86%);
+  box-shadow:
+    0 12px 30px rgb(0 0 0 / 38%),
+    inset 0 1px rgb(255 255 255 / 6%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.reference-guide .atlas-inspector-toggle[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--citylit-violet) 64%, transparent);
+  box-shadow:
+    0 0 0 3px rgb(139 92 246 / 16%),
+    0 12px 30px rgb(0 0 0 / 38%);
+}
+
+.reference-guide .atlas-inspector-toggle svg {
+  color: var(--citylit-violet-soft);
+}
+
+.reference-guide .atlas-inspector-panel {
+  display: none;
+}
+
+.reference-guide .atlas-inspector-panel.is-open,
+.reference-guide .atlas-inspector-panel[popover]:popover-open {
+  display: grid;
+  gap: 12px;
+  width: min(330px, calc(100vw - 28px));
+  max-height: min(520px, calc(100dvh - 190px));
+  padding: 14px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 22px;
+  background: rgb(14 14 19 / 96%);
+  box-shadow: 0 26px 64px rgb(0 0 0 / 58%);
+  backdrop-filter: blur(26px) saturate(1.3);
+  -webkit-backdrop-filter: blur(26px) saturate(1.3);
+}
+
+.reference-guide .atlas-inspector-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 5px;
+  border: 0;
+  border-radius: 16px;
+  background: rgb(255 255 255 / 4%);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.reference-guide .atlas-inspector-actions button {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 44px;
+  border-radius: 12px;
+  color: var(--citylit-text);
+}
+
+.reference-guide .atlas-inspector-actions button[aria-pressed="true"] {
+  color: var(--citylit-on-gold);
+  background: var(--citylit-gold);
+}
+
+.reference-guide .atlas-inspector-section-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 4px 0;
+  color: var(--citylit-quiet);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.reference-guide .atlas-inspector-chevron {
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+.reference-guide .atlas-inspector-presets-section {
+  display: grid;
+  gap: 10px;
+}
+
+.reference-guide .atlas-inspector-visual-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.reference-guide .atlas-preset-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 15px;
+  background: rgb(255 255 255 / 3%);
+  color: var(--citylit-quiet);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.reference-guide .atlas-preset-card.is-active {
+  border-color: var(--citylit-violet);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgb(139 92 246 / 20%);
+}
+
+.reference-guide .atlas-preset-thumb {
+  position: relative;
+  height: 66px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #0b0b0e;
+}
+
+.reference-guide .preset-thumb-art {
+  width: 100%;
+  height: 100%;
+}
+
+.reference-guide .atlas-preset-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--citylit-violet);
+  box-shadow: 0 0 0 2px rgb(14 14 19 / 80%);
+}
+
+.reference-guide .atlas-preset-title {
+  padding-inline: 2px;
+}
+
+.reference-guide .atlas-inspector-toggles {
+  display: grid;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--citylit-hairline);
+}
+
+.reference-guide .atlas-inspector-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  padding-inline: 4px;
+}
+
+.reference-guide .atlas-toggle-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--citylit-text);
+  font-size: 13px;
+}
+
+.reference-guide .atlas-toggle-meta svg {
+  color: var(--citylit-quiet);
+}
+
+.reference-guide .atlas-stage-live-badge {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 11px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  background: rgb(12 12 16 / 74%);
+  color: var(--citylit-quiet);
+  font-size: 10px;
+  font-weight: 650;
+  backdrop-filter: blur(12px);
+}
+
+/* --- My day / Explore ------------------------------------------------- */
+
+.reference-guide .field-guide {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding: 0 max(18px, env(safe-area-inset-left)) calc(150px + env(safe-area-inset-bottom));
+  background: transparent;
+  color: var(--citylit-text);
+}
+
+.reference-guide .field-guide .citylit-myday-header-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 18px 0 6px;
+}
+
+.reference-guide .field-guide .citylit-myday-header-wrap h1 {
+  margin: 0;
+  color: var(--citylit-text);
+  font:
+    430 clamp(42px, 11vw, 72px)/0.98 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.05em;
+}
+
+.citylit-myday-plus-btn {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  min-height: 46px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 50%;
+  color: var(--citylit-text);
+  background: var(--citylit-surface);
+  box-shadow: inset 0 1px rgb(255 255 255 / 5%);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.citylit-myday-plus-btn:hover {
+  border-color: color-mix(in srgb, var(--citylit-violet) 60%, transparent);
+  box-shadow: 0 0 0 3px rgb(139 92 246 / 14%);
+}
+
+.reference-guide .field-guide .field-guide-intro {
+  margin: 0 0 18px;
+  color: var(--citylit-quiet);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.reference-guide .field-guide .select-city {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--citylit-quiet);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reference-guide .field-guide .select-city select {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 8px;
+  padding: 0 44px 0 16px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  background: color-mix(in srgb, var(--citylit-surface) 88%, transparent);
+  font-size: 16px;
+  font-weight: 600;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--citylit-quiet) 50%),
+    linear-gradient(135deg, var(--citylit-quiet) 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) calc(50% + 1px),
+    calc(100% - 16px) calc(50% + 1px);
+  background-size:
+    6px 6px,
+    6px 6px;
+  background-repeat: no-repeat;
+}
+
+.reference-guide .field-guide .select-city select:focus-visible {
+  outline: 2px solid var(--citylit-violet-soft);
+  outline-offset: 2px;
+}
+
+.reference-guide .field-guide .hub-tabs.easyui-tabs-list {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  background: rgb(10 10 14 / 66%);
+}
+
+.reference-guide .field-guide .hub-tabs .easyui-tab {
+  flex: 1 1 0;
+  position: relative;
+  min-width: 0;
+  min-height: 44px;
+  padding-inline: 10px;
+  border-radius: 999px;
+  color: var(--citylit-quiet);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.reference-guide .field-guide .hub-tabs .easyui-tab[aria-selected="true"] {
+  color: #fff;
+}
+
+.reference-guide .field-guide .easyui-tab-indicator {
+  border-radius: 999px;
+  background: var(--citylit-violet-strong);
+  box-shadow: 0 6px 18px rgb(139 92 246 / 30%);
+}
+
+.reference-guide .citylit-myday-pill-nav {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 20px;
+  padding: 5px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  background: rgb(10 10 14 / 66%);
+}
+
+.reference-guide .citylit-myday-pill-nav .bencho-magnetic-item {
+  flex: 1 1 0;
+  position: relative;
+  min-height: 44px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--citylit-quiet);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.reference-guide .citylit-myday-pill-nav .bencho-magnetic-item.is-selected {
+  color: #fff;
+}
+
+.reference-guide .citylit-myday-pill-nav .bencho-magnetic-active-bg {
+  border-radius: 999px;
+  background: var(--citylit-violet-strong);
+  box-shadow: 0 6px 18px rgb(139 92 246 / 30%);
+}
+
+.reference-guide .citylit-saved-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.reference-guide .citylit-saved-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--citylit-surface) 90%, transparent);
+}
+
+.reference-guide .citylit-saved-thumb {
+  position: relative;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--citylit-surface-raised);
+}
+
+.reference-guide .citylit-saved-thumb img {
+  object-fit: cover;
+}
+
+.reference-guide .citylit-saved-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.reference-guide .citylit-saved-info a {
+  color: var(--citylit-text);
+  text-decoration: none;
+}
+
+.reference-guide .citylit-saved-name {
+  margin: 0;
+  color: var(--citylit-text);
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.reference-guide .citylit-saved-location {
+  margin: 3px 0 0;
+  color: var(--citylit-reference-dim);
+  font-size: 12px;
+}
+
+.reference-guide .citylit-saved-bookmark-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--citylit-quiet);
+  background: transparent;
+}
+
+.reference-guide .citylit-saved-bookmark-btn[aria-label^="Remove"] {
+  color: var(--citylit-gold);
+}
+
+.reference-guide .citylit-adventure-callout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px 14px;
+  padding: 18px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgb(233 176 77 / 10%), transparent 58%),
+    color-mix(in srgb, var(--citylit-surface) 92%, transparent);
+}
+
+.reference-guide .citylit-adventure-callout-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  color: var(--citylit-gold);
+  background: rgb(233 176 77 / 12%);
+}
+
+.reference-guide .citylit-adventure-callout-body h3 {
+  margin: 0;
+  color: var(--citylit-text);
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.reference-guide .citylit-adventure-callout-body p {
+  margin: 4px 0 0;
+  color: var(--citylit-quiet);
+  font-size: 12px;
+}
+
+.reference-guide .citylit-adventure-callout-btn {
+  grid-column: 1 / -1;
+  justify-self: stretch;
+  min-height: 46px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.reference-guide .field-guide .reference-trip-empty {
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--citylit-surface) 88%, transparent);
+}
+
+.reference-guide .field-guide .trip-stops {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reference-guide .field-guide .trip-stops li {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 14px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--citylit-surface) 90%, transparent);
+}
+
+.reference-guide .field-guide .trip-stops .stop-number {
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--citylit-on-gold);
+  background: var(--citylit-gold);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reference-guide .field-guide .trip-stops h3 {
+  margin: 0;
+  color: var(--citylit-text);
+  font-size: 15px;
+}
+
+.reference-guide .field-guide .trip-stops p {
+  margin: 3px 0 0;
+  color: var(--citylit-quiet);
+  font-size: 12px;
+}
+
+.reference-guide .field-guide .trip-stops a {
+  color: var(--citylit-violet-soft);
+}
+
+.reference-guide .field-guide .day-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.reference-guide .field-guide .day-actions button {
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  background: var(--citylit-surface);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reference-guide .field-guide .adventure-section > h2 {
+  margin-top: 26px;
+  color: var(--citylit-text);
+  font:
+    440 clamp(24px, 5.6vw, 32px)/1.1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.03em;
+}
+
+.reference-guide .field-guide .adventure-card,
+.reference-guide .field-guide .collection-card,
+.reference-guide .field-guide .event-card {
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--citylit-surface) 92%, transparent);
+}
+
+.reference-guide .field-guide .adventure-card h3,
+.reference-guide .field-guide .collection-card h3,
+.reference-guide .field-guide .event-card h3 {
+  color: var(--citylit-text);
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-weight: 460;
+  letter-spacing: -0.02em;
+}
+
+.reference-guide .field-guide .adventure-card-actions button {
+  min-height: 42px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  background: var(--citylit-surface-raised);
+}
+
+.reference-guide .field-guide .adventure-card-actions .adventure-card-add[aria-pressed="true"] {
+  color: var(--citylit-on-gold);
+  background: var(--citylit-gold);
+  border-color: transparent;
+}
+
+.reference-guide .field-guide .planner-refine {
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--citylit-surface) 84%, transparent);
+}
+
+.reference-guide .field-guide .planner-shuffle {
+  min-height: 46px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  background: var(--citylit-surface);
+}
+
+.reference-guide .field-guide .passport-settings .setting-row {
+  color: var(--citylit-text);
+}
+
+/* --- Settings sheet --------------------------------------------------- */
+
+.citylit-settings-backdrop {
+  background: rgb(3 3 5 / 72%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.citylit-settings-sheet {
+  width: 100%;
+  max-width: 460px;
+  padding: 22px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  border: 1px solid var(--citylit-hairline);
+  border-top: 1px solid color-mix(in srgb, var(--citylit-text) 10%, transparent);
+  border-radius: 28px 28px 0 0;
+  background: var(--citylit-surface);
+  box-shadow: 0 -24px 70px rgb(0 0 0 / 62%);
+}
+
+@media (min-width: 640px) {
+  .citylit-settings-sheet {
+    border-radius: 28px;
+  }
+}
+
+.citylit-settings-header h2 {
+  margin: 0;
+  color: var(--citylit-text);
+  font:
+    440 26px/1.1 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.03em;
+}
+
+.citylit-settings-close.citylit-settings-close-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 50%;
+  color: var(--citylit-quiet);
+  background: transparent;
+}
+
+.citylit-settings-close.citylit-settings-close-btn:hover {
+  color: var(--citylit-text);
+  background: color-mix(in srgb, var(--citylit-text) 6%, transparent);
+}
+
+.citylit-settings-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--citylit-text) 5%, transparent);
+}
+
+.citylit-settings-tab {
+  flex: 1 1 0;
+  min-height: 42px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--citylit-quiet);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.citylit-settings-tab.is-active {
+  color: #fff;
+  background: var(--citylit-violet-strong);
+  box-shadow: 0 6px 18px rgb(139 92 246 / 32%);
+}
+
+.citylit-settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.citylit-settings-subhead {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--citylit-reference-dim);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.citylit-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.citylit-theme-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 92px;
+  padding: 14px 8px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 16px;
+  color: var(--citylit-quiet);
+  background: color-mix(in srgb, var(--citylit-text) 4%, transparent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.citylit-theme-card:hover {
+  border-color: color-mix(in srgb, var(--citylit-text) 20%, transparent);
+}
+
+.citylit-theme-card.is-selected {
+  border-color: var(--citylit-violet);
+  color: var(--citylit-text);
+  background: color-mix(in srgb, var(--citylit-violet) 12%, transparent);
+  box-shadow: 0 0 0 3px rgb(139 92 246 / 16%);
+}
+
+.citylit-card-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--citylit-violet);
+}
+
+.citylit-setting-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 16px;
+  border-top: 1px solid var(--citylit-hairline);
+}
+
+.citylit-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 56px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--citylit-hairline);
+  color: var(--citylit-text);
+  font-size: 14px;
+}
+
+.citylit-setting-label {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.citylit-setting-icon {
+  color: var(--citylit-quiet);
+}
+
+.citylit-setting-value {
+  color: var(--citylit-quiet);
+  font-size: 13px;
+}
+
+.citylit-settings-desc {
+  margin: 0 0 14px;
+  color: var(--citylit-quiet);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.citylit-map-cities-list {
+  display: grid;
+  gap: 6px;
+}
+
+.citylit-map-city-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 12px;
+  color: var(--citylit-text);
+  font-size: 13px;
+}
+
+.citylit-map-city-item svg {
+  color: var(--citylit-violet-soft);
+}
+
+.citylit-map-city-item strong {
+  font-weight: 650;
+}
+
+.citylit-map-city-item span {
+  margin-left: auto;
+  color: var(--citylit-reference-dim);
+  font-size: 11px;
+}
+
+.citylit-about-card {
+  padding: 16px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--citylit-text) 4%, transparent);
+  color: var(--citylit-quiet);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.citylit-about-card strong {
+  color: var(--citylit-text);
+}
+
+.citylit-about-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--citylit-hairline);
+  color: var(--citylit-reference-dim);
+  font-size: 11px;
+}
+
+/* --- Venue detail ----------------------------------------------------- */
+
+.citylit-detail-page {
+  padding-top: 0;
+  padding-bottom: calc(184px + env(safe-area-inset-bottom));
+}
+
+.citylit-detail-hero {
+  position: relative;
+  width: 100%;
+  height: min(440px, 58svh);
+  overflow: hidden;
+}
+
+.citylit-detail-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.citylit-detail-hero-media img {
+  object-fit: cover;
+}
+
+.citylit-detail-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(6 6 9 / 46%) 0,
+    rgb(8 8 11 / 4%) 34%,
+    rgb(8 8 11 / 96%) 100%
+  );
+}
+
+.citylit-detail-top-bar {
+  position: absolute;
+  top: 14px;
+  left: max(16px, env(safe-area-inset-left));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 4;
+}
+
+.citylit-detail-hero-copy {
+  position: absolute;
+  left: max(18px, env(safe-area-inset-left));
+  right: max(18px, env(safe-area-inset-right));
+  bottom: 20px;
+  z-index: 3;
+  max-width: 720px;
+  color: #fff;
+}
+
+.citylit-detail-hero-copy .citylit-featured-badge {
+  position: static;
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 10px;
+  border-color: rgb(233 176 77 / 42%);
+  color: var(--citylit-gold);
+  background: rgb(10 9 14 / 66%);
+}
+
+.citylit-detail-hero-copy h1 {
+  margin: 0;
+  color: #fff;
+  font:
+    430 clamp(34px, 9vw, 58px)/0.98 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.citylit-detail-hero-copy .atlas-title-period {
+  color: var(--citylit-gold);
+}
+
+.citylit-detail-subhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin-top: 12px;
+  color: rgb(255 255 255 / 78%);
+  font-size: 12px;
+}
+
+.citylit-detail-location,
+.citylit-detail-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.citylit-detail-location svg {
+  color: var(--citylit-gold);
+}
+
+.citylit-detail-rating {
+  color: var(--citylit-gold);
+  font-weight: 650;
+}
+
+.citylit-detail-rating span {
+  color: rgb(255 255 255 / 62%);
+  font-weight: 500;
+}
+
+.citylit-detail-3d-banner {
+  position: relative;
+  z-index: 3;
+  padding: 16px max(18px, env(safe-area-inset-left)) 0;
+}
+
+.citylit-detail-3d-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 999px;
+  color: var(--citylit-text);
+  background: var(--citylit-surface);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.citylit-detail-3d-btn svg {
+  color: var(--citylit-violet-soft);
+}
+
+.citylit-detail-tabs-bar {
+  position: sticky;
+  top: 64px;
+  z-index: 8;
+  display: flex;
+  gap: 22px;
+  margin-top: 18px;
+  padding: 0 max(18px, env(safe-area-inset-left));
+  overflow-x: auto;
+  border-bottom: 1px solid var(--citylit-hairline);
+  background: color-mix(in srgb, var(--citylit-reference-bg) 92%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  scrollbar-width: none;
+}
+
+.citylit-detail-tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.citylit-detail-tab {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 14px 0;
+  border: 0;
+  color: var(--citylit-quiet);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.citylit-detail-tab.is-active {
+  color: var(--citylit-text);
+}
+
+.citylit-detail-tab-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--citylit-violet);
+  box-shadow: 0 0 10px rgb(139 92 246 / 60%);
+}
+
+.citylit-detail-body {
+  width: min(100%, 900px);
+  margin-inline: auto;
+  padding: 20px max(18px, env(safe-area-inset-left)) 0;
+}
+
+.citylit-tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.citylit-lead-desc {
+  margin: 0;
+  color: var(--citylit-quiet);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.citylit-tab-panel > h2,
+.citylit-story-card h2,
+.citylit-tips-card h2,
+.citylit-detail-section-title {
+  margin: 0;
+  color: var(--citylit-text);
+  font:
+    440 clamp(22px, 5vw, 28px)/1.15 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.03em;
+}
+
+.citylit-detail-comparison-section,
+.citylit-story-card,
+.citylit-tips-card {
+  display: grid;
+  gap: 14px;
+  padding: clamp(16px, 3.4vw, 22px);
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--citylit-surface) 90%, transparent);
+  color: var(--citylit-quiet);
+}
+
+.citylit-nearby-grid {
+  display: grid;
+  gap: 9px;
+}
+
+.citylit-nearby-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px;
+  border: 1px solid var(--citylit-hairline);
+  border-radius: 16px;
+  color: var(--citylit-text);
+  background: color-mix(in srgb, var(--citylit-surface) 90%, transparent);
+  text-decoration: none;
+}
+
+.citylit-nearby-thumb {
+  position: relative;
+  flex: 0 0 54px;
+  width: 54px;
+  height: 54px;
+  overflow: hidden;
+  border-radius: 11px;
+  background: var(--citylit-surface-raised);
+}
+
+.citylit-nearby-thumb img {
+  object-fit: cover;
+}
+
+.citylit-nearby-card strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.citylit-nearby-card p {
+  margin: 3px 0 0;
+  color: var(--citylit-reference-dim);
+  font-size: 11px;
+}
+
+.citylit-nearby-arrow {
+  margin-left: auto;
+  color: var(--citylit-quiet);
+}
+
+.citylit-detail-sticky-footer {
+  position: fixed;
+  inset: auto 0 calc(88px + env(safe-area-inset-bottom)) 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding-inline: max(18px, env(safe-area-inset-left));
+  pointer-events: none;
+}
+
+.citylit-detail-sticky-footer > * {
+  width: min(420px, 100%);
+  pointer-events: auto;
+}
+
+/* --- Cohesive focus + reduced motion ---------------------------------- */
+
+.reference-guide :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--citylit-violet-soft);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reference-guide .citylit-popular-card:hover .citylit-popular-thumb img {
+    transform: none;
+  }
+}
+
+/* --- Small-screen tuning ---------------------------------------------- */
+
+@media (max-width: 767px) {
+  .reference-guide .citylit-app-header {
+    height: 60px;
+    padding-inline: max(14px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-right));
+    background: linear-gradient(180deg, rgb(8 8 11 / 92%), rgb(8 8 11 / 54%) 78%, transparent);
+  }
+
+  .reference-guide #guide-main {
+    padding-top: 60px;
+  }
+
+  .reference-guide .atlas-stage {
+    padding-top: 12px;
+  }
+
+  .reference-guide.reference-stage-guide .atlas-ring-scene,
+  .reference-guide.reference-stage-guide
+    .atlas-stage:has(.atlas-ring-scene.is-heritage-hero)
+    .atlas-ring-scene {
+    --stage-visual-height: clamp(290px, 44svh, 370px);
+  }
+
+  .reference-guide .atlas-stage-heading h1 {
+    font-size: clamp(32px, 8.4vw, 46px);
+  }
+
+  .reference-guide .atlas-city-breadcrumb {
+    margin-top: 12px;
+  }
+
+  .reference-guide .atlas-city-hero.atlas-city-hero-redesign {
+    min-height: min(500px, 64svh);
+    border-radius: 22px;
+  }
+
+  .reference-guide .atlas-city-hero-redesign .atlas-city-hero-copy {
+    padding: 22px 20px 24px;
+  }
+
+  .reference-guide .atlas-city-hero-redesign h1 {
+    font-size: clamp(29px, 8.8vw, 62px);
+    overflow-wrap: normal;
+  }
+
+  .reference-guide .atlas-directory-header.atlas-section {
+    padding-top: 22px;
+  }
+
+  .reference-guide .atlas-landmark-photo {
+    height: 156px;
+  }
+
+  .reference-guide .atlas-footer {
+    display: none;
+  }
+
+  .citylit-detail-hero {
+    height: min(400px, 54svh);
+  }
+
+  .citylit-detail-tabs-bar {
+    top: 60px;
+  }
+}
+
+@media (max-width: 380px) {
+  .reference-guide .citylit-app-header .wordmark-letters {
+    font-size: 21px;
+  }
+
+  .reference-guide .atlas-stage-heading h1 {
+    font-size: 30px;
+  }
+
+  /* Keep the exploration mode and Inspect controls from colliding. */
+  .reference-guide.reference-stage-guide .atlas-exploration-tabs .easyui-tab svg {
+    display: none;
+  }
+
+  .reference-guide.reference-stage-guide .atlas-exploration-tabs .easyui-tab {
+    min-height: 34px;
+    padding-inline: 11px;
+    font-size: 11px;
+  }
+
+  .reference-guide.reference-stage-guide .atlas-inspector-toggle {
+    min-height: 42px;
+    padding-inline: 13px;
+    font-size: 12px;
+  }
+}
+/* -----------------------------------------------------------------------
+   Cosmic Obsidian & Amber alignment pass (design refs: DESIGN*.md/code*.html)
+   Overrides to bring the live UI closer to the pictured dark editorial atlas.
+   ----------------------------------------------------------------------- */
+
+:root {
+  --co-surface: #121317;
+  --co-surface-dim: #121317;
+  --co-surface-bright: #38393d;
+  --co-surface-lowest: #0d0e12;
+  --co-surface-low: #1a1b20;
+  --co-surface-container: #1f1f24;
+  --co-surface-high: #292a2e;
+  --co-surface-highest: #343439;
+  --co-on-surface: #e3e2e7;
+  --co-on-surface-variant: #ccc3d8;
+  --co-outline: #958da1;
+  --co-outline-variant: #4a4455;
+  --co-primary: #d2bbff;
+  --co-primary-container: #7c3aed;
+  --co-on-primary-container: #ede0ff;
+  --co-secondary: #ffb95f;
+  --co-secondary-container: #ee9800;
+  --co-on-secondary-container: #472a00;
+  --co-tertiary: #ddb7ff;
+  --co-tertiary-container: #8d36db;
+  --co-amber-highlight: #fbbf24;
+  --co-text-primary: #f8fafc;
+  --co-text-secondary: #94a3b8;
+  --co-text-muted: #64748b;
+  --co-glass: rgba(20, 22, 31, 0.72);
+  --co-glass-border: rgba(255, 255, 255, 0.08);
+  --co-violet-glow: rgba(168, 85, 247, 0.24);
+}
+
+:root,
+:root[data-theme="night"] {
+  --citylit-reference-bg: var(--co-surface);
+  --citylit-reference-panel: var(--co-surface-low);
+  --citylit-reference-panel-raised: var(--co-surface-container);
+  --citylit-reference-border: var(--co-glass-border);
+  --citylit-reference-text: var(--co-on-surface);
+  --citylit-reference-muted: var(--co-on-surface-variant);
+  --citylit-reference-dim: var(--co-outline);
+  --citylit-reference-purple: var(--co-primary-container);
+  --citylit-reference-purple-soft: var(--co-primary);
+  --citylit-reference-gold: var(--co-secondary);
+  --citylit-reference-gold-strong: var(--co-secondary-container);
+  --citylit-reference-accent-ink: #472a00;
+}
+
+.reference-guide {
+  background: var(--co-surface) !important;
+  color: var(--co-on-surface);
+}
+
+.reference-guide .atlas-nav.citylit-app-header {
+  background: rgba(18, 19, 23, 0.82) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--co-glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+.reference-guide .atlas-wordmark,
+.reference-guide .citylit-app-header .wordmark-letters {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  letter-spacing: -0.02em;
+}
+
+.reference-guide .atlas-nav nav > a,
+.reference-guide .citylit-header-nav-link {
+  color: var(--co-on-surface-variant);
+}
+
+.reference-guide .atlas-nav nav > a[aria-current="page"],
+.reference-guide .atlas-day-link[aria-current="page"] {
+  color: var(--co-primary);
+}
+
+.reference-guide .atlas-native-dock,
+.reference-guide .bencho-magnifying-dock {
+  background: rgba(18, 19, 23, 0.88) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--co-glass-border);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.55);
+}
+
+.reference-guide .citylit-dock-item {
+  color: var(--co-on-surface-variant);
+}
+
+.reference-guide .citylit-dock-item.is-active {
+  color: var(--co-primary);
+}
+
+.reference-guide .bencho-dock-pill,
+.reference-guide .citylit-dock-pill {
+  background: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 -2px 12px rgba(124, 58, 237, 0.35);
+}
+
+/* Home hero */
+.reference-home {
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(124, 58, 237, 0.14), transparent 45%),
+    radial-gradient(ellipse at 20% 10%, rgba(251, 191, 36, 0.06), transparent 35%),
+    var(--co-surface) !important;
+}
+
+.reference-home-hero h1,
+.reference-guide .living-atlas-hero h1 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  color: var(--co-text-primary);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.reference-home-hero h1 em,
+.reference-guide .living-atlas-hero h1 em {
+  font-style: italic;
+  color: var(--co-tertiary);
+}
+
+.citylit-hero-eyebrow,
+.reference-eyebrow {
+  color: var(--co-tertiary);
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reference-home-subtitle,
+.reference-guide .living-atlas-hero .reference-home-subtitle {
+  color: var(--co-text-secondary);
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+}
+
+.reference-search {
+  background: var(--co-surface-container) !important;
+  border: 1px solid var(--co-glass-border);
+  color: var(--co-text-muted);
+}
+
+.reference-search:focus-within {
+  border-color: rgba(124, 58, 237, 0.5);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.reference-search input {
+  color: var(--co-text-primary);
+}
+
+.reference-search input::placeholder {
+  color: var(--co-text-muted);
+}
+
+/* Filter pills */
+.citylit-filter-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.citylit-filter-pill {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--co-surface-container);
+  color: var(--co-text-secondary);
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.citylit-filter-pill.is-active,
+.citylit-filter-pill[aria-pressed="true"] {
+  background: var(--co-primary-container);
+  color: var(--co-on-primary-container);
+  box-shadow: 0 0 16px rgba(124, 58, 237, 0.4);
+}
+
+.citylit-filter-pill:hover:not(.is-active) {
+  color: var(--co-text-primary);
+  background: var(--co-surface-high);
+}
+
+/* Featured card */
+.citylit-featured-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--co-surface-container);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--co-glass-border);
+}
+
+.citylit-featured-media {
+  position: relative;
+  min-height: 320px;
+}
+
+.citylit-featured-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(13, 14, 18, 0.95) 0%,
+    rgba(13, 14, 18, 0.35) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.citylit-featured-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(13, 14, 18, 0.72);
+  backdrop-filter: blur(12px);
+  color: var(--co-amber-highlight);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.citylit-featured-meta {
+  position: absolute;
+  left: 18px;
+  right: 70px;
+  bottom: 18px;
+  z-index: 2;
+}
+
+.citylit-featured-meta h2 {
+  margin: 0;
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 500;
+  color: var(--co-text-primary);
+}
+
+.citylit-featured-meta p {
+  margin: 4px 0 0;
+  color: var(--co-text-secondary);
+  font-size: 14px;
+}
+
+.citylit-featured-arrow-btn {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--co-primary-container);
+  color: var(--co-on-primary-container);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.45);
+}
+
+.citylit-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.citylit-carousel-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--co-surface-highest);
+}
+
+.citylit-carousel-dots .dot.is-active {
+  width: 18px;
+  background: var(--co-primary-container);
+}
+
+/* Section headings */
+.citylit-section-head h2,
+.reference-section-heading h2,
+.living-atlas-panel-heading h2 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  color: var(--co-text-primary);
+  font-weight: 500;
+}
+
+.citylit-see-all-link,
+.living-atlas-all-cities,
+.reference-section-heading a {
+  color: var(--co-tertiary);
+}
+
+/* Popular cards */
+.citylit-popular-card,
+.reference-city-tile {
+  background: var(--co-surface-low);
+  border: 1px solid var(--co-glass-border);
+  border-radius: 16px;
+}
+
+.citylit-popular-name,
+.reference-city-tile strong {
+  color: var(--co-text-primary);
+}
+
+.citylit-popular-prov,
+.reference-city-tile small {
+  color: var(--co-text-secondary);
+}
+
+/* Buttons */
+.reference-guide .atlas-button.atlas-primary,
+.field-guide .day-actions button:first-child,
+.easyui-pill-button.is-active,
+.citylit-primary-action {
+  background: linear-gradient(135deg, var(--co-amber-highlight), var(--co-secondary)) !important;
+  color: var(--co-on-secondary-container) !important;
+  border: none !important;
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.3);
+  font-weight: 700;
+}
+
+.reference-guide .atlas-button,
+.reference-guide .atlas-text-link,
+button.atlas-button:not(.atlas-primary) {
+  color: var(--co-text-primary);
+}
+
+/* Cards / surfaces */
+.reference-guide .atlas-beacon-card,
+.reference-guide .atlas-empty,
+.reference-guide .atlas-plan-stop,
+.reference-guide .atlas-city-card-link,
+.reference-guide .atlas-place-card-link,
+.reference-result-card,
+.living-atlas-city-card {
+  background: var(--co-surface-low) !important;
+  border: 1px solid var(--co-glass-border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Settings */
+.citylit-settings-backdrop {
+  background: rgba(13, 14, 18, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.citylit-settings-sheet {
+  background: rgba(26, 27, 32, 0.96);
+  border: 1px solid var(--co-glass-border);
+  color: var(--co-on-surface);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+.citylit-settings-header h2 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  color: var(--co-text-primary);
+}
+
+.citylit-settings-tab.is-active {
+  background: var(--co-primary-container);
+  color: var(--co-on-primary-container);
+}
+
+.citylit-theme-card.is-selected {
+  border-color: var(--co-primary-container);
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.25);
+}
+
+/* Day theme readability overrides */
+:root[data-theme="day"] .reference-guide,
+:root[data-theme="day"] .reference-home {
+  background: #f4efe6 !important;
+}
+
+:root[data-theme="day"] .reference-guide .atlas-nav.citylit-app-header,
+:root[data-theme="day"] .reference-guide .atlas-native-dock {
+  background: rgba(251, 249, 245, 0.92) !important;
+}
+
+@media (max-width: 767px) {
+  .citylit-featured-media {
+    min-height: 280px;
+  }
+  .reference-guide .atlas-native-dock {
+    border-radius: 24px 24px 0 0;
+  }
+}
+/* Ref polish: amber accent dot + dock glow */
+.reference-guide .wordmark-spark,
+.reference-guide .atlas-wordmark::after {
+  background: var(--co-amber-highlight, #fbbf24);
+}
+.reference-guide .atlas-native-dock a[aria-current="page"] .bencho-dock-label,
+.reference-guide .citylit-dock-item.is-active .bencho-dock-label {
+  color: var(--co-primary, #d2bbff);
+}
+.reference-guide .atlas-native-dock a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: var(--co-primary-container, #7c3aed);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.9);
+}
+.reference-guide .atlas-native-dock a {
+  position: relative;
+}
+/* Keep day mode dock readable */
+:root[data-theme="day"] .reference-guide .atlas-native-dock a[aria-current="page"]::after {
+  box-shadow: none;
+}
+/* Home: 3D canvas card + plan card (Cosmic Obsidian ref) */
+.citylit-3d-canvas-section,
+.citylit-plan-card-section {
+  margin-top: 20px;
+}
+.citylit-3d-canvas-card {
+  background: var(--co-surface-low, #1a1b20);
+  border: 1px solid var(--co-glass-border, rgba(255, 255, 255, 0.08));
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+.citylit-3d-canvas-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.citylit-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--co-text-muted, #64748b);
+  margin-bottom: 4px;
+}
+.citylit-3d-canvas-head h2 {
+  margin: 0;
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--co-text-primary, #f8fafc);
+}
+.citylit-inspect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--co-surface-container, #1f1f24);
+  border: 1px solid var(--co-glass-border, rgba(255, 255, 255, 0.08));
+  color: var(--co-text-primary, #f8fafc);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.citylit-inspect-btn svg {
+  color: var(--co-tertiary, #ddb7ff);
+}
+.citylit-3d-viewport {
+  position: relative;
+  height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--co-surface-lowest, #0d0e12);
+}
+.citylit-3d-preview-image {
+  object-fit: cover;
+  opacity: 0.55;
+  transform: scale(1.02);
+}
+.citylit-3d-viewport-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 60%, rgba(124, 58, 237, 0.22) 0%, transparent 60%),
+    linear-gradient(
+      to top,
+      rgba(13, 14, 18, 0.92) 0%,
+      rgba(13, 14, 18, 0.2) 55%,
+      rgba(13, 14, 18, 0.35) 100%
+    );
+}
+.citylit-3d-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 65%, rgba(124, 58, 237, 0.22) 0%, transparent 65%);
+  pointer-events: none;
+}
+.citylit-3d-diorama-label {
+  position: absolute;
+  left: 14px;
+  bottom: 56px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 12px;
+  font-weight: 500;
+}
+.citylit-3d-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--co-amber-highlight, #fbbf24);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+}
+.citylit-3d-preset-card {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  width: 200px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(20, 22, 31, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+.citylit-3d-preset-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--co-text-primary, #f8fafc);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.citylit-3d-preset-title svg {
+  color: var(--co-tertiary, #ddb7ff);
+}
+.citylit-3d-preset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.citylit-3d-preset-grid span {
+  display: block;
+  text-align: center;
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: var(--co-surface-container, #1f1f24);
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.citylit-3d-preset-grid span.is-active {
+  border-color: rgba(124, 58, 237, 0.6);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.25);
+  color: var(--co-text-primary, #f8fafc);
+}
+.citylit-3d-preset-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 11px;
+}
+.citylit-3d-chip-row {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.citylit-3d-chip-row::-webkit-scrollbar {
+  display: none;
+}
+.citylit-3d-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(26, 27, 32, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.citylit-3d-chip.is-active {
+  background: var(--co-secondary-container, #ee9800);
+  color: #472a00;
+  border-color: transparent;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.3);
+}
+@media (max-width: 420px) {
+  .citylit-3d-preset-card {
+    display: none;
+  }
+  .citylit-3d-diorama-label {
+    bottom: 52px;
+  }
+}
+
+/* Popular destinations ref tweaks */
+.citylit-popular-section .citylit-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.citylit-section-sub {
+  margin: 4px 0 0;
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 13px;
+}
+.citylit-popular-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.citylit-popular-scroll::-webkit-scrollbar {
+  display: none;
+}
+.citylit-popular-card {
+  flex: 0 0 176px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  background: var(--co-surface-low, #1a1b20);
+  border: 1px solid var(--co-glass-border, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
+}
+.citylit-popular-thumb {
+  position: relative;
+  width: 100%;
+  height: 112px;
+}
+.citylit-popular-thumb img {
+  object-fit: cover;
+}
+.citylit-popular-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.citylit-popular-body .citylit-popular-prov {
+  color: var(--co-amber-highlight, #fbbf24);
+  font-size: 11px;
+  font-weight: 600;
+}
+.citylit-popular-body .citylit-popular-name {
+  color: var(--co-text-primary, #f8fafc);
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+}
+.citylit-popular-meta {
+  color: var(--co-text-muted, #64748b);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* Plan card */
+.citylit-plan-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--co-surface-low, #1a1b20);
+  border: 1px solid var(--co-glass-border, rgba(255, 255, 255, 0.08));
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+.citylit-plan-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(245, 158, 11, 0.16);
+  color: var(--co-amber-highlight, #fbbf24);
+}
+.citylit-plan-copy h3 {
+  margin: 0;
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--co-text-primary, #f8fafc);
+}
+.citylit-plan-copy p {
+  margin: 6px 0 0;
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.citylit-plan-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.citylit-plan-primary {
+  flex: 1;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--co-amber-highlight, #fbbf24),
+    var(--co-secondary, #ffb95f)
+  );
+  color: #472a00;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.35);
+}
+.citylit-plan-secondary {
+  height: 44px;
+  min-width: 64px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  background: var(--co-surface-container, #1f1f24);
+  border: 1px solid var(--co-glass-border, rgba(255, 255, 255, 0.08));
+  color: var(--co-text-primary, #f8fafc);
+  text-decoration: none;
+  font-weight: 600;
+}
+.citylit-plan-secondary svg {
+  color: var(--co-amber-highlight, #fbbf24);
+}
+.citylit-plan-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--co-text-muted, #64748b);
+  font-size: 11px;
+}
+.citylit-plan-status > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.citylit-plan-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--co-tertiary, #ddb7ff);
+}
+.citylit-plan-status a {
+  color: var(--co-text-secondary, #94a3b8);
+  text-decoration: none;
+}
+:root[data-theme="day"] .citylit-3d-canvas-card,
+:root[data-theme="day"] .citylit-plan-card,
+:root[data-theme="day"] .citylit-popular-card {
+  background: #fbf9f5;
+}
+:root[data-theme="day"] .citylit-3d-preset-card,
+:root[data-theme="day"] .citylit-3d-chip {
+  background: rgba(251, 249, 245, 0.92);
+}
+/* Step 2/3: City, venue, stage/inspector cosmic alignment */
+.reference-guide .atlas-city-hero-redesign,
+.reference-guide .atlas-landmark-card,
+.reference-guide .atlas-place-card-link,
+.reference-guide .atlas-plan-stop,
+.reference-guide .citylit-detail-hero {
+  border-color: var(--co-glass-border, rgba(255, 255, 255, 0.08));
+}
+
+.reference-guide .atlas-city-hero-copy h1,
+.reference-guide .atlas-section h2,
+.reference-guide .atlas-landmark-story h1,
+.reference-guide .atlas-category-guide h1,
+.citylit-detail-meta h1 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  color: var(--co-text-primary, #f8fafc);
+}
+
+.reference-guide .atlas-eyebrow,
+.reference-guide .atlas-breadcrumb,
+.citylit-detail-location {
+  color: var(--co-on-surface-variant, #ccc3d8);
+}
+
+.reference-guide .atlas-landmark-3d-tag,
+.reference-guide .living-atlas-3d-badge,
+.citylit-detail-3d-btn {
+  background: rgba(124, 58, 237, 0.18);
+  color: var(--co-primary, #d2bbff);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+}
+
+.reference-guide .atlas-button.atlas-primary,
+.reference-guide .living-atlas-primary-action {
+  background: linear-gradient(
+    90deg,
+    var(--co-amber-highlight, #fbbf24),
+    var(--co-secondary, #ffb95f)
+  ) !important;
+  color: #472a00 !important;
+}
+
+.reference-guide .atlas-text-link,
+.reference-guide .living-atlas-all-cities {
+  color: var(--co-tertiary, #ddb7ff);
+}
+
+/* Stage / inspector */
+.reference-guide.reference-stage-guide .atlas-stage {
+  background: radial-gradient(circle at 50% 40%, rgba(124, 58, 237, 0.12), transparent 55%);
+}
+.reference-guide .atlas-inspector-toggle,
+.reference-guide .atlas-inspect-btn {
+  background: rgba(35, 27, 62, 0.9);
+  border: 1px solid rgba(168, 85, 247, 0.6);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+}
+.reference-guide .atlas-stage-sheet,
+.reference-guide .atlas-inspector-sheet,
+.reference-guide .camera-preset-card {
+  background: rgba(20, 22, 31, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.reference-guide .atlas-stage-chips .easyui-pill-button.is-active,
+.reference-guide .atlas-landmark-chip.is-active {
+  background: var(--co-secondary-container, #ee9800) !important;
+  color: #472a00 !important;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.3);
+}
+
+/* Venue detail */
+.citylit-detail-tabs-bar {
+  background: rgba(18, 19, 23, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.citylit-detail-tab.is-active,
+.citylit-detail-tab[aria-selected="true"] {
+  color: var(--co-text-primary, #f8fafc);
+}
+.citylit-detail-tab-line {
+  background: var(--co-primary-container, #7c3aed);
+}
+.citylit-nearby-card,
+.citylit-story-card,
+.citylit-tips-card {
+  background: var(--co-surface-low, #1a1b20);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.citylit-detail-sticky-footer .bencho-slide-track,
+.citylit-detail-sticky-footer .citylit-add-day-btn {
+  background: linear-gradient(
+    90deg,
+    var(--co-amber-highlight, #fbbf24),
+    var(--co-secondary, #ffb95f)
+  );
+  color: #472a00;
+}
+
+/* Settings refinements */
+.citylit-settings-sheet {
+  border-radius: 24px;
+}
+.citylit-settings-tabs {
+  background: var(--co-surface-container, #1f1f24);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.citylit-theme-card {
+  background: var(--co-surface-container, #1f1f24);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--co-text-primary, #f8fafc);
+}
+.citylit-theme-card.is-selected {
+  border-color: var(--co-primary-container, #7c3aed);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.35),
+    0 0 18px rgba(124, 58, 237, 0.18);
+}
+.citylit-card-check {
+  background: var(--co-primary-container, #7c3aed);
+  color: #fff;
+}
+/* === Cosmic Obsidian alignment pass: shell / stage / venue / settings === */
+.reference-guide .atlas-header,
+.reference-guide .citylit-header {
+  background: rgba(18, 19, 23, 0.72);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.reference-guide .atlas-dock,
+.reference-guide .citylit-bottom-nav,
+.reference-guide .easyui-magnifying-dock {
+  background: rgba(18, 19, 23, 0.78);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Stage HUD / inspector closer to refs */
+.reference-stage-guide .atlas-stage-heading .atlas-breadcrumb,
+.reference-stage-guide .atlas-stage-heading h1 {
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.reference-stage-guide .atlas-stage-heading h1 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-weight: 500;
+}
+.reference-stage-guide .atlas-stage-sheet {
+  background: rgba(20, 22, 31, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+}
+.reference-stage-guide .atlas-inspector-toggle {
+  background: rgba(35, 27, 62, 0.92);
+  border: 1px solid rgba(168, 85, 247, 0.65);
+  color: #fff;
+  box-shadow: 0 0 22px rgba(168, 85, 247, 0.35);
+}
+.reference-stage-guide .atlas-inspector-panel {
+  background: rgba(22, 24, 33, 0.82);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75);
+}
+.reference-stage-guide .atlas-inspector-actions button,
+.reference-stage-guide .atlas-inspector-actions .atlas-inspector-action {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--co-text-secondary, #94a3b8);
+}
+.reference-stage-guide .atlas-preset-card {
+  background: rgba(26, 28, 39, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.reference-stage-guide .atlas-preset-card.is-active {
+  border-color: rgba(124, 58, 237, 0.85);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.3);
+}
+.reference-stage-guide .atlas-preset-badge,
+.reference-stage-guide .atlas-inspector-check {
+  background: var(--co-primary-container, #7c3aed);
+  color: #fff;
+}
+.reference-stage-guide .atlas-stage-chips .easyui-pill-button.is-active,
+.reference-stage-guide .atlas-stage-chips button[aria-pressed="true"] {
+  background: var(--co-secondary-container, #ee9800) !important;
+  color: #472a00 !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.3);
+}
+
+/* Venue detail cosmic treatment */
+.citylit-detail-page {
+  color: var(--co-text-primary, #f8fafc);
+}
+.citylit-detail-hero-copy h1,
+.citylit-detail-body h2,
+.citylit-detail-section-title {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+}
+.citylit-detail-tabs-bar {
+  background: rgba(18, 19, 23, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.citylit-detail-tab {
+  color: var(--co-text-secondary, #94a3b8);
+}
+.citylit-detail-tab.is-active {
+  color: var(--co-text-primary, #f8fafc);
+}
+.citylit-detail-tab-line {
+  background: var(--co-primary-container, #7c3aed);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+}
+.citylit-nearby-card,
+.citylit-story-card,
+.citylit-tips-card,
+.citylit-detail-comparison-section {
+  background: var(--co-surface-low, #1a1b20);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.citylit-detail-sticky-footer {
+  background: linear-gradient(to top, rgba(18, 19, 23, 0.98), rgba(18, 19, 23, 0.75), transparent);
+}
+.citylit-detail-circle-btn,
+.citylit-detail-3d-btn {
+  background: rgba(26, 27, 32, 0.72);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--co-text-primary, #f8fafc);
+}
+
+/* Settings sheet cosmic treatment */
+.citylit-settings-overlay {
+  background: rgba(7, 8, 10, 0.62);
+  backdrop-filter: blur(8px);
+}
+.citylit-settings-sheet {
+  background: rgba(26, 27, 32, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+}
+.citylit-settings-header h2,
+.citylit-settings-group-title {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+}
+.citylit-settings-tabs {
+  background: var(--co-surface-container, #1f1f24);
+}
+.citylit-theme-card {
+  background: var(--co-surface-container, #1f1f24);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.citylit-theme-card.is-selected {
+  border-color: rgba(124, 58, 237, 0.8);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.35),
+    0 0 18px rgba(124, 58, 237, 0.18);
+}
+.citylit-card-check {
+  background: var(--co-primary-container, #7c3aed);
+}
+@media (prefers-color-scheme: light) {
+  :root[data-theme="day"] .reference-guide .atlas-header,
+  :root[data-theme="day"] .reference-guide .atlas-dock {
+    background: rgba(255, 252, 245, 0.82);
+  }
 }

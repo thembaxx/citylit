@@ -46,10 +46,8 @@ test("editable controls use 16px text across themes and viewport sizes", async (
 
 test("home and city guides prioritize discovery, not marketing filler", async ({ page }) => {
   await page.goto("/?view=guide");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Follow your");
-  await expect(
-    page.getByRole("heading", { name: "Where should we wander?", exact: true }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Follow your curiosity");
+  await expect(page.getByRole("searchbox", { name: "Search landmarks and cities" })).toBeVisible();
   await expect(page.getByRole("searchbox", { name: "Search landmarks and cities" })).toHaveCSS(
     "font-size",
     "16px",

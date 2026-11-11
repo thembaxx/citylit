@@ -5,21 +5,19 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   ArrowRight,
-  ArrowUpRight,
   BookmarkSimple,
+  CalendarPlus,
+  Cube,
   MagnifyingGlass,
   X,
 } from "@phosphor-icons/react";
 import { cities, landmarkSources, places } from "../lib/data";
 import { cityPhoto, landmarkPath } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
-import ThemeToggle from "./ThemeToggle";
-import BrandWordmark from "./BrandWordmark";
-import SettingsModal from "./SettingsModal";
 import { useKhwezi } from "./KhweziProvider";
+import { useDiscovery } from "./useDiscovery";
 import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
-import { useDiscovery } from "./useDiscovery";
 import { benchoAudio } from "../lib/bencho-audio";
 
 const moodPatterns: Partial<Record<AtlasMood, RegExp>> = {
@@ -43,10 +41,8 @@ export default function DiscoveryHome() {
   const [mood, setMood] = useState<AtlasMood>("explore");
   const [selectedCity, setSelectedCity] = useState<number | null>(0);
   const [mapSelectedCity, setMapSelectedCity] = useState<number | null>(null);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const { feedback } = useKhwezi();
   const { state } = useDiscovery();
-  const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
   const normalizedQuery = query.trim().toLowerCase();
 
   // Featured landmark (Cape Town's Table Mountain)
@@ -54,6 +50,12 @@ export default function DiscoveryHome() {
   const featuredLandmarkSource =
     landmarkSources.find((item) => item.name === "Table Mountain") || landmarkSources[0];
   const featuredPhoto = featuredLandmarkSource.images[0];
+
+  // 3D spotlight (real landmark)
+  const spotlightCity = cities.find((c) => c.slug === "mbombela") || cities[0];
+  const spotlightLandmarkName = spotlightCity.landmarks[0];
+  const spotlightLandmark = landmarkSources.find((item) => item.name === spotlightLandmarkName);
+  const spotlightPhoto = spotlightLandmark?.images[0] || cityPhoto(spotlightCity);
 
   const matchingCities = useMemo(
     () =>
@@ -71,13 +73,16 @@ export default function DiscoveryHome() {
         city.landmarks
           .filter((name) => {
             const record = landmarkSources.find((item) => item.name === name);
-            return (
-              `${name} ${city.name} ${city.province} ${record?.about || ""}`
-                .toLowerCase()
-                .includes(normalizedQuery) &&
-              (filter !== "Nature" ||
-                /mountain|garden|park|reserve|island|point|forest|beach/i.test(name))
-            );
+            const haystack =
+              `${name} ${city.name} ${city.province} ${record?.about || ""}`.toLowerCase();
+            if (!haystack.includes(normalizedQuery)) return false;
+            if (filter === "Nature")
+              return /mountain|garden|park|reserve|island|point|forest|beach/i.test(name);
+            if (filter === "Architecture")
+              return /tower|bridge|stadium|building|cathedral|church|fort|castle|museum|monument|city hall|station|library/i.test(
+                `${name} ${record?.about || ""}`,
+              );
+            return true;
           })
           .map((name) => ({ name, city })),
       ),
@@ -88,12 +93,15 @@ export default function DiscoveryHome() {
     () =>
       places.filter((place) => {
         const city = cities.find((row) => row.slug === place.city);
-        return (
-          `${place.name} ${place.city} ${city?.name || ""} ${city?.province || ""} ${place.category} ${place.description} ${place.district || ""}`
-            .toLowerCase()
-            .includes(normalizedQuery) &&
-          (filter !== "Nature" || place.category === "Parks & zoos")
-        );
+        const haystack =
+          `${place.name} ${place.city} ${city?.name || ""} ${city?.province || ""} ${place.category} ${place.description} ${place.district || ""}`.toLowerCase();
+        if (!haystack.includes(normalizedQuery)) return false;
+        if (filter === "Nature") return place.category === "Parks & zoos";
+        if (filter === "Architecture")
+          return /architecture|museum|heritage|theatre|gallery/i.test(
+            `${place.category} ${place.name} ${place.description}`,
+          );
+        return true;
       }),
     [normalizedQuery, filter],
   );
@@ -151,43 +159,19 @@ export default function DiscoveryHome() {
       }}
     >
       <div className="reference-home living-atlas-home">
-        {/* Header (Image 3 Screen 1) */}
-        <header className="reference-home-header">
-          <Link href="/" aria-label="Citylit home">
-            <BrandWordmark />
-          </Link>
-          <div className="reference-home-actions">
-            <Link
-              href="/destinations"
-              className="reference-header-link"
-              data-transition-label="Explore all cities"
-            >
-              Cities <ArrowUpRight size={16} />
-            </Link>
-            <Link
-              href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
-              className="reference-header-link"
-              data-transition-label="Open your day"
-            >
-              <BookmarkSimple size={16} /> My day{" "}
-              {state.itinerary.length ? `(${state.itinerary.length})` : ""}
-            </Link>
-            <ThemeToggle onOpenSettings={() => setSettingsOpen(true)} />
-          </div>
-        </header>
-
         <div className="reference-home-main living-atlas-main">
-          {/* Hero Section (Image 3 Screen 1) */}
+          {/* Hero Section */}
           <section
             className="reference-home-hero living-atlas-hero"
             aria-labelledby="reference-home-title"
           >
+            <p className="citylit-hero-eyebrow">The Nocturnal Edition · South Africa</p>
             <h1 id="reference-home-title">
-              Follow your
-              <br />
-              <em>curiosity.</em>
+              Follow your <em>curiosity.</em>
             </h1>
-            <p className="reference-home-subtitle">Discover. Learn. Experience.</p>
+            <p className="reference-home-subtitle">
+              Discover. Learn. Experience South Africa&apos;s iconic places and night-lit landmarks.
+            </p>
 
             {/* Search Input */}
             <label className="reference-search">
@@ -200,7 +184,7 @@ export default function DiscoveryHome() {
                 onChange={(event) => {
                   setQuery(event.target.value);
                 }}
-                placeholder="Search landmarks, cities..."
+                placeholder="Search landmarks, cities, or provinces..."
                 autoComplete="off"
               />
               {query && (
@@ -216,9 +200,9 @@ export default function DiscoveryHome() {
               )}
             </label>
 
-            {/* Category Filter Pills (Image 3 Screen 1) */}
+            {/* Category Filter Pills */}
             <div className="citylit-filter-pills-row" role="group" aria-label="Explore categories">
-              {(["All", "Landmarks", "Cities", "Nature"] as const).map((tab) => (
+              {(["All", "Landmarks", "Cities", "Nature", "Architecture"] as const).map((tab) => (
                 <button
                   key={tab}
                   type="button"
@@ -252,7 +236,7 @@ export default function DiscoveryHome() {
             />
           ) : (
             <>
-              {/* Featured Landmark Card (Image 3 Screen 1) */}
+              {/* Featured Landmark Card */}
               {(filter === "All" || filter === "Landmarks" || filter === "Nature") &&
                 featuredPhoto && (
                   <section className="citylit-featured-section" aria-label="Featured place">
@@ -281,7 +265,6 @@ export default function DiscoveryHome() {
                         </Link>
                       </div>
                     </div>
-                    {/* Carousel Dots Indicator */}
                     <div className="citylit-carousel-dots" aria-hidden="true">
                       <span className="dot is-active" />
                       <span className="dot" />
@@ -291,18 +274,110 @@ export default function DiscoveryHome() {
                   </section>
                 )}
 
-              {/* Popular Destinations (Image 3 Screen 1) */}
+              {/* 3D Landmark Interactive Canvas Card (visual ref) */}
+              {(filter === "All" || filter === "Landmarks") && spotlightLandmarkName && (
+                <section
+                  className="citylit-3d-canvas-section"
+                  aria-labelledby="home-3d-landmarks-title"
+                >
+                  <div className="citylit-3d-canvas-card">
+                    <div className="citylit-3d-canvas-head">
+                      <div>
+                        <nav className="citylit-crumbs" aria-label="Breadcrumb">
+                          <span>Home</span>
+                          <span>/</span>
+                          <span>Landmarks</span>
+                        </nav>
+                        <h2 id="home-3d-landmarks-title">{spotlightCity.name} landmarks</h2>
+                      </div>
+                      <Link
+                        href={`/${spotlightCity.slug}/landmarks`}
+                        className="citylit-inspect-btn"
+                        data-transition-label={`${spotlightCity.name} 3D landmarks`}
+                      >
+                        <Cube size={17} weight="duotone" aria-hidden="true" /> Inspect
+                      </Link>
+                    </div>
+                    <div className="citylit-3d-viewport">
+                      <div className="citylit-3d-glow" aria-hidden="true" />
+                      {spotlightPhoto && (
+                        <Image
+                          src={spotlightPhoto.src}
+                          alt={spotlightPhoto.alt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 900px"
+                          className="citylit-3d-preview-image"
+                        />
+                      )}
+                      <div className="citylit-3d-viewport-overlay" aria-hidden="true" />
+                      <div className="citylit-3d-diorama-label">
+                        <span className="citylit-3d-live-dot" aria-hidden="true" />
+                        3D landmark mesh · {spotlightLandmarkName}
+                      </div>
+                      <div className="citylit-3d-preset-card" aria-hidden="true">
+                        <div className="citylit-3d-preset-title">
+                          <Cube size={14} weight="duotone" /> Camera presets
+                        </div>
+                        <div className="citylit-3d-preset-grid">
+                          <span className="is-active">Overview</span>
+                          <span>Close-up</span>
+                        </div>
+                        <div className="citylit-3d-preset-toggles">
+                          <span>Overhead</span>
+                          <span>Surroundings</span>
+                        </div>
+                      </div>
+                      <div
+                        className="citylit-3d-chip-row"
+                        role="list"
+                        aria-label="Landmark shortcuts"
+                      >
+                        <Link
+                          href={`/${spotlightCity.slug}/landmarks`}
+                          className="citylit-3d-chip is-active"
+                          role="listitem"
+                        >
+                          {spotlightLandmarkName}
+                        </Link>
+                        {spotlightCity.landmarks.slice(1, 3).map((name) => (
+                          <Link
+                            key={name}
+                            href={landmarkPath(spotlightCity, name)}
+                            className="citylit-3d-chip"
+                            role="listitem"
+                          >
+                            {name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Where should we wander? */}
+              <LivingAtlasDiscovery
+                mood={mood}
+                selectedCity={selectedCityData}
+                onMoodChange={selectMood}
+              />
+
+              {/* Popular Destinations */}
               {(filter === "All" || filter === "Cities") && (
                 <section className="citylit-popular-section" aria-labelledby="popular-heading">
                   <div className="citylit-section-head">
-                    <h2 id="popular-heading">Popular destinations</h2>
+                    <div>
+                      <h2 id="popular-heading">Popular destinations</h2>
+                      <p className="citylit-section-sub">Monographs, guides &amp; walking tours</p>
+                    </div>
                     <Link href="/destinations" className="citylit-see-all-link">
-                      See all <ArrowRight size={14} weight="bold" />
+                      See all 12 <ArrowRight size={14} weight="bold" />
                     </Link>
                   </div>
                   <div className="citylit-popular-scroll">
                     {cities.map((c) => {
                       const photo = cityPhoto(c);
+                      const placeCount = places.filter((p) => p.city === c.slug).length;
                       return (
                         <Link
                           key={c.slug}
@@ -316,12 +391,17 @@ export default function DiscoveryHome() {
                                 src={photo.src}
                                 alt={photo.alt}
                                 fill
-                                sizes="(max-width: 600px) 140px, 180px"
+                                sizes="(max-width: 600px) 160px, 180px"
                               />
                             )}
                           </div>
-                          <strong className="citylit-popular-name">{c.name}</strong>
-                          <span className="citylit-popular-prov">{c.province}</span>
+                          <div className="citylit-popular-body">
+                            <span className="citylit-popular-prov">{c.province}</span>
+                            <strong className="citylit-popular-name">{c.name}</strong>
+                            <span className="citylit-popular-meta">
+                              {placeCount} places · {c.landmarks.length} landmarks
+                            </span>
+                          </div>
                         </Link>
                       );
                     })}
@@ -329,18 +409,43 @@ export default function DiscoveryHome() {
                 </section>
               )}
 
-              {/* Living Atlas Interactive Explorer */}
-              <LivingAtlasDiscovery
-                mood={mood}
-                selectedCity={selectedCityData}
-                onMoodChange={selectMood}
-              />
+              {/* Plan your next adventure */}
+              <section className="citylit-plan-card-section" aria-labelledby="home-plan-title">
+                <div className="citylit-plan-card">
+                  <div className="citylit-plan-icon" aria-hidden="true">
+                    <CalendarPlus size={22} weight="duotone" />
+                  </div>
+                  <div className="citylit-plan-copy">
+                    <h3 id="home-plan-title">Plan your next adventure</h3>
+                    <p>
+                      Save places, compile routes, and keep your day across South African cities.
+                    </p>
+                  </div>
+                  <div className="citylit-plan-actions">
+                    <Link href="/explore?tab=day" className="citylit-plan-primary">
+                      <CalendarPlus size={18} aria-hidden="true" /> Create itinerary
+                    </Link>
+                    <Link
+                      href="/explore?tab=saved"
+                      className="citylit-plan-secondary"
+                      aria-label="View saved places"
+                    >
+                      <BookmarkSimple size={17} weight="duotone" aria-hidden="true" />
+                      <span>{state.saved.length || 0}</span>
+                    </Link>
+                  </div>
+                  <div className="citylit-plan-status">
+                    <span>
+                      <span className="citylit-plan-dot" aria-hidden="true" /> The living atlas ·
+                      Offline caches ready
+                    </span>
+                    <Link href="/about">Source notes →</Link>
+                  </div>
+                </div>
+              </section>
             </>
           )}
         </div>
-
-        {/* Global Settings Modal */}
-        <SettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
       </div>
     </GuideShell>
   );

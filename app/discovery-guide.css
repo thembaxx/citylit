@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
   font-family: Fraunces;
   font-style: normal;
   font-weight: 100 900;
@@ -30,8 +30,8 @@
   --guide-accent: #ffc46b;
   --guide-accent-contrast: #21160a;
   --guide-surface: color-mix(in srgb, var(--bg) 82%, var(--ink) 5%);
-  --guide-heading: Fraunces, Georgia, serif;
-  --font-heading: Fraunces, Georgia, serif;
+  --guide-heading: var(--font-display, "Playfair Display", Georgia, serif);
+  --font-heading: var(--font-display, "Playfair Display", Georgia, serif);
   --accent: var(--guide-accent);
   --accent-ink: var(--guide-accent);
   height: 100vh;
@@ -221,7 +221,7 @@
   max-width: 800px;
 }
 .atlas-eyebrow {
-  font-family: Manrope, system-ui, sans-serif !important;
+  font-family: var(--font-body, "Plus Jakarta Sans", system-ui, sans-serif) !important;
   font-size: 10px !important;
   font-weight: 700;
   line-height: 1.6 !important;
@@ -1200,7 +1200,7 @@
   color: var(--muted);
 }
 .discovery-guide .visit-plan-trigger {
-  font-family: Manrope, sans-serif;
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
   font-size: 13px;
 }
 .discovery-guide .visit-plan-body h3,
@@ -1746,12 +1746,12 @@
     sans-serif;
 }
 .guide-planner {
-  --font-heading: Fraunces, Georgia, serif;
-  --font-mono: Manrope, sans-serif;
+  --font-heading: var(--font-display, "Playfair Display", Georgia, serif);
+  --font-mono: var(--font-body, "Plus Jakarta Sans", sans-serif);
   --accent: #ffc46b;
   --accent-ink: #ffc46b;
   --planner-button-ink: #21160a;
-  font-family: Manrope, sans-serif;
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
 }
 :root[data-theme="day"] .guide-planner {
   --accent: #963f06;
@@ -1771,7 +1771,7 @@
 .guide-planner h1,
 .guide-planner h2,
 .guide-planner h3 {
-  font-family: Fraunces, Georgia, serif;
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
   text-transform: none;
   font-weight: 400;
   letter-spacing: -0.035em;
@@ -1798,11 +1798,11 @@
   color: var(--accent-ink);
 }
 .discovery-guide .visit-plan summary strong {
-  font-family: Manrope, sans-serif;
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
   font-size: 13px;
 }
 .discovery-guide .visit-plan-group dd {
-  font-family: Manrope, sans-serif;
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
   font-size: 12px;
 }
 .discovery-guide .practical-details {

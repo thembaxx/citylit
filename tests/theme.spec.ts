@@ -169,7 +169,8 @@ test("system changes and cross-tab choices update the UI; explicit choices survi
   // Also exercise a route that uses ThemeToggle instead of Explorer's control.
   await page.goto("/explore");
   await matchesTheme(page, "day");
-  await expect(page.getByRole("button", { name: "Switch to night theme" })).toBeVisible();
+  // Guide routes reach theme choices through the settings sheet.
+  await expect(page.getByRole("button", { name: "Open settings", exact: true })).toBeVisible();
   await other.evaluate(() => localStorage.removeItem("citylit-theme"));
   await matchesTheme(page, "night");
   await other.close();

@@ -8,7 +8,7 @@ import { cities, landmarkSources, type Place } from "../lib/data";
 import { cityPhoto, landmarkPath, venuePath } from "../lib/discovery-guide";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 
-export type DiscoveryFilter = "All" | "Landmarks" | "Cities" | "Places" | "Nature";
+export type DiscoveryFilter = "All" | "Landmarks" | "Cities" | "Places" | "Nature" | "Architecture";
 type City = (typeof cities)[number];
 type LandmarkMatch = { name: string; city: City };
 
@@ -55,10 +55,12 @@ export default function DiscoverySearchResults({
           setShowAll(false);
           onFilterChange(item as DiscoveryFilter);
         }}
-        items={(["All", "Landmarks", "Places", "Cities", "Nature"] as const).map((item) => ({
-          id: item,
-          label: item,
-        }))}
+        items={(["All", "Landmarks", "Places", "Cities", "Nature", "Architecture"] as const).map(
+          (item) => ({
+            id: item,
+            label: item,
+          }),
+        )}
       />
       <section className="reference-results" aria-live="polite">
         <div className="reference-section-heading">

@@ -8545,3 +8545,80 @@ button.atlas-button:not(.atlas-primary) {
     background: rgba(255, 252, 245, 0.82);
   }
 }
+
+/* Stage layout refinement toward code2/code4 refs */
+.reference-stage-guide .atlas-stage {
+  position: relative;
+}
+.reference-stage-guide .atlas-stage-heading {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: auto;
+  z-index: 6;
+  max-width: min(520px, calc(100% - 32px));
+}
+.reference-stage-guide .atlas-stage-content {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.reference-stage-guide .atlas-stage-content > * {
+  pointer-events: auto;
+}
+.reference-stage-guide .atlas-stage-chips {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  top: auto;
+  z-index: 7;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 4px 2px;
+  scrollbar-width: none;
+}
+.reference-stage-guide .atlas-stage-chips::-webkit-scrollbar {
+  display: none;
+}
+.reference-stage-guide .atlas-stage-sheet {
+  position: absolute;
+  left: 16px;
+  bottom: 84px;
+  top: auto;
+  width: min(360px, calc(100% - 32px));
+  max-height: min(46vh, 420px);
+  overflow: auto;
+  z-index: 7;
+}
+.reference-stage-guide .atlas-inspector-toolbar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 8;
+}
+@media (max-width: 767px) {
+  .reference-stage-guide .atlas-stage-heading {
+    top: 12px;
+    left: 12px;
+    max-width: calc(100% - 24px);
+  }
+  .reference-stage-guide .atlas-stage-sheet {
+    left: 12px;
+    right: 12px;
+    bottom: 76px;
+    width: auto;
+    max-height: 38vh;
+  }
+  .reference-stage-guide .atlas-stage-chips {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+:root[data-theme="day"] .reference-stage-guide .atlas-stage-sheet {
+  background: rgba(251, 249, 245, 0.92);
+}

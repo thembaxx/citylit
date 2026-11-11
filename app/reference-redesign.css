@@ -8722,3 +8722,66 @@ button.atlas-button:not(.atlas-primary) {
     bottom: 118px;
   }
 }
+/* Corrective overrides: preserve mobile stage flow for tests and usability */
+.reference-stage-guide .atlas-stage-telemetry {
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  .reference-stage-guide .atlas-stage-heading {
+    position: relative;
+    top: auto;
+    left: auto;
+    max-width: none;
+    z-index: 2;
+  }
+  .reference-stage-guide .atlas-stage-content {
+    position: relative;
+    inset: auto;
+    pointer-events: auto;
+    z-index: 2;
+  }
+  .reference-stage-guide .atlas-stage-chips {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    top: auto;
+    margin-top: 8px;
+  }
+  .reference-stage-guide .atlas-stage-sheet {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    top: auto;
+    width: auto;
+    max-height: none;
+    margin-top: 10px;
+  }
+  .reference-stage-guide .atlas-stage-telemetry {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: 10px;
+  }
+  .reference-stage-guide .atlas-inspector-toolbar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+}
+@media (min-width: 768px) {
+  .reference-stage-guide .atlas-stage {
+    min-height: 100dvh;
+  }
+  .reference-stage-guide .atlas-ring-scene {
+    min-height: 100dvh;
+  }
+  .reference-stage-guide .atlas-stage-content {
+    pointer-events: none;
+  }
+  .reference-stage-guide .atlas-stage-content > * {
+    pointer-events: auto;
+  }
+}

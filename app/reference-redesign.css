@@ -8411,62 +8411,6 @@ button.atlas-button:not(.atlas-primary) {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Stage HUD / inspector closer to refs */
-.reference-stage-guide .atlas-stage-heading .atlas-breadcrumb,
-.reference-stage-guide .atlas-stage-heading h1 {
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-.reference-stage-guide .atlas-stage-heading h1 {
-  font-family: var(--font-display, "Playfair Display", Georgia, serif);
-  font-weight: 500;
-}
-.reference-stage-guide .atlas-stage-sheet {
-  background: rgba(20, 22, 31, 0.82);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
-}
-.reference-stage-guide .atlas-inspector-toggle {
-  background: rgba(35, 27, 62, 0.92);
-  border: 1px solid rgba(168, 85, 247, 0.65);
-  color: #fff;
-  box-shadow: 0 0 22px rgba(168, 85, 247, 0.35);
-}
-.reference-stage-guide .atlas-inspector-panel {
-  background: rgba(22, 24, 33, 0.82);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75);
-}
-.reference-stage-guide .atlas-inspector-actions button,
-.reference-stage-guide .atlas-inspector-actions .atlas-inspector-action {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: var(--co-text-secondary, #94a3b8);
-}
-.reference-stage-guide .atlas-preset-card {
-  background: rgba(26, 28, 39, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-.reference-stage-guide .atlas-preset-card.is-active {
-  border-color: rgba(124, 58, 237, 0.85);
-  box-shadow: 0 0 18px rgba(124, 58, 237, 0.3);
-}
-.reference-stage-guide .atlas-preset-badge,
-.reference-stage-guide .atlas-inspector-check {
-  background: var(--co-primary-container, #7c3aed);
-  color: #fff;
-}
-.reference-stage-guide .atlas-stage-chips .easyui-pill-button.is-active,
-.reference-stage-guide .atlas-stage-chips button[aria-pressed="true"] {
-  background: var(--co-secondary-container, #ee9800) !important;
-  color: #472a00 !important;
-  border-color: transparent !important;
-  box-shadow: 0 0 14px rgba(251, 191, 36, 0.3);
-}
-
 /* Venue detail cosmic treatment */
 .citylit-detail-page {
   color: var(--co-text-primary, #f8fafc);
@@ -8922,4 +8866,52 @@ button.atlas-button:not(.atlas-primary) {
   :root[data-theme="day"] .citylit-detail-page .citylit-detail-hero-gradient {
     background: linear-gradient(to bottom, transparent 0%, rgba(251, 249, 245, 0.85) 100%);
   }
+}
+/* Stage HUD / inspector closer to refs (without inspector panel backdrop-filter) */
+.reference-stage-guide .atlas-stage-heading .atlas-breadcrumb,
+.reference-stage-guide .atlas-stage-heading h1 {
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.reference-stage-guide .atlas-stage-heading h1 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-weight: 500;
+}
+.reference-stage-guide .atlas-stage-sheet {
+  background: rgba(20, 22, 31, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+}
+.reference-stage-guide .atlas-inspector-toggle {
+  background: rgba(35, 27, 62, 0.92);
+  border: 1px solid rgba(168, 85, 247, 0.65);
+  color: #fff;
+  box-shadow: 0 0 22px rgba(168, 85, 247, 0.35);
+}
+.reference-stage-guide .atlas-inspector-actions button,
+.reference-stage-guide .atlas-inspector-actions .atlas-inspector-action {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--co-text-secondary, #94a3b8);
+}
+.reference-stage-guide .atlas-preset-card {
+  background: rgba(26, 28, 39, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.reference-stage-guide .atlas-preset-card.is-active {
+  border-color: rgba(124, 58, 237, 0.85);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.3);
+}
+.reference-stage-guide .atlas-preset-badge,
+.reference-stage-guide .atlas-inspector-check {
+  background: var(--co-primary-container, #7c3aed);
+  color: #fff;
+}
+.reference-stage-guide .atlas-stage-chips .easyui-pill-button.is-active,
+.reference-stage-guide .atlas-stage-chips button[aria-pressed="true"] {
+  background: var(--co-secondary-container, #ee9800) !important;
+  color: #472a00 !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.3);
 }

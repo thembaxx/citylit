@@ -8816,3 +8816,110 @@ button.atlas-button:not(.atlas-primary) {
   background: rgba(251, 249, 245, 0.82);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
+/* Venue detail cosmic refinement */
+.citylit-detail-page .citylit-detail-hero {
+  position: relative;
+  overflow: hidden;
+}
+.citylit-detail-page .citylit-detail-hero-media img {
+  transform: scale(1.02);
+}
+.citylit-detail-page .citylit-detail-hero-gradient {
+  background: linear-gradient(to bottom, transparent 0%, rgba(18, 19, 23, 0.85) 100%);
+}
+.citylit-detail-page .citylit-detail-top-bar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.citylit-detail-page .citylit-detail-hero-copy {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 4;
+}
+.citylit-detail-page .citylit-detail-hero-copy h1 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--co-text-primary, #f8fafc);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.citylit-detail-page .citylit-detail-location {
+  color: var(--co-on-surface-variant, #ccc3d8);
+  font-size: 14px;
+}
+.citylit-detail-page .citylit-detail-rating {
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 13px;
+}
+.citylit-detail-page .citylit-detail-rating strong {
+  color: var(--co-amber-highlight, #fbbf24);
+}
+.citylit-detail-page .citylit-detail-tabs-bar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+.citylit-detail-page .citylit-detail-tab {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 16px;
+  transition: color 0.2s ease;
+}
+.citylit-detail-page .citylit-detail-tab.is-active {
+  font-weight: 600;
+}
+.citylit-detail-page .citylit-detail-body {
+  padding: 20px;
+}
+.citylit-detail-page .citylit-lead-desc {
+  color: var(--co-text-secondary, #94a3b8);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.citylit-detail-page .citylit-detail-section-title {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  color: var(--co-text-primary, #f8fafc);
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+.citylit-detail-page .citylit-nearby-card {
+  border-radius: 14px;
+  padding: 12px;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+.citylit-detail-page .citylit-nearby-card:hover {
+  background: var(--co-surface-container, #1f1f24);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.citylit-detail-page .citylit-story-card,
+.citylit-detail-page .citylit-tips-card {
+  border-radius: 16px;
+  padding: 20px;
+}
+.citylit-detail-page .citylit-story-card h2,
+.citylit-detail-page .citylit-tips-card h2 {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  color: var(--co-text-primary, #f8fafc);
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+.citylit-detail-page .citylit-detail-sticky-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+@media (prefers-color-scheme: light) {
+  :root[data-theme="day"] .citylit-detail-page .citylit-detail-hero-gradient {
+    background: linear-gradient(to bottom, transparent 0%, rgba(251, 249, 245, 0.85) 100%);
+  }
+}

@@ -1,5 +1,9 @@
 export function stageModel(name: string, category = "") {
   const value = name.toLowerCase();
+  if (/colosseum|amphitheatre|arena/.test(value)) return "colosseum";
+  if (/eiffel/.test(value)) return "eiffel-tower";
+  if (/pisa|leaning tower/.test(value)) return "leaning-tower";
+  if (/big ben|parliament|westminster/.test(value)) return "clock-tower";
   if (/bo.kaap/.test(value)) return "bo-kaap";
   if (/orlando|cooling tower/.test(value)) return "cooling-towers";
   if (/ushaka|u.shaka|aquarium/.test(value)) return "aquarium";
@@ -24,7 +28,7 @@ export function stageModel(name: string, category = "") {
     return "theatre";
   if (/meropa|boardwalk|casino|palms/.test(value) || category === "Clubs") return "entertainment";
   if (
-    /garden|park|zoo|reserve|dam|beach|wildebeest kuil/.test(value) ||
+    /garden|botanical|park|zoo|reserve|dam|beach|wildebeest kuil|lowveld/.test(value) ||
     category === "Parks & zoos"
   )
     return "park";

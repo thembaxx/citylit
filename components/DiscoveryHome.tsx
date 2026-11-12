@@ -19,6 +19,7 @@ import { useDiscovery } from "./useDiscovery";
 import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
 import WeatherWidget from "./WeatherWidget";
+import DioramaWeatherController from "./DioramaWeatherController";
 import { benchoAudio } from "../lib/bencho-audio";
 
 const moodPatterns: Partial<Record<AtlasMood, RegExp>> = {
@@ -46,10 +47,38 @@ export default function DiscoveryHome() {
   const { state } = useDiscovery();
   const normalizedQuery = query.trim().toLowerCase();
 
-  // Featured landmark (Cape Town's Table Mountain)
-  const featuredCity = cities.find((c) => c.slug === "cape-town") || cities[0];
-  const featuredLandmarkSource =
-    landmarkSources.find((item) => item.name === "Table Mountain") || landmarkSources[0];
+  // Featured landmarks carousel (Cape Town, Pretoria, Durban, Joburg)
+  const featuredList = useMemo(
+    () => [
+      {
+        city: cities.find((c) => c.slug === "cape-town") || cities[0],
+        landmark:
+          landmarkSources.find((item) => item.name === "Table Mountain") || landmarkSources[0],
+      },
+      {
+        city: cities.find((c) => c.slug === "tshwane") || cities[1],
+        landmark:
+          landmarkSources.find((item) => item.name === "Union Buildings") || landmarkSources[1],
+      },
+      {
+        city: cities.find((c) => c.slug === "durban") || cities[2],
+        landmark:
+          landmarkSources.find((item) => item.name === "Moses Mabhida Stadium") ||
+          landmarkSources[2],
+      },
+      {
+        city: cities.find((c) => c.slug === "johannesburg") || cities[3],
+        landmark:
+          landmarkSources.find((item) => item.name === "Nelson Mandela Bridge") ||
+          landmarkSources[3],
+      },
+    ],
+    [],
+  );
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const currentFeatured = featuredList[featuredIndex] || featuredList[0];
+  const featuredCity = currentFeatured.city;
+  const featuredLandmarkSource = currentFeatured.landmark;
   const featuredPhoto = featuredLandmarkSource.images[0];
 
   // 3D spotlight (real landmark)
@@ -262,6 +291,22 @@ export default function DiscoveryHome() {
                           <h2>{featuredLandmarkSource.name}</h2>
                           <p>{featuredCity.name}, South Africa</p>
                         </div>
+                        <div className="citylit-featured-dots" role="tablist" aria-label="Featured landmarks">
+                          {featuredList.map((item, idx) => (
+                            <button
+                              key={item.landmark.name}
+                              type="button"
+                              role="tab"
+                              aria-selected={featuredIndex === idx}
+                              className={`citylit-dot ${featuredIndex === idx ? "is-active" : ""}`}
+                              onClick={() => {
+                                benchoAudio.playTap(750 + idx * 40);
+                                setFeaturedIndex(idx);
+                              }}
+                              aria-label={`View ${item.landmark.name}`}
+                            />
+                          ))}
+                        </div>
                         <Link
                           href={landmarkPath(featuredCity, featuredLandmarkSource.name)}
                           className="citylit-featured-arrow-btn"
@@ -293,6 +338,10 @@ export default function DiscoveryHome() {
                         <Cube size={17} weight="duotone" aria-hidden="true" /> Inspect
                       </Link>
                     </div>
+
+                    {/* Real-time Weather & Atmospheric Scrubber (Image 6 & Image 8) */}
+                    <DioramaWeatherController compact cityName={spotlightCity.name} />
+
                     <div className="citylit-3d-viewport">
                       {spotlightPhoto && (
                         <Image

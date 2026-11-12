@@ -8,14 +8,17 @@ import {
   Compass,
   Globe,
   Moon,
+  SpeakerHigh,
   Sparkle,
   Sun,
+  Waveform,
   X,
 } from "@phosphor-icons/react";
 import useTheme from "./useTheme";
 import { useDiscovery } from "./useDiscovery";
 import { cities } from "../lib/data";
 import LiquidToggle from "./ui/LiquidToggle";
+import { benchoAudio } from "../lib/bencho-audio";
 
 export type SettingsTab = "appearance" | "map" | "about";
 
@@ -36,6 +39,22 @@ export default function SettingsModal({
   const dialogRef = useRef<HTMLDivElement>(null);
 
   const [activeTab, setActiveTab] = useState<SettingsTab>(initialTab);
+  const [audioFeedback, setAudioFeedback] = useState(() => benchoAudio.isEnabled());
+  const [ambientAudio, setAmbientAudio] = useState(() => benchoAudio.isAmbientEnabled());
+
+  const toggleAudioFeedback = () => {
+    const next = !audioFeedback;
+    setAudioFeedback(next);
+    benchoAudio.setEnabled(next);
+    if (next) benchoAudio.playTap(900);
+  };
+
+  const toggleAmbientAudio = () => {
+    const next = !ambientAudio;
+    setAmbientAudio(next);
+    benchoAudio.setAmbientEnabled(next);
+    if (next) benchoAudio.playLiquidToggle(true);
+  };
 
   useEffect(() => {
     if (isOpen) setActiveTab(initialTab);
@@ -205,6 +224,30 @@ export default function SettingsModal({
 
                   {/* Toggles */}
                   <div className="citylit-setting-rows">
+                    <div className="citylit-setting-row">
+                      <div className="citylit-setting-label">
+                        <SpeakerHigh size={19} className="citylit-setting-icon" />
+                        <span>Tactile UI sound</span>
+                      </div>
+                      <LiquidToggle
+                        checked={audioFeedback}
+                        onChange={toggleAudioFeedback}
+                        ariaLabel="Toggle tactile UI sound"
+                      />
+                    </div>
+
+                    <div className="citylit-setting-row">
+                      <div className="citylit-setting-label">
+                        <Waveform size={19} className="citylit-setting-icon" />
+                        <span>Ambient soundscapes</span>
+                      </div>
+                      <LiquidToggle
+                        checked={ambientAudio}
+                        onChange={toggleAmbientAudio}
+                        ariaLabel="Toggle ambient soundscapes"
+                      />
+                    </div>
+
                     <div className="citylit-setting-row">
                       <div className="citylit-setting-label">
                         <Sun size={19} className="citylit-setting-icon" />

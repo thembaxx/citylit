@@ -1,14 +1,7 @@
 "use client";
 import { View, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { useThree, useFrame } from "@react-three/fiber";
-import {
-  Suspense,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ComponentRef,
-} from "react";
+import { Suspense, useEffect, useMemo, useRef, useState, type ComponentRef } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
 import { cities, places } from "../lib/data";
@@ -132,7 +125,18 @@ function MarkerDots({
     }
     instanced.instanceMatrix.needsUpdate = true;
     return instanced;
-  }, [positions, color, radius, count, opacity]);
+  }, [positions, color, radius, count]);
+  useEffect(() => {
+    const material = mesh.material;
+    if (!Array.isArray(material)) material.opacity = opacity;
+  }, [mesh, opacity]);
+  useEffect(() => {
+    return () => {
+      mesh.geometry.dispose();
+      const material = mesh.material;
+      if (!Array.isArray(material)) material.dispose();
+    };
+  }, [mesh]);
   if (count === 0) return null;
   return <primitive object={mesh} />;
 }

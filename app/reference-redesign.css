@@ -9275,8 +9275,10 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
     height: min(48dvh, 420px);
     min-height: 260px;
   }
-  .reference-guide.reference-stage-guide .atlas-stage-facts {
-    display: none;
+  .reference-guide.reference-stage-guide .atlas-stage-facts,
+  .reference-guide.reference-stage-guide .atlas-stage-facts dd,
+  .reference-guide.reference-stage-guide .atlas-stage-facts a {
+    overflow-wrap: anywhere;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -9288,8 +9290,16 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 
 /* Native shell: one navigation, content clear of the dock, motion that
    does not fade text or resize layout. */
-.reference-guide .citylit-app-header .citylit-header-nav-link {
-  display: none;
+/* Phones use the dock. Wide screens keep the header links as well. */
+@media (max-width: 899px) {
+  .reference-guide .citylit-app-header .citylit-header-nav-link {
+    display: none;
+  }
+}
+@media (min-width: 900px) {
+  .reference-guide .citylit-app-header .citylit-header-nav-link {
+    display: inline-flex;
+  }
 }
 .reference-guide .citylit-app-header .citylit-header-theme-btn {
   width: 44px;

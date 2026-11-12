@@ -43,25 +43,33 @@ export default function WeatherWidget({
       return;
     }
     const controller = new AbortController();
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&timezone=Africa%2FJohannesburg`;
+    const timer = window.setTimeout(() => controller.abort(), 6000);
+    let dropped = false;
+    const url = `/api/weather?latitude=${latitude}&longitude=${longitude}`;
     fetch(url, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) throw new Error(String(response.status));
         return response.json();
       })
-      .then((data: { current?: { temperature_2m?: number; weather_code?: number } }) => {
-        const temp = data.current?.temperature_2m;
-        const code = data.current?.weather_code;
+      .then((data: { temp?: number; code?: number }) => {
+        const temp = data.temp;
+        const code = data.code;
         if (typeof temp !== "number" || typeof code !== "number") throw new Error("shape");
-        const next = { temp: Math.round(temp), code };
+        const next = { temp, code };
         cache.set(key, { at: Date.now(), weather: next });
-        setWeather(next);
-        setFailed(false);
+        if (!dropped) {
+          setWeather(next);
+          setFailed(false);
+        }
       })
-      .catch((error: { name?: string }) => {
-        if (error?.name !== "AbortError") setFailed(true);
-      });
-    return () => controller.abort();
+      .catch(() => {
+        if (!dropped) setFailed(true);
+      })
+      .finally(() => window.clearTimeout(timer));
+    return () => {
+      dropped = true;
+      controller.abort();
+    };
   }, [latitude, longitude]);
 
   const tone = weather ? toneFor(weather.code) : "cloud";

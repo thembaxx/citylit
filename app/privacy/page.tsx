@@ -52,6 +52,11 @@ export default function PrivacyPage() {
           <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap privacy policy</a>.
         </p>
         <p>
+          The weather chip requests a forecast for a published city coordinate, not your device
+          location. Citylit's own server asks Open-Meteo and keeps the result for about half an
+          hour. <a href="https://open-meteo.com/en/terms">Open-Meteo terms</a>.
+        </p>
+        <p>
           Opening Google Maps, Apple Maps, Waze, Wikipedia, official venue websites or GitHub takes
           you to services with their own privacy policies. Itinerary share links contain public
           place identifiers and a destination. Share them only if you want those choices to be

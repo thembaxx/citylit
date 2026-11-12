@@ -9190,3 +9190,98 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   .easyui-pill-button:not(.is-active) {
   color: #e3e2e7;
 }
+
+/* The model gets its own band. Title, chips and the detail card sit in the
+   page flow so they cannot cover the WebGL stage. */
+.reference-guide.reference-stage-guide .atlas-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: auto;
+  min-height: 0;
+  padding: 8px max(16px, env(safe-area-inset-left)) calc(24px + env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-right));
+}
+.reference-guide.reference-stage-guide .atlas-stage-heading {
+  order: 1;
+  position: relative;
+  inset: auto;
+  max-width: none;
+  z-index: 2;
+}
+.reference-guide.reference-stage-guide .atlas-stage-heading h1 {
+  max-width: 18ch;
+  font-size: clamp(28px, 6vw, 44px);
+  line-height: 1.05;
+}
+.reference-guide.reference-stage-guide .atlas-stage-heading .atlas-breadcrumb {
+  margin-bottom: 4px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 13px;
+  font-weight: 650;
+}
+.reference-guide.reference-stage-guide .atlas-ring-scene,
+.reference-guide.reference-stage-guide
+  .atlas-stage:has(.atlas-ring-scene.is-heritage-hero)
+  .atlas-ring-scene {
+  order: 2;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: min(56dvh, 640px);
+  min-height: 280px;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.reference-guide.reference-stage-guide .atlas-stage-content {
+  order: 3;
+  position: relative;
+  inset: auto;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  pointer-events: auto;
+}
+.reference-guide.reference-stage-guide .atlas-stage-chips,
+.reference-guide.reference-stage-guide .atlas-stage-sheet {
+  position: relative;
+  inset: auto;
+  width: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+}
+.reference-guide.reference-stage-guide .atlas-stage-sheet {
+  padding: 18px;
+}
+.reference-guide.reference-stage-guide .atlas-stage-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.reference-guide.reference-stage-guide .atlas-stage-actions :is(a, button),
+.reference-guide.reference-stage-guide .atlas-stage-controls button {
+  min-height: 44px;
+}
+@media (max-width: 767px) {
+  .reference-guide.reference-stage-guide .atlas-ring-scene,
+  .reference-guide.reference-stage-guide
+    .atlas-stage:has(.atlas-ring-scene.is-heritage-hero)
+    .atlas-ring-scene {
+    height: min(48dvh, 420px);
+    min-height: 260px;
+  }
+  .reference-guide.reference-stage-guide .atlas-stage-facts {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reference-guide.reference-stage-guide .atlas-stage-sheet,
+  .reference-guide.reference-stage-guide .atlas-stage-chips button {
+    transition: none;
+  }
+}

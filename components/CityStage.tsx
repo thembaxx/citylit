@@ -22,7 +22,6 @@ import GuideShell from "./GuideShell";
 import { useKhwezi } from "./KhweziProvider";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
-import TiltCard from "./ui/TiltCard";
 const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
   loading: () => (
@@ -163,13 +162,7 @@ export default function CityStage({
         />
         <header className="atlas-stage-heading">
           <nav className="atlas-breadcrumb" aria-label="Breadcrumb">
-            <Link href="/">HOME</Link>
-            <span>/</span>
-            <span>ATLAS &amp; LANDMARKS</span>
-            <span>/</span>
-            <Link href={`/${city.slug}`}>{city.name.toUpperCase()}</Link>
-            <span>/</span>
-            <span>{mode.toUpperCase()}</span>
+            <Link href={`/${city.slug}`}>{city.name}</Link>
           </nav>
           <h1 id="stage-title">
             {city.name} {mode}
@@ -188,7 +181,7 @@ export default function CityStage({
               ariaControls: "stage-detail",
             }))}
           />
-          <TiltCard id="stage-detail" className="atlas-stage-sheet" maxTilt={1.6}>
+          <div id="stage-detail" className="atlas-stage-sheet">
             <div
               key={item.href}
               className="atlas-stage-reveal"
@@ -260,25 +253,6 @@ export default function CityStage({
                 Next <ArrowRight size={17} />
               </MagneticButton>
             </div>
-          </TiltCard>
-        </div>
-        <div className="atlas-stage-telemetry" aria-label="Atlas status">
-          <div className="atlas-stage-telemetry-group">
-            <span className="atlas-stage-telemetry-dot" aria-hidden="true" />
-            <span>
-              <strong>{items.length}</strong> {mode === "places" ? "places" : "landmarks"} in{" "}
-              {city.name}
-            </span>
-            <span className="atlas-stage-telemetry-sep" aria-hidden="true">
-              •
-            </span>
-            <span>
-              Viewing <strong>{String(index + 1).padStart(2, "0")}</strong> of{" "}
-              <strong>{String(items.length).padStart(2, "0")}</strong>
-            </span>
-          </div>
-          <div className="atlas-stage-telemetry-group atlas-stage-telemetry-muted">
-            <span>3D stage · {item.name}</span>
           </div>
         </div>
       </section>

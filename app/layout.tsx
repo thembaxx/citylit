@@ -66,7 +66,7 @@ export const metadata: Metadata = {
         url: "/brand/social-card.png",
         width: 1200,
         height: 630,
-        alt: "Khwezi the springhare — Citylit’s guide to South Africa.",
+        alt: "Citylit — Interactive 3D and Field Guide to South Africa.",
       },
     ],
   },

@@ -51,12 +51,9 @@ function vector(pose) {
 }
 const character = vector("idle");
 await writeFile(new URL("khwezi.svg", directory), character);
-const offline = vector("offline").replace(
-  '<g class="khwezi-eyes">',
-  '<g class="khwezi-eyes" transform="translate(0 94) scale(1 .14)">',
-);
+const offline = vector("offline");
 await writeFile(new URL("khwezi-offline.svg", directory), offline);
-const iconArtwork = `<g transform="scale(3.2)"><path d="M20 5.2c3.6 0 5.1 4.8 6.4 8.4 3.6 1.3 8.4 2.8 8.4 6.4s-4.8 5.1-8.4 6.4c-1.3 3.6-2.8 8.4-6.4 8.4s-5.1-4.8-6.4-8.4c-3.6-1.3-8.4-2.8-8.4-6.4s4.8-5.1 8.4-6.4C14.9 10 16.4 5.2 20 5.2Z" fill="#B39AFF"/><path d="M20 5.2c3.6 0 5.1 4.8 6.4 8.4 3.6 1.3 8.4 2.8 8.4 6.4s-4.8 5.1-8.4 6.4c-1.3 3.6-2.8 8.4-6.4 8.4 2.7-7.8 1.8-23.3 0-30.6Z" fill="#8E77EA" opacity=".8"/><rect x="14.9" y="16" width="3.7" height="7.7" rx="1.85" fill="#17243C"/><rect x="21.5" y="16" width="3.7" height="7.7" rx="1.85" fill="#17243C"/><path d="m18 27 2 1.5 2-1.5" fill="none" stroke="#17243C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11.3" cy="12.7" r="2.1" fill="#FFE09A"/></g>`;
+const iconArtwork = `<g transform="scale(3.2)"><path d="M20 6 L23 15 L32 20 L23 25 L20 34 L17 25 L8 20 L17 15 Z" fill="#B39AFF"/><circle cx="20" cy="20" r="2.4" fill="#FFE09A"/></g>`;
 const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><rect width="128" height="128" rx="28" fill="#17243C"/>${iconArtwork}</svg>`;
 await writeFile(new URL("../app-icon.svg", directory), icon);
 for (const [file, size] of [

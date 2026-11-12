@@ -27,7 +27,6 @@ import SafeStageModel from "./SafeStageModel";
 import MuseumHeroAsset from "./MuseumHeroAsset";
 import { type MuseumFeature } from "./MuseumShowcase";
 import StudioEnvironment from "./StudioEnvironment";
-import ProceduralTree from "./ProceduralTree";
 import AtlasWorld from "./AtlasWorld";
 import JourneyTrail from "./JourneyTrail";
 import WalkableDistrict from "./WalkableDistrict";
@@ -39,175 +38,6 @@ import { benchoAudio } from "../lib/bencho-audio";
 import useTheme from "./useTheme";
 import type { StageItem } from "./CityStage";
 import { landmarkJointLabels } from "../lib/landmark-specs.js";
-
-// Small, original geometry adds a sense of place without introducing licensed GLB files.
-// This is illustrative scenery, never a real street or geospatial representation.
-function StreetHouse({ x, color, roofColor }: { x: number; color: string; roofColor: string }) {
-  return (
-    <group position={[x, 0, 0.95]} scale={0.46}>
-      <mesh position={[0, 0.04, 0]}>
-        <boxGeometry args={[0.86, 0.08, 0.81]} />
-        <meshStandardMaterial color="#c9b69a" roughness={0.95} />
-      </mesh>
-      <mesh position={[0, 0.53, 0]} castShadow>
-        <boxGeometry args={[0.76, 0.94, 0.71]} />
-        <meshStandardMaterial color={color} roughness={0.88} />
-      </mesh>
-      {[-1, 1].map((side) => (
-        <mesh
-          key={side}
-          position={[side * 0.205, 1.16, 0]}
-          rotation={[0, 0, side * -0.72]}
-          castShadow
-          receiveShadow
-        >
-          <boxGeometry args={[0.6, 0.041, 0.85]} />
-          <meshStandardMaterial color={roofColor} roughness={0.77} metalness={0.03} />
-        </mesh>
-      ))}
-      <mesh position={[0, 0.99, 0.03]}>
-        <boxGeometry args={[0.86, 0.055, 0.79]} />
-        <meshStandardMaterial color="#fff0d6" roughness={0.9} />
-      </mesh>
-      <mesh position={[0.22, 1.32, -0.15]} castShadow>
-        <boxGeometry args={[0.13, 0.22, 0.14]} />
-        <meshStandardMaterial color={color} />
-      </mesh>
-      <mesh position={[0, 0.27, 0.365]}>
-        <boxGeometry args={[0.19, 0.46, 0.032]} />
-        <meshStandardMaterial color="#625748" roughness={0.83} />
-      </mesh>
-      <mesh position={[0.055, 0.28, 0.389]}>
-        <sphereGeometry args={[0.017, 6, 4]} />
-        <meshStandardMaterial color="#d5a655" metalness={0.5} roughness={0.4} />
-      </mesh>
-      {[-0.24, 0.24].map((windowX) => (
-        <group key={windowX} position={[windowX, 0.68, 0.367]}>
-          <mesh>
-            <boxGeometry args={[0.23, 0.29, 0.035]} />
-            <meshStandardMaterial color="#faf1dc" roughness={0.75} />
-          </mesh>
-          <mesh position={[0, 0, 0.023]}>
-            <boxGeometry args={[0.18, 0.235, 0.01]} />
-            <meshStandardMaterial color="#648c97" roughness={0.26} metalness={0.1} />
-          </mesh>
-          <mesh position={[0, 0, 0.033]}>
-            <boxGeometry args={[0.025, 0.26, 0.012]} />
-            <meshStandardMaterial color="#f9edd5" />
-          </mesh>
-          <mesh position={[0, 0, 0.034]}>
-            <boxGeometry args={[0.21, 0.023, 0.012]} />
-            <meshStandardMaterial color="#f9edd5" />
-          </mesh>
-          <mesh position={[0, -0.17, 0.036]}>
-            <boxGeometry args={[0.26, 0.045, 0.08]} />
-            <meshStandardMaterial color="#d3b38f" />
-          </mesh>
-        </group>
-      ))}
-    </group>
-  );
-}
-
-function StreetLamp({ x }: { x: number }) {
-  return (
-    <group position={[x, 0, 1.07]}>
-      <mesh position={[0, 0.28, 0]}>
-        <cylinderGeometry args={[0.016, 0.026, 0.56, 6]} />
-        <meshStandardMaterial color="#445954" metalness={0.4} roughness={0.65} />
-      </mesh>
-      <mesh position={[0.04, 0.55, 0]}>
-        <boxGeometry args={[0.09, 0.018, 0.025]} />
-        <meshStandardMaterial color="#445954" />
-      </mesh>
-      <mesh position={[0.082, 0.51, 0]}>
-        <sphereGeometry args={[0.047, 8, 6]} />
-        <meshStandardMaterial
-          color="#fff0c8"
-          emissive="#d69d55"
-          emissiveIntensity={0.32}
-          roughness={0.5}
-        />
-      </mesh>
-    </group>
-  );
-}
-
-// An illustrative street, not a surveyed reconstruction of any South African neighbourhood.
-function MiniatureStreet({ compact }: { compact: boolean }) {
-  return (
-    <group position={[0, -0.43, 0]}>
-      <mesh position={[0, 0.03, 1.46]} receiveShadow>
-        <boxGeometry args={[3.4, 0.06, 0.49]} />
-        <meshStandardMaterial color="#454b4a" roughness={0.96} />
-      </mesh>
-      {[1.17, 1.76].map((z) => (
-        <group key={z}>
-          <mesh position={[0, 0.07, z]} receiveShadow>
-            <boxGeometry args={[3.4, 0.055, 0.17]} />
-            <meshStandardMaterial color="#d2c4a7" roughness={0.96} />
-          </mesh>
-          <mesh position={[0, 0.1, z - 0.058]}>
-            <boxGeometry args={[3.4, 0.017, 0.02]} />
-            <meshStandardMaterial color="#f1e2c6" roughness={0.9} />
-          </mesh>
-        </group>
-      ))}
-      {[-1.25, -0.45, 0.35, 1.15].map((x) => (
-        <mesh key={x} position={[x, 0.068, 1.46]}>
-          <boxGeometry args={[0.33, 0.006, 0.023]} />
-          <meshBasicMaterial color="#f5e5bf" />
-        </mesh>
-      ))}
-      {[-0.1, 0, 0.1].map((x) => (
-        <mesh key={x} position={[x + 0.44, 0.07, 1.55]}>
-          <boxGeometry args={[0.045, 0.006, 0.29]} />
-          <meshBasicMaterial color="#f7ebce" />
-        </mesh>
-      ))}
-      <StreetHouse x={-1.32} color="#e7b88d" roofColor="#907968" />
-      <StreetHouse x={1.32} color="#eecfaf" roofColor="#747d6a" />
-      <StreetLamp x={-0.96} />
-      <StreetLamp x={1.08} />
-      <ProceduralTree
-        position={[-0.94, 0, -1.32]}
-        scale={0.43}
-        color="#579761"
-        seed={3}
-        detail={compact ? "compact" : "hero"}
-      />
-      <ProceduralTree
-        position={[0.98, 0, -1.3]}
-        scale={0.41}
-        color="#80ad62"
-        seed={7}
-        detail={compact ? "compact" : "hero"}
-      />
-      <mesh position={[-1.04, 0.13, 0.64]}>
-        <boxGeometry args={[0.3, 0.09, 0.12]} />
-        <meshStandardMaterial color="#8d694c" roughness={0.94} />
-      </mesh>
-      {[-1.14, -0.94].map((x) => (
-        <mesh key={x} position={[x, 0.075, 0.64]}>
-          <boxGeometry args={[0.022, 0.12, 0.1]} />
-          <meshStandardMaterial color="#534d40" />
-        </mesh>
-      ))}
-      {[-1.54, 1.54].map((x) => (
-        <group key={x} position={[x, 0.08, -0.57]}>
-          <mesh position={[0, 0.1, 0]}>
-            <cylinderGeometry args={[0.17, 0.16, 0.18, 8]} />
-            <meshStandardMaterial color="#a98964" roughness={0.93} />
-          </mesh>
-          <mesh position={[0, 0.2, 0]}>
-            <cylinderGeometry args={[0.145, 0.145, 0.05, 8]} />
-            <meshStandardMaterial color="#627957" roughness={1} />
-          </mesh>
-        </group>
-      ))}
-    </group>
-  );
-}
 
 type StageView = "overview" | "detail" | "overhead";
 
@@ -464,13 +294,13 @@ function Ring({
     <>
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
       <AtlasWorld night={night} accent={accent} animate={!reduced} />
-      <StudioEnvironment intensity={night ? 0.34 : 0.68} />
-      <hemisphereLight args={[night ? "#a8b6d4" : "#fff6e8", "#5a534d", night ? 0.24 : 0.34]} />
-      <ambientLight intensity={night ? 0.12 : 0.16} />
+      <StudioEnvironment intensity={night ? 0.38 : 0.72} />
+      <hemisphereLight args={[night ? "#9cb0d8" : "#fff8ee", night ? "#222030" : "#5a5042", night ? 0.42 : 0.58]} />
+      <ambientLight intensity={night ? 0.25 : 0.42} />
       <directionalLight
-        position={[4, 7, 5]}
-        intensity={night ? 0.62 : 1.68}
-        color={night ? "#b6c8eb" : "#fff5e2"}
+        position={[5, 8, 6]}
+        intensity={night ? 0.95 : 2.1}
+        color={night ? "#c8d8f8" : "#fff6e8"}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
@@ -478,19 +308,19 @@ function Ring({
         shadow-camera-right={9}
         shadow-camera-top={9}
         shadow-camera-bottom={-9}
-        shadow-bias={-0.00025}
-        shadow-normalBias={0.025}
+        shadow-bias={-0.0002}
+        shadow-normalBias={0.02}
       />
       <directionalLight
-        position={[-4, 3, -2]}
-        intensity={night ? 0.2 : 0.4}
-        color={night ? "#99b4db" : "#ffa968"}
+        position={[-5, 4, -3]}
+        intensity={night ? 0.38 : 0.65}
+        color={night ? "#7894c8" : "#fcd8b8"}
       />
       <pointLight
-        position={[1.8, 2.5, 3.4]}
-        intensity={night ? 0.9 : 0.12}
-        distance={9}
-        color="#ffe3be"
+        position={[1.8, 3.2, 3.4]}
+        intensity={night ? 0.8 : 0.35}
+        distance={12}
+        color="#ffe8cc"
       />
       <group
         position={[
@@ -564,11 +394,6 @@ function Ring({
                     />
                   )
                 )}
-                {showContext &&
-                  index === selected &&
-                  !item.name.toLowerCase().includes("mcgregor museum") && (
-                    <MiniatureStreet compact={size.width < 760} />
-                  )}
               </RotatingMiniature>
             </group>
           ))}

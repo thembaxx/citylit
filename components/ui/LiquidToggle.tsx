@@ -4,6 +4,7 @@
  * Bencho-inspired Liquid Toggle
  * Viscous, physics-based switch with fluid stretch & snap animation based on Bencho (bencho.dev).
  * Thumb deforms organically during travel and settles with spring damping.
+ * Proportioned strictly to 48px × 26px with a 20px thumb and accessible hit target.
  */
 
 import { useId } from "react";
@@ -54,31 +55,30 @@ export function LiquidToggle({
           layout
           transition={
             reduced
-              ? { duration: 0.1 }
+              ? { duration: 0.12 }
               : {
                   type: "spring",
-                  stiffness: 480,
-                  damping: 24,
-                  mass: 0.7,
-                  // Squash and stretch is a keyframe ramp, not a spring settle.
+                  stiffness: 520,
+                  damping: 26,
+                  mass: 0.65,
                   scaleX: {
                     type: "tween",
-                    duration: 0.44,
-                    times: [0, 0.32, 0.68, 1],
+                    duration: 0.36,
+                    times: [0, 0.35, 0.7, 1],
                     ease: "easeInOut",
                   },
                   scaleY: {
                     type: "tween",
-                    duration: 0.44,
-                    times: [0, 0.32, 0.68, 1],
+                    duration: 0.36,
+                    times: [0, 0.35, 0.7, 1],
                     ease: "easeInOut",
                   },
                 }
           }
           animate={{
-            x: checked ? 20 : 2,
-            scaleX: reduced ? 1 : [1, 1.28, 0.92, 1],
-            scaleY: reduced ? 1 : [1, 0.82, 1.06, 1],
+            x: checked ? 23 : 3,
+            scaleX: reduced ? 1 : [1, 1.24, 0.94, 1],
+            scaleY: reduced ? 1 : [1, 0.84, 1.05, 1],
           }}
         />
         <span className="bencho-liquid-track-glow" aria-hidden="true" />

@@ -15,7 +15,7 @@
   overscroll-behavior: contain;
   touch-action: pan-y;
 }
-.reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open button {
+.reference-stage-guide .atlas-ring-scene .atlas-inspector-panel.is-open button:not([role="switch"]):not(.bencho-liquid-toggle-track) {
   min-height: 44px;
 }
 .reference-guide :is(.atlas-search, .atlas-province-select, .category-page-search) {
@@ -171,7 +171,7 @@
   pointer-events: auto;
   max-height: min(65dvh, calc(100dvh - 48px - env(safe-area-inset-top)));
 }
-.reference-stage-guide .atlas-inspector-panel[popover]:popover-open button {
+.reference-stage-guide .atlas-inspector-panel[popover]:popover-open button:not([role="switch"]):not(.bencho-liquid-toggle-track) {
   min-height: 44px;
   pointer-events: auto;
 }

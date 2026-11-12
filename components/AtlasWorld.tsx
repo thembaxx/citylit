@@ -4,6 +4,12 @@ import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
+/**
+ * Atmospheric studio environment for Citylit 3D dioramas.
+ * Smooth, deep ambient vignette, soft ground contact shadow,
+ * and gentle drifting ember sparks — no harsh wireframe grids.
+ */
+
 const skyVertex = `
   varying vec3 vDirection;
   void main() {
@@ -11,85 +17,93 @@ const skyVertex = `
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `;
+
 const skyFragment = `
   uniform float uTime;
   uniform float uNight;
   varying vec3 vDirection;
+  
   float hash(vec3 p) {
     p = fract(p * 0.3183099 + vec3(0.1, 0.2, 0.3));
     p *= 17.0;
     return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
   }
+  
   void main() {
-    vec3 direction = normalize(vDirection);
-    float horizon = smoothstep(-0.55, 0.88, direction.y);
-    vec3 dusk = mix(vec3(0.055, 0.059, 0.075), vec3(0.135, 0.145, 0.178), horizon);
-    dusk = mix(dusk, vec3(0.32, 0.24, 0.18), pow(1.0 - abs(direction.y + 0.08), 12.0) * 0.22);
-    vec3 midnight = mix(vec3(0.024, 0.027, 0.036), vec3(0.072, 0.078, 0.102), horizon);
-    float auroraLine = sin(direction.x * 8.0 + uTime * 0.14 + sin(direction.z * 7.0)) * 0.5 + 0.5;
-    float aurora = smoothstep(0.75, 0.98, auroraLine) * smoothstep(-0.05, 0.38, direction.y) * uNight;
-    vec3 color = mix(dusk, midnight, uNight);
-    color += vec3(0.24, 0.20, 0.15) * aurora * 0.36;
-    float stars = step(0.9978, hash(floor(direction * 310.0)));
-    stars *= smoothstep(0.02, 0.58, direction.y) * uNight;
-    color += vec3(0.84, 0.86, 0.92) * stars * (0.65 + 0.35 * sin(uTime * 1.4 + direction.x * 12.0));
+    vec3 dir = normalize(vDirection);
+    float horizon = smoothstep(-0.25, 0.75, dir.y);
+    
+    // Day palette: soft warm dawn/day atmosphere
+    vec3 dayHorizon = vec3(0.88, 0.86, 0.83);
+    vec3 dayZenith = vec3(0.58, 0.68, 0.82);
+    vec3 daySky = mix(dayHorizon, dayZenith, horizon);
+    
+    // Night palette: deep studio indigo/slate with subtle warm horizon glow
+    vec3 nightHorizon = vec3(0.08, 0.08, 0.12);
+    vec3 nightZenith = vec3(0.035, 0.038, 0.058);
+    vec3 nightSky = mix(nightHorizon, nightZenith, horizon);
+    
+    vec3 color = mix(daySky, nightSky, uNight);
+    
+    // Subtle star dust in night mode
+    float starDensity = step(0.9982, hash(floor(dir * 280.0)));
+    float starGlow = smoothstep(0.05, 0.85, dir.y) * uNight;
+    color += vec3(0.85, 0.88, 0.98) * starDensity * starGlow * (0.6 + 0.4 * sin(uTime * 1.5 + dir.x * 14.0));
+    
     gl_FragColor = vec4(color, 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
   }
 `;
-const terrainVertex = `
-  uniform float uTime;
+
+const groundVertex = `
   varying vec2 vUv;
-  varying float vHeight;
   void main() {
     vUv = uv;
-    vec3 p = position;
-    float wave = sin(p.x * 0.22 + uTime * 0.12) * cos(p.y * 0.19 - uTime * 0.1) * 0.025;
-    p.z += wave;
-    vHeight = wave;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `;
-const terrainFragment = `
-  uniform float uTime;
+
+const groundFragment = `
   uniform float uNight;
-  uniform vec3 uAccent;
   varying vec2 vUv;
-  varying float vHeight;
   void main() {
-    vec2 centered = vUv - 0.5;
-    float radius = length(centered);
-    float gridX = 1.0 - smoothstep(0.0, 0.032, abs(fract(vUv.x * 42.0) - 0.5));
-    float gridY = 1.0 - smoothstep(0.0, 0.032, abs(fract(vUv.y * 42.0) - 0.5));
-    float grid = max(gridX, gridY) * 0.1;
-    float contours = 1.0 - smoothstep(0.0, 0.04, abs(fract(radius * 54.0 + vHeight * 3.0 - uTime * 0.012) - 0.5));
-    float waveRing = exp(-pow((radius - fract(uTime * 0.04) * 0.36) * 28.0, 2.0)) * 0.14;
-    float glow = exp(-radius * 8.2) * (0.2 + uNight * 0.14) + waveRing;
-    float edge = 1.0 - smoothstep(0.32, 0.5, radius);
-    vec3 ground = mix(vec3(0.048, 0.052, 0.068), vec3(0.032, 0.035, 0.046), uNight);
-    vec3 color = ground + uAccent * (grid * 0.34 + contours * 0.11 + glow) * edge;
-    float alpha = edge * (0.78 + grid * 0.38 + contours * 0.09);
-    gl_FragColor = vec4(color, alpha);
+    vec2 center = vUv - 0.5;
+    float dist = length(center) * 2.0;
+    
+    // Soft radial contact shadow directly beneath pedestal
+    float shadowCore = smoothstep(0.85, 0.0, dist);
+    float shadowAura = smoothstep(1.3, 0.2, dist) * 0.35;
+    float shadow = max(shadowCore * 0.65, shadowAura);
+    
+    // Ground tone blends with sky
+    vec3 dayGround = vec3(0.08, 0.08, 0.09);
+    vec3 nightGround = vec3(0.0, 0.0, 0.0);
+    vec3 groundColor = mix(dayGround, nightGround, uNight);
+    
+    float alpha = shadow * mix(0.48, 0.72, uNight);
+    gl_FragColor = vec4(groundColor, alpha);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
   }
 `;
+
 const sparkVertex = `
   uniform float uTime;
   attribute float aPhase;
   varying float vGlow;
   void main() {
     vec3 p = position;
-    p.x += sin(uTime * 0.18 + aPhase * 6.283) * 0.1;
-    p.y += sin(uTime * 0.45 + aPhase * 18.0) * 0.12;
-    p.z += cos(uTime * 0.14 + aPhase * 6.283) * 0.09;
+    p.x += sin(uTime * 0.22 + aPhase * 6.283) * 0.15;
+    p.y += sin(uTime * 0.38 + aPhase * 14.0) * 0.18;
+    p.z += cos(uTime * 0.18 + aPhase * 6.283) * 0.15;
     vec4 viewPosition = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * viewPosition;
-    gl_PointSize = clamp(3.4 * (4.0 / -viewPosition.z), 1.4, 5.8);
-    vGlow = 0.4 + 0.6 * sin(uTime * 1.15 + aPhase * 31.0) * sin(uTime * 1.15 + aPhase * 31.0);
+    gl_PointSize = clamp(3.2 * (4.0 / -viewPosition.z), 1.2, 5.0);
+    vGlow = 0.4 + 0.6 * pow(sin(uTime * 1.2 + aPhase * 24.0) * 0.5 + 0.5, 2.0);
   }
 `;
+
 const sparkFragment = `
   uniform vec3 uAccent;
   uniform float uNight;
@@ -97,10 +111,9 @@ const sparkFragment = `
   void main() {
     float radius = length(gl_PointCoord - 0.5);
     if (radius > 0.5) discard;
-    float core = exp(-radius * radius * 16.0);
-    float aura = 1.0 - smoothstep(0.06, 0.5, radius);
-    float alpha = mix(aura, core, 0.55) * vGlow * (0.36 + uNight * 0.22);
-    vec3 tint = mix(uAccent, vec3(0.98, 0.94, 0.84), core * 0.35);
+    float core = exp(-radius * radius * 14.0);
+    float alpha = core * vGlow * (0.35 + uNight * 0.35);
+    vec3 tint = mix(uAccent, vec3(0.96, 0.92, 0.82), core * 0.4);
     gl_FragColor = vec4(tint, alpha);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
@@ -117,35 +130,38 @@ export default function AtlasWorld({
   animate?: boolean;
 }) {
   const sky = useRef<THREE.ShaderMaterial>(null);
-  const terrain = useRef<THREE.ShaderMaterial>(null);
+  const ground = useRef<THREE.ShaderMaterial>(null);
   const sparks = useRef<THREE.ShaderMaterial>(null);
   const time = useRef(0);
   const nightMix = useRef(night ? 1 : 0);
   const color = useMemo(() => new THREE.Color(accent), [accent]);
+
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uNight: { value: 0 },
+      uNight: { value: night ? 1 : 0 },
       uAccent: { value: new THREE.Color(accent) },
     }),
-    [accent],
+    [accent, night],
   );
+
   const particles = useMemo(() => {
-    const count = 56;
+    const count = 38;
     const positions = new Float32Array(count * 3);
     const phases = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       const phase = (i * 0.61803398875) % 1;
       const angle = i * 2.3999632297;
-      const radius = 1.9 + ((i * 13) % 35) / 10;
+      const radius = 1.6 + ((i * 11) % 25) / 10;
       positions.set(
-        [Math.cos(angle) * radius, -0.15 + phase * 2.8, Math.sin(angle) * radius],
+        [Math.cos(angle) * radius, 0.2 + phase * 2.2, Math.sin(angle) * radius],
         i * 3,
       );
       phases[i] = phase;
     }
     return { positions, phases };
   }, []);
+
   useFrame((_, delta) => {
     if (animate) time.current += Math.min(delta, 0.05);
     nightMix.current = animate
@@ -153,16 +169,23 @@ export default function AtlasWorld({
       : night
         ? 1
         : 0;
-    for (const material of [sky.current, terrain.current, sparks.current]) {
-      if (!material) continue;
-      material.uniforms.uTime.value = time.current;
-      material.uniforms.uNight.value = nightMix.current;
+    if (sky.current) {
+      sky.current.uniforms.uTime.value = time.current;
+      sky.current.uniforms.uNight.value = nightMix.current;
     }
-    if (terrain.current) terrain.current.uniforms.uAccent.value.copy(color);
-    if (sparks.current) sparks.current.uniforms.uAccent.value.copy(color);
+    if (ground.current) {
+      ground.current.uniforms.uNight.value = nightMix.current;
+    }
+    if (sparks.current) {
+      sparks.current.uniforms.uTime.value = time.current;
+      sparks.current.uniforms.uNight.value = nightMix.current;
+      sparks.current.uniforms.uAccent.value.copy(color);
+    }
   });
+
   return (
     <>
+      {/* Cinematic studio sky dome */}
       <mesh renderOrder={-10} frustumCulled={false}>
         <sphereGeometry args={[70, 32, 20]} />
         <shaderMaterial
@@ -175,54 +198,32 @@ export default function AtlasWorld({
           depthTest={false}
         />
       </mesh>
-      <mesh position={[0, -0.72, 0]} rotation={[-Math.PI / 2, 0, 0]} renderOrder={-4}>
-        <planeGeometry args={[48, 48, 1, 1]} />
+
+      {/* Clean radial contact shadow under the pedestal */}
+      <mesh position={[0, -0.44, 0]} rotation={[-Math.PI / 2, 0, 0]} renderOrder={-2}>
+        <planeGeometry args={[10, 10]} />
         <shaderMaterial
-          ref={terrain}
-          vertexShader={terrainVertex}
-          fragmentShader={terrainFragment}
+          ref={ground}
+          vertexShader={groundVertex}
+          fragmentShader={groundFragment}
           uniforms={uniforms}
           transparent
           depthWrite={false}
           side={THREE.DoubleSide}
         />
       </mesh>
-      <mesh position={[0, -0.62, 0]} receiveShadow>
-        <cylinderGeometry args={[4.68, 4.92, 0.18, 96, 1, false]} />
-        <meshPhysicalMaterial
-          color={night ? "#151720" : "#1f222d"}
-          roughness={0.22}
-          metalness={0.54}
-          clearcoat={0.92}
-          clearcoatRoughness={0.16}
-        />
-      </mesh>
-      <mesh position={[0, -0.525, 0]} receiveShadow>
-        <cylinderGeometry args={[3.45, 3.62, 0.03, 96, 1, false]} />
-        <meshPhysicalMaterial
-          color={night ? "#1d202b" : "#282c3a"}
-          roughness={0.28}
-          metalness={0.42}
-          clearcoat={0.75}
-          clearcoatRoughness={0.22}
-        />
-      </mesh>
-      <mesh position={[0, -0.51, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[4.52, 0.015, 8, 128]} />
-        <meshBasicMaterial color={accent} transparent opacity={night ? 0.88 : 0.65} />
-      </mesh>
-      <mesh position={[0, -0.5, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[3.9, 0.008, 6, 128]} />
-        <meshBasicMaterial color="#d0d5e2" transparent opacity={night ? 0.42 : 0.24} />
-      </mesh>
-      <mesh position={[0, -0.505, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[3.44, 0.01, 6, 128]} />
-        <meshBasicMaterial color={accent} transparent opacity={night ? 0.52 : 0.34} />
-      </mesh>
-      <points position={[0, 0.25, 0]} frustumCulled={false} renderOrder={2} raycast={() => {}}>
+
+      {/* Subtle floating ambient dust / embers */}
+      <points renderOrder={-1}>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[particles.positions, 3]} />
-          <bufferAttribute attach="attributes-aPhase" args={[particles.phases, 1]} />
+          <bufferAttribute
+            attach="attributes-position"
+            args={[particles.positions, 3]}
+          />
+          <bufferAttribute
+            attach="attributes-aPhase"
+            args={[particles.phases, 1]}
+          />
         </bufferGeometry>
         <shaderMaterial
           ref={sparks}

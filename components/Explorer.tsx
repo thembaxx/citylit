@@ -619,7 +619,7 @@ export default function Explorer() {
                   const lines = [
                     "It likes you.",
                     "A small light answered.",
-                    "Khwezi left a spark.",
+                    "A spark illuminates the path.",
                   ];
                   setNotice(lines[index % lines.length]);
                   setBloom(true);
@@ -1052,7 +1052,7 @@ export default function Explorer() {
                         </p>
                       </div>
                       <Link className="brand-link" href="/brand">
-                        Meet Khwezi &amp; the Citylit story <ArrowUpRight size={14} />
+                        About Citylit &amp; brand design <ArrowUpRight size={14} />
                       </Link>
                       <div className="settings-information">
                         <Link href="/about">About &amp; sources</Link>

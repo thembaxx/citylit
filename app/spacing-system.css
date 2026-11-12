@@ -1,6 +1,35 @@
-/* Citylit layout rhythm: a shared spacing scale for the guide and classic explorer.
+/* Citylit layout rhythm: a shared spacing scale for the guide, home, and classic explorer.
    Loaded after the existing guide/native refinements to avoid changing 3D scene math. */
-.reference-guide {
+:root {
+  --citylit-space-0: 0px;
+  --citylit-space-1: 4px;
+  --citylit-space-2: 8px;
+  --citylit-space-3: 12px;
+  --citylit-space-4: 16px;
+  --citylit-space-5: 20px;
+  --citylit-space-6: 24px;
+  --citylit-space-7: 28px;
+  --citylit-space-8: 32px;
+  --citylit-space-10: 40px;
+  --citylit-space-12: 48px;
+  --citylit-space-16: 64px;
+  --citylit-space-20: 80px;
+  --citylit-space-24: 96px;
+  --citylit-page-gutter: clamp(18px, 4vw, 56px);
+  --citylit-section-space: clamp(48px, 6vw, 96px);
+  --citylit-card-inset: clamp(18px, 2.4vw, 28px);
+  --citylit-touch-target: 44px;
+  --citylit-radius-sm: 8px;
+  --citylit-radius-md: 14px;
+  --citylit-radius-lg: 20px;
+  --citylit-radius-xl: 26px;
+  --citylit-radius-full: 9999px;
+}
+
+.reference-guide,
+.field-guide,
+.reading-page,
+.reference-home {
   --citylit-space-1: 4px;
   --citylit-space-2: 8px;
   --citylit-space-3: 12px;
@@ -10,9 +39,9 @@
   --citylit-space-8: 32px;
   --citylit-space-10: 40px;
   --citylit-space-12: 48px;
-  --citylit-page-gutter: clamp(20px, 4.5vw, 64px);
-  --citylit-section-space: clamp(64px, 7vw, 104px);
-  --citylit-card-inset: clamp(22px, 2.2vw, 28px);
+  --citylit-page-gutter: clamp(18px, 4vw, 56px);
+  --citylit-section-space: clamp(48px, 6vw, 96px);
+  --citylit-card-inset: clamp(18px, 2.4vw, 28px);
 }
 
 /* The guide shares an edge alignment across headings, cards, photos and footer. */
@@ -431,8 +460,9 @@
 /* Reference-led stage polish: visible keyboard focus and explicit active cameras.
    Do not alter the Three.js canvas, camera math or inspector stacking. */
 .reference-stage-guide .atlas-stage-chips button:focus-visible,
-.reference-stage-guide .atlas-stage-controls button:focus-visible {
-  outline: 3px solid var(--guide-accent, currentColor);
+.reference-stage-guide .atlas-stage-controls button:focus-visible,
+:focus-visible {
+  outline: 3px solid var(--accent, #ee9800);
   outline-offset: 3px;
 }
 .reference-stage-guide .atlas-stage-chips button[aria-pressed="true"] {
@@ -440,7 +470,10 @@
 }
 @media (max-width: 600px) {
   .reference-stage-guide .atlas-stage-chips button,
-  .reference-stage-guide .atlas-stage-controls button {
+  .reference-stage-guide .atlas-stage-controls button,
+  .atlas-button,
+  .citylit-filter-pill,
+  .bencho-dock-item {
     min-height: 44px;
     touch-action: manipulation;
   }
@@ -450,4 +483,53 @@
   .reference-guide .atlas-nav {
     padding-inline: var(--citylit-page-gutter);
   }
+}
+
+/* Universal safe area, spacing, padding & margin consistency across viewports */
+:where(main, .shell, .reference-home, .field-guide, .reading-page, .atlas-directory) {
+  padding-left: max(var(--citylit-page-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--citylit-page-gutter), env(safe-area-inset-right));
+}
+
+.reading-page {
+  max-width: 76ch;
+  margin-inline: auto;
+  padding-block: clamp(32px, 5vw, 64px);
+  padding-bottom: calc(112px + env(safe-area-inset-bottom));
+}
+
+.reading-page h1 {
+  margin: var(--citylit-space-2) 0 var(--citylit-space-4);
+  font-size: clamp(34px, 5.5vw, 56px);
+  line-height: 1.05;
+}
+
+.reading-page .reading-intro {
+  margin-bottom: var(--citylit-space-8);
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.6;
+  color: var(--muted, #cbd5e1);
+}
+
+.reading-page section {
+  padding-block: var(--citylit-space-6);
+  border-bottom: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+}
+
+.reading-page section:last-of-type {
+  border-bottom: 0;
+}
+
+.reading-page h2 {
+  margin: 0 0 var(--citylit-space-3);
+  font-size: clamp(20px, 2.5vw, 26px);
+}
+
+.reading-page p {
+  margin: 0 0 var(--citylit-space-4);
+  line-height: 1.65;
+}
+
+.reading-page p:last-child {
+  margin-bottom: 0;
 }

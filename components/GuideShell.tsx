@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BookmarkSimple, Cube, House, MapPin } from "@phosphor-icons/react";
 import { usePathname } from "next/navigation";
 import BrandWordmark from "./BrandWordmark";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import ThemeToggle from "./ThemeToggle";
 import SettingsModal from "./SettingsModal";
 import MagnifyingDock from "./ui/MagnifyingDock";
@@ -29,6 +29,27 @@ export default function GuideShell({
   const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
   const isHome = pathname === "/";
   const [settingsOpen, setSettingsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        e.target instanceof HTMLSelectElement ||
+        (e.target as HTMLElement)?.isContentEditable
+      ) {
+        return;
+      }
+      if (e.key === "Escape") {
+        setSettingsOpen(false);
+      } else if (e.key === "?" || e.key === "/") {
+        e.preventDefault();
+        setSettingsOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const isDayActive = pathname.startsWith("/explore");
   const isCitiesActive = pathname === "/destinations" || pathname.startsWith("/provinces");

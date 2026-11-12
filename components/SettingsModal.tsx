@@ -283,6 +283,23 @@ export default function SettingsModal({
                       <span>12 Cities · 9 Provinces</span>
                     </div>
                   </div>
+
+                  <span className="citylit-settings-subhead" style={{ marginTop: 20 }}>
+                    Controls &amp; navigation
+                  </span>
+                  <div className="citylit-about-card citylit-shortcuts-card">
+                    <ul className="citylit-shortcuts-list">
+                      <li>
+                        <kbd>?</kbd> / <kbd>/</kbd> <span>Open settings &amp; controls</span>
+                      </li>
+                      <li>
+                        <kbd>Esc</kbd> <span>Close dialogs &amp; clear overlays</span>
+                      </li>
+                      <li>
+                        <kbd>Drag / Swipe</kbd> <span>Rotate 3D stage miniature</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               )}
             </div>

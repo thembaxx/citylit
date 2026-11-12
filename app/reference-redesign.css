@@ -9632,3 +9632,482 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
     transform: scale(0.96);
   }
 }
+
+/* ==========================================================================
+   CityLite Improvement Report & Spacing, Padding, Margin Enhancements
+   ========================================================================== */
+
+/* 1. Focus Stage Mode (R4, R5, R17) */
+.reference-guide.reference-stage-guide .atlas-stage.is-focused-stage .atlas-ring-scene,
+.reference-guide.reference-stage-guide
+  .atlas-stage.is-focused-stage:has(.atlas-ring-scene.is-heritage-hero)
+  .atlas-ring-scene {
+  height: min(78dvh, 760px);
+  min-height: 400px;
+  transition: height 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reference-guide.reference-stage-guide .atlas-stage.is-focused-stage .atlas-stage-sheet {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: all 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reference-guide.reference-stage-guide .atlas-stage.is-focused-stage .atlas-stage-chips {
+  opacity: 0.85;
+}
+
+.atlas-stage-unfocus-pill {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 25;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--citylit-reference-border);
+  background: color-mix(in srgb, var(--citylit-reference-panel) 88%, transparent);
+  color: var(--citylit-reference-text);
+  font-size: 13px;
+  font-weight: 650;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .atlas-stage-unfocus-pill:hover {
+    transform: translateY(-2px);
+    background: var(--citylit-reference-panel);
+    border-color: var(--citylit-reference-gold);
+  }
+}
+
+.atlas-stage-focus-btn {
+  color: var(--citylit-reference-muted);
+}
+
+/* 2. Search Empty State Suggestions (R3) */
+.reference-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(32px, 5vw, 56px) 20px;
+  margin: 24px auto;
+  max-width: 580px;
+  background: var(--citylit-reference-panel);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 24px;
+}
+
+.reference-empty p {
+  margin: 0 0 16px;
+  font-size: 16px;
+  color: var(--citylit-reference-text);
+}
+
+.reference-empty-suggestions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.reference-empty-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--citylit-reference-muted);
+}
+
+.reference-empty-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.reference-empty-pill {
+  min-height: 38px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--citylit-reference-border);
+  background: var(--citylit-reference-panel-raised);
+  color: var(--citylit-reference-text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reference-empty-pill:hover {
+    border-color: var(--citylit-reference-gold);
+    color: var(--citylit-reference-gold);
+    transform: translateY(-1px);
+  }
+}
+
+.reference-empty-clear {
+  min-height: 44px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--citylit-reference-border);
+  background: transparent;
+  color: var(--citylit-reference-muted);
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reference-empty-clear:hover {
+    color: var(--citylit-reference-text);
+    border-color: var(--citylit-reference-text);
+  }
+}
+
+/* 3. Settings Shortcuts list (R20) */
+.citylit-shortcuts-card {
+  margin-top: 8px;
+}
+
+.citylit-shortcuts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.citylit-shortcuts-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--citylit-reference-text);
+}
+
+.citylit-shortcuts-list kbd {
+  display: inline-block;
+  padding: 3px 8px;
+  min-width: 24px;
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--citylit-reference-gold);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--citylit-reference-border);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 4. Complete spacing, padding, margin rhythm on ALL pages and elements */
+
+/* Home hero spacing */
+.living-atlas-home .reference-home-hero {
+  padding-top: clamp(36px, 6vw, 76px);
+  padding-bottom: clamp(20px, 3.5vw, 36px);
+}
+
+.living-atlas-home .reference-home-hero h1 {
+  margin-top: 10px;
+  margin-bottom: 16px;
+  line-height: 1.02;
+}
+
+.living-atlas-home .reference-home-subtitle {
+  margin-top: 0;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.living-atlas-home .weather-widget {
+  margin-bottom: 22px;
+}
+
+.living-atlas-home .reference-search {
+  margin-bottom: 22px;
+  min-height: 52px;
+  padding-inline: 18px;
+}
+
+.living-atlas-home .citylit-filter-pills-row {
+  margin-bottom: clamp(24px, 4vw, 36px);
+  gap: 8px;
+  padding-block: 4px;
+}
+
+/* Featured place section */
+.citylit-featured-section {
+  margin-bottom: clamp(36px, 5.5vw, 60px);
+}
+
+.citylit-featured-card {
+  border-radius: 24px;
+}
+
+/* 3D Canvas section */
+.citylit-3d-canvas-section {
+  margin-bottom: clamp(36px, 5.5vw, 60px);
+}
+
+.citylit-3d-canvas-card {
+  padding: clamp(18px, 2.5vw, 26px);
+  border-radius: 24px;
+  gap: 16px;
+}
+
+.citylit-3d-canvas-head {
+  margin-bottom: 4px;
+}
+
+.citylit-3d-chip-row {
+  gap: 8px;
+  padding: 10px 14px;
+}
+
+.citylit-3d-chip {
+  min-height: 38px;
+  padding: 6px 14px;
+}
+
+/* Living Atlas Discovery (Wander section) */
+.living-atlas-discovery {
+  margin-bottom: clamp(40px, 6vw, 68px);
+}
+
+.living-atlas-discovery-head {
+  margin-bottom: 18px;
+}
+
+.atlas-mood-chips {
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-block: 4px;
+}
+
+/* Popular Destinations */
+.citylit-popular-section {
+  margin-bottom: clamp(48px, 7vw, 84px);
+}
+
+.citylit-section-head {
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.citylit-popular-scroll {
+  gap: 16px;
+  padding: 8px 4px 18px;
+}
+
+.citylit-popular-card {
+  padding: 12px;
+  border-radius: 20px;
+  gap: 12px;
+}
+
+/* Destinations Directory Page */
+.atlas-directory-header {
+  padding-block: clamp(36px, 5.5vw, 68px);
+  gap: 12px;
+}
+
+.atlas-directory-header h1 {
+  margin: 0 0 8px;
+}
+
+.atlas-directory-tools {
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.atlas-city-grid {
+  column-gap: clamp(20px, 2.8vw, 36px);
+  row-gap: clamp(28px, 3.6vw, 44px);
+}
+
+.atlas-card-copy {
+  padding: clamp(18px, 2.4vw, 26px);
+  gap: 14px;
+}
+
+/* City Guide Page */
+.atlas-city-facts {
+  margin: clamp(20px, 3vw, 36px) 0;
+  gap: 12px;
+}
+
+.atlas-city-facts > div {
+  padding: clamp(14px, 2vw, 20px) clamp(16px, 2.4vw, 24px);
+  border-radius: 18px;
+  gap: 6px;
+}
+
+.atlas-place-filters {
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-block: 2px;
+}
+
+/* 3D Stage */
+.reference-guide.reference-stage-guide .atlas-stage {
+  gap: clamp(16px, 2.5vw, 24px);
+  padding: 12px max(18px, env(safe-area-inset-left)) calc(32px + env(safe-area-inset-bottom))
+    max(18px, env(safe-area-inset-right));
+}
+
+.reference-guide.reference-stage-guide .atlas-stage-sheet {
+  padding: clamp(20px, 2.8vw, 32px);
+  border-radius: 24px;
+  margin-top: 4px;
+}
+
+.reference-guide.reference-stage-guide .atlas-stage-actions {
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.reference-guide.reference-stage-guide .atlas-stage-facts {
+  margin-block: 20px 16px;
+  gap: 12px;
+}
+
+.reference-guide.reference-stage-guide .atlas-stage-facts > div {
+  padding: 14px 18px;
+  border-radius: 16px;
+}
+
+.reference-guide.reference-stage-guide .atlas-stage-controls {
+  gap: 12px;
+  margin-top: 22px;
+}
+
+/* Venue Detail Page */
+.citylit-detail-content {
+  padding: 0 max(18px, env(safe-area-inset-left)) 36px max(18px, env(safe-area-inset-right));
+  max-width: 1040px;
+  margin-inline: auto;
+  gap: 22px;
+}
+
+.citylit-detail-circle-btn {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.citylit-detail-top-actions .atlas-button {
+  min-height: 44px;
+  padding: 0 18px;
+}
+
+/* Day planner & Adventure Hub */
+.field-guide {
+  padding-block: clamp(32px, 5vw, 64px);
+  padding-inline: max(18px, env(safe-area-inset-left));
+  max-width: 1080px;
+  margin-inline: auto;
+}
+
+.citylit-myday-header-wrap {
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.citylit-myday-plus-btn {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.citylit-myday-section {
+  margin-top: 24px;
+}
+
+.citylit-saved-card {
+  padding: 16px;
+  gap: 16px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.citylit-saved-bookmark-btn {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.citylit-adventure-callout {
+  padding: clamp(20px, 3.2vw, 28px);
+  border-radius: 24px;
+  margin: 28px 0;
+  gap: 16px;
+}
+
+.citylit-adventure-callout-btn {
+  min-height: 44px;
+  padding: 10px 22px;
+}
+
+.reference-trip-empty {
+  padding: clamp(36px, 5vw, 60px) 24px;
+  border-radius: 24px;
+  gap: 20px;
+  margin-block: 20px;
+}
+
+.reference-trip-empty-actions {
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.reference-trip-empty-actions .pill-button {
+  min-height: 44px;
+  padding: 10px 20px;
+}
+
+/* Touch targets and safe areas across all mobile viewports */
+@media (max-width: 767px) {
+  .reference-guide.reference-stage-guide .atlas-stage-sheet {
+    border-radius: 24px 24px 0 0;
+    max-height: 56dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: clamp(18px, 4vw, 24px);
+  }
+
+  .atlas-directory-tools {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .citylit-detail-hero {
+    height: 280px;
+  }
+
+  .citylit-saved-card {
+    padding: 14px;
+  }
+}
+

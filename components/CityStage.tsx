@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,6 +12,8 @@ import {
   Leaf,
   Mountains,
   Buildings,
+  CornersOut,
+  CornersIn,
 } from "@phosphor-icons/react";
 import { places, landmarkSources, categorySlug, type Place } from "../lib/data";
 import { landmarkPath, landmarkVenue, venuePath, type GuideCity } from "../lib/discovery-guide";
@@ -80,7 +82,17 @@ export default function CityStage({
   const router = useRouter();
   const { feedback } = useKhwezi();
   const [message, setMessage] = useState("");
+  const [focusMode, setFocusMode] = useState(false);
   const local = places.filter((place) => place.city === city.slug);
+
+  useEffect(() => {
+    if (!focusMode) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFocusMode(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [focusMode]);
   const items: StageItem[] =
     mode === "places"
       ? local.map((place) => ({
@@ -151,7 +163,10 @@ export default function CityStage({
   };
   return (
     <GuideShell stage>
-      <section className="atlas-stage" aria-labelledby="stage-title">
+      <section
+        className={`atlas-stage${focusMode ? " is-focused-stage" : ""}`}
+        aria-labelledby="stage-title"
+      >
         <LandmarkRing
           items={items}
           selected={index}
@@ -160,6 +175,16 @@ export default function CityStage({
           accent={city.accentColor}
           onOpenGuide={(nextIndex) => router.push(items[nextIndex]?.href ?? item.href)}
         />
+        {focusMode && (
+          <button
+            type="button"
+            className="atlas-stage-unfocus-pill"
+            onClick={() => setFocusMode(false)}
+            aria-label="Restore guide details"
+          >
+            <CornersIn size={16} /> Show guide details
+          </button>
+        )}
         <header className="atlas-stage-heading">
           <nav className="atlas-breadcrumb" aria-label="Breadcrumb">
             <Link href={`/${city.slug}`}>{city.name}</Link>
@@ -206,6 +231,16 @@ export default function CityStage({
                   {selected ? "In my day" : "Add to my day"}
                 </MagneticButton>
               )}
+              <MagneticButton
+                onClick={() => setFocusMode((v) => !v)}
+                className="atlas-button atlas-stage-focus-btn"
+                strength={0.16}
+                aria-pressed={focusMode}
+                aria-label={focusMode ? "Show guide sheet" : "Focus on 3D view"}
+              >
+                {focusMode ? <CornersIn size={17} /> : <CornersOut size={17} />}
+                {focusMode ? "Show details" : "Focus 3D"}
+              </MagneticButton>
             </div>
             {availableFacts.length > 0 && (
               <dl className="atlas-stage-facts">

@@ -236,6 +236,7 @@ export default function DiscoveryHome() {
               landmarks={matchingLandmarks}
               places={matchingPlaces}
               onFilterChange={setFilter}
+              onSelectQuery={(selectedQuery) => setQuery(selectedQuery)}
               onClear={() => {
                 setQuery("");
                 setFilter("All");

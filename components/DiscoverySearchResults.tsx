@@ -19,6 +19,7 @@ export default function DiscoverySearchResults({
   landmarks: matchingLandmarks,
   places: matchingPlaces,
   onFilterChange,
+  onSelectQuery,
   onClear,
 }: {
   query: string;
@@ -27,6 +28,7 @@ export default function DiscoverySearchResults({
   landmarks: LandmarkMatch[];
   places: Place[];
   onFilterChange: (filter: DiscoveryFilter) => void;
+  onSelectQuery?: (query: string) => void;
   onClear: () => void;
 }) {
   const [showAll, setShowAll] = useState(false);
@@ -134,7 +136,32 @@ export default function DiscoverySearchResults({
         {resultCount === 0 && (
           <div className="reference-empty">
             <p>No places found for “{query}”.</p>
-            <button type="button" onClick={onClear}>
+            <div
+              className="reference-empty-suggestions"
+              role="group"
+              aria-label="Suggested discoveries"
+            >
+              <span className="reference-empty-title">Try discovering:</span>
+              <div className="reference-empty-pills">
+                {["Cape Town", "Durban", "Johannesburg", "Table Mountain", "Garden"].map(
+                  (suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      className="reference-empty-pill"
+                      onClick={() => {
+                        if (onSelectQuery) {
+                          onSelectQuery(suggestion);
+                        }
+                      }}
+                    >
+                      {suggestion}
+                    </button>
+                  ),
+                )}
+              </div>
+            </div>
+            <button type="button" onClick={onClear} className="reference-empty-clear">
               Clear search
             </button>
           </div>

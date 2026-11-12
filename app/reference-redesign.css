@@ -6308,10 +6308,15 @@
   overscroll-behavior: contain;
   border: 1px solid var(--citylit-hairline);
   border-radius: 22px;
-  background: rgb(14 14 19 / 96%);
+  background: rgb(14 14 19) !important;
   box-shadow: 0 26px 64px rgb(0 0 0 / 58%);
   backdrop-filter: blur(26px) saturate(1.3);
   -webkit-backdrop-filter: blur(26px) saturate(1.3);
+}
+
+.reference-guide .atlas-inspector-mechanisms {
+  background: color-mix(in srgb, var(--co-surface-low, #1a1b20) 91%, transparent);
+  border-color: var(--citylit-hairline, rgba(255, 255, 255, 0.08));
 }
 
 .reference-guide .atlas-inspector-actions {
@@ -8581,6 +8586,32 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 
 /* Settings sheet cosmic treatment */
+.citylit-settings-overlay,
+.citylit-settings-backdrop {
+  /* The sheet is always a dark surface, so its text tokens stay dark-theme
+     even when the guide behind it is in day mode. */
+  --co-surface-container: #1f1f24;
+  --co-surface-low: #1a1b20;
+  --co-surface-high: #292a2e;
+  --co-on-surface: #e3e2e7;
+  --co-on-surface-variant: #ccc3d8;
+  --co-outline: #958da1;
+  --co-glass-border: rgba(255, 255, 255, 0.08);
+  --co-text-primary: #f8fafc;
+  --co-text-secondary: #94a3b8;
+  --co-text-muted: #94a3b8;
+  --co-primary: #d2bbff;
+  --citylit-text: #e3e2e7;
+  --citylit-quiet: #ccc3d8;
+  --citylit-surface: #1a1b20;
+  --citylit-surface-raised: #1f1f24;
+  --citylit-panel: #1a1b20;
+  --citylit-panel-raised: #1f1f24;
+  --citylit-hairline: rgba(255, 255, 255, 0.08);
+  --ink: #e3e2e7;
+  --bg: #121317;
+  color-scheme: dark;
+}
 .citylit-settings-overlay {
   background: rgba(7, 8, 10, 0.62);
   backdrop-filter: blur(8px);
@@ -9009,9 +9040,26 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   z-index: 10;
 }
 @media (prefers-color-scheme: light) {
+  /* Photo heroes keep a dark scrim in both themes so the white editorial
+     title stays legible over bright daylight imagery. */
   :root[data-theme="day"] .citylit-detail-page .citylit-detail-hero-gradient {
-    background: linear-gradient(to bottom, transparent 0%, rgba(251, 249, 245, 0.85) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 14, 0.38) 0%,
+      rgba(10, 10, 14, 0.08) 38%,
+      rgba(10, 10, 14, 0.92) 100%
+    );
   }
+}
+.citylit-detail-page .citylit-detail-hero-copy h1 {
+  color: #fff;
+}
+.citylit-detail-page .citylit-detail-hero-copy .citylit-detail-location,
+.citylit-detail-page .citylit-detail-hero-copy .citylit-detail-rating {
+  color: rgba(255, 255, 255, 0.82);
+}
+.citylit-detail-page .citylit-detail-hero-copy .citylit-featured-badge {
+  color: #ffb95f;
 }
 /* Stage HUD / inspector closer to refs (without inspector panel backdrop-filter) */
 .reference-stage-guide .atlas-stage-heading .atlas-breadcrumb,

@@ -5660,45 +5660,6 @@
   display: none;
 }
 
-.citylit-popular-card {
-  flex: 0 0 132px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  text-decoration: none;
-}
-
-.citylit-popular-thumb {
-  position: relative;
-  height: 88px;
-  overflow: hidden;
-  border: 1px solid var(--citylit-hairline);
-  border-radius: 16px;
-  background: var(--citylit-surface-raised);
-}
-
-.citylit-popular-thumb img {
-  object-fit: cover;
-  transition: transform 300ms var(--citylit-ease);
-}
-
-.citylit-popular-card:hover .citylit-popular-thumb img {
-  transform: scale(1.04);
-}
-
-.citylit-popular-name {
-  color: var(--citylit-text);
-  font-size: 13px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-}
-
-.citylit-popular-prov {
-  margin-top: -4px;
-  color: var(--citylit-reference-dim);
-  font-size: 11px;
-}
-
 /* Mood explorer. */
 .reference-home .living-atlas-explorer {
   margin-top: 34px;
@@ -8364,10 +8325,12 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 .citylit-popular-scroll {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding: 8px 4px 20px;
   scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 16px;
 }
 .citylit-popular-scroll::-webkit-scrollbar {
   display: none;
@@ -8377,12 +8340,21 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   display: flex;
   flex-direction: column;
   height: auto;
-  min-height: fit-content;
+  min-height: 200px;
+  max-height: none;
   overflow: hidden;
   text-decoration: none;
+  box-sizing: border-box;
   background: var(--co-surface-low, #1a1b20);
   border: 1px solid var(--co-glass-border, rgba(255, 255, 255, 0.08));
-  border-radius: 16px;
+  border-radius: 18px;
+  transition: transform 200ms var(--ease-out, ease-out), border-color 200ms ease;
+}
+
+@media (max-width: 480px) {
+  .citylit-popular-card {
+    flex: 0 0 156px;
+  }
 }
 .citylit-popular-thumb {
   position: relative;
@@ -10075,11 +10047,6 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 .citylit-popular-scroll {
   gap: 16px;
   padding: 8px 4px 18px;
-}
-
-.citylit-popular-card {
-  padding: 0;
-  border-radius: 20px;
 }
 
 /* Destinations Directory Page */

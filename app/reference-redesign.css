@@ -9562,3 +9562,50 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
     transition: none;
   }
 }
+
+/* Place and landmark dots are real buttons. The 44px target sits on the
+   projected point; the visible mark stays small so neighbours can still be hit. */
+.glow-place-marker {
+  position: absolute;
+  left: -120px;
+  top: -120px;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: auto;
+}
+.glow-place-marker::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f7f1e6;
+  box-shadow: 0 0 0 2px rgb(20 16 12 / 40%);
+}
+.glow-place-marker.is-landmark::before {
+  left: 16px;
+  top: 16px;
+  width: 12px;
+  height: 12px;
+  background: #d9660b;
+}
+.glow-place-marker .glow-marker-name {
+  opacity: 0;
+  pointer-events: none;
+}
+.glow-place-marker:is(:hover, :focus-visible) .glow-marker-name {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .glow-place-marker:active::before {
+    transform: scale(0.86);
+  }
+}

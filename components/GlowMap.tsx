@@ -2,6 +2,7 @@
 import { View, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Suspense, useEffect, useMemo, useRef, useState, type ComponentRef } from "react";
+import { useRouter } from "next/navigation";
 import * as THREE from "three";
 import gsap from "gsap";
 import { cities, places } from "../lib/data";
@@ -94,6 +95,69 @@ const beamFragment = `
 const x = (lon: number) => (lon - 25) * 0.48;
 const z = (lat: number) => -(lat + 28.7) * 0.48;
 
+type AtlasPin = {
+  key: string;
+  label: string;
+  href: string;
+  kind: "place" | "landmark";
+  position: [number, number, number];
+};
+
+function buildAtlasPins(): AtlasPin[] {
+  const pins: AtlasPin[] = [];
+  const at = new Map<string, number>();
+  const add = (pin: AtlasPin, coordKey: string) => {
+    const index = at.get(coordKey);
+    if (index === undefined) {
+      at.set(coordKey, pins.length);
+      pins.push(pin);
+      return;
+    }
+    if (pin.kind === "landmark") pins[index] = pin;
+  };
+  for (const place of places) {
+    if (place.coordinateAccuracy !== "venue" || place.coords.length < 2) continue;
+    const coordKey = `${place.coords[0].toFixed(3)},${place.coords[1].toFixed(3)}`;
+    add(
+      {
+        key: `place-${place.id}`,
+        label: place.name,
+        href: `/${place.city}/places?place=${encodeURIComponent(place.id)}`,
+        kind: "place",
+        position: [x(place.coords[0]), 0.07, z(place.coords[1])],
+      },
+      coordKey,
+    );
+  }
+  for (const city of cities) {
+    for (const name of city.landmarks) {
+      const place = landmarkVenue(city.slug, name);
+      if (!place || place.coordinateAccuracy !== "venue" || place.coords.length < 2) continue;
+      const coordKey = `${place.coords[0].toFixed(3)},${place.coords[1].toFixed(3)}`;
+      add(
+        {
+          key: `landmark-${city.slug}-${name}`,
+          label: name,
+          href: `/${city.slug}/landmarks?landmark=${encodeURIComponent(name)}`,
+          kind: "landmark",
+          position: [x(place.coords[0]), 0.14, z(place.coords[1])],
+        },
+        coordKey,
+      );
+    }
+  }
+  return pins;
+}
+
+function pinPositions(pins: AtlasPin[], kind: AtlasPin["kind"]) {
+  const values: number[] = [];
+  for (const pin of pins) {
+    if (pin.kind !== kind) continue;
+    values.push(pin.position[0], pin.position[1], pin.position[2]);
+  }
+  return new Float32Array(values);
+}
+
 function MarkerDots({
   positions,
   color,
@@ -159,6 +223,8 @@ function Terrain({
   selected,
   host,
   labels,
+  pins,
+  pinLabels,
   focus,
   opacity,
   interactive,
@@ -168,6 +234,8 @@ function Terrain({
   selected: number | null;
   host: HTMLElement;
   labels: { current: (HTMLButtonElement | null)[] };
+  pins: AtlasPin[];
+  pinLabels: { current: (HTMLButtonElement | null)[] };
   focus?: number[];
   opacity: number;
   interactive: boolean;
@@ -217,29 +285,8 @@ function Terrain({
       elevations: new Float32Array(elevations),
     };
   }, []);
-  const atlasMarkers = useMemo(() => {
-    const placeDots: number[] = [];
-    const landmarkDots: number[] = [];
-    const seen = new Set<string>();
-    for (const place of places) {
-      if (place.coordinateAccuracy !== "venue" || place.coords.length < 2) continue;
-      const key = `${place.coords[0].toFixed(3)},${place.coords[1].toFixed(3)}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      placeDots.push(x(place.coords[0]), 0.07, z(place.coords[1]));
-    }
-    for (const city of cities) {
-      for (const name of city.landmarks) {
-        const place = landmarkVenue(city.slug, name);
-        if (!place || place.coordinateAccuracy !== "venue" || place.coords.length < 2) continue;
-        landmarkDots.push(x(place.coords[0]), 0.14, z(place.coords[1]));
-      }
-    }
-    return {
-      places: new Float32Array(placeDots),
-      landmarks: new Float32Array(landmarkDots),
-    };
-  }, []);
+  const placeDots = useMemo(() => pinPositions(pins, "place"), [pins]);
+  const landmarkDots = useMemo(() => pinPositions(pins, "landmark"), [pins]);
   const outline = useMemo(() => {
     const positions: number[] = [];
     for (const feature of boundaries.features) {
@@ -298,6 +345,15 @@ function Terrain({
       const label = labels.current[index];
       if (!label) return;
       vector.set(x(city.coords[0]), 0.15, z(city.coords[1])).project(camera);
+      label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
+      label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
+      label.style.visibility =
+        Math.abs(vector.x) > 1 || Math.abs(vector.y) > 1 || vector.z > 1 ? "hidden" : "visible";
+    });
+    pins.forEach((pin, index) => {
+      const label = pinLabels.current[index];
+      if (!label) return;
+      vector.set(pin.position[0], pin.position[1], pin.position[2]).project(camera);
       label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
       label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
       label.style.visibility =
@@ -405,14 +461,9 @@ function Terrain({
           depthWrite={false}
         />
       </lineSegments>
+      <MarkerDots positions={placeDots} color="#f7f1e6" radius={0.028} opacity={0.92 * opacity} />
       <MarkerDots
-        positions={atlasMarkers.places}
-        color="#f7f1e6"
-        radius={0.028}
-        opacity={0.92 * opacity}
-      />
-      <MarkerDots
-        positions={atlasMarkers.landmarks}
+        positions={landmarkDots}
         color={night ? "#ffc46b" : "#d9660b"}
         radius={0.042}
         opacity={opacity}
@@ -519,9 +570,12 @@ export default function GlowMap({
   animate?: boolean;
 }) {
   const labels = useRef<(HTMLButtonElement | null)[]>([]);
+  const pinLabels = useRef<(HTMLButtonElement | null)[]>([]);
+  const pins = useMemo(() => buildAtlasPins(), []);
   const [host, setHost] = useState<HTMLElement | null>(null);
   const { night } = useTheme();
   const { feedback } = useKhwezi();
+  const router = useRouter();
   return (
     <div
       className="glow-map"
@@ -536,6 +590,8 @@ export default function GlowMap({
             night={night}
             selected={selected}
             labels={labels}
+            pins={pins}
+            pinLabels={pinLabels}
             focus={focus}
             opacity={opacity}
             interactive={interactive}
@@ -550,7 +606,7 @@ export default function GlowMap({
             ref={(element) => {
               labels.current[index] = element;
             }}
-            aria-label={`Choose ${city.name}`}
+            aria-label={selected === index ? `Open ${city.name} in 3D` : `Choose ${city.name}`}
             aria-pressed={selected === index}
             tabIndex={interactive ? 0 : -1}
             disabled={!interactive}
@@ -558,11 +614,35 @@ export default function GlowMap({
             onPointerDown={(event) => event.stopPropagation()}
             onClick={() => {
               feedback("tap");
+              if (selected === index) {
+                router.push(`/${city.slug}/landmarks`);
+                return;
+              }
               onSelect(index);
             }}
           >
             <span className="glow-marker-dot" />
             <span className="glow-marker-name">{city.short}</span>
+          </button>
+        ))}
+        {pins.map((pin, index) => (
+          <button
+            key={pin.key}
+            ref={(element) => {
+              pinLabels.current[index] = element;
+            }}
+            type="button"
+            className={`glow-place-marker ${pin.kind === "landmark" ? "is-landmark" : ""}`}
+            aria-label={`Open ${pin.label} in 3D`}
+            tabIndex={interactive ? 0 : -1}
+            disabled={!interactive}
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={() => {
+              feedback("tap");
+              router.push(pin.href);
+            }}
+          >
+            <span className="glow-marker-name">{pin.label}</span>
           </button>
         ))}
       </div>

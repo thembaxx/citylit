@@ -8,7 +8,14 @@
  */
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useMotionValue, useTransform, useReducedMotion, animate, type PanInfo } from "motion/react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  useReducedMotion,
+  animate,
+  type PanInfo,
+} from "motion/react";
 import { ArrowRight, Check } from "@phosphor-icons/react";
 
 interface SlideToConfirmProps {
@@ -59,23 +66,34 @@ export function SlideToConfirm({
 
   const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const currentX = dragX.get();
-    const isFlick = info?.velocity?.x > 300;
+    const vx = info?.velocity?.x ?? 0;
+    const isFlick = vx > 300;
     if (currentX >= maxDrag * 0.68 || isFlick) {
-      // Confirmed! Snap to end
-      animate(dragX, maxDrag, {
-        type: "spring",
-        stiffness: 400,
-        damping: 25,
-      });
+      // Confirmed! Snap to end with seeded gesture velocity
+      if (reduced) {
+        animate(dragX, maxDrag, { duration: 0.1 });
+      } else {
+        animate(dragX, maxDrag, {
+          type: "spring",
+          stiffness: 400,
+          damping: 25,
+          velocity: vx,
+        });
+      }
       setConfirmed(true);
       onConfirm();
     } else {
-      // Rebound back to start
-      animate(dragX, 0, {
-        type: "spring",
-        stiffness: 450,
-        damping: 28,
-      });
+      // Rebound back to start with seeded gesture velocity
+      if (reduced) {
+        animate(dragX, 0, { duration: 0.1 });
+      } else {
+        animate(dragX, 0, {
+          type: "spring",
+          stiffness: 450,
+          damping: 28,
+          velocity: vx,
+        });
+      }
     }
   };
 
@@ -122,9 +140,9 @@ export function SlideToConfirm({
           className="bencho-slide-thumb"
           drag="x"
           dragConstraints={{ left: 0, right: maxDrag }}
-          dragElastic={0.08}
+          dragElastic={0.2}
           dragMomentum={false}
-          style={{ x: dragX }}
+          style={{ x: dragX, touchAction: "pan-y" }}
           onDragEnd={handleDragEnd}
           whileTap={{ scale: 0.94 }}
         >

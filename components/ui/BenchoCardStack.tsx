@@ -75,7 +75,23 @@ export function BenchoCardStack({
               style={{
                 transformOrigin: "50% calc(100% + 200px)",
                 zIndex: offset.zIndex,
+                touchAction: "pan-y",
               }}
+              drag={isTop ? "x" : false}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.35}
+              onDragEnd={
+                isTop
+                  ? (_e, info) => {
+                      if (Math.abs(info.offset.x) > 65 || Math.abs(info.velocity.x) > 300) {
+                        const dir = (info.velocity.x || info.offset.x) > 0 ? -1 : 1;
+                        const nextIndex = (activeIndex + dir + cards.length) % cards.length;
+                        setActiveIndex(nextIndex);
+                        onCardSelect?.(cards[nextIndex].id);
+                      }
+                    }
+                  : undefined
+              }
               animate={{
                 rotate: offset.rotate,
                 x: offset.x,

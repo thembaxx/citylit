@@ -304,14 +304,15 @@ export default function Explorer() {
     });
   };
   const bind = useDrag(
-    ({ last, tap, swipe: [x], movement: [mx] }) => {
+    ({ last, tap, swipe: [x], movement: [mx], velocity: [vx] }) => {
       if (tap) {
         if (mode === "city") openLandmark(index);
         return;
       }
-      if (last && (x || Math.abs(mx) > 55)) {
+      const isFlick = Math.abs(vx) > 0.35 && Math.abs(mx) > 15;
+      if (last && (x || Math.abs(mx) > 48 || isFlick)) {
         feedback("swipe");
-        const d = (x || mx) > 0 ? -1 : 1;
+        const d = (x || mx || vx) > 0 ? -1 : 1;
         if (mode === "city") next(d);
         else chooseCategory((cat + d + 5) % 5);
       }

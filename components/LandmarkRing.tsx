@@ -295,7 +295,9 @@ function Ring({
       <PerspectiveCamera makeDefault position={[0.5, 2.35, 11.45]} fov={42} />
       <AtlasWorld night={night} accent={accent} animate={!reduced} />
       <StudioEnvironment intensity={night ? 0.38 : 0.72} />
-      <hemisphereLight args={[night ? "#9cb0d8" : "#fff8ee", night ? "#222030" : "#5a5042", night ? 0.42 : 0.58]} />
+      <hemisphereLight
+        args={[night ? "#9cb0d8" : "#fff8ee", night ? "#222030" : "#5a5042", night ? 0.42 : 0.58]}
+      />
       <ambientLight intensity={night ? 0.25 : 0.42} />
       <directionalLight
         position={[5, 8, 6]}
@@ -424,7 +426,13 @@ export default function LandmarkRing({
 }) {
   const [host, setHost] = useState<HTMLDivElement | null>(null);
   const angle = useRef(0);
-  const drag = useRef<{ x: number; y: number; angle: number } | null>(null);
+  const drag = useRef<{
+    x: number;
+    y: number;
+    angle: number;
+    time: number;
+    vx: number;
+  } | null>(null);
   const dragging = useRef(false);
   const moved = useRef(false);
   const [settle, setSettle] = useState(0);
@@ -570,6 +578,7 @@ export default function LandmarkRing({
       data-active-model-status={
         museumSelected ? "ready" : (modelStatuses[items[selected]?.name] ?? "loading")
       }
+      style={{ touchAction: "pan-y" }}
       role="group"
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {
@@ -579,7 +588,13 @@ export default function LandmarkRing({
         if (event.button === 0) {
           // Capture immediately so dragging continues across scene overlays.
           event.currentTarget.setPointerCapture(event.pointerId);
-          drag.current = { x: event.clientX, y: event.clientY, angle: angle.current };
+          drag.current = {
+            x: event.clientX,
+            y: event.clientY,
+            angle: angle.current,
+            time: performance.now(),
+            vx: 0,
+          };
           moved.current = false;
         }
       }}
@@ -591,6 +606,12 @@ export default function LandmarkRing({
         if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.2) {
           dragging.current = true;
           moved.current = true;
+          const now = performance.now();
+          const dt = now - drag.current.time;
+          if (dt > 8) {
+            drag.current.vx = (event.clientX - drag.current.x) / dt;
+            drag.current.time = now;
+          }
           angle.current = drag.current.angle + dx * 0.009;
           event.currentTarget.setPointerCapture(event.pointerId);
           redraw();
@@ -604,15 +625,24 @@ export default function LandmarkRing({
         }
         if (!drag.current) return;
         const travel = event.clientX - drag.current.x;
+        const vx = drag.current.vx || 0;
+        const isFlick = Math.abs(vx) > 0.35;
         drag.current = null;
         dragging.current = false;
         if (moved.current && items.length > 1) {
           const snapped = Math.round((-angle.current / (Math.PI * 2)) * items.length);
           const nearest = ((snapped % items.length) + items.length) % items.length;
-          // Do not snap a deliberate short swipe back to its starting item.
+          // Respect flick velocity or deliberate travel distance
+          const step = isFlick
+            ? vx > 0
+              ? items.length - 1
+              : 1
+            : travel > 0
+              ? items.length - 1
+              : 1;
           const next =
-            nearest === selected && Math.abs(travel) > 24
-              ? (selected + (travel > 0 ? items.length - 1 : 1)) % items.length
+            isFlick || (nearest === selected && Math.abs(travel) > 24)
+              ? (selected + step) % items.length
               : nearest;
           onSelect(next, "swipe");
           setSettle((value) => value + 1);

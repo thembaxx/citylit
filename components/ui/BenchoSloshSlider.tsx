@@ -18,6 +18,7 @@ import {
   useSpring,
   useReducedMotion,
   animate,
+  type PanInfo,
 } from "motion/react";
 import { benchoAudio } from "../../lib/bencho-audio";
 
@@ -111,16 +112,24 @@ export function BenchoSloshSlider({
     }
   };
 
-  const handleDragEnd = () => {
-    // Snap to nearest detent if close
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info?: PanInfo) => {
+    // Snap to nearest detent, taking release velocity into account
     const currentX = thumbX.get();
+    const vx = info?.velocity?.x ?? xVelocity.get();
     const fraction = Math.max(0, Math.min(1, currentX / trackWidth));
     const rawVal = min + fraction * (max - min);
+
+    // Bias toward flick direction when flung with velocity
+    let targetVal = rawVal;
+    if (Math.abs(vx) > 300) {
+      const step = (max - min) * 0.12 * Math.sign(vx);
+      targetVal = Math.max(min, Math.min(max, rawVal + step));
+    }
 
     let closest = detents[0];
     let minDiff = Infinity;
     for (const d of detents) {
-      const diff = Math.abs(d.value - rawVal);
+      const diff = Math.abs(d.value - targetVal);
       if (diff < minDiff) {
         minDiff = diff;
         closest = d;
@@ -129,7 +138,16 @@ export function BenchoSloshSlider({
 
     onChange(closest.value);
     const targetX = ((closest.value - min) / (max - min)) * trackWidth;
-    animate(thumbX, targetX, { type: "spring", stiffness: 450, damping: 25 });
+    if (reduced) {
+      animate(thumbX, targetX, { duration: 0.1 });
+    } else {
+      animate(thumbX, targetX, {
+        type: "spring",
+        stiffness: 450,
+        damping: 26,
+        velocity: vx,
+      });
+    }
     benchoAudio.playClick(680);
   };
 
@@ -170,11 +188,12 @@ export function BenchoSloshSlider({
           className="bencho-slosh-thumb"
           drag="x"
           dragConstraints={{ left: 0, right: trackWidth }}
-          dragElastic={0.06}
+          dragElastic={0.18}
           dragMomentum={false}
           style={{
             x: thumbX,
             rotate: reduced ? 0 : sloshTilt,
+            touchAction: "pan-y",
           }}
           onDrag={handleDrag}
           onDragEnd={handleDragEnd}

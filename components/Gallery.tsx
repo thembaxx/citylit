@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useMotionValue, useTransform, useReducedMotion, animate } from "motion/react";
 import { useGesture } from "@use-gesture/react";
 import { X, CaretLeft, CaretRight, MagnifyingGlassPlus } from "@phosphor-icons/react";
 import type { Photo } from "../lib/data";
@@ -18,7 +18,9 @@ export default function Gallery({
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [scale, setScale] = useState(1);
-  const [offset, setOffset] = useState<[number, number]>([0, 0]);
+  const dragX = useMotionValue(0);
+  const dragY = useMotionValue(0);
+  const imageOpacity = useTransform(dragY, [0, 240], [1, 0.45]);
   const dialog = useRef<HTMLDialogElement>(null);
   const area = useRef<HTMLDivElement>(null);
   const image = images[index];
@@ -27,8 +29,9 @@ export default function Gallery({
   }, [name]);
   useEffect(() => {
     setScale(1);
-    setOffset([0, 0]);
-  }, [index, open]);
+    dragX.set(0);
+    dragY.set(0);
+  }, [index, open, dragX, dragY]);
   useEffect(() => {
     if (open) dialog.current?.showModal();
     else dialog.current?.close();
@@ -37,16 +40,63 @@ export default function Gallery({
   useGesture(
     {
       onPinch: ({ offset: [s] }) => setScale(s),
-      onDrag: ({ offset: [x, y], movement: [mx, my], last, swipe: [swipe] }) => {
-        if (scale > 1) setOffset([x, y]);
-        else if (last && my > 100 && my > Math.abs(mx) * 1.5) setOpen(false);
-        else if (last && swipe) select(swipe > 0 ? -1 : 1);
+      onDrag: ({
+        offset: [ox, oy],
+        movement: [mx, my],
+        velocity: [vx, vy],
+        last,
+        swipe: [swipeX],
+      }) => {
+        if (scale > 1) {
+          dragX.set(ox);
+          dragY.set(oy);
+        } else {
+          if (!last) {
+            // Track phase: 1:1 mapping with pointer; rubber-band when dragging up past boundary
+            const currentY = my > 0 ? my : my * 0.22;
+            dragY.set(currentY);
+            if (Math.abs(mx) > Math.abs(my) * 1.2) {
+              dragX.set(mx * 0.35);
+            }
+          } else {
+            // Release phase: dismiss on distance OR velocity
+            const isDownward = (my > 80 || (vy > 0.45 && my > 20)) && my > Math.abs(mx) * 1.2;
+            if (isDownward) {
+              setOpen(false);
+              dragX.set(0);
+              dragY.set(0);
+            } else if (swipeX || (Math.abs(vx) > 0.45 && Math.abs(mx) > 25)) {
+              select((swipeX || mx) > 0 ? -1 : 1);
+              animate(dragX, 0, { type: "spring", stiffness: 450, damping: 28 });
+              animate(dragY, 0, { type: "spring", stiffness: 450, damping: 28 });
+            } else {
+              // Rapid snap-back seeded with velocity
+              if (reduced) {
+                dragX.set(0);
+                dragY.set(0);
+              } else {
+                animate(dragY, 0, {
+                  type: "spring",
+                  stiffness: 450,
+                  damping: 26,
+                  velocity: vy * 1000,
+                });
+                animate(dragX, 0, {
+                  type: "spring",
+                  stiffness: 450,
+                  damping: 26,
+                  velocity: vx * 1000,
+                });
+              }
+            }
+          }
+        }
       },
     },
     {
       target: area,
       pinch: { scaleBounds: { min: 1, max: 3 }, from: () => [scale, 0] },
-      drag: { filterTaps: true, from: () => offset },
+      drag: { filterTaps: true, from: () => [dragX.get(), dragY.get()] },
     },
   );
   if (!image)
@@ -118,8 +168,12 @@ export default function Gallery({
         <div ref={area} className="lightbox-image-area">
           <motion.div
             className="lightbox-image"
-            animate={{ scale, x: offset[0], y: offset[1] }}
-            transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 30 }}
+            style={{
+              scale,
+              x: dragX,
+              y: dragY,
+              opacity: reduced ? 1 : imageOpacity,
+            }}
           >
             <Image src={image.src} alt={image.alt} fill sizes="90vw" draggable={false} />
           </motion.div>

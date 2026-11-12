@@ -295,9 +295,10 @@ export default function KhweziView({
     };
   }, []);
   const drag = useDrag(
-    ({ offset: [x], tap, last, event }) => {
+    ({ offset: [x], tap, last, event, velocity: [vx] }) => {
       event.stopPropagation();
       if (last && tap) setTurn((v) => v + 0.4);
+      else if (last && Math.abs(vx) > 0.45) setTurn((v) => v + Math.sign(vx) * 0.35);
       else if (!tap) setTurn(x * 0.009);
     },
     { axis: "x", filterTaps: true, from: () => [turn / 0.009, 0] },

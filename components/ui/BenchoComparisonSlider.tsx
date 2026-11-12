@@ -79,6 +79,7 @@ export function BenchoComparisonSlider({
     <div
       ref={containerRef}
       className={`bencho-comparison-slider-root ${className}`}
+      style={{ touchAction: "pan-y" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}

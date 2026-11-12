@@ -4622,11 +4622,12 @@
   background: linear-gradient(90deg, rgba(240, 179, 94, 0.3) 0%, rgba(240, 179, 94, 0.85) 100%);
   border-radius: 9999px;
   pointer-events: none;
-  transition: width 0.1s linear;
+  touch-action: none;
 }
 
 .bencho-slide-confirm-track.is-confirmed .bencho-slide-fill {
   background: linear-gradient(90deg, #f0b35e 0%, #d4923a 100%);
+  transition: width 0.22s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .bencho-slide-text {

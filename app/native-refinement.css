@@ -19,6 +19,21 @@ a,
 select {
   -webkit-tap-highlight-color: transparent;
 }
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
+}
+.select-city select {
+  appearance: none;
+  -webkit-appearance: none;
+}
+@media (max-width: 767px) {
+  .reference-guide #guide-main,
+  .reference-guide .guide-planner,
+  .reference-guide .atlas-section:last-child {
+    padding-bottom: max(120px, calc(100px + env(safe-area-inset-bottom)));
+  }
+}
 button,
 [role="button"],
 [role="tab"],

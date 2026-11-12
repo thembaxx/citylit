@@ -9204,6 +9204,16 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 .reference-stage-guide .atlas-stage-heading h1 {
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
+:root[data-theme="day"] .reference-stage-guide .atlas-stage-heading h1,
+:root[data-theme="day"] .reference-guide.reference-stage-guide .atlas-stage-heading h1 {
+  color: #171920 !important;
+  text-shadow: none;
+}
+:root[data-theme="day"] .reference-stage-guide .atlas-stage-heading .atlas-breadcrumb a,
+:root[data-theme="day"] .reference-stage-guide .atlas-stage-heading .atlas-breadcrumb {
+  color: #4b5563 !important;
+  text-shadow: none;
+}
 .reference-stage-guide .atlas-stage-heading h1 {
   font-family: var(--font-display, "Playfair Display", Georgia, serif);
   font-weight: 500;

@@ -56,7 +56,10 @@ export default function DiscoveryHome() {
           landmarkSources.find((item) => item.name === "Table Mountain") || landmarkSources[0],
       },
       {
-        city: cities.find((c) => c.slug === "tshwane") || cities[1],
+        city:
+          cities.find((c) => c.slug === "pretoria") ||
+          cities.find((c) => c.slug === "tshwane") ||
+          cities[1],
         landmark:
           landmarkSources.find((item) => item.name === "Union Buildings") || landmarkSources[1],
       },
@@ -236,23 +239,25 @@ export default function DiscoveryHome() {
               )}
             </label>
 
-            {/* Category Filter Pills */}
-            <div className="citylit-filter-pills-row" role="group" aria-label="Explore categories">
-              {(["All", "Landmarks", "Cities", "Nature", "Architecture"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  className={`citylit-filter-pill ${filter === tab ? "is-active" : ""}`}
-                  aria-pressed={filter === tab}
-                  onClick={() => {
-                    benchoAudio.playClick(540);
-                    setFilter(tab);
-                  }}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
+            {/* Category Filter Pills (hidden in search mode to prevent duplicate stacked pill rows) */}
+            {!resultsVisible && (
+              <div className="citylit-filter-pills-row" role="group" aria-label="Explore categories">
+                {(["All", "Landmarks", "Cities", "Nature", "Architecture"] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    className={`citylit-filter-pill ${filter === tab ? "is-active" : ""}`}
+                    aria-pressed={filter === tab}
+                    onClick={() => {
+                      benchoAudio.playClick(540);
+                      setFilter(tab);
+                    }}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            )}
           </section>
 
           {/* Results or Featured View */}

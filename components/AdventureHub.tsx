@@ -296,7 +296,7 @@ export default function AdventureHub() {
             })
           }
         >
-          <Heart size={16} fill={state.saved.includes(p.id) ? "currentColor" : "none"} />
+          <Heart size={16} weight={state.saved.includes(p.id) ? "fill" : "regular"} />
         </button>
       </div>
     </TiltCard>

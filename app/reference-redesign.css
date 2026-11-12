@@ -225,7 +225,7 @@
 .reference-guide .atlas-place-filters button[aria-pressed="true"] {
   border-color: var(--citylit-reference-purple);
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   box-shadow: 0 0 22px rgb(240 179 94 / 22%);
 }
 
@@ -277,7 +277,7 @@
 .field-guide .day-actions button:first-child {
   border-color: transparent;
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   box-shadow: 0 8px 24px rgb(240 179 94 / 18%);
 }
 
@@ -354,7 +354,7 @@
 .field-guide .hub-tabs button[aria-selected="true"] {
   border-color: var(--citylit-reference-purple);
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
 }
 
 .game-screen {
@@ -648,7 +648,7 @@
 }
 .reference-filter-row button[aria-pressed="true"] {
   border-color: transparent;
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
   box-shadow: 0 5px 18px rgb(240 179 94 / 18%);
 }
@@ -1143,7 +1143,7 @@
 .game-screen .pill-button {
   min-height: 44px;
   border: 0;
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
   box-shadow: 0 8px 24px rgb(240 179 94 / 18%);
   font: 700 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
@@ -1301,7 +1301,7 @@
 }
 .reference-guide .atlas-landmark-story .atlas-story-next .atlas-button {
   margin: 10px 8px 0 0;
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
 }
 @media (max-width: 700px) {
@@ -1451,7 +1451,7 @@
   min-height: 44px;
   padding-inline: 16px;
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
 }
 .field-guide .reference-trip-empty .pill-button + .pill-button {
   border: 1px solid var(--citylit-reference-border);
@@ -1492,7 +1492,7 @@
   background: #fbf9f5 !important;
 }
 .field-guide .hub-tabs.easyui-tabs-list .easyui-tab[aria-selected="true"] {
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: transparent;
 }
 .easyui-tab-indicator {
@@ -1551,7 +1551,7 @@
 }
 .reference-stage-guide .atlas-inspector-toolbar .easyui-pill-button[aria-pressed="true"],
 .reference-stage-guide .atlas-inspector-toolbar .easyui-pill-button.is-active {
-  color: #17130e !important;
+  color: #ffffff !important;
 }
 .easyui-pill-indicator {
   position: absolute;
@@ -1586,7 +1586,7 @@
     var(--citylit-reference-purple) 65%,
     var(--citylit-reference-border)
   );
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
 }
 @supports (corner-shape: squircle) {
@@ -1604,7 +1604,47 @@
   .reference-saved-empty,
   .field-guide .trip-stops li,
   .easyui-tab-indicator,
-  .easyui-tab-badge {
+  .easyui-tab-badge,
+  .easyui-tab,
+  .hub-tabs,
+  .easyui-tabs-list,
+  .easyui-pill-button,
+  .easyui-pill-indicator,
+  .easyui-pill-badge,
+  .easyui-magnetic-button,
+  .reference-guide .atlas-button,
+  .reference-guide .atlas-day-link,
+  .reference-guide .atlas-place-filters button,
+  .reference-filter-row button,
+  .field-guide .adventure-card-actions button,
+  .field-guide .day-actions button,
+  .field-guide .trip-stops .stop-actions button,
+  .bencho-liquid-toggle-track,
+  .bencho-liquid-thumb,
+  .atlas-switch,
+  .atlas-slider,
+  .reference-setting-toggle input,
+  .citylit-settings-tabs,
+  .citylit-settings-tab,
+  .citylit-detail-tabs-bar,
+  .citylit-detail-tab,
+  .citylit-detail-tab-line,
+  .bencho-magnetic-select-root,
+  .bencho-magnetic-item,
+  .bencho-magnetic-active-bg,
+  .bencho-slide-confirm-track,
+  .bencho-slide-fill,
+  .bencho-dynamic-island-pill,
+  .bencho-dynamic-island-action,
+  .atlas-inspector-toggle,
+  .atlas-inspect-btn,
+  .citylit-inspect-btn,
+  .citylit-view-toggle-btn,
+  .citylit-header-theme-btn,
+  .shimmer-button,
+  .citylit-primary-action,
+  .modal-panel,
+  .citylit-settings-modal {
     corner-shape: squircle;
   }
   .reference-guide .atlas-beacon-card,
@@ -1625,11 +1665,6 @@
   .reference-result-card,
   .field-guide .trip-stops li {
     border-radius: var(--citylit-radius-control);
-  }
-  .field-guide .adventure-card-actions button,
-  .field-guide .day-actions button,
-  .field-guide .trip-stops .stop-actions button {
-    corner-shape: squircle;
   }
 }
 @media (max-width: 700px) {
@@ -1728,7 +1763,7 @@
   font-weight: 700;
 }
 .reference-settings-tabs button[aria-selected="true"] {
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
   box-shadow: 0 4px 15px rgb(0 0 0 / 24%);
 }
@@ -1863,7 +1898,7 @@
   justify-content: center;
   min-height: 43px;
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
 }
 
 /* Saved places and itinerary surfaces */
@@ -1959,7 +1994,7 @@
 }
 .field-guide .hub-tabs button[aria-current="page"] {
   border: 0;
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
 }
 .field-guide .adventure-section > h2 {
@@ -2034,7 +2069,7 @@
   width: 27px;
   height: 27px;
   border-radius: 50%;
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
   font-size: 10px;
   font-weight: 800;
@@ -2081,7 +2116,7 @@
 .reference-saved-empty .pill-button {
   margin-top: 6px;
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
 }
 
 /* Living Atlas home: let the map lead and keep the choices close at hand. */
@@ -2168,7 +2203,7 @@
   font-size: 11px;
 }
 .living-atlas-mood-tabs .easyui-tab[aria-selected="true"] {
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
 }
 .living-atlas-mood-tabs .easyui-tab-indicator {
   border-radius: 13px;
@@ -2283,7 +2318,7 @@
   min-height: 42px;
   padding: 0 14px;
   border-radius: 14px;
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
   background: var(--citylit-reference-purple);
 }
 .living-atlas-empty-card {
@@ -2940,7 +2975,7 @@
 .field-guide .planner-pill-row .easyui-pill-button[aria-pressed="true"] {
   border-color: var(--citylit-reference-purple);
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
 }
 .field-guide .planner-pill-row .easyui-pill-indicator {
   position: absolute;
@@ -2984,7 +3019,7 @@
 .reference-guide .atlas-province-pills .easyui-pill-button[aria-pressed="true"] {
   border-color: var(--citylit-reference-purple);
   background: var(--citylit-reference-purple);
-  color: var(--citylit-reference-accent-ink);
+  color: #ffffff;
 }
 
 .atlas-inspector-features .atlas-inspector-pill-group {
@@ -3338,8 +3373,12 @@
   justify-content: space-between;
   font-size: 13px;
   font-weight: 500;
-  color: #e2e8f0;
+  color: var(--citylit-reference-text, #e2e8f0);
   cursor: pointer;
+}
+
+:root[data-theme="day"] .atlas-toggle-row {
+  color: #171920;
 }
 
 .atlas-toggle-label {
@@ -3798,6 +3837,15 @@
   transition: all 0.15s ease;
 }
 
+:root[data-theme="day"] .citylit-settings-tabs {
+  background: #efeae1;
+  border-color: rgba(23, 25, 32, 0.12);
+}
+
+:root[data-theme="day"] .citylit-settings-tab:not(.is-active) {
+  color: #4b5563;
+}
+
 .citylit-settings-tab.is-active {
   background: var(--citylit-neon-purple);
   color: #ffffff;
@@ -3914,6 +3962,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh;
   padding-bottom: 90px;
 }
 
@@ -4450,9 +4499,18 @@
 .bencho-liquid-toggle-label {
   font-size: 13px;
   font-weight: 500;
-  color: #e2e8f0;
+  color: var(--citylit-reference-text, #e2e8f0);
   cursor: pointer;
   user-select: none;
+}
+
+:root[data-theme="day"] .bencho-liquid-toggle-label {
+  color: #171920;
+}
+
+:root[data-theme="day"] .bencho-liquid-toggle-track:not(.is-checked) {
+  background: #cbd5e1;
+  border-color: #94a3b8 !important;
 }
 
 /* Bencho Dynamic Island Toast */
@@ -4500,6 +4558,22 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.bencho-dynamic-island-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--citylit-neon-purple);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 .bencho-dynamic-island-close {
@@ -4663,6 +4737,19 @@
 }
 
 .bencho-magnetic-item.is-selected {
+  color: #ffffff;
+}
+
+:root[data-theme="day"] .bencho-magnetic-select-root {
+  background: #efeae1;
+  border-color: rgba(23, 25, 32, 0.14);
+}
+
+:root[data-theme="day"] .bencho-magnetic-item {
+  color: #4b5563;
+}
+
+:root[data-theme="day"] .bencho-magnetic-item.is-selected {
   color: #ffffff;
 }
 
@@ -8782,6 +8869,15 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 .reference-stage-guide .atlas-toggle-meta span {
   color: var(--co-text-secondary, #94a3b8);
 }
+:root[data-theme="day"] .reference-stage-guide :is(.atlas-inspector-toggle-row, .atlas-toggle-meta) span {
+  color: #374151;
+}
+:root[data-theme="day"] .reference-stage-guide .atlas-inspector-section-head {
+  color: #4b5563;
+}
+:root[data-theme="day"] .reference-stage-guide .atlas-inspector-head-title {
+  color: #171920;
+}
 .reference-stage-guide .atlas-stage-telemetry {
   position: absolute;
   left: 16px;
@@ -10612,6 +10708,160 @@ html[data-theme="light"] .citylit-3d-canvas-card {
   background: #ffffff;
   border-color: rgba(0, 0, 0, 0.08);
 }
+
+/* Mobile responsiveness & touch hygiene per mobile-native skill */
+@media (hover: none) and (pointer: coarse) {
+  /* Prevent sticky hover styles on touch screens */
+  button:hover,
+  a:hover,
+  .easyui-tab:hover,
+  .easyui-pill-button:hover,
+  .citylit-filter-pill:hover,
+  .citylit-dock-item:hover,
+  .atlas-inspector-bar-btn:hover,
+  .citylit-settings-close-btn:hover,
+  .citylit-theme-card:hover,
+  .citylit-detail-cta-btn:hover,
+  .citylit-myday-plus-btn:hover,
+  .citylit-saved-card:hover,
+  .bencho-magnetic-item:hover,
+  .weather-audio-btn:hover,
+  .weather-scrub-btn:hover,
+  .weather-cond-pill:hover,
+  .diorama-map-reset-btn:hover {
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* Instant press feedback for buttons, tabs and controls */
+button:active:not(:disabled),
+[role="button"]:active:not([aria-disabled="true"]),
+.easyui-tab:active,
+.easyui-pill-button:active,
+.citylit-settings-tab:active,
+.atlas-button:active,
+.pill-button:active {
+  transform: scale(0.97);
+  transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:active,
+  [role="button"]:active,
+  .easyui-tab:active,
+  .easyui-pill-button:active,
+  .citylit-settings-tab:active,
+  .atlas-button:active,
+  .pill-button:active {
+    transform: none !important;
+  }
+}
+
+/* Mobile responsive constraints for small screens (320px - 390px) */
+@media (max-width: 390px) {
+  .citylit-settings-tabs,
+  .hub-tabs.easyui-tabs-list {
+    gap: 2px;
+    padding: 3px;
+  }
+  .citylit-settings-tab,
+  .field-guide .hub-tabs.easyui-tabs-list .easyui-tab {
+    padding-inline: 6px;
+    font-size: 11px;
+    min-height: 40px;
+  }
+  .bencho-slide-confirm-track {
+    height: 48px;
+  }
+  .bencho-slide-thumb {
+    width: 40px;
+    height: 40px;
+  }
+  .bencho-slide-text {
+    font-size: 12px;
+  }
+}
+
+/* Squircle corner-shape support across all buttons, toggles, tabs, chips, inputs and cards */
+@supports (corner-shape: squircle) {
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="switch"],
+  .atlas-button,
+  .pill-button,
+  .icon-button,
+  .shimmer-button,
+  .easyui-magnetic-button,
+  .easyui-tab,
+  .easyui-tab-indicator,
+  .easyui-pill-button,
+  .easyui-pill-indicator,
+  .citylit-settings-tab,
+  .citylit-detail-tab,
+  .citylit-filter-pill,
+  .bencho-liquid-toggle-track,
+  .bencho-liquid-thumb,
+  .atlas-slider,
+  .atlas-switch,
+  .bencho-magnetic-select-root,
+  .bencho-magnetic-item,
+  .bencho-magnetic-active-bg,
+  .bencho-slide-confirm-track,
+  .bencho-slide-fill,
+  .bencho-dynamic-island-pill,
+  .bencho-dynamic-island-action,
+  .citylit-inspect-btn,
+  .citylit-view-toggle-btn,
+  .citylit-header-theme-btn,
+  .citylit-primary-action,
+  .atlas-inspector-toggle,
+  .atlas-inspect-btn,
+  .modal-panel,
+  .citylit-settings-modal {
+    corner-shape: squircle;
+  }
+}
+
+/* Robust WCAG AA contrast rules for tabs, buttons, and toggles across light and dark themes */
+:root[data-theme="day"] .easyui-tab[aria-selected="true"],
+html[data-theme="day"] .easyui-tab[aria-selected="true"],
+html[data-theme="light"] .easyui-tab[aria-selected="true"] {
+  color: #ffffff !important;
+}
+
+:root[data-theme="day"] .easyui-tab:not([aria-selected="true"]),
+html[data-theme="day"] .easyui-tab:not([aria-selected="true"]),
+html[data-theme="light"] .easyui-tab:not([aria-selected="true"]) {
+  color: #374151 !important;
+}
+
+:root:not([data-theme="day"]) .easyui-tab[aria-selected="true"],
+html:not([data-theme="day"]) .easyui-tab[aria-selected="true"],
+html[data-theme="dark"] .easyui-tab[aria-selected="true"] {
+  color: #ffffff !important;
+}
+
+:root:not([data-theme="day"]) .easyui-tab:not([aria-selected="true"]),
+html:not([data-theme="day"]) .easyui-tab:not([aria-selected="true"]),
+html[data-theme="dark"] .easyui-tab:not([aria-selected="true"]) {
+  color: #ccc3d8 !important;
+}
+
+/* Ensure toggles have sharp, high-contrast labels and visible tracks */
+:root[data-theme="day"] .bencho-liquid-toggle-label,
+html[data-theme="day"] .bencho-liquid-toggle-label,
+html[data-theme="light"] .bencho-liquid-toggle-label {
+  color: #171920 !important;
+}
+
+:root:not([data-theme="day"]) .bencho-liquid-toggle-label,
+html:not([data-theme="day"]) .bencho-liquid-toggle-label,
+html[data-theme="dark"] .bencho-liquid-toggle-label {
+  color: #f1f5f9 !important;
+}
+
 
 
 

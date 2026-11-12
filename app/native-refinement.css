@@ -1,5 +1,11 @@
 /* Citylit 2026 interface refresh — intentionally layered after the existing guide styles.
    Keeps the real atlas, day planner, landmark renderer and offline flows intact. */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
 :root {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -11,8 +17,27 @@ select {
 }
 button,
 [role="button"],
+[role="tab"],
+[role="switch"],
+.easyui-tab,
+.easyui-pill-button,
+.citylit-settings-tab,
+.citylit-detail-tab,
+.atlas-button,
 .atlas-native-dock a {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
   -webkit-touch-callout: none;
+}
+.atlas-province-pills,
+.atlas-stage-chips,
+.living-atlas-mood-tabs .hub-tabs.easyui-tabs-list,
+.citylit-detail-tabs-bar,
+.citylit-featured-track,
+.reference-featured-track,
+.carousel {
+  touch-action: pan-y;
 }
 .citylit-logo {
   display: inline-flex;
@@ -558,7 +583,30 @@ button,
   .atlas-native-dock,
   .atlas-native-dock a,
   .reference-guide .atlas-beacon-card,
-  .reference-guide .atlas-city-card-link {
+  .reference-guide .atlas-city-card-link,
+  .reference-guide .atlas-place-card-link,
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="switch"],
+  .atlas-button,
+  .atlas-stage-chips button,
+  .atlas-stage-controls button,
+  .atlas-place-filters button,
+  .easyui-tab,
+  .easyui-tab-indicator,
+  .easyui-pill-button,
+  .easyui-pill-indicator,
+  .citylit-settings-tab,
+  .citylit-detail-tab,
+  .citylit-inspect-btn,
+  .citylit-view-toggle-btn,
+  .citylit-header-theme-btn,
+  .shimmer-button,
+  .modal-panel,
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
     corner-shape: squircle;
   }
 }

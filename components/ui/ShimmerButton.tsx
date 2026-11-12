@@ -43,7 +43,7 @@ export function ShimmerButton({
       whileHover={reduced ? {} : { scale: 1.02 }}
       whileTap={reduced ? {} : { scale: 0.97 }}
       onClick={handleClick}
-      className={`relative inline-flex items-center justify-center overflow-hidden border border-white/10 px-5 py-2.5 font-medium text-white shadow-xl transition-all duration-200 active:shadow-inner ${className}`}
+      className={`shimmer-button relative inline-flex items-center justify-center overflow-hidden border border-white/10 px-5 py-2.5 font-medium text-white shadow-xl transition-all duration-200 active:shadow-inner ${className}`}
       style={{
         borderRadius,
         background,

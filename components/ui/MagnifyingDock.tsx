@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 export interface DockItemData {
   href: string;
@@ -42,7 +43,12 @@ export function MagnifyingDock({
           </span>
           <span className="bencho-dock-label">{item.label}</span>
           {item.isActive ? (
-            <span className="citylit-dock-pill bencho-dock-pill" aria-hidden="true" />
+            <motion.span
+              layoutId="citylit-dock-active-pill"
+              className="citylit-dock-pill bencho-dock-pill"
+              aria-hidden="true"
+              transition={{ type: "spring", stiffness: 380, damping: 28 }}
+            />
           ) : null}
         </Link>
       ))}

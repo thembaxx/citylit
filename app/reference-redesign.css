@@ -20,6 +20,18 @@
   --citylit-reference-radius: 22px;
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Manrope", var(--font-body, "Manrope", system-ui, sans-serif);
+
+  /* Pin UI Tactile Depth & Chamfer Highlight Tokens */
+  --pin-chamfer: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  --pin-chamfer-subtle: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  --pin-shadow-card:
+    0 1px 2px rgb(0 0 0 / 14%), 0 8px 24px -4px rgb(0 0 0 / 26%), 0 24px 52px -12px rgb(0 0 0 / 38%);
+  --pin-shadow-floating:
+    0 4px 14px rgb(0 0 0 / 20%), 0 16px 38px -8px rgb(0 0 0 / 40%),
+    0 32px 68px -16px rgb(0 0 0 / 52%);
+  --pin-glow-violet: 0 0 24px -4px rgb(124 58 237 / 38%);
+  --pin-glow-amber: 0 0 24px -4px rgb(255 185 95 / 38%);
+  --pin-spring: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :where(.reference-guide, .field-guide, .game-screen, .category-page) {
@@ -65,6 +77,17 @@
   --citylit-reference-gold-strong: #8a4f0c;
   --citylit-reference-accent-ink: #fff;
   --citylit-reference-shadow: 0 18px 46px rgb(15 17 24 / 12%);
+
+  /* Pin UI Day Tokens */
+  --pin-chamfer: inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+  --pin-chamfer-subtle: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+  --pin-shadow-card:
+    0 1px 3px rgb(0 0 0 / 6%), 0 6px 18px -4px rgb(0 0 0 / 8%), 0 16px 36px -8px rgb(0 0 0 / 12%);
+  --pin-shadow-floating:
+    0 4px 16px rgb(0 0 0 / 8%), 0 12px 32px -8px rgb(0 0 0 / 12%),
+    0 24px 48px -12px rgb(0 0 0 / 14%);
+  --pin-glow-violet: 0 0 24px -4px rgb(109 63 212 / 24%);
+  --pin-glow-amber: 0 0 24px -4px rgb(154 90 16 / 24%);
 }
 
 :root[data-theme="day"] :where(.reference-guide, .field-guide, .game-screen, .category-page) {
@@ -602,11 +625,22 @@
   border-radius: 999px;
   background: var(--citylit-reference-panel);
   color: var(--citylit-reference-muted);
-  box-shadow: 0 12px 30px rgb(0 0 0 / 16%);
+  box-shadow:
+    var(--pin-chamfer),
+    0 12px 32px -6px rgb(0 0 0 / 22%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 .reference-search:focus-within {
   border-color: var(--citylit-reference-purple);
-  box-shadow: 0 0 0 3px rgb(240 179 94 / 14%);
+  box-shadow:
+    var(--pin-chamfer),
+    0 0 0 3px rgb(124 58 237 / 20%),
+    0 16px 36px -8px rgb(0 0 0 / 32%);
 }
 .reference-search input {
   flex: 1;
@@ -3752,21 +3786,32 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  background: #14161f;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.12), transparent 60%), #14161f;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 28px 28px 0 0;
   padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+:root[data-theme="day"] .citylit-settings-sheet {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(109, 63, 212, 0.08), transparent 60%), #fbf9f5;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+}
+
 @media (min-width: 640px) {
   .citylit-settings-sheet {
     border-radius: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+  }
+  :root[data-theme="day"] .citylit-settings-sheet {
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -3781,24 +3826,38 @@
   font-weight: 700;
   color: #ffffff;
   margin: 0;
+  letter-spacing: -0.02em;
+}
+
+:root[data-theme="day"] .citylit-settings-header h2 {
+  color: #171920;
 }
 
 .citylit-settings-close-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--pin-chamfer-subtle);
   color: #cbd5e1;
   cursor: pointer;
+  transition:
+    transform 140ms var(--pin-spring),
+    background-color 140ms ease,
+    color 140ms ease;
 }
 
 .citylit-settings-close-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
+}
+
+.citylit-settings-close-btn:active {
+  transform: scale(0.92);
 }
 
 .citylit-settings-tabs {
@@ -3808,9 +3867,11 @@
   background: rgba(24, 26, 36, 0.9);
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.32);
 }
 
 .citylit-settings-tab {
+  position: relative;
   flex: 1;
   padding: 8px 12px;
   border-radius: 9999px;
@@ -3820,16 +3881,20 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  z-index: 1;
   transition:
     color 150ms ease,
-    background 150ms ease,
-    box-shadow 150ms ease,
-    transform 150ms var(--ease-out, ease-out);
+    transform 140ms var(--pin-spring);
+}
+
+.citylit-settings-tab:active {
+  transform: scale(0.96);
 }
 
 :root[data-theme="day"] .citylit-settings-tabs {
   background: #efeae1;
   border-color: rgba(23, 25, 32, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 :root[data-theme="day"] .citylit-settings-tab:not(.is-active) {
@@ -3837,9 +3902,18 @@
 }
 
 .citylit-settings-tab.is-active {
-  background: var(--citylit-neon-purple);
   color: #ffffff;
-  box-shadow: 0 2px 8px var(--citylit-neon-purple-glow);
+}
+
+.citylit-settings-tab-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--citylit-violet-strong, #7c3aed);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 2px 10px rgba(124, 92, 252, 0.45);
+  z-index: -1;
 }
 
 .citylit-settings-content {
@@ -5283,14 +5357,18 @@
   margin-inline: auto;
   padding: 7px 10px;
   transform: none;
-  border: 1px solid color-mix(in srgb, var(--citylit-text) 10%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--citylit-reference-panel) 95%, transparent);
-  box-shadow:
-    0 18px 46px rgb(0 0 0 / 34%),
-    inset 0 1px color-mix(in srgb, var(--citylit-text) 7%, transparent);
-  backdrop-filter: blur(30px) saturate(1.4);
-  -webkit-backdrop-filter: blur(30px) saturate(1.4);
+  background: color-mix(in srgb, var(--citylit-reference-panel) 88%, transparent);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+}
+
+:root[data-theme="day"] .reference-guide .atlas-native-dock.citylit-bottom-dock {
+  border: 1px solid rgb(23 25 32 / 12%);
+  background: color-mix(in srgb, #fbf9f5 90%, transparent);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
 }
 
 .reference-guide .citylit-bottom-dock .bencho-dock-item-wrapper {
@@ -5306,6 +5384,13 @@
   color: var(--citylit-quiet);
   background: transparent;
   text-decoration: none;
+  transition:
+    transform 140ms var(--pin-spring),
+    color 140ms ease;
+}
+
+.reference-guide .citylit-bottom-dock .bencho-dock-item:active {
+  transform: scale(0.92);
 }
 
 .reference-guide .citylit-bottom-dock .bencho-dock-item.is-active {
@@ -5330,7 +5415,9 @@
   height: 3px;
   border-radius: 999px;
   background: var(--citylit-violet);
-  box-shadow: 0 0 12px rgb(139 92 246 / 70%);
+  box-shadow:
+    0 0 14px rgb(139 92 246 / 75%),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 /* Keep page feet clear of the floating dock. */
@@ -5432,19 +5519,54 @@
   padding: 0 18px;
   border: 1px solid var(--citylit-hairline);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--citylit-surface) 82%, transparent);
-  box-shadow: inset 0 1px rgb(255 255 255 / 4%);
+  background: color-mix(in srgb, var(--citylit-surface) 86%, transparent);
+  box-shadow:
+    var(--pin-chamfer),
+    0 10px 28px -6px rgb(0 0 0 / 26%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 
 .reference-home .reference-search:focus-within {
-  border-color: color-mix(in srgb, var(--citylit-violet) 70%, white);
-  box-shadow: 0 0 0 3px rgb(139 92 246 / 18%);
+  border-color: color-mix(in srgb, var(--citylit-violet) 75%, white);
+  box-shadow:
+    var(--pin-chamfer),
+    0 0 0 3.5px rgb(139 92 246 / 22%),
+    0 16px 36px -8px rgb(0 0 0 / 38%);
 }
 
 .reference-home .reference-search input {
   min-height: 52px;
   color: var(--citylit-text);
   font-size: 16px;
+}
+
+.reference-search-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--citylit-quiet);
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  user-select: none;
+  pointer-events: none;
+}
+
+:root[data-theme="day"] .reference-search-shortcut {
+  border-color: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.05);
+  color: #64748b;
 }
 
 /* Filter pills (the composition's All / Landmarks / Cities / Nature row). */
@@ -5474,19 +5596,27 @@
   border-radius: 999px;
   color: var(--citylit-quiet);
   background: color-mix(in srgb, var(--citylit-surface) 60%, transparent);
+  box-shadow: var(--pin-chamfer-subtle);
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
   transition:
+    transform 160ms var(--pin-spring),
     color 160ms ease,
     background-color 160ms ease,
     border-color 160ms ease,
     box-shadow 160ms ease;
 }
+
+.citylit-filter-pill:active {
+  transform: scale(0.95);
+}
+
 :root[data-theme="day"] .citylit-filter-pill {
   color: #374151;
   background: #e5e7eb;
   border-color: #d1d5db;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
 }
 :root[data-theme="day"] .easyui-pill-button.is-active,
 :root[data-theme="day"] .easyui-pill-button[aria-pressed="true"] {
@@ -5495,14 +5625,16 @@
 
 .citylit-filter-pill:hover {
   color: var(--citylit-text);
-  border-color: rgb(255 255 255 / 18%);
+  border-color: rgb(255 255 255 / 22%);
 }
 
 .citylit-filter-pill.is-active {
   color: #fff;
-  border-color: transparent;
+  border-color: rgba(255, 255, 255, 0.24);
   background: var(--citylit-violet-strong);
-  box-shadow: 0 8px 22px rgb(139 92 246 / 32%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 8px 24px rgb(139 92 246 / 36%);
 }
 
 /* Featured card. */
@@ -5516,9 +5648,21 @@
   height: clamp(220px, 58vw, 330px);
   overflow: hidden;
   border: 1px solid var(--citylit-hairline);
-  border-radius: 24px;
+  border-radius: 26px;
   background: var(--citylit-surface-raised);
-  box-shadow: 0 22px 50px rgb(0 0 0 / 42%);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+  transition:
+    transform 280ms var(--pin-spring),
+    box-shadow 280ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .citylit-featured-card:hover {
+    transform: translateY(-3px) scale(1.008);
+    box-shadow:
+      var(--pin-chamfer),
+      0 32px 72px -12px rgb(0 0 0 / 58%);
+  }
 }
 
 .citylit-featured-media {
@@ -5547,16 +5691,43 @@
   right: 14px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 13px;
-  border: 1px solid rgb(255 255 255 / 14%);
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid rgb(255 255 255 / 16%);
   border-radius: 999px;
   color: #fff;
-  background: rgb(14 13 20 / 72%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgb(14 13 20 / 76%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    0 4px 16px rgb(0 0 0 / 28%);
   font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.citylit-featured-badge .citylit-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow:
+    0 0 8px #34d399,
+    0 0 0 2px rgba(52, 211, 153, 0.25);
+  animation: pin-status-pulse 2.2s infinite ease-in-out;
+}
+
+@keyframes pin-status-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.75;
+  }
 }
 
 .citylit-featured-badge span {
@@ -5597,17 +5768,31 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 1px solid rgb(255 255 255 / 18%);
+  border: 1px solid rgb(255 255 255 / 22%);
   border-radius: 50%;
   color: #fff;
-  background: rgb(17 16 24 / 72%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: transform 180ms var(--citylit-ease);
+  background: rgb(17 16 24 / 76%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    0 4px 16px rgb(0 0 0 / 30%);
+  transition:
+    transform 180ms var(--pin-spring),
+    background-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .citylit-featured-arrow-btn:hover {
-  transform: translateX(2px);
+  transform: translateX(3px) scale(1.05);
+  background: rgb(25 24 35 / 88%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 6px 20px rgb(0 0 0 / 40%);
+}
+
+.citylit-featured-arrow-btn:active {
+  transform: scale(0.94);
 }
 
 .citylit-carousel-dots {
@@ -5721,9 +5906,22 @@
 
 .reference-home .living-atlas-city-card {
   border: 1px solid var(--citylit-hairline);
-  border-radius: 20px;
+  border-radius: 24px;
   background: var(--citylit-reference-panel, #1a1b20);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-card);
   overflow: hidden;
+  transition:
+    transform 260ms var(--pin-spring),
+    box-shadow 260ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reference-home .living-atlas-city-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      var(--pin-chamfer),
+      0 16px 36px -8px rgb(0 0 0 / 40%);
+  }
 }
 
 .reference-home .living-atlas-city-card h3 {
@@ -10420,19 +10618,26 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  border-radius: 20px;
+  border-radius: 24px;
   background: rgba(18, 20, 28, 0.88);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-card);
   margin-bottom: var(--citylit-space-4, 16px);
+}
+
+:root[data-theme="day"] .citylit-weather-controller {
+  background: rgba(251, 249, 245, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-card);
 }
 
 .citylit-weather-controller.is-compact {
   padding: 12px 14px;
   gap: 10px;
-  background: rgba(15, 17, 24, 0.82);
-  border-radius: 16px;
+  background: rgba(15, 17, 24, 0.85);
+  border-radius: 20px;
   margin-bottom: 12px;
 }
 
@@ -10445,9 +10650,10 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 .weather-badge-icon {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--pin-chamfer-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10501,41 +10707,49 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   height: 38px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--pin-chamfer-subtle);
   color: #94a3b8;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition:
-    color 200ms ease,
-    background 200ms ease,
-    border-color 200ms ease,
-    box-shadow 200ms ease,
-    transform 200ms var(--ease-out, ease-out);
+    transform 160ms var(--pin-spring),
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
   flex-shrink: 0;
 }
 
 .weather-audio-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
+}
+
+.weather-audio-btn:active {
+  transform: scale(0.92);
 }
 
 .weather-audio-btn.is-active {
   background: #7c5cfc;
   color: #ffffff;
   border-color: #9374ff;
-  box-shadow: 0 0 16px rgba(124, 92, 252, 0.5);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 0 16px rgba(124, 92, 252, 0.55);
 }
 
 .weather-scrubber-row {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(10, 11, 16, 0.65);
+  background: rgba(10, 11, 16, 0.72);
   padding: 4px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -10557,9 +10771,10 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   font-weight: 600;
   cursor: pointer;
   transition:
-    color 160ms ease,
-    background 160ms ease,
-    box-shadow 160ms ease;
+    transform 140ms var(--pin-spring),
+    color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
   white-space: nowrap;
 }
 
@@ -10567,16 +10782,24 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   color: #ffffff;
 }
 
+.weather-scrub-btn:active {
+  transform: scale(0.95);
+}
+
 .weather-scrub-btn.is-active {
   background: rgba(124, 92, 252, 0.28);
   color: #c4b5fd;
-  box-shadow: inset 0 0 0 1px rgba(124, 92, 252, 0.55);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 0 0 1px rgba(124, 92, 252, 0.55);
 }
 
 .weather-scrub-btn.is-live.is-active {
   background: rgba(239, 68, 68, 0.24);
   color: #fca5a5;
-  box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.6);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset 0 0 0 1px rgba(239, 68, 68, 0.6);
 }
 
 .weather-condition-pills {
@@ -10596,25 +10819,34 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--pin-chamfer-subtle);
   color: #cbd5e1;
   font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
   transition:
-    color 150ms ease,
-    background 150ms ease,
-    border-color 150ms ease;
+    transform 140ms var(--pin-spring),
+    color 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease;
   white-space: nowrap;
 }
 
 .weather-cond-pill:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.09);
   color: #ffffff;
 }
 
+.weather-cond-pill:active {
+  transform: scale(0.95);
+}
+
 .weather-cond-pill.is-active {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    0 4px 14px rgba(0, 0, 0, 0.2);
   color: #ffffff;
   font-weight: 600;
 }
@@ -10940,4 +11172,453 @@ html[data-theme="light"] .bencho-liquid-toggle-label {
 html:not([data-theme="day"]) .bencho-liquid-toggle-label,
 html[data-theme="dark"] .bencho-liquid-toggle-label {
   color: #f1f5f9 !important;
+}
+
+/* ==========================================================================
+   Pin UI High-Craft Components (pinui.xyz)
+   Liquid Tabs, Thermal Dial, and Editorial Reader Card
+   ========================================================================== */
+
+/* Pin UI Liquid Tabs */
+.pin-liquid-tabs-root {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 9999px;
+  background: rgba(20, 22, 32, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.32);
+}
+
+:root[data-theme="day"] .pin-liquid-tabs-root {
+  background: #efeae1;
+  border-color: rgba(23, 25, 32, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.pin-liquid-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  min-height: 40px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1;
+  transition:
+    color 150ms ease,
+    transform 140ms var(--pin-spring);
+}
+
+.pin-liquid-tab:active {
+  transform: scale(0.96);
+}
+
+.pin-liquid-tab.is-active {
+  color: #ffffff;
+}
+
+:root[data-theme="day"] .pin-liquid-tab:not(.is-active) {
+  color: #4b5563;
+}
+
+.pin-tab-indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--citylit-violet-strong, #7c3aed);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 2px 10px rgba(124, 92, 252, 0.45);
+  z-index: -1;
+}
+
+.pin-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  color: inherit;
+}
+
+/* Pin UI Thermal Dial */
+.pin-thermal-dial-root {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(14, 16, 24, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pin-thermal-dial-root.is-dragging {
+  cursor: grabbing;
+}
+
+.pin-dial-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(28px);
+  transition: opacity 200ms ease;
+}
+
+.pin-dial-ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.pin-dial-tick {
+  position: absolute;
+  width: 2px;
+  height: 8px;
+  border-radius: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+  transform-origin: center center;
+  transition: background-color 150ms ease;
+}
+
+.pin-dial-tick.is-lit {
+  box-shadow: 0 0 6px currentColor;
+}
+
+.pin-dial-needle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.pin-needle-head {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 10px;
+  box-shadow:
+    0 0 10px currentColor,
+    0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.pin-dial-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pin-dial-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.pin-dial-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.pin-dial-value {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: var(--font-body, "Manrope", sans-serif);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.pin-dial-unit {
+  font-size: 18px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* Pin UI Editorial Reader Card */
+.pin-reader-card-root {
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--citylit-surface-raised, #1b1b22);
+  border: 1px solid var(--citylit-hairline, rgba(255, 255, 255, 0.08));
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-card);
+  transition:
+    transform 260ms var(--pin-spring),
+    box-shadow 260ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pin-reader-card-root:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      var(--pin-chamfer),
+      0 20px 48px -8px rgb(0 0 0 / 44%);
+  }
+}
+
+.pin-reader-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pin-reader-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--citylit-gold, #ffb95f);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pin-reader-title {
+  margin: 0;
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: clamp(22px, 4vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--citylit-text, #ffffff);
+  letter-spacing: -0.03em;
+}
+
+.pin-reader-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--citylit-quiet, #94a3b8);
+  line-height: 1.5;
+}
+
+.pin-reader-excerpt-container {
+  position: relative;
+  max-height: 96px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+}
+
+.pin-reader-excerpt {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+.pin-reader-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pin-reader-author {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.pin-reader-open-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  min-height: 40px;
+  border-radius: 9999px;
+  background: var(--citylit-violet, #7c3aed);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 4px 14px rgba(124, 92, 252, 0.35);
+  transition:
+    transform 140ms var(--pin-spring),
+    box-shadow 140ms ease;
+}
+
+.pin-reader-open-btn:active {
+  transform: scale(0.95);
+}
+
+/* Pin UI Reader Modal */
+.pin-reader-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.pin-reader-modal {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  max-height: min(90dvh, 720px);
+  background: #121319;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pin-reader-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 19, 25, 0.95);
+}
+
+.pin-reader-modal-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--citylit-gold, #ffb95f);
+}
+
+.pin-reader-font-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  padding: 2px 4px;
+}
+
+.pin-font-btn {
+  padding: 4px 10px;
+  min-height: 28px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.pin-font-btn.is-active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.pin-reader-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.pin-reader-scrollable {
+  padding: 32px 28px 40px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pin-reader-modal-heading {
+  margin: 0 0 8px;
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+}
+
+.pin-reader-modal-sub {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #94a3b8;
+}
+
+.pin-reader-modal-meta {
+  margin: 0 0 24px;
+  font-size: 12px;
+  color: var(--citylit-gold, #ffb95f);
+  font-weight: 600;
+}
+
+.pin-reader-prose {
+  font-family: var(--font-body, "Manrope", sans-serif);
+  line-height: 1.8;
+  color: #e2e8f0;
+}
+
+.pin-reader-prose p {
+  margin-bottom: 20px;
+}
+
+.pin-reader-prose.text-base {
+  font-size: 15px;
+}
+
+.pin-reader-prose.text-lg {
+  font-size: 17px;
+}
+
+.pin-reader-prose.text-xl {
+  font-size: 19px;
 }

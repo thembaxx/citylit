@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   BookmarkSimple,
@@ -47,7 +47,26 @@ export default function DiscoveryHome() {
   const [mapSelectedCity, setMapSelectedCity] = useState<number | null>(null);
   const { feedback } = useKhwezi();
   const { state } = useDiscovery();
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const normalizedQuery = query.trim().toLowerCase();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      } else if (
+        e.key === "/" &&
+        document.activeElement?.tagName !== "INPUT" &&
+        document.activeElement?.tagName !== "TEXTAREA"
+      ) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // Featured landmarks carousel (Cape Town, Pretoria, Durban, Joburg)
   const featuredList = useMemo(
@@ -222,6 +241,7 @@ export default function DiscoveryHome() {
             <label className="reference-search">
               <MagnifyingGlass size={20} aria-hidden="true" />
               <input
+                ref={searchInputRef}
                 type="search"
                 role="searchbox"
                 aria-label="Search landmarks and cities"
@@ -232,6 +252,11 @@ export default function DiscoveryHome() {
                 placeholder="Search landmarks..."
                 autoComplete="off"
               />
+              {!query && (
+                <span className="reference-search-shortcut" aria-hidden="true">
+                  ⌘K
+                </span>
+              )}
               {query && (
                 <button
                   type="button"
@@ -301,7 +326,10 @@ export default function DiscoveryHome() {
                           priority
                           sizes="(max-width: 768px) 100vw, 900px"
                         />
-                        <div className="citylit-featured-badge">Featured</div>
+                        <div className="citylit-featured-badge">
+                          <span className="citylit-status-dot" aria-hidden="true" />
+                          Featured
+                        </div>
                         <div className="citylit-featured-meta">
                           <h2>{featuredLandmarkSource.name}</h2>
                           <p>{featuredCity.name}, South Africa</p>

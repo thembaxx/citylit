@@ -201,39 +201,33 @@ export default function SettingsModal({
 
             {/* Segmented Tabs */}
             <div className="citylit-settings-tabs" role="tablist" aria-label="Settings categories">
-              <button
-                type="button"
-                role="tab"
-                id="settings-tab-appearance"
-                aria-selected={activeTab === "appearance"}
-                aria-controls="settings-panel-appearance"
-                className={`citylit-settings-tab ${activeTab === "appearance" ? "is-active" : ""}`}
-                onClick={() => setActiveTab("appearance")}
-              >
-                Appearance
-              </button>
-              <button
-                type="button"
-                role="tab"
-                id="settings-tab-map"
-                aria-selected={activeTab === "map"}
-                aria-controls="settings-panel-map"
-                className={`citylit-settings-tab ${activeTab === "map" ? "is-active" : ""}`}
-                onClick={() => setActiveTab("map")}
-              >
-                Map
-              </button>
-              <button
-                type="button"
-                role="tab"
-                id="settings-tab-about"
-                aria-selected={activeTab === "about"}
-                aria-controls="settings-panel-about"
-                className={`citylit-settings-tab ${activeTab === "about" ? "is-active" : ""}`}
-                onClick={() => setActiveTab("about")}
-              >
-                About
-              </button>
+              {(
+                [
+                  ["appearance", "Appearance"],
+                  ["map", "Map"],
+                  ["about", "About"],
+                ] as const
+              ).map(([tabKey, tabLabel]) => (
+                <button
+                  key={tabKey}
+                  type="button"
+                  role="tab"
+                  id={`settings-tab-${tabKey}`}
+                  aria-selected={activeTab === tabKey}
+                  aria-controls={`settings-panel-${tabKey}`}
+                  className={`citylit-settings-tab ${activeTab === tabKey ? "is-active" : ""}`}
+                  onClick={() => setActiveTab(tabKey)}
+                >
+                  <span>{tabLabel}</span>
+                  {activeTab === tabKey && (
+                    <motion.div
+                      layoutId="settings-tab-indicator"
+                      className="citylit-settings-tab-pill"
+                      transition={{ type: "spring", stiffness: 360, damping: 28 }}
+                    />
+                  )}
+                </button>
+              ))}
             </div>
 
             {/* Tab Panel: Appearance */}

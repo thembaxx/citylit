@@ -220,7 +220,7 @@ export default function DiscoveryHome() {
                 onChange={(event) => {
                   setQuery(event.target.value);
                 }}
-                placeholder="Search landmarks, cities, or provinces..."
+                placeholder="Search landmarks..."
                 autoComplete="off"
               />
               {query && (

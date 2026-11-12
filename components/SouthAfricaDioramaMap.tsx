@@ -3,7 +3,7 @@
 import { useRef, useState, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { benchoAudio } from "../lib/bencho-audio";
 import boundaries from "../public/data/provinces.json";
 
@@ -119,6 +119,42 @@ function LowPolyTree({
   );
 }
 
+// Create high-resolution Canvas2D texture for speech bubble signposts (100% offline, zero network requests, zero CSP issues)
+function createSignTexture(text: string, isSelected: boolean) {
+  if (typeof document === "undefined") return null;
+  const canvas = document.createElement("canvas");
+  canvas.width = 384;
+  canvas.height = 96;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+
+  // Background rounded capsule
+  ctx.fillStyle = isSelected ? "#7c5cfc" : "#ffffff";
+  ctx.beginPath();
+  if (typeof ctx.roundRect === "function") {
+    ctx.roundRect(4, 4, 376, 88, 28);
+  } else {
+    ctx.rect(4, 4, 376, 88);
+  }
+  ctx.fill();
+
+  // Subtle border
+  ctx.strokeStyle = isSelected ? "#9374ff" : "rgba(0, 0, 0, 0.14)";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // Crisp bold uppercase label
+  ctx.fillStyle = isSelected ? "#ffffff" : "#1a1c22";
+  ctx.font = "bold 32px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, 192, 48);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+  return texture;
+}
+
 // 3D speech bubble signpost pin matching Image 3
 function ProvinceSignPin({
   label,
@@ -132,6 +168,7 @@ function ProvinceSignPin({
   onClick: () => void;
 }) {
   const groupRef = useRef<THREE.Group>(null);
+  const texture = useMemo(() => createSignTexture(label, isSelected), [label, isSelected]);
 
   useFrame((state) => {
     if (!groupRef.current) return;
@@ -139,6 +176,8 @@ function ProvinceSignPin({
     // Gentle floating bob
     groupRef.current.position.y = position[1] + Math.sin(time * 2.0 + position[0]) * 0.025;
   });
+
+  const width = Math.max(1.15, label.length * 0.115);
 
   return (
     <group
@@ -155,27 +194,13 @@ function ProvinceSignPin({
         <meshStandardMaterial color="#ffffff" roughness={0.4} />
       </mesh>
 
-      {/* Rounded capsule pill */}
-      <mesh position={[0, 0.04, 0]} castShadow>
-        <boxGeometry args={[Math.max(1.1, label.length * 0.11), 0.32, 0.08]} />
-        <meshStandardMaterial
-          color={isSelected ? "#7c5cfc" : "#ffffff"}
-          roughness={0.25}
-          metalness={0.05}
-        />
-      </mesh>
-
-      {/* Bold uppercase label */}
-      <Text
-        position={[0, 0.04, 0.048]}
-        fontSize={0.115}
-        color={isSelected ? "#ffffff" : "#1a1c22"}
-        anchorX="center"
-        anchorY="middle"
-        font="/fonts/Inter-Bold.ttf"
-      >
-        {label}
-      </Text>
+      {/* Pill with embedded crisp text texture */}
+      {texture && (
+        <mesh position={[0, 0.06, 0]}>
+          <planeGeometry args={[width, 0.34]} />
+          <meshBasicMaterial map={texture} transparent side={THREE.DoubleSide} />
+        </mesh>
+      )}
     </group>
   );
 }

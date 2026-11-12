@@ -232,18 +232,19 @@ export default function DioramaWeatherController({
       <div className="weather-scrubber-row" role="group" aria-label="Time of day presets">
         {(
           [
-            ["dawn", "Dawn", <Sun key="d" size={13} weight="regular" />],
-            ["midday", "12 PM", <Sun key="m" size={13} weight="fill" />],
-            ["sunset", "Sunset", <Sparkle key="s" size={13} weight="fill" />],
-            ["night", "Night", <Moon key="n" size={13} weight="fill" />],
-            ["live", "LIVE", <Clock key="l" size={13} weight="bold" />],
+            ["dawn", "Dawn", <Sun key="d" size={13} weight="regular" />, "Dawn morning time preset"],
+            ["midday", "12 PM", <Sun key="m" size={13} weight="fill" />, "Midday noon time preset"],
+            ["sunset", "Sunset", <Sparkle key="s" size={13} weight="fill" />, "Golden hour sunset time preset"],
+            ["night", "Night", <Moon key="n" size={13} weight="fill" />, "Night twilight time preset"],
+            ["live", "LIVE", <Clock key="l" size={13} weight="bold" />, "Live local time preset"],
           ] as const
-        ).map(([p, label, icon]) => (
+        ).map(([p, label, icon, ariaLbl]) => (
           <button
             key={p}
             type="button"
             className={`weather-scrub-btn ${timePeriod === p ? "is-active" : ""} ${p === "live" ? "is-live" : ""}`}
             aria-pressed={timePeriod === p}
+            aria-label={ariaLbl}
             onClick={() => selectPeriod(p)}
           >
             {icon}
@@ -254,16 +255,24 @@ export default function DioramaWeatherController({
 
       {/* Atmospheric Weather Conditions Selector */}
       <div className="weather-condition-pills" role="group" aria-label="Weather conditions">
-        {(["clear", "cloudy", "rain", "sunset"] as const).map((w) => (
+        {(
+          [
+            ["clear", "Clear", "Clear sky condition"],
+            ["cloudy", "Cloudy", "Partly cloudy condition"],
+            ["rain", "Rain", "Light rain condition"],
+            ["sunset", "Sunset", "Golden sunset condition"],
+          ] as const
+        ).map(([w, label, ariaLbl]) => (
           <button
             key={w}
             type="button"
             className={`weather-cond-pill ${weather === w ? "is-active" : ""}`}
             aria-pressed={weather === w}
+            aria-label={ariaLbl}
             onClick={() => selectWeather(w)}
           >
             {weatherIcons[w]}
-            <span>{w.charAt(0).toUpperCase() + w.slice(1)}</span>
+            <span>{label}</span>
           </button>
         ))}
       </div>

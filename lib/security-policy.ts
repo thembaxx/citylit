@@ -24,8 +24,8 @@ export function contentSecurityPolicy({
     // Motion, GSAP, Three.js and MapLibre update style attributes during gestures.
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://tile.openstreetmap.org",
-    "font-src 'self'",
-    `connect-src 'self' https://tile.openstreetmap.org${development ? " ws: wss:" : ""}`,
+    "font-src 'self' https://fonts.gstatic.com",
+    `connect-src 'self' https://tile.openstreetmap.org https://fonts.gstatic.com${development ? " ws: wss:" : ""}`,
     "worker-src 'self' blob:",
     "manifest-src 'self'",
     "media-src 'self'",

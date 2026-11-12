@@ -10495,4 +10495,93 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4) !important;
 }
 
+/* Responsive Navigation Dock: Hide on desktop (>=768px) to avoid duplicate nav & occlusion */
+@media (min-width: 768px) {
+  .reference-guide .atlas-native-dock.citylit-bottom-dock,
+  .reference-guide.reference-stage-guide .atlas-native-dock.citylit-bottom-dock,
+  .citylit-bottom-dock,
+  .bencho-magnifying-dock {
+    display: none !important;
+  }
+
+  .citylit-detail-sticky-footer {
+    bottom: 24px !important;
+  }
+}
+
+/* Mobile Viewport Navigation Dock & Sticky Action Clearances (<768px) */
+@media (max-width: 767px) {
+  .reference-home,
+  .atlas-section.atlas-directory,
+  .citylit-detail-body {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 16px));
+  }
+
+  .citylit-detail-sticky-footer {
+    bottom: calc(76px + env(safe-area-inset-bottom, 16px)) !important;
+  }
+
+  .citylit-filter-pills-row {
+    padding-right: 24px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .citylit-filter-pills-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .citylit-filter-pill {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Refined Light Theme Palette & Contrast */
+html[data-theme="light"] {
+  --citylit-bg: #f8fafc;
+  --citylit-card-bg: #ffffff;
+  --citylit-surface: #f1f5f9;
+  --citylit-border: rgba(0, 0, 0, 0.08);
+  --citylit-text: #0f172a;
+  --citylit-quiet: #64748b;
+}
+
+html[data-theme="light"] .reference-home {
+  background-color: #f8fafc;
+}
+
+html[data-theme="light"] .citylit-weather-controller {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+html[data-theme="light"] .weather-badge-condition strong {
+  color: #0f172a;
+}
+
+html[data-theme="light"] .weather-badge-condition span,
+html[data-theme="light"] .weather-badge-time {
+  color: #475569;
+}
+
+html[data-theme="light"] .citylit-diorama-map-wrapper {
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="light"] .diorama-map-hint {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+html[data-theme="light"] .citylit-3d-canvas-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+
 

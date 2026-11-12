@@ -1464,6 +1464,15 @@
   font: 650 11px/1 var(--font-body, "Plus Jakarta Sans", sans-serif);
   white-space: nowrap;
 }
+:root[data-theme="day"] .field-guide .hub-tabs.easyui-tabs-list .easyui-tab {
+  color: #374151;
+}
+:root[data-theme="day"] .field-guide .hub-tabs.easyui-tabs-list .easyui-tab[aria-selected="true"] {
+  color: #fff;
+}
+:root[data-theme="day"] .field-guide .hub-tabs {
+  background: #fbf9f5 !important;
+}
 .field-guide .hub-tabs.easyui-tabs-list .easyui-tab[aria-selected="true"] {
   color: var(--citylit-reference-accent-ink);
   background: transparent;
@@ -1518,7 +1527,7 @@
 }
 .easyui-pill-button[aria-pressed="true"],
 .easyui-pill-button.is-active {
-  color: var(--citylit-reference-accent-ink) !important;
+  color: #fff !important;
   border-color: color-mix(in srgb, var(--citylit-reference-purple) 78%, transparent) !important;
   background: transparent !important;
 }
@@ -5255,6 +5264,9 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
+:root[data-theme="day"] .citylit-hero-eyebrow {
+  color: #6d28d9;
+}
 
 .reference-home .living-atlas-hero h1 {
   max-width: 16ch;
@@ -5335,6 +5347,15 @@
     background-color 160ms ease,
     border-color 160ms ease,
     box-shadow 160ms ease;
+}
+:root[data-theme="day"] .citylit-filter-pill {
+  color: #374151;
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+:root[data-theme="day"] .easyui-pill-button.is-active,
+:root[data-theme="day"] .easyui-pill-button[aria-pressed="true"] {
+  color: #fff !important;
 }
 
 .citylit-filter-pill:hover {
@@ -5605,7 +5626,7 @@
 .reference-home .living-atlas-city-card {
   border: 1px solid var(--citylit-hairline);
   border-radius: 20px;
-  background: var(--citylit-surface);
+  background: var(--citylit-reference-panel, #1a1b20);
   overflow: hidden;
 }
 
@@ -5853,13 +5874,15 @@
 }
 
 .reference-guide .atlas-city-hero-redesign h1 {
+  max-width: 100%;
   margin: 6px 0 10px;
-  color: #fff;
+  color: #fff !important;
   font:
-    430 clamp(46px, 11vw, 92px)/0.96 Fraunces,
+    430 clamp(46px, 6.2vw, 80px)/0.96 Fraunces,
     Georgia,
     serif;
   letter-spacing: -0.05em;
+  overflow-wrap: normal;
 }
 
 .reference-guide .atlas-city-hero-redesign .atlas-title-period {
@@ -5945,7 +5968,9 @@
 
 .reference-guide .atlas-landmark-photo {
   position: relative;
+  width: 100%;
   height: 170px;
+  aspect-ratio: auto;
   overflow: hidden;
 }
 
@@ -5976,6 +6001,7 @@
 .reference-guide .atlas-landmark-3d-tag {
   position: absolute;
   top: 12px;
+  right: auto;
   left: 12px;
   display: inline-flex;
   align-items: center;
@@ -6048,10 +6074,16 @@
 
 .reference-guide .atlas-exploration-switch {
   position: absolute;
-  top: 2px;
-  left: 0;
+  top: 12px;
+  left: 12px;
   z-index: 7;
   padding: 0;
+}
+
+.reference-guide .atlas-exploration-switch .atlas-exploration-tabs {
+  position: static;
+  top: auto;
+  left: auto;
 }
 
 .reference-guide .atlas-exploration-tabs .hub-tabs.easyui-tabs-list {
@@ -6070,7 +6102,7 @@
   min-height: 36px;
   padding-inline: 12px;
   border-radius: 999px;
-  color: var(--citylit-quiet);
+  color: rgba(226, 232, 240, 0.82);
   font-size: 11px;
   font-weight: 600;
 }
@@ -7494,7 +7526,7 @@
   --co-amber-highlight: #fbbf24;
   --co-text-primary: #f8fafc;
   --co-text-secondary: #94a3b8;
-  --co-text-muted: #64748b;
+  --co-text-muted: #94a3b8;
   --co-glass: rgba(20, 22, 31, 0.72);
   --co-glass-border: rgba(255, 255, 255, 0.08);
   --co-violet-glow: rgba(168, 85, 247, 0.24);
@@ -7519,6 +7551,10 @@
 .reference-guide {
   background: var(--co-surface) !important;
   color: var(--co-on-surface);
+}
+/* The 3D stage keeps the shared WebGL layer visible instead of an opaque page. */
+.reference-guide.reference-stage-guide {
+  background: transparent !important;
 }
 
 .reference-guide .atlas-nav.citylit-app-header {
@@ -7686,6 +7722,7 @@
 .citylit-featured-badge {
   position: absolute;
   top: 14px;
+  right: auto;
   left: 14px;
   z-index: 2;
   display: inline-flex;
@@ -7714,12 +7751,13 @@
   font-family: var(--font-display, "Playfair Display", Georgia, serif);
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 500;
-  color: var(--co-text-primary);
+  color: #fff;
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
 }
 
 .citylit-featured-meta p {
   margin: 4px 0 0;
-  color: var(--co-text-secondary);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
 }
 
@@ -7793,7 +7831,6 @@
 /* Buttons */
 .reference-guide .atlas-button.atlas-primary,
 .field-guide .day-actions button:first-child,
-.easyui-pill-button.is-active,
 .citylit-primary-action {
   background: linear-gradient(135deg, var(--co-amber-highlight), var(--co-secondary)) !important;
   color: var(--co-on-secondary-container) !important;
@@ -7850,9 +7887,91 @@ button.atlas-button:not(.atlas-primary) {
 }
 
 /* Day theme readability overrides */
-:root[data-theme="day"] .reference-guide,
+:root[data-theme="day"] {
+  --co-surface: #f4efe6;
+  --co-surface-dim: #ece7de;
+  --co-surface-bright: #fbf9f5;
+  --co-surface-lowest: #ffffff;
+  --co-surface-low: #fbf9f5;
+  --co-surface-container: #efeae1;
+  --co-surface-high: #e8e3d9;
+  --co-surface-highest: #e1dbd0;
+  --co-on-surface: #171920;
+  --co-on-surface-variant: #4f5462;
+  --co-outline: #6b6577;
+  --co-outline-variant: #d6d0c6;
+  --co-primary: #5b2fc0;
+  --co-tertiary: #5b2fc0;
+  --co-glass: rgba(251, 249, 245, 0.82);
+  --co-glass-border: rgba(23, 25, 32, 0.12);
+  --co-text-primary: #171920;
+  --co-text-secondary: #4f5462;
+  --co-text-muted: #68646f;
+  --citylit-reference-bg: #f4efe6;
+  --citylit-reference-panel: #fbf9f5;
+  --citylit-reference-panel-raised: #e6e2da;
+  --citylit-reference-border: rgb(23 25 32 / 14%);
+  --citylit-reference-text: #171920;
+  --citylit-reference-muted: #4f5462;
+  --citylit-reference-dim: #68646f;
+  --citylit-reference-purple: #6d3fd4;
+  --citylit-reference-purple-soft: #5b2fc0;
+  --citylit-reference-gold: #9a5a10;
+  --citylit-reference-gold-strong: #8a4f0c;
+  --citylit-reference-accent-ink: #fff;
+}
+
+:root[data-theme="day"] .reference-guide:not(.reference-stage-guide),
 :root[data-theme="day"] .reference-home {
   background: #f4efe6 !important;
+}
+
+:root[data-theme="day"] .reference-home .living-atlas-hero h1 {
+  color: #171920;
+}
+:root[data-theme="day"] .reference-home-subtitle {
+  color: #4f5462;
+}
+:root[data-theme="day"] .reference-guide {
+  --citylit-surface: #fbf9f5;
+  --citylit-text: #171920;
+  --citylit-quiet: #374151;
+}
+:root[data-theme="day"] .citylit-detail-tabs-bar {
+  background: rgba(251, 249, 245, 0.92);
+  border-color: rgba(23, 25, 32, 0.1);
+}
+:root[data-theme="day"] .citylit-detail-tab {
+  color: #4f5462;
+}
+:root[data-theme="day"] .citylit-detail-tab.is-active,
+:root[data-theme="day"] .citylit-detail-tab[aria-selected="true"] {
+  color: #171920;
+}
+:root[data-theme="day"] .citylit-detail-circle-btn,
+:root[data-theme="day"] .citylit-detail-3d-btn {
+  background: rgba(251, 249, 245, 0.92);
+  border-color: rgba(23, 25, 32, 0.12);
+  color: #171920;
+}
+:root[data-theme="day"] .citylit-detail-3d-btn {
+  color: #5b2fc0;
+}
+:root[data-theme="day"] .citylit-detail-sticky-footer {
+  background: linear-gradient(
+    to top,
+    rgba(251, 249, 245, 0.98),
+    rgba(251, 249, 245, 0.82),
+    transparent
+  );
+}
+html[data-theme="day"] .reference-home .amicro-tilt-card.living-atlas-city-card,
+html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card {
+  background: #fbf9f5 !important;
+}
+html[data-theme="day"] .reference-home .amicro-tilt-card.living-atlas-city-card h3,
+html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
+  color: #171920 !important;
 }
 
 :root[data-theme="day"] .reference-guide .atlas-nav.citylit-app-header,
@@ -7949,6 +8068,14 @@ button.atlas-button:not(.atlas-primary) {
 }
 .citylit-inspect-btn svg {
   color: var(--co-tertiary, #ddb7ff);
+}
+:root[data-theme="day"] .citylit-inspect-btn {
+  background: #e5e7eb;
+  color: #171920;
+  border-color: #d1d5db;
+}
+:root[data-theme="day"] .citylit-inspect-btn svg {
+  color: #6d28d9;
 }
 .citylit-3d-viewport {
   position: relative;
@@ -8716,11 +8843,30 @@ button.atlas-button:not(.atlas-primary) {
   }
 }
 @media (min-width: 768px) {
+  /* Immersive stage: the ring fills the viewport below the header and every
+     HUD layer (heading, mode switch, sheet, chips, telemetry) sits on top. */
   .reference-stage-guide .atlas-stage {
-    min-height: 100dvh;
+    height: calc(100dvh - 64px);
+    min-height: 560px;
+    padding: 0;
   }
-  .reference-stage-guide .atlas-ring-scene {
-    min-height: 100dvh;
+  .reference-stage-guide .atlas-ring-scene,
+  .reference-stage-guide .atlas-stage:has(.atlas-ring-scene.is-heritage-hero) .atlas-ring-scene {
+    position: absolute;
+    inset: 0;
+    order: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+  }
+  .reference-stage-guide .atlas-exploration-switch {
+    top: 72px;
+    right: 16px;
+    left: auto;
+  }
+  .reference-stage-guide .atlas-stage-heading {
+    max-width: min(520px, calc(100% - 264px));
   }
   .reference-stage-guide .atlas-stage-content {
     pointer-events: none;
@@ -8914,4 +9060,85 @@ button.atlas-button:not(.atlas-primary) {
   color: #472a00 !important;
   border-color: transparent !important;
   box-shadow: 0 0 14px rgba(251, 191, 36, 0.3);
+}
+
+/* --- Stage theme contract ------------------------------------------------
+   The stage is a dark cinema surface in both themes so the 3D atlas and its
+   HUD stay legible. Only the model lighting follows the app theme (with the
+   inspector's local override). Mobile keeps the light page above the ring. */
+@media (min-width: 768px) {
+  :root[data-theme="day"] .reference-guide.reference-stage-guide .atlas-stage {
+    --co-surface: #121317;
+    --co-surface-dim: #121317;
+    --co-surface-bright: #38393d;
+    --co-surface-lowest: #0d0e12;
+    --co-surface-low: #1a1b20;
+    --co-surface-container: #1f1f24;
+    --co-surface-high: #292a2e;
+    --co-surface-highest: #343439;
+    --co-on-surface: #e3e2e7;
+    --co-on-surface-variant: #ccc3d8;
+    --co-outline: #958da1;
+    --co-outline-variant: #4a4455;
+    --co-primary: #d2bbff;
+    --co-tertiary: #ddb7ff;
+    --co-glass: rgba(18, 19, 23, 0.82);
+    --co-glass-border: rgba(255, 255, 255, 0.08);
+    --co-text-primary: #f8fafc;
+    --co-text-secondary: #94a3b8;
+    --co-text-muted: #94a3b8;
+    --citylit-reference-bg: #121317;
+    --citylit-reference-panel: #1a1b20;
+    --citylit-reference-panel-raised: #1f1f24;
+    --citylit-reference-border: rgba(255, 255, 255, 0.08);
+    --citylit-reference-text: #e3e2e7;
+    --citylit-reference-muted: #ccc3d8;
+    --citylit-reference-dim: #958da1;
+    --citylit-reference-purple: #7c3aed;
+    --citylit-reference-purple-soft: #d2bbff;
+    --citylit-reference-gold: #ffb95f;
+    --citylit-reference-gold-strong: #ee9800;
+    --citylit-reference-accent-ink: #472a00;
+    --citylit-surface: #1f1f24;
+    --citylit-surface-raised: #1f1f24;
+    --citylit-panel: #1a1b20;
+    --citylit-panel-raised: #1f1f24;
+    --citylit-hairline: rgba(255, 255, 255, 0.08);
+    --citylit-text: #e3e2e7;
+    --citylit-quiet: #ccc3d8;
+    --citylit-violet: #7c3aed;
+    --citylit-violet-soft: #d2bbff;
+    --citylit-gold: #ffb95f;
+    --guide-surface: #1a1b20;
+    --bg: #121317;
+    --ink: #e3e2e7;
+    --muted: #ccc3d8;
+    color-scheme: dark;
+  }
+  :root[data-theme="day"] .reference-guide.reference-stage-guide .atlas-stage-sheet {
+    background: rgba(20, 22, 31, 0.82);
+  }
+  .reference-stage-guide .atlas-stage-telemetry {
+    bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+  }
+  .reference-stage-guide .atlas-stage-chips {
+    bottom: calc(146px + env(safe-area-inset-bottom, 0px));
+  }
+  .reference-stage-guide .atlas-stage-sheet {
+    bottom: calc(214px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Mobile day keeps the light page, so only the dark HUD controls get light ink. */
+:root[data-theme="day"] .reference-stage-guide .atlas-stage-telemetry {
+  color: #cbd5e1;
+}
+:root[data-theme="day"] .reference-stage-guide .atlas-stage-telemetry strong {
+  color: #f8fafc;
+}
+:root[data-theme="day"]
+  .reference-stage-guide
+  .atlas-stage-chips
+  .easyui-pill-button:not(.is-active) {
+  color: #e3e2e7;
 }

@@ -80,6 +80,7 @@ export function AnimatedTabs({
               {isSelected && (
                 <motion.span
                   aria-hidden="true"
+                  role="presentation"
                   className="easyui-tab-indicator"
                   layoutId={indicatorId}
                   transition={transition}

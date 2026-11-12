@@ -8,7 +8,7 @@
  */
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useMotionValue, useTransform, useReducedMotion, animate } from "motion/react";
+import { motion, useMotionValue, useTransform, useReducedMotion, animate, type PanInfo } from "motion/react";
 import { ArrowRight, Check } from "@phosphor-icons/react";
 
 interface SlideToConfirmProps {
@@ -57,9 +57,10 @@ export function SlideToConfirm({
   const textOpacity = useTransform(progress, [0, 0.5], [1, 0.1]);
   const fillWidth = useTransform(dragX, (x) => `${Math.max(48, x + 48)}px`);
 
-  const handleDragEnd = () => {
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const currentX = dragX.get();
-    if (currentX >= maxDrag * 0.78) {
+    const isFlick = info?.velocity?.x > 300;
+    if (currentX >= maxDrag * 0.68 || isFlick) {
       // Confirmed! Snap to end
       animate(dragX, maxDrag, {
         type: "spring",

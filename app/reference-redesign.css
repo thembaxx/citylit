@@ -3549,7 +3549,7 @@
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s ease;
+  transition: color 150ms ease, background 150ms ease, border-color 150ms ease, transform 150ms var(--ease-out, ease-out), box-shadow 150ms ease;
 }
 
 .citylit-pill:hover {
@@ -3834,7 +3834,7 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 150ms ease, background 150ms ease, box-shadow 150ms ease, transform 150ms var(--ease-out, ease-out);
 }
 
 :root[data-theme="day"] .citylit-settings-tabs {
@@ -3885,7 +3885,7 @@
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 150ms ease, background 150ms ease, box-shadow 150ms ease, transform 150ms var(--ease-out, ease-out);
 }
 
 .citylit-theme-card:hover {
@@ -4136,7 +4136,7 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 150ms ease, background 150ms ease, box-shadow 150ms ease, transform 150ms var(--ease-out, ease-out);
 }
 
 .citylit-detail-tab-btn.is-active {
@@ -4233,7 +4233,7 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 150ms ease, background 150ms ease, box-shadow 150ms ease, transform 150ms var(--ease-out, ease-out);
 }
 
 .citylit-myday-pill.is-active {
@@ -7799,7 +7799,7 @@
   font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
   font-size: 13px;
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: color 200ms ease, background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms var(--ease-out, ease-out);
 }
 
 .citylit-filter-pill.is-active,
@@ -9501,11 +9501,11 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 @media (prefers-reduced-motion: no-preference) {
   .reference-guide #guide-main {
-    animation: citylit-rise 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    animation: citylit-rise 300ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
   }
   .citylit-popular-thumb img,
   .citylit-featured-media img {
-    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 240ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
   }
   .citylit-popular-card:hover .citylit-popular-thumb img,
   .citylit-featured-card:hover .citylit-featured-media img {
@@ -9780,7 +9780,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   margin: 0;
   overflow: hidden;
   pointer-events: none;
-  transition: all 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 240ms var(--ease-snappy, cubic-bezier(0.16, 1, 0.3, 1)), transform 240ms var(--ease-snappy, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 .reference-guide.reference-stage-guide .atlas-stage.is-focused-stage .atlas-stage-chips {
@@ -9875,7 +9875,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms var(--ease-out, ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -9896,7 +9896,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   font-size: 13px;
   font-weight: 650;
   cursor: pointer;
-  transition: all 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -10248,11 +10248,11 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 
 ::view-transition-old(root) {
-  animation: 160ms cubic-bezier(0.4, 0, 1, 1) both citylit-fade-out;
+  animation: 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)) both citylit-fade-out;
 }
 
 ::view-transition-new(root) {
-  animation: 240ms cubic-bezier(0, 0, 0.2, 1) 40ms both citylit-fade-in;
+  animation: 240ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)) 40ms both citylit-fade-in;
 }
 
 @keyframes citylit-fade-out {
@@ -10452,7 +10452,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 200ms ease, background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms var(--ease-out, ease-out);
   flex-shrink: 0;
 }
 
@@ -10496,7 +10496,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.16s ease;
+  transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
   white-space: nowrap;
 }
 
@@ -10537,7 +10537,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
   white-space: nowrap;
 }
 
@@ -10573,7 +10573,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 240ms var(--ease-snappy, cubic-bezier(0.16, 1, 0.3, 1)), background 240ms ease;
 }
 
 .citylit-dot:hover {

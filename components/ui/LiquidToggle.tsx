@@ -63,15 +63,15 @@ export function LiquidToggle({
                   mass: 0.65,
                   scaleX: {
                     type: "tween",
-                    duration: 0.36,
-                    times: [0, 0.35, 0.7, 1],
-                    ease: "easeInOut",
+                    duration: 0.18,
+                    times: [0, 0.4, 0.75, 1],
+                    ease: [0.23, 1, 0.32, 1],
                   },
                   scaleY: {
                     type: "tween",
-                    duration: 0.36,
-                    times: [0, 0.35, 0.7, 1],
-                    ease: "easeInOut",
+                    duration: 0.18,
+                    times: [0, 0.4, 0.75, 1],
+                    ease: [0.23, 1, 0.32, 1],
                   },
                 }
           }

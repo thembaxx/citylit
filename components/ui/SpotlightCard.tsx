@@ -60,7 +60,7 @@ export function SpotlightCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${className}`}
+      className={`relative overflow-hidden rounded-2xl border transition-[border-color,background-color] duration-300 ${className}`}
       style={{
         borderColor: borderColor,
       }}

@@ -45,10 +45,10 @@ export function DynamicIslandToast({
           aria-live="polite"
           className="bencho-dynamic-island-container"
           initial={
-            reduced ? { opacity: 0 } : { opacity: 0, y: -24, scale: 0.88, filter: "blur(8px)" }
+            reduced ? { opacity: 0 } : { opacity: 0, y: -14, scale: 0.96, filter: "blur(4px)" }
           }
           animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-          exit={reduced ? { opacity: 0 } : { opacity: 0, y: -16, scale: 0.92, filter: "blur(6px)" }}
+          exit={reduced ? { opacity: 0 } : { opacity: 0, y: -10, scale: 0.97, filter: "blur(4px)" }}
           transition={{
             type: "spring",
             stiffness: 420,

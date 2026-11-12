@@ -235,7 +235,7 @@ function Terrain({
   host: HTMLElement;
   labels: { current: (HTMLButtonElement | null)[] };
   pins: AtlasPin[];
-  pinLabels: { current: (HTMLButtonElement | null)[] };
+  pinLabels: { current: (HTMLAnchorElement | null)[] };
   focus?: number[];
   opacity: number;
   interactive: boolean;
@@ -587,7 +587,7 @@ export default function GlowMap({
   animate?: boolean;
 }) {
   const labels = useRef<(HTMLButtonElement | null)[]>([]);
-  const pinLabels = useRef<(HTMLButtonElement | null)[]>([]);
+  const pinLabels = useRef<(HTMLAnchorElement | null)[]>([]);
   const pins = useMemo(() => buildAtlasPins(), []);
   const [host, setHost] = useState<HTMLElement | null>(null);
   const { night } = useTheme();
@@ -629,12 +629,23 @@ export default function GlowMap({
             disabled={!interactive}
             className={`glow-city-marker ${selected === index ? "is-selected" : ""} ${index < 3 ? "is-major" : ""}`}
             onPointerDown={(event) => event.stopPropagation()}
-            onClick={() => {
-              feedback("tap");
+            onClick={(event) => {
               if (selected === index) {
-                router.push(`/${city.slug}/landmarks`);
+                const href = `/${city.slug}/landmarks`;
+                window.dispatchEvent(
+                  new CustomEvent("citylit:portal", {
+                    detail: {
+                      label: `${city.name} landmarks`,
+                      href,
+                      x: event.clientX,
+                      y: event.clientY,
+                    },
+                  }),
+                );
+                router.push(href);
                 return;
               }
+              feedback("tap");
               onSelect(index);
             }}
           >
@@ -643,24 +654,27 @@ export default function GlowMap({
           </button>
         ))}
         {pins.map((pin, index) => (
-          <button
+          <a
             key={pin.key}
             ref={(element) => {
               pinLabels.current[index] = element;
             }}
-            type="button"
+            href={pin.href}
+            data-transition-label={pin.label}
             className={`glow-place-marker ${pin.kind === "landmark" ? "is-landmark" : ""}`}
             aria-label={`Open ${pin.label} in 3D`}
             tabIndex={interactive ? 0 : -1}
-            disabled={!interactive}
+            aria-disabled={!interactive}
             onPointerDown={(event) => event.stopPropagation()}
-            onClick={() => {
-              feedback("tap");
+            onClick={(event) => {
+              if (!interactive || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+                return;
+              event.preventDefault();
               router.push(pin.href);
             }}
           >
             <span className="glow-marker-name">{pin.label}</span>
-          </button>
+          </a>
         ))}
       </div>
     </div>

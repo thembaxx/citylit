@@ -9,7 +9,7 @@ import { cities } from "../lib/data";
 import { useKhwezi } from "./KhweziProvider";
 
 type PendingRoute = { key: string; label: string };
-type PortalDetail = { label: string; x?: number; y?: number };
+type PortalDetail = { label: string; x?: number; y?: number; href?: string };
 
 function routeLabel(pathname: string, search: string) {
   const query = new URLSearchParams(search);
@@ -106,6 +106,8 @@ export default function JourneyTransition() {
       setAnnouncement(`Following the trail to ${nextLabel}.`);
       veil.dataset.portalX = `${x}px`;
       veil.dataset.portalY = `${y}px`;
+      veil.style.setProperty("--portal-x", `${x}px`);
+      veil.style.setProperty("--portal-y", `${y}px`);
       veil.style.visibility = "visible";
       veil.style.opacity = "1";
       coverTween.current?.kill();
@@ -177,13 +179,13 @@ export default function JourneyTransition() {
       );
     };
     const onPortal = (event: Event) => {
-      const { label: nextLabel, x, y } = (event as CustomEvent<PortalDetail>).detail;
+      const { label: nextLabel, x, y, href } = (event as CustomEvent<PortalDetail>).detail;
       cover(
-        `local:${performance.now()}`,
+        href || `local:${performance.now()}`,
         nextLabel,
         x ?? window.innerWidth / 2,
         y ?? window.innerHeight / 2,
-        true,
+        !href,
       );
     };
     document.addEventListener("click", onClick, true);

@@ -9609,3 +9609,26 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
     transform: scale(0.86);
   }
 }
+
+/* A press should feel physical, and a route should wash in the atlas amber.
+   Transform only, and only when motion is allowed. */
+.glow-place-marker {
+  color: inherit;
+  text-decoration: none;
+}
+.journey-transition {
+  background:
+    radial-gradient(ellipse at var(--portal-x, 50%) var(--portal-y, 46%), rgb(240 179 94 / 34%), transparent 18rem),
+    radial-gradient(ellipse at 50% 120%, rgb(136 146 172 / 16%), transparent 45rem),
+    #0e0f13;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reference-guide .citylit-bottom-dock .bencho-dock-item,
+  .reference-guide .atlas-button {
+    transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reference-guide .citylit-bottom-dock .bencho-dock-item:active,
+  .reference-guide .atlas-button:active {
+    transform: scale(0.96);
+  }
+}

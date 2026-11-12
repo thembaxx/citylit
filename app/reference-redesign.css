@@ -9285,3 +9285,116 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
     transition: none;
   }
 }
+
+/* Native shell: one navigation, content clear of the dock, motion that
+   does not fade text or resize layout. */
+.reference-guide .citylit-app-header .citylit-header-nav-link {
+  display: none;
+}
+.reference-guide .citylit-app-header .citylit-header-theme-btn {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+}
+.reference-guide #guide-main {
+  padding-bottom: calc(112px + env(safe-area-inset-bottom));
+}
+.reference-guide .citylit-bottom-dock .bencho-dock-item {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: 6px 4px 8px;
+  color: var(--citylit-quiet);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.reference-guide .citylit-bottom-dock .bencho-dock-item svg {
+  filter: none;
+}
+.reference-guide .citylit-bottom-dock .bencho-dock-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.reference-guide .citylit-bottom-dock .citylit-dock-pill {
+  left: 28%;
+  right: 28%;
+  bottom: 4px;
+  height: 3px;
+}
+.citylit-filter-pills-row {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.citylit-filter-pill {
+  flex: 0 0 auto;
+  min-height: 44px;
+  scroll-snap-align: start;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+.reference-home .reference-search input {
+  font-size: 16px;
+}
+.citylit-featured-arrow-btn,
+.citylit-inspect-btn,
+.citylit-plan-primary,
+.citylit-plan-secondary {
+  min-height: 44px;
+}
+.citylit-popular-scroll {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 16px;
+}
+.citylit-popular-card {
+  scroll-snap-align: start;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reference-guide #guide-main {
+    animation: citylit-rise 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .citylit-popular-thumb img,
+  .citylit-featured-media img {
+    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .citylit-popular-card:hover .citylit-popular-thumb img,
+  .citylit-featured-card:hover .citylit-featured-media img {
+    transform: scale(1.04);
+  }
+  .reference-guide .citylit-bottom-dock .bencho-dock-item:active,
+  .citylit-filter-pill:active,
+  .citylit-popular-card:active {
+    transform: scale(0.97);
+  }
+}
+@keyframes citylit-rise {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reference-guide #guide-main,
+  .citylit-popular-card,
+  .citylit-filter-pill,
+  .reference-guide .citylit-bottom-dock .bencho-dock-item {
+    animation: none;
+    transition: none;
+  }
+}

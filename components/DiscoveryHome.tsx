@@ -249,9 +249,7 @@ export default function DiscoveryHome() {
                           priority
                           sizes="(max-width: 768px) 100vw, 900px"
                         />
-                        <div className="citylit-featured-badge">
-                          <span aria-hidden="true">★</span> Featured
-                        </div>
+                        <div className="citylit-featured-badge">Featured</div>
                         <div className="citylit-featured-meta">
                           <h2>{featuredLandmarkSource.name}</h2>
                           <p>{featuredCity.name}, South Africa</p>
@@ -265,12 +263,6 @@ export default function DiscoveryHome() {
                         </Link>
                       </div>
                     </div>
-                    <div className="citylit-carousel-dots" aria-hidden="true">
-                      <span className="dot is-active" />
-                      <span className="dot" />
-                      <span className="dot" />
-                      <span className="dot" />
-                    </div>
                   </section>
                 )}
 
@@ -283,11 +275,6 @@ export default function DiscoveryHome() {
                   <div className="citylit-3d-canvas-card">
                     <div className="citylit-3d-canvas-head">
                       <div>
-                        <nav className="citylit-crumbs" aria-label="Breadcrumb">
-                          <span>Home</span>
-                          <span>/</span>
-                          <span>Landmarks</span>
-                        </nav>
                         <h2 id="home-3d-landmarks-title">{spotlightCity.name} landmarks</h2>
                       </div>
                       <Link
@@ -299,7 +286,6 @@ export default function DiscoveryHome() {
                       </Link>
                     </div>
                     <div className="citylit-3d-viewport">
-                      <div className="citylit-3d-glow" aria-hidden="true" />
                       {spotlightPhoto && (
                         <Image
                           src={spotlightPhoto.src}
@@ -310,23 +296,7 @@ export default function DiscoveryHome() {
                         />
                       )}
                       <div className="citylit-3d-viewport-overlay" aria-hidden="true" />
-                      <div className="citylit-3d-diorama-label">
-                        <span className="citylit-3d-live-dot" aria-hidden="true" />
-                        3D landmark mesh · {spotlightLandmarkName}
-                      </div>
-                      <div className="citylit-3d-preset-card" aria-hidden="true">
-                        <div className="citylit-3d-preset-title">
-                          <Cube size={14} weight="duotone" /> Camera presets
-                        </div>
-                        <div className="citylit-3d-preset-grid">
-                          <span className="is-active">Overview</span>
-                          <span>Close-up</span>
-                        </div>
-                        <div className="citylit-3d-preset-toggles">
-                          <span>Overhead</span>
-                          <span>Surroundings</span>
-                        </div>
-                      </div>
+                      <div className="citylit-3d-diorama-label">{spotlightLandmarkName}</div>
                       <div
                         className="citylit-3d-chip-row"
                         role="list"

@@ -8,6 +8,7 @@ import { CityCard, PhotoCredit } from "./GuideCards";
 import PlacesBrowser from "./PlacesBrowser";
 import PlanVisit from "./PlanVisit";
 import TiltCard from "./ui/TiltCard";
+import WeatherWidget from "./WeatherWidget";
 
 export default function CityGuide({ city }: { city: GuideCity }) {
   const neighbours = cities.filter(
@@ -34,6 +35,7 @@ export default function CityGuide({ city }: { city: GuideCity }) {
       <section className="atlas-city-hero atlas-city-map-hero atlas-city-hero-redesign">
         <div className="atlas-city-hero-copy">
           <p className="atlas-eyebrow">{city.province} · CITY GUIDE</p>
+          <WeatherWidget name={city.name} longitude={city.coords[0]} latitude={city.coords[1]} />
           <h1>
             {city.name}
             <span className="atlas-title-period">.</span>

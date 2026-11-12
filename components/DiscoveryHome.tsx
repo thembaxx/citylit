@@ -18,6 +18,7 @@ import { useKhwezi } from "./KhweziProvider";
 import { useDiscovery } from "./useDiscovery";
 import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
+import WeatherWidget from "./WeatherWidget";
 import { benchoAudio } from "../lib/bencho-audio";
 
 const moodPatterns: Partial<Record<AtlasMood, RegExp>> = {
@@ -172,6 +173,12 @@ export default function DiscoveryHome() {
             <p className="reference-home-subtitle">
               Discover. Learn. Experience South Africa&apos;s iconic places and night-lit landmarks.
             </p>
+
+            <WeatherWidget
+              name={(cities[mapSelectedCity ?? selectedCity ?? 0] ?? cities[0]).name}
+              longitude={(cities[mapSelectedCity ?? selectedCity ?? 0] ?? cities[0]).coords[0]}
+              latitude={(cities[mapSelectedCity ?? selectedCity ?? 0] ?? cities[0]).coords[1]}
+            />
 
             {/* Search Input */}
             <label className="reference-search">

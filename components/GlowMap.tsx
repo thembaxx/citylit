@@ -1,10 +1,18 @@
 "use client";
 import { View, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { useThree, useFrame } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useRef, useState, type ComponentRef } from "react";
+import {
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ComponentRef,
+} from "react";
 import * as THREE from "three";
 import gsap from "gsap";
-import { cities } from "../lib/data";
+import { cities, places } from "../lib/data";
+import { landmarkVenue } from "../lib/discovery-guide";
 import boundaries from "../public/data/provinces.json";
 import useTheme from "./useTheme";
 import StageModel from "./StageModel";
@@ -48,8 +56,8 @@ const landFragment = `
     float core = exp(-radius * radius * 18.0);
     float halo = 1.0 - smoothstep(0.08, 0.5, radius);
     float glow = mix(halo, core, 0.42);
-    vec3 dayBase = mix(vec3(0.28, 0.30, 0.36), vec3(0.54, 0.58, 0.68), vPulse);
-    vec3 dayHigh = mix(dayBase, vec3(0.84, 0.52, 0.20), vElevation * 0.45 + vFocus * 0.72);
+    vec3 dayBase = mix(vec3(0.20, 0.34, 0.28), vec3(0.62, 0.52, 0.34), vPulse);
+    vec3 dayHigh = mix(dayBase, vec3(0.78, 0.48, 0.18), vElevation * 0.5 + vFocus * 0.65);
     vec3 nightBase = mix(vec3(0.32, 0.35, 0.44), vec3(0.86, 0.65, 0.38), vPulse);
     vec3 nightHigh = mix(nightBase, vec3(0.98, 0.78, 0.46), vElevation * 0.40 + vFocus * 0.78);
     vec3 color = mix(dayHigh, nightHigh, uNight);
@@ -92,6 +100,43 @@ const beamFragment = `
 
 const x = (lon: number) => (lon - 25) * 0.48;
 const z = (lat: number) => -(lat + 28.7) * 0.48;
+
+function MarkerDots({
+  positions,
+  color,
+  radius,
+  opacity,
+}: {
+  positions: Float32Array;
+  color: string;
+  radius: number;
+  opacity: number;
+}) {
+  const count = positions.length / 3;
+  const mesh = useMemo(() => {
+    const geometry = new THREE.SphereGeometry(radius, 8, 6);
+    const material = new THREE.MeshBasicMaterial({
+      color,
+      transparent: true,
+      depthWrite: false,
+      opacity,
+    });
+    const instanced = new THREE.InstancedMesh(geometry, material, Math.max(count, 1));
+    instanced.count = count;
+    instanced.frustumCulled = false;
+    const dummy = new THREE.Object3D();
+    for (let i = 0; i < count; i++) {
+      dummy.position.set(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
+      dummy.updateMatrix();
+      instanced.setMatrixAt(i, dummy.matrix);
+    }
+    instanced.instanceMatrix.needsUpdate = true;
+    return instanced;
+  }, [positions, color, radius, count, opacity]);
+  if (count === 0) return null;
+  return <primitive object={mesh} />;
+}
+
 function insideRing(point: number[], ring: number[][]) {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
@@ -167,6 +212,55 @@ function Terrain({
       phases: new Float32Array(phases),
       elevations: new Float32Array(elevations),
     };
+  }, []);
+  const atlasMarkers = useMemo(() => {
+    const placeDots: number[] = [];
+    const landmarkDots: number[] = [];
+    const seen = new Set<string>();
+    for (const place of places) {
+      if (place.coordinateAccuracy !== "venue" || place.coords.length < 2) continue;
+      const key = `${place.coords[0].toFixed(3)},${place.coords[1].toFixed(3)}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      placeDots.push(x(place.coords[0]), 0.07, z(place.coords[1]));
+    }
+    for (const city of cities) {
+      for (const name of city.landmarks) {
+        const place = landmarkVenue(city.slug, name);
+        if (!place || place.coordinateAccuracy !== "venue" || place.coords.length < 2) continue;
+        landmarkDots.push(x(place.coords[0]), 0.14, z(place.coords[1]));
+      }
+    }
+    return {
+      places: new Float32Array(placeDots),
+      landmarks: new Float32Array(landmarkDots),
+    };
+  }, []);
+  const outline = useMemo(() => {
+    const positions: number[] = [];
+    for (const feature of boundaries.features) {
+      const polygons =
+        feature.geometry.type === "Polygon"
+          ? [feature.geometry.coordinates as unknown as number[][][]]
+          : (feature.geometry.coordinates as unknown as number[][][][]);
+      for (const polygon of polygons) {
+        for (const ring of polygon) {
+          for (let i = 0; i < ring.length - 1; i++) {
+            positions.push(
+              x(ring[i][0]),
+              0.03,
+              z(ring[i][1]),
+              x(ring[i + 1][0]),
+              0.03,
+              z(ring[i + 1][1]),
+            );
+          }
+        }
+      }
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(new Float32Array(positions), 3));
+    return geometry;
   }, []);
   const landMaterial = useRef<THREE.ShaderMaterial>(null);
   const beamMaterial = useRef<THREE.ShaderMaterial>(null);
@@ -299,6 +393,26 @@ function Terrain({
           blending={THREE.AdditiveBlending}
         />
       </points>
+      <lineSegments geometry={outline} dispose={null}>
+        <lineBasicMaterial
+          color={night ? "#e7d7bf" : "#5c5348"}
+          transparent
+          opacity={(night ? 0.72 : 0.55) * opacity}
+          depthWrite={false}
+        />
+      </lineSegments>
+      <MarkerDots
+        positions={atlasMarkers.places}
+        color="#f7f1e6"
+        radius={0.028}
+        opacity={0.92 * opacity}
+      />
+      <MarkerDots
+        positions={atlasMarkers.landmarks}
+        color={night ? "#ffc46b" : "#d9660b"}
+        radius={0.042}
+        opacity={opacity}
+      />
       {cities.map((city, index) => (
         <group key={city.slug} position={[x(city.coords[0]), 0.06, z(city.coords[1])]}>
           <mesh
@@ -364,10 +478,20 @@ function Terrain({
             />
           </mesh>
           {index === selected && opacity > 0.65 && (
-            <group position={[0, 0.14, 0]} scale={0.4}>
-              <Suspense fallback={null}>
-                <StageModel model={stageModel(city.landmarks[0])} />
-              </Suspense>
+            <group position={[0, 0.14, 0]}>
+              <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
+                <circleGeometry args={[0.28, 24]} />
+                <meshBasicMaterial
+                  color={night ? "#3a3328" : "#e6d3b4"}
+                  transparent
+                  opacity={0.9}
+                />
+              </mesh>
+              <group scale={0.4}>
+                <Suspense fallback={null}>
+                  <StageModel model={stageModel(city.landmarks[0])} />
+                </Suspense>
+              </group>
             </group>
           )}
         </group>
@@ -398,7 +522,7 @@ export default function GlowMap({
     <div
       className="glow-map"
       ref={setHost}
-      aria-label="Interactive map of South African city guides"
+      aria-label="Interactive map of South Africa, with cities, places and landmarks"
       data-interactive={interactive}
     >
       <View className="glow-map-view" index={2} visible={opacity > 0.01}>

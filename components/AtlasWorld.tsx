@@ -153,10 +153,7 @@ export default function AtlasWorld({
       const phase = (i * 0.61803398875) % 1;
       const angle = i * 2.3999632297;
       const radius = 1.6 + ((i * 11) % 25) / 10;
-      positions.set(
-        [Math.cos(angle) * radius, 0.2 + phase * 2.2, Math.sin(angle) * radius],
-        i * 3,
-      );
+      positions.set([Math.cos(angle) * radius, 0.2 + phase * 2.2, Math.sin(angle) * radius], i * 3);
       phases[i] = phase;
     }
     return { positions, phases };
@@ -216,14 +213,8 @@ export default function AtlasWorld({
       {/* Subtle floating ambient dust / embers */}
       <points renderOrder={-1}>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            args={[particles.positions, 3]}
-          />
-          <bufferAttribute
-            attach="attributes-aPhase"
-            args={[particles.phases, 1]}
-          />
+          <bufferAttribute attach="attributes-position" args={[particles.positions, 3]} />
+          <bufferAttribute attach="attributes-aPhase" args={[particles.phases, 1]} />
         </bufferGeometry>
         <shaderMaterial
           ref={sparks}

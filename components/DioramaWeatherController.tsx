@@ -215,16 +215,10 @@ export default function DioramaWeatherController({
               : `Play organic ${atmosphere.ambientSound} soundscape`
           }
           title={
-            ambientActive
-              ? "Mute sensory soundscape"
-              : `Play ${atmosphere.ambientSound} soundscape`
+            ambientActive ? "Mute sensory soundscape" : `Play ${atmosphere.ambientSound} soundscape`
           }
         >
-          {ambientActive ? (
-            <SpeakerHigh size={16} weight="fill" />
-          ) : (
-            <SpeakerSlash size={16} />
-          )}
+          {ambientActive ? <SpeakerHigh size={16} weight="fill" /> : <SpeakerSlash size={16} />}
         </button>
       </div>
 
@@ -232,10 +226,25 @@ export default function DioramaWeatherController({
       <div className="weather-scrubber-row" role="group" aria-label="Time of day presets">
         {(
           [
-            ["dawn", "Dawn", <Sun key="d" size={13} weight="regular" />, "Dawn morning time preset"],
+            [
+              "dawn",
+              "Dawn",
+              <Sun key="d" size={13} weight="regular" />,
+              "Dawn morning time preset",
+            ],
             ["midday", "12 PM", <Sun key="m" size={13} weight="fill" />, "Midday noon time preset"],
-            ["sunset", "Sunset", <Sparkle key="s" size={13} weight="fill" />, "Golden hour sunset time preset"],
-            ["night", "Night", <Moon key="n" size={13} weight="fill" />, "Night twilight time preset"],
+            [
+              "sunset",
+              "Sunset",
+              <Sparkle key="s" size={13} weight="fill" />,
+              "Golden hour sunset time preset",
+            ],
+            [
+              "night",
+              "Night",
+              <Moon key="n" size={13} weight="fill" />,
+              "Night twilight time preset",
+            ],
             ["live", "LIVE", <Clock key="l" size={13} weight="bold" />, "Live local time preset"],
           ] as const
         ).map(([p, label, icon, ariaLbl]) => (

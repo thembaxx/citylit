@@ -5,7 +5,7 @@ import { Compass } from "@phosphor-icons/react";
 /** Clean, modern brand mark for Citylit with Phosphor icon accent. */
 export default function BrandWordmark() {
   return (
-    <span className="wordmark citylit-logo" role="img" aria-label="Citylit">
+    <span className="wordmark citylit-logo" role="img" aria-label="cıtylit">
       <span className="citylit-logo-symbol-wrap" aria-hidden="true">
         <Compass size={22} weight="fill" className="citylit-brand-icon" />
       </span>

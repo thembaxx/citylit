@@ -13,7 +13,7 @@ export default function SavePlace({ id, name }: { id: string; name: string }) {
         className="atlas-button"
         strength={0.14}
         aria-pressed={saved}
-        aria-label={`${saved ? "Unsave" : "Save"} ${name}`}
+        aria-label={saved ? `Saved discovery: ${name}` : `Save this discovery: ${name}`}
         onClick={() => {
           const ok = update((previous) => ({
             saved: saved ? previous.saved.filter((value) => value !== id) : [...previous.saved, id],

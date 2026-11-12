@@ -190,7 +190,7 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
 
             {place.images.length > 1 && (
               <div className="citylit-detail-comparison-section">
-                <h3 className="citylit-detail-section-title">Interactive Perspective Slider</h3>
+                <h2 className="citylit-detail-section-title">Interactive Perspective Slider</h2>
                 <BenchoComparisonSlider
                   beforeLabel="Perspective 1"
                   afterLabel="Perspective 2"

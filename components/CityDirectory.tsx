@@ -49,6 +49,9 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
       id="cities"
       aria-labelledby="city-directory-title"
     >
+      <h2 id="city-directory-title" className="sr-only">
+        Cities
+      </h2>
       <div className="atlas-section-heading">
         <div>
           <h2 id="city-directory-title">Cities</h2>

@@ -106,7 +106,9 @@ export default function CityGuide({ city }: { city: GuideCity }) {
                     <h3 id={`landmark-card-${city.slug}-${index}`}>
                       {name} <ArrowUpRight size={20} />
                     </h3>
-                    <p>{city.descriptions[index] || record?.about?.split(". ")[0]}</p>
+                    <p aria-hidden="true">
+                      {city.descriptions[index] || record?.about?.split(". ")[0]}
+                    </p>
                   </div>
                 </Link>
                 {image && <PhotoCredit photo={image} />}

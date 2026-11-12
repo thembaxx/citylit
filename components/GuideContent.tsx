@@ -26,7 +26,7 @@ export default function GuideContent({ route }: { route: DiscoveryRoute }) {
   const destinations = route.kind === "province" ? route.province.cities : cities;
   return (
     <main className="guide-content" id="main-content" tabIndex={-1}>
-      <Link href="/" aria-label="Citylit home">
+      <Link href="/" aria-label="cıtylit — Citylit home">
         <BrandWordmark />
       </Link>
       <p className="tiny-label">SOUTH AFRICA / CITY GUIDES</p>

@@ -320,12 +320,14 @@ class BenchoAudioEngine {
         const dur = 4.0;
         const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
         const d = buf.getChannelData(0);
-        let b0 = 0, b1 = 0, b2 = 0;
+        let b0 = 0,
+          b1 = 0,
+          b2 = 0;
         for (let i = 0; i < buf.length; i++) {
           const white = Math.random() * 2 - 1;
           b0 = 0.99886 * b0 + white * 0.0555179;
           b1 = 0.99332 * b1 + white * 0.0750759;
-          b2 = 0.96900 * b2 + white * 0.1538520;
+          b2 = 0.969 * b2 + white * 0.153852;
           d[i] = (b0 + b1 + b2) * 0.22;
         }
 
@@ -441,7 +443,11 @@ class BenchoAudioEngine {
 
   private stopAmbientNodes() {
     this.ambientSourceNodes.forEach((node) => {
-      if (typeof node !== "number" && "stop" in node && typeof (node as AudioScheduledSourceNode).stop === "function") {
+      if (
+        typeof node !== "number" &&
+        "stop" in node &&
+        typeof (node as AudioScheduledSourceNode).stop === "function"
+      ) {
         try {
           (node as AudioScheduledSourceNode).stop();
         } catch {

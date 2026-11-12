@@ -304,9 +304,15 @@ function ProvincePiece({
       </mesh>
 
       {/* Decorative Low-poly Mountains & Trees on province surface */}
-      <LowPolyMountain position={[theme.pinOffset[0] - 0.45, theme.elevation + 0.05, theme.pinOffset[2] - 0.35]} />
-      <LowPolyTree position={[theme.pinOffset[0] + 0.38, theme.elevation + 0.02, theme.pinOffset[2] - 0.25]} />
-      <LowPolyTree position={[theme.pinOffset[0] - 0.32, theme.elevation + 0.02, theme.pinOffset[2] + 0.32]} />
+      <LowPolyMountain
+        position={[theme.pinOffset[0] - 0.45, theme.elevation + 0.05, theme.pinOffset[2] - 0.35]}
+      />
+      <LowPolyTree
+        position={[theme.pinOffset[0] + 0.38, theme.elevation + 0.02, theme.pinOffset[2] - 0.25]}
+      />
+      <LowPolyTree
+        position={[theme.pinOffset[0] - 0.32, theme.elevation + 0.02, theme.pinOffset[2] + 0.32]}
+      />
 
       {/* 3D Signpost Pin */}
       <ProvinceSignPin

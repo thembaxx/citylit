@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { BookmarkSimple, Cube, House, MapPin } from "@phosphor-icons/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import BrandWordmark from "./BrandWordmark";
 import { useEffect, useState, type ReactNode } from "react";
 import ThemeToggle from "./ThemeToggle";
@@ -26,6 +26,7 @@ export default function GuideShell({
 }) {
   const { state } = useDiscovery();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
   const isHome = pathname === "/";
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -51,19 +52,21 @@ export default function GuideShell({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const isDayActive = pathname.startsWith("/explore");
+  const tabParam = searchParams.get("tab");
+  const hasTrip = !!searchParams.get("trip");
+  const isDayActive =
+    pathname === "/explore" ? tabParam === "day" || hasTrip : pathname.startsWith("/explore");
   const isCitiesActive = pathname === "/destinations" || pathname.startsWith("/provinces");
 
   return (
     <div className={`discovery-guide reference-guide${stage ? " reference-stage-guide" : ""}`}>
-      {backdrop && !stage && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
-      <GuideMotion essential={state.essential} />
       <a className="guide-skip" href="#guide-main">
         Skip to content
       </a>
+      <GuideMotion essential={state.essential} />
 
       <header className="atlas-nav citylit-app-header">
-        <Link className="atlas-wordmark" href="/" aria-label="Citylit home">
+        <Link className="atlas-wordmark" href="/" aria-label="cıtylit — Citylit home">
           <BrandWordmark />
         </Link>
         <nav aria-label="Main navigation">
@@ -89,6 +92,8 @@ export default function GuideShell({
       <main id="guide-main" tabIndex={-1}>
         {children}
       </main>
+
+      {backdrop && !stage && <GuideBackdrop selection={mapSelection} essential={state.essential} />}
 
       <MagnifyingDock
         items={[

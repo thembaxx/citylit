@@ -30,8 +30,8 @@
   --guide-accent: #ffc46b;
   --guide-accent-contrast: #21160a;
   --guide-surface: color-mix(in srgb, var(--bg) 82%, var(--ink) 5%);
-  --guide-heading: var(--font-display, "Playfair Display", Georgia, serif);
-  --font-heading: var(--font-display, "Playfair Display", Georgia, serif);
+  --guide-heading: var(--font-display, "Fraunces", Georgia, serif);
+  --font-heading: var(--font-display, "Fraunces", Georgia, serif);
   --accent: var(--guide-accent);
   --accent-ink: var(--guide-accent);
   height: 100vh;
@@ -40,6 +40,8 @@
   overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
+  scroll-padding-bottom: calc(66px + 24px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(66px + 24px + env(safe-area-inset-bottom, 0px));
   background: var(--bg);
   color: var(--ink);
   font:
@@ -328,8 +330,8 @@
   left: -100px;
   top: -100px;
   transform: translate(-50%, -50%);
-  min-width: 32px;
-  min-height: 32px;
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -346,7 +348,7 @@
   display: block;
 }
 .glow-marker-name {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
   position: absolute;
@@ -1746,12 +1748,12 @@
     sans-serif;
 }
 .guide-planner {
-  --font-heading: var(--font-display, "Playfair Display", Georgia, serif);
-  --font-mono: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  --font-heading: var(--font-display, "Fraunces", Georgia, serif);
+  --font-mono: var(--font-body, "Manrope", sans-serif);
   --accent: #ffc46b;
   --accent-ink: #ffc46b;
   --planner-button-ink: #21160a;
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body, "Manrope", sans-serif);
 }
 :root[data-theme="day"] .guide-planner {
   --accent: #963f06;
@@ -1771,7 +1773,7 @@
 .guide-planner h1,
 .guide-planner h2,
 .guide-planner h3 {
-  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
   text-transform: none;
   font-weight: 400;
   letter-spacing: -0.035em;

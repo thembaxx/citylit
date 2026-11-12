@@ -20,7 +20,14 @@ export default function KhweziMark({
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id="citylitSparkGrad" x1="45" y1="45" x2="135" y2="135" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="citylitSparkGrad"
+          x1="45"
+          y1="45"
+          x2="135"
+          y2="135"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stopColor="#a78bfa" />
           <stop offset="1" stopColor="#6366f1" />
         </linearGradient>

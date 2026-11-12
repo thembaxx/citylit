@@ -298,11 +298,11 @@ function Ring({
       <hemisphereLight
         args={[night ? "#9cb0d8" : "#fff8ee", night ? "#222030" : "#5a5042", night ? 0.42 : 0.58]}
       />
-      <ambientLight intensity={night ? 0.25 : 0.42} />
+      <ambientLight intensity={night ? 0.25 : 0.28} />
       <directionalLight
         position={[5, 8, 6]}
-        intensity={night ? 0.95 : 2.1}
-        color={night ? "#c8d8f8" : "#fff6e8"}
+        intensity={night ? 0.95 : 2.6}
+        color={night ? "#c8d8f8" : "#fff1df"}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
@@ -315,9 +315,18 @@ function Ring({
       />
       <directionalLight
         position={[-5, 4, -3]}
-        intensity={night ? 0.38 : 0.65}
-        color={night ? "#7894c8" : "#fcd8b8"}
+        intensity={night ? 0.38 : 0.55}
+        color={night ? "#7894c8" : "#e6b080"}
       />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]} receiveShadow>
+        <circleGeometry args={[2.8, 32]} />
+        <meshBasicMaterial
+          color={night ? "#08080d" : "#221c16"}
+          opacity={night ? 0.45 : 0.22}
+          transparent
+          depthWrite={false}
+        />
+      </mesh>
       <pointLight
         position={[1.8, 3.2, 3.4]}
         intensity={night ? 0.8 : 0.35}
@@ -659,8 +668,11 @@ export default function LandmarkRing({
           className="atlas-exploration-tabs"
           ariaLabel="Exploration mode"
           idPrefix="atlas-exploration"
-          value={explorationMode}
-          onChange={switchExplorationMode}
+          value={mobileInspectorOpen ? "" : explorationMode}
+          onChange={(mode) => {
+            if (mobileInspectorOpen) setMobileInspectorOpen(false);
+            switchExplorationMode(mode);
+          }}
           items={[
             { id: "discover", label: "Discover", icon: <Cube size={16} /> },
             { id: "walk", label: "Walk the city", icon: <ArrowRight size={16} /> },
@@ -742,7 +754,9 @@ export default function LandmarkRing({
           ref={inspectorToggleRef}
           type="button"
           className="atlas-inspector-toggle"
-          aria-label={mobileInspectorOpen ? "Close 3D inspector" : "Open 3D inspector"}
+          aria-label={
+            mobileInspectorOpen ? "Inspect: close 3D panel" : "Inspect: open 3D inspector"
+          }
           aria-controls="atlas-inspector-panel"
           aria-expanded={mobileInspectorOpen}
           onClick={() => setMobileInspectorOpen((open) => !open)}

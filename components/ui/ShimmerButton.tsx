@@ -52,10 +52,7 @@ export function ShimmerButton({
       {...(props as any)}
     >
       {!reduced && (
-        <span
-          className="pointer-events-none absolute inset-0 overflow-visible"
-          aria-hidden="true"
-        >
+        <span className="pointer-events-none absolute inset-0 overflow-visible" aria-hidden="true">
           <span
             className="absolute inset-[-100%] animate-[spin_3s_linear_infinite]"
             style={{
@@ -71,9 +68,7 @@ export function ShimmerButton({
           background,
         }}
       />
-      <span className="relative z-10 inline-flex items-center gap-2">
-        {children}
-      </span>
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
     </motion.button>
   );
 }

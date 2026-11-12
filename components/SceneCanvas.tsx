@@ -104,40 +104,45 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
         </p>
       )}
       <WebGLBoundary>
-        <Canvas
-          eventSource={ref as React.RefObject<HTMLDivElement>}
-          eventPrefix="client"
-          className="persistent-canvas"
+        <div
+          aria-hidden="true"
           style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 2 }}
-          frameloop="demand"
-          shadows={!lowPower}
-          onCreated={({ gl }) => {
-            gl.outputColorSpace = THREE.SRGBColorSpace;
-            gl.toneMapping = THREE.AgXToneMapping;
-            gl.toneMappingExposure = 0.98;
-            if (!lowPower) gl.shadowMap.type = THREE.PCFSoftShadowMap;
-          }}
-          // A fixed 1× mobile backing buffer blurs detailed glazing and thin
-          // geometry on Retina phones. Cap the mobile buffer at 1.5× while
-          // keeping shadows and MSAA off on low-power layouts; desktop at 2×.
-          // R3F clamps this range to the device's actual pixel ratio.
-          dpr={lowPower ? [1, 1.5] : [1, 2]}
-          gl={{
-            antialias: !lowPower,
-            alpha: true,
-            stencil: false,
-            powerPreference: lowPower ? "low-power" : "high-performance",
-          }}
-          fallback={
-            <div className="webgl-fallback">
-              Explore using the province links in the map legend.
-            </div>
-          }
         >
-          <RendererTelemetry mobile={lowPower} onContextState={setContextLost} />
-          <FrameClear />
-          <View.Port />
-        </Canvas>
+          <Canvas
+            eventSource={ref as React.RefObject<HTMLDivElement>}
+            eventPrefix="client"
+            className="persistent-canvas"
+            style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+            frameloop="demand"
+            shadows={!lowPower}
+            onCreated={({ gl }) => {
+              gl.outputColorSpace = THREE.SRGBColorSpace;
+              gl.toneMapping = THREE.AgXToneMapping;
+              gl.toneMappingExposure = 0.98;
+              if (!lowPower) gl.shadowMap.type = THREE.PCFSoftShadowMap;
+            }}
+            // A fixed 1× mobile backing buffer blurs detailed glazing and thin
+            // geometry on Retina phones. Cap the mobile buffer at 1.5× while
+            // keeping shadows and MSAA off on low-power layouts; desktop at 2×.
+            // R3F clamps this range to the device's actual pixel ratio.
+            dpr={lowPower ? [1, 1.5] : [1, 2]}
+            gl={{
+              antialias: !lowPower,
+              alpha: true,
+              stencil: false,
+              powerPreference: lowPower ? "low-power" : "high-performance",
+            }}
+            fallback={
+              <div className="webgl-fallback">
+                Explore using the province links in the map legend.
+              </div>
+            }
+          >
+            <RendererTelemetry mobile={lowPower} onContextState={setContextLost} />
+            <FrameClear />
+            <View.Port />
+          </Canvas>
+        </div>
       </WebGLBoundary>
     </div>
   );

@@ -16,6 +16,7 @@ import { cityPhoto, landmarkPath } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import { useKhwezi } from "./KhweziProvider";
 import { useDiscovery } from "./useDiscovery";
+import useTheme from "./useTheme";
 import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
 import WeatherWidget from "./WeatherWidget";
@@ -38,6 +39,7 @@ function cityMoodScore(city: (typeof cities)[number], pattern: RegExp) {
 }
 
 export default function DiscoveryHome() {
+  const { night } = useTheme();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<DiscoveryFilter>("All");
   const [mood, setMood] = useState<AtlasMood>("explore");
@@ -198,12 +200,16 @@ export default function DiscoveryHome() {
             className="reference-home-hero living-atlas-hero"
             aria-labelledby="reference-home-title"
           >
-            <p className="citylit-hero-eyebrow">The Nocturnal Edition · South Africa</p>
+            <p className="citylit-hero-eyebrow">
+              {night ? "The Nocturnal Edition · South Africa" : "A Living Atlas · South Africa"}
+            </p>
             <h1 id="reference-home-title">
               Follow your <em>curiosity.</em>
             </h1>
             <p className="reference-home-subtitle">
-              Discover. Learn. Experience South Africa&apos;s iconic places and night-lit landmarks.
+              {night
+                ? "Discover. Learn. Experience South Africa's iconic places and night-lit landmarks."
+                : "Discover. Learn. Experience South Africa's iconic places and cultural landmarks."}
             </p>
 
             <WeatherWidget
@@ -241,7 +247,11 @@ export default function DiscoveryHome() {
 
             {/* Category Filter Pills (hidden in search mode to prevent duplicate stacked pill rows) */}
             {!resultsVisible && (
-              <div className="citylit-filter-pills-row" role="group" aria-label="Explore categories">
+              <div
+                className="citylit-filter-pills-row"
+                role="group"
+                aria-label="Explore categories"
+              >
                 {(["All", "Landmarks", "Cities", "Nature", "Architecture"] as const).map((tab) => (
                   <button
                     key={tab}
@@ -296,7 +306,11 @@ export default function DiscoveryHome() {
                           <h2>{featuredLandmarkSource.name}</h2>
                           <p>{featuredCity.name}, South Africa</p>
                         </div>
-                        <div className="citylit-featured-dots" role="tablist" aria-label="Featured landmarks">
+                        <div
+                          className="citylit-featured-dots"
+                          role="tablist"
+                          aria-label="Featured landmarks"
+                        >
                           {featuredList.map((item, idx) => (
                             <button
                               key={item.landmark.name}
@@ -367,7 +381,6 @@ export default function DiscoveryHome() {
                         <Link
                           href={`/${spotlightCity.slug}/landmarks`}
                           className="citylit-3d-chip is-active"
-                          role="listitem"
                         >
                           {spotlightLandmarkName}
                         </Link>
@@ -376,7 +389,6 @@ export default function DiscoveryHome() {
                             key={name}
                             href={landmarkPath(spotlightCity, name)}
                             className="citylit-3d-chip"
-                            role="listitem"
                           >
                             {name}
                           </Link>

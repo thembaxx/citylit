@@ -38,16 +38,20 @@ export function CityCard({ city, index }: { city: GuideCity; index: number }) {
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 30vw"
             />
           )}
-          <span className="atlas-card-number">{String(index + 1).padStart(2, "0")} / 12</span>
-          <span className="atlas-card-arrow">
+          <span className="atlas-card-number" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")} / 12
+          </span>
+          <span className="atlas-card-arrow" aria-hidden="true">
             <ArrowUpRight size={22} />
           </span>
         </div>
         <div className="atlas-card-copy">
-          <p className="atlas-eyebrow">{city.province}</p>
+          <p className="atlas-eyebrow" aria-hidden="true">
+            {city.province}
+          </p>
           <h3 id={`city-card-${city.slug}`}>{city.name}</h3>
-          <p>{city.intro}</p>
-          <span className="atlas-card-meta">
+          <p aria-hidden="true">{city.intro}</p>
+          <span className="atlas-card-meta" aria-hidden="true">
             {places.filter((place) => place.city === city.slug).length} places to discover
           </span>
         </div>
@@ -73,16 +77,18 @@ export function PlaceCard({ place }: { place: Place }) {
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 30vw"
             />
-            <span className="atlas-card-arrow">
+            <span className="atlas-card-arrow" aria-hidden="true">
               <ArrowUpRight size={20} />
             </span>
           </div>
         )}
         <div className="atlas-card-copy">
-          <p className="atlas-eyebrow">{place.category}</p>
+          <p className="atlas-eyebrow" aria-hidden="true">
+            {place.category}
+          </p>
           <h3 id={`place-card-${place.id}`}>{place.name}</h3>
-          <p>{place.description}</p>
-          <span className="atlas-card-meta">
+          <p aria-hidden="true">{place.description}</p>
+          <span className="atlas-card-meta" aria-hidden="true">
             <MapPin size={14} aria-hidden="true" /> {place.district || place.address}
           </span>
         </div>

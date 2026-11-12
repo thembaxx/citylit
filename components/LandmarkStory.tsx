@@ -28,7 +28,9 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
   const record = landmarkSources.find((item) => item.name === name);
   const place = landmarkVenue(city.slug, name);
   const { state, update } = useDiscovery();
-  const [activeTab, setActiveTab] = useState<"overview" | "history" | "facts" | "sources">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "history" | "facts" | "sources">(
+    "overview",
+  );
   const [message, setMessage] = useState("");
 
   const heroImage = record?.images[0];

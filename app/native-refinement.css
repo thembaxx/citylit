@@ -255,7 +255,7 @@ button,
   min-height: 46px;
   margin-top: 18px;
   border-radius: 15px;
-  background: var(--accent);
+  background: var(--citylit-amber, #e59934);
   color: #17130e;
   font:
     700 13px/1.3 Manrope,

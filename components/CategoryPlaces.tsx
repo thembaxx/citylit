@@ -243,10 +243,12 @@ export default function CategoryPlaces(props: Props) {
                 <button
                   className="save-icon"
                   onClick={() => props.onSave(place.id)}
-                  aria-label={`Save ${place.name}`}
+                  aria-label={
+                    saved ? `Saved discovery: ${place.name}` : `Save discovery: ${place.name}`
+                  }
                   aria-pressed={saved}
                 >
-                  <Heart size={17} fill={saved ? "currentColor" : "none"} />
+                  <Heart size={17} weight={saved ? "fill" : "regular"} />
                 </button>
                 <ArrowUpRight size={18} aria-hidden="true" />
               </article>

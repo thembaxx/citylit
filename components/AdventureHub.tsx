@@ -277,7 +277,7 @@ export default function AdventureHub() {
         <MagneticButton
           className="adventure-card-add"
           aria-label={
-            state.itinerary.includes(p.id) ? `${p.name} is in your day` : `Add ${p.name} to day`
+            state.itinerary.includes(p.id) ? `In your day: ${p.name}` : `Add to day: ${p.name}`
           }
           aria-pressed={state.itinerary.includes(p.id)}
           onClick={() => add(p.id)}
@@ -286,7 +286,10 @@ export default function AdventureHub() {
           {state.itinerary.includes(p.id) ? "In your day" : "Add to day"}
         </MagneticButton>
         <button
-          aria-label={`Save ${p.name}`}
+          className={`adventure-card-save ${state.saved.includes(p.id) ? "is-saved" : ""}`}
+          aria-label={
+            state.saved.includes(p.id) ? `Saved discovery: ${p.name}` : `Save discovery: ${p.name}`
+          }
           aria-pressed={state.saved.includes(p.id)}
           onClick={() =>
             update({
@@ -296,7 +299,7 @@ export default function AdventureHub() {
             })
           }
         >
-          <Heart size={16} weight={state.saved.includes(p.id) ? "fill" : "regular"} />
+          <Heart size={18} weight={state.saved.includes(p.id) ? "fill" : "regular"} />
         </button>
       </div>
     </TiltCard>

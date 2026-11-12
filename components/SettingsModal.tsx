@@ -37,6 +37,7 @@ export default function SettingsModal({
   const { state: discovery, update: updateDiscovery } = useDiscovery();
   const reducedMotion = useReducedMotion();
   const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   const [activeTab, setActiveTab] = useState<SettingsTab>(initialTab);
   const [audioFeedback, setAudioFeedback] = useState(() => benchoAudio.isEnabled());
@@ -60,15 +61,88 @@ export default function SettingsModal({
     if (isOpen) setActiveTab(initialTab);
   }, [isOpen, initialTab]);
 
+  // Accessible focus trap, initial focus, focus restore, and background inert
   useEffect(() => {
     if (!isOpen) return;
+
+    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+
+    // Mark background siblings inert
+    const guideShell = dialogRef.current?.closest(".discovery-guide");
+    const backgroundSiblings: HTMLElement[] = [];
+    if (guideShell) {
+      Array.from(guideShell.children).forEach((child) => {
+        if (child !== dialogRef.current?.parentElement && child instanceof HTMLElement) {
+          child.setAttribute("inert", "");
+          backgroundSiblings.push(child);
+        }
+      });
+    }
+
+    // Set initial focus inside dialog
+    const focusTimer = setTimeout(() => {
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length > 0) {
+        focusable[0].focus();
+      } else {
+        dialog.focus();
+      }
+    }, 30);
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        e.preventDefault();
         onClose();
+        return;
+      }
+
+      if (e.key === "Tab") {
+        const dialog = dialogRef.current;
+        if (!dialog) return;
+        const focusable = Array.from(
+          dialog.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0);
+
+        if (focusable.length === 0) {
+          e.preventDefault();
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first || !dialog.contains(document.activeElement)) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last || !dialog.contains(document.activeElement)) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      clearTimeout(focusTimer);
+      window.removeEventListener("keydown", handleKeyDown);
+      backgroundSiblings.forEach((el) => el.removeAttribute("inert"));
+      if (
+        previouslyFocusedRef.current &&
+        typeof previouslyFocusedRef.current.focus === "function"
+      ) {
+        previouslyFocusedRef.current.focus();
+      }
+    };
   }, [isOpen, onClose]);
 
   // Trap body scroll when modal is open

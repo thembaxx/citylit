@@ -358,23 +358,82 @@ function Terrain({
     const stamp = `${camera.position.x.toFixed(2)} ${camera.position.y.toFixed(2)} ${camera.position.z.toFixed(2)} ${camera.quaternion.x.toFixed(3)} ${size.width} ${size.height}`;
     if (stamp !== cameraStamp.current) {
       cameraStamp.current = stamp;
+      const placedBoxes: { x1: number; y1: number; x2: number; y2: number }[] = [];
+      const clampPad = 28;
+
       cities.forEach((city, index) => {
         const label = labels.current[index];
         if (!label) return;
         vector.set(x(city.coords[0]), 0.15, z(city.coords[1])).project(camera);
-        label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
-        label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
-        label.style.visibility =
-          Math.abs(vector.x) > 1 || Math.abs(vector.y) > 1 || vector.z > 1 ? "hidden" : "visible";
+        const px = (vector.x * 0.5 + 0.5) * size.width;
+        const py = (-vector.y * 0.5 + 0.5) * size.height;
+        const isOffscreen =
+          Math.abs(vector.x) > 0.96 ||
+          Math.abs(vector.y) > 0.96 ||
+          vector.z > 1 ||
+          px < clampPad ||
+          px > size.width - clampPad ||
+          py < clampPad ||
+          py > size.height - clampPad;
+        const clampedX = Math.max(clampPad, Math.min(size.width - clampPad, px));
+        const clampedY = Math.max(clampPad, Math.min(size.height - clampPad, py));
+        label.style.left = `${clampedX}px`;
+        label.style.top = `${clampedY}px`;
+        label.style.visibility = isOffscreen ? "hidden" : "visible";
+        if (isOffscreen) {
+          label.tabIndex = -1;
+          label.setAttribute("aria-hidden", "true");
+        } else {
+          label.tabIndex = interactive ? 0 : -1;
+          label.removeAttribute("aria-hidden");
+          placedBoxes.push({
+            x1: clampedX - 22,
+            y1: clampedY - 22,
+            x2: clampedX + 22,
+            y2: clampedY + 22,
+          });
+        }
       });
+
       pins.forEach((pin, index) => {
         const label = pinLabels.current[index];
         if (!label) return;
         vector.set(pin.position[0], pin.position[1], pin.position[2]).project(camera);
-        label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
-        label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
-        label.style.visibility =
-          Math.abs(vector.x) > 1 || Math.abs(vector.y) > 1 || vector.z > 1 ? "hidden" : "visible";
+        const px = (vector.x * 0.5 + 0.5) * size.width;
+        const py = (-vector.y * 0.5 + 0.5) * size.height;
+        const isOffscreen =
+          Math.abs(vector.x) > 0.96 ||
+          Math.abs(vector.y) > 0.96 ||
+          vector.z > 1 ||
+          px < clampPad ||
+          px > size.width - clampPad ||
+          py < clampPad ||
+          py > size.height - clampPad;
+        const clampedX = Math.max(clampPad, Math.min(size.width - clampPad, px));
+        const clampedY = Math.max(clampPad, Math.min(size.height - clampPad, py));
+
+        const collides = placedBoxes.some(
+          (box) =>
+            clampedX >= box.x1 && clampedX <= box.x2 && clampedY >= box.y1 && clampedY <= box.y2,
+        );
+
+        const shouldHide = isOffscreen || collides;
+        label.style.left = `${clampedX}px`;
+        label.style.top = `${clampedY}px`;
+        label.style.visibility = shouldHide ? "hidden" : "visible";
+        if (shouldHide) {
+          label.tabIndex = -1;
+          label.setAttribute("aria-hidden", "true");
+        } else {
+          label.tabIndex = interactive ? 0 : -1;
+          label.removeAttribute("aria-hidden");
+          placedBoxes.push({
+            x1: clampedX - 18,
+            y1: clampedY - 18,
+            x2: clampedX + 18,
+            y2: clampedY + 18,
+          });
+        }
       });
     }
     if (animate && !reducedMotion && interactive && opacity > 0.1 && !document.hidden) {
@@ -597,9 +656,14 @@ export default function GlowMap({
     <div
       className="glow-map"
       ref={setHost}
+      role="region"
       aria-label="Interactive map of South Africa, with cities, places and landmarks"
       data-interactive={interactive}
     >
+      <p className="sr-only">
+        Interactive South Africa map. Use Tab to navigate through visible cities and landmarks, or
+        select a city to zoom.
+      </p>
       <View className="glow-map-view" index={2} visible={opacity > 0.01}>
         {host && (
           <Terrain
@@ -623,7 +687,11 @@ export default function GlowMap({
             ref={(element) => {
               labels.current[index] = element;
             }}
-            aria-label={selected === index ? `Open ${city.name} in 3D` : `Choose ${city.name}`}
+            aria-label={
+              selected === index
+                ? `${city.short}: Open ${city.name} in 3D`
+                : `${city.short}: Choose ${city.name}`
+            }
             aria-pressed={selected === index}
             tabIndex={interactive ? 0 : -1}
             disabled={!interactive}
@@ -662,7 +730,7 @@ export default function GlowMap({
             href={pin.href}
             data-transition-label={pin.label}
             className={`glow-place-marker ${pin.kind === "landmark" ? "is-landmark" : ""}`}
-            aria-label={`Open ${pin.label} in 3D`}
+            aria-label={`${pin.label}: Open in 3D`}
             tabIndex={interactive ? 0 : -1}
             aria-disabled={!interactive}
             onPointerDown={(event) => event.stopPropagation()}

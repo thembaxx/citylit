@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import "./discovery-guide.css";
 import "./native-refinement.css";
@@ -19,13 +19,13 @@ import JsonLd from "../components/JsonLd";
 import JourneyTransition from "../components/JourneyTransition";
 import { SITE_URL, websiteSchema, isPreview } from "../lib/seo";
 
-const display = Playfair_Display({
+const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-const body = Plus_Jakarta_Sans({
+const body = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",

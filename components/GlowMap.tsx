@@ -315,6 +315,20 @@ function Terrain({
   }, []);
   const landMaterial = useRef<THREE.ShaderMaterial>(null);
   const beamMaterial = useRef<THREE.ShaderMaterial>(null);
+  const cameraStamp = useRef("");
+  useEffect(() => {
+    if (!animate || reducedMotion || !interactive || opacity <= 0.1) return;
+    let frame = 0;
+    let last = 0;
+    const loop = (now: number) => {
+      frame = requestAnimationFrame(loop);
+      if (document.hidden || now - last < 32) return;
+      last = now;
+      invalidate();
+    };
+    frame = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(frame);
+  }, [animate, reducedMotion, interactive, opacity, invalidate]);
   useFrame(({ clock }, delta) => {
     nightMix.current =
       animate && !reducedMotion
@@ -341,32 +355,35 @@ function Terrain({
       beamMaterial.current.uniforms.uTime.value = animate && !reducedMotion ? clock.elapsedTime : 0;
       beamMaterial.current.uniforms.uOpacity.value = 0.22 * opacity;
     }
-    cities.forEach((city, index) => {
-      const label = labels.current[index];
-      if (!label) return;
-      vector.set(x(city.coords[0]), 0.15, z(city.coords[1])).project(camera);
-      label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
-      label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
-      label.style.visibility =
-        Math.abs(vector.x) > 1 || Math.abs(vector.y) > 1 || vector.z > 1 ? "hidden" : "visible";
-    });
-    pins.forEach((pin, index) => {
-      const label = pinLabels.current[index];
-      if (!label) return;
-      vector.set(pin.position[0], pin.position[1], pin.position[2]).project(camera);
-      label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
-      label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
-      label.style.visibility =
-        Math.abs(vector.x) > 1 || Math.abs(vector.y) > 1 || vector.z > 1 ? "hidden" : "visible";
-    });
-    if (animate && !reducedMotion && interactive && opacity > 0.1) {
+    const stamp = `${camera.position.x.toFixed(2)} ${camera.position.y.toFixed(2)} ${camera.position.z.toFixed(2)} ${camera.quaternion.x.toFixed(3)} ${size.width} ${size.height}`;
+    if (stamp !== cameraStamp.current) {
+      cameraStamp.current = stamp;
+      cities.forEach((city, index) => {
+        const label = labels.current[index];
+        if (!label) return;
+        vector.set(x(city.coords[0]), 0.15, z(city.coords[1])).project(camera);
+        label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
+        label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
+        label.style.visibility =
+          Math.abs(vector.x) > 1 || Math.abs(vector.y) > 1 || vector.z > 1 ? "hidden" : "visible";
+      });
+      pins.forEach((pin, index) => {
+        const label = pinLabels.current[index];
+        if (!label) return;
+        vector.set(pin.position[0], pin.position[1], pin.position[2]).project(camera);
+        label.style.left = `${(vector.x * 0.5 + 0.5) * size.width}px`;
+        label.style.top = `${(-vector.y * 0.5 + 0.5) * size.height}px`;
+        label.style.visibility =
+          Math.abs(vector.x) > 1 || Math.abs(vector.y) > 1 || vector.z > 1 ? "hidden" : "visible";
+      });
+    }
+    if (animate && !reducedMotion && interactive && opacity > 0.1 && !document.hidden) {
       pulses.current.forEach((pulse, index) => {
         if (!pulse) return;
         const phase = (clock.elapsedTime * 0.45 + index * 0.17) % 1;
         pulse.scale.setScalar(1 + phase * 2);
         (pulse.material as THREE.MeshBasicMaterial).opacity = (1 - phase) * 0.45 * opacity;
       });
-      invalidate();
     }
   });
   useEffect(() => {

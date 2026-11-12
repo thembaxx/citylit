@@ -125,6 +125,7 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
           gl={{
             antialias: !lowPower,
             alpha: true,
+            stencil: false,
             powerPreference: lowPower ? "low-power" : "high-performance",
           }}
           fallback={

@@ -472,8 +472,8 @@ function Ring({
         intensity={night ? 0.62 : 1.68}
         color={night ? "#b6c8eb" : "#fff5e2"}
         castShadow
-        shadow-mapSize-width={size.width < 760 ? 1024 : 2048}
-        shadow-mapSize-height={size.width < 760 ? 1024 : 2048}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
         shadow-camera-left={-9}
         shadow-camera-right={9}
         shadow-camera-top={9}

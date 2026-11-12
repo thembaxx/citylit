@@ -16,9 +16,10 @@ import { landmarkSources, places } from "../lib/data";
 import { landmarkVenue, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import Gallery from "./Gallery";
-import TiltCard from "./ui/TiltCard";
 import SlideToConfirm from "./ui/SlideToConfirm";
 import DynamicIslandToast from "./ui/DynamicIslandToast";
+import LiquidTabs from "./ui/LiquidTabs";
+import ReaderCard from "./ui/ReaderCard";
 import { useDiscovery } from "./useDiscovery";
 import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { benchoAudio } from "../lib/bencho-audio";
@@ -160,23 +161,22 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
         </div>
 
         {/* Tabs Bar (Overview, History, Facts, Sources) */}
-        <div className="citylit-detail-tabs-bar" role="tablist" aria-label="Landmark sections">
-          {(["overview", "history", "facts", "sources"] as const).map((tab) => (
-            <button
-              key={tab}
-              type="button"
-              role="tab"
-              aria-selected={activeTab === tab}
-              className={`citylit-detail-tab ${activeTab === tab ? "is-active" : ""}`}
-              onClick={() => {
-                benchoAudio.playTap(780);
-                setActiveTab(tab);
-              }}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              {activeTab === tab && <span className="citylit-detail-tab-line" />}
-            </button>
-          ))}
+        <div className="citylit-detail-tabs-wrap">
+          <LiquidTabs
+            variant="folder"
+            ariaLabel="Landmark sections"
+            value={activeTab}
+            onChange={(id) => {
+              benchoAudio.playTap(780);
+              setActiveTab(id as "overview" | "history" | "facts" | "sources");
+            }}
+            items={[
+              { id: "overview", label: "Overview" },
+              { id: "history", label: "History" },
+              { id: "facts", label: "Facts" },
+              { id: "sources", label: "Sources" },
+            ]}
+          />
         </div>
 
         {/* Tab Panels */}
@@ -193,17 +193,25 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           {activeTab === "history" && (
             <div className="citylit-tab-panel">
               {record?.about ? (
-                <TiltCard className="atlas-story-about" maxTilt={1.6}>
-                  <h2>
-                    The story <em>behind it.</em>
-                  </h2>
-                  <p>{record.about}</p>
+                <div className="citylit-history-reader-stack">
+                  <ReaderCard
+                    title={name}
+                    subtitle={`The story behind ${name} in ${city.name}, ${city.province}`}
+                    category="Landmark Monograph"
+                    excerpt={record.about}
+                    fullText={record.about}
+                  />
                   {record.aboutSource && (
-                    <a href={record.aboutSource} target="_blank" rel="noreferrer">
+                    <a
+                      className="citylit-source-attribution-link"
+                      href={record.aboutSource}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       Read background on Wikipedia <ArrowUpRight size={14} />
                     </a>
                   )}
-                </TiltCard>
+                </div>
               ) : (
                 <p>Detailed historical monographs are being compiled for this landmark.</p>
               )}

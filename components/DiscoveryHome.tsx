@@ -22,6 +22,15 @@ import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
 import WeatherWidget from "./WeatherWidget";
 import DioramaWeatherController from "./DioramaWeatherController";
 import { benchoAudio } from "../lib/bencho-audio";
+import { handleRovingKeyDown, recoverFocus } from "../lib/ui-primitives";
+
+const HOME_FILTER_TABS: readonly DiscoveryFilter[] = [
+  "All",
+  "Landmarks",
+  "Cities",
+  "Nature",
+  "Architecture",
+];
 
 const moodPatterns: Partial<Record<AtlasMood, RegExp>> = {
   views: /mountain|point|beach|ocean|coast|waterfront|view|peak|lookout|cliff|bay|lighthouse/i,
@@ -48,6 +57,8 @@ export default function DiscoveryHome() {
   const { feedback } = useKhwezi();
   const { state } = useDiscovery();
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const filterPillRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const featuredSwipeStartRef = useRef<{ x: number; y: number } | null>(null);
   const normalizedQuery = query.trim().toLowerCase();
 
   useEffect(() => {
@@ -213,6 +224,7 @@ export default function DiscoveryHome() {
       }}
     >
       <div className="reference-home living-atlas-home">
+        <div className="pin-ambient-bloom" aria-hidden="true" />
         <div className="reference-home-main living-atlas-main">
           {/* Hero Section */}
           <section
@@ -263,6 +275,7 @@ export default function DiscoveryHome() {
                   aria-label="Clear search"
                   onClick={() => {
                     setQuery("");
+                    recoverFocus(searchInputRef.current);
                   }}
                 >
                   <X size={17} />
@@ -277,20 +290,40 @@ export default function DiscoveryHome() {
                 role="group"
                 aria-label="Explore categories"
               >
-                {(["All", "Landmarks", "Cities", "Nature", "Architecture"] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    type="button"
-                    className={`citylit-filter-pill ${filter === tab ? "is-active" : ""}`}
-                    aria-pressed={filter === tab}
-                    onClick={() => {
-                      benchoAudio.playClick(540);
-                      setFilter(tab);
-                    }}
-                  >
-                    {tab}
-                  </button>
-                ))}
+                {HOME_FILTER_TABS.map((tab, idx) => {
+                  const isActive = filter === tab;
+                  return (
+                    <button
+                      key={tab}
+                      ref={(el) => {
+                        filterPillRefs.current[idx] = el;
+                      }}
+                      type="button"
+                      className={`citylit-filter-pill ${isActive ? "is-active" : ""}`}
+                      aria-pressed={isActive}
+                      data-state={isActive ? "active" : "inactive"}
+                      tabIndex={isActive ? 0 : -1}
+                      onKeyDown={(e) =>
+                        handleRovingKeyDown(
+                          e,
+                          idx,
+                          HOME_FILTER_TABS.length,
+                          filterPillRefs,
+                          (nextIdx) => {
+                            benchoAudio.playClick(540);
+                            setFilter(HOME_FILTER_TABS[nextIdx]);
+                          },
+                        )
+                      }
+                      onClick={() => {
+                        benchoAudio.playClick(540);
+                        setFilter(tab);
+                      }}
+                    >
+                      {tab}
+                    </button>
+                  );
+                })}
               </div>
             )}
           </section>
@@ -309,6 +342,7 @@ export default function DiscoveryHome() {
               onClear={() => {
                 setQuery("");
                 setFilter("All");
+                recoverFocus(searchInputRef.current);
               }}
             />
           ) : (
@@ -317,7 +351,31 @@ export default function DiscoveryHome() {
               {(filter === "All" || filter === "Landmarks" || filter === "Nature") &&
                 featuredPhoto && (
                   <section className="citylit-featured-section" aria-label="Featured place">
-                    <div className="citylit-featured-card">
+                    <div
+                      className="citylit-featured-card"
+                      onPointerDown={(e) => {
+                        if (e.pointerType === "mouse") return;
+                        featuredSwipeStartRef.current = { x: e.clientX, y: e.clientY };
+                      }}
+                      onPointerUp={(e) => {
+                        const start = featuredSwipeStartRef.current;
+                        featuredSwipeStartRef.current = null;
+                        if (!start) return;
+                        const dx = e.clientX - start.x;
+                        const dy = e.clientY - start.y;
+                        if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                          benchoAudio.playTap(760);
+                          setFeaturedIndex((prev) =>
+                            dx < 0
+                              ? (prev + 1) % featuredList.length
+                              : (prev - 1 + featuredList.length) % featuredList.length,
+                          );
+                        }
+                      }}
+                      onPointerCancel={() => {
+                        featuredSwipeStartRef.current = null;
+                      }}
+                    >
                       <div className="citylit-featured-media">
                         <Image
                           src={featuredPhoto.src}

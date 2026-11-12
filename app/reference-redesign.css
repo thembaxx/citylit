@@ -11541,34 +11541,42 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
   padding: 2px 4px;
 }
 
+.pin-reader-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition:
+    transform 140ms var(--pin-spring),
+    background-color 140ms ease;
+}
+
+.pin-reader-close-btn:active {
+  transform: scale(0.92);
+}
+
 .pin-font-btn {
-  padding: 4px 10px;
-  min-height: 28px;
+  padding: 6px 12px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 9999px;
   border: none;
   background: transparent;
   color: #94a3b8;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   cursor: pointer;
 }
 
 .pin-font-btn.is-active {
   background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
-}
-
-.pin-reader-close-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: none;
-  color: #cbd5e1;
-  cursor: pointer;
 }
 
 .pin-reader-scrollable {
@@ -11621,4 +11629,282 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
 
 .pin-reader-prose.text-xl {
   font-size: 19px;
+}
+
+/* ==========================================================================
+   DESIGN.md Completions: Ambient Bloom, Folder Inverted Fillets, Day Theme,
+   Sheet Pull Handle, Touch Ergonomics
+   ========================================================================== */
+
+.reference-home.living-atlas-home {
+  position: relative;
+  overflow-x: clip;
+}
+
+.pin-ambient-bloom {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  width: min(760px, 120vw);
+  height: 360px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(124, 58, 237, 0.2), transparent 62%),
+    radial-gradient(circle at 72% 48%, rgba(255, 185, 95, 0.14), transparent 58%);
+  filter: blur(48px);
+  animation: pin-bloom-drift 16s ease-in-out infinite alternate;
+}
+
+@keyframes pin-bloom-drift {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(-46%) translateY(14px) scale(1.06);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pin-ambient-bloom {
+    animation: none;
+  }
+}
+
+.citylit-featured-card {
+  touch-action: pan-y;
+}
+
+/* Mobile Pull-to-Dismiss Sheet Handle */
+.citylit-sheet-handle-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 2px 0 8px;
+  margin-top: -10px;
+  touch-action: none;
+  cursor: grab;
+}
+
+.citylit-sheet-handle-wrap:active {
+  cursor: grabbing;
+}
+
+.citylit-sheet-handle {
+  width: 38px;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+:root[data-theme="day"] .citylit-sheet-handle {
+  background: rgba(23, 25, 32, 0.2);
+}
+
+@media (min-width: 640px) {
+  .citylit-sheet-handle-wrap {
+    display: none;
+  }
+}
+
+/* Pin UI Liquid Tabs — Folder Variant with Inverted-Fillet Concave Curves */
+.pin-liquid-tabs-root.is-folder {
+  border-radius: 18px 18px 0 0;
+  padding: 6px 8px 0;
+  gap: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pin-liquid-tabs-root.is-folder::-webkit-scrollbar {
+  display: none;
+}
+
+.pin-liquid-tabs-root.is-folder .pin-liquid-tab {
+  border-radius: 14px 14px 0 0;
+  min-height: 44px;
+  padding: 10px 18px;
+}
+
+.pin-liquid-tabs-root.is-folder .pin-tab-indicator {
+  border-radius: 14px 14px 0 0;
+  background: color-mix(in srgb, var(--citylit-surface-raised, #1f2028) 96%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.16),
+    0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pin-liquid-tabs-root.is-folder .pin-tab-indicator::before,
+.pin-liquid-tabs-root.is-folder .pin-tab-indicator::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.pin-liquid-tabs-root.is-folder .pin-tab-indicator::before {
+  left: -12px;
+  background: radial-gradient(
+    circle at 0 0,
+    transparent 12px,
+    color-mix(in srgb, var(--citylit-surface-raised, #1f2028) 96%, transparent) 12.5px
+  );
+}
+
+.pin-liquid-tabs-root.is-folder .pin-tab-indicator::after {
+  right: -12px;
+  background: radial-gradient(
+    circle at 100% 0,
+    transparent 12px,
+    color-mix(in srgb, var(--citylit-surface-raised, #1f2028) 96%, transparent) 12.5px
+  );
+}
+
+:root[data-theme="day"] .pin-liquid-tabs-root.is-folder {
+  background: #ebe5db;
+  border-bottom-color: rgba(23, 25, 32, 0.1);
+}
+
+:root[data-theme="day"] .pin-liquid-tabs-root.is-folder .pin-liquid-tab.is-active {
+  color: #171920;
+}
+
+:root[data-theme="day"] .pin-liquid-tabs-root.is-folder .pin-tab-indicator {
+  background: #fbf9f5;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+    0 -2px 8px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="day"] .pin-liquid-tabs-root.is-folder .pin-tab-indicator::before {
+  background: radial-gradient(circle at 0 0, transparent 12px, #fbf9f5 12.5px);
+}
+
+:root[data-theme="day"] .pin-liquid-tabs-root.is-folder .pin-tab-indicator::after {
+  background: radial-gradient(circle at 100% 0, transparent 12px, #fbf9f5 12.5px);
+}
+
+/* LandmarkStory integration helpers */
+.citylit-detail-tabs-wrap {
+  margin: 16px 0 12px;
+}
+
+.citylit-history-reader-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.citylit-source-attribution-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  width: fit-content;
+  color: var(--citylit-violet-soft, #d2bbff);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Day Mode Support for ThermalDial & ReaderCard */
+:root[data-theme="day"] .pin-thermal-dial-root {
+  background: #fbf9f5;
+  border-color: rgba(23, 25, 32, 0.1);
+  box-shadow: var(--pin-chamfer), var(--pin-shadow-card);
+}
+
+:root[data-theme="day"] .pin-dial-tick {
+  background-color: rgba(23, 25, 32, 0.14);
+}
+
+:root[data-theme="day"] .pin-dial-label,
+:root[data-theme="day"] .pin-dial-unit {
+  color: #4f5462;
+}
+
+:root[data-theme="day"] .pin-dial-value {
+  color: #171920;
+}
+
+:root[data-theme="day"] .pin-reader-card-root {
+  background: #fbf9f5;
+  border-color: rgba(23, 25, 32, 0.1);
+}
+
+:root[data-theme="day"] .pin-reader-badge {
+  background: rgba(23, 25, 32, 0.06);
+  border-color: rgba(23, 25, 32, 0.1);
+  color: #9a5a10;
+}
+
+:root[data-theme="day"] .pin-reader-title {
+  color: #171920;
+}
+
+:root[data-theme="day"] .pin-reader-subtitle,
+:root[data-theme="day"] .pin-reader-author {
+  color: #4f5462;
+}
+
+:root[data-theme="day"] .pin-reader-excerpt {
+  color: #2f3340;
+}
+
+:root[data-theme="day"] .pin-reader-footer {
+  border-top-color: rgba(23, 25, 32, 0.08);
+}
+
+:root[data-theme="day"] .pin-reader-modal {
+  background: #fbf9f5;
+  border-color: rgba(23, 25, 32, 0.12);
+}
+
+:root[data-theme="day"] .pin-reader-toolbar {
+  background: rgba(251, 249, 245, 0.95);
+  border-bottom-color: rgba(23, 25, 32, 0.08);
+}
+
+:root[data-theme="day"] .pin-reader-modal-badge,
+:root[data-theme="day"] .pin-reader-modal-meta {
+  color: #9a5a10;
+}
+
+:root[data-theme="day"] .pin-reader-font-controls {
+  background: rgba(23, 25, 32, 0.06);
+}
+
+:root[data-theme="day"] .pin-font-btn {
+  color: #4f5462;
+}
+
+:root[data-theme="day"] .pin-font-btn.is-active {
+  background: #ffffff;
+  color: #171920;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="day"] .pin-reader-close-btn {
+  background: rgba(23, 25, 32, 0.07);
+  border-color: rgba(23, 25, 32, 0.08);
+  color: #171920;
+}
+
+:root[data-theme="day"] .pin-reader-modal-heading {
+  color: #171920;
+}
+
+:root[data-theme="day"] .pin-reader-modal-sub {
+  color: #4f5462;
+}
+
+:root[data-theme="day"] .pin-reader-prose {
+  color: #242731;
 }

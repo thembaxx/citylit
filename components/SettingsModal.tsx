@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useDragControls,
+  useMotionValue,
+  useReducedMotion,
+  useTransform,
+} from "motion/react";
 import {
   ArrowCounterClockwise,
   Check,
@@ -19,6 +26,13 @@ import { useDiscovery } from "./useDiscovery";
 import { cities } from "../lib/data";
 import LiquidToggle from "./ui/LiquidToggle";
 import { benchoAudio } from "../lib/bencho-audio";
+import { handleRovingKeyDown } from "../lib/ui-primitives";
+
+const SETTINGS_TABS: ReadonlyArray<readonly [SettingsTab, string]> = [
+  ["appearance", "Appearance"],
+  ["map", "Map"],
+  ["about", "About"],
+];
 
 export type SettingsTab = "appearance" | "map" | "about";
 
@@ -38,6 +52,10 @@ export default function SettingsModal({
   const reducedMotion = useReducedMotion();
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const dragControls = useDragControls();
+  const dragY = useMotionValue(0);
+  const backdropOpacity = useTransform(dragY, [0, 260], [1, 0]);
 
   const [activeTab, setActiveTab] = useState<SettingsTab>(initialTab);
   const [audioFeedback, setAudioFeedback] = useState(() => benchoAudio.isEnabled());
@@ -173,7 +191,12 @@ export default function SettingsModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="citylit-settings-backdrop" onClick={onClose} role="presentation">
+        <motion.div
+          className="citylit-settings-backdrop"
+          style={reducedMotion ? undefined : { opacity: backdropOpacity }}
+          onClick={onClose}
+          role="presentation"
+        >
           <motion.div
             ref={dialogRef}
             className="citylit-settings-sheet"
@@ -181,13 +204,39 @@ export default function SettingsModal({
             aria-modal="true"
             aria-labelledby="settings-sheet-title"
             onClick={(e) => e.stopPropagation()}
+            drag={reducedMotion ? false : "y"}
+            dragControls={dragControls}
+            dragListener={false}
+            dragConstraints={{ top: 0 }}
+            dragElastic={0.2}
+            style={reducedMotion ? undefined : { y: dragY }}
+            onDragEnd={(_e, info) => {
+              if (info.offset.y > 100 || info.velocity.y > 500) {
+                onClose();
+              }
+            }}
             initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.96 }}
             animate={reducedMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.97 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
           >
+            {/* Mobile Sheet Drag Handle */}
+            <div
+              className="citylit-sheet-handle-wrap"
+              onPointerDown={(e) => dragControls.start(e)}
+              aria-hidden="true"
+            >
+              <span className="citylit-sheet-handle" />
+            </div>
+
             {/* Modal Header */}
-            <div className="citylit-settings-header">
+            <div
+              className="citylit-settings-header"
+              onPointerDown={(e) => {
+                if ((e.target as HTMLElement).closest("button")) return;
+                dragControls.start(e);
+              }}
+            >
               <h2 id="settings-sheet-title">Settings</h2>
               <button
                 type="button"
@@ -201,33 +250,40 @@ export default function SettingsModal({
 
             {/* Segmented Tabs */}
             <div className="citylit-settings-tabs" role="tablist" aria-label="Settings categories">
-              {(
-                [
-                  ["appearance", "Appearance"],
-                  ["map", "Map"],
-                  ["about", "About"],
-                ] as const
-              ).map(([tabKey, tabLabel]) => (
-                <button
-                  key={tabKey}
-                  type="button"
-                  role="tab"
-                  id={`settings-tab-${tabKey}`}
-                  aria-selected={activeTab === tabKey}
-                  aria-controls={`settings-panel-${tabKey}`}
-                  className={`citylit-settings-tab ${activeTab === tabKey ? "is-active" : ""}`}
-                  onClick={() => setActiveTab(tabKey)}
-                >
-                  <span>{tabLabel}</span>
-                  {activeTab === tabKey && (
-                    <motion.div
-                      layoutId="settings-tab-indicator"
-                      className="citylit-settings-tab-pill"
-                      transition={{ type: "spring", stiffness: 360, damping: 28 }}
-                    />
-                  )}
-                </button>
-              ))}
+              {SETTINGS_TABS.map(([tabKey, tabLabel], idx) => {
+                const isActive = activeTab === tabKey;
+                return (
+                  <button
+                    key={tabKey}
+                    ref={(el) => {
+                      tabRefs.current[idx] = el;
+                    }}
+                    type="button"
+                    role="tab"
+                    id={`settings-tab-${tabKey}`}
+                    aria-selected={isActive}
+                    aria-controls={`settings-panel-${tabKey}`}
+                    data-state={isActive ? "active" : "inactive"}
+                    tabIndex={isActive ? 0 : -1}
+                    className={`citylit-settings-tab ${isActive ? "is-active" : ""}`}
+                    onKeyDown={(e) =>
+                      handleRovingKeyDown(e, idx, SETTINGS_TABS.length, tabRefs, (nextIdx) =>
+                        setActiveTab(SETTINGS_TABS[nextIdx][0]),
+                      )
+                    }
+                    onClick={() => setActiveTab(tabKey)}
+                  >
+                    <span>{tabLabel}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="settings-tab-indicator"
+                        className="citylit-settings-tab-pill"
+                        transition={{ type: "spring", stiffness: 360, damping: 28 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Tab Panel: Appearance */}
@@ -415,7 +471,7 @@ export default function SettingsModal({
               )}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

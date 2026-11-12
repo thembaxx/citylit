@@ -1,7 +1,8 @@
 "use client";
 
-import { useId, useRef, type KeyboardEvent, type ReactNode } from "react";
+import { useId, useRef, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { handleRovingKeyDown } from "../../lib/ui-primitives";
 
 export interface LiquidTabItem {
   id: string;
@@ -15,42 +16,32 @@ interface LiquidTabsProps {
   value: string;
   onChange: (id: string) => void;
   ariaLabel: string;
+  variant?: "pill" | "folder";
   className?: string;
 }
 
 /**
- * Liquid Tabs with Pin UI's tactile styling and Vercel Labs ui-sdk roving focus.
- * Features an animated spring pill, subtle chamfer highlight, and roving keyboard navigation.
+ * Liquid Tabs with Pin UI's tactile styling (pill or inverted-fillet folder variant)
+ * and Vercel Labs ui-sdk roving focus.
  */
-export function LiquidTabs({ items, value, onChange, ariaLabel, className = "" }: LiquidTabsProps) {
+export function LiquidTabs({
+  items,
+  value,
+  onChange,
+  ariaLabel,
+  variant = "pill",
+  className = "",
+}: LiquidTabsProps) {
   const generatedId = useId();
   const reducedMotion = useReducedMotion();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    let nextIndex = index;
-    if (event.key === "ArrowRight") {
-      nextIndex = (index + 1) % items.length;
-    } else if (event.key === "ArrowLeft") {
-      nextIndex = (index - 1 + items.length) % items.length;
-    } else if (event.key === "Home") {
-      nextIndex = 0;
-    } else if (event.key === "End") {
-      nextIndex = items.length - 1;
-    } else {
-      return;
-    }
-
-    event.preventDefault();
-    onChange(items[nextIndex].id);
-    tabRefs.current[nextIndex]?.focus();
-  };
 
   return (
     <div
       role="tablist"
       aria-label={ariaLabel}
-      className={`pin-liquid-tabs-root ${className}`.trim()}
+      data-variant={variant}
+      className={`pin-liquid-tabs-root ${variant === "folder" ? "is-folder" : ""} ${className}`.trim()}
     >
       {items.map((tab, idx) => {
         const isActive = tab.id === value;
@@ -66,7 +57,16 @@ export function LiquidTabs({ items, value, onChange, ariaLabel, className = "" }
             aria-selected={isActive}
             tabIndex={isActive ? 0 : -1}
             onClick={() => onChange(tab.id)}
-            onKeyDown={(e) => handleKeyDown(e, idx)}
+            onKeyDown={(e) =>
+              handleRovingKeyDown(
+                e,
+                idx,
+                items.length,
+                tabRefs,
+                (nextIdx) => onChange(items[nextIdx].id),
+                "horizontal",
+              )
+            }
             className={`pin-liquid-tab ${isActive ? "is-active" : ""}`}
             data-state={isActive ? "active" : "inactive"}
           >

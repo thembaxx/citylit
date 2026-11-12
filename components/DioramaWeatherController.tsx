@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo, useCallback, useRef } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   Sun,
   Moon,
@@ -10,8 +11,11 @@ import {
   SpeakerSlash,
   Clock,
   Sparkle,
+  Gauge,
 } from "@phosphor-icons/react";
 import { benchoAudio, type AmbientSoundType } from "../lib/bencho-audio";
+import { handleRovingKeyDown } from "../lib/ui-primitives";
+import ThermalDial from "./ui/ThermalDial";
 
 export type TimePeriod = "dawn" | "midday" | "sunset" | "night" | "live";
 export type WeatherType = "clear" | "cloudy" | "rain" | "sunset";
@@ -43,7 +47,12 @@ export default function DioramaWeatherController({
   const [timePeriod, setTimePeriod] = useState<TimePeriod>("midday");
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [ambientActive, setAmbientActive] = useState(false);
+  const [showDial, setShowDial] = useState(false);
+  const [customTemp, setCustomTemp] = useState<number | null>(null);
   const [currentTimeStr, setCurrentTimeStr] = useState("12:00 PM");
+  const reducedMotion = useReducedMotion();
+  const scrubRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const weatherRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   // Calculate live time periodically
   useEffect(() => {
@@ -102,6 +111,7 @@ export default function DioramaWeatherController({
     }
 
     if (weather === "rain") temp -= 4;
+    if (customTemp !== null) temp = customTemp;
 
     let ambientType: AmbientSoundType = "none";
     if (weather === "rain") ambientType = "rain";
@@ -119,7 +129,7 @@ export default function DioramaWeatherController({
       lightColor,
       ambientSound: ambientType,
     };
-  }, [timePeriod, weather]);
+  }, [timePeriod, weather, customTemp]);
 
   // Notify parent on change
   useEffect(() => {
@@ -148,13 +158,35 @@ export default function DioramaWeatherController({
 
   const selectPeriod = (period: TimePeriod) => {
     benchoAudio.playTick(1200);
+    setCustomTemp(null);
     setTimePeriod(period);
   };
 
   const selectWeather = (w: WeatherType) => {
     benchoAudio.playWeatherShift();
+    setCustomTemp(null);
     setWeather(w);
   };
+
+  const timePresets: ReadonlyArray<readonly [TimePeriod, string, React.ReactNode, string]> = [
+    ["dawn", "Dawn", <Sun key="d" size={13} weight="regular" />, "Dawn morning time preset"],
+    ["midday", "12 PM", <Sun key="m" size={13} weight="fill" />, "Midday noon time preset"],
+    [
+      "sunset",
+      "Sunset",
+      <Sparkle key="s" size={13} weight="fill" />,
+      "Golden hour sunset time preset",
+    ],
+    ["night", "Night", <Moon key="n" size={13} weight="fill" />, "Night twilight time preset"],
+    ["live", "LIVE", <Clock key="l" size={13} weight="bold" />, "Live local time preset"],
+  ];
+
+  const weatherPresets: ReadonlyArray<readonly [WeatherType, string, string]> = [
+    ["clear", "Clear", "Clear sky condition"],
+    ["cloudy", "Cloudy", "Partly cloudy condition"],
+    ["rain", "Rain", "Light rain condition"],
+    ["sunset", "Sunset", "Golden sunset condition"],
+  ];
 
   const weatherIcons = {
     clear: <Sun size={16} weight="fill" className="text-amber-400" />,
@@ -204,11 +236,27 @@ export default function DioramaWeatherController({
           </div>
         </div>
 
+        {/* Thermal Dial Toggle */}
+        <button
+          type="button"
+          className={`weather-audio-btn ${showDial ? "is-active" : ""}`}
+          onClick={() => {
+            benchoAudio.playTap(820);
+            setShowDial((prev) => !prev);
+          }}
+          aria-expanded={showDial}
+          aria-label={showDial ? "Hide atmosphere dial" : "Open atmosphere dial"}
+          title={showDial ? "Hide atmosphere dial" : "Open atmosphere dial"}
+        >
+          <Gauge size={16} weight={showDial ? "fill" : "regular"} />
+        </button>
+
         {/* Ambient Soundscape Toggle (libraries.dev/waves inspired) */}
         <button
           type="button"
           className={`weather-audio-btn ${ambientActive ? "is-active" : ""}`}
           onClick={toggleAmbient}
+          aria-pressed={ambientActive}
           aria-label={
             ambientActive
               ? "Mute sensory ambient soundscape"
@@ -222,68 +270,85 @@ export default function DioramaWeatherController({
         </button>
       </div>
 
+      <AnimatePresence initial={false}>
+        {showDial && (
+          <motion.div
+            className="weather-dial-panel"
+            initial={reducedMotion ? { opacity: 0 } : { opacity: 0, height: 0, scale: 0.96 }}
+            animate={reducedMotion ? { opacity: 1 } : { opacity: 1, height: "auto", scale: 1 }}
+            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, height: 0, scale: 0.96 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            style={{ overflow: "hidden", paddingBlock: 8 }}
+          >
+            <ThermalDial
+              value={atmosphere.temperature}
+              min={8}
+              max={38}
+              label={cityName}
+              onChange={(val) => setCustomTemp(val)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Time of Day Scrubber / Presets (Image 8 style) */}
       <div className="weather-scrubber-row" role="group" aria-label="Time of day presets">
-        {(
-          [
-            [
-              "dawn",
-              "Dawn",
-              <Sun key="d" size={13} weight="regular" />,
-              "Dawn morning time preset",
-            ],
-            ["midday", "12 PM", <Sun key="m" size={13} weight="fill" />, "Midday noon time preset"],
-            [
-              "sunset",
-              "Sunset",
-              <Sparkle key="s" size={13} weight="fill" />,
-              "Golden hour sunset time preset",
-            ],
-            [
-              "night",
-              "Night",
-              <Moon key="n" size={13} weight="fill" />,
-              "Night twilight time preset",
-            ],
-            ["live", "LIVE", <Clock key="l" size={13} weight="bold" />, "Live local time preset"],
-          ] as const
-        ).map(([p, label, icon, ariaLbl]) => (
-          <button
-            key={p}
-            type="button"
-            className={`weather-scrub-btn ${timePeriod === p ? "is-active" : ""} ${p === "live" ? "is-live" : ""}`}
-            aria-pressed={timePeriod === p}
-            aria-label={ariaLbl}
-            onClick={() => selectPeriod(p)}
-          >
-            {icon}
-            <span>{label}</span>
-          </button>
-        ))}
+        {timePresets.map(([p, label, icon, ariaLbl], idx) => {
+          const isActive = timePeriod === p;
+          return (
+            <button
+              key={p}
+              ref={(el) => {
+                scrubRefs.current[idx] = el;
+              }}
+              type="button"
+              className={`weather-scrub-btn ${isActive ? "is-active" : ""} ${p === "live" ? "is-live" : ""}`}
+              aria-pressed={isActive}
+              data-state={isActive ? "active" : "inactive"}
+              tabIndex={isActive ? 0 : -1}
+              aria-label={ariaLbl}
+              onKeyDown={(e) =>
+                handleRovingKeyDown(e, idx, timePresets.length, scrubRefs, (nextIdx) =>
+                  selectPeriod(timePresets[nextIdx][0]),
+                )
+              }
+              onClick={() => selectPeriod(p)}
+            >
+              {icon}
+              <span>{label}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Atmospheric Weather Conditions Selector */}
       <div className="weather-condition-pills" role="group" aria-label="Weather conditions">
-        {(
-          [
-            ["clear", "Clear", "Clear sky condition"],
-            ["cloudy", "Cloudy", "Partly cloudy condition"],
-            ["rain", "Rain", "Light rain condition"],
-            ["sunset", "Sunset", "Golden sunset condition"],
-          ] as const
-        ).map(([w, label, ariaLbl]) => (
-          <button
-            key={w}
-            type="button"
-            className={`weather-cond-pill ${weather === w ? "is-active" : ""}`}
-            aria-pressed={weather === w}
-            aria-label={ariaLbl}
-            onClick={() => selectWeather(w)}
-          >
-            {weatherIcons[w]}
-            <span>{label}</span>
-          </button>
-        ))}
+        {weatherPresets.map(([w, label, ariaLbl], idx) => {
+          const isActive = weather === w;
+          return (
+            <button
+              key={w}
+              ref={(el) => {
+                weatherRefs.current[idx] = el;
+              }}
+              type="button"
+              className={`weather-cond-pill ${isActive ? "is-active" : ""}`}
+              aria-pressed={isActive}
+              data-state={isActive ? "active" : "inactive"}
+              tabIndex={isActive ? 0 : -1}
+              aria-label={ariaLbl}
+              onKeyDown={(e) =>
+                handleRovingKeyDown(e, idx, weatherPresets.length, weatherRefs, (nextIdx) =>
+                  selectWeather(weatherPresets[nextIdx][0]),
+                )
+              }
+              onClick={() => selectWeather(w)}
+            >
+              {weatherIcons[w]}
+              <span>{label}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

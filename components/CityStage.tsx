@@ -1,12 +1,11 @@
 "use client";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  Cube,
   Plus,
   Check,
   Leaf,
@@ -24,14 +23,6 @@ import GuideShell from "./GuideShell";
 import { useKhwezi } from "./KhweziProvider";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
-const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
-  ssr: false,
-  loading: () => (
-    <p className="stage-loading" role="status">
-      Loading 3D…
-    </p>
-  ),
-});
 export type StageItem = {
   name: string;
   description: string;
@@ -79,7 +70,6 @@ export default function CityStage({
   initialItem?: string;
 }) {
   const { state, update } = useDiscovery();
-  const router = useRouter();
   const { feedback } = useKhwezi();
   const [message, setMessage] = useState("");
   const [focusMode, setFocusMode] = useState(false);
@@ -167,14 +157,6 @@ export default function CityStage({
         className={`atlas-stage${focusMode ? " is-focused-stage" : ""}`}
         aria-labelledby="stage-title"
       >
-        <LandmarkRing
-          items={items}
-          selected={index}
-          onSelect={pick}
-          itinerary={state.itinerary}
-          accent={city.accentColor}
-          onOpenGuide={(nextIndex) => router.push(items[nextIndex]?.href ?? item.href)}
-        />
         {focusMode && (
           <button
             type="button"
@@ -219,6 +201,12 @@ export default function CityStage({
             <div className="atlas-stage-actions">
               <Link href={item.href} className="atlas-button atlas-primary">
                 Open guide <ArrowUpRight size={17} />
+              </Link>
+              <Link
+                href={`/dioramas?scope=landmark&city=${city.slug}&item=${encodeURIComponent(item.name)}`}
+                className="atlas-button"
+              >
+                <Cube size={17} aria-hidden="true" /> Inspect in 3D
               </Link>
               {item.place && (
                 <MagneticButton

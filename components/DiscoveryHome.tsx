@@ -436,7 +436,7 @@ export default function DiscoveryHome() {
                         <h2 id="home-3d-landmarks-title">{spotlightCity.name} landmarks</h2>
                       </div>
                       <Link
-                        href={`/${spotlightCity.slug}/landmarks`}
+                        href={`/dioramas?scope=landmark&city=${spotlightCity.slug}`}
                         className="citylit-inspect-btn"
                         data-transition-label={`${spotlightCity.name} 3D landmarks`}
                       >

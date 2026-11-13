@@ -37,7 +37,6 @@ import KhweziWelcome from "./KhweziWelcome";
 import KhweziMoment from "./KhweziMoment";
 import LandmarkSheet from "./LandmarkSheet";
 import LandmarkDetail from "./LandmarkDetail";
-const Atmosphere = dynamic(() => import("./Atmosphere"), { ssr: false });
 import {
   cities,
   categories,
@@ -46,14 +45,6 @@ import {
   categorySlug,
   landmarkSources,
 } from "../lib/data";
-const Scene = dynamic(() => import("./Scene"), {
-  ssr: false,
-  loading: () => (
-    <div className="scene-loading">
-      <KhweziMoment pose="loading" compact />
-    </div>
-  ),
-});
 const PlaceMap = dynamic(() => import("./PlaceMap"), { ssr: false });
 const cityDescriptions = [
   "Gauteng. Big energy, bold ideas and a city that keeps becoming.",
@@ -139,7 +130,6 @@ export default function Explorer() {
     toggleSound,
     toggleHaptics,
     animations: animate,
-    dismissWelcome,
     moving,
   } = useKhwezi();
   useEffect(() => {
@@ -276,11 +266,6 @@ export default function Explorer() {
       return next;
     });
   };
-  const goCity = (i: number) => {
-    feedback("tap");
-    dismissWelcome();
-    router.push("/" + cities[i].slug);
-  };
   const selectLandmark = (v: number) => {
     setIndex(v);
     try {
@@ -333,10 +318,6 @@ export default function Explorer() {
   const visible = places.filter(
     (p) => p.city === city.slug && (ids ? ids.includes(p.id) : p.category === categories[cat]),
   );
-  const openPlaces = () => {
-    feedback("tap");
-    router.push(`${categoryPath}?view=places`, { scroll: false });
-  };
   const closePlaces = () => {
     setQuery("");
     router.replace(categoryPath, { scroll: false });
@@ -399,13 +380,6 @@ export default function Explorer() {
         } as CSSProperties
       }
     >
-      <Atmosphere
-        mode={mode}
-        city={ci}
-        category={cat}
-        night={night}
-        animate={animate && !discovery.essential && !panelOpen}
-      />
       <div className="game-atmosphere" aria-hidden="true">
         <div className="ambient-glow" />
         <div className="horizon" />
@@ -598,34 +572,28 @@ export default function Explorer() {
       ) : mode !== "place" ? (
         <>
           <div className="game-stage">
-            <div className="scene">
-              <Scene
-                mode={mode}
-                city={ci}
-                index={index}
-                category={cat}
-                reset={reset}
-                animate={animate && !discovery.essential && !panelOpen}
-                onCity={goCity}
-                onSelect={mode === "city" ? () => openLandmark(index) : openPlaces}
-                onCycle={
-                  mode === "city" && spot === null
-                    ? (step) => {
-                        feedback("swipe");
-                        next(step);
-                      }
-                    : undefined
-                }
-                onSecret={() => {
-                  const lines = [
-                    "It likes you.",
-                    "A small light answered.",
-                    "A spark illuminates the path.",
-                  ];
-                  setNotice(lines[index % lines.length]);
-                  setBloom(true);
-                }}
-              />
+            <div className="scene scene-centralized-cta">
+              <div className="scene-centralized-card">
+                <KhweziMoment pose="welcome" compact />
+                <h2>
+                  {mode === "map" ? "South Africa 3D Globe & Provinces" : `${city.name} in 3D`}
+                </h2>
+                <p>
+                  {mode === "map"
+                    ? "Explore the Africa-active 3D globe, nine provinces, and regional dioramas on the dedicated 3D stage."
+                    : `Inspect ${city.landmarks[index] ?? city.name} in interactive 3D on the Dioramas stage.`}
+                </p>
+                <Link
+                  href={
+                    mode === "map"
+                      ? "/dioramas?scope=globe"
+                      : `/dioramas?scope=landmark&city=${city.slug}`
+                  }
+                  className="atlas-button atlas-primary"
+                >
+                  Open 3D Stage <ArrowUpRight size={17} />
+                </Link>
+              </div>
             </div>
             {mode === "map" && (
               <FadeHint token="map">Drag the land. Tap a province that glows.</FadeHint>

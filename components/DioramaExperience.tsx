@@ -1,5 +1,7 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -14,9 +16,12 @@ import {
   ArrowsClockwise,
   ArrowsOutSimple,
   CaretRight,
+  Compass,
   Cube,
+  GlobeHemisphereEast,
   Info,
   MoonStars,
+  Mountains,
   Sun,
   SunHorizon,
 } from "@phosphor-icons/react";
@@ -28,6 +33,33 @@ import {
   type TimeMode,
 } from "../lib/diorama/content";
 import type { DioramaEngine, Quality, RenderBackend, RendererKind } from "../lib/diorama/types";
+import { cities, landmarkSources, places } from "../lib/data";
+import { landmarkPath, landmarkVenue } from "../lib/discovery-guide";
+import { stageModel } from "../lib/stage-models";
+import { useDiscovery } from "./useDiscovery";
+import CartographicLoader from "./CartographicLoader";
+import type { StageItem } from "./CityStage";
+
+const AfricaGlobeScope = dynamic(() => import("./AfricaGlobeScope"), {
+  ssr: false,
+  loading: () => (
+    <CartographicLoader
+      variant="globe"
+      title="Africa & South Africa"
+      subtitle="Only Africa active · 9 provinces"
+      coordinates="22.9375° E · 30.5595° S"
+    />
+  ),
+});
+
+const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
+  ssr: false,
+  loading: () => (
+    <CartographicLoader title="City Landmarks & Places" subtitle="Procedural 3D stage" />
+  ),
+});
+
+type DioramaScope = "diorama" | "globe" | "landmark";
 
 const TIME_OPTIONS: { mode: TimeMode; label: string; icon: typeof Sun }[] = [
   { mode: "day", label: "Day", icon: Sun },
@@ -86,14 +118,33 @@ function detectQuality(): Quality {
 }
 
 export default function DioramaExperience() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { state } = useDiscovery();
+  const initialScope = (searchParams.get("scope") as DioramaScope | null) ?? "diorama";
+  const initialScene = searchParams.get("scene") as DioramaSlug | null;
+  const initialCity = searchParams.get("city") || cities[0]?.slug || "cape-town";
+  const initialProvince = searchParams.get("province") || undefined;
+  const initialItem = searchParams.get("item") || undefined;
+
+  const [scope, setScope] = useState<DioramaScope>(
+    initialScope === "globe" || initialScope === "landmark" ? initialScope : "diorama",
+  );
+  const [landmarkCitySlug, setLandmarkCitySlug] = useState<string>(initialCity);
+  const [landmarkIndex, setLandmarkIndex] = useState(0);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineRef = useRef<DioramaEngine | null>(null);
-  const slugRef = useRef<DioramaSlug>("hole-in-the-wall");
+  const slugRef = useRef<DioramaSlug>(
+    initialScene && DIORAMA_BY_SLUG[initialScene] ? initialScene : "hole-in-the-wall",
+  );
   const timeRef = useRef<TimeMode>("day");
   const explodedRef = useRef(false);
   const autoRotateRef = useRef(false);
 
-  const [slug, setSlug] = useState<DioramaSlug>("hole-in-the-wall");
+  const [slug, setSlug] = useState<DioramaSlug>(
+    initialScene && DIORAMA_BY_SLUG[initialScene] ? initialScene : "hole-in-the-wall",
+  );
   const [timeMode, setTimeMode] = useState<TimeMode>("day");
   const [exploded, setExploded] = useState(false);
   const [autoRotate, setAutoRotate] = useState(false);
@@ -109,6 +160,47 @@ export default function DioramaExperience() {
   const [engineReady, setEngineReady] = useState(false);
 
   const scene = DIORAMA_BY_SLUG[slug];
+  const landmarkCity = useMemo(
+    () => cities.find((c) => c.slug === landmarkCitySlug) ?? cities[0],
+    [landmarkCitySlug],
+  );
+  const landmarkItems: StageItem[] = useMemo(() => {
+    if (!landmarkCity) return [];
+    const cityLandmarks = landmarkCity.landmarks.map((name) => {
+      const place = landmarkVenue(landmarkCity.slug, name);
+      const record = landmarkSources.find((item) => item.name === name);
+      return {
+        name,
+        description:
+          place?.description ||
+          record?.about?.split("\n")[0] ||
+          `Discover the story of ${name} in ${landmarkCity.name}.`,
+        href: landmarkPath(landmarkCity, name),
+        model: stageModel(name, place?.category),
+        place,
+      };
+    });
+    if (cityLandmarks.length > 0) return cityLandmarks;
+    return places
+      .filter((p) => p.city === landmarkCity.slug)
+      .slice(0, 6)
+      .map((place) => ({
+        name: place.name,
+        description: place.description,
+        href: `/${landmarkCity.slug}/places`,
+        model: stageModel(place.name, place.category),
+        place,
+      }));
+  }, [landmarkCity]);
+
+  useEffect(() => {
+    if (!initialItem || landmarkItems.length === 0) return;
+    const found = landmarkItems.findIndex(
+      (item) => item.name.toLowerCase() === initialItem.toLowerCase(),
+    );
+    if (found >= 0) setLandmarkIndex(found);
+  }, [initialItem, landmarkItems]);
+
   const selected = useMemo(
     () => landmarks.find((landmark) => landmark.id === selectedId) ?? null,
     [landmarks, selectedId],
@@ -128,6 +220,7 @@ export default function DioramaExperience() {
   }, []);
 
   useEffect(() => {
+    if (scope !== "diorama") return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     let cancelled = false;
@@ -180,7 +273,7 @@ export default function DioramaExperience() {
       engine?.dispose();
       if (engineRef.current === engine) engineRef.current = null;
     };
-  }, [backend]);
+  }, [backend, scope]);
 
   useEffect(() => {
     if (!engineReady) return;
@@ -259,237 +352,330 @@ export default function DioramaExperience() {
   return (
     <section className="dioramas" aria-labelledby="dioramas-title">
       <header className="dioramas-header">
-        <p className="dioramas-eyebrow">FOURTEEN PLACES · ONE COUNTRY</p>
+        <p className="dioramas-eyebrow">ALL 3D EXPERIENCES · ONE STAGE</p>
         <h1 id="dioramas-title">Walk into the landscape.</h1>
         <p className="dioramas-lede">
-          Cutaway blocks of South Africa, built in real time with three.js. Orbit the scene, change
-          the light, or open the earth to see how each place is layered — then switch the renderer
-          to watch the same shaders compile to WGSL on WebGPU or GLSL on WebGL 2.
+          Explore the Africa-active 3D globe and nine South African provinces, inspect procedural
+          city landmarks, or open fourteen cutaway regional dioramas.
         </p>
+
+        <div className="dioramas-scope-bar" role="tablist" aria-label="3D view scope">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={scope === "diorama"}
+            className={`dioramas-scope-btn${scope === "diorama" ? " is-active" : ""}`}
+            onClick={() => setScope("diorama")}
+          >
+            <Mountains size={17} aria-hidden="true" />
+            <span>Regional Dioramas</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={scope === "globe"}
+            className={`dioramas-scope-btn${scope === "globe" ? " is-active" : ""}`}
+            onClick={() => setScope("globe")}
+          >
+            <GlobeHemisphereEast size={17} aria-hidden="true" />
+            <span>Africa Globe & Provinces</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={scope === "landmark"}
+            className={`dioramas-scope-btn${scope === "landmark" ? " is-active" : ""}`}
+            onClick={() => setScope("landmark")}
+          >
+            <Compass size={17} aria-hidden="true" />
+            <span>Cities & Landmarks</span>
+          </button>
+        </div>
       </header>
 
-      <div className="dioramas-grid">
-        <div className="dioramas-main">
-          <div
-            className="dioramas-tabs"
-            role="tablist"
-            aria-label="Choose a diorama"
-            onKeyDown={onTabKeyDown}
-          >
-            {DIORAMAS.map((item) => (
+      {scope === "globe" ? (
+        <div className="dioramas-globe-panel">
+          <AfricaGlobeScope
+            initialProvince={initialProvince}
+            onOpenCityLandmarks={(citySlug) => {
+              setLandmarkCitySlug(citySlug);
+              setLandmarkIndex(0);
+              setScope("landmark");
+            }}
+            onOpenDiorama={(sceneSlug) => {
+              if (DIORAMA_BY_SLUG[sceneSlug as DioramaSlug]) {
+                setSlug(sceneSlug as DioramaSlug);
+              }
+              setScope("diorama");
+            }}
+          />
+        </div>
+      ) : null}
+
+      {scope === "landmark" ? (
+        <div className="dioramas-landmark-panel">
+          <div className="dioramas-landmark-cities" role="tablist" aria-label="Choose a city">
+            {cities.map((c) => (
               <button
-                key={item.slug}
-                ref={(node) => {
-                  if (node) tabRefs.current.set(item.slug, node);
-                  else tabRefs.current.delete(item.slug);
-                }}
+                key={c.slug}
                 type="button"
                 role="tab"
-                aria-selected={item.slug === slug}
-                tabIndex={item.slug === slug ? 0 : -1}
-                className={`dioramas-tab${item.slug === slug ? " is-active" : ""}`}
-                onClick={() => setSlug(item.slug)}
+                aria-selected={c.slug === landmarkCity?.slug}
+                className={`dioramas-tab${c.slug === landmarkCity?.slug ? " is-active" : ""}`}
+                onClick={() => {
+                  setLandmarkCitySlug(c.slug);
+                  setLandmarkIndex(0);
+                }}
               >
-                <span className="dioramas-tab-name">{item.name}</span>
-                <span className="dioramas-tab-province">{item.province}</span>
+                <span className="dioramas-tab-name">{c.name}</span>
+                <span className="dioramas-tab-province">{c.province}</span>
               </button>
             ))}
           </div>
-
-          <div className="dioramas-stage" style={stageStyle} data-time={timeMode}>
-            <canvas
-              key={backend}
-              ref={canvasRef}
-              className="dioramas-canvas"
-              aria-label={`Interactive 3D diorama of ${scene.name}: ${scene.title}`}
-              aria-describedby="dioramas-instructions"
-            />
-            <div className="dioramas-stage-glow" aria-hidden="true" />
-            <div className="dioramas-stage-top">
-              <div className="dioramas-stage-title">
-                <span>{scene.name}</span>
-                <strong>{scene.title}</strong>
-              </div>
-              <span className={`dioramas-badge${renderer ? " is-live" : ""}`}>
-                <span className="dioramas-dot" aria-hidden="true" />
-                {renderer ? (
-                  <>
-                    {renderer}
-                    <span className="dioramas-badge-shader" aria-hidden="true">
-                      {" "}
-                      · {shaderLanguage}
-                    </span>
-                  </>
-                ) : (
-                  "Starting"
-                )}
-              </span>
+          {landmarkItems.length > 0 ? (
+            <div className="dioramas-landmark-stage">
+              <LandmarkRing
+                items={landmarkItems}
+                selected={Math.min(landmarkIndex, landmarkItems.length - 1)}
+                onSelect={(idx) => setLandmarkIndex(idx)}
+                itinerary={state.itinerary}
+                onOpenGuide={() => {
+                  const item = landmarkItems[landmarkIndex];
+                  if (item) router.push(item.href);
+                }}
+              />
             </div>
-            <p className="dioramas-hint" id="dioramas-instructions">
-              Drag to orbit · Scroll or pinch to zoom · Select a marker to focus
-            </p>
-            {status === "loading" ? (
-              <div className="dioramas-status" role="status">
-                <span className="dioramas-spinner" aria-hidden="true" />
-                <span>Building {scene.name}…</span>
+          ) : null}
+        </div>
+      ) : null}
+
+      {scope === "diorama" ? (
+        <div className="dioramas-grid">
+          <div className="dioramas-main">
+            <div
+              className="dioramas-tabs"
+              role="tablist"
+              aria-label="Choose a diorama"
+              onKeyDown={onTabKeyDown}
+            >
+              {DIORAMAS.map((item) => (
+                <button
+                  key={item.slug}
+                  ref={(node) => {
+                    if (node) tabRefs.current.set(item.slug, node);
+                    else tabRefs.current.delete(item.slug);
+                  }}
+                  type="button"
+                  role="tab"
+                  aria-selected={item.slug === slug}
+                  tabIndex={item.slug === slug ? 0 : -1}
+                  className={`dioramas-tab${item.slug === slug ? " is-active" : ""}`}
+                  onClick={() => setSlug(item.slug)}
+                >
+                  <span className="dioramas-tab-name">{item.name}</span>
+                  <span className="dioramas-tab-province">{item.province}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="dioramas-stage" style={stageStyle} data-time={timeMode}>
+              <canvas
+                key={backend}
+                ref={canvasRef}
+                className="dioramas-canvas"
+                aria-label={`Interactive 3D diorama of ${scene.name}: ${scene.title}`}
+                aria-describedby="dioramas-instructions"
+              />
+              <div className="dioramas-stage-glow" aria-hidden="true" />
+              <div className="dioramas-stage-top">
+                <div className="dioramas-stage-title">
+                  <span>{scene.name}</span>
+                  <strong>{scene.title}</strong>
+                </div>
+                <span className={`dioramas-badge${renderer ? " is-live" : ""}`}>
+                  <span className="dioramas-dot" aria-hidden="true" />
+                  {renderer ? (
+                    <>
+                      {renderer}
+                      <span className="dioramas-badge-shader" aria-hidden="true">
+                        {" "}
+                        · {shaderLanguage}
+                      </span>
+                    </>
+                  ) : (
+                    "Starting"
+                  )}
+                </span>
               </div>
-            ) : null}
-            {status === "error" ? (
-              <div className="dioramas-status is-error" role="alert">
-                <Info size={20} aria-hidden="true" />
-                <span>{error || "This scene could not be rendered."}</span>
-                <button type="button" onClick={() => window.location.reload()}>
-                  Reload
+              <p className="dioramas-hint" id="dioramas-instructions">
+                Drag to orbit · Scroll or pinch to zoom · Select a marker to focus
+              </p>
+              {status === "loading" ? (
+                <CartographicLoader
+                  title={scene.name}
+                  subtitle={scene.title}
+                  coordinates={scene.province}
+                />
+              ) : null}
+              {status === "error" ? (
+                <div className="dioramas-status is-error" role="alert">
+                  <Info size={20} aria-hidden="true" />
+                  <span>{error || "This scene could not be rendered."}</span>
+                  <button type="button" onClick={() => window.location.reload()}>
+                    Reload
+                  </button>
+                </div>
+              ) : null}
+            </div>
+
+            <div className="dioramas-controls">
+              <div className="dioramas-segment" role="group" aria-label="Time of day">
+                {TIME_OPTIONS.map((option) => {
+                  const Icon = option.icon;
+                  return (
+                    <button
+                      key={option.mode}
+                      type="button"
+                      className={`dioramas-control${timeMode === option.mode ? " is-active" : ""}`}
+                      aria-pressed={timeMode === option.mode}
+                      onClick={() => setTimeMode(option.mode)}
+                    >
+                      <Icon size={17} aria-hidden="true" weight="regular" />
+                      <span>{option.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="dioramas-toggles" role="group" aria-label="Scene options">
+                <button
+                  type="button"
+                  className={`dioramas-control${exploded ? " is-active" : ""}`}
+                  aria-pressed={exploded}
+                  onClick={() => setExploded((value) => !value)}
+                >
+                  <ArrowsOutSimple size={17} aria-hidden="true" />
+                  <span>Explode</span>
+                </button>
+                <button
+                  type="button"
+                  className={`dioramas-control${autoRotate ? " is-active" : ""}`}
+                  aria-pressed={autoRotate}
+                  disabled={reducedMotion}
+                  title={
+                    reducedMotion
+                      ? "Auto-rotate is off because reduced motion is enabled"
+                      : undefined
+                  }
+                  onClick={() => setAutoRotate((value) => !value)}
+                >
+                  <ArrowsClockwise size={17} aria-hidden="true" />
+                  <span>Auto-rotate</span>
+                </button>
+                <button type="button" className="dioramas-control" onClick={resetView}>
+                  <ArrowCounterClockwise size={17} aria-hidden="true" />
+                  <span>Reset</span>
                 </button>
               </div>
-            ) : null}
-          </div>
-
-          <div className="dioramas-controls">
-            <div className="dioramas-segment" role="group" aria-label="Time of day">
-              {TIME_OPTIONS.map((option) => {
-                const Icon = option.icon;
-                return (
+              <div className="dioramas-segment" role="group" aria-label="Renderer backend">
+                <span className="dioramas-segment-label" aria-hidden="true">
+                  Renderer
+                </span>
+                {BACKENDS.map((option) => (
                   <button
-                    key={option.mode}
+                    key={option.value}
                     type="button"
-                    className={`dioramas-control${timeMode === option.mode ? " is-active" : ""}`}
-                    aria-pressed={timeMode === option.mode}
-                    onClick={() => setTimeMode(option.mode)}
+                    className={`dioramas-control${backend === option.value ? " is-active" : ""}`}
+                    aria-pressed={backend === option.value}
+                    title={option.hint}
+                    onClick={() => setBackend(option.value)}
                   >
-                    <Icon size={17} aria-hidden="true" weight="regular" />
                     <span>{option.label}</span>
                   </button>
-                );
-              })}
+                ))}
+              </div>
             </div>
-            <div className="dioramas-toggles" role="group" aria-label="Scene options">
-              <button
-                type="button"
-                className={`dioramas-control${exploded ? " is-active" : ""}`}
-                aria-pressed={exploded}
-                onClick={() => setExploded((value) => !value)}
-              >
-                <ArrowsOutSimple size={17} aria-hidden="true" />
-                <span>Explode</span>
-              </button>
-              <button
-                type="button"
-                className={`dioramas-control${autoRotate ? " is-active" : ""}`}
-                aria-pressed={autoRotate}
-                disabled={reducedMotion}
-                title={
-                  reducedMotion ? "Auto-rotate is off because reduced motion is enabled" : undefined
-                }
-                onClick={() => setAutoRotate((value) => !value)}
-              >
-                <ArrowsClockwise size={17} aria-hidden="true" />
-                <span>Auto-rotate</span>
-              </button>
-              <button type="button" className="dioramas-control" onClick={resetView}>
-                <ArrowCounterClockwise size={17} aria-hidden="true" />
-                <span>Reset</span>
-              </button>
-            </div>
-            <div className="dioramas-segment" role="group" aria-label="Renderer backend">
-              <span className="dioramas-segment-label" aria-hidden="true">
-                Renderer
-              </span>
-              {BACKENDS.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  className={`dioramas-control${backend === option.value ? " is-active" : ""}`}
-                  aria-pressed={backend === option.value}
-                  title={option.hint}
-                  onClick={() => setBackend(option.value)}
-                >
-                  <span>{option.label}</span>
-                </button>
-              ))}
-            </div>
+
+            <p className="dioramas-caption">{scene.description}</p>
           </div>
 
-          <p className="dioramas-caption">{scene.description}</p>
-        </div>
-
-        <aside className="dioramas-side" aria-label="Landmarks and sources">
-          <div className="dioramas-panel">
-            <div className="dioramas-panel-heading">
-              <h2>Landmarks</h2>
-              <span>{landmarks.length} to find</span>
+          <aside className="dioramas-side" aria-label="Landmarks and sources">
+            <div className="dioramas-panel">
+              <div className="dioramas-panel-heading">
+                <h2>Landmarks</h2>
+                <span>{landmarks.length} to find</span>
+              </div>
+              <ul className="dioramas-landmarks">
+                {landmarks.map((landmark) => (
+                  <li key={landmark.id}>
+                    <button
+                      type="button"
+                      className={`dioramas-landmark${selectedId === landmark.id ? " is-active" : ""}`}
+                      aria-pressed={selectedId === landmark.id}
+                      onClick={() => selectLandmark(landmark.id)}
+                    >
+                      <span className="dioramas-landmark-copy">
+                        <span className="dioramas-landmark-kicker">{landmark.kicker}</span>
+                        <span className="dioramas-landmark-name">{landmark.name}</span>
+                      </span>
+                      <CaretRight size={16} aria-hidden="true" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="dioramas-landmarks">
-              {landmarks.map((landmark) => (
-                <li key={landmark.id}>
-                  <button
-                    type="button"
-                    className={`dioramas-landmark${selectedId === landmark.id ? " is-active" : ""}`}
-                    aria-pressed={selectedId === landmark.id}
-                    onClick={() => selectLandmark(landmark.id)}
+
+            <div className="dioramas-panel dioramas-info" aria-live="polite">
+              {selected ? (
+                <>
+                  <p className="dioramas-info-kicker">{selected.kicker}</p>
+                  <h2>{selected.name}</h2>
+                  <p>{selected.description}</p>
+                  <p className="dioramas-fact">{selected.fact}</p>
+                  <a
+                    className="dioramas-source"
+                    href={selected.source.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
                   >
-                    <span className="dioramas-landmark-copy">
-                      <span className="dioramas-landmark-kicker">{landmark.kicker}</span>
-                      <span className="dioramas-landmark-name">{landmark.name}</span>
-                    </span>
-                    <CaretRight size={16} aria-hidden="true" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="dioramas-panel dioramas-info" aria-live="polite">
-            {selected ? (
-              <>
-                <p className="dioramas-info-kicker">{selected.kicker}</p>
-                <h2>{selected.name}</h2>
-                <p>{selected.description}</p>
-                <p className="dioramas-fact">{selected.fact}</p>
-                <a
-                  className="dioramas-source"
-                  href={selected.source.url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Source: {selected.source.label}
-                </a>
-              </>
-            ) : (
-              <>
-                <p className="dioramas-info-kicker">
-                  <Cube size={14} aria-hidden="true" /> The scene
-                </p>
-                <h2>{scene.tagline}</h2>
-                <p>
-                  Choose a landmark from the list, or tap one of the glowing markers in the scene.
-                  The camera will move in for a closer look.
-                </p>
-                <p className="dioramas-fact">
-                  {scene.province} · {scene.name}
-                </p>
-              </>
-            )}
-          </div>
-
-          <div className="dioramas-panel dioramas-sources">
-            <h2>Sources</h2>
-            <ul>
-              {scene.sources.map((source) => (
-                <li key={source.url}>
-                  <a href={source.url} target="_blank" rel="noreferrer noopener">
-                    {source.label}
+                    Source: {selected.source.label}
                   </a>
-                </li>
-              ))}
-            </ul>
-            <p>
-              Landmark positions and terrain are an artistic interpretation, not a survey. Facts
-              follow the linked references.
-            </p>
-          </div>
-        </aside>
-      </div>
+                </>
+              ) : (
+                <>
+                  <p className="dioramas-info-kicker">
+                    <Cube size={14} aria-hidden="true" /> The scene
+                  </p>
+                  <h2>{scene.tagline}</h2>
+                  <p>
+                    Choose a landmark from the list, or tap one of the glowing markers in the scene.
+                    The camera will move in for a closer look.
+                  </p>
+                  <p className="dioramas-fact">
+                    {scene.province} · {scene.name}
+                  </p>
+                </>
+              )}
+            </div>
+
+            <div className="dioramas-panel dioramas-sources">
+              <h2>Sources</h2>
+              <ul>
+                {scene.sources.map((source) => (
+                  <li key={source.url}>
+                    <a href={source.url} target="_blank" rel="noreferrer noopener">
+                      {source.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p>
+                Landmark positions and terrain are an artistic interpretation, not a survey. Facts
+                follow the linked references.
+              </p>
+            </div>
+          </aside>
+        </div>
+      ) : null}
     </section>
   );
 }

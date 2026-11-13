@@ -1,26 +1,14 @@
 "use client";
-import { useState } from "react";
-import dynamic from "next/dynamic";
+import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { ArrowUpRight, Cube, GridFour, MagnifyingGlass, X } from "@phosphor-icons/react";
+import { ArrowUpRight, GlobeHemisphereEast, MagnifyingGlass, X } from "@phosphor-icons/react";
 import { cities } from "../lib/data";
 import { CityCard } from "./GuideCards";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
-import { benchoAudio } from "../lib/bencho-audio";
-
-const SouthAfricaDioramaMap = dynamic(() => import("./SouthAfricaDioramaMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="diorama-map-loading" role="status">
-      Loading 3D Province Puzzle…
-    </div>
-  ),
-});
 
 export default function CityDirectory({ compact = false }: { compact?: boolean }) {
   const pathname = usePathname();
   const params = useSearchParams();
-  const [show3dMap, setShow3dMap] = useState(!compact);
   const province = params.get("province") || "All provinces";
   const query = params.get("q") || "";
   const setFilter = (name: string, value: string) => {
@@ -56,36 +44,15 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
         <div>
           <h2 id="city-directory-title">Cities</h2>
         </div>
-        {!compact && (
-          <button
-            type="button"
-            className="atlas-button citylit-view-toggle-btn"
-            onClick={() => {
-              benchoAudio.playLiquidToggle(!show3dMap);
-              setShow3dMap((v) => !v);
-            }}
-            aria-pressed={show3dMap}
-            aria-label={show3dMap ? "Switch to grid only" : "View 3D Province Puzzle"}
-          >
-            {show3dMap ? <GridFour size={17} /> : <Cube size={17} />}
-            {show3dMap ? "Hide 3D Map" : "3D Province Puzzle"}
-          </button>
-        )}
       </div>
 
-      {!compact && show3dMap && (
-        <div className="citylit-directory-3d-map-stage">
-          <SouthAfricaDioramaMap
-            selectedProvince={province === "All provinces" ? null : province}
-            onSelectProvince={(name) => {
-              benchoAudio.playTap(800);
-              setProvince(name);
-            }}
-          />
-        </div>
-      )}
-
       <div className="atlas-directory-tools">
+        {!compact && (
+          <Link href="/dioramas?scope=globe" className="atlas-button citylit-view-toggle-btn">
+            <GlobeHemisphereEast size={17} aria-hidden="true" />
+            3D Globe & Provinces
+          </Link>
+        )}
         <label className="atlas-search">
           <MagnifyingGlass size={20} aria-hidden="true" />
           <span className="sr-only">Search city guides</span>

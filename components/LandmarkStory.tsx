@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,8 +11,8 @@ import {
   MapPin,
   ShareNetwork,
 } from "@phosphor-icons/react";
-import { landmarkSources, places } from "../lib/data";
-import { landmarkVenue, type GuideCity } from "../lib/discovery-guide";
+import { landmarkSources } from "../lib/data";
+import { landmarkVenue, togglePlaceInDay, type GuideCity } from "../lib/discovery-guide";
 import GuideShell from "./GuideShell";
 import Gallery from "./Gallery";
 import SlideToConfirm from "./ui/SlideToConfirm";
@@ -21,7 +21,6 @@ import LiquidTabs from "./ui/LiquidTabs";
 import ReaderCard from "./ui/ReaderCard";
 import { MdxCallout, MdxCodeBlock, MdxTable } from "./ui/mdxcn";
 import { useDiscovery } from "./useDiscovery";
-import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { benchoAudio } from "../lib/bencho-audio";
 
 export default function LandmarkStory({ city, index }: { city: GuideCity; index: number }) {
@@ -33,6 +32,7 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
     "overview",
   );
   const [message, setMessage] = useState("");
+  const tabsId = useId();
 
   const heroImage = record?.images[0];
   const inDay = place ? state.itinerary.includes(place.id) : false;
@@ -51,31 +51,9 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
   };
 
   const handleToggleDay = () => {
-    if (!place) {
-      setMessage("This landmark is an observational monument without a venue record.");
-      return;
-    }
-    const first = places.find((p) => p.id === state.itinerary[0]);
-    if (!inDay && first && first.city !== place.city) {
-      setMessage("Your day belongs to another destination. Clear it in My day first.");
-      return;
-    }
-    if (!inDay && state.itinerary.length >= MAX_TRIP_STOPS) {
-      setMessage(`Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`);
-      return;
-    }
-    const saved = update((prev) => ({
-      itinerary: inDay
-        ? prev.itinerary.filter((id) => id !== place.id)
-        : Array.from(new Set([...prev.itinerary, place.id])),
-    }));
-    setMessage(
-      saved
-        ? inDay
-          ? "Removed from your day."
-          : "Added to your day."
-        : "This browser could not save your day. Allow site storage and try again.",
-    );
+    const result = togglePlaceInDay(place, state.itinerary, update);
+    setMessage(result.message);
+    return result.ok;
   };
 
   return (
@@ -167,6 +145,8 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           <LiquidTabs
             variant="folder"
             ariaLabel="Landmark sections"
+            idPrefix={`${tabsId}-tab`}
+            panelIdPrefix={`${tabsId}-panel`}
             value={activeTab}
             onChange={(id) => {
               benchoAudio.playTap(780);
@@ -184,7 +164,12 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
         {/* Tab Panels */}
         <div className="citylit-detail-body">
           {activeTab === "overview" && (
-            <div className="citylit-tab-panel">
+            <div
+              className="citylit-tab-panel"
+              id={`${tabsId}-panel-overview`}
+              role="tabpanel"
+              aria-labelledby={`${tabsId}-tab-overview`}
+            >
               <p className="citylit-lead-desc">{city.descriptions[index]}</p>
               {record?.images.length ? (
                 <Gallery images={record.images} context="landmark" name={name} />
@@ -193,7 +178,12 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           )}
 
           {activeTab === "history" && (
-            <div className="citylit-tab-panel">
+            <div
+              className="citylit-tab-panel"
+              id={`${tabsId}-panel-history`}
+              role="tabpanel"
+              aria-labelledby={`${tabsId}-tab-history`}
+            >
               {record?.about ? (
                 <div className="citylit-history-reader-stack">
                   <ReaderCard
@@ -221,7 +211,12 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           )}
 
           {activeTab === "facts" && (
-            <div className="citylit-tab-panel">
+            <div
+              className="citylit-tab-panel"
+              id={`${tabsId}-panel-facts`}
+              role="tabpanel"
+              aria-labelledby={`${tabsId}-tab-facts`}
+            >
               {record?.facts?.length ? (
                 <MdxTable
                   caption={`${name} · Reference facts`}
@@ -237,7 +232,12 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           )}
 
           {activeTab === "sources" && (
-            <div className="citylit-tab-panel">
+            <div
+              className="citylit-tab-panel"
+              id={`${tabsId}-panel-sources`}
+              role="tabpanel"
+              aria-labelledby={`${tabsId}-tab-sources`}
+            >
               <MdxCallout tone="verified" title="Research & attribution">
                 <p>
                   This landmark story is researched from publicly accessible historical records and
@@ -269,12 +269,12 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
               confirmedLabel="In your day · Tap to remove"
               isConfirmed={inDay}
               onConfirm={() => {
-                benchoAudio.playConfirm();
-                if (!inDay) handleToggleDay();
+                const ok = !inDay ? handleToggleDay() : true;
+                if (ok) benchoAudio.playConfirm();
+                return ok;
               }}
               onReset={() => {
-                benchoAudio.playClick(440);
-                if (inDay) handleToggleDay();
+                if (!inDay || handleToggleDay()) benchoAudio.playClick(440);
               }}
             />
           </div>

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { benchoAudio } from "../../lib/bencho-audio";
 
 export interface DockItemData {
@@ -26,6 +26,8 @@ export function MagnifyingDock({
   ariaLabel = "Mobile navigation",
   className = "",
 }: MagnifyingDockProps) {
+  const reduced = useReducedMotion();
+
   return (
     <nav
       className={`atlas-native-dock citylit-bottom-dock bencho-magnifying-dock ${className}`}
@@ -49,7 +51,9 @@ export function MagnifyingDock({
               layoutId="citylit-dock-active-pill"
               className="citylit-dock-pill bencho-dock-pill"
               aria-hidden="true"
-              transition={{ type: "spring", stiffness: 380, damping: 28 }}
+              transition={
+                reduced ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 28 }
+              }
             />
           ) : null}
         </Link>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookmarkSimple, MapPin, Mountains } from "@phosphor-icons/react";
+import { BookmarkSimple, Compass, MapPin, Mountains } from "@phosphor-icons/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import BrandWordmark from "./BrandWordmark";
 import { useEffect, useState, type ReactNode } from "react";
@@ -64,10 +64,10 @@ export default function GuideShell({
 
   const tabParam = searchParams.get("tab");
   const hasTrip = !!searchParams.get("trip");
+  const isExploreActive = pathname === "/";
   const isDayActive =
     pathname === "/explore" ? tabParam === "day" || hasTrip : pathname.startsWith("/explore");
-  const isCitiesActive =
-    pathname === "/" || pathname === "/destinations" || pathname.startsWith("/provinces");
+  const isCitiesActive = pathname === "/destinations" || pathname.startsWith("/provinces");
   const isDioramasActive = pathname.startsWith("/dioramas");
 
   return (
@@ -83,9 +83,16 @@ export default function GuideShell({
         </Link>
         <nav aria-label="Main navigation">
           <Link
+            href="/"
+            className="citylit-header-nav-link"
+            aria-current={isExploreActive ? "page" : undefined}
+          >
+            <Compass size={16} aria-hidden="true" /> Explore
+          </Link>
+          <Link
             href="/destinations"
             className="citylit-header-nav-link"
-            aria-current={pathname === "/destinations" ? "page" : undefined}
+            aria-current={isCitiesActive ? "page" : undefined}
           >
             <MapPin size={16} aria-hidden="true" /> Cities
           </Link>
@@ -116,6 +123,13 @@ export default function GuideShell({
 
       <MagnifyingDock
         items={[
+          {
+            href: "/",
+            label: "Explore",
+            isActive: isExploreActive,
+            icon: <Compass size={22} aria-hidden="true" weight="regular" />,
+            activeIcon: <Compass size={22} aria-hidden="true" weight="fill" />,
+          },
           {
             href: "/destinations",
             label: "Cities",

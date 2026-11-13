@@ -13,10 +13,13 @@
    1. Theme Tokens (Dark default + Light / Day overhaul)
    -------------------------------------------------------------------------- */
 
-:root[data-theme="day"] {
+:root[data-theme="day"],
+:root[data-theme="day"] .reference-guide,
+:root[data-theme="day"] .field-guide,
+:root[data-theme="day"] .category-page {
   --bg: #f5f1e8;
   --surface: #ffffff;
-  --surface-glass: rgba(255, 255, 255, 0.9);
+  --surface-glass: rgba(255, 255, 255, 0.92);
   --ink: #171920;
   --muted: #4b5563;
   --line: rgba(23, 25, 32, 0.12);
@@ -28,8 +31,8 @@
   --citylit-reference-panel-raised: #fbf9f5;
   --citylit-reference-border: rgba(23, 25, 32, 0.11);
   --citylit-reference-text: #171920;
-  --citylit-reference-muted: #4b5563;
-  --citylit-reference-dim: #6b7280;
+  --citylit-reference-muted: #374151;
+  --citylit-reference-dim: #4b5563;
   --citylit-reference-purple: #5b2fc0;
   --citylit-reference-purple-soft: rgba(91, 47, 192, 0.12);
 
@@ -38,31 +41,38 @@
   --co-surface-bright: #ffffff;
   --co-surface-lowest: #ffffff;
   --co-surface-low: #fbf9f5;
-  --co-surface-container: #f0ece3;
-  --co-surface-high: #e7e2d7;
+  --co-surface-container: #efeae0;
+  --co-surface-high: #e6e0d4;
   --co-surface-highest: #dfd9cc;
   --co-on-surface: #171920;
-  --co-on-surface-variant: #4b5563;
-  --co-outline: #6b7280;
+  --co-on-surface-variant: #374151;
+  --co-outline: #4b5563;
   --co-outline-variant: rgba(23, 25, 32, 0.14);
   --co-primary: #5b2fc0;
   --co-primary-container: #5b2fc0;
   --co-on-primary-container: #ffffff;
   --co-tertiary: #5b2fc0;
-  --co-glass: rgba(255, 255, 255, 0.88);
+  --co-glass: rgba(255, 255, 255, 0.9);
   --co-glass-border: rgba(23, 25, 32, 0.12);
   --co-text-primary: #171920;
-  --co-text-secondary: #4b5563;
-  --co-text-muted: #6b7280;
+  --co-text-secondary: #374151;
+  --co-text-muted: #4b5563;
 
   --citylit-surface: #ffffff;
   --citylit-surface-raised: #fbf9f5;
   --citylit-hairline: rgba(23, 25, 32, 0.11);
   --citylit-text: #171920;
-  --citylit-quiet: #4b5563;
+  --citylit-quiet: #374151;
   --citylit-violet: #5b2fc0;
   --citylit-violet-strong: #4c23a8;
   --citylit-violet-soft: rgba(91, 47, 192, 0.12);
+  --citylit-reference-shadow:
+    0 4px 14px rgba(23, 25, 32, 0.05), 0 18px 42px -12px rgba(23, 25, 32, 0.11);
+  --pin-shadow-card:
+    0 1px 2px rgba(23, 25, 32, 0.04), 0 8px 24px -6px rgba(23, 25, 32, 0.07),
+    0 20px 40px -16px rgba(23, 25, 32, 0.05);
+  --pin-shadow-floating:
+    0 4px 12px rgba(23, 25, 32, 0.06), 0 18px 42px -12px rgba(23, 25, 32, 0.12);
 }
 
 /* Light theme readability across home, weather, search, cards, header, and stages */
@@ -1180,52 +1190,7 @@ textarea::placeholder {
   opacity: 1 !important;
 }
 
-/* --- Light Mode (Explicit [data-theme="day"] AND System Light) --- */
-:root[data-theme="day"],
-:root[data-theme="day"] .reference-guide,
-:root[data-theme="day"] .field-guide,
-:root[data-theme="day"] .category-page {
-  --bg: #f5f1e8;
-  --surface: #ffffff;
-  --surface-glass: rgba(255, 255, 255, 0.92);
-  --ink: #171920;
-  --muted: #4b5563;
-  --line: rgba(23, 25, 32, 0.12);
-  --accent: #5b2fc0;
-  --accent-ink: #ffffff;
-  --citylit-reference-bg: #f5f1e8;
-  --citylit-reference-panel: #ffffff;
-  --citylit-reference-panel-raised: #fbf9f5;
-  --citylit-reference-border: rgba(23, 25, 32, 0.11);
-  --citylit-reference-text: #171920;
-  --citylit-reference-muted: #374151;
-  --citylit-reference-dim: #4b5563;
-  --citylit-reference-purple: #5b2fc0;
-  --citylit-reference-purple-soft: rgba(91, 47, 192, 0.12);
-  --co-surface: #f5f1e8;
-  --co-surface-bright: #ffffff;
-  --co-surface-low: #fbf9f5;
-  --co-surface-container: #efeae0;
-  --co-surface-high: #e6e0d4;
-  --co-on-surface: #171920;
-  --co-on-surface-variant: #374151;
-  --co-outline: #4b5563;
-  --co-text-primary: #171920;
-  --co-text-secondary: #374151;
-  --co-text-muted: #4b5563;
-  --citylit-surface: #ffffff;
-  --citylit-surface-raised: #fbf9f5;
-  --citylit-text: #171920;
-  --citylit-quiet: #374151;
-  --citylit-reference-shadow:
-    0 4px 14px rgba(23, 25, 32, 0.05), 0 18px 42px -12px rgba(23, 25, 32, 0.11);
-  --pin-shadow-card:
-    0 1px 2px rgba(23, 25, 32, 0.04), 0 8px 24px -6px rgba(23, 25, 32, 0.07),
-    0 20px 40px -16px rgba(23, 25, 32, 0.05);
-  --pin-shadow-floating:
-    0 4px 12px rgba(23, 25, 32, 0.06), 0 18px 42px -12px rgba(23, 25, 32, 0.12);
-}
-
+/* --- Light Mode (Consolidated Day selectors + System Light Parity) --- */
 :root[data-theme="day"] .citylit-hero-eyebrow {
   color: #5b2fc0 !important;
 }
@@ -1282,20 +1247,34 @@ textarea::placeholder {
     --citylit-reference-purple: #5b2fc0;
     --citylit-reference-purple-soft: rgba(91, 47, 192, 0.12);
     --co-surface: #f5f1e8;
+    --co-surface-dim: #ebe5d9;
     --co-surface-bright: #ffffff;
+    --co-surface-lowest: #ffffff;
     --co-surface-low: #fbf9f5;
     --co-surface-container: #efeae0;
     --co-surface-high: #e6e0d4;
+    --co-surface-highest: #dfd9cc;
     --co-on-surface: #171920;
     --co-on-surface-variant: #374151;
     --co-outline: #4b5563;
+    --co-outline-variant: rgba(23, 25, 32, 0.14);
+    --co-primary: #5b2fc0;
+    --co-primary-container: #5b2fc0;
+    --co-on-primary-container: #ffffff;
+    --co-tertiary: #5b2fc0;
+    --co-glass: rgba(255, 255, 255, 0.9);
+    --co-glass-border: rgba(23, 25, 32, 0.12);
     --co-text-primary: #171920;
     --co-text-secondary: #374151;
     --co-text-muted: #4b5563;
     --citylit-surface: #ffffff;
     --citylit-surface-raised: #fbf9f5;
+    --citylit-hairline: rgba(23, 25, 32, 0.11);
     --citylit-text: #171920;
     --citylit-quiet: #374151;
+    --citylit-violet: #5b2fc0;
+    --citylit-violet-strong: #4c23a8;
+    --citylit-violet-soft: rgba(91, 47, 192, 0.12);
     --citylit-reference-shadow:
       0 4px 14px rgba(23, 25, 32, 0.05), 0 18px 42px -12px rgba(23, 25, 32, 0.11);
     --pin-shadow-card:
@@ -1332,6 +1311,22 @@ textarea::placeholder {
     color: #5b2fc0 !important;
   }
 
+  :root:not([data-theme="night"]) .reference-home .living-atlas-hero h1,
+  :root:not([data-theme="night"]) .reference-home h2:not(.citylit-featured-meta h2),
+  :root:not([data-theme="night"]) .reference-home h3,
+  :root:not([data-theme="night"]) .dioramas-header h1,
+  :root:not([data-theme="night"]) .atlas-directory-header h1 {
+    color: #171920;
+  }
+
+  :root:not([data-theme="night"]) .reference-home-subtitle,
+  :root:not([data-theme="night"]) .citylit-section-sub,
+  :root:not([data-theme="night"]) .dioramas-lede,
+  :root:not([data-theme="night"]) .dioramas-eyebrow,
+  :root:not([data-theme="night"]) .atlas-eyebrow {
+    color: #4b5563;
+  }
+
   :root:not([data-theme="night"]) .citylit-dock-item {
     color: #374151 !important;
   }
@@ -1343,10 +1338,12 @@ textarea::placeholder {
   }
 
   :root:not([data-theme="night"]) .weather-widget,
+  :root:not([data-theme="night"]) .citylit-weather-controller,
   :root:not([data-theme="night"]) .reference-search,
   :root:not([data-theme="night"]) .citylit-3d-canvas-card,
   :root:not([data-theme="night"]) .citylit-plan-card,
   :root:not([data-theme="night"]) .citylit-popular-card,
+  :root:not([data-theme="night"]) .living-atlas-city-card,
   :root:not([data-theme="night"]) .dioramas-panel,
   :root:not([data-theme="night"]) .atlas-city-card,
   :root:not([data-theme="night"]) .atlas-place-card,
@@ -1357,24 +1354,109 @@ textarea::placeholder {
     box-shadow: var(--pin-shadow-card) !important;
   }
 
+  :root:not([data-theme="night"]) .weather-audio-btn,
+  :root:not([data-theme="night"]) .weather-scrub-btn,
+  :root:not([data-theme="night"]) .weather-cond-pill,
+  :root:not([data-theme="night"]) .citylit-filter-pill {
+    background: #ffffff !important;
+    border-color: rgba(23, 25, 32, 0.12) !important;
+    color: #374151 !important;
+  }
+
+  :root:not([data-theme="night"]) .citylit-filter-pill.is-active {
+    background: #171920 !important;
+    border-color: #171920 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px -4px rgba(23, 25, 32, 0.16) !important;
+  }
+
+  :root:not([data-theme="night"]) .living-atlas-explorer .easyui-tabs-list,
+  :root:not([data-theme="night"]) .living-atlas-moods {
+    background: #ebe5d9 !important;
+    border-color: rgba(23, 25, 32, 0.12) !important;
+  }
+
+  :root:not([data-theme="night"]) .living-atlas-explorer .easyui-tab:not([aria-selected="true"]) {
+    color: #374151 !important;
+  }
+
+  :root:not([data-theme="night"]) .citylit-inspect-btn,
+  :root:not([data-theme="night"]) .citylit-plan-secondary,
+  :root:not([data-theme="night"]) .citylit-see-all-link,
+  :root:not([data-theme="night"]) .atlas-stage-actions :is(a, button),
+  :root:not([data-theme="night"]) .atlas-button,
+  :root:not([data-theme="night"]) .easyui-magnetic-button {
+    background: #fbf9f5 !important;
+    border-color: rgba(23, 25, 32, 0.14) !important;
+    color: #171920 !important;
+  }
+
+  :root:not([data-theme="night"]) .atlas-stage-actions :is(a, button)[aria-pressed="true"],
+  :root:not([data-theme="night"]) .atlas-button[aria-pressed="true"],
+  :root:not([data-theme="night"]) .adventure-card-add[aria-pressed="true"],
+  :root:not([data-theme="night"]) .atlas-stage-chips button[aria-pressed="true"] {
+    background: #5b2fc0 !important;
+    border-color: #5b2fc0 !important;
+    color: #ffffff !important;
+  }
+
+  :root:not([data-theme="night"]) .dioramas-control {
+    color: #4b5563;
+  }
+
+  :root:not([data-theme="night"]) .dioramas-control.is-active {
+    background: #171920;
+    border-color: #171920;
+    color: #ffffff;
+  }
+
   :root:not([data-theme="night"]) .weather-copy strong,
   :root:not([data-theme="night"]) .weather-badge-condition strong,
   :root:not([data-theme="night"]) .citylit-popular-name,
   :root:not([data-theme="night"]) .citylit-plan-copy h3,
+  :root:not([data-theme="night"]) .citylit-3d-canvas-head h2,
   :root:not([data-theme="night"]) .dioramas-panel h2,
-  :root:not([data-theme="night"]) .dioramas-tab-name {
+  :root:not([data-theme="night"]) .dioramas-tab-name,
+  :root:not([data-theme="night"]) .atlas-stage-sheet h2,
+  :root:not([data-theme="night"]) .atlas-stage-sheet h3,
+  :root:not([data-theme="night"]) .atlas-stage-sheet p,
+  :root:not([data-theme="night"]) .atlas-stage-description,
+  :root:not([data-theme="night"]) .atlas-stage-facts dd,
+  :root:not([data-theme="night"]) .reference-search input {
     color: #171920 !important;
   }
 
   :root:not([data-theme="night"]) .weather-copy span,
+  :root:not([data-theme="night"]) .weather-badge-condition span,
+  :root:not([data-theme="night"]) .weather-badge-time,
   :root:not([data-theme="night"]) .dioramas-stage-hint,
   :root:not([data-theme="night"]) .citylit-settings-tab:not(.is-active),
   :root:not([data-theme="night"]) .reference-card .address,
   :root:not([data-theme="night"]) .adventure-card .address,
   :root:not([data-theme="night"]) .adventure-card p,
   :root:not([data-theme="night"]) .citylit-popular-prov,
-  :root:not([data-theme="night"]) .citylit-popular-meta {
+  :root:not([data-theme="night"]) .citylit-popular-meta,
+  :root:not([data-theme="night"]) .citylit-plan-copy p,
+  :root:not([data-theme="night"]) .citylit-plan-status,
+  :root:not([data-theme="night"]) .dioramas-panel p,
+  :root:not([data-theme="night"]) .dioramas-tab-province,
+  :root:not([data-theme="night"]) .atlas-stage-facts dt,
+  :root:not([data-theme="night"]) .reference-search svg {
     color: #4b5563 !important;
+  }
+
+  :root:not([data-theme="night"]) .atlas-stage-facts a,
+  :root:not([data-theme="night"]) .atlas-plan-stop a,
+  :root:not([data-theme="night"]) .atlas-source-link,
+  :root:not([data-theme="night"]) .dioramas-source,
+  :root:not([data-theme="night"]) .dioramas-sources a {
+    color: #5b2fc0 !important;
+  }
+
+  :root:not([data-theme="night"]) .reference-search-shortcut {
+    background: #f0ece3 !important;
+    color: #4b5563 !important;
+    border-color: rgba(23, 25, 32, 0.1) !important;
   }
 
   :root:not([data-theme="night"]) input::placeholder,

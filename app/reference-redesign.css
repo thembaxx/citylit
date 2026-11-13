@@ -5387,7 +5387,7 @@
 }
 
 .reference-guide .citylit-bottom-dock .bencho-dock-item-wrapper {
-  flex: 0 1 auto;
+  flex: 1 1 0;
   min-width: 0;
 }
 

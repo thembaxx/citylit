@@ -1,4 +1,5 @@
 import { cities, cityImages, landmarkSources, places, categorySlug, type Place } from "./data";
+import { MAX_TRIP_STOPS, type Discovery } from "./client-data";
 
 export type GuideCity = (typeof cities)[number];
 export const venuePath = (place: Place) =>
@@ -47,4 +48,52 @@ export function planningStops(city: string) {
   const culture = local.find((place) => place.category === "Entertainment");
   const extra = local.find((place) => place.id !== nature?.id && place.id !== culture?.id);
   return [nature, culture, extra].filter((place): place is Place => !!place);
+}
+
+/** Toggle a venue in the active single-destination day plan, enforcing city and stop limits. */
+export function togglePlaceInDay(
+  place: Place | undefined,
+  itinerary: string[],
+  update: (change: (previous: Discovery) => Partial<Discovery>) => boolean,
+): { ok: boolean; added: boolean; message: string } {
+  if (!place) {
+    return {
+      ok: false,
+      added: false,
+      message: "This landmark is an observational monument without a venue record.",
+    };
+  }
+  const inDay = itinerary.includes(place.id);
+  const first = places.find((item) => item.id === itinerary[0]);
+  if (!inDay && first && first.city !== place.city) {
+    return {
+      ok: false,
+      added: false,
+      message: "Your day belongs to another destination. Clear it in My day first.",
+    };
+  }
+  if (!inDay && itinerary.length >= MAX_TRIP_STOPS) {
+    return {
+      ok: false,
+      added: false,
+      message: `Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`,
+    };
+  }
+  const saved = update((prev) => ({
+    itinerary: inDay
+      ? prev.itinerary.filter((id) => id !== place.id)
+      : Array.from(new Set([...prev.itinerary, place.id])),
+  }));
+  if (!saved) {
+    return {
+      ok: false,
+      added: false,
+      message: "This browser could not save your day. Allow site storage and try again.",
+    };
+  }
+  return {
+    ok: true,
+    added: !inDay,
+    message: inDay ? "Removed from your day." : "Added to your day.",
+  };
 }

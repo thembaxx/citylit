@@ -1,18 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Cube, MapPin, ShareNetwork } from "@phosphor-icons/react";
 import type { Place } from "../lib/data";
-import { type GuideCity } from "../lib/discovery-guide";
+import { togglePlaceInDay, type GuideCity } from "../lib/discovery-guide";
 import { places } from "../lib/data";
 import Gallery from "./Gallery";
 import PlaceContext from "./PlaceContext";
 import PlaceActions from "./PlaceActions";
 import SavePlace from "./SavePlace";
 import { useDiscovery } from "./useDiscovery";
-import { MAX_TRIP_STOPS } from "../lib/client-data";
+import { handleRovingKeyDown } from "../lib/ui-primitives";
 import SlideToConfirm from "./ui/SlideToConfirm";
 import DynamicIslandToast from "./ui/DynamicIslandToast";
 import BenchoComparisonSlider from "./ui/BenchoComparisonSlider";
@@ -22,9 +22,18 @@ import { benchoAudio } from "../lib/bencho-audio";
 
 export type DetailTab = "overview" | "history" | "nearby" | "tips";
 
+const DETAIL_TABS: Array<{ id: DetailTab; label: string }> = [
+  { id: "overview", label: "Overview" },
+  { id: "history", label: "History" },
+  { id: "nearby", label: "Nearby" },
+  { id: "tips", label: "Tips" },
+];
+
 export default function VenueDetailView({ city, place }: { city: GuideCity; place: Place }) {
   const [activeTab, setActiveTab] = useState<DetailTab>("overview");
   const [message, setMessage] = useState("");
+  const tabsId = useId();
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const { state, update } = useDiscovery();
   const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, ${place.address}, ${city.name}, South Africa`)}`;
   const heroImage = place.images[0];
@@ -34,10 +43,11 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
 
   const handleShare = async () => {
     try {
-      if (navigator.share) {
+      if (typeof navigator !== "undefined" && navigator.share) {
         await navigator.share({ title: place.name, url: location.href });
-      } else {
+      } else if (typeof navigator !== "undefined") {
         await navigator.clipboard.writeText(location.href);
+        setMessage("Link copied to clipboard");
       }
     } catch {
       // Ignored
@@ -45,27 +55,9 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
   };
 
   const handleToggleDay = () => {
-    const first = places.find((p) => p.id === state.itinerary[0]);
-    if (!inDay && first && first.city !== place.city) {
-      setMessage("Your day belongs to another destination. Clear it in My day first.");
-      return;
-    }
-    if (!inDay && state.itinerary.length >= MAX_TRIP_STOPS) {
-      setMessage(`Your day has reached ${MAX_TRIP_STOPS} stops. Remove a stop first.`);
-      return;
-    }
-    const saved = update((prev) => ({
-      itinerary: inDay
-        ? prev.itinerary.filter((id) => id !== place.id)
-        : Array.from(new Set([...prev.itinerary, place.id])),
-    }));
-    setMessage(
-      saved
-        ? inDay
-          ? "Removed from your day."
-          : "Added to your day."
-        : "This browser could not save your day. Allow site storage and try again.",
-    );
+    const result = togglePlaceInDay(place, state.itinerary, update);
+    setMessage(result.message);
+    return result.ok;
   };
 
   return (
@@ -140,52 +132,49 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
 
       {/* Tabs Row (Image 3 Screen 4: Overview, History, Nearby, Tips) */}
       <div className="citylit-detail-tabs-bar" role="tablist" aria-label="Place details">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activeTab === "overview"}
-          className={`citylit-detail-tab ${activeTab === "overview" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("overview")}
-        >
-          Overview
-          {activeTab === "overview" && <span className="citylit-detail-tab-line" />}
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activeTab === "history"}
-          className={`citylit-detail-tab ${activeTab === "history" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("history")}
-        >
-          History
-          {activeTab === "history" && <span className="citylit-detail-tab-line" />}
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activeTab === "nearby"}
-          className={`citylit-detail-tab ${activeTab === "nearby" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("nearby")}
-        >
-          Nearby
-          {activeTab === "nearby" && <span className="citylit-detail-tab-line" />}
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activeTab === "tips"}
-          className={`citylit-detail-tab ${activeTab === "tips" ? "is-active" : ""}`}
-          onClick={() => setActiveTab("tips")}
-        >
-          Tips
-          {activeTab === "tips" && <span className="citylit-detail-tab-line" />}
-        </button>
+        {DETAIL_TABS.map((tab, idx) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              ref={(el) => {
+                tabRefs.current[idx] = el;
+              }}
+              type="button"
+              role="tab"
+              id={`${tabsId}-tab-${tab.id}`}
+              aria-selected={isActive}
+              aria-controls={`${tabsId}-panel-${tab.id}`}
+              tabIndex={isActive ? 0 : -1}
+              className={`citylit-detail-tab ${isActive ? "is-active" : ""}`}
+              onClick={() => setActiveTab(tab.id)}
+              onKeyDown={(e) =>
+                handleRovingKeyDown(
+                  e,
+                  idx,
+                  DETAIL_TABS.length,
+                  tabRefs,
+                  (nextIdx) => setActiveTab(DETAIL_TABS[nextIdx].id),
+                  "horizontal",
+                )
+              }
+            >
+              {tab.label}
+              {isActive && <span className="citylit-detail-tab-line" />}
+            </button>
+          );
+        })}
       </div>
 
       {/* Tab Panels */}
       <div className="citylit-detail-body">
         {activeTab === "overview" && (
-          <div className="citylit-tab-panel">
+          <div
+            className="citylit-tab-panel"
+            id={`${tabsId}-panel-overview`}
+            role="tabpanel"
+            aria-labelledby={`${tabsId}-tab-overview`}
+          >
             <p className="citylit-lead-desc">{place.description}</p>
 
             {place.images.length > 1 && (
@@ -250,7 +239,12 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
         )}
 
         {activeTab === "history" && (
-          <div className="citylit-tab-panel">
+          <div
+            className="citylit-tab-panel"
+            id={`${tabsId}-panel-history`}
+            role="tabpanel"
+            aria-labelledby={`${tabsId}-tab-history`}
+          >
             <div className="citylit-story-card">
               <h2>Heritage &amp; Story</h2>
               <PlaceContext place={place} />
@@ -266,7 +260,12 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
         )}
 
         {activeTab === "nearby" && (
-          <div className="citylit-tab-panel">
+          <div
+            className="citylit-tab-panel"
+            id={`${tabsId}-panel-nearby`}
+            role="tabpanel"
+            aria-labelledby={`${tabsId}-tab-nearby`}
+          >
             <h2>Nearby in {city.name}</h2>
             <div className="citylit-nearby-grid">
               {nearbyPlaces.map((np) => (
@@ -292,7 +291,12 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
         )}
 
         {activeTab === "tips" && (
-          <div className="citylit-tab-panel">
+          <div
+            className="citylit-tab-panel"
+            id={`${tabsId}-panel-tips`}
+            role="tabpanel"
+            aria-labelledby={`${tabsId}-tab-tips`}
+          >
             <div className="citylit-tips-card">
               <h2>Practical Tips &amp; Access</h2>
               <MdxCallout
@@ -333,12 +337,12 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
           confirmedLabel="In your day · Tap to remove"
           isConfirmed={inDay}
           onConfirm={() => {
-            benchoAudio.playConfirm();
-            if (!inDay) handleToggleDay();
+            const ok = !inDay ? handleToggleDay() : true;
+            if (ok) benchoAudio.playConfirm();
+            return ok;
           }}
           onReset={() => {
-            benchoAudio.playClick(440);
-            if (inDay) handleToggleDay();
+            if (!inDay || handleToggleDay()) benchoAudio.playClick(440);
           }}
         />
       </div>

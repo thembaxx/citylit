@@ -17,6 +17,8 @@ interface LiquidTabsProps {
   onChange: (id: string) => void;
   ariaLabel: string;
   variant?: "pill" | "folder";
+  idPrefix?: string;
+  panelIdPrefix?: string;
   className?: string;
 }
 
@@ -30,9 +32,12 @@ export function LiquidTabs({
   onChange,
   ariaLabel,
   variant = "pill",
+  idPrefix,
+  panelIdPrefix,
   className = "",
 }: LiquidTabsProps) {
   const generatedId = useId();
+  const resolvedIdPrefix = idPrefix || `liquid-tab-${generatedId}`;
   const reducedMotion = useReducedMotion();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -53,8 +58,9 @@ export function LiquidTabs({
             }}
             type="button"
             role="tab"
-            id={`liquid-tab-${generatedId}-${tab.id}`}
+            id={`${resolvedIdPrefix}-${tab.id}`}
             aria-selected={isActive}
+            aria-controls={panelIdPrefix ? `${panelIdPrefix}-${tab.id}` : undefined}
             tabIndex={isActive ? 0 : -1}
             onClick={() => onChange(tab.id)}
             onKeyDown={(e) =>

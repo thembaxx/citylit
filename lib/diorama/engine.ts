@@ -155,7 +155,7 @@ export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngin
   let tween: CameraTween | null = null;
   let userMoved = false;
 
-  const clock = new THREE.Clock();
+  const timer = new THREE.Timer();
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   let pointerDown: { x: number; y: number } | null = null;
@@ -324,8 +324,9 @@ export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngin
 
   function renderLoop() {
     if (!renderer || !scene || !camera || !controls) return;
-    const dt = Math.min(0.05, clock.getDelta());
-    const time = clock.elapsedTime;
+    timer.update();
+    const dt = Math.min(0.05, timer.getDelta());
+    const time = timer.getElapsed();
 
     const target = ATMOSPHERES[atmosphereMode];
     if (reducedMotion) {
@@ -390,7 +391,7 @@ export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngin
         renderer.outputColorSpace = THREE.SRGBColorSpace;
         if (quality.shadows) {
           renderer.shadowMap.enabled = true;
-          renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+          renderer.shadowMap.type = THREE.PCFShadowMap;
         }
 
         const backend = (renderer as unknown as { backend?: { isWebGPUBackend?: boolean } })

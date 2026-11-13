@@ -315,8 +315,8 @@ function Ring({
         intensity={night ? 0.38 : 0.55}
         color={night ? "#7894c8" : "#e6b080"}
       />
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]} receiveShadow>
-        <circleGeometry args={[2.8, 32]} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, radius]} receiveShadow>
+        <circleGeometry args={[2.4, 48]} />
         <meshBasicMaterial
           color={night ? "#08080d" : "#221c16"}
           opacity={night ? 0.45 : 0.22}
@@ -330,15 +330,7 @@ function Ring({
         distance={12}
         color="#ffe8cc"
       />
-      <group
-        position={[
-          size.width > size.height ? 1.52 : size.width < 360 ? -0.18 : 0.04,
-          size.width < 760 && !items[selected]?.name.toLowerCase().includes("mcgregor museum")
-            ? 0.12
-            : 0,
-          0,
-        ]}
-      >
+      <group position={[0, 0, 0]}>
         <group ref={ring}>
           {items.map((item, index) => (
             <group

@@ -95,11 +95,22 @@
 }
 
 :root[data-theme="day"] .reference-home .living-atlas-hero h1,
-:root[data-theme="day"] .reference-home h2,
+:root[data-theme="day"] .reference-home h2:not(.citylit-featured-meta h2),
 :root[data-theme="day"] .reference-home h3,
 :root[data-theme="day"] .dioramas-header h1,
 :root[data-theme="day"] .atlas-directory-header h1 {
   color: #171920;
+}
+
+/* Featured card overlays a dark photo scrim, so keep its copy crisp white in both themes */
+.citylit-featured-meta h2,
+:root[data-theme="day"] .citylit-featured-meta h2 {
+  color: #ffffff !important;
+}
+
+.citylit-featured-meta p,
+:root[data-theme="day"] .citylit-featured-meta p {
+  color: rgba(255, 255, 255, 0.88) !important;
 }
 
 :root[data-theme="day"] .reference-home-subtitle,
@@ -226,8 +237,56 @@
 :root[data-theme="day"] .atlas-plan-stop a,
 :root[data-theme="day"] .atlas-source-link,
 :root[data-theme="day"] .dioramas-source,
-:root[data-theme="day"] .dioramas-sources a {
+:root[data-theme="day"] .dioramas-sources a,
+:root[data-theme="day"] a[href*="maps.google"],
+:root[data-theme="day"] a[href*="google.com/maps"],
+:root[data-theme="day"] a[href*="openstreetmap.org"] {
   color: #5b2fc0 !important;
+}
+
+/* Light theme: /cape-town/landmarks stage sheet, headings, body & action buttons */
+:root[data-theme="day"] .atlas-stage-sheet h2,
+:root[data-theme="day"] .atlas-stage-sheet h3,
+:root[data-theme="day"] .atlas-stage-sheet p,
+:root[data-theme="day"] .atlas-stage-description,
+:root[data-theme="day"] .atlas-stage-facts dd {
+  color: #171920 !important;
+}
+
+:root[data-theme="day"] .atlas-stage-facts dt {
+  color: #4b5563 !important;
+}
+
+:root[data-theme="day"] .atlas-stage-actions :is(a, button),
+:root[data-theme="day"] .atlas-button,
+:root[data-theme="day"] .easyui-magnetic-button {
+  background: #fbf9f5 !important;
+  border: 1px solid rgba(23, 25, 32, 0.16) !important;
+  color: #171920 !important;
+}
+
+:root[data-theme="day"] .atlas-stage-actions :is(a, button)[aria-pressed="true"],
+:root[data-theme="day"] .atlas-button[aria-pressed="true"],
+:root[data-theme="day"] .adventure-card-add[aria-pressed="true"],
+:root[data-theme="day"] .atlas-stage-chips button[aria-pressed="true"] {
+  background: #5b2fc0 !important;
+  border-color: #5b2fc0 !important;
+  color: #ffffff !important;
+}
+
+/* Light & Dark theme: "Where should we wander?" mood tabs */
+:root[data-theme="day"] .living-atlas-explorer .easyui-tabs-list,
+:root[data-theme="day"] .living-atlas-moods {
+  background: #ebe5d9 !important;
+  border-color: rgba(23, 25, 32, 0.12) !important;
+}
+
+:root[data-theme="day"] .living-atlas-explorer .easyui-tab:not([aria-selected="true"]) {
+  color: #374151 !important;
+}
+
+:root:not([data-theme="day"]) .living-atlas-explorer .easyui-tab:not([aria-selected="true"]) {
+  color: rgba(241, 245, 249, 0.86) !important;
 }
 
 :root[data-theme="day"] .citylit-inspect-btn,
@@ -800,9 +859,15 @@
 
 .citylit-theme-card.is-selected {
   border-color: var(--accent) !important;
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface)) !important;
-  color: var(--ink) !important;
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent) !important;
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface)) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 26%, transparent) !important;
+}
+
+:root:not([data-theme="day"]) .citylit-theme-card.is-selected {
+  background: rgba(139, 92, 246, 0.22) !important;
+  border-color: #a78bfa !important;
+  color: #ffffff !important;
 }
 
 :root[data-theme="day"] .citylit-theme-card {

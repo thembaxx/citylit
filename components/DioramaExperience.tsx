@@ -91,23 +91,23 @@ function detectQuality(): Quality {
   if (width < 720 || cores <= 4 || memory <= 4) {
     return {
       tier: "saver",
-      terrainSegments: 64,
-      waterSegments: 40,
-      treeCount: 0.6,
-      detail: 0.6,
-      shadows: false,
-      dpr: 1.3,
+      terrainSegments: 80,
+      waterSegments: 48,
+      treeCount: 0.7,
+      detail: 0.75,
+      shadows: true,
+      dpr: 1.75,
     };
   }
   if (width < 1100 || cores <= 8) {
     return {
       tier: "balanced",
-      terrainSegments: 96,
-      waterSegments: 64,
-      treeCount: 0.85,
-      detail: 0.8,
+      terrainSegments: 108,
+      waterSegments: 72,
+      treeCount: 0.9,
+      detail: 0.9,
       shadows: true,
-      dpr: 1.6,
+      dpr: 2,
     };
   }
   return {

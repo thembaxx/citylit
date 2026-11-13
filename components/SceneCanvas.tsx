@@ -118,16 +118,13 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
             onCreated={({ gl }) => {
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.AgXToneMapping;
-              gl.toneMappingExposure = 0.98;
-              if (!lowPower) gl.shadowMap.type = THREE.PCFSoftShadowMap;
+              gl.toneMappingExposure = 1.04;
+              if (!lowPower) gl.shadowMap.type = THREE.PCFShadowMap;
             }}
-            // A fixed 1× mobile backing buffer blurs detailed glazing and thin
-            // geometry on Retina phones. Cap the mobile buffer at 1.5× while
-            // keeping shadows and MSAA off on low-power layouts; desktop at 2×.
-            // R3F clamps this range to the device's actual pixel ratio.
-            dpr={lowPower ? [1, 1.5] : [1, 2]}
+            // Use up to 2x DPR with antialiasing for crisp silhouettes on Retina/mobile screens.
+            dpr={[1, 2]}
             gl={{
-              antialias: !lowPower,
+              antialias: true,
               alpha: true,
               stencil: false,
               powerPreference: lowPower ? "low-power" : "high-performance",

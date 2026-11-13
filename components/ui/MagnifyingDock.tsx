@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
+import { benchoAudio } from "../../lib/bencho-audio";
 
 export interface DockItemData {
   href: string;
@@ -36,6 +37,7 @@ export function MagnifyingDock({
           href={item.href}
           aria-label={item.ariaLabel || item.label}
           aria-current={item.isActive ? "page" : undefined}
+          onClick={() => benchoAudio.playTap(840)}
           className={`citylit-dock-item bencho-dock-item ${item.isActive ? "is-active" : ""} ${item.className || ""}`}
         >
           <span className="bencho-dock-icon-inner">

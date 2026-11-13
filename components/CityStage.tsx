@@ -23,6 +23,7 @@ import GuideShell from "./GuideShell";
 import { useKhwezi } from "./KhweziProvider";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
+import { benchoAudio } from "../lib/bencho-audio";
 export type StageItem = {
   name: string;
   description: string;
@@ -122,6 +123,7 @@ export default function CityStage({
     .slice(0, 3);
   const pick = (value: number, interaction: "tap" | "swipe" = "tap") => {
     feedback(interaction);
+    benchoAudio.playTap(interaction === "swipe" ? 720 : 820);
     setIndex((value + items.length) % items.length);
     setMessage("");
   };
@@ -131,10 +133,12 @@ export default function CityStage({
     if (!place) return;
     const first = places.find((row) => row.id === state.itinerary[0]);
     if (!selected && first && first.city !== city.slug) {
+      benchoAudio.playClick(360);
       setMessage("Your day belongs to another city. Clear it in My day before starting a new one.");
       return;
     }
     if (!selected && state.itinerary.length >= MAX_TRIP_STOPS) {
+      benchoAudio.playClick(360);
       setMessage("Your day is full. Remove a stop in My day first.");
       return;
     }
@@ -143,6 +147,10 @@ export default function CityStage({
         ? previous.itinerary.filter((id) => id !== place.id)
         : [...new Set([...previous.itinerary, place.id])],
     }));
+    if (saved) {
+      if (selected) benchoAudio.playClick(440);
+      else benchoAudio.playConfirm();
+    }
     setMessage(
       saved
         ? selected

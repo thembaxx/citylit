@@ -166,11 +166,16 @@ export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngin
     const night = atmosphere.night;
     sun.color.copy(DAY_SUN).lerp(GOLDEN_SUN, golden).lerp(NIGHT_SUN, night);
     sun.intensity = 2.8 + golden * 0.25 - night * 2.15;
+    sun.position.set(
+      9 + golden * 4.5 - night * 15,
+      15 - golden * 7.5 - night * 2,
+      10 - golden * 1.5 + night * 1,
+    );
     hemi.color.copy(DAY_SKY).lerp(NIGHT_SKY, night);
     hemi.groundColor.copy(DAY_GROUND).lerp(NIGHT_GROUND, night);
     hemi.intensity = 1.75 - night * 1.05;
-    fill.intensity = 0.42 - night * 0.18;
-    renderer.toneMappingExposure = 1.05 - night * 0.12 + golden * 0.05;
+    fill.intensity = 0.42 - night * 0.18 + golden * 0.08;
+    renderer.toneMappingExposure = 1.05 - night * 0.12 + golden * 0.06;
   }
 
   function applyExplode() {

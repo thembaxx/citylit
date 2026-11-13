@@ -76,7 +76,12 @@ export default function SettingsModal({
   };
 
   useEffect(() => {
-    if (isOpen) setActiveTab(initialTab);
+    if (isOpen) {
+      setActiveTab(initialTab);
+      setAudioFeedback(benchoAudio.isEnabled());
+      setAmbientAudio(benchoAudio.isAmbientEnabled());
+      benchoAudio.playModalOpen();
+    }
   }, [isOpen, initialTab]);
 
   // Accessible focus trap, initial focus, focus restore, and background inert
@@ -188,13 +193,22 @@ export default function SettingsModal({
     }));
   };
 
+  const handleClose = () => {
+    benchoAudio.playModalClose();
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
           className="citylit-settings-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: reducedMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
           style={reducedMotion ? undefined : { opacity: backdropOpacity }}
-          onClick={onClose}
+          onClick={handleClose}
           role="presentation"
         >
           <motion.div
@@ -212,13 +226,35 @@ export default function SettingsModal({
             style={reducedMotion ? undefined : { y: dragY }}
             onDragEnd={(_e, info) => {
               if (info.offset.y > 100 || info.velocity.y > 500) {
-                onClose();
+                handleClose();
               }
             }}
-            initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.96 }}
-            animate={reducedMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.97 }}
-            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            initial={
+              reducedMotion
+                ? { opacity: 0 }
+                : { opacity: 0, y: 24, scale: 0.96, filter: "blur(2px)" }
+            }
+            animate={
+              reducedMotion
+                ? { opacity: 1 }
+                : {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: "blur(0px)",
+                    transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
+                  }
+            }
+            exit={
+              reducedMotion
+                ? { opacity: 0 }
+                : {
+                    opacity: 0,
+                    y: 16,
+                    scale: 0.97,
+                    transition: { duration: 0.15, ease: [0.22, 1, 0.36, 1] },
+                  }
+            }
           >
             {/* Mobile Sheet Drag Handle */}
             <div
@@ -241,7 +277,7 @@ export default function SettingsModal({
               <button
                 type="button"
                 className="citylit-settings-close citylit-settings-close-btn"
-                onClick={onClose}
+                onClick={handleClose}
                 aria-label="Close settings"
               >
                 <X size={18} weight="bold" />

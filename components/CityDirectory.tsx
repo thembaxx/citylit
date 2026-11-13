@@ -5,6 +5,7 @@ import { ArrowUpRight, GlobeHemisphereEast, MagnifyingGlass, X } from "@phosphor
 import { cities } from "../lib/data";
 import { CityCard } from "./GuideCards";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
+import { benchoAudio } from "../lib/bencho-audio";
 
 export default function CityDirectory({ compact = false }: { compact?: boolean }) {
   const pathname = usePathname();
@@ -21,7 +22,10 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
       pathname + (search.size ? "?" + search : "") + location.hash,
     );
   };
-  const setProvince = (value: string) => setFilter("province", value);
+  const setProvince = (value: string) => {
+    benchoAudio.playTap(780);
+    setFilter("province", value);
+  };
   const setQuery = (value: string) => setFilter("q", value);
   const provinces = ["All provinces", ...new Set(cities.map((city) => city.province))];
   const selected = cities.filter(
@@ -37,9 +41,6 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
       id="cities"
       aria-labelledby="city-directory-title"
     >
-      <h2 id="city-directory-title" className="sr-only">
-        Cities
-      </h2>
       <div className="atlas-section-heading">
         <div>
           <h2 id="city-directory-title">Cities</h2>

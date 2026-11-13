@@ -39,6 +39,7 @@ import { stageModel } from "../lib/stage-models";
 import { useDiscovery } from "./useDiscovery";
 import CartographicLoader from "./CartographicLoader";
 import type { StageItem } from "./CityStage";
+import { benchoAudio } from "../lib/bencho-audio";
 
 const AfricaGlobeScope = dynamic(() => import("./AfricaGlobeScope"), {
   ssr: false,
@@ -331,11 +332,13 @@ export default function DioramaExperience() {
   }, []);
 
   const selectLandmark = useCallback((id: string) => {
+    benchoAudio.playBeaconSelect();
     setSelectedId(id);
     engineRef.current?.focus(id);
   }, []);
 
   const resetView = useCallback(() => {
+    benchoAudio.playWhoosh();
     engineRef.current?.resetView();
     setSelectedId(null);
   }, []);
@@ -365,7 +368,10 @@ export default function DioramaExperience() {
             role="tab"
             aria-selected={scope === "diorama"}
             className={`dioramas-scope-btn${scope === "diorama" ? " is-active" : ""}`}
-            onClick={() => setScope("diorama")}
+            onClick={() => {
+              benchoAudio.playTap(820);
+              setScope("diorama");
+            }}
           >
             <Mountains size={17} aria-hidden="true" />
             <span>Regional Dioramas</span>
@@ -375,7 +381,10 @@ export default function DioramaExperience() {
             role="tab"
             aria-selected={scope === "globe"}
             className={`dioramas-scope-btn${scope === "globe" ? " is-active" : ""}`}
-            onClick={() => setScope("globe")}
+            onClick={() => {
+              benchoAudio.playTap(860);
+              setScope("globe");
+            }}
           >
             <GlobeHemisphereEast size={17} aria-hidden="true" />
             <span>Africa Globe & Provinces</span>
@@ -385,7 +394,10 @@ export default function DioramaExperience() {
             role="tab"
             aria-selected={scope === "landmark"}
             className={`dioramas-scope-btn${scope === "landmark" ? " is-active" : ""}`}
-            onClick={() => setScope("landmark")}
+            onClick={() => {
+              benchoAudio.playTap(900);
+              setScope("landmark");
+            }}
           >
             <Compass size={17} aria-hidden="true" />
             <span>Cities & Landmarks</span>
@@ -423,6 +435,7 @@ export default function DioramaExperience() {
                 aria-selected={c.slug === landmarkCity?.slug}
                 className={`dioramas-tab${c.slug === landmarkCity?.slug ? " is-active" : ""}`}
                 onClick={() => {
+                  benchoAudio.playTap(780);
                   setLandmarkCitySlug(c.slug);
                   setLandmarkIndex(0);
                 }}

@@ -9,6 +9,7 @@ import boundaries from "../public/data/provinces.json";
 import { cities } from "../lib/data";
 import { DIORAMAS } from "../lib/diorama/content";
 import CartographicLoader from "./CartographicLoader";
+import { benchoAudio } from "../lib/bencho-audio";
 
 const GLOBE_RADIUS = 2.15;
 
@@ -501,7 +502,14 @@ export default function AfricaGlobeScope({
         </div>
 
         {viewMode === "province" ? (
-          <button type="button" className="globe-back-btn" onClick={() => setViewMode("globe")}>
+          <button
+            type="button"
+            className="globe-back-btn"
+            onClick={() => {
+              benchoAudio.playTap(760);
+              setViewMode("globe");
+            }}
+          >
             <ArrowLeft size={16} aria-hidden="true" />
             <span>Africa Globe</span>
           </button>
@@ -530,6 +538,7 @@ export default function AfricaGlobeScope({
               hoveredCode={hoveredCode}
               onHover={setHoveredCode}
               onSelectProvince={(code) => {
+                benchoAudio.playBeaconSelect();
                 setSelectedCode(code);
                 setViewMode("province");
               }}
@@ -564,6 +573,7 @@ export default function AfricaGlobeScope({
               type="button"
               className={`globe-province-pill${active ? " is-active" : ""}`}
               onClick={() => {
+                benchoAudio.playBeaconSelect();
                 setSelectedCode(p.code);
                 setViewMode("province");
               }}

@@ -24,7 +24,7 @@
 .dioramas-header h1 {
   margin: 0;
   color: var(--ink);
-  font-family: var(--font-display, Fraunces, Georgia, serif);
+  font-family: var(--font-display);
   font-size: clamp(38px, 6vw, 66px);
   font-weight: 380;
   letter-spacing: -0.04em;
@@ -198,7 +198,7 @@
 
 .dioramas-stage-title strong {
   color: var(--ink);
-  font-family: var(--font-display, Fraunces, Georgia, serif);
+  font-family: var(--font-display);
   font-size: 15px;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -428,7 +428,7 @@
 .dioramas-panel h2 {
   margin: 0;
   color: var(--ink);
-  font-family: var(--font-display, Fraunces, Georgia, serif);
+  font-family: var(--font-display);
   font-size: 18px;
   font-weight: 500;
   letter-spacing: -0.015em;

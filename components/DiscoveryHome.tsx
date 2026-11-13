@@ -239,8 +239,8 @@ export default function DiscoveryHome() {
             </h1>
             <p className="reference-home-subtitle">
               {night
-                ? "Discover. Learn. Experience South Africa's iconic places and night-lit landmarks."
-                : "Discover. Learn. Experience South Africa's iconic places and cultural landmarks."}
+                ? "South Africa's cities, night-lit landmarks, and local places."
+                : "South Africa's cities, landmarks, and local places."}
             </p>
 
             <WeatherWidget
@@ -461,7 +461,7 @@ export default function DiscoveryHome() {
                       <div className="citylit-3d-diorama-label">{spotlightLandmarkName}</div>
                       <div
                         className="citylit-3d-chip-row"
-                        role="list"
+                        role="group"
                         aria-label="Landmark shortcuts"
                       >
                         <Link

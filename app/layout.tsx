@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
-import { Fraunces, Manrope } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { GeistSerif } from "geist/font/serif";
 import "./globals.css";
 import "./discovery-guide.css";
 import "./native-refinement.css";
@@ -19,17 +21,6 @@ import JsonLd from "../components/JsonLd";
 import JourneyTransition from "../components/JourneyTransition";
 import { SITE_URL, websiteSchema, isPreview } from "../lib/seo";
 
-const display = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Manrope({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -75,7 +66,11 @@ export const metadata: Metadata = {
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const nonce = (await headers()).get("x-nonce") || undefined;
   return (
-    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistSerif.variable}`}
+    >
       <head>
         <link rel="stylesheet" href="/theme.css" />
         {/* Deliberately parser-blocking: a deferred script cannot prevent a wrong-theme paint. */}

@@ -1,37 +1,9 @@
-﻿@font-face {
-  font-family: Fraunces;
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/fraunces-variable.woff2") format("woff2");
-}
-@font-face {
-  font-family: Fraunces;
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/fraunces-variable-italic.woff2") format("woff2");
-}
-@font-face {
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url("/fonts/manrope-normal-400.ttf") format("truetype");
-}
-@font-face {
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: 700 800;
-  font-display: swap;
-  src: url("/fonts/manrope-normal-700.ttf") format("truetype");
-}
-.discovery-guide {
+﻿.discovery-guide {
   --guide-accent: #ffc46b;
   --guide-accent-contrast: #21160a;
   --guide-surface: color-mix(in srgb, var(--bg) 82%, var(--ink) 5%);
-  --guide-heading: var(--font-display, "Fraunces", Georgia, serif);
-  --font-heading: var(--font-display, "Fraunces", Georgia, serif);
+  --guide-heading: var(--font-display, var(--font-geist-serif), Georgia, serif);
+  --font-heading: var(--font-display, var(--font-geist-serif), Georgia, serif);
   --accent: var(--guide-accent);
   --accent-ink: var(--guide-accent);
   height: 100vh;
@@ -45,7 +17,7 @@
   background: var(--bg);
   color: var(--ink);
   font:
-    400 15px/1.64 Manrope,
+    400 15px/1.64 var(--font-body),
     system-ui,
     sans-serif;
   font-feature-settings:
@@ -164,7 +136,7 @@
 }
 .atlas-wordmark {
   font:
-    400 32px/1 Fraunces,
+    400 32px/1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -2px;
@@ -223,7 +195,7 @@
   max-width: 800px;
 }
 .atlas-eyebrow {
-  font-family: var(--font-body, "Plus Jakarta Sans", system-ui, sans-serif) !important;
+  font-family: var(--font-body) !important;
   font-size: 10px !important;
   font-weight: 700;
   line-height: 1.6 !important;
@@ -389,7 +361,7 @@
   right: 48px;
   top: 44px;
   font:
-    10px/1.8 Manrope,
+    10px/1.8 var(--font-body),
     sans-serif;
   letter-spacing: 0.12em;
   color: var(--muted);
@@ -1080,7 +1052,7 @@
 }
 .discovery-guide .gallery-hero > span {
   font:
-    10px Manrope,
+    10px var(--font-body),
     sans-serif;
   letter-spacing: 0.07em;
 }
@@ -1103,7 +1075,7 @@
 }
 .discovery-guide .place-context h2 {
   font:
-    400 32px/1.2 Fraunces,
+    400 32px/1.2 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.03em;
@@ -1111,26 +1083,26 @@
 }
 .discovery-guide .about-copy {
   font:
-    400 14px/1.9 Manrope,
+    400 14px/1.9 var(--font-body),
     sans-serif;
   color: var(--muted);
 }
 .discovery-guide .context-source,
 .discovery-guide .context-license {
   font:
-    10px/1.6 Manrope,
+    10px/1.6 var(--font-body),
     sans-serif;
   color: var(--muted);
 }
 .discovery-guide .about-more {
   font:
-    700 12px Manrope,
+    700 12px var(--font-body),
     sans-serif;
   min-height: 40px;
 }
 .discovery-guide .facts-unconfirmed {
   font:
-    12px/1.8 Manrope,
+    12px/1.8 var(--font-body),
     sans-serif;
   color: var(--muted);
 }
@@ -1139,7 +1111,7 @@
 }
 .discovery-guide .location-card h3 {
   font:
-    400 22px/1.2 Fraunces,
+    400 22px/1.2 var(--font-display),
     serif;
 }
 .atlas-visit-panel {
@@ -1186,7 +1158,7 @@
 .discovery-guide .day-actions button,
 .discovery-guide .day-actions a {
   font:
-    700 11px Manrope,
+    700 11px var(--font-body),
     sans-serif;
   min-height: 44px;
   border-color: var(--line);
@@ -1197,25 +1169,25 @@
 .discovery-guide .visit-note,
 .discovery-guide .planning-note {
   font:
-    11px/1.7 Manrope,
+    11px/1.7 var(--font-body),
     sans-serif;
   color: var(--muted);
 }
 .discovery-guide .visit-plan-trigger {
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
   font-size: 13px;
 }
 .discovery-guide .visit-plan-body h3,
 .discovery-guide .plan-group h3 {
   font:
-    700 12px/1.6 Manrope,
+    700 12px/1.6 var(--font-body),
     sans-serif;
   letter-spacing: 0;
 }
 .discovery-guide .practical-facts li,
 .discovery-guide .plan-facts li {
   font:
-    11px/1.8 Manrope,
+    11px/1.8 var(--font-body),
     sans-serif;
 }
 .atlas-source-details {
@@ -1276,7 +1248,7 @@
 }
 .atlas-story-facts dd {
   font:
-    400 24px/1.3 Fraunces,
+    400 24px/1.3 var(--font-display),
     serif;
   margin: 0;
 }
@@ -1727,7 +1699,7 @@
 }
 .atlas-reading .tiny-label {
   font:
-    700 10px/1.6 Manrope,
+    700 10px/1.6 var(--font-body),
     sans-serif;
   color: var(--guide-accent);
   letter-spacing: 0.14em;
@@ -1744,16 +1716,16 @@
 .atlas-reading .reading-links a,
 .atlas-reading .text-guide-link {
   font:
-    700 11px/1.7 Manrope,
+    700 11px/1.7 var(--font-body),
     sans-serif;
 }
 .guide-planner {
-  --font-heading: var(--font-display, "Fraunces", Georgia, serif);
-  --font-mono: var(--font-body, "Manrope", sans-serif);
+  --font-heading: var(--font-display);
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
   --accent: #ffc46b;
   --accent-ink: #ffc46b;
   --planner-button-ink: #21160a;
-  font-family: var(--font-body, "Manrope", sans-serif);
+  font-family: var(--font-body);
 }
 :root[data-theme="day"] .guide-planner {
   --accent: #963f06;
@@ -1773,7 +1745,7 @@
 .guide-planner h1,
 .guide-planner h2,
 .guide-planner h3 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   text-transform: none;
   font-weight: 400;
   letter-spacing: -0.035em;
@@ -1794,17 +1766,17 @@
 }
 .guide-planner .tiny-label {
   font:
-    700 10px/1.6 Manrope,
+    700 10px/1.6 var(--font-body),
     sans-serif;
   letter-spacing: 0.14em;
   color: var(--accent-ink);
 }
 .discovery-guide .visit-plan summary strong {
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
   font-size: 13px;
 }
 .discovery-guide .visit-plan-group dd {
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
   font-size: 12px;
 }
 .discovery-guide .practical-details {
@@ -1846,7 +1818,7 @@
 }
 .atlas-map-select select {
   font:
-    400 16px Manrope,
+    400 16px var(--font-body),
     sans-serif;
   background: var(--bg);
   color: var(--ink);
@@ -2054,7 +2026,7 @@
 }
 .reference-guide .atlas-hero-sub {
   font:
-    italic 300 clamp(23px, 3vw, 30px)/1.3 Fraunces,
+    italic 300 clamp(23px, 3vw, 30px)/1.3 var(--font-display),
     Georgia,
     serif;
   position: absolute;
@@ -2090,7 +2062,7 @@
 }
 .reference-guide .atlas-beacon-card h2 {
   font:
-    400 31px/1.1 Fraunces,
+    400 31px/1.1 var(--font-display),
     Georgia,
     serif;
   margin: 6px 0;
@@ -2140,7 +2112,7 @@
 }
 .reference-guide .atlas-city-map-hero .atlas-city-intro {
   font:
-    italic 300 clamp(22px, 3vw, 30px)/1.45 Fraunces,
+    italic 300 clamp(22px, 3vw, 30px)/1.45 var(--font-display),
     Georgia,
     serif;
   max-width: 40ch;
@@ -2197,7 +2169,7 @@
 }
 .atlas-stage-heading h1 {
   font:
-    300 clamp(42px, 6vw, 85px)/1.05 Fraunces,
+    300 clamp(42px, 6vw, 85px)/1.05 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.04em;
@@ -2264,7 +2236,7 @@
 }
 .atlas-stage-sheet h2 {
   font:
-    400 30px/1.15 Fraunces,
+    400 30px/1.15 var(--font-display),
     Georgia,
     serif;
   margin: 10px 0;

@@ -18,8 +18,11 @@
   --citylit-reference-accent-ink: #472a00;
   --citylit-reference-shadow: 0 24px 60px rgb(0 0 0 / 46%);
   --citylit-reference-radius: 22px;
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Manrope", var(--font-body, "Manrope", system-ui, sans-serif);
+  --font-display: var(--font-geist-serif), Georgia, serif;
+  --font-heading: var(--font-geist-serif), Georgia, serif;
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
   /* Pin UI Tactile Depth & Chamfer Highlight Tokens */
   --pin-chamfer: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
@@ -53,7 +56,7 @@
   --accent-ink: var(--citylit-reference-accent-ink);
   color: var(--citylit-reference-text);
   color-scheme: dark;
-  font-family: var(--font-body, "Plus Jakarta Sans", "Manrope", system-ui, sans-serif);
+  font-family: var(--font-body);
   font-feature-settings:
     "kern" 1,
     "liga" 1,
@@ -179,7 +182,7 @@
 .reference-guide .atlas-city-hero h1,
 .reference-guide .atlas-category-guide h1 {
   color: var(--citylit-reference-text);
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-optical-sizing: auto;
   font-variation-settings:
     "SOFT" 30,
@@ -321,7 +324,7 @@
 .field-guide h1,
 .field-guide h2 {
   color: var(--citylit-reference-text);
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-optical-sizing: auto;
   font-variation-settings:
     "SOFT" 30,
@@ -408,7 +411,7 @@
 }
 
 .game-screen .modal h2 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-weight: 450;
   letter-spacing: -0.04em;
 }
@@ -561,7 +564,7 @@
 .reference-eyebrow {
   margin: 0 0 12px;
   color: var(--citylit-reference-purple-soft);
-  font: 700 10px/1.5 var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 700 10px/1.5 var(--font-body);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -570,7 +573,7 @@
   margin: 0;
   color: var(--citylit-reference-text);
   font:
-    450 clamp(42px, 6.1vw, 76px)/0.99 Fraunces,
+    450 clamp(42px, 6.1vw, 76px)/0.99 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.055em;
@@ -650,7 +653,7 @@
   outline: 0;
   background: transparent;
   color: var(--citylit-reference-text);
-  font: 500 13px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 500 13px var(--font-body);
 }
 .reference-search input::placeholder {
   color: var(--citylit-reference-muted);
@@ -678,7 +681,7 @@
   border-radius: 999px;
   color: var(--citylit-reference-text);
   background: var(--citylit-reference-panel);
-  font: 650 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 650 11px var(--font-body);
 }
 .reference-filter-row button[aria-pressed="true"] {
   border-color: transparent;
@@ -745,7 +748,7 @@
 .reference-featured-copy h2 {
   margin: 0;
   font:
-    450 clamp(32px, 5vw, 56px)/1 Fraunces,
+    450 clamp(32px, 5vw, 56px)/1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.045em;
@@ -796,7 +799,7 @@
   margin: 0;
   color: var(--citylit-reference-text);
   font:
-    450 clamp(26px, 3.3vw, 34px)/1.1 Fraunces,
+    450 clamp(26px, 3.3vw, 34px)/1.1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.04em;
@@ -1032,7 +1035,7 @@
 .game-screen .game-back {
   min-height: 42px;
   color: var(--citylit-reference-text);
-  font: 600 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 600 11px var(--font-body);
 }
 .game-screen .game-back .citylit-logo-symbol {
   width: 34px;
@@ -1067,7 +1070,7 @@
 .game-screen .game-heading h1 {
   color: var(--citylit-reference-text);
   font:
-    450 clamp(34px, 5.5vw, 58px)/1.02 Fraunces,
+    450 clamp(34px, 5.5vw, 58px)/1.02 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.05em;
@@ -1076,7 +1079,7 @@
 .game-screen .province-subtitle,
 .game-screen .roman-chapter {
   color: var(--citylit-reference-muted);
-  font: 500 10px/1.6 var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 500 10px/1.6 var(--font-body);
   letter-spacing: 0.11em;
   text-transform: uppercase;
 }
@@ -1089,7 +1092,7 @@
 }
 .game-screen .game-search input {
   color: var(--citylit-reference-text);
-  font: 500 12px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 500 12px var(--font-body);
 }
 .game-screen .game-stage {
   min-height: 250px;
@@ -1106,7 +1109,7 @@
   border-radius: 16px;
   background: color-mix(in srgb, var(--citylit-reference-panel) 92%, transparent);
   color: var(--citylit-reference-muted);
-  font: 600 10px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 600 10px var(--font-body);
 }
 .game-map .map-legend > button,
 .game-map .map-legend > a {
@@ -1138,7 +1141,7 @@
   min-height: 42px;
   color: var(--citylit-reference-text);
   border-color: var(--citylit-reference-border);
-  font: 600 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 600 11px var(--font-body);
 }
 .game-map .province-picker a span {
   margin-left: auto;
@@ -1156,7 +1159,7 @@
 .game-city .landmark-open h3 {
   color: var(--citylit-reference-text);
   font:
-    450 clamp(24px, 4vw, 34px)/1.1 Fraunces,
+    450 clamp(24px, 4vw, 34px)/1.1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.035em;
@@ -1180,7 +1183,7 @@
   color: #ffffff;
   background: var(--citylit-reference-purple);
   box-shadow: 0 8px 24px rgb(240 179 94 / 18%);
-  font: 700 11px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 700 11px var(--font-body);
 }
 @media (max-width: 700px) {
   .game-screen .game-nav {
@@ -1239,7 +1242,7 @@
   margin: 0;
   color: var(--citylit-reference-text);
   font:
-    450 clamp(40px, 7vw, 76px)/0.98 Fraunces,
+    450 clamp(40px, 7vw, 76px)/0.98 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.06em;
@@ -1293,7 +1296,7 @@
 }
 .reference-guide .atlas-landmark-story .atlas-story-facts dt {
   color: var(--citylit-reference-muted);
-  font: 700 9px var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 700 9px var(--font-body);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1301,7 +1304,7 @@
   margin: 7px 0 0;
   color: var(--citylit-reference-text);
   font:
-    450 20px/1.15 Fraunces,
+    450 20px/1.15 var(--font-display),
     Georgia,
     serif;
 }
@@ -1317,7 +1320,7 @@
 .reference-guide .atlas-landmark-story .atlas-story-next h2 {
   color: var(--citylit-reference-text);
   font:
-    450 clamp(26px, 4vw, 38px)/1.08 Fraunces,
+    450 clamp(26px, 4vw, 38px)/1.08 var(--font-display),
     Georgia,
     serif;
   text-transform: none;
@@ -1464,7 +1467,7 @@
 .reference-trip-empty h3 {
   margin: 0;
   color: var(--citylit-reference-text);
-  font: 600 clamp(19px, 4vw, 25px)/1.2 var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 600 clamp(19px, 4vw, 25px)/1.2 var(--font-body);
   letter-spacing: -0.035em;
 }
 .reference-trip-empty p {
@@ -1513,7 +1516,7 @@
   border-radius: 999px;
   color: var(--citylit-reference-muted);
   background: transparent;
-  font: 650 11px/1 var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 650 11px/1 var(--font-body);
   white-space: nowrap;
 }
 :root[data-theme="day"] .field-guide .hub-tabs.easyui-tabs-list .easyui-tab {
@@ -2050,7 +2053,7 @@
 }
 .field-guide .adventure-card h3 {
   margin: 6px 0 8px;
-  font: 650 15px/1.3 var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 650 15px/1.3 var(--font-body);
   letter-spacing: -0.02em;
 }
 .field-guide .adventure-card p {
@@ -2089,7 +2092,7 @@
 }
 .field-guide .trip-stops li > div:first-of-type h3 {
   margin: 0 0 4px;
-  font: 700 12px/1.35 var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font: 700 12px/1.35 var(--font-body);
   letter-spacing: -0.01em;
 }
 .field-guide .trip-stops li > div:first-of-type p {
@@ -2138,7 +2141,7 @@
   margin: 0;
   color: var(--citylit-reference-text);
   font:
-    450 23px/1.15 Fraunces,
+    450 23px/1.15 var(--font-display),
     Georgia,
     serif;
 }
@@ -2211,7 +2214,7 @@
   margin: 0;
   color: var(--citylit-reference-text);
   font:
-    450 clamp(24px, 3vw, 32px)/1.08 Fraunces,
+    450 clamp(24px, 3vw, 32px)/1.08 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.035em;
@@ -2315,7 +2318,7 @@
   margin: 0;
   color: var(--citylit-reference-text);
   font:
-    450 clamp(22px, 3vw, 30px)/1.05 Fraunces,
+    450 clamp(22px, 3vw, 30px)/1.05 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.035em;
@@ -2609,7 +2612,7 @@
   max-width: 9ch;
   margin: 10px 0 14px;
   font:
-    500 clamp(44px, 7vw, 84px)/0.96 Fraunces,
+    500 clamp(44px, 7vw, 84px)/0.96 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.045em;
@@ -2700,7 +2703,7 @@
 }
 .reference-guide .atlas-section-heading h2 {
   font:
-    500 clamp(32px, 4vw, 52px)/1.05 Fraunces,
+    500 clamp(32px, 4vw, 52px)/1.05 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.025em;
@@ -2791,7 +2794,7 @@
 .reference-guide .atlas-stage-heading h1 {
   margin-block: 6px 0;
   font:
-    500 clamp(34px, 5.5vw, 58px)/1 Fraunces,
+    500 clamp(34px, 5.5vw, 58px)/1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.035em;
@@ -2825,7 +2828,7 @@
 }
 .reference-guide .atlas-stage-sheet h2 {
   font:
-    500 clamp(28px, 4vw, 44px)/1.05 Fraunces,
+    500 clamp(28px, 4vw, 44px)/1.05 var(--font-display),
     Georgia,
     serif;
 }
@@ -3508,7 +3511,7 @@
 }
 
 .citylit-hero-heading {
-  font-family: var(--font-fraunces, "Fraunces", serif);
+  font-family: var(--font-display);
   font-size: clamp(26px, 6vw, 36px);
   font-weight: 400;
   line-height: 1.15;
@@ -3662,7 +3665,7 @@
 }
 
 .citylit-featured-title {
-  font-family: var(--font-fraunces, "Fraunces", serif);
+  font-family: var(--font-display);
   font-size: 20px;
   font-weight: 600;
   color: #ffffff;
@@ -4159,7 +4162,7 @@
 }
 
 .citylit-detail-title {
-  font-family: var(--font-fraunces, "Fraunces", serif);
+  font-family: var(--font-display);
   font-size: clamp(24px, 5vw, 32px);
   font-weight: 400;
   color: #ffffff;
@@ -5490,7 +5493,7 @@
   margin: 0;
   color: var(--citylit-text);
   font:
-    430 clamp(37px, 9.6vw, 76px)/0.99 Fraunces,
+    430 clamp(37px, 9.6vw, 76px)/0.99 var(--font-display),
     Georgia,
     serif;
   font-variation-settings:
@@ -5552,11 +5555,11 @@
   height: 22px;
   padding: 0 7px;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--citylit-quiet);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--citylit-reference-muted, #ccc3d8);
   font-size: 11px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-mono);
   font-weight: 600;
   letter-spacing: 0.04em;
   user-select: none;
@@ -5564,9 +5567,9 @@
 }
 
 :root[data-theme="day"] .reference-search-shortcut {
-  border-color: rgba(0, 0, 0, 0.12);
-  background: rgba(0, 0, 0, 0.05);
-  color: #64748b;
+  border-color: rgba(23, 25, 32, 0.16);
+  background: rgba(23, 25, 32, 0.06);
+  color: #474c59;
 }
 
 /* Filter pills (the composition's All / Landmarks / Cities / Nature row). */
@@ -5747,7 +5750,7 @@
   margin: 0;
   color: #fff;
   font:
-    440 clamp(26px, 6vw, 38px)/1.04 Fraunces,
+    440 clamp(26px, 6vw, 38px)/1.04 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.04em;
@@ -5833,7 +5836,7 @@
   margin: 0;
   color: var(--citylit-text);
   font:
-    440 clamp(22px, 5.2vw, 30px)/1.1 Fraunces,
+    440 clamp(22px, 5.2vw, 30px)/1.1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.035em;
@@ -5926,7 +5929,7 @@
 
 .reference-home .living-atlas-city-card h3 {
   color: var(--citylit-text);
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
 }
 
 .reference-home .living-atlas-primary-action {
@@ -5989,7 +5992,7 @@
   margin: 6px 0 0;
   color: var(--citylit-text);
   font:
-    430 clamp(38px, 9vw, 72px)/1 Fraunces,
+    430 clamp(38px, 9vw, 72px)/1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.05em;
@@ -6059,7 +6062,7 @@
 
 .reference-guide .atlas-city-card-link .atlas-card-copy h3 {
   color: var(--citylit-text);
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: clamp(24px, 5vw, 32px);
   font-weight: 460;
 }
@@ -6172,7 +6175,7 @@
   margin: 6px 0 10px;
   color: #fff !important;
   font:
-    430 clamp(46px, 6.2vw, 80px)/0.96 Fraunces,
+    430 clamp(46px, 6.2vw, 80px)/0.96 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.05em;
@@ -6234,7 +6237,7 @@
 .reference-guide .atlas-section-heading h2 {
   color: var(--citylit-text);
   font:
-    440 clamp(26px, 6vw, 40px)/1.06 Fraunces,
+    440 clamp(26px, 6vw, 40px)/1.06 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.04em;
@@ -6279,7 +6282,7 @@
   gap: 10px;
   margin: 0 0 6px;
   color: var(--citylit-text);
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: 22px;
   font-weight: 460;
   letter-spacing: -0.02em;
@@ -6356,7 +6359,7 @@
   margin: 0;
   color: var(--citylit-text);
   font:
-    430 clamp(34px, 8.6vw, 68px)/1 Fraunces,
+    430 clamp(34px, 8.6vw, 68px)/1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.045em;
@@ -6474,7 +6477,7 @@
 .reference-guide .atlas-stage-sheet h2 {
   margin: 0 0 8px;
   color: var(--citylit-text);
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: clamp(24px, 6vw, 32px);
   font-weight: 440;
   letter-spacing: -0.035em;
@@ -6786,7 +6789,7 @@
   margin: 0;
   color: var(--citylit-text);
   font:
-    430 clamp(42px, 11vw, 72px)/0.98 Fraunces,
+    430 clamp(42px, 11vw, 72px)/0.98 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.05em;
@@ -7111,7 +7114,7 @@
   margin-top: 26px;
   color: var(--citylit-text);
   font:
-    440 clamp(24px, 5.6vw, 32px)/1.1 Fraunces,
+    440 clamp(24px, 5.6vw, 32px)/1.1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.03em;
@@ -7129,7 +7132,7 @@
 .reference-guide .field-guide .collection-card h3,
 .reference-guide .field-guide .event-card h3 {
   color: var(--citylit-text);
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-weight: 460;
   letter-spacing: -0.02em;
 }
@@ -7211,7 +7214,7 @@
   margin: 0;
   color: var(--citylit-text);
   font:
-    440 26px/1.1 Fraunces,
+    440 26px/1.1 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.03em;
@@ -7487,7 +7490,7 @@
   margin: 0;
   color: #fff;
   font:
-    430 clamp(34px, 9vw, 58px)/0.98 Fraunces,
+    430 clamp(34px, 9vw, 58px)/0.98 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.045em;
@@ -7627,7 +7630,7 @@
   margin: 0;
   color: var(--citylit-text);
   font:
-    440 clamp(22px, 5vw, 28px)/1.15 Fraunces,
+    440 clamp(22px, 5vw, 28px)/1.15 var(--font-display),
     Georgia,
     serif;
   letter-spacing: -0.03em;
@@ -7884,7 +7887,7 @@
 
 .reference-guide .atlas-wordmark,
 .reference-guide .citylit-app-header .wordmark-letters {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   letter-spacing: -0.02em;
 }
 
@@ -7931,7 +7934,7 @@
 
 .reference-home-hero h1,
 .reference-guide .living-atlas-hero h1 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   color: var(--co-text-primary);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -7946,7 +7949,7 @@
 .citylit-hero-eyebrow,
 .reference-eyebrow {
   color: var(--co-tertiary);
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -7955,7 +7958,7 @@
 .reference-home-subtitle,
 .reference-guide .living-atlas-hero .reference-home-subtitle {
   color: var(--co-text-secondary);
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
 }
 
 .reference-search {
@@ -7991,7 +7994,7 @@
   border: 1px solid transparent;
   background: var(--co-surface-container);
   color: var(--co-text-secondary);
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
   transition:
@@ -8070,7 +8073,7 @@
 
 .citylit-featured-meta h2 {
   margin: 0;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 500;
   color: #fff;
@@ -8121,7 +8124,7 @@
 .citylit-section-head h2,
 .reference-section-heading h2,
 .living-atlas-panel-heading h2 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   color: var(--co-text-primary);
   font-weight: 500;
 }
@@ -8194,7 +8197,7 @@ button.atlas-button:not(.atlas-primary) {
 }
 
 .citylit-settings-header h2 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   color: var(--co-text-primary);
 }
 
@@ -8369,7 +8372,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 .citylit-3d-canvas-head h2 {
   margin: 0;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: 1.35rem;
   font-weight: 500;
   color: var(--co-text-primary, #f8fafc);
@@ -8617,7 +8620,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 .citylit-popular-body .citylit-popular-name {
   color: var(--co-text-primary, #f8fafc);
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
   font-size: 15px;
   font-weight: 600;
 }
@@ -8651,7 +8654,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 .citylit-plan-copy h3 {
   margin: 0;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--co-text-primary, #f8fafc);
@@ -8750,7 +8753,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 .reference-guide .atlas-landmark-story h1,
 .reference-guide .atlas-category-guide h1,
 .citylit-detail-meta h1 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   color: var(--co-text-primary, #f8fafc);
 }
 
@@ -8885,7 +8888,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 .citylit-detail-hero-copy h1,
 .citylit-detail-body h2,
 .citylit-detail-section-title {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
 }
 .citylit-detail-tabs-bar {
   background: rgba(18, 19, 23, 0.88);
@@ -8958,7 +8961,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 .citylit-settings-header h2,
 .citylit-settings-group-title {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
 }
 .citylit-settings-tabs {
   background: var(--co-surface-container, #1f1f24);
@@ -9073,7 +9076,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   align-items: center;
   gap: 8px;
   color: var(--co-text-primary, #f8fafc);
-  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
 }
@@ -9261,7 +9264,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 .reference-guide .citylit-app-header .atlas-wordmark {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   color: var(--co-text-primary, #f8fafc);
 }
 .reference-guide .citylit-header-nav-link {
@@ -9313,7 +9316,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   z-index: 4;
 }
 .citylit-detail-page .citylit-detail-hero-copy h1 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 500;
   color: var(--co-text-primary, #f8fafc);
@@ -9353,7 +9356,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   line-height: 1.6;
 }
 .citylit-detail-page .citylit-detail-section-title {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   color: var(--co-text-primary, #f8fafc);
   font-size: 1.2rem;
   margin-bottom: 12px;
@@ -9376,7 +9379,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
 }
 .citylit-detail-page .citylit-story-card h2,
 .citylit-detail-page .citylit-tips-card h2 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   color: var(--co-text-primary, #f8fafc);
   font-size: 1.2rem;
   margin-bottom: 12px;
@@ -9424,7 +9427,7 @@ html[data-theme="day"] .amicro-tilt-card.living-atlas-city-card h3 {
   text-shadow: none;
 }
 .reference-stage-guide .atlas-stage-heading h1 {
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-weight: 500;
 }
 .reference-stage-guide .atlas-stage-sheet {
@@ -11358,7 +11361,7 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
   font-size: 38px;
   font-weight: 800;
   color: #ffffff;
-  font-family: var(--font-body, "Manrope", sans-serif);
+  font-family: var(--font-body);
   letter-spacing: -0.04em;
   line-height: 1;
 }
@@ -11417,7 +11420,7 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
 
 .pin-reader-title {
   margin: 0;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: clamp(22px, 4vw, 28px);
   font-weight: 400;
   line-height: 1.2;
@@ -11588,7 +11591,7 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
 
 .pin-reader-modal-heading {
   margin: 0 0 8px;
-  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-family: var(--font-display);
   font-size: clamp(28px, 5vw, 40px);
   font-weight: 400;
   line-height: 1.15;
@@ -11610,7 +11613,7 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
 }
 
 .pin-reader-prose {
-  font-family: var(--font-body, "Manrope", sans-serif);
+  font-family: var(--font-body);
   line-height: 1.8;
   color: #e2e8f0;
 }
@@ -11907,4 +11910,151 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
 
 :root[data-theme="day"] .pin-reader-prose {
   color: #242731;
+}
+
+/* ============================================================================
+   Geist Typography & UI Craft Polish
+   - Geist Sans: body & UI controls
+   - Geist Serif: headlines & display titles
+   - Geist Mono: numbers, metrics, coordinates, shortcuts & tabular data
+   ============================================================================ */
+
+::selection {
+  background: color-mix(in srgb, var(--citylit-amber, #ffb95f) 28%, transparent);
+  color: var(--ink, #e3e2e7);
+}
+
+.discovery-guide {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--ink, #e3e2e7) 22%, transparent) transparent;
+}
+
+.discovery-guide::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.discovery-guide::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.discovery-guide::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--ink, #e3e2e7) 20%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.discovery-guide::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--ink, #e3e2e7) 34%, transparent);
+  background-clip: content-box;
+}
+
+:where(.reference-guide, .field-guide, .game-screen, .category-page) :is(h1, h2, h3) {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+:where(.reference-guide, .field-guide, .category-page) :is(h1) {
+  letter-spacing: -0.03em;
+}
+
+:where(.reference-guide, .field-guide, .category-page) :is(h2, h3) {
+  letter-spacing: -0.02em;
+}
+
+:where(.reference-guide, .field-guide, .category-page) p {
+  text-wrap: pretty;
+}
+
+:where(.reference-guide, .field-guide, .game-screen, .category-page)
+  :is(
+    .weather-copy strong,
+    .citylit-popular-meta,
+    .citylit-plan-secondary span,
+    .reference-search-shortcut,
+    .atlas-card-meta,
+    .atlas-stat,
+    .atlas-stage-counter,
+    .pin-reader-modal-meta,
+    .tabular-nums,
+    [data-numeric],
+    kbd,
+    code,
+    pre
+  ) {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+:where(.reference-guide, .field-guide, .category-page)
+  :is(
+    .citylit-filter-pill,
+    .citylit-plan-primary,
+    .citylit-plan-secondary,
+    .citylit-inspect-btn,
+    .citylit-3d-chip,
+    .citylit-featured-arrow-btn,
+    .atlas-button,
+    .easyui-pill-button,
+    .easyui-tab
+  ) {
+  transition:
+    transform 140ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)),
+    background-color 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)),
+    border-color 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)),
+    color 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)),
+    box-shadow 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+}
+
+:where(.reference-guide, .field-guide, .category-page)
+  :is(
+    .citylit-filter-pill,
+    .citylit-plan-primary,
+    .citylit-plan-secondary,
+    .citylit-inspect-btn,
+    .citylit-3d-chip,
+    .citylit-featured-arrow-btn,
+    .atlas-button,
+    .easyui-pill-button,
+    .easyui-tab
+  ):active {
+  transform: scale(0.975);
+}
+
+:where(.reference-guide, .field-guide, .category-page)
+  :is(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--citylit-focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.reference-guide, .field-guide, .category-page)
+    :is(
+      .citylit-filter-pill,
+      .citylit-plan-primary,
+      .citylit-plan-secondary,
+      .citylit-inspect-btn,
+      .citylit-3d-chip,
+      .citylit-featured-arrow-btn,
+      .atlas-button,
+      .easyui-pill-button,
+      .easyui-tab
+    ) {
+    transition: none;
+  }
+  :where(.reference-guide, .field-guide, .category-page)
+    :is(
+      .citylit-filter-pill,
+      .citylit-plan-primary,
+      .citylit-plan-secondary,
+      .citylit-inspect-btn,
+      .citylit-3d-chip,
+      .citylit-featured-arrow-btn,
+      .atlas-button,
+      .easyui-pill-button,
+      .easyui-tab
+    ):active {
+    transform: none;
+  }
 }

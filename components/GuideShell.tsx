@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookmarkSimple, Cube, House, MapPin } from "@phosphor-icons/react";
+import { BookmarkSimple, Cube, House, MapPin, Mountains } from "@phosphor-icons/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import BrandWordmark from "./BrandWordmark";
 import { useEffect, useState, type ReactNode } from "react";
@@ -57,6 +57,7 @@ export default function GuideShell({
   const isDayActive =
     pathname === "/explore" ? tabParam === "day" || hasTrip : pathname.startsWith("/explore");
   const isCitiesActive = pathname === "/destinations" || pathname.startsWith("/provinces");
+  const isDioramasActive = pathname.startsWith("/dioramas");
 
   return (
     <div className={`discovery-guide reference-guide${stage ? " reference-stage-guide" : ""}`}>
@@ -76,6 +77,13 @@ export default function GuideShell({
             aria-current={pathname === "/destinations" ? "page" : undefined}
           >
             <MapPin size={16} aria-hidden="true" /> Cities
+          </Link>
+          <Link
+            href="/dioramas"
+            className="citylit-header-nav-link"
+            aria-current={isDioramasActive ? "page" : undefined}
+          >
+            <Mountains size={16} aria-hidden="true" /> Dioramas
           </Link>
           <Link
             href={`/explore?${dayCity ? `city=${dayCity}&` : ""}tab=day`}
@@ -118,6 +126,13 @@ export default function GuideShell({
             isActive: isDayActive,
             icon: <BookmarkSimple size={22} aria-hidden="true" weight="regular" />,
             activeIcon: <BookmarkSimple size={22} aria-hidden="true" weight="fill" />,
+          },
+          {
+            href: "/dioramas",
+            label: "Dioramas",
+            isActive: isDioramasActive,
+            icon: <Mountains size={22} aria-hidden="true" weight="regular" />,
+            activeIcon: <Mountains size={22} aria-hidden="true" weight="fill" />,
           },
           {
             href: "/?view=3d",

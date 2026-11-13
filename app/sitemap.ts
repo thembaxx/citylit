@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             ? { lastModified: latestCheck(cityPlaces(route.city)) }
             : {}),
       })),
-    ...["/destinations", "/about", "/privacy", "/brand", "/explore"].map((path) => ({
+    ...["/destinations", "/about", "/privacy", "/brand", "/explore", "/dioramas"].map((path) => ({
       url: absoluteUrl(path),
     })),
   ];

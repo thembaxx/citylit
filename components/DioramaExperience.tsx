@@ -504,8 +504,7 @@ export default function DioramaExperience() {
                       title={option.label}
                       onClick={() => setTimeMode(option.mode)}
                     >
-                      <Icon size={17} aria-hidden="true" weight="regular" />
-                      <span className="dioramas-control-label">{option.label}</span>
+                      <Icon size={18} aria-hidden="true" weight="regular" />
                     </button>
                   );
                 })}
@@ -519,8 +518,7 @@ export default function DioramaExperience() {
                   title="Explode layers"
                   onClick={() => setExploded((value) => !value)}
                 >
-                  <ArrowsOutSimple size={17} aria-hidden="true" />
-                  <span className="dioramas-control-label">Explode</span>
+                  <ArrowsOutSimple size={18} aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -535,8 +533,7 @@ export default function DioramaExperience() {
                   }
                   onClick={() => setAutoRotate((value) => !value)}
                 >
-                  <ArrowsClockwise size={17} aria-hidden="true" />
-                  <span className="dioramas-control-label">Auto-rotate</span>
+                  <ArrowsClockwise size={18} aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -545,8 +542,7 @@ export default function DioramaExperience() {
                   title="Reset camera"
                   onClick={resetView}
                 >
-                  <ArrowCounterClockwise size={17} aria-hidden="true" />
-                  <span className="dioramas-control-label">Reset</span>
+                  <ArrowCounterClockwise size={18} aria-hidden="true" />
                 </button>
               </div>
               <div className="dioramas-segment dioramas-renderer-segment" role="group" aria-label="Renderer backend">

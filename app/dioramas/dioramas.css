@@ -3,18 +3,18 @@
 .dioramas {
   width: min(100%, 1240px);
   margin-inline: auto;
-  padding-top: clamp(18px, 2.6vw, 34px);
+  padding-top: calc(clamp(76px, 8vw, 96px) + env(safe-area-inset-top, 0px));
   padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
-  padding-bottom: clamp(44px, 6vw, 84px);
+  padding-bottom: clamp(44px, 6vw, 72px);
 }
 
 .dioramas-header {
   max-width: 760px;
-  margin-bottom: clamp(20px, 3vw, 34px);
+  margin-bottom: 18px;
 }
 
 .dioramas-eyebrow {
-  margin: 0 0 10px;
+  margin: 0 0 6px;
   color: var(--muted);
   font-size: 11px;
   font-weight: 700;
@@ -51,24 +51,30 @@
 }
 
 .dioramas-tabs {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(102px, 1fr));
-  gap: 7px;
-  padding-bottom: 2px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline proximity;
+  scrollbar-width: thin;
+  padding: 2px 2px 8px;
 }
 
 .dioramas-tab {
-  min-width: 0;
-  min-height: 56px;
+  flex: 0 0 auto;
+  min-width: 132px;
+  min-height: 52px;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   gap: 2px;
-  padding: 9px 14px;
+  padding: 8px 14px;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
   color: var(--ink);
   font: inherit;
   text-align: left;
@@ -330,14 +336,15 @@
 }
 
 .dioramas-control {
+  min-width: 44px;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 0 14px;
+  padding: 0 12px;
   border: 1px solid transparent;
-  border-radius: 14px;
+  border-radius: 12px;
   background: transparent;
   color: var(--muted);
   font: inherit;
@@ -606,8 +613,13 @@
 
 @media (max-width: 767px) {
   .dioramas {
+    padding-top: calc(70px + env(safe-area-inset-top, 0px));
     padding-inline: max(14px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-right));
     padding-bottom: max(108px, calc(84px + env(safe-area-inset-bottom)));
+  }
+
+  .dioramas-header {
+    margin-bottom: 14px;
   }
 
   .dioramas-header h1 {

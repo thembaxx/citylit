@@ -39,7 +39,7 @@ test.describe("Centralized /dioramas 3D hub & non-3D discovery routes", () => {
 
     await page.goto("/destinations");
     await expect(page.locator(stageCanvases)).toHaveCount(0);
-    await expect(page.getByRole("link", { name: /3D Globe & Provinces/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: /3D Stage & Dioramas/i })).toBeVisible();
 
     await page.goto("/cape-town/landmarks");
     await expect(page.locator(stageCanvases)).toHaveCount(0);

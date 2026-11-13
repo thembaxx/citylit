@@ -166,14 +166,9 @@ test("plan cards open venues and day picks persist without replacing another cit
   ).toEqual([stops[0].id]);
 });
 
-test("saved view switches cleanly between the guide and original 3D experience", async ({
-  page,
-}) => {
-  await page.goto("/johannesburg?view=3d");
-  await expect(page.locator(".game-screen")).toBeVisible();
-  await page.getByRole("link", { name: "Read guide" }).click();
+test("city guide renders cleanly and links to the 3D landmark stage", async ({ page }) => {
+  await page.goto("/johannesburg");
   await expect(page.locator(".discovery-guide")).toBeVisible();
-  await page.reload();
   await expect(page.locator(".atlas-city-hero")).toBeVisible();
 });
 

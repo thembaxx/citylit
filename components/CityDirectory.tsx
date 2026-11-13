@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { ArrowUpRight, GlobeHemisphereEast, MagnifyingGlass, X } from "@phosphor-icons/react";
+import { ArrowUpRight, MagnifyingGlass, Mountains, X } from "@phosphor-icons/react";
 import { cities } from "../lib/data";
 import { CityCard } from "./GuideCards";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
@@ -49,9 +49,9 @@ export default function CityDirectory({ compact = false }: { compact?: boolean }
 
       <div className="atlas-directory-tools">
         {!compact && (
-          <Link href="/dioramas?scope=globe" className="atlas-button citylit-view-toggle-btn">
-            <GlobeHemisphereEast size={17} aria-hidden="true" />
-            3D Globe & Provinces
+          <Link href="/dioramas" className="atlas-button citylit-view-toggle-btn">
+            <Mountains size={17} aria-hidden="true" />
+            3D Stage &amp; Dioramas
           </Link>
         )}
         <label className="atlas-search">

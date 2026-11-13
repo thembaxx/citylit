@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookmarkSimple, Cube, House, MapPin, Mountains } from "@phosphor-icons/react";
+import { BookmarkSimple, MapPin, Mountains } from "@phosphor-icons/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import BrandWordmark from "./BrandWordmark";
 import { useEffect, useState, type ReactNode } from "react";
@@ -28,7 +28,6 @@ export default function GuideShell({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const dayCity = places.find((place) => place.id === state.itinerary[0])?.city;
-  const isHome = pathname === "/";
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   useEffect(() => {
@@ -56,7 +55,8 @@ export default function GuideShell({
   const hasTrip = !!searchParams.get("trip");
   const isDayActive =
     pathname === "/explore" ? tabParam === "day" || hasTrip : pathname.startsWith("/explore");
-  const isCitiesActive = pathname === "/destinations" || pathname.startsWith("/provinces");
+  const isCitiesActive =
+    pathname === "/" || pathname === "/destinations" || pathname.startsWith("/provinces");
   const isDioramasActive = pathname.startsWith("/dioramas");
 
   return (
@@ -106,14 +106,6 @@ export default function GuideShell({
       <MagnifyingDock
         items={[
           {
-            href: "/",
-            label: "Home",
-            ariaLabel: "Home · Explore",
-            isActive: isHome,
-            icon: <House size={22} aria-hidden="true" weight="regular" />,
-            activeIcon: <House size={22} aria-hidden="true" weight="fill" />,
-          },
-          {
             href: "/destinations",
             label: "Cities",
             isActive: isCitiesActive,
@@ -133,12 +125,6 @@ export default function GuideShell({
             isActive: isDioramasActive,
             icon: <Mountains size={22} aria-hidden="true" weight="regular" />,
             activeIcon: <Mountains size={22} aria-hidden="true" weight="fill" />,
-          },
-          {
-            href: "/?view=3d",
-            label: "Atlas",
-            icon: <Cube size={22} aria-hidden="true" weight="regular" />,
-            className: "citylit-dock-atlas",
           },
         ]}
       />

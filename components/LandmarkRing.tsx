@@ -7,7 +7,6 @@ import { useKhwezi } from "./KhweziProvider";
 import {
   ArrowCounterClockwise,
   ArrowClockwise,
-  ArrowRight,
   CaretRight,
   Check,
   Cube,
@@ -29,8 +28,6 @@ import { type MuseumFeature } from "./MuseumShowcase";
 import StudioEnvironment from "./StudioEnvironment";
 import AtlasWorld from "./AtlasWorld";
 import JourneyTrail from "./JourneyTrail";
-import WalkableDistrict from "./WalkableDistrict";
-import { AnimatedTabs } from "./ui/AnimatedTabs";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import LiquidToggle from "./ui/LiquidToggle";
 
@@ -424,14 +421,14 @@ export default function LandmarkRing({
   onSelect,
   itinerary,
   accent = "#e4a95f",
-  onOpenGuide,
+  onOpenGuide: _onOpenGuide,
 }: {
   items: StageItem[];
   selected: number;
   onSelect: (index: number, interaction?: "tap" | "swipe") => void;
   itinerary: string[];
   accent?: string;
-  onOpenGuide: (index: number) => void;
+  onOpenGuide?: (index: number) => void;
 }) {
   const [host, setHost] = useState<HTMLDivElement | null>(null);
   const angle = useRef(0);
@@ -459,7 +456,6 @@ export default function LandmarkRing({
   const [view, setView] = useState<StageView>("overview");
   const [spin, setSpin] = useState(0);
   const [showContext, setShowContext] = useState(false);
-  const [explorationMode, setExplorationMode] = useState("discover");
   const [touring, setTouring] = useState(false);
   const touringRef = useRef(false);
   const [modelStatuses, setModelStatuses] = useState<Record<string, "ready" | "error">>({});
@@ -482,16 +478,6 @@ export default function LandmarkRing({
     const next = !touringRef.current;
     touringRef.current = next;
     setTouring(next);
-  };
-  const switchExplorationMode = (mode: string) => {
-    if (mode === explorationMode) return;
-    setExplorationMode(mode);
-    feedback("swipe");
-    window.dispatchEvent(
-      new CustomEvent("citylit:portal", {
-        detail: { label: mode === "walk" ? "Walk the city" : "Landmark discoveries" },
-      }),
-    );
   };
   const selectItem = useCallback(
     (index: number, interaction: "tap" | "swipe" = "tap") => {
@@ -576,11 +562,7 @@ export default function LandmarkRing({
   return (
     <div
       ref={setHost}
-      className={[
-        "atlas-ring-scene",
-        museumSelected && "is-heritage-hero",
-        explorationMode === "walk" && "is-walking",
-      ]
+      className={["atlas-ring-scene", museumSelected && "is-heritage-hero"]
         .filter(Boolean)
         .join(" ")}
       data-active-model={museumSelected ? "museum" : items[selected]?.model}
@@ -591,7 +573,6 @@ export default function LandmarkRing({
       role="group"
       aria-label="Interactive illustrative landmark models"
       onPointerDown={(event) => {
-        if (explorationMode === "walk") return;
         // Tapping the model dismisses the inspector; its toolbar stops bubbling.
         if (mobileInspectorOpen) setMobileInspectorOpen(false);
         if (event.button === 0) {
@@ -608,7 +589,6 @@ export default function LandmarkRing({
         }
       }}
       onPointerMove={(event) => {
-        if (explorationMode === "walk") return;
         if (!drag.current) return;
         const dx = event.clientX - drag.current.x,
           dy = event.clientY - drag.current.y;
@@ -627,11 +607,6 @@ export default function LandmarkRing({
         }
       }}
       onPointerUp={(event) => {
-        if (explorationMode === "walk") {
-          drag.current = null;
-          dragging.current = false;
-          return;
-        }
         if (!drag.current) return;
         const travel = event.clientX - drag.current.x;
         const vx = drag.current.vx || 0;
@@ -663,66 +638,35 @@ export default function LandmarkRing({
         setSettle((value) => value + 1);
       }}
     >
-      <div className="atlas-exploration-switch" onPointerDown={(event) => event.stopPropagation()}>
-        <AnimatedTabs
-          className="atlas-exploration-tabs"
-          ariaLabel="Exploration mode"
-          idPrefix="atlas-exploration"
-          value={mobileInspectorOpen ? "" : explorationMode}
-          onChange={(mode) => {
-            if (mobileInspectorOpen) setMobileInspectorOpen(false);
-            switchExplorationMode(mode);
-          }}
-          items={[
-            { id: "discover", label: "Discover", icon: <Cube size={16} /> },
-            { id: "walk", label: "Walk the city", icon: <ArrowRight size={16} /> },
-          ]}
-        />
-      </div>
-      <div
-        id="atlas-exploration-panel"
-        role="tabpanel"
-        aria-labelledby={`atlas-exploration-tab-${explorationMode}`}
-      >
-        {explorationMode === "walk" ? (
-          <WalkableDistrict
+      <View className="atlas-ring-view" index={2}>
+        {host && (
+          <Ring
             items={items}
+            selected={selected}
+            onSelect={(index, interaction = "tap") => {
+              if (!moved.current) selectItem(index, interaction);
+            }}
+            angle={angle}
+            itinerary={itinerary}
+            dragging={dragging}
+            settle={settle}
+            night={night}
+            exploded={exploded}
+            feature={feature}
+            onFeature={setFeature}
+            zoom={zoom}
+            spin={spin}
+            view={view}
+            showContext={showContext}
+            reduced={reduced}
+            onModelStatus={onModelStatus}
             accent={accent}
-            onClose={() => setExplorationMode("discover")}
-            onOpenGuide={onOpenGuide}
+            touring={touring}
+            onTourComplete={finishTour}
+            jointValues={jointValues}
           />
-        ) : (
-          <View className="atlas-ring-view" index={2}>
-            {host && (
-              <Ring
-                items={items}
-                selected={selected}
-                onSelect={(index, interaction = "tap") => {
-                  if (!moved.current) selectItem(index, interaction);
-                }}
-                angle={angle}
-                itinerary={itinerary}
-                dragging={dragging}
-                settle={settle}
-                night={night}
-                exploded={exploded}
-                feature={feature}
-                onFeature={setFeature}
-                zoom={zoom}
-                spin={spin}
-                view={view}
-                showContext={showContext}
-                reduced={reduced}
-                onModelStatus={onModelStatus}
-                accent={accent}
-                touring={touring}
-                onTourComplete={finishTour}
-                jointValues={jointValues}
-              />
-            )}
-          </View>
         )}
-      </div>
+      </View>
 
       {(exploded || manualJointCount > 0 || touring) && (
         <div className="atlas-stage-live-badge" aria-hidden="true">
@@ -754,6 +698,7 @@ export default function LandmarkRing({
           ref={inspectorToggleRef}
           type="button"
           className="atlas-inspector-toggle"
+          title={mobileInspectorOpen ? "Close 3D inspector" : "Open 3D inspector"}
           aria-label={
             mobileInspectorOpen ? "Inspect: close 3D panel" : "Inspect: open 3D inspector"
           }
@@ -761,8 +706,8 @@ export default function LandmarkRing({
           aria-expanded={mobileInspectorOpen}
           onClick={() => setMobileInspectorOpen((open) => !open)}
         >
-          <Cube size={18} />
-          <span>Inspect</span>
+          <Cube size={18} aria-hidden="true" />
+          <span className="atlas-inspector-toggle-label">Inspect</span>
         </button>
         <div
           ref={inspectorPanelRef}

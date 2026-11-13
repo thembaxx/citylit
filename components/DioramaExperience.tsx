@@ -18,7 +18,6 @@ import {
   CaretRight,
   Compass,
   Cube,
-  GlobeHemisphereEast,
   Info,
   MoonStars,
   Mountains,
@@ -40,18 +39,7 @@ import { useDiscovery } from "./useDiscovery";
 import CartographicLoader from "./CartographicLoader";
 import type { StageItem } from "./CityStage";
 import { benchoAudio } from "../lib/bencho-audio";
-
-const AfricaGlobeScope = dynamic(() => import("./AfricaGlobeScope"), {
-  ssr: false,
-  loading: () => (
-    <CartographicLoader
-      variant="globe"
-      title="Africa & South Africa"
-      subtitle="Only Africa active · 9 provinces"
-      coordinates="22.9375° E · 30.5595° S"
-    />
-  ),
-});
+import DropdownSelect, { type DropdownOption } from "./ui/DropdownSelect";
 
 const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
@@ -60,7 +48,22 @@ const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ),
 });
 
-type DioramaScope = "diorama" | "globe" | "landmark";
+type DioramaScope = "diorama" | "landmark";
+
+const SCOPE_OPTIONS: readonly DropdownOption<DioramaScope>[] = [
+  {
+    value: "diorama",
+    label: "Regional Dioramas",
+    description: "14 cutaway South African landscapes",
+    icon: <Mountains size={18} weight="duotone" />,
+  },
+  {
+    value: "landmark",
+    label: "Cities & Landmarks",
+    description: "Procedural 3D city landmark stage",
+    icon: <Compass size={18} weight="duotone" />,
+  },
+];
 
 const TIME_OPTIONS: { mode: TimeMode; label: string; icon: typeof Sun }[] = [
   { mode: "day", label: "Day", icon: Sun },
@@ -125,11 +128,10 @@ export default function DioramaExperience() {
   const initialScope = (searchParams.get("scope") as DioramaScope | null) ?? "diorama";
   const initialScene = searchParams.get("scene") as DioramaSlug | null;
   const initialCity = searchParams.get("city") || cities[0]?.slug || "cape-town";
-  const initialProvince = searchParams.get("province") || undefined;
   const initialItem = searchParams.get("item") || undefined;
 
   const [scope, setScope] = useState<DioramaScope>(
-    initialScope === "globe" || initialScope === "landmark" ? initialScope : "diorama",
+    initialScope === "landmark" ? "landmark" : "diorama",
   );
   const [landmarkCitySlug, setLandmarkCitySlug] = useState<string>(initialCity);
   const [landmarkIndex, setLandmarkIndex] = useState(0);
@@ -355,74 +357,21 @@ export default function DioramaExperience() {
   return (
     <section className="dioramas" aria-labelledby="dioramas-title">
       <header className="dioramas-header">
-        <p className="dioramas-eyebrow">ALL 3D EXPERIENCES · ONE STAGE</p>
+        <p className="dioramas-eyebrow">3D STAGE · SOUTH AFRICA</p>
         <h1 id="dioramas-title">Walk into the landscape.</h1>
         <p className="dioramas-lede">
-          Explore the Africa-active 3D globe and nine South African provinces, inspect procedural
-          city landmarks, or open fourteen cutaway regional dioramas.
+          Explore fourteen cutaway regional dioramas or inspect procedural city landmarks in 3D.
         </p>
 
-        <div className="dioramas-scope-bar" role="tablist" aria-label="3D view scope">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={scope === "diorama"}
-            className={`dioramas-scope-btn${scope === "diorama" ? " is-active" : ""}`}
-            onClick={() => {
-              benchoAudio.playTap(820);
-              setScope("diorama");
-            }}
-          >
-            <Mountains size={17} aria-hidden="true" />
-            <span>Regional Dioramas</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={scope === "globe"}
-            className={`dioramas-scope-btn${scope === "globe" ? " is-active" : ""}`}
-            onClick={() => {
-              benchoAudio.playTap(860);
-              setScope("globe");
-            }}
-          >
-            <GlobeHemisphereEast size={17} aria-hidden="true" />
-            <span>Africa Globe & Provinces</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={scope === "landmark"}
-            className={`dioramas-scope-btn${scope === "landmark" ? " is-active" : ""}`}
-            onClick={() => {
-              benchoAudio.playTap(900);
-              setScope("landmark");
-            }}
-          >
-            <Compass size={17} aria-hidden="true" />
-            <span>Cities & Landmarks</span>
-          </button>
-        </div>
-      </header>
-
-      {scope === "globe" ? (
-        <div className="dioramas-globe-panel">
-          <AfricaGlobeScope
-            initialProvince={initialProvince}
-            onOpenCityLandmarks={(citySlug) => {
-              setLandmarkCitySlug(citySlug);
-              setLandmarkIndex(0);
-              setScope("landmark");
-            }}
-            onOpenDiorama={(sceneSlug) => {
-              if (DIORAMA_BY_SLUG[sceneSlug as DioramaSlug]) {
-                setSlug(sceneSlug as DioramaSlug);
-              }
-              setScope("diorama");
-            }}
+        <div className="dioramas-scope-dropdown-wrap">
+          <DropdownSelect
+            value={scope}
+            options={SCOPE_OPTIONS}
+            onChange={(nextScope) => setScope(nextScope)}
+            ariaLabel="Choose 3D view"
           />
         </div>
-      ) : null}
+      </header>
 
       {scope === "landmark" ? (
         <div className="dioramas-landmark-panel">
@@ -551,10 +500,12 @@ export default function DioramaExperience() {
                       type="button"
                       className={`dioramas-control${timeMode === option.mode ? " is-active" : ""}`}
                       aria-pressed={timeMode === option.mode}
+                      aria-label={option.label}
+                      title={option.label}
                       onClick={() => setTimeMode(option.mode)}
                     >
                       <Icon size={17} aria-hidden="true" weight="regular" />
-                      <span>{option.label}</span>
+                      <span className="dioramas-control-label">{option.label}</span>
                     </button>
                   );
                 })}
@@ -564,32 +515,41 @@ export default function DioramaExperience() {
                   type="button"
                   className={`dioramas-control${exploded ? " is-active" : ""}`}
                   aria-pressed={exploded}
+                  aria-label="Explode layers"
+                  title="Explode layers"
                   onClick={() => setExploded((value) => !value)}
                 >
                   <ArrowsOutSimple size={17} aria-hidden="true" />
-                  <span>Explode</span>
+                  <span className="dioramas-control-label">Explode</span>
                 </button>
                 <button
                   type="button"
                   className={`dioramas-control${autoRotate ? " is-active" : ""}`}
                   aria-pressed={autoRotate}
+                  aria-label="Auto-rotate"
                   disabled={reducedMotion}
                   title={
                     reducedMotion
                       ? "Auto-rotate is off because reduced motion is enabled"
-                      : undefined
+                      : "Auto-rotate"
                   }
                   onClick={() => setAutoRotate((value) => !value)}
                 >
                   <ArrowsClockwise size={17} aria-hidden="true" />
-                  <span>Auto-rotate</span>
+                  <span className="dioramas-control-label">Auto-rotate</span>
                 </button>
-                <button type="button" className="dioramas-control" onClick={resetView}>
+                <button
+                  type="button"
+                  className="dioramas-control"
+                  aria-label="Reset camera"
+                  title="Reset camera"
+                  onClick={resetView}
+                >
                   <ArrowCounterClockwise size={17} aria-hidden="true" />
-                  <span>Reset</span>
+                  <span className="dioramas-control-label">Reset</span>
                 </button>
               </div>
-              <div className="dioramas-segment" role="group" aria-label="Renderer backend">
+              <div className="dioramas-segment dioramas-renderer-segment" role="group" aria-label="Renderer backend">
                 <span className="dioramas-segment-label" aria-hidden="true">
                   Renderer
                 </span>
@@ -599,10 +559,14 @@ export default function DioramaExperience() {
                     type="button"
                     className={`dioramas-control${backend === option.value ? " is-active" : ""}`}
                     aria-pressed={backend === option.value}
+                    aria-label={option.label}
                     title={option.hint}
                     onClick={() => setBackend(option.value)}
                   >
-                    <span>{option.label}</span>
+                    <span className="dioramas-backend-full">{option.label}</span>
+                    <span className="dioramas-backend-short" aria-hidden="true">
+                      {option.value === "auto" ? "GPU" : "GL2"}
+                    </span>
                   </button>
                 ))}
               </div>

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Centralized /dioramas 3D hub & non-3D discovery routes", () => {
-  test("hosts Regional Dioramas, Africa Globe & Provinces, and Cities & Landmarks in /dioramas", async ({
+  test("hosts Regional Dioramas and Cities & Landmarks via dropdown in /dioramas", async ({
     page,
   }) => {
     for (const viewport of [
@@ -11,19 +11,17 @@ test.describe("Centralized /dioramas 3D hub & non-3D discovery routes", () => {
     ]) {
       await page.setViewportSize(viewport);
       await page.goto("/dioramas");
-      await expect(page.getByRole("tab", { name: "Regional Dioramas" })).toBeVisible();
-      await expect(page.getByRole("tab", { name: "Africa Globe & Provinces" })).toBeVisible();
-      await expect(page.getByRole("tab", { name: "Cities & Landmarks" })).toBeVisible();
+      const scopeTrigger = page.getByRole("button", { name: "Choose 3D view" });
+      await expect(scopeTrigger).toBeVisible();
+      await expect(scopeTrigger).toContainText("Regional Dioramas");
       await expect(page.locator("canvas.dioramas-canvas")).toBeVisible();
 
-      // Switch to Africa Globe & Provinces
-      await page.getByRole("tab", { name: "Africa Globe & Provinces" }).click();
-      await expect(page.getByText("Africa · South Africa")).toBeVisible();
-      await expect(page.getByRole("navigation", { name: "South African provinces" })).toBeVisible();
-
-      // Switch to Cities & Landmarks
-      await page.getByRole("tab", { name: "Cities & Landmarks" }).click();
+      // Open dropdown and switch to Cities & Landmarks
+      await scopeTrigger.click();
+      await expect(page.getByRole("option", { name: /Africa Globe/i })).toHaveCount(0);
+      await page.getByRole("option", { name: /Cities & Landmarks/i }).click();
       await expect(page.getByRole("tablist", { name: "Choose a city" })).toBeVisible();
+      await expect(page.locator(".dioramas-landmark-stage .atlas-ring-scene")).toBeVisible();
     }
   });
 

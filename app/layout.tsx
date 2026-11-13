@@ -13,6 +13,7 @@ import "./mobile-ux.css";
 import "./native-shell.css";
 import "./unified-design-system.css";
 import "./reference-redesign.css";
+import "./ui-polish.css";
 import PwaProvider from "../components/PwaProvider";
 import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";

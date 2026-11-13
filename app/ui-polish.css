@@ -1073,3 +1073,353 @@
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   4. Unified Theme Contrast, Soft Shadows, Icon-Only Controls & Whitespace
+   ========================================================================== */
+
+/* Prevent root horizontal overflow while allowing inner horizontal scrollers */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* Fix double dropdown chevrons on native selects */
+.reference-guide select,
+.adventure-shell select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+/* Consistent icon-only control sizing (44px touch target, centered glyph) */
+.is-icon-only {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+}
+
+.weather-scrub-btn.is-icon-only,
+.weather-cond-pill.is-icon-only {
+  min-width: 40px !important;
+  min-height: 38px !important;
+  padding: 0 10px !important;
+}
+
+/* Tabular numerals for telemetry, clocks, coordinates & counters */
+.weather-badge-time,
+.weather-badge-condition strong,
+.atlas-stage-controls span,
+.stop-number,
+.dioramas-stats {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Dark Mode (Default) WCAG AA Contrast & Soft Shadows --- */
+:root,
+:root .reference-guide,
+:root .field-guide,
+:root .category-page {
+  --citylit-reference-dim: #a8a2b3;
+  --co-text-secondary: #cbd5e1;
+  --co-text-muted: #a1a1aa;
+  --citylit-reference-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.16),
+    0 18px 42px -12px rgba(0, 0, 0, 0.28);
+  --pin-shadow-card:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 10px 26px -8px rgba(0, 0, 0, 0.22);
+  --pin-shadow-floating:
+    0 4px 14px rgba(0, 0, 0, 0.18),
+    0 20px 46px -14px rgba(0, 0, 0, 0.3);
+}
+
+.citylit-hero-eyebrow {
+  color: #c4b5fd !important;
+}
+
+.reference-card .address,
+.adventure-card .address,
+.adventure-card p,
+.citylit-plan-copy p,
+.citylit-popular-prov,
+.citylit-popular-meta {
+  color: #b4bac6;
+}
+
+.dioramas-stage-hint {
+  color: #cbd5e1 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #a1a1aa !important;
+  opacity: 1 !important;
+}
+
+/* --- Light Mode (Explicit [data-theme="day"] AND System Light) --- */
+:root[data-theme="day"],
+:root[data-theme="day"] .reference-guide,
+:root[data-theme="day"] .field-guide,
+:root[data-theme="day"] .category-page {
+  --bg: #f5f1e8;
+  --surface: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.92);
+  --ink: #171920;
+  --muted: #4b5563;
+  --line: rgba(23, 25, 32, 0.12);
+  --accent: #5b2fc0;
+  --accent-ink: #ffffff;
+  --citylit-reference-bg: #f5f1e8;
+  --citylit-reference-panel: #ffffff;
+  --citylit-reference-panel-raised: #fbf9f5;
+  --citylit-reference-border: rgba(23, 25, 32, 0.11);
+  --citylit-reference-text: #171920;
+  --citylit-reference-muted: #374151;
+  --citylit-reference-dim: #4b5563;
+  --citylit-reference-purple: #5b2fc0;
+  --citylit-reference-purple-soft: rgba(91, 47, 192, 0.12);
+  --co-surface: #f5f1e8;
+  --co-surface-bright: #ffffff;
+  --co-surface-low: #fbf9f5;
+  --co-surface-container: #efeae0;
+  --co-surface-high: #e6e0d4;
+  --co-on-surface: #171920;
+  --co-on-surface-variant: #374151;
+  --co-outline: #4b5563;
+  --co-text-primary: #171920;
+  --co-text-secondary: #374151;
+  --co-text-muted: #4b5563;
+  --citylit-surface: #ffffff;
+  --citylit-surface-raised: #fbf9f5;
+  --citylit-text: #171920;
+  --citylit-quiet: #374151;
+  --citylit-reference-shadow:
+    0 4px 14px rgba(23, 25, 32, 0.05),
+    0 18px 42px -12px rgba(23, 25, 32, 0.11);
+  --pin-shadow-card:
+    0 1px 2px rgba(23, 25, 32, 0.04),
+    0 8px 24px -6px rgba(23, 25, 32, 0.07),
+    0 20px 40px -16px rgba(23, 25, 32, 0.05);
+  --pin-shadow-floating:
+    0 4px 12px rgba(23, 25, 32, 0.06),
+    0 18px 42px -12px rgba(23, 25, 32, 0.12);
+}
+
+:root[data-theme="day"] .citylit-hero-eyebrow {
+  color: #5b2fc0 !important;
+}
+
+:root[data-theme="day"] .citylit-dock-item {
+  color: #374151 !important;
+}
+
+:root[data-theme="day"] .citylit-dock-item.is-active {
+  color: #5b2fc0 !important;
+}
+
+:root[data-theme="day"] .weather-copy span,
+:root[data-theme="day"] .dioramas-stage-hint,
+:root[data-theme="day"] .citylit-settings-tab:not(.is-active),
+:root[data-theme="day"] .reference-card .address,
+:root[data-theme="day"] .adventure-card .address,
+:root[data-theme="day"] .adventure-card p {
+  color: #4b5563 !important;
+}
+
+:root[data-theme="day"] input::placeholder,
+:root[data-theme="day"] textarea::placeholder {
+  color: #525866 !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="day"] .citylit-filter-pill.is-active {
+  box-shadow: 0 4px 14px -4px rgba(23, 25, 32, 0.16) !important;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]),
+  :root:not([data-theme="night"]) .reference-guide,
+  :root:not([data-theme="night"]) .field-guide,
+  :root:not([data-theme="night"]) .category-page {
+    --bg: #f5f1e8;
+    --surface: #ffffff;
+    --surface-glass: rgba(255, 255, 255, 0.92);
+    --ink: #171920;
+    --muted: #4b5563;
+    --line: rgba(23, 25, 32, 0.12);
+    --accent: #5b2fc0;
+    --accent-ink: #ffffff;
+    --citylit-reference-bg: #f5f1e8;
+    --citylit-reference-panel: #ffffff;
+    --citylit-reference-panel-raised: #fbf9f5;
+    --citylit-reference-border: rgba(23, 25, 32, 0.11);
+    --citylit-reference-text: #171920;
+    --citylit-reference-muted: #374151;
+    --citylit-reference-dim: #4b5563;
+    --citylit-reference-purple: #5b2fc0;
+    --citylit-reference-purple-soft: rgba(91, 47, 192, 0.12);
+    --co-surface: #f5f1e8;
+    --co-surface-bright: #ffffff;
+    --co-surface-low: #fbf9f5;
+    --co-surface-container: #efeae0;
+    --co-surface-high: #e6e0d4;
+    --co-on-surface: #171920;
+    --co-on-surface-variant: #374151;
+    --co-outline: #4b5563;
+    --co-text-primary: #171920;
+    --co-text-secondary: #374151;
+    --co-text-muted: #4b5563;
+    --citylit-surface: #ffffff;
+    --citylit-surface-raised: #fbf9f5;
+    --citylit-text: #171920;
+    --citylit-quiet: #374151;
+    --citylit-reference-shadow:
+      0 4px 14px rgba(23, 25, 32, 0.05),
+      0 18px 42px -12px rgba(23, 25, 32, 0.11);
+    --pin-shadow-card:
+      0 1px 2px rgba(23, 25, 32, 0.04),
+      0 8px 24px -6px rgba(23, 25, 32, 0.07),
+      0 20px 40px -16px rgba(23, 25, 32, 0.05);
+    --pin-shadow-floating:
+      0 4px 12px rgba(23, 25, 32, 0.06),
+      0 18px 42px -12px rgba(23, 25, 32, 0.12);
+  }
+
+  :root:not([data-theme="night"]) .canvas-root {
+    background:
+      radial-gradient(ellipse at 85% -5%, rgba(91, 47, 192, 0.08), transparent 44%),
+      radial-gradient(ellipse at 10% 6%, rgba(217, 119, 6, 0.06), transparent 36%),
+      #f5f1e8 !important;
+  }
+
+  :root:not([data-theme="night"]) .reference-guide:not(.reference-stage-guide),
+  :root:not([data-theme="night"]) .reference-home {
+    background: transparent !important;
+    color: #171920;
+  }
+
+  :root:not([data-theme="night"]) .reference-guide .atlas-nav.citylit-app-header {
+    background: rgba(251, 249, 245, 0.9) !important;
+    border-bottom: 1px solid rgba(23, 25, 32, 0.08);
+    color: #171920;
+  }
+
+  :root:not([data-theme="night"]) .reference-guide .atlas-nav.citylit-app-header a,
+  :root:not([data-theme="night"]) .citylit-header-nav-link {
+    color: #171920 !important;
+  }
+
+  :root:not([data-theme="night"]) .citylit-hero-eyebrow {
+    color: #5b2fc0 !important;
+  }
+
+  :root:not([data-theme="night"]) .citylit-dock-item {
+    color: #374151 !important;
+  }
+
+  :root:not([data-theme="night"]) .citylit-dock-item.is-active {
+    color: #5b2fc0 !important;
+  }
+
+  :root:not([data-theme="night"]) .weather-widget,
+  :root:not([data-theme="night"]) .reference-search,
+  :root:not([data-theme="night"]) .citylit-3d-canvas-card,
+  :root:not([data-theme="night"]) .citylit-plan-card,
+  :root:not([data-theme="night"]) .citylit-popular-card,
+  :root:not([data-theme="night"]) .dioramas-panel,
+  :root:not([data-theme="night"]) .atlas-city-card,
+  :root:not([data-theme="night"]) .atlas-place-card,
+  :root:not([data-theme="night"]) .atlas-stage-sheet {
+    background: #ffffff !important;
+    border-color: rgba(23, 25, 32, 0.1) !important;
+    color: #171920 !important;
+    box-shadow: var(--pin-shadow-card) !important;
+  }
+
+  :root:not([data-theme="night"]) .weather-copy strong,
+  :root:not([data-theme="night"]) .weather-badge-condition strong,
+  :root:not([data-theme="night"]) .citylit-popular-name,
+  :root:not([data-theme="night"]) .citylit-plan-copy h3,
+  :root:not([data-theme="night"]) .dioramas-panel h2,
+  :root:not([data-theme="night"]) .dioramas-tab-name {
+    color: #171920 !important;
+  }
+
+  :root:not([data-theme="night"]) .weather-copy span,
+  :root:not([data-theme="night"]) .dioramas-stage-hint,
+  :root:not([data-theme="night"]) .citylit-settings-tab:not(.is-active),
+  :root:not([data-theme="night"]) .reference-card .address,
+  :root:not([data-theme="night"]) .adventure-card .address,
+  :root:not([data-theme="night"]) .adventure-card p,
+  :root:not([data-theme="night"]) .citylit-popular-prov,
+  :root:not([data-theme="night"]) .citylit-popular-meta {
+    color: #4b5563 !important;
+  }
+
+  :root:not([data-theme="night"]) input::placeholder,
+  :root:not([data-theme="night"]) textarea::placeholder {
+    color: #525866 !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Soften card shadows globally (never harsh black drop shadows) */
+:where(.reference-guide, .field-guide)
+  :is(
+    .citylit-featured-card,
+    .citylit-3d-canvas-card,
+    .citylit-plan-card,
+    .citylit-popular-card,
+    .dioramas-panel,
+    .dioramas-stage,
+    .dioramas-landmark-stage,
+    .citylit-dropdown-menu,
+    .adventure-card,
+    .atlas-city-card
+  ) {
+  box-shadow: var(--pin-shadow-card) !important;
+}
+
+/* Generous Whitespace & Bottom Dock Safe-Area Clearance */
+.reference-home,
+.dioramas-page,
+.adventure-shell,
+.atlas-directory,
+.atlas-guide {
+  padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.reference-home {
+  gap: 28px !important;
+}
+
+.citylit-section-block,
+.adventure-section {
+  margin-top: 8px;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .reference-home {
+    gap: 36px !important;
+    padding-top: 24px !important;
+  }
+}
+
+/* Clean icon-only bottom dock on compact mobile viewports */
+@media (max-width: 720px) {
+  .citylit-dock-item .bencho-dock-label {
+    display: none !important;
+  }
+
+  .citylit-dock-item {
+    min-width: 52px;
+    min-height: 44px;
+    justify-content: center;
+  }
+}

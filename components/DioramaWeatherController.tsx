@@ -291,7 +291,7 @@ export default function DioramaWeatherController({
         )}
       </AnimatePresence>
 
-      {/* Time of Day Scrubber / Presets (Image 8 style) */}
+      {/* Time of Day Scrubber / Presets (icon-only) */}
       <div className="weather-scrubber-row" role="group" aria-label="Time of day presets">
         {timePresets.map(([p, label, icon, ariaLbl], idx) => {
           const isActive = timePeriod === p;
@@ -302,11 +302,12 @@ export default function DioramaWeatherController({
                 scrubRefs.current[idx] = el;
               }}
               type="button"
-              className={`weather-scrub-btn ${isActive ? "is-active" : ""} ${p === "live" ? "is-live" : ""}`}
+              className={`weather-scrub-btn is-icon-only ${isActive ? "is-active" : ""} ${p === "live" ? "is-live" : ""}`}
               aria-pressed={isActive}
               data-state={isActive ? "active" : "inactive"}
               tabIndex={isActive ? 0 : -1}
               aria-label={ariaLbl}
+              title={label}
               onKeyDown={(e) =>
                 handleRovingKeyDown(e, idx, timePresets.length, scrubRefs, (nextIdx) =>
                   selectPeriod(timePresets[nextIdx][0]),
@@ -315,13 +316,12 @@ export default function DioramaWeatherController({
               onClick={() => selectPeriod(p)}
             >
               {icon}
-              <span>{label}</span>
             </button>
           );
         })}
       </div>
 
-      {/* Atmospheric Weather Conditions Selector */}
+      {/* Atmospheric Weather Conditions Selector (icon-only) */}
       <div className="weather-condition-pills" role="group" aria-label="Weather conditions">
         {weatherPresets.map(([w, label, ariaLbl], idx) => {
           const isActive = weather === w;
@@ -332,11 +332,12 @@ export default function DioramaWeatherController({
                 weatherRefs.current[idx] = el;
               }}
               type="button"
-              className={`weather-cond-pill ${isActive ? "is-active" : ""}`}
+              className={`weather-cond-pill is-icon-only ${isActive ? "is-active" : ""}`}
               aria-pressed={isActive}
               data-state={isActive ? "active" : "inactive"}
               tabIndex={isActive ? 0 : -1}
               aria-label={ariaLbl}
+              title={label}
               onKeyDown={(e) =>
                 handleRovingKeyDown(e, idx, weatherPresets.length, weatherRefs, (nextIdx) =>
                   selectWeather(weatherPresets[nextIdx][0]),
@@ -345,7 +346,6 @@ export default function DioramaWeatherController({
               onClick={() => selectWeather(w)}
             >
               {weatherIcons[w]}
-              <span>{label}</span>
             </button>
           );
         })}

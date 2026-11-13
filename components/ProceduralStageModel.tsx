@@ -12,7 +12,7 @@ import {
   prepareLandmarkExplodedView,
   setLandmarkExplodedView,
 } from "../lib/landmark-exploded-view.js";
-import { addArchitecturalTrim, applyLandmarkLod } from "../lib/landmark-craft.js";
+import { addArchitecturalTrim, applyLandmarkCraft, applyLandmarkLod } from "../lib/landmark-craft.js";
 import {
   applyLandmarkRig,
   clearLandmarkJoint,
@@ -48,6 +48,7 @@ export default function ProceduralStageModel({
   const { gl, invalidate } = useThree();
   const subject = useMemo(() => {
     const landmark = createProceduralLandmark(name, model);
+    applyLandmarkCraft(landmark);
     addArchitecturalTrim(landmark);
     return landmark;
   }, [name, model]);

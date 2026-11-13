@@ -29,8 +29,8 @@ export type StrataPalette = {
 
 export function createStrataMaterial(palette: StrataPalette) {
   const material = new THREE.MeshStandardNodeMaterial({
-    roughness: 0.97,
-    metalness: 0,
+    roughness: 0.86,
+    metalness: 0.04,
     side: THREE.DoubleSide,
   });
   const p = positionWorld;
@@ -87,8 +87,8 @@ export function createWaterMaterial({
   const uGolden = uniform(0);
   const material = new THREE.MeshStandardNodeMaterial({
     transparent: true,
-    roughness: 0.42,
-    metalness: 0.04,
+    roughness: 0.24,
+    metalness: 0.12,
     side: THREE.DoubleSide,
   });
   const depth = attribute("aDepth", "float");

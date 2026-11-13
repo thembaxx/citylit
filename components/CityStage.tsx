@@ -212,9 +212,11 @@ export default function CityStage({
               </Link>
               <Link
                 href={`/dioramas?scope=landmark&city=${city.slug}&item=${encodeURIComponent(item.name)}`}
-                className="atlas-button"
+                className="atlas-button is-icon-only"
+                aria-label="Inspect in 3D"
+                title="Inspect in 3D"
               >
-                <Cube size={17} aria-hidden="true" /> Inspect in 3D
+                <Cube size={18} aria-hidden="true" />
               </Link>
               {item.place && (
                 <MagneticButton
@@ -227,16 +229,6 @@ export default function CityStage({
                   {selected ? "In my day" : "Add to my day"}
                 </MagneticButton>
               )}
-              <MagneticButton
-                onClick={() => setFocusMode((v) => !v)}
-                className="atlas-button atlas-stage-focus-btn"
-                strength={0.16}
-                aria-pressed={focusMode}
-                aria-label={focusMode ? "Show guide sheet" : "Focus on 3D view"}
-              >
-                {focusMode ? <CornersIn size={17} /> : <CornersOut size={17} />}
-                {focusMode ? "Show details" : "Focus 3D"}
-              </MagneticButton>
             </div>
             {availableFacts.length > 0 && (
               <dl className="atlas-stage-facts">
@@ -268,20 +260,24 @@ export default function CityStage({
             <div className="atlas-stage-controls">
               <MagneticButton
                 aria-label="Previous discovery"
+                title="Previous"
+                className="is-icon-only"
                 strength={0.18}
                 onClick={() => pick(index - 1)}
               >
-                <ArrowLeft size={17} /> Prev
+                <ArrowLeft size={18} />
               </MagneticButton>
               <span>
                 {String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
               </span>
               <MagneticButton
                 aria-label="Next discovery"
+                title="Next"
+                className="is-icon-only"
                 strength={0.18}
                 onClick={() => pick(index + 1)}
               >
-                Next <ArrowRight size={17} />
+                <ArrowRight size={18} />
               </MagneticButton>
             </div>
           </div>

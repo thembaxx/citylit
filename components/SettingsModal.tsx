@@ -339,9 +339,10 @@ export default function SettingsModal({
                       className={`citylit-theme-card ${night ? "is-selected" : ""}`}
                       onClick={() => setTheme("dark")}
                       aria-pressed={night}
+                      aria-label="Dark theme"
+                      title="Dark theme"
                     >
                       <Moon size={22} weight={night ? "fill" : "regular"} />
-                      <span>Dark</span>
                       {night && (
                         <div className="citylit-card-check">
                           <Check size={12} weight="bold" />
@@ -355,9 +356,10 @@ export default function SettingsModal({
                       className={`citylit-theme-card ${theme === "system" ? "is-selected" : ""}`}
                       onClick={() => setTheme("system")}
                       aria-pressed={theme === "system"}
+                      aria-label="System theme"
+                      title="System theme"
                     >
                       <Sparkle size={22} weight={theme === "system" ? "fill" : "regular"} />
-                      <span>System</span>
                       {theme === "system" && (
                         <div className="citylit-card-check">
                           <Check size={12} weight="bold" />
@@ -371,9 +373,10 @@ export default function SettingsModal({
                       className={`citylit-theme-card ${!night ? "is-selected" : ""}`}
                       onClick={() => setTheme("light")}
                       aria-pressed={!night}
+                      aria-label="Light theme"
+                      title="Light theme"
                     >
                       <Sun size={22} weight={!night ? "fill" : "regular"} />
-                      <span>Light</span>
                       {!night && (
                         <div className="citylit-card-check">
                           <Check size={12} weight="bold" />

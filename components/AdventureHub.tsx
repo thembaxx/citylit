@@ -22,6 +22,7 @@ import {
   ArrowUp as MoveUp,
   ArrowDown as MoveDown,
 } from "@phosphor-icons/react";
+import { DropdownSelect } from "./ui/DropdownSelect";
 import { cities, places, type Place } from "../lib/data";
 import {
   collections,
@@ -275,15 +276,15 @@ export default function AdventureHub() {
       </Link>
       <div className="adventure-card-actions">
         <MagneticButton
-          className="adventure-card-add"
+          className="adventure-card-add is-icon-only"
           aria-label={
             state.itinerary.includes(p.id) ? `In your day: ${p.name}` : `Add to day: ${p.name}`
           }
+          title={state.itinerary.includes(p.id) ? "In your day" : "Add to day"}
           aria-pressed={state.itinerary.includes(p.id)}
           onClick={() => add(p.id)}
         >
-          {state.itinerary.includes(p.id) ? <Check size={16} /> : <Plus size={16} />}
-          {state.itinerary.includes(p.id) ? "In your day" : "Add to day"}
+          {state.itinerary.includes(p.id) ? <Check size={17} /> : <Plus size={17} />}
         </MagneticButton>
         <button
           className={`adventure-card-save ${state.saved.includes(p.id) ? "is-saved" : ""}`}
@@ -381,22 +382,22 @@ export default function AdventureHub() {
           </section>
         )}
         {tab !== "passport" && (
-          <label className="select-city">
-            Choose a city
-            <select
+          <div className="select-city">
+            <DropdownSelect
+              ariaLabel="Choose a city"
               value={city}
-              onChange={(e) => {
-                setCity(e.target.value);
+              onChange={(nextCity) => {
+                setCity(nextCity);
                 setOrigin(null);
               }}
-            >
-              {cities.map((c) => (
-                <option key={c.slug} value={c.slug}>
-                  {c.name} · {c.province}
-                </option>
-              ))}
-            </select>
-          </label>
+              options={cities.map((c) => ({
+                value: c.slug,
+                label: c.name,
+                description: c.province,
+                icon: <MapPin size={16} weight="duotone" />,
+              }))}
+            />
+          </div>
         )}
         <AnimatedTabs
           ariaLabel="Your guide"
@@ -525,8 +526,13 @@ export default function AdventureHub() {
                           <MagneticButton strength={0.14} onClick={() => addMany(c.placeIds)}>
                             Make this my day <ArrowUpRight size={15} />
                           </MagneticButton>
-                          <button onClick={() => share(c.placeIds)}>
-                            Share collection <Share2 size={15} />
+                          <button
+                            className="is-icon-only"
+                            aria-label={`Share ${c.title} collection`}
+                            title="Share collection"
+                            onClick={() => share(c.placeIds)}
+                          >
+                            <Share2 size={16} />
                           </button>
                         </div>
                       </TiltCard>
@@ -752,9 +758,14 @@ export default function AdventureHub() {
                         <MapPin size={16} />
                         Group nearby stops
                       </button>
-                      <button onClick={() => share(state.itinerary)} disabled={!trip.length}>
+                      <button
+                        className="is-icon-only"
+                        aria-label="Share day"
+                        title="Share day"
+                        onClick={() => share(state.itinerary)}
+                        disabled={!trip.length}
+                      >
                         <Share2 size={16} />
-                        Share day
                       </button>
                       <button
                         onClick={() => {
@@ -781,11 +792,14 @@ export default function AdventureHub() {
                             {p.coordinateAccuracy === "venue" ? "venue pin" : "city reference pin"}
                           </span>
                           <a
+                            className="is-icon-only"
+                            aria-label={`Directions to ${p.name}`}
+                            title="Directions"
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + " " + p.address)}`}
                             target="_blank"
                             rel="noreferrer"
                           >
-                            Directions <ArrowUpRight size={13} />
+                            <ArrowUpRight size={15} />
                           </a>
                         </div>
                         <div className="stop-actions">

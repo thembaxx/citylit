@@ -312,14 +312,19 @@ function Ring({
       />
       <directionalLight
         position={[-5, 4, -3]}
-        intensity={night ? 0.38 : 0.55}
-        color={night ? "#7894c8" : "#e6b080"}
+        intensity={night ? 0.52 : 0.72}
+        color={night ? "#82a0d8" : "#f0be8e"}
+      />
+      <directionalLight
+        position={[4, 2.5, -5]}
+        intensity={night ? 0.34 : 0.44}
+        color={night ? "#a78bfa" : "#fff1d6"}
       />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, radius]} receiveShadow>
-        <circleGeometry args={[2.4, 48]} />
+        <circleGeometry args={[2.3, 48]} />
         <meshBasicMaterial
-          color={night ? "#08080d" : "#221c16"}
-          opacity={night ? 0.45 : 0.22}
+          color={night ? "#06060b" : "#1f1a14"}
+          opacity={night ? 0.24 : 0.11}
           transparent
           depthWrite={false}
         />
@@ -699,7 +704,6 @@ export default function LandmarkRing({
           onClick={() => setMobileInspectorOpen((open) => !open)}
         >
           <Cube size={18} aria-hidden="true" />
-          <span className="atlas-inspector-toggle-label">Inspect</span>
         </button>
         <div
           ref={inspectorPanelRef}

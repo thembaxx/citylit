@@ -440,12 +440,12 @@ export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngin
           sun.shadow.normalBias = 0.025;
         }
         scene.add(sun);
-        fill = new THREE.DirectionalLight(0xbcd7ff, 0.42);
+        fill = new THREE.DirectionalLight(0xc8e0ff, 0.68);
         fill.position.set(-8, 7, -7);
         scene.add(fill);
 
         groundShadow = createGroundShadow(17, -2.62);
-        (groundShadow.material as THREE.MeshBasicMaterial).opacity = 0.42;
+        (groundShadow.material as THREE.MeshBasicMaterial).opacity = 0.26;
         scene.add(groundShadow);
 
         hotspotGeometry = new THREE.PlaneGeometry(0.6, 0.6);

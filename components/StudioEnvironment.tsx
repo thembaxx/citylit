@@ -10,7 +10,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
  * No runtime CDN dependency: works with offline PWA and the shared R3F canvas.
  * Intentionally does not replace the transparent app background.
  */
-export default function StudioEnvironment({ intensity = 0.85 }: { intensity?: number }) {
+export default function StudioEnvironment({ intensity = 1.08 }: { intensity?: number }) {
   const { gl, scene, invalidate } = useThree();
 
   useEffect(() => {

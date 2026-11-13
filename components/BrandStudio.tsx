@@ -60,7 +60,7 @@ export default function BrandStudio() {
           >
             {pose === "saved" ? "Say hello" : "Make Khwezi hop"}
           </MagneticButton>
-          <div className="brand-pose-picker" aria-label="Khwezi moments">
+          <div className="brand-pose-picker" role="group" aria-label="Khwezi moments">
             {Object.keys(khweziMoments).map((key) => (
               <button
                 key={key}
@@ -71,7 +71,7 @@ export default function BrandStudio() {
               </button>
             ))}
           </div>
-          <div className="brand-view-picker" aria-label="Character view">
+          <div className="brand-view-picker" role="group" aria-label="Character view">
             {[
               ["Front", 0],
               ["Three-quarter", 0.6],

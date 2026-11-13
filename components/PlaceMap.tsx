@@ -72,6 +72,7 @@ export default function PlaceMap({
       <div
         className="street-map"
         ref={ref}
+        role="region"
         aria-label={
           accuracy === "venue" ? `Street map of ${name}` : `City reference map for ${name}`
         }

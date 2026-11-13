@@ -740,8 +740,8 @@
 
   .dioramas-control {
     flex: 0 0 auto;
-    min-height: 40px;
-    min-width: 40px;
+    min-height: 44px;
+    min-width: 44px;
     padding: 0 11px;
     border-radius: 11px;
   }

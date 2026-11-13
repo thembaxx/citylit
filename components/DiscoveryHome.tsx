@@ -352,7 +352,10 @@ export default function DiscoveryHome() {
           ) : (
             <>
               {/* Featured Landmark Card */}
-              {(filter === "All" || filter === "Landmarks" || filter === "Nature") &&
+              {(filter === "All" ||
+                filter === "Landmarks" ||
+                filter === "Nature" ||
+                filter === "Architecture") &&
                 featuredPhoto && (
                   <section className="citylit-featured-section" aria-label="Featured place">
                     <div
@@ -429,65 +432,66 @@ export default function DiscoveryHome() {
                 )}
 
               {/* 3D Landmark Interactive Canvas Card (visual ref) */}
-              {(filter === "All" || filter === "Landmarks") && spotlightLandmarkName && (
-                <section
-                  className="citylit-3d-canvas-section"
-                  aria-labelledby="home-3d-landmarks-title"
-                >
-                  <div className="citylit-3d-canvas-card">
-                    <div className="citylit-3d-canvas-head">
-                      <div>
-                        <h2 id="home-3d-landmarks-title">{spotlightCity.name} landmarks</h2>
-                      </div>
-                      <Link
-                        href={`/dioramas?scope=landmark&city=${spotlightCity.slug}`}
-                        className="citylit-inspect-btn"
-                        data-transition-label={`${spotlightCity.name} 3D landmarks`}
-                      >
-                        <Cube size={17} weight="duotone" aria-hidden="true" /> Inspect
-                      </Link>
-                    </div>
-
-                    {/* Real-time Weather & Atmospheric Scrubber (Image 6 & Image 8) */}
-                    <DioramaWeatherController compact cityName={spotlightCity.name} />
-
-                    <div className="citylit-3d-viewport">
-                      {spotlightPhoto && (
-                        <Image
-                          src={spotlightPhoto.src}
-                          alt={spotlightPhoto.alt}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 900px"
-                          className="citylit-3d-preview-image"
-                        />
-                      )}
-                      <div className="citylit-3d-viewport-overlay" aria-hidden="true" />
-                      <div className="citylit-3d-diorama-label">{spotlightLandmarkName}</div>
-                      <div
-                        className="citylit-3d-chip-row"
-                        role="group"
-                        aria-label="Landmark shortcuts"
-                      >
+              {(filter === "All" || filter === "Landmarks" || filter === "Architecture") &&
+                spotlightLandmarkName && (
+                  <section
+                    className="citylit-3d-canvas-section"
+                    aria-labelledby="home-3d-landmarks-title"
+                  >
+                    <div className="citylit-3d-canvas-card">
+                      <div className="citylit-3d-canvas-head">
+                        <div>
+                          <h2 id="home-3d-landmarks-title">{spotlightCity.name} landmarks</h2>
+                        </div>
                         <Link
-                          href={`/${spotlightCity.slug}/landmarks`}
-                          className="citylit-3d-chip is-active"
+                          href={`/dioramas?scope=landmark&city=${spotlightCity.slug}`}
+                          className="citylit-inspect-btn"
+                          data-transition-label={`${spotlightCity.name} 3D landmarks`}
                         >
-                          {spotlightLandmarkName}
+                          <Cube size={17} weight="duotone" aria-hidden="true" /> Inspect
                         </Link>
-                        {spotlightCity.landmarks.slice(1, 3).map((name) => (
+                      </div>
+
+                      {/* Real-time Weather & Atmospheric Scrubber (Image 6 & Image 8) */}
+                      <DioramaWeatherController compact cityName={spotlightCity.name} />
+
+                      <div className="citylit-3d-viewport">
+                        {spotlightPhoto && (
+                          <Image
+                            src={spotlightPhoto.src}
+                            alt={spotlightPhoto.alt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 900px"
+                            className="citylit-3d-preview-image"
+                          />
+                        )}
+                        <div className="citylit-3d-viewport-overlay" aria-hidden="true" />
+                        <div className="citylit-3d-diorama-label">{spotlightLandmarkName}</div>
+                        <div
+                          className="citylit-3d-chip-row"
+                          role="group"
+                          aria-label="Landmark shortcuts"
+                        >
                           <Link
-                            key={name}
-                            href={landmarkPath(spotlightCity, name)}
-                            className="citylit-3d-chip"
+                            href={`/${spotlightCity.slug}/landmarks`}
+                            className="citylit-3d-chip is-active"
                           >
-                            {name}
+                            {spotlightLandmarkName}
                           </Link>
-                        ))}
+                          {spotlightCity.landmarks.slice(1, 3).map((name) => (
+                            <Link
+                              key={name}
+                              href={landmarkPath(spotlightCity, name)}
+                              className="citylit-3d-chip"
+                            >
+                              {name}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </section>
-              )}
+                  </section>
+                )}
 
               {/* Where should we wander? */}
               <LivingAtlasDiscovery

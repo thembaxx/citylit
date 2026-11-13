@@ -22,7 +22,7 @@ interface SlideToConfirmProps {
   label?: string;
   confirmedLabel?: string;
   isConfirmed?: boolean;
-  onConfirm: () => void;
+  onConfirm: () => boolean | void;
   onReset?: () => void;
   className?: string;
 }
@@ -69,9 +69,23 @@ export function SlideToConfirm({
     const vx = info?.velocity?.x ?? 0;
     const isFlick = vx > 300;
     if (currentX >= maxDrag * 0.68 || isFlick) {
+      const result = onConfirm();
+      if (result === false) {
+        if (reduced) {
+          dragX.set(0);
+        } else {
+          animate(dragX, 0, {
+            type: "spring",
+            stiffness: 450,
+            damping: 28,
+            velocity: vx,
+          });
+        }
+        return;
+      }
       // Confirmed! Snap to end with seeded gesture velocity
       if (reduced) {
-        animate(dragX, maxDrag, { duration: 0.1 });
+        dragX.set(maxDrag);
       } else {
         animate(dragX, maxDrag, {
           type: "spring",
@@ -81,11 +95,10 @@ export function SlideToConfirm({
         });
       }
       setConfirmed(true);
-      onConfirm();
     } else {
       // Rebound back to start with seeded gesture velocity
       if (reduced) {
-        animate(dragX, 0, { duration: 0.1 });
+        dragX.set(0);
       } else {
         animate(dragX, 0, {
           type: "spring",
@@ -101,11 +114,14 @@ export function SlideToConfirm({
     if (confirmed) {
       onReset?.();
       setConfirmed(false);
-      animate(dragX, 0, { type: "spring", stiffness: 400, damping: 25 });
+      if (reduced) dragX.set(0);
+      else animate(dragX, 0, { type: "spring", stiffness: 400, damping: 25 });
     } else {
+      const result = onConfirm();
+      if (result === false) return;
       setConfirmed(true);
-      animate(dragX, maxDrag, { type: "spring", stiffness: 400, damping: 25 });
-      onConfirm();
+      if (reduced) dragX.set(maxDrag);
+      else animate(dragX, maxDrag, { type: "spring", stiffness: 400, damping: 25 });
     }
   };
 
@@ -116,6 +132,9 @@ export function SlideToConfirm({
       role="button"
       tabIndex={0}
       aria-label={confirmed ? confirmedLabel : label}
+      onClick={() => {
+        if (confirmed) handleKeyboardTrigger();
+      }}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();

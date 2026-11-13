@@ -42,9 +42,20 @@ export default function GuideShell({
       }
       if (e.key === "Escape") {
         setSettingsOpen(false);
-      } else if (e.key === "?" || e.key === "/") {
+      } else if (e.key === "?") {
         e.preventDefault();
         setSettingsOpen((prev) => !prev);
+      } else if (e.key === "/") {
+        const searchInput = document.querySelector<HTMLElement>(
+          'input[type="search"], [role="searchbox"]',
+        );
+        if (searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        } else {
+          e.preventDefault();
+          setSettingsOpen((prev) => !prev);
+        }
       }
     };
     window.addEventListener("keydown", handleKeyDown);

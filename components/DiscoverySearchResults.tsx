@@ -33,8 +33,10 @@ export default function DiscoverySearchResults({
 }) {
   const [showAll, setShowAll] = useState(false);
   const showCities = filter === "All" || filter === "Cities";
-  const showLandmarks = filter === "All" || filter === "Landmarks" || filter === "Nature";
-  const showPlaces = filter === "All" || filter === "Places" || filter === "Nature";
+  const showLandmarks =
+    filter === "All" || filter === "Landmarks" || filter === "Nature" || filter === "Architecture";
+  const showPlaces =
+    filter === "All" || filter === "Places" || filter === "Nature" || filter === "Architecture";
   const visibleCities = showCities ? matchingCities.slice(0, showAll ? undefined : 8) : [];
   const visibleLandmarks = showLandmarks ? matchingLandmarks.slice(0, showAll ? undefined : 8) : [];
   const visiblePlaces = showPlaces ? matchingPlaces.slice(0, showAll ? undefined : 8) : [];

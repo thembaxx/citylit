@@ -481,7 +481,10 @@ export default function SettingsModal({
                   <div className="citylit-about-card citylit-shortcuts-card">
                     <ul className="citylit-shortcuts-list">
                       <li>
-                        <kbd>?</kbd> / <kbd>/</kbd> <span>Open settings &amp; controls</span>
+                        <kbd>?</kbd> <span>Open settings &amp; controls</span>
+                      </li>
+                      <li>
+                        <kbd>/</kbd> / <kbd>⌘K</kbd> <span>Focus search bar</span>
                       </li>
                       <li>
                         <kbd>Esc</kbd> <span>Close dialogs &amp; clear overlays</span>

@@ -5298,7 +5298,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  min-height: 42px;
+  min-height: 44px;
   padding: 0 13px;
   border-radius: 999px;
   color: var(--citylit-quiet);
@@ -5319,9 +5319,9 @@
 .reference-guide .citylit-app-header .citylit-header-theme-btn {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  min-height: 42px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
   padding: 0;
   border: 1px solid var(--citylit-hairline);
   border-radius: 50%;
@@ -5376,6 +5376,14 @@
   border: 1px solid rgb(23 25 32 / 12%);
   background: color-mix(in srgb, #fbf9f5 90%, transparent);
   box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) .reference-guide .atlas-native-dock.citylit-bottom-dock {
+    border: 1px solid rgb(23 25 32 / 12%);
+    background: color-mix(in srgb, #fbf9f5 90%, transparent);
+    box-shadow: var(--pin-chamfer), var(--pin-shadow-floating);
+  }
 }
 
 .reference-guide .citylit-bottom-dock .bencho-dock-item-wrapper {
@@ -11081,16 +11089,16 @@ button:active:not(:disabled),
   }
   .citylit-settings-tab,
   .field-guide .hub-tabs.easyui-tabs-list .easyui-tab {
-    padding-inline: 6px;
+    padding-inline: 8px;
     font-size: 11px;
-    min-height: 40px;
+    min-height: 44px;
   }
   .bencho-slide-confirm-track {
-    height: 48px;
+    height: 52px;
   }
   .bencho-slide-thumb {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
   .bencho-slide-text {
     font-size: 12px;
@@ -11814,6 +11822,16 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
+}
+
+:root[data-theme="day"] .citylit-source-attribution-link {
+  color: #5b2fc0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="night"]) .citylit-source-attribution-link {
+    color: #5b2fc0;
+  }
 }
 
 /* Day Mode Support for ThermalDial & ReaderCard */

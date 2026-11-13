@@ -588,6 +588,27 @@
     color: #ffffff !important;
   }
 
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="night"])
+      .reference-guide
+      .citylit-bottom-dock
+      .bencho-dock-item.is-active,
+    :root:not([data-theme="night"])
+      .reference-guide
+      .citylit-bottom-dock
+      .bencho-dock-item[aria-current="page"] {
+      color: #ffffff !important;
+    }
+
+    :root:not([data-theme="night"])
+      .reference-guide
+      .citylit-bottom-dock
+      .citylit-dock-pill.bencho-dock-pill {
+      background: #171920 !important;
+      box-shadow: 0 4px 14px rgba(23, 25, 32, 0.24) !important;
+    }
+  }
+
   .reference-guide .citylit-bottom-dock .bencho-dock-icon-inner,
   .reference-guide .citylit-bottom-dock .bencho-dock-label {
     position: relative !important;
@@ -1213,8 +1234,10 @@ textarea::placeholder {
   color: #374151 !important;
 }
 
-:root[data-theme="day"] .citylit-dock-item.is-active {
-  color: #5b2fc0 !important;
+@media (min-width: 768px) {
+  :root[data-theme="day"] .citylit-dock-item.is-active {
+    color: #5b2fc0 !important;
+  }
 }
 
 :root[data-theme="day"] .weather-copy span,
@@ -1313,8 +1336,10 @@ textarea::placeholder {
     color: #374151 !important;
   }
 
-  :root:not([data-theme="night"]) .citylit-dock-item.is-active {
-    color: #5b2fc0 !important;
+  @media (min-width: 768px) {
+    :root:not([data-theme="night"]) .citylit-dock-item.is-active {
+      color: #5b2fc0 !important;
+    }
   }
 
   :root:not([data-theme="night"]) .weather-widget,

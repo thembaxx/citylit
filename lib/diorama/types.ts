@@ -50,10 +50,18 @@ export type SceneLoader = () => Promise<SceneModule>;
 
 export type RendererKind = "WebGPU" | "WebGL 2";
 
+/**
+ * Which backend the renderer should start on. "auto" uses WebGPU when the
+ * browser exposes it and silently falls back to WebGL 2. "webgl" forces the
+ * WebGL 2 backend so the same TSL scene graph is compiled to GLSL instead.
+ */
+export type RenderBackend = "auto" | "webgl";
+
 export type DioramaEngineOptions = {
   canvas: HTMLCanvasElement;
   reducedMotion: boolean;
   quality?: Quality;
+  backend?: RenderBackend;
   onRenderer?: (kind: RendererKind) => void;
   onLandmarks?: (landmarks: DioramaLandmark[]) => void;
   onSelect?: (id: string | null) => void;

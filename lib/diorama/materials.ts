@@ -144,11 +144,36 @@ export function createWaterfallMaterial() {
     0.5,
   );
   const streak = smoothstep(0.18, 0.82, flow);
+  // Fade the card's edges so the fall reads as water, not a lit rectangle.
+  const edgeX = smoothstep(0, 0.3, tex.x).mul(smoothstep(1, 0.7, tex.x));
+  const edgeTop = smoothstep(0.92, 1, tex.y).mul(0.5).add(0.5);
+  const edgeBottom = smoothstep(0.1, 0, tex.y).mul(0.55).add(0.45);
   material.colorNode = mix(color("#bfeef7"), color("#ffffff"), streak);
-  material.opacityNode = float(0.48).add(streak.mul(0.52));
+  material.opacityNode = float(0.38).add(streak.mul(0.5)).mul(edgeX).mul(edgeTop).mul(edgeBottom);
   material.userData.dioramaMaterial = "waterfall";
   material.userData.uniforms = { time: uTime };
   return material;
+}
+
+/** A flat water surface ribbon used for rivers above sea level. */
+export function createRiverMaterial({
+  color = "#5aa6b4",
+  emissive = "#0f3540",
+  opacity = 0.92,
+}: {
+  color?: string;
+  emissive?: string;
+  opacity?: number;
+} = {}) {
+  return new THREE.MeshStandardMaterial({
+    color,
+    roughness: 0.16,
+    metalness: 0.06,
+    transparent: true,
+    opacity,
+    emissive: new THREE.Color(emissive),
+    emissiveIntensity: 0.16,
+  });
 }
 
 /** Basic node material used for mist and other soft transparent shapes. */

@@ -31,6 +31,25 @@ const LOADERS: Record<DioramaSlug, SceneLoader> = {
     import("./scenes/drakensberg").then((module) => ({ build: module.buildDrakensberg })),
   pretoria: () => import("./scenes/pretoria").then((module) => ({ build: module.buildPretoria })),
   knysna: () => import("./scenes/knysna").then((module) => ({ build: module.buildKnysna })),
+  "hole-in-the-wall": () =>
+    import("./scenes/hole-in-the-wall").then((module) => ({ build: module.buildHoleInTheWall })),
+  "sani-pass": () =>
+    import("./scenes/sani-pass").then((module) => ({ build: module.buildSaniPass })),
+  winelands: () =>
+    import("./scenes/winelands").then((module) => ({ build: module.buildWinelands })),
+  "cape-point": () =>
+    import("./scenes/cape-point").then((module) => ({ build: module.buildCapePoint })),
+  augrabies: () =>
+    import("./scenes/augrabies").then((module) => ({ build: module.buildAugrabies })),
+  boulders: () => import("./scenes/boulders").then((module) => ({ build: module.buildBoulders })),
+  "robben-island": () =>
+    import("./scenes/robben-island").then((module) => ({ build: module.buildRobbenIsland })),
+  "kosi-bay": () => import("./scenes/kosi-bay").then((module) => ({ build: module.buildKosiBay })),
+  addo: () => import("./scenes/addo").then((module) => ({ build: module.buildAddo })),
+  "valley-of-desolation": () =>
+    import("./scenes/valley-of-desolation").then((module) => ({
+      build: module.buildValleyOfDesolation,
+    })),
 };
 
 const SEEDS: Record<DioramaSlug, number> = {
@@ -38,6 +57,16 @@ const SEEDS: Record<DioramaSlug, number> = {
   drakensberg: 41,
   pretoria: 73,
   knysna: 91,
+  "hole-in-the-wall": 127,
+  "sani-pass": 149,
+  winelands: 163,
+  "cape-point": 181,
+  augrabies: 199,
+  boulders: 211,
+  "robben-island": 233,
+  "kosi-bay": 251,
+  addo: 269,
+  "valley-of-desolation": 287,
 };
 
 const ATMOSPHERES: Record<TimeMode, Atmosphere> = {
@@ -98,6 +127,7 @@ function disposeObject(object: THREE.Object3D) {
 export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngine {
   const { canvas, reducedMotion, onRenderer, onLandmarks, onSelect, onError } = options;
   const quality = options.quality ?? DEFAULT_QUALITY;
+  const requestedBackend = options.backend ?? "auto";
 
   let renderer: THREE.WebGPURenderer | null = null;
   let scene: THREE.Scene | null = null;
@@ -341,6 +371,7 @@ export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngin
           antialias: true,
           alpha: true,
           powerPreference: "high-performance",
+          forceWebGL: requestedBackend === "webgl",
         });
         await gpu.init();
         if (disposed) {

@@ -5,7 +5,7 @@ import "./dioramas.css";
 
 export const metadata = metadataForPage(
   "South African landscapes in 3D",
-  "Explore Soweto, the Drakensberg, Pretoria and Knysna as animated cutaway dioramas. Orbit the scene, change the light and open the earth to see each place in layers.",
+  "Explore fourteen South African places — from the Hole in the Wall to Augrabies Falls — as animated cutaway dioramas. Orbit the scene, change the light, open the earth, and switch between WebGPU and WebGL 2.",
   "/dioramas",
 );
 

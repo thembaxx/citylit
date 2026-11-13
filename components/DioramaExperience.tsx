@@ -1,6 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+} from "react";
 import {
   ArrowCounterClockwise,
   ArrowsClockwise,
@@ -19,12 +27,25 @@ import {
   type DioramaSlug,
   type TimeMode,
 } from "../lib/diorama/content";
-import type { DioramaEngine, Quality, RendererKind } from "../lib/diorama/types";
+import type { DioramaEngine, Quality, RenderBackend, RendererKind } from "../lib/diorama/types";
 
 const TIME_OPTIONS: { mode: TimeMode; label: string; icon: typeof Sun }[] = [
   { mode: "day", label: "Day", icon: Sun },
   { mode: "golden", label: "Golden", icon: SunHorizon },
   { mode: "night", label: "Night", icon: MoonStars },
+];
+
+const BACKENDS: { value: RenderBackend; label: string; hint: string }[] = [
+  {
+    value: "auto",
+    label: "WebGPU",
+    hint: "Use the WebGPU backend when the browser supports it. Shaders compile to WGSL.",
+  },
+  {
+    value: "webgl",
+    label: "WebGL 2",
+    hint: "Force the WebGL 2 backend. The same shader graph compiles to GLSL.",
+  },
 ];
 
 function detectQuality(): Quality {
@@ -67,17 +88,20 @@ function detectQuality(): Quality {
 export default function DioramaExperience() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineRef = useRef<DioramaEngine | null>(null);
-  const slugRef = useRef<DioramaSlug>("soweto");
+  const slugRef = useRef<DioramaSlug>("hole-in-the-wall");
   const timeRef = useRef<TimeMode>("day");
   const explodedRef = useRef(false);
   const autoRotateRef = useRef(false);
 
-  const [slug, setSlug] = useState<DioramaSlug>("soweto");
+  const [slug, setSlug] = useState<DioramaSlug>("hole-in-the-wall");
   const [timeMode, setTimeMode] = useState<TimeMode>("day");
   const [exploded, setExploded] = useState(false);
   const [autoRotate, setAutoRotate] = useState(false);
+  const [backend, setBackend] = useState<RenderBackend>("auto");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [landmarks, setLandmarks] = useState<DioramaLandmark[]>(DIORAMA_BY_SLUG.soweto.landmarks);
+  const [landmarks, setLandmarks] = useState<DioramaLandmark[]>(
+    DIORAMA_BY_SLUG["hole-in-the-wall"].landmarks,
+  );
   const [renderer, setRenderer] = useState<RendererKind | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [error, setError] = useState("");
@@ -107,14 +131,21 @@ export default function DioramaExperience() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     let cancelled = false;
+    let engine: DioramaEngine | null = null;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    setEngineReady(false);
+    setStatus("loading");
+    setRenderer(null);
+    setError("");
 
     (async () => {
       try {
         const { createDioramaEngine } = await import("../lib/diorama/engine");
         if (cancelled) return;
-        const engine = createDioramaEngine({
+        engine = createDioramaEngine({
           canvas,
+          backend,
           quality: detectQuality(),
           reducedMotion: reduce,
           onRenderer: setRenderer,
@@ -146,10 +177,10 @@ export default function DioramaExperience() {
 
     return () => {
       cancelled = true;
-      engineRef.current?.dispose();
-      engineRef.current = null;
+      engine?.dispose();
+      if (engineRef.current === engine) engineRef.current = null;
     };
-  }, []);
+  }, [backend]);
 
   useEffect(() => {
     if (!engineReady) return;
@@ -188,6 +219,24 @@ export default function DioramaExperience() {
     engineRef.current?.setAutoRotate(autoRotate);
   }, [autoRotate]);
 
+  const tabRefs = useRef(new Map<DioramaSlug, HTMLButtonElement>());
+
+  const onTabKeyDown = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
+    const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
+    if (!keys.includes(event.key)) return;
+    const index = DIORAMAS.findIndex((item) => item.slug === slugRef.current);
+    if (index < 0) return;
+    event.preventDefault();
+    let next = index;
+    if (event.key === "ArrowRight") next = (index + 1) % DIORAMAS.length;
+    if (event.key === "ArrowLeft") next = (index - 1 + DIORAMAS.length) % DIORAMAS.length;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = DIORAMAS.length - 1;
+    const nextSlug = DIORAMAS[next].slug;
+    setSlug(nextSlug);
+    tabRefs.current.get(nextSlug)?.focus();
+  }, []);
+
   const selectLandmark = useCallback((id: string) => {
     setSelectedId(id);
     engineRef.current?.focus(id);
@@ -204,26 +253,40 @@ export default function DioramaExperience() {
     "--scene-sky": timeMode === "night" ? "#2b3550" : scene.sky,
   } as CSSProperties;
 
+  const shaderLanguage =
+    renderer === "WebGPU" ? "WGSL" : renderer === "WebGL 2" ? "GLSL ES 3.0" : "";
+
   return (
     <section className="dioramas" aria-labelledby="dioramas-title">
       <header className="dioramas-header">
-        <p className="dioramas-eyebrow">FOUR PLACES · ONE COUNTRY</p>
+        <p className="dioramas-eyebrow">FOURTEEN PLACES · ONE COUNTRY</p>
         <h1 id="dioramas-title">Walk into the landscape.</h1>
         <p className="dioramas-lede">
-          Cutaway blocks of South Africa, built in real time. Orbit the scene, change the light, or
-          open the earth to see how each place is layered.
+          Cutaway blocks of South Africa, built in real time with three.js. Orbit the scene, change
+          the light, or open the earth to see how each place is layered — then switch the renderer
+          to watch the same shaders compile to WGSL on WebGPU or GLSL on WebGL 2.
         </p>
       </header>
 
       <div className="dioramas-grid">
         <div className="dioramas-main">
-          <div className="dioramas-tabs" role="tablist" aria-label="Choose a diorama">
+          <div
+            className="dioramas-tabs"
+            role="tablist"
+            aria-label="Choose a diorama"
+            onKeyDown={onTabKeyDown}
+          >
             {DIORAMAS.map((item) => (
               <button
                 key={item.slug}
+                ref={(node) => {
+                  if (node) tabRefs.current.set(item.slug, node);
+                  else tabRefs.current.delete(item.slug);
+                }}
                 type="button"
                 role="tab"
                 aria-selected={item.slug === slug}
+                tabIndex={item.slug === slug ? 0 : -1}
                 className={`dioramas-tab${item.slug === slug ? " is-active" : ""}`}
                 onClick={() => setSlug(item.slug)}
               >
@@ -235,6 +298,7 @@ export default function DioramaExperience() {
 
           <div className="dioramas-stage" style={stageStyle} data-time={timeMode}>
             <canvas
+              key={backend}
               ref={canvasRef}
               className="dioramas-canvas"
               aria-label={`Interactive 3D diorama of ${scene.name}: ${scene.title}`}
@@ -248,7 +312,17 @@ export default function DioramaExperience() {
               </div>
               <span className={`dioramas-badge${renderer ? " is-live" : ""}`}>
                 <span className="dioramas-dot" aria-hidden="true" />
-                {renderer ?? "Starting"}
+                {renderer ? (
+                  <>
+                    {renderer}
+                    <span className="dioramas-badge-shader" aria-hidden="true">
+                      {" "}
+                      · {shaderLanguage}
+                    </span>
+                  </>
+                ) : (
+                  "Starting"
+                )}
               </span>
             </div>
             <p className="dioramas-hint" id="dioramas-instructions">
@@ -316,6 +390,23 @@ export default function DioramaExperience() {
                 <ArrowCounterClockwise size={17} aria-hidden="true" />
                 <span>Reset</span>
               </button>
+            </div>
+            <div className="dioramas-segment" role="group" aria-label="Renderer backend">
+              <span className="dioramas-segment-label" aria-hidden="true">
+                Renderer
+              </span>
+              {BACKENDS.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`dioramas-control${backend === option.value ? " is-active" : ""}`}
+                  aria-pressed={backend === option.value}
+                  title={option.hint}
+                  onClick={() => setBackend(option.value)}
+                >
+                  <span>{option.label}</span>
+                </button>
+              ))}
             </div>
           </div>
 

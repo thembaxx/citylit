@@ -860,6 +860,78 @@
    6. Mobile Edge-to-Edge Horizontal Scroll, Carousel, & Reduced Boxes-in-Boxes
    -------------------------------------------------------------------------- */
 
+/* --------------------------------------------------------------------------
+   7. Global Icon + Text Vertical Centering
+   -------------------------------------------------------------------------- */
+
+:where(.reference-guide, .field-guide, .category-page, .citylit-settings-sheet)
+  :is(
+    button,
+    a.atlas-button,
+    a.pill-button,
+    a.citylit-header-nav-link,
+    a.citylit-inspect-btn,
+    a.citylit-plan-primary,
+    a.citylit-plan-secondary,
+    a.citylit-see-all-link,
+    a.citylit-3d-chip,
+    .easyui-tab,
+    .easyui-pill-button,
+    .citylit-filter-pill,
+    .citylit-dropdown-trigger,
+    .citylit-dropdown-trigger-lead,
+    .citylit-dropdown-option,
+    .citylit-dropdown-option-lead,
+    .citylit-setting-label,
+    .citylit-map-city-item,
+    .citylit-shortcuts-list li,
+    .dioramas-control,
+    .dioramas-badge,
+    .dioramas-info-kicker,
+    .weather-widget,
+    .reference-search,
+    .atlas-search,
+    .atlas-inspector-toggle,
+    .atlas-stage-chips button
+  ) {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+:where(.reference-guide, .field-guide, .category-page, .citylit-settings-sheet)
+  :is(
+    .reference-search,
+    .atlas-search,
+    .citylit-dropdown-trigger,
+    .citylit-dropdown-option,
+    .citylit-setting-row
+  ) {
+  display: flex;
+  align-items: center;
+}
+
+:where(.reference-guide, .field-guide, .category-page, .citylit-settings-sheet)
+  :is(button, a, .citylit-setting-label, .citylit-dropdown-icon, .bencho-dock-icon-inner)
+  > svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.citylit-header-nav-link {
+  gap: 6px;
+}
+
+.dioramas-info-kicker {
+  gap: 6px;
+}
+
+.citylit-plan-status > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 @media (max-width: 767px) {
   /* Edge-to-edge horizontal scroll lists with side padding & smart edge blur/fade */
   .citylit-filter-pills-row,

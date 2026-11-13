@@ -305,7 +305,7 @@ export function buildKnysna(context: SceneContext): SceneBuild {
   const clouds = createClouds({
     count: 4,
     seed: 91,
-    y: 6.3,
+    y: 5.7,
     spread: 6.6,
     scale: 0.54,
     material: cloudMaterial,

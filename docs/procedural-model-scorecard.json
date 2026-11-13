@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-08T19:30:44.185Z",
-  "average": 83,
+  "generatedAt": "2026-11-13T19:39:26.953Z",
+  "average": 94,
   "missingSpecs": [],
   "cases": [
     {
@@ -8,13 +8,13 @@
       "label": "Table Mountain",
       "score": {
         "model": "table-mountain",
-        "total": 85,
+        "total": 95,
         "possible": 100,
-        "percent": 85,
-        "grade": "B",
+        "percent": 95,
+        "grade": "A",
         "axes": {
           "craft": {
-            "earned": 13,
+            "earned": 23,
             "possible": 25
           },
           "geometry": {
@@ -44,13 +44,13 @@
           {
             "axis": "craft",
             "label": "Human-scale cues",
-            "earned": 0,
+            "earned": 8,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Named parts",
-            "earned": 3,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -134,18 +134,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 147,
-        "triangles": 84004,
-        "geometryBytes": 2513596,
+        "drawCalls": 150,
+        "triangles": 84040,
+        "geometryBytes": 2516116,
         "textureBytes": 262144,
         "instances": 110
       },
       "craft": {
         "chamfered": 7,
-        "cues": 0,
+        "cues": 2,
         "pbr": 3,
-        "emissive": 145,
-        "colors": 17
+        "emissive": 148,
+        "colors": 20
       },
       "physics": {
         "model": "table-mountain",
@@ -164,10 +164,10 @@
           "height": 1.315,
           "depth": 3.417
         },
-        "meshes": 143,
-        "drawCalls": 145,
-        "triangles": 84004,
-        "materials": 29,
+        "meshes": 144,
+        "drawCalls": 148,
+        "triangles": 84040,
+        "materials": 32,
         "textures": 4,
         "instanced": [
           {
@@ -179,9 +179,9 @@
             "count": 30
           }
         ],
-        "namedParts": 7,
-        "volumeM3": 5173319609,
-        "massTonnes": 5866544437,
+        "namedParts": 10,
+        "volumeM3": 5173677113,
+        "massTonnes": 5866949846,
         "centerOfMass": {
           "x": -0.13,
           "y": 0.534,
@@ -234,21 +234,21 @@
       "label": "Moses Mabhida Stadium",
       "score": {
         "model": "stadium",
-        "total": 86,
+        "total": 93,
         "possible": 100,
-        "percent": 86,
-        "grade": "B",
+        "percent": 93,
+        "grade": "A",
         "axes": {
           "craft": {
             "earned": 21,
             "possible": 25
           },
           "geometry": {
-            "earned": 17,
+            "earned": 22,
             "possible": 25
           },
           "materials": {
-            "earned": 13,
+            "earned": 15,
             "possible": 15
           },
           "physics": {
@@ -300,7 +300,7 @@
           {
             "axis": "geometry",
             "label": "Instanced detail",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -312,7 +312,7 @@
           {
             "axis": "materials",
             "label": "PBR surfaces",
-            "earned": 3,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -360,18 +360,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 243,
-        "triangles": 25480,
-        "geometryBytes": 1531000,
-        "textureBytes": 196608,
-        "instances": 0
+        "drawCalls": 198,
+        "triangles": 25792,
+        "geometryBytes": 1500112,
+        "textureBytes": 458752,
+        "instances": 58
       },
       "craft": {
         "chamfered": 8,
-        "cues": 4,
-        "pbr": 2,
-        "emissive": 239,
-        "colors": 29
+        "cues": 6,
+        "pbr": 7,
+        "emissive": 194,
+        "colors": 31
       },
       "physics": {
         "model": "stadium",
@@ -384,32 +384,45 @@
           "depth": 280,
           "unit": "m"
         },
-        "metresPerUnit": 93.73,
+        "metresPerUnit": 22.978,
         "bounds": {
-          "width": 3.414,
-          "height": 1.587,
-          "depth": 3.45
+          "width": 13.927,
+          "height": 1.632,
+          "depth": 11.115
         },
-        "meshes": 232,
-        "drawCalls": 239,
-        "triangles": 25480,
-        "materials": 32,
-        "textures": 3,
-        "instanced": [],
-        "namedParts": 3,
-        "volumeM3": 2754387,
-        "massTonnes": 2220780,
+        "meshes": 184,
+        "drawCalls": 194,
+        "triangles": 25792,
+        "materials": 34,
+        "textures": 7,
+        "instanced": [
+          {
+            "name": "moses-mabhida-facade-ribs",
+            "count": 48
+          },
+          {
+            "name": "instanced",
+            "count": 4
+          },
+          {
+            "name": "instanced",
+            "count": 6
+          }
+        ],
+        "namedParts": 4,
+        "volumeM3": 40403,
+        "massTonnes": 32100,
         "centerOfMass": {
-          "x": -0.002,
-          "y": 0.341,
-          "z": -0.03
+          "x": -0.003,
+          "y": 0.354,
+          "z": -1.431
         },
         "support": {
-          "points": 96,
+          "points": 92,
           "area": 7.69,
           "stabilityMargin": 1.463,
           "inside": true,
-          "footprintRadius": 1.725
+          "footprintRadius": 6.963
         },
         "joints": [
           {
@@ -417,18 +430,18 @@
             "label": "Arch cable car",
             "type": "path",
             "travelUnits": 16.917774777081327,
-            "travelMetres": 1585.7078362123777
+            "travelMetres": 388.73169830258894
           },
           {
             "id": "roof-lift",
             "label": "Roof membrane",
             "type": "prismatic",
             "travelUnits": 0.45,
-            "travelMetres": 42.17862784544503
+            "travelMetres": 10.33996885176314
           }
         ],
         "collisions": {
-          "rest": 475,
+          "rest": 427,
           "extremes": [
             {
               "id": "arch-car",
@@ -577,18 +590,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 321,
-        "triangles": 27532,
-        "geometryBytes": 1917448,
+        "drawCalls": 323,
+        "triangles": 27844,
+        "geometryBytes": 1922968,
         "textureBytes": 720896,
-        "instances": 36
+        "instances": 46
       },
       "craft": {
         "chamfered": 19,
-        "cues": 4,
+        "cues": 6,
         "pbr": 94,
-        "emissive": 318,
-        "colors": 24
+        "emissive": 320,
+        "colors": 26
       },
       "physics": {
         "model": "union-buildings",
@@ -601,37 +614,45 @@
           "depth": 180,
           "unit": "m"
         },
-        "metresPerUnit": 82.609,
+        "metresPerUnit": 23.08,
         "bounds": {
-          "width": 3.45,
-          "height": 1.601,
-          "depth": 2.048
+          "width": 12.348,
+          "height": 1.646,
+          "depth": 9.855
         },
         "meshes": 310,
-        "drawCalls": 319,
-        "triangles": 27555,
-        "materials": 24,
+        "drawCalls": 321,
+        "triangles": 27867,
+        "materials": 26,
         "textures": 11,
         "instanced": [
           {
             "name": "union-buildings-terraced-garden-parterres",
             "count": 36
+          },
+          {
+            "name": "instanced",
+            "count": 4
+          },
+          {
+            "name": "instanced",
+            "count": 6
           }
         ],
         "namedParts": 3,
-        "volumeM3": 1153594,
-        "massTonnes": 1155068,
+        "volumeM3": 25159,
+        "massTonnes": 25191,
         "centerOfMass": {
-          "x": -0.039,
-          "y": 0.337,
-          "z": -0.113
+          "x": -0.004,
+          "y": 0.349,
+          "z": -1.405
         },
         "support": {
-          "points": 184,
+          "points": 144,
           "area": 5.113,
           "stabilityMargin": 0.903,
           "inside": true,
-          "footprintRadius": 1.725
+          "footprintRadius": 6.174
         },
         "joints": [
           {
@@ -639,14 +660,14 @@
             "label": "East wing",
             "type": "prismatic",
             "travelUnits": 0.5,
-            "travelMetres": 41.304347826086946
+            "travelMetres": 11.54014269400218
           },
           {
             "id": "wing-west",
             "label": "West wing",
             "type": "prismatic",
             "travelUnits": 0.5,
-            "travelMetres": 41.304347826086946
+            "travelMetres": 11.54014269400218
           }
         ],
         "collisions": {
@@ -673,21 +694,21 @@
       "label": "Nelson Mandela Bridge",
       "score": {
         "model": "bridge",
-        "total": 82,
+        "total": 97,
         "possible": 100,
-        "percent": 82,
-        "grade": "B",
+        "percent": 97,
+        "grade": "A",
         "axes": {
           "craft": {
-            "earned": 20,
+            "earned": 25,
             "possible": 25
           },
           "geometry": {
-            "earned": 17,
+            "earned": 22,
             "possible": 25
           },
           "materials": {
-            "earned": 10,
+            "earned": 15,
             "possible": 15
           },
           "physics": {
@@ -715,7 +736,7 @@
           {
             "axis": "craft",
             "label": "Named parts",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -739,7 +760,7 @@
           {
             "axis": "geometry",
             "label": "Instanced detail",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -751,7 +772,7 @@
           {
             "axis": "materials",
             "label": "PBR surfaces",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -793,18 +814,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 238,
-        "triangles": 24980,
-        "geometryBytes": 1634008,
-        "textureBytes": 32768,
-        "instances": 0
+        "drawCalls": 206,
+        "triangles": 25292,
+        "geometryBytes": 1641832,
+        "textureBytes": 819200,
+        "instances": 46
       },
       "craft": {
         "chamfered": 26,
-        "cues": 4,
-        "pbr": 0,
-        "emissive": 236,
-        "colors": 26
+        "cues": 6,
+        "pbr": 25,
+        "emissive": 204,
+        "colors": 29
       },
       "physics": {
         "model": "bridge",
@@ -817,36 +838,53 @@
           "depth": 30,
           "unit": "m"
         },
-        "metresPerUnit": 82.319,
+        "metresPerUnit": 18.68,
         "bounds": {
-          "width": 3.45,
-          "height": 1.577,
-          "depth": 2.171
+          "width": 15.204,
+          "height": 1.628,
+          "depth": 12.134
         },
-        "meshes": 229,
-        "drawCalls": 236,
-        "triangles": 24980,
-        "materials": 32,
-        "textures": 1,
-        "instanced": [],
-        "namedParts": 0,
-        "volumeM3": 335700,
-        "massTonnes": 342270,
+        "meshes": 193,
+        "drawCalls": 204,
+        "triangles": 25292,
+        "materials": 35,
+        "textures": 13,
+        "instanced": [
+          {
+            "name": "bridge-lamp-masts",
+            "count": 18
+          },
+          {
+            "name": "bridge-lamp-luminaires",
+            "count": 18
+          },
+          {
+            "name": "instanced",
+            "count": 4
+          },
+          {
+            "name": "instanced",
+            "count": 6
+          }
+        ],
+        "namedParts": 15,
+        "volumeM3": 3921,
+        "massTonnes": 4006,
         "centerOfMass": {
-          "x": -0.164,
-          "y": 0.347,
-          "z": -0.264
+          "x": -0.165,
+          "y": 0.362,
+          "z": -1.948
         },
         "support": {
-          "points": 116,
+          "points": 112,
           "area": 6.615,
           "stabilityMargin": 0.822,
           "inside": true,
-          "footprintRadius": 1.725
+          "footprintRadius": 7.602
         },
         "joints": [],
         "collisions": {
-          "rest": 428,
+          "rest": 374,
           "extremes": [],
           "newAtExtremes": 0
         },
@@ -858,17 +896,17 @@
       "label": "The Big Hole",
       "score": {
         "model": "hole",
-        "total": 78,
+        "total": 93,
         "possible": 100,
-        "percent": 78,
-        "grade": "C",
+        "percent": 93,
+        "grade": "A",
         "axes": {
           "craft": {
-            "earned": 13,
+            "earned": 23,
             "possible": 25
           },
           "geometry": {
-            "earned": 17,
+            "earned": 22,
             "possible": 25
           },
           "materials": {
@@ -894,13 +932,13 @@
           {
             "axis": "craft",
             "label": "Human-scale cues",
-            "earned": 0,
+            "earned": 8,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Named parts",
-            "earned": 3,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -924,7 +962,7 @@
           {
             "axis": "geometry",
             "label": "Instanced detail",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -984,18 +1022,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 183,
-        "triangles": 16544,
-        "geometryBytes": 927716,
+        "drawCalls": 154,
+        "triangles": 17744,
+        "geometryBytes": 1045092,
         "textureBytes": 262144,
-        "instances": 0
+        "instances": 34
       },
       "craft": {
-        "chamfered": 6,
-        "cues": 0,
+        "chamfered": 10,
+        "cues": 3,
         "pbr": 1,
-        "emissive": 177,
-        "colors": 20
+        "emissive": 148,
+        "colors": 22
       },
       "physics": {
         "model": "hole",
@@ -1014,24 +1052,29 @@
           "height": 1.625,
           "depth": 3.45
         },
-        "meshes": 181,
-        "drawCalls": 182,
-        "triangles": 16574,
-        "materials": 60,
+        "meshes": 148,
+        "drawCalls": 153,
+        "triangles": 17774,
+        "materials": 31,
         "textures": 4,
-        "instanced": [],
-        "namedParts": 3,
-        "volumeM3": 848829268,
-        "massTonnes": 971243636,
+        "instanced": [
+          {
+            "name": "big-hole-rim-boulders",
+            "count": 34
+          }
+        ],
+        "namedParts": 8,
+        "volumeM3": 845021953,
+        "massTonnes": 966926140,
         "centerOfMass": {
-          "x": -0.024,
-          "y": 0.402,
-          "z": 0.014
+          "x": -0.023,
+          "y": 0.4,
+          "z": 0.015
         },
         "support": {
           "points": 4,
           "area": 11.888,
-          "stabilityMargin": 1.699,
+          "stabilityMargin": 1.7,
           "inside": true,
           "footprintRadius": 1.725
         },
@@ -1040,19 +1083,19 @@
             "id": "sheave",
             "label": "Headframe sheave",
             "type": "revolute",
-            "travelUnits": 16.53391231405932,
-            "travelMetres": 7677.554284023793
+            "travelUnits": 16.533912573736632,
+            "travelMetres": 7677.5543057867
           },
           {
             "id": "skip",
             "label": "Mine skip",
             "type": "path",
             "travelUnits": 6.592419889539803,
-            "travelMetres": 3061.2029750503475
+            "travelMetres": 3061.202935649224
           }
         ],
         "collisions": {
-          "rest": 260,
+          "rest": 248,
           "extremes": [
             {
               "id": "sheave",
@@ -1201,18 +1244,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 87,
-        "triangles": 118720,
-        "geometryBytes": 781528,
+        "drawCalls": 24,
+        "triangles": 114912,
+        "geometryBytes": 410808,
         "textureBytes": 262144,
-        "instances": 2094
+        "instances": 2104
       },
       "craft": {
         "chamfered": 3,
-        "cues": 4,
+        "cues": 6,
         "pbr": 9,
-        "emissive": 87,
-        "colors": 29
+        "emissive": 24,
+        "colors": 20
       },
       "physics": {
         "model": "ponte",
@@ -1225,16 +1268,16 @@
           "depth": 55,
           "unit": "m"
         },
-        "metresPerUnit": 15.942,
+        "metresPerUnit": 12.306,
         "bounds": {
-          "width": 3.45,
-          "height": 1.573,
-          "depth": 3.45
+          "width": 4.469,
+          "height": 2.262,
+          "depth": 4.221
         },
-        "meshes": 75,
-        "drawCalls": 87,
-        "triangles": 118720,
-        "materials": 29,
+        "meshes": 10,
+        "drawCalls": 24,
+        "triangles": 114912,
+        "materials": 20,
         "textures": 4,
         "instanced": [
           {
@@ -1256,22 +1299,30 @@
           {
             "name": "ponte-city-vertical-concrete-fins",
             "count": 24
+          },
+          {
+            "name": "instanced",
+            "count": 4
+          },
+          {
+            "name": "instanced",
+            "count": 6
           }
         ],
         "namedParts": 8,
-        "volumeM3": 13888,
-        "massTonnes": 14000,
+        "volumeM3": 15070,
+        "massTonnes": 15192,
         "centerOfMass": {
-          "x": 0.002,
-          "y": 0.524,
-          "z": -0.004
+          "x": -0.005,
+          "y": 0.836,
+          "z": -0.258
         },
         "support": {
-          "points": 12,
+          "points": 4,
           "area": 11.902,
           "stabilityMargin": 1.721,
           "inside": true,
-          "footprintRadius": 1.725
+          "footprintRadius": 2.235
         },
         "joints": [
           {
@@ -1279,11 +1330,11 @@
             "label": "Atrium lift",
             "type": "prismatic",
             "travelUnits": 2.2,
-            "travelMetres": 35.072463768115945
+            "travelMetres": 27.07299300216464
           }
         ],
         "collisions": {
-          "rest": 177,
+          "rest": 4,
           "extremes": [
             {
               "id": "lift",
@@ -1301,13 +1352,13 @@
       "label": "Voortrekker Monument",
       "score": {
         "model": "voortrekker",
-        "total": 88,
+        "total": 100,
         "possible": 100,
-        "percent": 88,
-        "grade": "B",
+        "percent": 100,
+        "grade": "A",
         "axes": {
           "craft": {
-            "earned": 13,
+            "earned": 25,
             "possible": 25
           },
           "geometry": {
@@ -1331,19 +1382,19 @@
           {
             "axis": "craft",
             "label": "Chamfered edges",
-            "earned": 6,
+            "earned": 8,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Human-scale cues",
-            "earned": 0,
+            "earned": 8,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Named parts",
-            "earned": 3,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -1421,17 +1472,17 @@
         ]
       },
       "profile": {
-        "drawCalls": 82,
-        "triangles": 19916,
-        "geometryBytes": 908128,
+        "drawCalls": 83,
+        "triangles": 20216,
+        "geometryBytes": 936928,
         "textureBytes": 524288,
         "instances": 116
       },
       "craft": {
-        "chamfered": 19,
-        "cues": 0,
+        "chamfered": 20,
+        "cues": 2,
         "pbr": 22,
-        "emissive": 81,
+        "emissive": 82,
         "colors": 25
       },
       "physics": {
@@ -1451,9 +1502,9 @@
           "height": 1.383,
           "depth": 3.45
         },
-        "meshes": 76,
-        "drawCalls": 81,
-        "triangles": 19916,
+        "meshes": 69,
+        "drawCalls": 82,
+        "triangles": 20216,
         "materials": 25,
         "textures": 8,
         "instanced": [
@@ -1478,24 +1529,24 @@
             "count": 48
           }
         ],
-        "namedParts": 7,
-        "volumeM3": 4172,
-        "massTonnes": 4465,
+        "namedParts": 8,
+        "volumeM3": 4170,
+        "massTonnes": 4461,
         "centerOfMass": {
           "x": -0.004,
           "y": 0.466,
-          "z": 0.005
+          "z": 0.004
         },
         "support": {
           "points": 20,
           "area": 11.903,
-          "stabilityMargin": 1.72,
+          "stabilityMargin": 1.721,
           "inside": true,
           "footprintRadius": 1.725
         },
         "joints": [],
         "collisions": {
-          "rest": 122,
+          "rest": 117,
           "extremes": [],
           "newAtExtremes": 0
         },
@@ -1507,17 +1558,17 @@
       "label": "Lighthouse",
       "score": {
         "model": "lighthouse",
-        "total": 78,
+        "total": 93,
         "possible": 100,
-        "percent": 78,
-        "grade": "C",
+        "percent": 93,
+        "grade": "A",
         "axes": {
           "craft": {
-            "earned": 10,
+            "earned": 20,
             "possible": 25
           },
           "geometry": {
-            "earned": 20,
+            "earned": 25,
             "possible": 25
           },
           "materials": {
@@ -1543,13 +1594,13 @@
           {
             "axis": "craft",
             "label": "Human-scale cues",
-            "earned": 0,
+            "earned": 8,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Named parts",
-            "earned": 3,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -1573,7 +1624,7 @@
           {
             "axis": "geometry",
             "label": "Instanced detail",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -1633,18 +1684,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 77,
-        "triangles": 5972,
-        "geometryBytes": 503976,
-        "textureBytes": 262144,
-        "instances": 0
+        "drawCalls": 24,
+        "triangles": 2700,
+        "geometryBytes": 187888,
+        "textureBytes": 524288,
+        "instances": 16
       },
       "craft": {
-        "chamfered": 2,
-        "cues": 0,
-        "pbr": 1,
-        "emissive": 76,
-        "colors": 18
+        "chamfered": 3,
+        "cues": 2,
+        "pbr": 2,
+        "emissive": 22,
+        "colors": 10
       },
       "physics": {
         "model": "lighthouse",
@@ -1660,27 +1711,32 @@
         "metresPerUnit": 3.478,
         "bounds": {
           "width": 3.45,
-          "height": 1.766,
-          "depth": 3.45
+          "height": 2.076,
+          "depth": 3.268
         },
-        "meshes": 77,
-        "drawCalls": 77,
-        "triangles": 5972,
-        "materials": 19,
-        "textures": 4,
-        "instanced": [],
-        "namedParts": 7,
-        "volumeM3": 102,
-        "massTonnes": 116,
+        "meshes": 21,
+        "drawCalls": 24,
+        "triangles": 2700,
+        "materials": 17,
+        "textures": 8,
+        "instanced": [
+          {
+            "name": "lighthouse-gallery-balusters",
+            "count": 16
+          }
+        ],
+        "namedParts": 11,
+        "volumeM3": 139,
+        "massTonnes": 152,
         "centerOfMass": {
-          "x": -0.003,
-          "y": 0.582,
-          "z": -0.009
+          "x": -0.271,
+          "y": 0.794,
+          "z": -0.178
         },
         "support": {
-          "points": 36,
-          "area": 11.902,
-          "stabilityMargin": 1.716,
+          "points": 48,
+          "area": 8.441,
+          "stabilityMargin": 1.449,
           "inside": true,
           "footprintRadius": 1.725
         },
@@ -1689,12 +1745,12 @@
             "id": "beam",
             "label": "Lantern beam",
             "type": "revolute",
-            "travelUnits": 0.006283185307179587,
-            "travelMetres": 0.02185455759018987
+            "travelUnits": 2.0567761536508637,
+            "travelMetres": 7.154004012698656
           }
         ],
         "collisions": {
-          "rest": 194,
+          "rest": 42,
           "extremes": [
             {
               "id": "beam",
@@ -1712,17 +1768,17 @@
       "label": "Civic tower",
       "score": {
         "model": "tower",
-        "total": 88,
+        "total": 93,
         "possible": 100,
-        "percent": 88,
-        "grade": "B",
+        "percent": 93,
+        "grade": "A",
         "axes": {
           "craft": {
             "earned": 20,
             "possible": 25
           },
           "geometry": {
-            "earned": 20,
+            "earned": 25,
             "possible": 25
           },
           "materials": {
@@ -1778,7 +1834,7 @@
           {
             "axis": "geometry",
             "label": "Instanced detail",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -1838,18 +1894,18 @@
         ]
       },
       "profile": {
-        "drawCalls": 90,
-        "triangles": 7028,
-        "geometryBytes": 535368,
-        "textureBytes": 262144,
-        "instances": 0
+        "drawCalls": 31,
+        "triangles": 3776,
+        "geometryBytes": 199024,
+        "textureBytes": 524288,
+        "instances": 26
       },
       "craft": {
-        "chamfered": 2,
-        "cues": 4,
-        "pbr": 1,
-        "emissive": 90,
-        "colors": 23
+        "chamfered": 3,
+        "cues": 8,
+        "pbr": 2,
+        "emissive": 31,
+        "colors": 15
       },
       "physics": {
         "model": "tower",
@@ -1862,51 +1918,64 @@
           "depth": 40,
           "unit": "m"
         },
-        "metresPerUnit": 11.594,
+        "metresPerUnit": 8.892,
         "bounds": {
-          "width": 3.45,
-          "height": 1.661,
-          "depth": 3.45
+          "width": 4.498,
+          "height": 2.401,
+          "depth": 4.239
         },
-        "meshes": 83,
-        "drawCalls": 90,
-        "triangles": 7028,
-        "materials": 25,
-        "textures": 4,
-        "instanced": [],
-        "namedParts": 9,
-        "volumeM3": 2975,
-        "massTonnes": 3357,
+        "meshes": 19,
+        "drawCalls": 31,
+        "triangles": 3776,
+        "materials": 17,
+        "textures": 8,
+        "instanced": [
+          {
+            "name": "tower-gallery-balusters",
+            "count": 16
+          },
+          {
+            "name": "instanced",
+            "count": 4
+          },
+          {
+            "name": "instanced",
+            "count": 6
+          }
+        ],
+        "namedParts": 13,
+        "volumeM3": 2885,
+        "massTonnes": 2913,
         "centerOfMass": {
-          "x": 0.01,
-          "y": 0.303,
-          "z": 0
+          "x": 0.007,
+          "y": 0.533,
+          "z": -0.265
         },
         "support": {
-          "points": 12,
+          "points": 4,
           "area": 11.902,
-          "stabilityMargin": 1.715,
+          "stabilityMargin": 1.716,
           "inside": true,
-          "footprintRadius": 1.725
+          "footprintRadius": 2.249
         },
         "joints": [
           {
             "id": "clock-minute",
             "label": "Clock minute hand",
             "type": "revolute",
-            "travelUnits": 1.5853320991291329,
-            "travelMetres": 18.3806620188885
+            "travelUnits": 0.5614781594921844,
+            "travelMetres": 4.992586877800195
           },
           {
             "id": "clock-hour",
             "label": "Clock hour hand",
             "type": "revolute",
-            "travelUnits": 0.1348071512864909,
-            "travelMetres": 1.562981464191199
+            "travelUnits": 0.05055265949907064,
+            "travelMetres": 0.4495073231009169
           }
         ],
         "collisions": {
-          "rest": 178,
+          "rest": 27,
           "extremes": [
             {
               "id": "clock-minute",
@@ -1926,16 +1995,16 @@
     },
     {
       "model": "dome",
-      "label": "dome",
+      "label": "Civic Hall & Rotunda",
       "score": {
         "model": "dome",
-        "total": 72,
+        "total": 95,
         "possible": 100,
-        "percent": 72,
-        "grade": "C",
+        "percent": 95,
+        "grade": "A",
         "axes": {
           "craft": {
-            "earned": 7,
+            "earned": 20,
             "possible": 25
           },
           "geometry": {
@@ -1943,7 +2012,7 @@
             "possible": 25
           },
           "materials": {
-            "earned": 10,
+            "earned": 15,
             "possible": 15
           },
           "physics": {
@@ -1951,7 +2020,7 @@
             "possible": 20
           },
           "articulation": {
-            "earned": 10,
+            "earned": 15,
             "possible": 15
           }
         },
@@ -1965,13 +2034,13 @@
           {
             "axis": "craft",
             "label": "Human-scale cues",
-            "earned": 0,
+            "earned": 8,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Named parts",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -2007,7 +2076,7 @@
           {
             "axis": "materials",
             "label": "PBR surfaces",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -2037,7 +2106,7 @@
           {
             "axis": "articulation",
             "label": "Named spec",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -2049,60 +2118,73 @@
         ]
       },
       "profile": {
-        "drawCalls": 77,
-        "triangles": 7028,
-        "geometryBytes": 510544,
-        "textureBytes": 0,
-        "instances": 28
+        "drawCalls": 27,
+        "triangles": 4088,
+        "geometryBytes": 184384,
+        "textureBytes": 720896,
+        "instances": 22
       },
       "craft": {
-        "chamfered": 2,
-        "cues": 0,
-        "pbr": 0,
-        "emissive": 77,
-        "colors": 17
+        "chamfered": 3,
+        "cues": 8,
+        "pbr": 11,
+        "emissive": 27,
+        "colors": 15
       },
       "physics": {
         "model": "dome",
-        "label": "dome",
-        "provenance": "Generic procedural archetype without a published-dimension spec.",
-        "material": "concrete",
-        "real": null,
-        "metresPerUnit": 1,
-        "bounds": {
-          "width": 3.45,
-          "height": 1.627,
-          "depth": 3.45
+        "label": "Civic Hall & Rotunda",
+        "provenance": "Illustrative domed civic hall archetype with portico and cupola.",
+        "material": "limestone",
+        "real": {
+          "width": 65,
+          "height": 42,
+          "depth": 52,
+          "unit": "m"
         },
-        "meshes": 76,
-        "drawCalls": 77,
-        "triangles": 7028,
-        "materials": 18,
-        "textures": 0,
+        "metresPerUnit": 14.582,
+        "bounds": {
+          "width": 4.457,
+          "height": 2.553,
+          "depth": 4.214
+        },
+        "meshes": 15,
+        "drawCalls": 27,
+        "triangles": 4088,
+        "materials": 15,
+        "textures": 11,
         "instanced": [
           {
+            "name": "dome-rotunda-pilasters",
+            "count": 12
+          },
+          {
             "name": "instanced",
-            "count": 28
+            "count": 4
+          },
+          {
+            "name": "instanced",
+            "count": 6
           }
         ],
-        "namedParts": 0,
-        "volumeM3": 3,
-        "massTonnes": 3,
+        "namedParts": 9,
+        "volumeM3": 18378,
+        "massTonnes": 19369,
         "centerOfMass": {
-          "x": -0.006,
-          "y": 0.434,
-          "z": -0.083
+          "x": -0.001,
+          "y": 0.704,
+          "z": -0.364
         },
         "support": {
-          "points": 8,
+          "points": 4,
           "area": 11.902,
-          "stabilityMargin": 1.642,
+          "stabilityMargin": 1.616,
           "inside": true,
-          "footprintRadius": 1.725
+          "footprintRadius": 2.229
         },
         "joints": [],
         "collisions": {
-          "rest": 160,
+          "rest": 5,
           "extremes": [],
           "newAtExtremes": 0
         },
@@ -2111,16 +2193,16 @@
     },
     {
       "model": "fort",
-      "label": "fort",
+      "label": "Stone Fort & Bastion",
       "score": {
         "model": "fort",
-        "total": 75,
+        "total": 95,
         "possible": 100,
-        "percent": 75,
-        "grade": "C",
+        "percent": 95,
+        "grade": "A",
         "axes": {
           "craft": {
-            "earned": 10,
+            "earned": 20,
             "possible": 25
           },
           "geometry": {
@@ -2128,7 +2210,7 @@
             "possible": 25
           },
           "materials": {
-            "earned": 10,
+            "earned": 15,
             "possible": 15
           },
           "physics": {
@@ -2136,7 +2218,7 @@
             "possible": 20
           },
           "articulation": {
-            "earned": 10,
+            "earned": 15,
             "possible": 15
           }
         },
@@ -2144,19 +2226,19 @@
           {
             "axis": "craft",
             "label": "Chamfered edges",
-            "earned": 6,
+            "earned": 3,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Human-scale cues",
-            "earned": 0,
+            "earned": 8,
             "possible": 8
           },
           {
             "axis": "craft",
             "label": "Named parts",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -2192,7 +2274,7 @@
           {
             "axis": "materials",
             "label": "PBR surfaces",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -2222,7 +2304,7 @@
           {
             "axis": "articulation",
             "label": "Named spec",
-            "earned": 0,
+            "earned": 5,
             "possible": 5
           },
           {
@@ -2234,60 +2316,73 @@
         ]
       },
       "profile": {
-        "drawCalls": 78,
-        "triangles": 7380,
-        "geometryBytes": 642168,
-        "textureBytes": 0,
-        "instances": 21
+        "drawCalls": 30,
+        "triangles": 2964,
+        "geometryBytes": 156744,
+        "textureBytes": 720896,
+        "instances": 26
       },
       "craft": {
-        "chamfered": 8,
-        "cues": 0,
-        "pbr": 0,
-        "emissive": 78,
-        "colors": 16
+        "chamfered": 3,
+        "cues": 8,
+        "pbr": 11,
+        "emissive": 30,
+        "colors": 15
       },
       "physics": {
         "model": "fort",
-        "label": "fort",
-        "provenance": "Generic procedural archetype without a published-dimension spec.",
-        "material": "concrete",
-        "real": null,
-        "metresPerUnit": 1,
-        "bounds": {
-          "width": 3.45,
-          "height": 0.978,
-          "depth": 3.45
+        "label": "Stone Fort & Bastion",
+        "provenance": "Illustrative colonial stone fort archetype with corner bastions and ramparts.",
+        "material": "sandstone",
+        "real": {
+          "width": 85,
+          "height": 18,
+          "depth": 75,
+          "unit": "m"
         },
-        "meshes": 77,
-        "drawCalls": 78,
-        "triangles": 7380,
-        "materials": 17,
-        "textures": 0,
+        "metresPerUnit": 19.135,
+        "bounds": {
+          "width": 4.442,
+          "height": 1.495,
+          "depth": 4.205
+        },
+        "meshes": 18,
+        "drawCalls": 30,
+        "triangles": 2964,
+        "materials": 18,
+        "textures": 11,
         "instanced": [
           {
+            "name": "fort-battlement-crenels",
+            "count": 16
+          },
+          {
             "name": "instanced",
-            "count": 21
+            "count": 4
+          },
+          {
+            "name": "instanced",
+            "count": 6
           }
         ],
-        "namedParts": 0,
-        "volumeM3": 2,
-        "massTonnes": 2,
+        "namedParts": 15,
+        "volumeM3": 34550,
+        "massTonnes": 34748,
         "centerOfMass": {
-          "x": 0.005,
-          "y": 0.249,
-          "z": -0.008
+          "x": -0.001,
+          "y": 0.426,
+          "z": -0.317
         },
         "support": {
           "points": 4,
           "area": 11.902,
-          "stabilityMargin": 1.717,
+          "stabilityMargin": 1.66,
           "inside": true,
-          "footprintRadius": 1.725
+          "footprintRadius": 2.221
         },
         "joints": [],
         "collisions": {
-          "rest": 183,
+          "rest": 23,
           "extremes": [],
           "newAtExtremes": 0
         },

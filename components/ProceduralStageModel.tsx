@@ -12,7 +12,11 @@ import {
   prepareLandmarkExplodedView,
   setLandmarkExplodedView,
 } from "../lib/landmark-exploded-view.js";
-import { addArchitecturalTrim, applyLandmarkCraft, applyLandmarkLod } from "../lib/landmark-craft.js";
+import {
+  addArchitecturalTrim,
+  applyLandmarkCraft,
+  applyLandmarkLod,
+} from "../lib/landmark-craft.js";
 import {
   applyLandmarkRig,
   clearLandmarkJoint,

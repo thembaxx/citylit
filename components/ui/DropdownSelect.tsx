@@ -166,7 +166,12 @@ export function DropdownSelect<T extends string = string>({
                     </span>
                   </span>
                   {isSelected && (
-                    <Check size={16} weight="bold" aria-hidden="true" className="citylit-dropdown-check" />
+                    <Check
+                      size={16}
+                      weight="bold"
+                      aria-hidden="true"
+                      className="citylit-dropdown-check"
+                    />
                   )}
                 </button>
               );

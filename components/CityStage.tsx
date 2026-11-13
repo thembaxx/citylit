@@ -11,7 +11,6 @@ import {
   Leaf,
   Mountains,
   Buildings,
-  CornersOut,
   CornersIn,
 } from "@phosphor-icons/react";
 import { places, landmarkSources, categorySlug, type Place } from "../lib/data";

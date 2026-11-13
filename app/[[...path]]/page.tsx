@@ -56,8 +56,7 @@ export default async function Page({ params, searchParams }: Props) {
       ) : (
         <CityGuide city={route.city} />
       );
-  } else if (route.kind === "place")
-    content = <VenueGuide city={route.city} place={route.place} />;
+  } else if (route.kind === "place") content = <VenueGuide city={route.city} place={route.place} />;
   else if (route.kind === "category")
     content = (
       <GuideShell>
@@ -71,11 +70,7 @@ export default async function Page({ params, searchParams }: Props) {
             <span className="atlas-title-period">.</span>
           </h1>
           <p className="atlas-city-intro">{categoryBlurbs[route.category]}</p>
-          <PlacesBrowser
-            key={route.path}
-            city={route.city.slug}
-            initialCategory={route.category}
-          />
+          <PlacesBrowser key={route.path} city={route.city.slug} initialCategory={route.category} />
         </section>
       </GuideShell>
     );

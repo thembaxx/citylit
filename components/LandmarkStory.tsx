@@ -10,7 +10,6 @@ import {
   Cube,
   MapPin,
   ShareNetwork,
-  Star,
 } from "@phosphor-icons/react";
 import { landmarkSources, places } from "../lib/data";
 import { landmarkVenue, type GuideCity } from "../lib/discovery-guide";
@@ -20,6 +19,7 @@ import SlideToConfirm from "./ui/SlideToConfirm";
 import DynamicIslandToast from "./ui/DynamicIslandToast";
 import LiquidTabs from "./ui/LiquidTabs";
 import ReaderCard from "./ui/ReaderCard";
+import { MdxCallout, MdxCodeBlock, MdxTable } from "./ui/mdxcn";
 import { useDiscovery } from "./useDiscovery";
 import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { benchoAudio } from "../lib/bencho-audio";
@@ -128,7 +128,7 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           {/* Hero Copy */}
           <div className="citylit-detail-hero-copy">
             <div className="citylit-featured-badge">
-              <Star size={12} weight="fill" /> Featured
+              <MapPin size={12} weight="fill" /> Heritage Landmark
             </div>
             <h1>
               {name}
@@ -141,11 +141,13 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
                   {city.name}, {city.province}
                 </span>
               </div>
-              <div className="citylit-detail-rating">
-                <Star size={15} weight="fill" className="rating-star" />
-                <strong>4.8</strong>
-                <span>(12k reviews)</span>
-              </div>
+              {record?.facts?.[0] && (
+                <div className="citylit-detail-rating">
+                  <span>
+                    {record.facts[0].label}: {record.facts[0].value}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -221,23 +223,22 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
           {activeTab === "facts" && (
             <div className="citylit-tab-panel">
               {record?.facts?.length ? (
-                <dl className="atlas-story-facts">
-                  {record.facts.map((fact) => (
-                    <div key={fact.label}>
-                      <dt>{fact.label}</dt>
-                      <dd>{fact.value}</dd>
-                    </div>
-                  ))}
-                </dl>
+                <MdxTable
+                  caption={`${name} · Reference facts`}
+                  headers={["Attribute", "Detail"]}
+                  rows={record.facts.map((fact) => [fact.label, fact.value])}
+                />
               ) : (
-                <p>Public entry and visiting hours are verified through local operators.</p>
+                <MdxCallout tone="tip" title="Practical access">
+                  <p>Public entry and visiting hours are verified through local operators.</p>
+                </MdxCallout>
               )}
             </div>
           )}
 
           {activeTab === "sources" && (
             <div className="citylit-tab-panel">
-              <div className="citylit-tips-box">
+              <MdxCallout tone="verified" title="Research & attribution">
                 <p>
                   This landmark story is researched from publicly accessible historical records and
                   survey observations. Visiting arrangements and accessibility should be confirmed
@@ -250,7 +251,12 @@ export default function LandmarkStory({ city, index }: { city: GuideCity; index:
                     </a>
                   </p>
                 )}
-              </div>
+              </MdxCallout>
+              <MdxCodeBlock
+                title="Portable Markdown Note"
+                language="markdown"
+                code={`# ${name}\n- Destination: ${city.name}, ${city.province}\n- Summary: ${city.descriptions[index]}\n${record?.aboutSource ? `- Source: ${record.aboutSource}` : ""}`.trim()}
+              />
             </div>
           )}
         </div>

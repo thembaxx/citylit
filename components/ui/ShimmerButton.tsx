@@ -15,16 +15,15 @@ interface ShimmerButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * EasyUI inspired Shimmer Button
- * Seamless rotating beam of light along the button perimeter with haptic/tactile feedback.
+ * EasyUI Shimmer Button adapted to Citylit squircle controls & motion preferences.
  */
 export function ShimmerButton({
   children,
-  shimmerColor = "#a78bfa",
+  shimmerColor = "var(--citylit-amber, #e59934)",
   _shimmerSize = "0.08em",
-  borderRadius = "9999px",
+  borderRadius = "14px",
   _shimmerDuration = "2.8s",
-  background = "rgba(23, 20, 38, 0.95)",
+  background = "var(--surface)",
   className = "",
   onClick,
   ...props
@@ -41,34 +40,68 @@ export function ShimmerButton({
     <motion.button
       ref={buttonRef}
       whileHover={reduced ? {} : { scale: 1.02 }}
-      whileTap={reduced ? {} : { scale: 0.97 }}
+      whileTap={reduced ? {} : { scale: 0.98 }}
       onClick={handleClick}
-      className={`shimmer-button relative inline-flex items-center justify-center overflow-hidden border border-white/10 px-5 py-2.5 font-medium text-white shadow-xl transition-[box-shadow,background-color,border-color] duration-200 active:shadow-inner ${className}`}
+      className={`easyui-shimmer-btn ${className}`.trim()}
       style={{
+        position: "relative",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
         borderRadius,
         background,
+        border: "1px solid var(--line)",
+        color: "var(--ink)",
         minHeight: "44px",
+        padding: "10px 18px",
+        fontWeight: 650,
+        cursor: "pointer",
+        touchAction: "manipulation",
       }}
-      {...(props as any)}
+      {...(props as React.ComponentProps<typeof motion.button>)}
     >
       {!reduced && (
-        <span className="pointer-events-none absolute inset-0 overflow-visible" aria-hidden="true">
+        <span
+          aria-hidden="true"
+          style={{
+            pointerEvents: "none",
+            position: "absolute",
+            inset: 0,
+            overflow: "hidden",
+            borderRadius,
+          }}
+        >
           <span
-            className="absolute inset-[-100%] animate-[spin_3s_linear_infinite]"
             style={{
-              background: `conic-gradient(from 0deg at 50% 50%, transparent 0%, transparent 75%, ${shimmerColor} 100%)`,
+              position: "absolute",
+              inset: "-100%",
+              animation: "spin 3.2s linear infinite",
+              background: `conic-gradient(from 0deg at 50% 50%, transparent 0%, transparent 78%, ${shimmerColor} 100%)`,
             }}
           />
         </span>
       )}
       <span
-        className="absolute inset-[1px] -z-0"
+        aria-hidden="true"
         style={{
+          position: "absolute",
+          inset: "1px",
           borderRadius,
           background,
         }}
       />
-      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+      <span
+        style={{
+          position: "relative",
+          zIndex: 1,
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "8px",
+        }}
+      >
+        {children}
+      </span>
     </motion.button>
   );
 }

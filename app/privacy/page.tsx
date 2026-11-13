@@ -1,4 +1,5 @@
 import ReadingPage from "../../components/ReadingPage";
+import { MdxCallout, MdxTable } from "../../components/ui/mdxcn";
 import { metadataForPage } from "../../lib/seo";
 export const metadata = metadataForPage(
   "Privacy and your data",
@@ -13,6 +14,43 @@ export default function PrivacyPage() {
       <p className="reading-intro">
         Your discoveries belong to you. Here’s how the app handles them.
       </p>
+      <MdxCallout tone="verified" title="On-device first">
+        <p>
+          Saved places, itineraries, visits, correction drafts, and sound/theme settings stay in
+          this browser. There are no Citylit accounts, ad trackers, or analytics beacons.
+        </p>
+      </MdxCallout>
+      <MdxTable
+        caption="Storage & third-party summary"
+        headers={["Feature", "Where it runs", "Stored or shared data"]}
+        rows={[
+          [
+            "View preference",
+            "Cookie (citylit-view)",
+            "Stores 3D atlas vs reading-guide preference up to 1 year",
+          ],
+          [
+            "Saved stops & itinerary",
+            "Local browser storage",
+            "No backend sync; exportable via share links containing public IDs",
+          ],
+          [
+            "Offline guide cache",
+            "Service worker",
+            "Public guide copy & downloaded photos (clearable in Settings)",
+          ],
+          [
+            "Street map tiles",
+            "OpenStreetMap",
+            "Requests public tiles on demand (uncached offline)",
+          ],
+          [
+            "Weather chip",
+            "Citylit server -> Open-Meteo",
+            "Uses published city coordinates cached ~30 min, not GPS",
+          ],
+        ]}
+      />
       <section>
         <h2>Saved on this browser</h2>
         <p>

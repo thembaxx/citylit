@@ -48,7 +48,14 @@ const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ),
 });
 
-type DioramaScope = "diorama" | "landmark";
+const Pixi3DStage = dynamic(() => import("./Pixi3DStage"), {
+  ssr: false,
+  loading: () => (
+    <CartographicLoader title="PixiJS 3D Stage" subtitle="glTF & Draco PBR renderer" />
+  ),
+});
+
+type DioramaScope = "diorama" | "landmark" | "pixi3d";
 
 const SCOPE_OPTIONS: readonly DropdownOption<DioramaScope>[] = [
   {
@@ -62,6 +69,12 @@ const SCOPE_OPTIONS: readonly DropdownOption<DioramaScope>[] = [
     label: "Cities & Landmarks",
     description: "Procedural 3D city landmark stage",
     icon: <Compass size={18} weight="duotone" />,
+  },
+  {
+    value: "pixi3d",
+    label: "PixiJS 3D Stage",
+    description: "Interactive @pixi/3d GLB & PBR models",
+    icon: <Cube size={18} weight="duotone" />,
   },
 ];
 
@@ -131,7 +144,7 @@ export default function DioramaExperience() {
   const initialItem = searchParams.get("item") || undefined;
 
   const [scope, setScope] = useState<DioramaScope>(
-    initialScope === "landmark" ? "landmark" : "diorama",
+    initialScope === "landmark" ? "landmark" : initialScope === "pixi3d" ? "pixi3d" : "diorama",
   );
   const [landmarkCitySlug, setLandmarkCitySlug] = useState<string>(initialCity);
   const [landmarkIndex, setLandmarkIndex] = useState(0);
@@ -411,6 +424,8 @@ export default function DioramaExperience() {
         </div>
       ) : null}
 
+      {scope === "pixi3d" ? <Pixi3DStage /> : null}
+
       {scope === "diorama" ? (
         <div className="dioramas-grid">
           <div className="dioramas-main">
@@ -545,7 +560,11 @@ export default function DioramaExperience() {
                   <ArrowCounterClockwise size={18} aria-hidden="true" />
                 </button>
               </div>
-              <div className="dioramas-segment dioramas-renderer-segment" role="group" aria-label="Renderer backend">
+              <div
+                className="dioramas-segment dioramas-renderer-segment"
+                role="group"
+                aria-label="Renderer backend"
+              >
                 <span className="dioramas-segment-label" aria-hidden="true">
                   Renderer
                 </span>

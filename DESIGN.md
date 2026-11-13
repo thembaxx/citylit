@@ -1,78 +1,144 @@
-# Citylit Design System & Interaction Architecture
-
-> Built on the aesthetic craft of [Pin UI](https://pinui.xyz) and the headless behavioral rigor of [Vercel Labs ui-sdk](https://github.com/vercel-labs/ui).
-
+---
+version: alpha
+name: Citylit
+description: Tactile 3D South Africa travel guide and interactive diorama atlas built around limestone daylight, obsidian night, forest sage, and amber accents.
+colors:
+  primary: "#ffb95f"
+  on-primary: "#472a00"
+  secondary: "#a78bfa"
+  tertiary: "#5a8f69"
+  background: "#121317"
+  surface: "#1a1b20"
+  on-surface: "#e3e2e7"
+  on-surface-muted: "#ccc3d8"
+  outline: "#4a4455"
+  danger: "#9b2c1a"
+typography:
+  headline-display:
+    fontFamily: Geist Serif
+    fontSize: 36px
+    fontWeight: 500
+    lineHeight: 1.12
+    letterSpacing: -0.02em
+  headline-lg:
+    fontFamily: Geist Serif
+    fontSize: 24px
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: -0.015em
+  body-lg:
+    fontFamily: Geist Sans
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.6
+    letterSpacing: 0em
+  body-md:
+    fontFamily: Geist Sans
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.55
+    letterSpacing: 0em
+  label-md:
+    fontFamily: Geist Sans
+    fontSize: 13px
+    fontWeight: 600
+    lineHeight: 1.3
+    letterSpacing: 0.01em
+  mono:
+    fontFamily: Geist Mono
+    fontSize: 12px
+    fontWeight: 600
+    lineHeight: 1.4
+    letterSpacing: 0.06em
+spacing:
+  xs: 4px
+  sm: 8px
+  md: 16px
+  lg: 24px
+  xl: 36px
+  touch-target: 44px
+rounded:
+  sm: 12px
+  md: 18px
+  lg: 22px
+  full: 9999px
+components:
+  button-primary:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.full}"
+    height: 44px
+    padding: 12px
+  card-surface:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.lg}"
+    padding: 16px
+  callout-mdxcn:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-muted}"
+    rounded: "{rounded.sm}"
+    padding: 16px
+  badge-alert:
+    backgroundColor: "{colors.danger}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.full}"
+    padding: 8px
 ---
 
-## 1. Aesthetic Identity & Core Principles
+# Citylit
 
-### A. Tactile Depth & The Chamfer Rule
-Rather than flat monotone borders or generic box shadows, every card, pill, and container utilizes a dual-layer milled chamfer highlight:
-- **Outer Hairline Border**: `1px solid rgba(255, 255, 255, 0.08)` (Night) / `1px solid rgba(0, 0, 0, 0.08)` (Day).
-- **Inner Specular Chamfer Highlight**: `box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12)` (Night) / `inset 0 1px 0 0 rgba(255, 255, 255, 0.85)` (Day).
-- **Atmospheric Elevation**: Multi-tiered soft shadows grounding cards without harsh mud (`0 1px 2px rgba(0,0,0,0.12), 0 8px 24px -4px rgba(0,0,0,0.24), 0 24px 52px -12px rgba(0,0,0,0.38)`).
+## Overview
 
-### B. Ambient Drifting Bloom
-Surfaces are dynamic and living. Floating radial gradients (`filter: blur(48px)`, opacity 0.15–0.25) gently illuminate background planes, shifting between violet, amber, and forest hues reflecting time of day and local atmospheres.
+Citylit is a mobile-first South Africa destination guide, day planner, and interactive 3D atlas combining procedural Three.js landmarks, 14 regional GLSL/WebGPU/WebGL diorama basins, and a `@pixi/3d` PBR GLB stage. Every surface balances editorial clarity (verified source dates, pin confidence, CC BY-SA & geoBoundaries attribution) with tactile 3D inspection and local-first offline persistence.
 
-### C. Continuous Curvature (Squircles & Inverted Fillets)
-- Master cards & modals: `border-radius: 24px - 28px` (iOS-grade squircle geometry).
-- Micro-badges & action buttons: `border-radius: 999px` (tactile pills).
-- Folder tabs: **Inverted-fillet** concave curves blending the active tab into the surface below it without abrupt corners.
+## Colors
 
-### D. Typographic Hierarchy & Duality
-- **Display Serif**: `Fraunces` for editorial storytelling, city names, and prominent milestones.
-- **Modern Grotesque UI Sans**: `Manrope` with tight tracking (`-0.025em`) for UI navigation, metrics, labels, and weather readings.
-- **Monospace Micro-Badges**: UI shortcuts and metadata pills (`⌘K`, `LIVE`, `37%`).
+Night (Obsidian & Amber) is defined in frontmatter as the base dark palette matching `public/theme.css`. Both themes avoid harsh pure white/black glare (`#121317` obsidian slate vs `#f4efe6` warm limestone paper) while maintaining WCAG AA contrast across cards, inspector drawers, and WebGL/WebGPU overlays.
 
----
+## Themes
 
-## 2. Mobile-First Ergonomics & Gestures
+Citylit switches via `:root[data-theme="day"]` and respects `prefers-color-scheme` on first paint before client hydration.
 
-1. **Thumb-Zone Navigation**:
-   - The floating frosted glass dock (`.citylit-bottom-dock`) is anchored at the bottom with strict safe-area clearance (`bottom: max(10px, env(safe-area-inset-bottom))`).
-   - Smooth layout sliding indicator (`layoutId="citylit-dock-active-pill"`).
-   - Press compression haptics: `:active { transform: scale(0.92); }`.
+| Role | Night (default in frontmatter) | Day (`data-theme="day"`) | CSS Token |
+| --- | --- | --- | --- |
+| Background canvas | `#121317` | `#f4efe6` | `--bg` |
+| Elevated surface | `#1a1b20` | `#fbf9f5` | `--surface` |
+| Glass surface | `#1a1b20e8` | `#fbf9f5e8` | `--surface-glass` |
+| Primary text | `#e3e2e7` | `#171920` | `--ink` |
+| Muted text | `#ccc3d8` | `#525663` | `--muted` |
+| Primary accent | `#ffb95f` | `#252834` | `--accent` |
+| Accent ink | `#472a00` | `#ffffff` | `--accent-ink` |
+| Hairline divider | `#4a4455` | `#d6d4cd` | `--line` |
+| Atlas highlight | `#a78bfa` | `#7046c8` | `--citylit-purple` |
+| Atmospheric sage | `#5a8f69` | `#5a8f69` | `--citylit-sage` |
 
-2. **Touch & Gesture Physics**:
-   - Tuned spring dynamics via `motion/react`: `stiffness: 360, damping: 28`.
-   - Filter pills with horizontal scroll-snap and active compression (`:active { transform: scale(0.95); }`).
-   - Drag-to-rotate 3D diorama canvas and hardware dials.
+## Typography
 
-3. **Responsive Viewport Support**:
-   - Tested and fluidly supported at **320px** (iPhone SE), **390px** (iPhone 14/15/16 Pro), and desktop viewports.
-   - All editable controls maintain strict 16px font-size to prevent iOS Safari auto-zooming.
-   - All interactive touch targets are ≥ 44×44px.
+Headings use `Geist Serif` with tight display tracking (`-0.02em`), body copy uses `Geist Sans`, and tabular metadata, provenance timestamps, and `mdxcn` table/code chrome use `Geist Mono`. Editable controls (`input`, `select`, `textarea`, `[role="combobox"]`) enforce a single `16px` rule in `app/native-refinement.css` to prevent iOS auto-zoom without per-page overrides.
 
----
+## Layout & Spacing
 
-## 3. Behavioral Engine (Vercel Labs ui-sdk Architecture)
+Mobile-first containers fit `320px` and `390px` viewports with zero horizontal overflow, dynamic `100dvh` height budgeting, safe-area inset bottom clearance (`env(safe-area-inset-bottom)` above the bottom dock), and a `44px` minimum interactive touch target across buttons, theme pills, and tabs. Hover effects are gated under `@media (hover: hover) and (pointer: fine)` to eliminate sticky hover states on touch screens.
 
-1. **Roving Focus Navigation**:
-   - Horizontal tab groups, category filters, and weather scrubbers manage roving tabindex (`tabIndex={isActive ? 0 : -1}`) for instant arrow-key navigation.
+## Elevation & Depth
 
-2. **Focus Recovery**:
-   - Search inputs, filter pills, and bottom sheets automatically restore focus to the triggering element upon dismissal or clearance.
+Hierarchy relies on tonal surface stepping (`--bg` to `--surface`), subtle `1px` hairlines (`--line`), and frosted backdrop separation (`backdrop-filter: blur(18px)`) so inspector popovers and HUD controls remain crisp above 3D canvases. Interactive 3D dioramas use Three.js WebGPU/WebGL shaders, ACES tone mapping in `@pixi/3d`, and reduced-motion fallbacks (`prefers-reduced-motion` / `useReducedMotion`).
 
-3. **Semantic ARIA & Data Attributes**:
-   - Accessible roles (`role="tab"`, `aria-selected`, `aria-controls`, `role="region"`, `aria-modal`).
-   - Explicit `data-state="active|inactive"` and `data-theme="day|night"` attributes driving visual transitions without re-mounting DOM nodes.
+## Shapes
 
----
+Controls and editorial frames use approachable squircle radii (`12px` for compact controls, pills, and `mdxcn` blocks; `18px–22px` for panels and spotlights) and full pill capsules (`9999px`) for primary stage actions. All UI iconography comes from `@phosphor-icons/react` (plus `/icons/ui.svg` Phosphor sprite in static HTML), paired only with Citylit's South Africa `KhweziMark` emblem.
 
-## 4. Component Inventory & Pin UI Patterns
+## Components
 
-1. **Search & Command Card (`.reference-search`)**:
-   - Floating search pill with `⌘K` / `/` shortcut tag, expanding into elevated card with pastel category pills and instant clear button.
+- **Interactive primitives (`components/ui/`)**: EasyUI source-owned `AnimatedTabs`, `AnimatedPillGroup`, `SpotlightCard`, `ShimmerButton`, `MagneticButton`, `DropdownSelect`, `LiquidToggle`, `MagnifyingDock`, `LiquidTabs`, `SlideToConfirm`, and `DynamicIslandToast`.
+- **Markdown-friendly reading (`components/ui/mdxcn/`)**: `MdxCallout`, `MdxSteps`, `MdxTimeline`, `MdxTable`, and `MdxCodeBlock` used in `/about`, `/privacy`, `LandmarkStory`, and `VenueDetailView`.
+- **3D stages**: `DioramaExperience` unifies 14 regional terrain basins (`lib/diorama/`), procedural Three.js city landmarks (`LandmarkRing` + `ProceduralStageModel` using `lib/procedural-landmarks.js`), and the `@pixi/3d` glTF/Draco stage (`Pixi3DStage`).
 
-2. **Thermal & Atmospheric Controller (`DioramaWeatherController`)**:
-   - Real-time weather badge with hardware-style sunken scrubber track, illuminated condition pills, and sensory soundscape audio ripple button.
+## Do's and Don'ts
 
-3. **Featured Landmark Card (`.citylit-featured-card`)**:
-   - 26px squircles, top specular chamfer sheen, pulsing green status stamp, and spring hover lift.
-
-4. **Floating Bottom Dock (`MagnifyingDock`)**:
-   - Frosted glass (`backdrop-filter: blur(28px) saturate(190%)`), hairline border, and sliding spring pill.
-
-5. **Settings Sheet (`SettingsModal`)**:
-   - Ambient radial bloom, segmented layout slider tabs, and tactile toggle switches.
+- Do keep verified check dates, source attribution, pin accuracy labels, and real catalog data — never invent ratings or placeholder counts.
+- Do use `@phosphor-icons/react` exclusively for UI icons and reserve custom SVG paths for Citylit's `KhweziMark` brand mark.
+- Don't override `16px` editable control sizing outside `app/native-refinement.css`.
+- Don't import `.glb` / `GLTFLoader` inside procedural Three.js files (`MuseumHeroAsset`, `StageModel`, `LandmarkRing`, `SafeStageModel`, `ProceduralStageModel`); keep glTF/Draco asset loading isolated in `Pixi3DStage` under `/draco/`.
+- Don't bypass `44px` minimum touch targets or `prefers-reduced-motion` guards on animated beams, camera tours, and auto-rotation.

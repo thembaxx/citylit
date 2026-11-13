@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "name": "Citylit",
+  "direction": "Limestone daylight and obsidian night editorial South Africa travel atlas with forest/sage/amber surfaces and interactive 3D dioramas.",
+  "principles": [
+    "Real catalog data, source attribution, and coordinate-confidence labels; zero fake ratings or filler copy",
+    "Phosphor icons exclusively for UI controls; KhweziMark reserved as brand map emblem",
+    "Mobile-first 320px/390px layout safety with 44px touch targets, hover media-query gating, and 16px editable inputs",
+    "Unified CSS semantic tokens shared across procedural Three.js stages, PixiJS 3D glTF viewer, EasyUI components, and mdxcn editorial blocks"
+  ],
+  "tokens": {
+    "colors": {
+      "bg": { "night": "#121317", "day": "#f4efe6" },
+      "surface": { "night": "#1a1b20", "day": "#fbf9f5" },
+      "surfaceGlass": { "night": "#1a1b20e8", "day": "#fbf9f5e8" },
+      "ink": { "night": "#e3e2e7", "day": "#171920" },
+      "muted": { "night": "#ccc3d8", "day": "#525663" },
+      "accent": { "night": "#ffb95f", "day": "#252834" },
+      "accentInk": { "night": "#472a00", "day": "#ffffff" },
+      "line": { "night": "#4a4455", "day": "#d6d4cd" },
+      "purple": { "night": "#a78bfa", "day": "#7046c8" },
+      "sage": "#5a8f69",
+      "amber": "#e59934"
+    },
+    "typography": {
+      "display": "Geist Serif",
+      "body": "Geist Sans",
+      "mono": "Geist Mono",
+      "editableControlMinSize": "16px"
+    },
+    "radii": {
+      "sm": "12px",
+      "md": "18px",
+      "lg": "22px",
+      "full": "9999px"
+    },
+    "motion": {
+      "reducedMotionRespected": true,
+      "hoverGatedToPointerFine": true
+    }
+  },
+  "components": {
+    "easyui": [
+      "AnimatedTabs",
+      "AnimatedPillGroup",
+      "DropdownSelect",
+      "DynamicIslandToast",
+      "LiquidTabs",
+      "LiquidToggle",
+      "MagneticButton",
+      "MagnifyingDock",
+      "ReaderCard",
+      "ShimmerButton",
+      "SlideToConfirm",
+      "SpotlightCard",
+      "TiltCard"
+    ],
+    "mdxcn": [
+      "MdxCallout",
+      "MdxSteps",
+      "MdxTimeline",
+      "MdxTable",
+      "MdxCodeBlock"
+    ],
+    "stages": [
+      "DioramaExperience",
+      "LandmarkRing",
+      "ProceduralStageModel",
+      "Pixi3DStage"
+    ]
+  },
+  "icons": {
+    "library": "@phosphor-icons/react",
+    "sprite": "/icons/ui.svg"
+  }
+}

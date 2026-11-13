@@ -831,15 +831,7 @@ export default function LandmarkRing({
                   }}
                 >
                   <div className="atlas-preset-thumb diorama-overview-thumb" aria-hidden="true">
-                    <svg viewBox="0 0 100 64" fill="none" className="preset-thumb-art">
-                      <ellipse cx="50" cy="46" rx="42" ry="14" fill="#a4b494" />
-                      <ellipse cx="50" cy="42" rx="38" ry="12" fill="#7fa873" />
-                      <circle cx="38" cy="34" r="7" fill="#8B5CF6" opacity="0.9" />
-                      <circle cx="50" cy="30" r="9" fill="#5B9E5A" />
-                      <circle cx="62" cy="34" r="7" fill="#A78BFA" opacity="0.8" />
-                      <circle cx="56" cy="37" r="5" fill="#4D804C" />
-                      <circle cx="44" cy="37" r="5" fill="#9333EA" opacity="0.8" />
-                    </svg>
+                    <Mountains size={24} weight="duotone" className="preset-thumb-icon" />
                     {view === "overview" && (
                       <div className="atlas-preset-badge">
                         <Check size={11} weight="bold" />
@@ -861,13 +853,7 @@ export default function LandmarkRing({
                   }}
                 >
                   <div className="atlas-preset-thumb diorama-closeup-thumb" aria-hidden="true">
-                    <svg viewBox="0 0 100 64" fill="none" className="preset-thumb-art">
-                      <rect width="100" height="64" rx="10" fill="#2d372e" />
-                      <circle cx="34" cy="32" r="15" fill="#5B9E5A" />
-                      <circle cx="62" cy="28" r="18" fill="#8B5CF6" opacity="0.9" />
-                      <circle cx="78" cy="36" r="14" fill="#A78BFA" opacity="0.8" />
-                      <circle cx="22" cy="40" r="12" fill="#4D804C" />
-                    </svg>
+                    <MagnifyingGlassPlus size={24} weight="duotone" className="preset-thumb-icon" />
                     {view === "detail" && (
                       <div className="atlas-preset-badge">
                         <Check size={11} weight="bold" />

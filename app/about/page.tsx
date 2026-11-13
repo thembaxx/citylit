@@ -1,6 +1,7 @@
 import UiIcon from "../../components/UiIcon";
 import Link from "next/link";
 import ReadingPage from "../../components/ReadingPage";
+import { MdxCallout, MdxCodeBlock, MdxSteps, MdxTable } from "../../components/ui/mdxcn";
 import { metadataForPage, latestCheck, provinces } from "../../lib/seo";
 import { cities, places } from "../../lib/data";
 export const metadata = metadataForPage(
@@ -17,31 +18,62 @@ export default function AboutPage() {
         Citylit turns discovering South Africa into a little adventure. Khwezi brings the
         personality. Sources keep the story grounded.
       </p>
+      <MdxCallout tone="verified" title={`Catalog Snapshot · Checked ${latestCheck(places)}`}>
+        <p>
+          {places.length} researched places across {cities.length} South African destinations and{" "}
+          {provinces.length} provinces. Retrieved records are editorial reference, not live
+          confirmation of hours, prices, or ticket availability.
+        </p>
+      </MdxCallout>
       <section>
-        <h2>Our starting point</h2>
-        <p>
-          Our catalog includes {places.length} places across {cities.length} destinations and all{" "}
-          {provinces.length} provinces. Chapters represent visitor destinations and surrounding
-          districts. Coverage is curated and incomplete; an empty category means it hasn’t been
-          researched yet.
-        </p>
-        <p>
-          The most recent catalog source check is {latestCheck(places)}. A retrieved page is not
-          live confirmation of opening hours, ticket availability or amenities.
-        </p>
+        <h2>How places are researched</h2>
+        <MdxSteps
+          items={[
+            {
+              title: "Verify primary records",
+              description:
+                "Cross-check official venue pages, Wikipedia CC BY-SA entries, and photographic attributions with explicit check dates.",
+            },
+            {
+              title: "Separate pin precision",
+              description:
+                "Venue pins and broader city-reference pins are labelled separately so directions reflect true coordinate confidence.",
+            },
+            {
+              title: "Draft corrections locally",
+              description:
+                "Suggested updates stay on your device until you choose to open a public GitHub issue with supporting sources.",
+            },
+          ]}
+        />
       </section>
       <section>
-        <h2>What we know, and what we don’t</h2>
-        <p>
-          Practical facts carry a source, check date and confidence. Verified means supported by the
-          cited source at that date. Editorial estimates help with planning and remain estimates.
-          Unknown means unconfirmed, rather than unavailable or free.
-        </p>
-        <p>
-          We label city-reference pins separately from venue pins. A venue pin does not guarantee a
-          verified entrance. City-atmosphere photographs are labelled and do not claim to show the
-          venue.
-        </p>
+        <h2>Confidence &amp; attribution matrix</h2>
+        <MdxTable
+          headers={["Label", "Meaning", "Licensing & Notes"]}
+          rows={[
+            [
+              "Verified",
+              "Supported by the cited source on the recorded check date",
+              "Confirm opening hours directly with the operator",
+            ],
+            [
+              "Editorial estimate",
+              "Planning guidance such as typical dwell time or access notes",
+              "Presented transparently as an estimate",
+            ],
+            [
+              "Unknown",
+              "Unconfirmed rather than free, open, or unavailable",
+              "Flagged openly instead of filled with guesswork",
+            ],
+            [
+              "Province boundaries",
+              "geoBoundaries / OCHA / MDB administrative geometry",
+              "Adapted under CC BY 3.0 IGO alongside MIT-licensed app code",
+            ],
+          ]}
+        />
       </section>
       <section>
         <h2>Sources and credits</h2>
@@ -78,6 +110,11 @@ export default function AboutPage() {
           the place page and underlying source, keep uncertainty intact, and check the venue before
           relying on changing details.
         </p>
+        <MdxCodeBlock
+          title="Plain-text machine & reader endpoints"
+          language="markdown"
+          code={`# Citylit Plain-Text Catalog Index\nGET /llms.txt\nGET /guides/{city}\nGET /guides/{city}/{place}`}
+        />
       </section>
       <Link href="/brand" className="text-guide-link">
         Meet Khwezi and the Citylit identity <UiIcon name="arrow-up-right" />

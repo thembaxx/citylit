@@ -11,7 +11,6 @@ import {
 } from "motion/react";
 import {
   ArrowCounterClockwise,
-  Check,
   Compass,
   Globe,
   Moon,
@@ -336,18 +335,12 @@ export default function SettingsModal({
                     {/* Dark */}
                     <button
                       type="button"
-                      className={`citylit-theme-card ${night ? "is-selected" : ""}`}
+                      className={`citylit-theme-card ${night && theme !== "system" ? "is-selected" : ""}`}
                       onClick={() => setTheme("dark")}
-                      aria-pressed={night}
-                      aria-label="Dark theme"
-                      title="Dark theme"
+                      aria-pressed={night && theme !== "system"}
                     >
-                      <Moon size={22} weight={night ? "fill" : "regular"} />
-                      {night && (
-                        <div className="citylit-card-check">
-                          <Check size={12} weight="bold" />
-                        </div>
-                      )}
+                      <Moon size={16} weight={night ? "fill" : "regular"} aria-hidden="true" />
+                      <span>Dark</span>
                     </button>
 
                     {/* System */}
@@ -356,32 +349,24 @@ export default function SettingsModal({
                       className={`citylit-theme-card ${theme === "system" ? "is-selected" : ""}`}
                       onClick={() => setTheme("system")}
                       aria-pressed={theme === "system"}
-                      aria-label="System theme"
-                      title="System theme"
                     >
-                      <Sparkle size={22} weight={theme === "system" ? "fill" : "regular"} />
-                      {theme === "system" && (
-                        <div className="citylit-card-check">
-                          <Check size={12} weight="bold" />
-                        </div>
-                      )}
+                      <Sparkle
+                        size={16}
+                        weight={theme === "system" ? "fill" : "regular"}
+                        aria-hidden="true"
+                      />
+                      <span>System</span>
                     </button>
 
                     {/* Light */}
                     <button
                       type="button"
-                      className={`citylit-theme-card ${!night ? "is-selected" : ""}`}
+                      className={`citylit-theme-card ${!night && theme !== "system" ? "is-selected" : ""}`}
                       onClick={() => setTheme("light")}
-                      aria-pressed={!night}
-                      aria-label="Light theme"
-                      title="Light theme"
+                      aria-pressed={!night && theme !== "system"}
                     >
-                      <Sun size={22} weight={!night ? "fill" : "regular"} />
-                      {!night && (
-                        <div className="citylit-card-check">
-                          <Check size={12} weight="bold" />
-                        </div>
-                      )}
+                      <Sun size={16} weight={!night ? "fill" : "regular"} aria-hidden="true" />
+                      <span>Light</span>
                     </button>
                   </div>
 

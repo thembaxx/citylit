@@ -6699,15 +6699,21 @@
 
 .reference-guide .atlas-preset-thumb {
   position: relative;
-  height: 66px;
+  display: grid;
+  place-items: center;
+  height: 58px;
   overflow: hidden;
   border-radius: 10px;
-  background: #0b0b0e;
+  background: radial-gradient(circle at 50% 35%, rgba(114, 152, 108, 0.28), #111812 85%);
+  color: #f3ede2;
 }
 
-.reference-guide .preset-thumb-art {
-  width: 100%;
-  height: 100%;
+.reference-guide .diorama-closeup-thumb {
+  background: radial-gradient(circle at 60% 30%, rgba(229, 153, 52, 0.28), #111618 85%);
+}
+
+.reference-guide .preset-thumb-icon {
+  opacity: 0.92;
 }
 
 .reference-guide .atlas-preset-badge {

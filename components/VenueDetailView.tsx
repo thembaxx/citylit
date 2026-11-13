@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Cube, MapPin, ShareNetwork, Star } from "@phosphor-icons/react";
+import { ArrowLeft, ArrowUpRight, Cube, MapPin, ShareNetwork } from "@phosphor-icons/react";
 import type { Place } from "../lib/data";
 import { type GuideCity } from "../lib/discovery-guide";
 import { places } from "../lib/data";
@@ -16,6 +16,8 @@ import { MAX_TRIP_STOPS } from "../lib/client-data";
 import SlideToConfirm from "./ui/SlideToConfirm";
 import DynamicIslandToast from "./ui/DynamicIslandToast";
 import BenchoComparisonSlider from "./ui/BenchoComparisonSlider";
+import SpotlightCard from "./ui/SpotlightCard";
+import { MdxCallout, MdxTable } from "./ui/mdxcn";
 import { benchoAudio } from "../lib/bencho-audio";
 
 export type DetailTab = "overview" | "history" | "nearby" | "tips";
@@ -105,11 +107,9 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
           </div>
         </div>
 
-        {/* Hero Copy (Image 3 Screen 4) */}
+        {/* Hero Copy */}
         <div className="citylit-detail-hero-copy">
-          <div className="citylit-featured-badge">
-            <Star size={12} weight="fill" /> Featured
-          </div>
+          <div className="citylit-featured-badge">{place.category}</div>
           <h1>
             {place.name}
             <span className="atlas-title-period">.</span>
@@ -117,12 +117,12 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
           <div className="citylit-detail-subhead">
             <div className="citylit-detail-location">
               <MapPin size={16} weight="fill" />
-              <span>{city.name}, South Africa</span>
+              <span>
+                {city.name}, {city.province}
+              </span>
             </div>
             <div className="citylit-detail-rating">
-              <Star size={15} weight="fill" className="rating-star" />
-              <strong>4.8</strong>
-              <span>(12k reviews)</span>
+              <span>Catalog check · {place.checkedAt}</span>
             </div>
           </div>
         </div>
@@ -218,7 +218,7 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
 
             <Gallery images={place.images} context={place.imageContext} name={place.name} />
 
-            <div className="atlas-visit-panel">
+            <SpotlightCard className="atlas-visit-panel" spotlightColor="rgba(229, 153, 52, 0.14)">
               <h2 id="visit-panel-title">
                 Plan your <em>visit.</em>
               </h2>
@@ -245,7 +245,7 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
                 </a>
               </div>
               <PlaceActions place={place} />
-            </div>
+            </SpotlightCard>
           </div>
         )}
 
@@ -295,32 +295,32 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
           <div className="citylit-tab-panel">
             <div className="citylit-tips-card">
               <h2>Practical Tips &amp; Access</h2>
-              <p className="atlas-plan-note">
-                {place.coordinateAccuracy === "venue"
-                  ? "A venue pin is available; the entrance may differ. Confirm your arrival point with the operator."
-                  : "The catalog has a city-reference pin. Maps searches the venue name and address; confirm the result before travelling."}
-              </p>
-
-              <details className="atlas-source-details" open>
-                <summary>Sources &amp; research · {place.checkedAt}</summary>
+              <MdxCallout
+                tone={place.coordinateAccuracy === "venue" ? "tip" : "warning"}
+                title={
+                  place.coordinateAccuracy === "venue"
+                    ? "Venue coordinate pin"
+                    : "City-reference pin"
+                }
+              >
                 <p>
-                  Source checks are catalog research, not live confirmation. Check hours, prices and
-                  accessibility with the venue.
+                  {place.coordinateAccuracy === "venue"
+                    ? "A venue pin is available; the entrance may differ. Confirm your arrival point with the operator."
+                    : "The catalog has a city-reference pin. Maps searches the venue name and address; confirm the result before travelling."}
                 </p>
-                <ul>
-                  {place.sources.map((source) => (
-                    <li key={source.url}>
-                      <a href={source.url} target="_blank" rel="noreferrer">
-                        {source.title} <ArrowUpRight size={12} />
-                      </a>
-                      <span>
-                        Checked {source.fetchedAt} ·{" "}
-                        {source.status === "fetched" ? "source retrieved" : "source unavailable"}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </details>
+              </MdxCallout>
+
+              <MdxTable
+                caption={`Sources & research · ${place.checkedAt}`}
+                headers={["Source", "Checked", "Status"]}
+                rows={place.sources.map((source) => [
+                  <a key={source.url} href={source.url} target="_blank" rel="noreferrer">
+                    {source.title} <ArrowUpRight size={12} />
+                  </a>,
+                  source.fetchedAt,
+                  source.status === "fetched" ? "Source retrieved" : "Unavailable",
+                ])}
+              />
             </div>
           </div>
         )}

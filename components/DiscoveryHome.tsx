@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
@@ -21,6 +22,8 @@ import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchR
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
 import WeatherWidget from "./WeatherWidget";
 import DioramaWeatherController from "./DioramaWeatherController";
+import SpotlightCard from "./ui/SpotlightCard";
+import ShimmerButton from "./ui/ShimmerButton";
 import { benchoAudio } from "../lib/bencho-audio";
 import { handleRovingKeyDown, recoverFocus } from "../lib/ui-primitives";
 
@@ -54,6 +57,7 @@ export default function DiscoveryHome() {
   const [mood, setMood] = useState<AtlasMood>("explore");
   const [selectedCity, setSelectedCity] = useState<number | null>(0);
   const [mapSelectedCity, setMapSelectedCity] = useState<number | null>(null);
+  const router = useRouter();
   const { feedback } = useKhwezi();
   const { state } = useDiscovery();
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -496,12 +500,9 @@ export default function DiscoveryHome() {
               {(filter === "All" || filter === "Cities") && (
                 <section className="citylit-popular-section" aria-labelledby="popular-heading">
                   <div className="citylit-section-head">
-                    <div>
-                      <h2 id="popular-heading">Popular destinations</h2>
-                      <p className="citylit-section-sub">Monographs, guides &amp; walking tours</p>
-                    </div>
+                    <h2 id="popular-heading">Destinations</h2>
                     <Link href="/destinations" className="citylit-see-all-link">
-                      See all 12 <ArrowRight size={14} weight="bold" />
+                      See all 12 <ArrowRight size={14} weight="bold" aria-hidden="true" />
                     </Link>
                   </div>
                   <div className="citylit-popular-scroll">
@@ -541,15 +542,13 @@ export default function DiscoveryHome() {
 
               {/* Plan your next adventure */}
               <section className="citylit-plan-card-section" aria-labelledby="home-plan-title">
-                <div className="citylit-plan-card">
+                <SpotlightCard className="citylit-plan-card">
                   <div className="citylit-plan-icon" aria-hidden="true">
                     <CalendarPlus size={22} weight="duotone" />
                   </div>
                   <div className="citylit-plan-copy">
-                    <h3 id="home-plan-title">Plan your next adventure</h3>
-                    <p>
-                      Save places, compile routes, and keep your day across South African cities.
-                    </p>
+                    <h3 id="home-plan-title">Plan your day</h3>
+                    <p>Save stops and arrange a route across South Africa.</p>
                   </div>
                   <div className="citylit-plan-actions">
                     <Link href="/explore?tab=day" className="citylit-plan-primary">
@@ -563,15 +562,24 @@ export default function DiscoveryHome() {
                       <BookmarkSimple size={17} weight="duotone" aria-hidden="true" />
                       <span>{state.saved.length || 0}</span>
                     </Link>
+                    <ShimmerButton
+                      type="button"
+                      className="citylit-plan-shimmer-btn"
+                      onClick={() => router.push("/dioramas")}
+                    >
+                      <Cube size={16} weight="duotone" aria-hidden="true" />
+                      <span>Open 3D Atlas</span>
+                    </ShimmerButton>
                   </div>
                   <div className="citylit-plan-status">
                     <span>
-                      <span className="citylit-plan-dot" aria-hidden="true" /> The living atlas ·
-                      Offline caches ready
+                      <span className="citylit-plan-dot" aria-hidden="true" /> Offline caches ready
                     </span>
-                    <Link href="/about">Source notes →</Link>
+                    <Link href="/about">
+                      Source notes <ArrowRight size={12} weight="bold" aria-hidden="true" />
+                    </Link>
                   </div>
-                </div>
+                </SpotlightCard>
               </section>
             </>
           )}

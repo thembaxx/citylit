@@ -11,14 +11,14 @@ interface SpotlightCardProps {
 }
 
 /**
- * React Bits / EasyUI inspired Spotlight Card
- * Radial gradient illuminates on pointer hover with smooth falloff and luminous hairline border.
+ * EasyUI Spotlight Card
+ * Radial gradient illuminates on pointer hover with smooth falloff and Citylit hairline border.
  */
 export function SpotlightCard({
   children,
   className = "",
-  spotlightColor = "rgba(167, 139, 250, 0.15)",
-  borderColor = "rgba(255, 255, 255, 0.12)",
+  spotlightColor = "rgba(229, 153, 52, 0.14)",
+  borderColor = "var(--line)",
   onClick,
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
@@ -60,16 +60,22 @@ export function SpotlightCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`relative overflow-hidden rounded-2xl border transition-[border-color,background-color] duration-300 ${className}`}
+      className={`citylit-spotlight-card ${className}`.trim()}
       style={{
-        borderColor: borderColor,
+        position: "relative",
+        overflow: "hidden",
+        borderColor,
       }}
     >
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300"
+        aria-hidden="true"
         style={{
+          pointerEvents: "none",
+          position: "absolute",
+          inset: "-1px",
           opacity,
-          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
+          transition: "opacity 260ms ease",
+          background: `radial-gradient(360px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
         }}
       />
       {children}

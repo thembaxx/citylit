@@ -17,7 +17,7 @@
 :root[data-theme="day"] .reference-guide,
 :root[data-theme="day"] .field-guide,
 :root[data-theme="day"] .category-page {
-  --bg: #f5f1e8;
+  --bg: #f4efe6;
   --surface: #ffffff;
   --surface-glass: rgba(255, 255, 255, 0.92);
   --ink: #171920;
@@ -26,7 +26,7 @@
   --accent: #5b2fc0;
   --accent-ink: #ffffff;
 
-  --citylit-reference-bg: #f5f1e8;
+  --citylit-reference-bg: #f4efe6;
   --citylit-reference-panel: #ffffff;
   --citylit-reference-panel-raised: #fbf9f5;
   --citylit-reference-border: rgba(23, 25, 32, 0.11);
@@ -36,7 +36,7 @@
   --citylit-reference-purple: #5b2fc0;
   --citylit-reference-purple-soft: rgba(91, 47, 192, 0.12);
 
-  --co-surface: #f5f1e8;
+  --co-surface: #f4efe6;
   --co-surface-dim: #ebe5d9;
   --co-surface-bright: #ffffff;
   --co-surface-lowest: #ffffff;
@@ -79,7 +79,7 @@
 :root[data-theme="day"] .canvas-root {
   background:
     radial-gradient(ellipse at 85% -5%, rgba(91, 47, 192, 0.08), transparent 44%),
-    radial-gradient(ellipse at 10% 6%, rgba(217, 119, 6, 0.06), transparent 36%), #f5f1e8 !important;
+    radial-gradient(ellipse at 10% 6%, rgba(217, 119, 6, 0.06), transparent 36%), #f4efe6 !important;
 }
 
 :root[data-theme="day"] .reference-guide:not(.reference-stage-guide),
@@ -575,6 +575,16 @@
       transform 120ms ease !important;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .reference-guide .citylit-bottom-dock .bencho-dock-item,
+    .reference-guide .citylit-bottom-dock .bencho-dock-item:hover,
+    .reference-guide .citylit-bottom-dock .bencho-dock-item:focus,
+    .reference-guide .citylit-bottom-dock .bencho-dock-item.is-active,
+    .reference-guide .citylit-bottom-dock .bencho-dock-item[aria-current="page"] {
+      transition: none !important;
+    }
+  }
+
   .reference-guide .citylit-bottom-dock .bencho-dock-item::after,
   .reference-guide .citylit-bottom-dock .bencho-dock-item::before {
     content: none !important;
@@ -770,10 +780,11 @@
 }
 
 .citylit-settings-close.citylit-settings-close-btn {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  flex-shrink: 0 !important;
   display: grid !important;
   place-items: center !important;
   border-radius: 50% !important;
@@ -1229,7 +1240,7 @@ textarea::placeholder {
   :root:not([data-theme="night"]) .reference-guide,
   :root:not([data-theme="night"]) .field-guide,
   :root:not([data-theme="night"]) .category-page {
-    --bg: #f5f1e8;
+    --bg: #f4efe6;
     --surface: #ffffff;
     --surface-glass: rgba(255, 255, 255, 0.92);
     --ink: #171920;
@@ -1237,7 +1248,7 @@ textarea::placeholder {
     --line: rgba(23, 25, 32, 0.12);
     --accent: #5b2fc0;
     --accent-ink: #ffffff;
-    --citylit-reference-bg: #f5f1e8;
+    --citylit-reference-bg: #f4efe6;
     --citylit-reference-panel: #ffffff;
     --citylit-reference-panel-raised: #fbf9f5;
     --citylit-reference-border: rgba(23, 25, 32, 0.11);
@@ -1246,7 +1257,7 @@ textarea::placeholder {
     --citylit-reference-dim: #4b5563;
     --citylit-reference-purple: #5b2fc0;
     --citylit-reference-purple-soft: rgba(91, 47, 192, 0.12);
-    --co-surface: #f5f1e8;
+    --co-surface: #f4efe6;
     --co-surface-dim: #ebe5d9;
     --co-surface-bright: #ffffff;
     --co-surface-lowest: #ffffff;
@@ -1287,7 +1298,7 @@ textarea::placeholder {
   :root:not([data-theme="night"]) .canvas-root {
     background:
       radial-gradient(ellipse at 85% -5%, rgba(91, 47, 192, 0.08), transparent 44%),
-      radial-gradient(ellipse at 10% 6%, rgba(217, 119, 6, 0.06), transparent 36%), #f5f1e8 !important;
+      radial-gradient(ellipse at 10% 6%, rgba(217, 119, 6, 0.06), transparent 36%), #f4efe6 !important;
   }
 
   :root:not([data-theme="night"]) .reference-guide:not(.reference-stage-guide),

@@ -121,8 +121,8 @@ export default function SceneCanvas({ children }: { children: ReactNode }) {
               gl.toneMappingExposure = 1.04;
               if (!lowPower) gl.shadowMap.type = THREE.PCFShadowMap;
             }}
-            // Use up to 2x DPR with antialiasing for crisp silhouettes on Retina/mobile screens.
-            dpr={[1, 2]}
+            // Cap mobile Retina backing buffer at 1.5x while desktop scales to 2x.
+            dpr={lowPower ? [1, 1.5] : [1, 2]}
             gl={{
               antialias: true,
               alpha: true,

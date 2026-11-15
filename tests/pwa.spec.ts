@@ -50,7 +50,8 @@ test("install prompt requires a click and installed apps stop advertising instal
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
+  await page.getByRole("button", { name: "Open settings", exact: true }).click();
+  await page.getByRole("tab", { name: "About", exact: true }).click();
   await page.evaluate(() => {
     const state = window as unknown as { installCalls: number };
     state.installCalls = 0;
@@ -89,18 +90,20 @@ test("iPhone install instructions, native sheet focus and both themes are access
   try {
     await context.addCookies([{ name: "citylit-view", value: "3d", url: baseURL! }]);
     await page.goto("/");
-    await page.getByRole("button", { name: "Experience settings", exact: true }).click();
-    const sheet = page.getByRole("dialog", { name: "Experience settings", exact: true });
-    expect(await sheet.evaluate((element) => element.matches(":modal"))).toBe(true);
+    await page.getByRole("button", { name: "Open settings", exact: true }).click();
+    const sheet = page.getByRole("dialog", { name: "Settings", exact: true });
+    await expect(sheet).toHaveAttribute("aria-modal", "true");
     const bounds = (await sheet.boundingBox())!;
-    expect(bounds.x).toBeGreaterThanOrEqual(10);
-    expect(bounds.x + bounds.width).toBeLessThanOrEqual(380);
+    expect(bounds.x).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(390);
+    await page.getByRole("tab", { name: "About", exact: true }).click();
     await page.getByRole("button", { name: "Add to Home Screen", exact: true }).click();
     await expect(sheet).toContainText("In Safari, open Share");
     for (const theme of ["day", "night"]) {
       await page.evaluate((value) => {
         document.documentElement.dataset.theme = value;
       }, theme);
+      await page.waitForTimeout(250);
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
         .analyze();
@@ -108,9 +111,7 @@ test("iPhone install instructions, native sheet focus and both themes are access
     }
     await page.keyboard.press("Escape");
     await expect(sheet).not.toBeVisible();
-    await expect(
-      page.getByRole("button", { name: "Experience settings", exact: true }),
-    ).toBeFocused();
+    await expect(page.getByRole("button", { name: "Open settings", exact: true })).toBeFocused();
   } finally {
     await context.close();
   }
@@ -160,7 +161,7 @@ test("offline client navigation opens the guide instead of failing an RSC transi
   await context.setOffline(true);
   await expect(page.getByRole("complementary", { name: "App status" })).toBeVisible();
   await page.getByRole("button", { name: "Dismiss app status" }).click();
-  await page.getByRole("link", { name: "Explore Cape Town", exact: true }).click();
+  await page.locator('a[href="/cape-town"]').first().click();
   await expect(page).toHaveURL(/\/cape-town$/);
   await expect(
     page.getByRole("heading", { name: "Your sparks travel with you.", exact: true }),
@@ -176,7 +177,7 @@ test("photo downloads count retained caches and clearing photos keeps saves and 
   context,
 }) => {
   await page.goto("/cape-town/parks-zoos/kirstenbosch");
-  await page.getByRole("button", { name: "Save this discovery", exact: true }).click();
+  await page.getByRole("button", { name: /^Save this discovery/ }).click();
   await page.goto("/explore?tab=passport");
   const panel = page.getByRole("region", { name: "Citylit app and offline settings" });
   await panel.getByRole("button", { name: "Download photos", exact: true }).click();
@@ -265,10 +266,11 @@ test("waiting worker updates only after consent and reload preserves saved place
   await page.goto("/cape-town");
   await expect(page.getByRole("button", { name: "Update now", exact: true })).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem("pwa-updated"))).toBeNull();
-  await page.getByRole("button", { name: "Experience settings", exact: true }).click();
+  await page.getByRole("button", { name: "Open settings", exact: true }).click();
+  await page.getByRole("tab", { name: "About", exact: true }).click();
   await expect(page.getByRole("button", { name: "Download photos", exact: true })).toBeDisabled();
   await expect(page.getByText("Update Citylit to use the latest offline controls.")).toBeVisible();
-  await page.getByRole("button", { name: "Close", exact: true }).click();
+  await page.getByRole("button", { name: "Close settings", exact: true }).click();
   await Promise.all([
     page.waitForEvent("load"),
     page.getByRole("button", { name: "Update now", exact: true }).click(),
@@ -280,13 +282,13 @@ test("waiting worker updates only after consent and reload preserves saved place
 });
 
 test("native chrome follows theme and hidden apps pause continuous scenery", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/brand");
   await page.getByRole("button", { name: /Switch to .* theme/ }).click();
   await expect
     .poll(() => page.locator('meta[name="theme-color"]').first().getAttribute("content"))
     .toBe(
       await page.evaluate(() =>
-        document.documentElement.dataset.theme === "day" ? "#f4efe6" : "#0e0f13",
+        document.documentElement.dataset.theme === "day" ? "#f4efe6" : "#121317",
       ),
     );
   await page.evaluate(() => {

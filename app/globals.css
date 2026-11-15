@@ -4538,7 +4538,10 @@ button:disabled {
   color: var(--muted);
 }
 .street-map-link {
-  color: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--citylit-reference-purple, var(--accent));
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -4623,7 +4626,7 @@ button {
   padding: 12px 17px;
   border-radius: 17px;
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-ink);
   font-size: 14px;
   border: 1px solid transparent;
 }
@@ -4648,7 +4651,7 @@ button {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--accent-ink);
+  color: var(--accent);
   font-size: 13px;
 }
 .pwa-storage-actions {
@@ -4674,7 +4677,7 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--accent-ink) !important;
+  color: var(--accent) !important;
 }
 .pwa-install-help {
   display: flex;
@@ -4693,7 +4696,7 @@ button {
 }
 .pwa-message {
   margin-bottom: 0 !important;
-  color: var(--accent-ink) !important;
+  color: var(--accent) !important;
 }
 .pwa-message:empty {
   display: none;
@@ -4719,7 +4722,7 @@ button {
 .pwa-status > svg {
   flex: none;
   margin-top: 3px;
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 .pwa-status strong {
   font-size: 14px;
@@ -4736,7 +4739,7 @@ button {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--accent-ink);
+  color: var(--accent);
   font-size: 13px;
   text-decoration: underline;
   text-underline-offset: 4px;

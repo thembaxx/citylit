@@ -24,6 +24,7 @@ import useTheme from "./useTheme";
 import { useDiscovery } from "./useDiscovery";
 import { cities } from "../lib/data";
 import LiquidToggle from "./ui/LiquidToggle";
+import PwaPanel from "./PwaPanel";
 import { benchoAudio } from "../lib/bencho-audio";
 import { handleRovingKeyDown } from "../lib/ui-primitives";
 
@@ -494,6 +495,11 @@ export default function SettingsModal({
                       </li>
                     </ul>
                   </div>
+
+                  <span className="citylit-settings-subhead" style={{ marginTop: 20 }}>
+                    App &amp; offline guide
+                  </span>
+                  <PwaPanel />
                 </div>
               )}
             </div>

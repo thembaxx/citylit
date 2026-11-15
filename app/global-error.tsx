@@ -14,7 +14,7 @@ export default function GlobalError({
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="color-scheme" content="dark light" />
         <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0e0f13" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#121317" media="(prefers-color-scheme: dark)" />
         <script
           data-citylit-recovery-theme
           dangerouslySetInnerHTML={{ __html: recoveryThemeScript }}
@@ -26,8 +26,8 @@ export default function GlobalError({
           margin: 0,
           padding:
             "max(32px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left))",
-          background: "var(--bg, #0e0f13)",
-          color: "var(--ink, #f3eee4)",
+          background: "var(--bg, #121317)",
+          color: "var(--ink, #e3e2e7)",
           fontFamily: "system-ui, sans-serif",
           minHeight: "100vh",
           overflow: "auto",
@@ -45,8 +45,8 @@ export default function GlobalError({
               font: "inherit",
               fontSize: 16,
               padding: "14px 20px",
-              background: "var(--ink, #f3eee4)",
-              color: "var(--bg, #0e0f13)",
+              background: "var(--ink, #e3e2e7)",
+              color: "var(--bg, #121317)",
               borderRadius: 20,
               border: 0,
             }}
@@ -54,11 +54,11 @@ export default function GlobalError({
             Try again
           </button>
           <p>
-            <a href="/" style={{ color: "var(--accent-ink, #f4ca83)" }}>
+            <a href="/" style={{ color: "var(--accent, #ffb95f)" }}>
               Return to Citylit
             </a>{" "}
             ·{" "}
-            <a href="/offline.html" style={{ color: "var(--accent-ink, #f4ca83)" }}>
+            <a href="/offline.html" style={{ color: "var(--accent, #ffb95f)" }}>
               Downloaded guide
             </a>
           </p>

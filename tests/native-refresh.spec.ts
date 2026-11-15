@@ -13,8 +13,8 @@ test("mobile guide has tactile navigation, readable inputs and interactive Khwez
   const search = page.getByRole("searchbox", { name: "Search landmarks and cities" });
   await expect(search).toHaveCSS("font-size", "16px");
   await expect(search).toBeVisible();
-  await expect(page.locator(".persistent-canvas")).toHaveCSS("z-index", "1");
-  await page.getByRole("button", { name: "Choose Cape Town", exact: true }).click();
+  await expect(page.locator("canvas")).toHaveCount(1);
+  await page.getByRole("tab", { name: "Big views", exact: true }).click();
   await expect(page.locator(".living-atlas-city-card h3")).toHaveText("Cape Town");
   await expect(page.getByRole("link", { name: "Enter the city" })).toBeVisible();
   const overflow = await page
@@ -52,7 +52,7 @@ test("reduced motion leaves the guide logo and mascot controllable", async ({ pa
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?view=guide");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
-  await expect(page.locator(".citylit-logo-symbol").first()).toBeVisible();
+  await expect(page.locator(".citylit-logo-symbol-wrap").first()).toBeVisible();
   await page.goto("/brand");
   await page.getByRole("button", { name: "Make Khwezi hop" }).click();
   // The label becomes the reverse action after the successful pose change.

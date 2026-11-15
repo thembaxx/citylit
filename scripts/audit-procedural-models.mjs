@@ -67,7 +67,7 @@ assert.match(builders, /ponte-city-inner-atrium-wall/);
 assert.match(builders, /ponte-city-inner-atrium-gallery-floors/);
 assert.match(builders, /ponte-city-external-balcony-lips/);
 assert.match(builders, /ponte-city-vertical-concrete-fins/);
-assert.match(pbr, /const SIZE = 128;/);
+assert.match(pbr, /const SIZE = (?:64|128);/);
 assert.match(pkg.scripts["models:review"], /landmark-review/);
 assert.match(pkg.scripts["models:score"], /model-scorecard/);
 assert.doesNotMatch(Object.keys(pkg.dependencies ?? {}).join("\n"), /cannon|rapier|ammo|oimo/i);

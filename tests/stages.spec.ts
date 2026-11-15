@@ -6,31 +6,31 @@ test("the stage opens a landmark guide and shares the real day planner", async (
   await page.emulateMedia({ reducedMotion: "reduce" });
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/cape-town/landmarks");
+  await page.goto("/dioramas?scope=landmark&city=cape-town");
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
     "data-active-model-status",
     "ready",
     { timeout: 30000 },
   );
-  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Table Mountain");
   await expect(page.getByRole("button", { name: "Table Mountain", exact: true })).toHaveAttribute(
     "aria-pressed",
     "true",
   );
   await page.getByRole("button", { name: "Next discovery" }).click();
-  await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).not.toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
   for (const name of cities.find((city) => city.slug === "cape-town")!.landmarks) {
     await page.getByRole("button", { name, exact: true }).click();
-    await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(name);
+    await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText(name);
   }
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
-  // Selecting chips scrolls their sheet into view. Restore the scene viewport
+  // Selecting chips scrolls the sheet into view. Restore the scene viewport
   // before the drag; otherwise the mouse moves over the fixed header (y≈34).
   await page
     .locator(".reference-guide")
     .evaluate((guide) => guide.scrollTo({ top: 0, behavior: "instant" }));
-  await expect(page.locator(".atlas-stage-heading h1")).toBeInViewport();
+  await expect(page.locator(".dioramas-header h1")).toBeInViewport();
   // After selecting chips, the stage can be partly above the viewport.
   // A bounding-box percentage alone previously dragged at y=34, over the header.
   const point = await page.locator(".atlas-ring-scene").evaluate((host) => {
@@ -54,7 +54,7 @@ test("the stage opens a landmark guide and shares the real day planner", async (
   await page.mouse.down();
   await page.mouse.move(point.x + point.swipe, point.y, { steps: 8 });
   await page.mouse.up();
-  await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).not.toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
   await page.getByRole("button", { name: "Add to my day", exact: true }).click();
   await expect(page.getByRole("button", { name: "In my day", exact: true })).toHaveAttribute(
@@ -66,11 +66,11 @@ test("the stage opens a landmark guide and shares the real day planner", async (
   await page.getByRole("link", { name: "Open guide", exact: true }).click();
   await expect(page).toHaveURL(/\/cape-town\/parks-zoos\/table-mountain$/);
   await expect(page.locator("h1")).toHaveText("Table Mountain.");
-  await page.goto("/cape-town/places");
+  await page.goto("/dioramas?scope=landmark&city=cape-town&mode=places");
   await page.getByRole("button", { name: "Next discovery" }).click();
-  await expect(page.locator(".atlas-stage-sheet h2")).toBeVisible();
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toBeVisible();
   const audit = await new AxeBuilder({ page })
-    .include(".atlas-stage-content")
+    .include(".dioramas-landmark-panel")
     .withTags(["wcag2a", "wcag2aa"])
     .analyze();
   expect(audit.violations).toEqual([]);
@@ -98,20 +98,23 @@ test("narrow-screen stages remain navigable with procedural city detail", async 
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/cape-town/landmarks");
-  await expect(page.locator(".atlas-ring-scene")).toBeVisible();
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Next discovery" }).click();
   await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
   await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
   await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Inspect in 3D" })).toHaveAttribute(
+    "href",
+    /\/dioramas\?scope=landmark&city=cape-town/,
+  );
   expect(errors).toEqual([]);
 });
 
 test("320px header keeps a visible saved-day action and usable stage chips", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/johannesburg/landmarks");
+  await page.goto("/dioramas?scope=landmark&city=johannesburg");
   // The mobile redesign moves this action into the persistent bottom dock.
   const savedDay = page
     .getByRole("navigation", { name: "Mobile navigation" })
@@ -119,9 +122,9 @@ test("320px header keeps a visible saved-day action and usable stage chips", asy
   await expect(savedDay).toBeVisible();
   await expect(savedDay.locator("svg")).toBeVisible();
   await expect(savedDay).toHaveAttribute("href", /tab=day/);
-  const chips = page.locator(".atlas-stage-chips");
-  await expect(chips).toBeVisible();
-  await chips.getByRole("button", { name: "Ponte City", exact: true }).click();
+  const picker = page.locator(".dioramas-landmark-picker");
+  await expect(picker).toBeVisible();
+  await picker.getByRole("button", { name: "Ponte City", exact: true }).click();
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute("data-active-model", "ponte");
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
     "data-active-model-status",
@@ -130,7 +133,7 @@ test("320px header keeps a visible saved-day action and usable stage chips", asy
       timeout: 30000,
     },
   );
-  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Ponte City");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Ponte City");
   const width = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(width).toBeLessThanOrEqual(321);
 });

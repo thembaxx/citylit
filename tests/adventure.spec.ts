@@ -57,22 +57,25 @@ test("collections build a day, preserve visits and import shareable trips", asyn
 });
 
 test("practical filters and query survive opening a place and browser back", async ({ page }) => {
-  await page.goto("/pietermaritzburg/entertainment?view=places");
+  await page.goto("/explore?city=pietermaritzburg");
+  await page.getByText("Refine my adventure", { exact: true }).click();
   await page.getByRole("button", { name: "Free entry", exact: true }).click();
-  await page.getByRole("button", { name: "Step-free entrance", exact: true }).click();
-  await expect(page.locator(".place-card")).toHaveCount(1);
-  await page.getByPlaceholder("Search places").fill("Tatham");
-  await page.locator(".place-open").click();
-  await expect(page.locator("h1")).toHaveText("Tatham Art Gallery");
-  await page.goBack();
-  await expect(page.getByPlaceholder("Search places")).toHaveValue("Tatham");
   await expect(page.getByRole("button", { name: "Free entry", exact: true })).toHaveAttribute(
     "aria-pressed",
     "true",
   );
-  await expect(
-    page.getByRole("button", { name: "Step-free entrance", exact: true }),
-  ).toHaveAttribute("aria-pressed", "true");
+  await page.goto("/pietermaritzburg#places");
+  await page.getByRole("button", { name: "Entertainment", exact: true }).click();
+  await page.getByPlaceholder("Search places").fill("Tatham");
+  await expect(page.locator(".atlas-place-card")).toHaveCount(1);
+  await page.locator(".atlas-place-card-link").click();
+  await expect(page.locator("h1")).toHaveText("Tatham Art Gallery.");
+  await page.goBack();
+  await expect(page.getByPlaceholder("Search places")).toHaveValue("Tatham");
+  await expect(page.getByRole("button", { name: "Entertainment", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
 });
 
 test("corrections stay in a review queue and do not change public facts", async ({ page }) => {
@@ -89,10 +92,10 @@ test("corrections stay in a review queue and do not change public facts", async 
   await page.getByRole("button", { name: "Mark reviewed", exact: true }).click();
   await expect(page.locator(".correction-review")).toContainText("Status: reviewed");
   await page.goto("/pretoria/entertainment/freedom-park");
-  await expect(page.locator("h1")).toHaveText("Freedom Park");
+  await expect(page.locator("h1")).toHaveText("Freedom Park.");
 });
 
-test("nearby search handles location permission and new cities have one 3D canvas", async ({
+test("nearby search handles location permission and new cities connect to the 3D stage", async ({
   page,
   context,
 }) => {
@@ -106,11 +109,17 @@ test("nearby search handles location permission and new cities have one 3D canva
     }),
   ).toBeVisible();
   await page.goto("/kimberley");
-  await expect(page.locator(".landmark-open h3")).toHaveText("The Big Hole");
-  await expect(page).toHaveURL(/kimberley$/);
-  await expect(page.locator("canvas")).toHaveCount(1);
+  await expect(
+    page.locator(".atlas-landmark-link").filter({ hasText: "The Big Hole" }),
+  ).toBeVisible();
+  await expect(page.locator(".atlas-stage canvas")).toHaveCount(0);
   await page.goto("/mahikeng");
-  await expect(page.locator(".landmark-open h3")).toHaveText("Mahikeng Museum");
+  await expect(
+    page.locator(".atlas-landmark-link").filter({ hasText: "Mahikeng Museum" }),
+  ).toBeVisible();
+  await page.goto("/dioramas?scope=landmark&city=kimberley");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("The Big Hole");
+  await expect(page.locator("canvas")).toHaveCount(1);
 });
 
 test("saved field guide works offline and keeps its source information", async ({
@@ -118,7 +127,9 @@ test("saved field guide works offline and keeps its source information", async (
   context,
 }) => {
   await page.goto("/cape-town/parks-zoos/kirstenbosch");
-  await page.getByRole("button", { name: "Save this discovery", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Save this discovery: Kirstenbosch", exact: true })
+    .click();
   await page.goto("/explore?city=cape-town");
   await page.getByRole("tab", { name: "Passport", exact: true }).click();
   await page.evaluate(async () => {

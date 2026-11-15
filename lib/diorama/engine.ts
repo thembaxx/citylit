@@ -14,6 +14,7 @@ import type { DioramaSlug, TimeMode } from "./content";
 import { createGroundShadow } from "./base";
 import { createHotspotTexture } from "./textures";
 import { mulberry32 } from "./utils";
+import { isSoftwareRenderer } from "../renderer-quality";
 
 const DEFAULT_QUALITY: Quality = {
   tier: "balanced",
@@ -385,17 +386,32 @@ export function createDioramaEngine(options: DioramaEngineOptions): DioramaEngin
           return;
         }
         renderer = gpu;
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, quality.dpr));
+        const backend = (
+          renderer as unknown as {
+            backend?: { isWebGPUBackend?: boolean; gl?: WebGLRenderingContext };
+          }
+        ).backend;
+        let isSoftware = false;
+        if (backend?.gl) {
+          const debugExt = backend.gl.getExtension("WEBGL_debug_renderer_info");
+          const rendererName = String(
+            backend.gl.getParameter(
+              debugExt ? debugExt.UNMASKED_RENDERER_WEBGL : backend.gl.RENDERER,
+            ) ?? "",
+          );
+          isSoftware = isSoftwareRenderer(rendererName);
+        }
+        renderer.setPixelRatio(
+          isSoftware ? 1 : Math.min(window.devicePixelRatio || 1, quality.dpr),
+        );
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.05;
         renderer.outputColorSpace = THREE.SRGBColorSpace;
-        if (quality.shadows) {
+        if (quality.shadows && !isSoftware) {
           renderer.shadowMap.enabled = true;
           renderer.shadowMap.type = THREE.PCFShadowMap;
         }
 
-        const backend = (renderer as unknown as { backend?: { isWebGPUBackend?: boolean } })
-          .backend;
         onRenderer?.(backend?.isWebGPUBackend ? "WebGPU" : "WebGL 2");
 
         scene = new THREE.Scene();

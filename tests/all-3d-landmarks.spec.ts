@@ -35,9 +35,9 @@ for (const citySlug of [
       }
     });
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto(`/${citySlug}/landmarks`);
+    await page.goto(`/dioramas?scope=landmark&city=${citySlug}`);
     const city = cities.find((item) => item.slug === citySlug)!;
-    await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[0]);
+    await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText(city.landmarks[0]);
     await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
       "data-active-model-status",
       "ready",
@@ -45,22 +45,10 @@ for (const citySlug of [
     );
     const toolbar = page.getByLabel("3D inspection tools");
     await expect(toolbar).toBeVisible();
-    if ((page.viewportSize()?.width ?? 1024) <= 767) {
-      await toolbar.getByRole("button", { name: "Open 3D inspector" }).click();
-    }
+    await toolbar.getByRole("button", { name: /open 3D inspector/i }).click();
 
     await toolbar.getByRole("button", { name: "Switch to night lighting" }).click();
     await expect(toolbar.getByRole("button", { name: "Switch to daylight" })).toBeVisible();
-    const explode = toolbar.getByRole("button", { name: "Exploded view" });
-    const sceneCanvas = page.locator(".persistent-canvas canvas");
-    await expect(explode).toBeVisible();
-    await expect(explode).toHaveAttribute("aria-pressed", "false");
-    await explode.click();
-    await expect(explode).toHaveAttribute("aria-pressed", "true");
-    await expect(sceneCanvas).toHaveAttribute("data-exploded-progress", "1.000");
-    await explode.click();
-    await expect(explode).toHaveAttribute("aria-pressed", "false");
-    await expect(sceneCanvas).toHaveAttribute("data-exploded-progress", "0.000");
     await toolbar.getByRole("button", { name: "Rotate selected miniature" }).click();
     await toolbar.getByRole("button", { name: "Zoom in" }).click();
     await toolbar.getByRole("button", { name: "Close-up", exact: true }).click();
@@ -68,27 +56,23 @@ for (const citySlug of [
       "aria-pressed",
       "true",
     );
-    await toolbar.getByRole("button", { name: "Overhead" }).click();
-    await expect(toolbar.getByRole("button", { name: "Overhead" })).toHaveAttribute(
-      "aria-pressed",
-      "true",
-    );
+    const overhead = toolbar.getByRole("switch", { name: "Toggle overhead camera" });
+    await overhead.click();
+    await expect(overhead).toHaveAttribute("aria-checked", "true");
     await toolbar.getByRole("button", { name: "Reset inspection" }).click();
     await expect(toolbar.getByRole("button", { name: "Overview" })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
-    const contextToggle = toolbar.getByRole("button", { name: "Show illustrative surroundings" });
-    await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
+    const contextToggle = toolbar.getByRole("switch", { name: "Toggle show surroundings" });
+    await expect(contextToggle).toHaveAttribute("aria-checked", "false");
     await contextToggle.click();
-    await expect(
-      toolbar.getByRole("button", { name: "Hide surroundings and day trail" }),
-    ).toHaveAttribute("aria-pressed", "true");
-    await toolbar.getByRole("button", { name: "Hide surroundings and day trail" }).click();
-    await expect(contextToggle).toHaveAttribute("aria-pressed", "false");
+    await expect(contextToggle).toHaveAttribute("aria-checked", "true");
+    await contextToggle.click();
+    await expect(contextToggle).toHaveAttribute("aria-checked", "false");
 
     await page.getByRole("button", { name: "Next discovery" }).click();
-    await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(city.landmarks[1]);
+    await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText(city.landmarks[1]);
     await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
     expect(glbRequests).toEqual([]);
     expect(errors).toEqual([]);

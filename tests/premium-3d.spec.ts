@@ -7,15 +7,13 @@ test("Kimberley museum exposes functional, accessible architectural inspector to
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
 
-  await page.goto("/kimberley/landmarks");
+  await page.goto("/dioramas?scope=landmark&city=kimberley");
   await page.getByRole("button", { name: "McGregor Museum", exact: true }).click();
-  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("McGregor Museum");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("McGregor Museum");
 
   const tools = page.getByLabel("3D inspection tools");
   await expect(tools).toBeVisible();
-  if ((page.viewportSize()?.width ?? 1024) <= 767) {
-    await tools.getByRole("button", { name: "Open 3D inspector" }).click();
-  }
+  await tools.getByRole("button", { name: /open 3D inspector/i }).click();
   await tools.getByRole("button", { name: "Switch to night lighting" }).click();
   await expect(tools.getByRole("button", { name: "Switch to daylight" })).toHaveAttribute(
     "aria-pressed",
@@ -57,13 +55,11 @@ test("inspector tools fit a narrow mobile viewport and respect reduced motion", 
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/kimberley/landmarks");
+  await page.goto("/dioramas?scope=landmark&city=kimberley");
   await page.getByRole("button", { name: "McGregor Museum", exact: true }).click();
   const tools = page.getByLabel("3D inspection tools");
   await expect(tools).toBeVisible();
-  if ((page.viewportSize()?.width ?? 1024) <= 767) {
-    await tools.getByRole("button", { name: "Open 3D inspector" }).click();
-  }
+  await tools.getByRole("button", { name: /open 3D inspector/i }).click();
   const box = await tools.boundingBox();
   expect(box).not.toBeNull();
   expect(box!.x).toBeGreaterThanOrEqual(0);

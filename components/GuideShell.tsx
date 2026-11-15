@@ -78,7 +78,7 @@ export default function GuideShell({
       <GuideMotion essential={state.essential} />
 
       <header className="atlas-nav citylit-app-header">
-        <Link className="atlas-wordmark" href="/" aria-label="cıtylit — Citylit home">
+        <Link className="atlas-wordmark" href="/" aria-label="Citylit home">
           <BrandWordmark />
         </Link>
         <nav aria-label="Main navigation">

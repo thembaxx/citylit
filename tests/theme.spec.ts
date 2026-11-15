@@ -24,7 +24,7 @@ function recoveryElement(value: unknown): ReactNode {
 }
 const colors = {
   day: { css: "rgb(244, 239, 230)", hex: "#f4efe6", scheme: "light" },
-  night: { css: "rgb(14, 15, 19)", hex: "#0e0f13", scheme: "dark" },
+  night: { css: "rgb(18, 19, 23)", hex: "#121317", scheme: "dark" },
 } as const;
 async function matchesTheme(page: Page, theme: keyof typeof colors) {
   await expect(page.locator("html")).toHaveCSS("background-color", colors[theme].css);
@@ -103,13 +103,12 @@ for (const theme of ["day", "night"] as const) {
       await page.goto("/", { waitUntil: "commit" });
       await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
       await matchesTheme(page, theme);
-      // Neither React nor the Three.js bundle is needed for the correct page/chrome paint.
-      await expect(page.locator(".scene-loading")).toBeVisible();
+      // React hydration is not needed for the correct initial page/chrome paint.
+      await expect(page.locator(".discovery-guide h1")).toBeVisible();
     } finally {
       release();
     }
-    await expect(page.getByRole("button", { name: /Switch to .* theme/ })).toBeVisible();
-    await expect(page.locator(".scene-loading")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Open settings", exact: true })).toBeVisible();
     await matchesTheme(page, theme);
     expect(errors).toEqual([]);
   });
@@ -151,19 +150,15 @@ test("system changes and cross-tab choices update the UI; explicit choices survi
   await matchesTheme(page, "day");
   await page.emulateMedia({ colorScheme: "dark" });
   await matchesTheme(page, "night");
-  await expect(page.getByRole("button", { name: "Switch to day theme" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Open settings", exact: true })).toBeVisible();
   const other = await context.newPage();
   await other.emulateMedia({ colorScheme: "dark" });
   await other.goto("/brand");
   await other.getByRole("button", { name: "Switch to day theme" }).click();
   await matchesTheme(page, "day");
-  await expect(page.getByRole("button", { name: "Switch to night theme" })).toBeVisible();
   await page.emulateMedia({ colorScheme: "dark" });
-  await page.getByRole("button", { name: "9 provinces ready to explore", exact: true }).click();
-  await page
-    .getByRole("navigation", { name: "Available provinces" })
-    .locator('a[href="/durban"]')
-    .click();
+  await page.goto("/destinations");
+  await page.locator('.atlas-city-card-link[href="/durban"]').first().click();
   await expect(page).toHaveURL(/\/durban$/);
   await matchesTheme(page, "day");
   // Also exercise a route that uses ThemeToggle instead of Explorer's control.
@@ -228,7 +223,7 @@ test("viewport metadata replacements and compact landscape leave no background s
   ]) {
     await page.setViewportSize(viewport);
     await expect(page.locator(".canvas-root")).toHaveCSS("background-color", colors.day.css);
-    await expect(page.locator(".game-atmosphere")).toHaveCSS("background-color", colors.day.css);
+    await expect(page.locator("body")).toHaveCSS("background-color", colors.day.css);
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
       .toBe(viewport.width);

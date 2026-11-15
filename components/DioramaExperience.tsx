@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback,
@@ -13,14 +14,19 @@ import {
 } from "react";
 import {
   ArrowCounterClockwise,
+  ArrowLeft,
+  ArrowRight,
   ArrowsClockwise,
   ArrowsOutSimple,
+  ArrowUpRight,
   CaretRight,
+  Check,
   Compass,
   Cube,
   Info,
   MoonStars,
   Mountains,
+  Plus,
   Sun,
   SunHorizon,
 } from "@phosphor-icons/react";
@@ -32,8 +38,9 @@ import {
   type TimeMode,
 } from "../lib/diorama/content";
 import type { DioramaEngine, Quality, RenderBackend, RendererKind } from "../lib/diorama/types";
-import { cities, landmarkSources, places } from "../lib/data";
-import { landmarkPath, landmarkVenue } from "../lib/discovery-guide";
+import { categorySlug, cities, landmarkSources, places } from "../lib/data";
+import { landmarkPath, landmarkVenue, venuePath } from "../lib/discovery-guide";
+import { MAX_TRIP_STOPS } from "../lib/client-data";
 import { stageModel } from "../lib/stage-models";
 import { useDiscovery } from "./useDiscovery";
 import CartographicLoader from "./CartographicLoader";
@@ -137,17 +144,20 @@ function detectQuality(): Quality {
 export default function DioramaExperience() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { state } = useDiscovery();
+  const { state, update } = useDiscovery();
   const initialScope = (searchParams.get("scope") as DioramaScope | null) ?? "diorama";
   const initialScene = searchParams.get("scene") as DioramaSlug | null;
   const initialCity = searchParams.get("city") || cities[0]?.slug || "cape-town";
+  const initialMode = searchParams.get("mode") === "places" ? "places" : "landmarks";
   const initialItem = searchParams.get("item") || undefined;
 
   const [scope, setScope] = useState<DioramaScope>(
     initialScope === "landmark" ? "landmark" : initialScope === "pixi3d" ? "pixi3d" : "diorama",
   );
   const [landmarkCitySlug, setLandmarkCitySlug] = useState<string>(initialCity);
+  const [landmarkMode, setLandmarkMode] = useState<"landmarks" | "places">(initialMode);
   const [landmarkIndex, setLandmarkIndex] = useState(0);
+  const [landmarkMessage, setLandmarkMessage] = useState("");
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const engineRef = useRef<DioramaEngine | null>(null);
@@ -182,6 +192,17 @@ export default function DioramaExperience() {
   );
   const landmarkItems: StageItem[] = useMemo(() => {
     if (!landmarkCity) return [];
+    const cityPlaces: StageItem[] = places
+      .filter((p) => p.city === landmarkCity.slug)
+      .slice(0, 6)
+      .map((place) => ({
+        name: place.name,
+        description: place.description,
+        href: venuePath(place),
+        model: stageModel(place.name, place.category),
+        place,
+      }));
+    if (landmarkMode === "places" && cityPlaces.length > 0) return cityPlaces;
     const cityLandmarks = landmarkCity.landmarks.map((name) => {
       const place = landmarkVenue(landmarkCity.slug, name);
       const record = landmarkSources.find((item) => item.name === name);
@@ -196,26 +217,61 @@ export default function DioramaExperience() {
         place,
       };
     });
-    if (cityLandmarks.length > 0) return cityLandmarks;
-    return places
-      .filter((p) => p.city === landmarkCity.slug)
-      .slice(0, 6)
-      .map((place) => ({
-        name: place.name,
-        description: place.description,
-        href: `/${landmarkCity.slug}/places`,
-        model: stageModel(place.name, place.category),
-        place,
-      }));
-  }, [landmarkCity]);
+    return cityLandmarks.length > 0 ? cityLandmarks : cityPlaces;
+  }, [landmarkCity, landmarkMode]);
 
   useEffect(() => {
     if (!initialItem || landmarkItems.length === 0) return;
+    const normalized = categorySlug(initialItem);
     const found = landmarkItems.findIndex(
-      (item) => item.name.toLowerCase() === initialItem.toLowerCase(),
+      (item) =>
+        item.name.toLowerCase() === initialItem.toLowerCase() ||
+        item.place?.id === initialItem ||
+        categorySlug(item.name) === normalized,
     );
     if (found >= 0) setLandmarkIndex(found);
   }, [initialItem, landmarkItems]);
+
+  const activeLandmarkIndex =
+    landmarkItems.length > 0 ? Math.min(landmarkIndex, landmarkItems.length - 1) : 0;
+  const activeLandmark = landmarkItems[activeLandmarkIndex];
+  const activeInDay = !!(
+    activeLandmark?.place && state.itinerary.includes(activeLandmark.place.id)
+  );
+
+  const toggleActiveLandmarkInDay = useCallback(() => {
+    const place = activeLandmark?.place;
+    if (!place || !landmarkCity) return;
+    const first = places.find((row) => row.id === state.itinerary[0]);
+    if (!activeInDay && first && first.city !== landmarkCity.slug) {
+      benchoAudio.playClick(360);
+      setLandmarkMessage(
+        "Your day belongs to another city. Clear it in My day before starting a new one.",
+      );
+      return;
+    }
+    if (!activeInDay && state.itinerary.length >= MAX_TRIP_STOPS) {
+      benchoAudio.playClick(360);
+      setLandmarkMessage("Your day is full. Remove a stop in My day first.");
+      return;
+    }
+    const saved = update((previous) => ({
+      itinerary: activeInDay
+        ? previous.itinerary.filter((id) => id !== place.id)
+        : [...new Set([...previous.itinerary, place.id])],
+    }));
+    if (saved) {
+      if (activeInDay) benchoAudio.playClick(440);
+      else benchoAudio.playConfirm();
+    }
+    setLandmarkMessage(
+      saved
+        ? activeInDay
+          ? "Removed from your day."
+          : "Added to your day."
+        : "This browser could not save your day. Allow site storage and try again.",
+    );
+  }, [activeInDay, activeLandmark, landmarkCity, state.itinerary, update]);
 
   const selected = useMemo(
     () => landmarks.find((landmark) => landmark.id === selectedId) ?? null,
@@ -399,7 +455,9 @@ export default function DioramaExperience() {
                 onClick={() => {
                   benchoAudio.playTap(780);
                   setLandmarkCitySlug(c.slug);
+                  setLandmarkMode("landmarks");
                   setLandmarkIndex(0);
+                  setLandmarkMessage("");
                 }}
               >
                 <span className="dioramas-tab-name">{c.name}</span>
@@ -407,19 +465,103 @@ export default function DioramaExperience() {
               </button>
             ))}
           </div>
-          {landmarkItems.length > 0 ? (
-            <div className="dioramas-landmark-stage">
-              <LandmarkRing
-                items={landmarkItems}
-                selected={Math.min(landmarkIndex, landmarkItems.length - 1)}
-                onSelect={(idx) => setLandmarkIndex(idx)}
-                itinerary={state.itinerary}
-                onOpenGuide={() => {
-                  const item = landmarkItems[landmarkIndex];
-                  if (item) router.push(item.href);
-                }}
-              />
-            </div>
+          {landmarkItems.length > 0 && activeLandmark ? (
+            <>
+              <div
+                className="dioramas-landmark-picker"
+                role="group"
+                aria-label={`Choose a ${landmarkMode === "places" ? "place" : "landmark"} in ${landmarkCity?.name ?? "city"}`}
+              >
+                {landmarkItems.map((item, idx) => {
+                  const isActive = idx === activeLandmarkIndex;
+                  return (
+                    <button
+                      key={item.name}
+                      type="button"
+                      aria-pressed={isActive}
+                      className={`dioramas-landmark-pill${isActive ? " is-active" : ""}`}
+                      onClick={() => {
+                        benchoAudio.playTap(780);
+                        setLandmarkIndex(idx);
+                        setLandmarkMessage("");
+                      }}
+                    >
+                      {item.name}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="dioramas-landmark-stage">
+                <LandmarkRing
+                  items={landmarkItems}
+                  selected={activeLandmarkIndex}
+                  onSelect={(idx) => {
+                    setLandmarkIndex(idx);
+                    setLandmarkMessage("");
+                  }}
+                  itinerary={state.itinerary}
+                  onOpenGuide={() => router.push(activeLandmark.href)}
+                />
+              </div>
+              <div className="dioramas-landmark-sheet" aria-live="polite">
+                <div className="dioramas-landmark-sheet-head">
+                  <h2>{activeLandmark.name}</h2>
+                  <div className="dioramas-landmark-stepper">
+                    <button
+                      type="button"
+                      aria-label="Previous discovery"
+                      onClick={() => {
+                        benchoAudio.playTap(740);
+                        setLandmarkIndex(
+                          (activeLandmarkIndex - 1 + landmarkItems.length) % landmarkItems.length,
+                        );
+                        setLandmarkMessage("");
+                      }}
+                    >
+                      <ArrowLeft size={17} aria-hidden="true" />
+                    </button>
+                    <span>
+                      {String(activeLandmarkIndex + 1).padStart(2, "0")} /{" "}
+                      {String(landmarkItems.length).padStart(2, "0")}
+                    </span>
+                    <button
+                      type="button"
+                      aria-label="Next discovery"
+                      onClick={() => {
+                        benchoAudio.playTap(820);
+                        setLandmarkIndex((activeLandmarkIndex + 1) % landmarkItems.length);
+                        setLandmarkMessage("");
+                      }}
+                    >
+                      <ArrowRight size={17} aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+                <p className="dioramas-landmark-desc">{activeLandmark.description}</p>
+                <div className="dioramas-landmark-sheet-actions">
+                  <Link href={activeLandmark.href} className="dioramas-landmark-guide">
+                    Open guide <ArrowUpRight size={17} aria-hidden="true" />
+                  </Link>
+                  {activeLandmark.place ? (
+                    <button
+                      type="button"
+                      aria-pressed={activeInDay}
+                      onClick={toggleActiveLandmarkInDay}
+                    >
+                      {activeInDay ? (
+                        <Check size={17} aria-hidden="true" />
+                      ) : (
+                        <Plus size={17} aria-hidden="true" />
+                      )}
+                      {activeInDay ? "In my day" : "Add to my day"}
+                    </button>
+                  ) : null}
+                </div>
+                <p className="dioramas-landmark-status" role="status">
+                  {landmarkMessage}
+                </p>
+              </div>
+            </>
           ) : null}
         </div>
       ) : null}

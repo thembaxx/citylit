@@ -47,7 +47,7 @@ test("safe-area layout keeps interactive guide elements within a compact viewpor
 test("mobile inspector popover and camera preset stay above the model", async ({ page }) => {
   test.slow();
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/cape-town/landmarks");
+  await page.goto("/dioramas?scope=landmark&city=cape-town");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
     "data-active-model-status",
@@ -55,7 +55,7 @@ test("mobile inspector popover and camera preset stay above the model", async ({
     { timeout: 30000 },
   );
 
-  const inspect = page.getByRole("button", { name: "Open 3D inspector" });
+  const inspect = page.getByRole("button", { name: /open 3D inspector/i });
   await expect(inspect).toBeVisible();
   await inspect.click();
 

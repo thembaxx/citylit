@@ -37,9 +37,11 @@ test("beacon to city to landmark to a saved visit works end to end", async ({ pa
     "href",
     "https://www.tablemountain.net/",
   );
-  await page.getByRole("button", { name: "Save Table Mountain", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Save this discovery: Table Mountain", exact: true })
+    .click();
   await expect(
-    page.getByRole("button", { name: "Unsave Table Mountain", exact: true }),
+    page.getByRole("button", { name: "Saved discovery: Table Mountain", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "Open venue photo gallery" }).click();
   await expect(page.locator(".gallery-dialog")).toBeVisible();
@@ -52,12 +54,19 @@ test("beacon to city to landmark to a saved visit works end to end", async ({ pa
   await page.reload();
   await expect(page.locator(".visit-stamp")).toContainText("Passport stamped");
   await expect(
-    page.getByRole("button", { name: "Unsave Table Mountain", exact: true }),
+    page.getByRole("button", { name: "Saved discovery: Table Mountain", exact: true }),
   ).toBeVisible();
-  await page
-    .locator(".citylit-bottom-dock")
-    .getByRole("link", { name: "My day", exact: true })
-    .click();
+  if ((page.viewportSize()?.width ?? 1024) < 768) {
+    await page
+      .locator(".citylit-bottom-dock")
+      .getByRole("link", { name: "My day", exact: true })
+      .click();
+  } else {
+    await page
+      .getByRole("navigation", { name: "Main navigation" })
+      .getByRole("link", { name: /^My day/ })
+      .click();
+  }
   await expect(page.locator(".trip-stops")).toContainText("Table Mountain");
   expect(errors).toEqual([]);
 });
@@ -84,7 +93,10 @@ test("every landmark has a real detail destination and unmatched stories open", 
   await page.locator(".atlas-landmark-link").filter({ hasText: "Ponte City" }).click();
   await expect(page).toHaveURL(/landmark=ponte-city/);
   await expect(page.locator("h1")).toHaveText("Ponte City.");
-  await expect(page.getByText("Current visiting hours", { exact: false })).toBeVisible();
+  await page.getByRole("tab", { name: "Facts", exact: true }).click();
+  await expect(page.getByRole("cell", { name: "Berea, Johannesburg", exact: true })).toBeVisible();
+  await page.getByRole("tab", { name: "Sources", exact: true }).click();
+  await expect(page.getByText("Research & attribution", { exact: false })).toBeVisible();
   await page.getByRole("link", { name: "Back to Johannesburg" }).click();
   await expect(page).toHaveURL(/johannesburg#landmarks$/);
   expect((await request.get("/johannesburg?landmark=missing-landmark")).status()).toBe(404);
@@ -104,20 +116,15 @@ test("city search, province filters and empty-state reset work", async ({ page }
 });
 
 test("the particle map clears as the guide scrolls to city cards", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("h1")).toBeInViewport();
   await page.goto("/destinations");
-  await expect(
-    page.getByRole("button", { name: "Choose Johannesburg", exact: true }),
-  ).toBeInViewport();
+  await expect(page.locator(".atlas-map-backdrop")).toHaveCSS("opacity", "1");
   await page.locator(".discovery-guide").evaluate((guide) => {
     guide.scrollTo({ top: window.innerHeight, behavior: "instant" });
   });
-  // The reference map stays fixed; scrolling fades its renderer and removes
-  // the city controls from interaction and the accessibility tree.
   await expect(page.locator(".atlas-map-backdrop")).toHaveAttribute("aria-hidden", "true");
-  await expect(page.locator(".glow-map")).toHaveAttribute("data-interactive", "false");
-  await expect(page.getByRole("button", { name: "Choose Johannesburg", exact: true })).toHaveCount(
-    0,
-  );
+  await expect(page.locator(".atlas-map-backdrop")).toHaveCSS("opacity", "0");
   await page.screenshot({ scale: "css", path: test.info().outputPath("city-collection.png") });
   await page.locator(".atlas-city-card-link").first().click();
   await expect(page.locator(".atlas-city-hero h1")).toBeInViewport({ ratio: 1 });
@@ -210,13 +217,25 @@ for (const width of [320, 768, 1024, 1440]) {
         if (width === 1440 && route === "/")
           await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
         if (theme === "day" && width === 320 && route === "/johannesburg")
-          await page.screenshot({ scale: "css", path: "docs/redesign/05-city-mobile.png" });
+          await page.screenshot({
+            scale: "css",
+            path: test.info().outputPath("05-city-mobile.png"),
+          });
         if (theme === "day" && width === 1440 && route === "/")
-          await page.screenshot({ scale: "css", path: "docs/redesign/03-home-desktop.png" });
+          await page.screenshot({
+            scale: "css",
+            path: test.info().outputPath("03-home-desktop.png"),
+          });
         if (theme === "day" && width === 1440 && route === "/johannesburg")
-          await page.screenshot({ scale: "css", path: "docs/redesign/04-city-desktop.png" });
+          await page.screenshot({
+            scale: "css",
+            path: test.info().outputPath("04-city-desktop.png"),
+          });
         if (theme === "night" && width === 1440 && route.includes("the-big-hole"))
-          await page.screenshot({ scale: "css", path: "docs/redesign/06-venue-dark.png" });
+          await page.screenshot({
+            scale: "css",
+            path: test.info().outputPath("06-venue-dark.png"),
+          });
       }
     }
     expect(errors).toEqual([]);
@@ -254,14 +273,10 @@ test("planner and offline settings are accessible in both themes", async ({ page
   }
 });
 
-test("the original 3D field guide remains readable in the night theme", async ({
-  page,
-  context,
-}) => {
-  await context.addCookies([{ name: "citylit-view", value: "3d", url: "http://localhost:3000" }]);
+test("the centralized 3D landmark stage remains readable in the night theme", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
-  await page.goto("/johannesburg/lodging?view=places");
-  await expect(page.locator(".category-page h1")).toHaveText("Lodging");
+  await page.goto("/dioramas?scope=landmark&city=johannesburg");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "night");
   const result = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
@@ -288,7 +303,9 @@ test("denied storage reports a save failure and all guide links work without Jav
       throw new DOMException("Denied", "SecurityError");
     };
   });
-  await page.getByRole("button", { name: "Save Table Mountain", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Save this discovery: Table Mountain", exact: true })
+    .click();
   await expect(page.locator(".atlas-save-place [role=status]")).toContainText("Unable to save");
   await page.getByRole("button", { name: "Mark visited", exact: true }).click();
   await expect(page.locator(".place-planning [role=status]")).toContainText(

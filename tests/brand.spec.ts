@@ -2,29 +2,28 @@ import { test, expect } from "./legacy-fixture";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 
-test("Khwezi welcomes once, teaches gestures and keeps a single canvas", async ({ page }) => {
+test("Khwezi renders a single 3D canvas on /brand while guide home keeps one map canvas", async ({
+  page,
+}) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-  const welcome = page.getByRole("complementary", { name: "Meet Khwezi" });
-  await expect(welcome).toBeVisible();
-  await expect(welcome.locator(".khwezi-view")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator(".atlas-stage canvas")).toHaveCount(0);
   await expect(page.locator("canvas")).toHaveCount(1);
-  await expect(page.locator(".utility-nav .icon-button")).toHaveCount(4);
-  await welcome.getByRole("button", { name: "Show me how" }).click();
-  const help = page.getByRole("dialog", { name: "How to explore" });
-  await expect(help).toBeVisible();
-  await expect(help.locator('[data-pose="gesture"]')).toBeVisible();
-  await help.getByRole("button", { name: "Let’s explore" }).click();
-  await page.reload();
-  await expect(welcome).toHaveCount(0);
+  await page.goto("/brand");
+  const stage = page.locator(".brand-character-stage");
+  await expect(stage.locator(".khwezi-view")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("canvas")).toHaveCount(1);
+  await page.getByRole("button", { name: "Make Khwezi hop" }).click();
+  await expect(page.getByRole("button", { name: "Say hello" })).toBeVisible();
   expect(errors).toEqual([]);
 });
 
 test("new saves catch a spark; unsaves and reloads do not celebrate", async ({ page }) => {
   await page.goto("/cape-town/parks-zoos/kirstenbosch");
-  await page.getByRole("button", { name: "Save this discovery", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Save this discovery: Kirstenbosch", exact: true })
+    .click();
   await expect(
     page
       .locator(".khwezi-toast")
@@ -32,11 +31,11 @@ test("new saves catch a spark; unsaves and reloads do not celebrate", async ({ p
       .locator('[data-pose="saved"]'),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Saved to discoveries", exact: true }),
+    page.getByRole("button", { name: "Saved discovery: Kirstenbosch", exact: true }),
   ).toBeVisible();
   await page.reload();
   await expect(page.locator(".khwezi-toast")).toHaveCount(0);
-  await page.getByRole("button", { name: "Saved to discoveries", exact: true }).click();
+  await page.getByRole("button", { name: "Saved discovery: Kirstenbosch", exact: true }).click();
   await expect(page.locator(".khwezi-toast")).toHaveCount(0);
 });
 
@@ -85,20 +84,26 @@ test("settings trap focus, still the mascot and persist preferences across route
   page,
 }) => {
   await page.goto("/");
-  const trigger = page.getByRole("button", { name: "Experience settings", exact: true });
+  const trigger = page.getByRole("button", { name: "Open settings", exact: true });
   await trigger.click();
-  const settings = page.getByRole("dialog", { name: "Experience settings" });
-  await expect(
-    settings.getByRole("button", { name: "Enable sounds", exact: true }),
-  ).toHaveAttribute("aria-pressed", "false");
-  await settings.getByRole("checkbox", { name: /Essential motion/ }).check();
+  const settings = page.getByRole("dialog");
+  await expect(settings).toBeVisible();
+  const soundSwitch = settings.getByRole("switch", { name: "Toggle tactile UI sound" });
+  await expect(soundSwitch).toHaveAttribute("aria-checked", "true");
+  await soundSwitch.click();
+  await expect(soundSwitch).toHaveAttribute("aria-checked", "false");
+  const motionSwitch = settings.getByRole("switch", { name: "Toggle reduced motion" });
+  await motionSwitch.click();
+  await expect(motionSwitch).toHaveAttribute("aria-checked", "true");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.keyboard.press("Escape");
   await expect(settings).not.toBeVisible();
   await expect(trigger).toBeFocused();
-  await page.getByRole("link", { name: "Explore Durban", exact: true }).click();
-  await trigger.click();
-  await expect(settings.getByRole("checkbox", { name: /Essential motion/ })).toBeChecked();
+  await page.goto("/durban");
+  await page.getByRole("button", { name: "Open settings", exact: true }).click();
+  await expect(
+    page.getByRole("dialog").getByRole("switch", { name: "Toggle reduced motion" }),
+  ).toHaveAttribute("aria-checked", "true");
   await expect(page.locator(".brand-world")).toHaveAttribute("data-khwezi-motion", "still");
   await page.keyboard.press("Escape");
   await page.goto("/brand");
@@ -153,7 +158,7 @@ test("empty searches introduce Khwezi; downloaded offline guides retain the masc
   page,
   context,
 }) => {
-  await page.goto("/johannesburg/lodging?view=places");
+  await page.goto("/johannesburg#places");
   await page.getByPlaceholder("Search places").fill("qzxqzxqzxqzx");
   await expect(page.locator('.empty [data-pose="search"]')).toBeVisible();
   await page.goto("/explore");

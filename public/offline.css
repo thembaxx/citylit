@@ -15,7 +15,7 @@ main {
   padding: calc(24px + env(safe-area-inset-top)) 24px calc(140px + env(safe-area-inset-bottom));
 }
 a {
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 .ui-symbol {
   display: inline-block;
@@ -78,8 +78,8 @@ button:active {
   opacity: 0.65;
 }
 button[aria-pressed="true"] {
-  background: var(--accent-ink);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 img {
   max-width: 100%;
@@ -94,7 +94,7 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--accent-ink);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 .offline-top {
@@ -172,7 +172,7 @@ article p {
 .place-actions a {
   min-height: 44px;
   padding: 10px;
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 .offline-tabs {
   position: fixed;
@@ -196,8 +196,8 @@ article p {
   background: transparent;
 }
 .offline-tabs button[aria-pressed="true"] {
-  background: var(--accent-ink);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 .offline-tabs .ui-symbol {
   display: block;
@@ -210,13 +210,13 @@ summary {
   cursor: pointer;
   min-height: 44px;
   padding: 12px 0;
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 details {
   margin-top: 16px;
 }
 #action-status {
-  color: var(--accent-ink);
+  color: var(--accent);
 }
 #status {
   font: 12px/1.5 monospace;

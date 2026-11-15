@@ -18,12 +18,10 @@ test("museum inspector uses the procedural Three.js model without GLB requests",
     }
   });
 
-  await page.goto("/kimberley/landmarks");
+  await page.goto("/dioramas?scope=landmark&city=kimberley");
   await page.getByRole("button", { name: "McGregor Museum", exact: true }).click();
   const tools = page.getByLabel("3D inspection tools");
-  if ((page.viewportSize()?.width ?? 1024) < 768) {
-    await tools.getByRole("button", { name: "Open 3D inspector" }).click();
-  }
+  await tools.getByRole("button", { name: /open 3D inspector/i }).click();
 
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
     "data-active-model-status",

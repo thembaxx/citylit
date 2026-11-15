@@ -27,11 +27,11 @@ for (const [city, landmark] of references) {
         glbRequests.push(request.url());
       }
     });
-    await page.goto(`/${city}/landmarks`);
+    await page.goto(`/dioramas?scope=landmark&city=${city}`);
     await page.getByRole("button", { name: landmark, exact: true }).click();
     const scene = page.locator(".atlas-ring-scene");
     await expect(scene).toHaveAttribute("data-active-model-status", "ready", { timeout: 30000 });
-    await expect(page.locator(".atlas-stage-sheet h2")).toHaveText(landmark);
+    await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText(landmark);
     if (process.env.CITYLIT_CAPTURE_VISUALS === "1" && landmark !== "Nelson Mandela Bridge") {
       const filename = `citylit-real-${city}-${landmark.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.png`;
       const capture = testInfo.outputPath(filename);
@@ -41,14 +41,10 @@ for (const [city, landmark] of references) {
         contentType: "image/png",
       });
     }
-    // At narrow widths inspector actions are intentionally hidden behind the
-    // mobile Inspect control. Open the real panel before checking lighting.
-    if ((page.viewportSize()?.width ?? 1440) < 768) {
-      const inspect = page.getByRole("button", { name: "Open 3D inspector" });
-      await expect(inspect).toBeVisible();
-      await inspect.click();
-      await expect(page.locator(".atlas-inspector-panel.is-open")).toBeVisible();
-    }
+    const inspect = page.getByRole("button", { name: /open 3D inspector/i });
+    await expect(inspect).toBeVisible();
+    await inspect.click();
+    await expect(page.locator(".atlas-inspector-panel.is-open")).toBeVisible();
     const lighting = page.getByRole("button", { name: "Switch to night lighting" });
     await expect(lighting).toBeVisible();
     await lighting.click();
@@ -75,12 +71,12 @@ test("procedural places have a scene in all twelve city catalogues", async ({ pa
     "kimberley",
     "mahikeng",
   ]) {
-    await page.goto(`/${city}/places`);
+    await page.goto(`/dioramas?scope=landmark&city=${city}&mode=places`);
     await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
       "data-active-model-status",
       "ready",
       { timeout: 30000 },
     );
-    await expect(page.locator(".atlas-stage-sheet h2")).not.toBeEmpty();
+    await expect(page.locator(".dioramas-landmark-sheet h2")).not.toBeEmpty();
   }
 });

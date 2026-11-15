@@ -41,30 +41,30 @@ test("3D stage buttons remain separated from the model and spacious enough to ta
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
-    await page.goto("/johannesburg/places");
+    await page.goto("/dioramas?scope=landmark&city=johannesburg&mode=places");
     const scene = page.locator(".atlas-ring-scene");
-    const chips = page.locator(".atlas-stage-chips");
+    const sheet = page.locator(".dioramas-landmark-sheet");
     await expect(scene).toBeVisible();
-    await expect(chips).toBeVisible();
+    await expect(sheet).toBeVisible();
 
     const metrics = await page.evaluate(() => {
       const scene = document.querySelector(".atlas-ring-scene")!.getBoundingClientRect();
-      const chips = document.querySelector(".atlas-stage-chips")!.getBoundingClientRect();
-      const sheet = document.querySelector(".atlas-stage-sheet")!;
+      const sheet = document.querySelector(".dioramas-landmark-sheet")!;
+      const sheetRect = sheet.getBoundingClientRect();
       const sheetStyle = getComputedStyle(sheet);
       const actions = [
         ...document.querySelectorAll<HTMLElement>(
-          ".atlas-stage-actions a, .atlas-stage-actions button",
+          ".dioramas-landmark-sheet-actions a, .dioramas-landmark-sheet-actions button",
         ),
       ];
       return {
         sceneBottom: scene.bottom,
-        chipsTop: chips.top,
+        sheetTop: sheetRect.top,
         sheetInset: Number.parseFloat(sheetStyle.paddingLeft),
         actionHeights: actions.map((button) => button.getBoundingClientRect().height),
       };
     });
-    expect(metrics.chipsTop).toBeGreaterThanOrEqual(metrics.sceneBottom - 1);
+    expect(metrics.sheetTop).toBeGreaterThanOrEqual(metrics.sceneBottom - 1);
     expect(metrics.sheetInset).toBeGreaterThanOrEqual(18);
     expect(metrics.actionHeights.length).toBeGreaterThan(0);
     expect(metrics.actionHeights.every((height) => height >= 44)).toBe(true);

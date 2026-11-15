@@ -21,7 +21,7 @@ export default function BrandStudio() {
   return (
     <main className="brand-page">
       <header className="brand-page-nav">
-        <Link href="/" aria-label="cıtylit — Citylit home">
+        <Link href="/" aria-label="Citylit home">
           <BrandWordmark />
         </Link>
         <div>

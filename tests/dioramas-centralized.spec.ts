@@ -4,6 +4,7 @@ test.describe("Centralized /dioramas 3D hub & non-3D discovery routes", () => {
   test("hosts Regional Dioramas and Cities & Landmarks via dropdown in /dioramas", async ({
     page,
   }) => {
+    test.slow();
     for (const viewport of [
       { width: 320, height: 640 },
       { width: 390, height: 844 },

@@ -843,6 +843,45 @@
   scroll-snap-align: start;
 }
 
+.dioramas-landmark-picker {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  padding-bottom: 4px;
+}
+
+.dioramas-landmark-pill {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.dioramas-landmark-pill:hover {
+  border-color: var(--accent);
+}
+
+.dioramas-landmark-pill.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
 .dioramas-landmark-stage {
   position: relative;
   height: clamp(460px, 66svh, 660px);
@@ -858,6 +897,108 @@
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+.dioramas-landmark-sheet {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.dioramas-landmark-sheet-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dioramas-landmark-sheet h2 {
+  margin: 0;
+  font-family: var(--font-display), var(--font-ui), Georgia, serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.dioramas-landmark-desc {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 68ch;
+}
+
+.dioramas-landmark-sheet-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.dioramas-landmark-sheet-actions a,
+.dioramas-landmark-sheet-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised, var(--surface));
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dioramas-landmark-sheet-actions a.dioramas-landmark-guide {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.dioramas-landmark-sheet-actions button[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.dioramas-landmark-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dioramas-landmark-stepper button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.dioramas-landmark-stepper span {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.dioramas-landmark-status:not(:empty) {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .dioramas-landmark-stage .atlas-ring-view {

@@ -210,7 +210,7 @@ export default function CityStage({
                 Open guide <ArrowUpRight size={17} />
               </Link>
               <Link
-                href={`/dioramas?scope=landmark&city=${city.slug}&item=${encodeURIComponent(item.name)}`}
+                href={`/dioramas?scope=landmark&city=${city.slug}&mode=${mode}&item=${encodeURIComponent(item.name)}`}
                 className="atlas-button is-icon-only"
                 aria-label="Inspect in 3D"
                 title="Inspect in 3D"

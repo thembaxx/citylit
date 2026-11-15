@@ -8,12 +8,14 @@ test("mobile stage keeps 3D, inspector and place buttons in separate paint and l
     { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(viewport);
-    await page.goto("/johannesburg/places");
+    await page.goto("/dioramas?scope=landmark&city=johannesburg&mode=places");
 
     const scene = page.locator(".atlas-ring-scene");
-    const chips = page.locator(".atlas-stage-chips");
+    const picker = page.locator(".dioramas-landmark-picker");
+    const sheet = page.locator(".dioramas-landmark-sheet");
     await expect(scene).toBeVisible();
-    await expect(chips).toBeVisible();
+    await expect(picker).toBeVisible();
+    await expect(sheet).toBeVisible();
 
     const layout = await page.evaluate(() => {
       const box = (selector: string) => {
@@ -25,19 +27,19 @@ test("mobile stage keeps 3D, inspector and place buttons in separate paint and l
       const canvas = document.querySelector(".persistent-canvas");
       if (!main || !canvas) throw new Error("Missing stage paint layers");
       return {
-        heading: box(".atlas-stage-heading"),
+        picker: box(".dioramas-landmark-picker"),
         scene: box(".atlas-ring-scene"),
-        chips: box(".atlas-stage-chips"),
+        sheet: box(".dioramas-landmark-sheet"),
         mainLayer: Number(getComputedStyle(main).zIndex),
         canvasLayer: Number(getComputedStyle(canvas).zIndex),
       };
     });
 
-    expect(layout.scene.top).toBeGreaterThanOrEqual(layout.heading.bottom - 1);
-    expect(layout.chips.top).toBeGreaterThanOrEqual(layout.scene.bottom - 1);
+    expect(layout.scene.top).toBeGreaterThanOrEqual(layout.picker.bottom - 1);
+    expect(layout.sheet.top).toBeGreaterThanOrEqual(layout.scene.bottom - 1);
     expect(layout.mainLayer).toBeGreaterThan(layout.canvasLayer);
 
-    await page.getByRole("button", { name: "Open 3D inspector" }).click();
+    await page.getByRole("button", { name: /open 3D inspector/i }).click();
     const panel = page.locator("#atlas-inspector-panel");
     await expect(panel).toBeVisible();
     // A z-index check alone missed WebGL painting over the buttons on iOS.
@@ -68,21 +70,21 @@ test("mobile stage keeps 3D, inspector and place buttons in separate paint and l
     const inspector = await page.evaluate(() => {
       const scene = document.querySelector(".atlas-ring-scene")!.getBoundingClientRect();
       const panel = document.querySelector("#atlas-inspector-panel")!.getBoundingClientRect();
-      const chips = document.querySelector(".atlas-stage-chips")!.getBoundingClientRect();
+      const sheet = document.querySelector(".dioramas-landmark-sheet")!.getBoundingClientRect();
       return {
         sceneBottom: scene.bottom,
         panelBottom: panel.bottom,
         panelRight: panel.right,
         sceneRight: scene.right,
-        chipsTop: chips.top,
+        sheetTop: sheet.top,
       };
     });
     expect(inspector.panelBottom).toBeLessThanOrEqual(inspector.sceneBottom + 1);
-    expect(inspector.panelBottom).toBeLessThan(inspector.chipsTop);
+    expect(inspector.panelBottom).toBeLessThan(inspector.sheetTop);
     expect(inspector.panelRight).toBeLessThanOrEqual(inspector.sceneRight + 1);
 
-    await page.getByRole("button", { name: "Close 3D inspector" }).click();
-    const otherPlace = chips.locator("button").nth(1);
+    await page.getByRole("button", { name: /close 3D/i }).click();
+    const otherPlace = picker.locator("button").nth(1);
     await otherPlace.click();
     await expect(otherPlace).toHaveAttribute("aria-pressed", "true");
   }

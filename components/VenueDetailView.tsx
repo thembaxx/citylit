@@ -8,6 +8,7 @@ import type { Place } from "../lib/data";
 import { togglePlaceInDay, type GuideCity } from "../lib/discovery-guide";
 import { places } from "../lib/data";
 import Gallery from "./Gallery";
+import PlaceMap from "./PlaceMap";
 import PlaceContext from "./PlaceContext";
 import PlaceActions from "./PlaceActions";
 import SavePlace from "./SavePlace";
@@ -220,6 +221,11 @@ export default function VenueDetailView({ city, place }: { city: GuideCity; plac
                   </p>
                 </div>
               </div>
+              <PlaceMap
+                coords={place.coords}
+                name={place.name}
+                accuracy={place.coordinateAccuracy}
+              />
               <div className="atlas-visit-links">
                 <a href={maps} className="atlas-button" target="_blank" rel="noreferrer">
                   Find on Google Maps <ArrowUpRight size={16} />

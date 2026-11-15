@@ -8,14 +8,14 @@ test("procedural landmarks remain interactive when legacy GLB requests are unava
     legacyRequests += 1;
     return route.fulfill({ status: 503, contentType: "text/plain", body: "Offline" });
   });
-  await page.goto("/cape-town/landmarks");
+  await page.goto("/dioramas?scope=landmark&city=cape-town");
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
     "data-active-model-status",
     "ready",
     { timeout: 30000 },
   );
   expect(legacyRequests).toBe(0);
-  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Table Mountain");
   await expect(page.getByRole("link", { name: "Open guide" })).toBeVisible();
   await expect(page.locator(".atlas-ring-scene")).toBeVisible();
   await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
@@ -23,9 +23,9 @@ test("procedural landmarks remain interactive when legacy GLB requests are unava
     "ready",
   );
   await page.getByRole("button", { name: "Next discovery" }).click();
-  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Bo-Kaap");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Bo-Kaap");
   await page.getByRole("button", { name: "Table Mountain", exact: true }).click();
-  await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Table Mountain");
   const ring = page.locator(".atlas-ring-scene");
   const bounds = await ring.boundingBox();
   expect(bounds).not.toBeNull();
@@ -35,5 +35,5 @@ test("procedural landmarks remain interactive when legacy GLB requests are unava
     steps: 8,
   });
   await page.mouse.up();
-  await expect(page.locator(".atlas-stage-sheet h2")).not.toHaveText("Table Mountain");
+  await expect(page.locator(".dioramas-landmark-sheet h2")).not.toHaveText("Table Mountain");
 });

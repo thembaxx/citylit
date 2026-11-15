@@ -12,8 +12,8 @@ test.describe("landmark mechanisms", () => {
     });
 
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/cape-town/landmarks");
-    await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
+    await page.goto("/dioramas?scope=landmark&city=cape-town");
+    await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Table Mountain");
     await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
       "data-active-model-status",
       "ready",
@@ -22,9 +22,7 @@ test.describe("landmark mechanisms", () => {
 
     const toolbar = page.getByLabel("3D inspection tools");
     const openInspector = async () => {
-      if ((page.viewportSize()?.width ?? 1024) <= 767) {
-        await toolbar.getByRole("button", { name: "Open 3D inspector" }).click();
-      }
+      await toolbar.getByRole("button", { name: /open 3D inspector/i }).click();
     };
     await openInspector();
 
@@ -68,10 +66,10 @@ test.describe("landmark mechanisms", () => {
     await ascentAuto.click();
     await expect(mechanisms.getByRole("slider")).toHaveCount(1);
     await page.getByRole("button", { name: "Next discovery" }).click();
-    await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Bo-Kaap");
+    await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Bo-Kaap");
     await expect(page.getByLabel("Landmark mechanisms")).toHaveCount(0);
     await page.getByRole("button", { name: "Previous discovery" }).click();
-    await expect(page.locator(".atlas-stage-sheet h2")).toHaveText("Table Mountain");
+    await expect(page.locator(".dioramas-landmark-sheet h2")).toHaveText("Table Mountain");
     await openInspector();
     await expect(ascentAuto).toHaveAttribute("aria-pressed", "false");
     await expect(mechanisms.getByRole("slider")).toHaveCount(0);
@@ -88,19 +86,22 @@ test.describe("landmark mechanisms", () => {
     for (const width of [320, 390]) {
       await page.setViewportSize({ width, height: 740 });
       await page.emulateMedia({ reducedMotion: "reduce" });
-      await page.goto("/cape-town/landmarks");
+      await page.goto("/dioramas?scope=landmark&city=cape-town");
       await expect(page.locator(".atlas-ring-scene")).toHaveAttribute(
         "data-active-model-status",
         "ready",
         { timeout: 30000 },
       );
       const toolbar = page.getByLabel("3D inspection tools");
-      await toolbar.getByRole("button", { name: "Open 3D inspector" }).click();
+      await toolbar.getByRole("button", { name: /open 3D inspector/i }).click();
       const mechanisms = page.getByLabel("Landmark mechanisms");
       await expect(mechanisms).toBeVisible();
       await mechanisms.getByRole("button", { name: "Control Cable car · ascent manually" }).click();
       await expect(mechanisms.getByRole("slider")).toBeVisible();
-      await mechanisms.scrollIntoViewIfNeeded();
+      await page.locator(".atlas-inspector-panel.is-open").evaluate((panel) => {
+        panel.scrollTop = panel.scrollHeight;
+      });
+      await mechanisms.evaluate((element) => element.scrollIntoView({ block: "end" }));
 
       const panelBox = await page.locator(".atlas-inspector-panel.is-open").boundingBox();
       expect(panelBox).not.toBeNull();

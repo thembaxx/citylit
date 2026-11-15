@@ -26,14 +26,13 @@ export function CityCard({ city, index }: { city: GuideCity; index: number }) {
       <Link
         href={`/${city.slug}`}
         className="atlas-city-card-link"
-        aria-labelledby={`city-card-${city.slug}`}
         data-transition-label={city.name}
       >
         <div className="atlas-city-photo">
           {photo && (
             <Image
               src={photo.src}
-              alt={photo.alt}
+              alt=""
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 30vw"
             />
@@ -46,12 +45,10 @@ export function CityCard({ city, index }: { city: GuideCity; index: number }) {
           </span>
         </div>
         <div className="atlas-card-copy">
-          <p className="atlas-eyebrow" aria-hidden="true">
-            {city.province}
-          </p>
+          <p className="atlas-eyebrow">{city.province}</p>
           <h3 id={`city-card-${city.slug}`}>{city.name}</h3>
-          <p aria-hidden="true">{city.intro}</p>
-          <span className="atlas-card-meta" aria-hidden="true">
+          <p>{city.intro}</p>
+          <span className="atlas-card-meta">
             {places.filter((place) => place.city === city.slug).length} places to discover
           </span>
         </div>
@@ -64,16 +61,12 @@ export function PlaceCard({ place }: { place: Place }) {
   const photo = place.images[0];
   return (
     <TiltCard className="atlas-place-card">
-      <Link
-        href={venuePath(place)}
-        className="atlas-place-card-link"
-        aria-labelledby={`place-card-${place.id}`}
-      >
+      <Link href={venuePath(place)} className="atlas-place-card-link">
         {photo && (
           <div className="atlas-place-photo">
             <Image
               src={photo.src}
-              alt={photo.alt}
+              alt=""
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 30vw"
             />
@@ -83,12 +76,10 @@ export function PlaceCard({ place }: { place: Place }) {
           </div>
         )}
         <div className="atlas-card-copy">
-          <p className="atlas-eyebrow" aria-hidden="true">
-            {place.category}
-          </p>
+          <p className="atlas-eyebrow">{place.category}</p>
           <h3 id={`place-card-${place.id}`}>{place.name}</h3>
-          <p aria-hidden="true">{place.description}</p>
-          <span className="atlas-card-meta" aria-hidden="true">
+          <p>{place.description}</p>
+          <span className="atlas-card-meta">
             <MapPin size={14} aria-hidden="true" /> {place.district || place.address}
           </span>
         </div>

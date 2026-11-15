@@ -621,58 +621,66 @@ export default function AdventureHub() {
 
               {daySubTab === "saved" ? (
                 <div className="citylit-saved-view">
-                  <div className="citylit-saved-list">
-                    {(state.saved.length > 0
-                      ? state.saved
-                          .map((id) => places.find((p) => p.id === id))
-                          .filter((p): p is Place => !!p)
-                      : places.slice(0, 3)
-                    ).map((p) => {
-                      const placeCity = cities.find((c) => c.slug === p.city);
-                      const isSaved = state.saved.includes(p.id);
-                      return (
-                        <div className="citylit-saved-card" key={p.id}>
-                          <div className="citylit-saved-thumb">
-                            {p.images[0] && (
-                              <Image
-                                src={p.images[0].src}
-                                alt={p.images[0].alt}
-                                fill
-                                sizes="56px"
-                              />
-                            )}
-                          </div>
-                          <div className="citylit-saved-info">
-                            <Link href={placePath(p)}>
-                              <h3 className="citylit-saved-name">{p.name}</h3>
-                            </Link>
-                            <p className="citylit-saved-location">
-                              {placeCity
-                                ? `${placeCity.name}, ${placeCity.province}`
-                                : "South Africa"}
-                            </p>
-                          </div>
-                          <button
-                            type="button"
-                            className="citylit-saved-bookmark-btn"
-                            aria-label={isSaved ? `Remove ${p.name} from saved` : `Save ${p.name}`}
-                            onClick={() => {
-                              update({
-                                saved: isSaved
-                                  ? state.saved.filter((id) => id !== p.id)
-                                  : [...state.saved, p.id],
-                              });
-                              setMessage(
-                                isSaved ? `${p.name} removed from saved.` : `${p.name} saved.`,
-                              );
-                            }}
-                          >
-                            <BookmarkSimple size={22} weight={isSaved ? "fill" : "regular"} />
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  {state.saved.length > 0 ? (
+                    <div className="citylit-saved-list">
+                      {state.saved
+                        .map((id) => places.find((p) => p.id === id))
+                        .filter((p): p is Place => !!p)
+                        .map((p) => {
+                          const placeCity = cities.find((c) => c.slug === p.city);
+                          return (
+                            <div className="citylit-saved-card" key={p.id}>
+                              <div className="citylit-saved-thumb">
+                                {p.images[0] && (
+                                  <Image
+                                    src={p.images[0].src}
+                                    alt={p.images[0].alt}
+                                    fill
+                                    sizes="56px"
+                                  />
+                                )}
+                              </div>
+                              <div className="citylit-saved-info">
+                                <Link href={placePath(p)}>
+                                  <h3 className="citylit-saved-name">{p.name}</h3>
+                                </Link>
+                                <p className="citylit-saved-location">
+                                  {placeCity
+                                    ? `${placeCity.name}, ${placeCity.province}`
+                                    : "South Africa"}
+                                </p>
+                              </div>
+                              <button
+                                type="button"
+                                className="citylit-saved-bookmark-btn"
+                                aria-label={`Remove ${p.name} from saved`}
+                                onClick={() => {
+                                  update({
+                                    saved: state.saved.filter((id) => id !== p.id),
+                                  });
+                                  setMessage(`${p.name} removed from saved.`);
+                                }}
+                              >
+                                <BookmarkSimple size={22} weight="fill" />
+                              </button>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  ) : (
+                    <div className="reference-trip-empty">
+                      <BookmarkSimple size={26} aria-hidden="true" />
+                      <div>
+                        <h3>No saved places yet.</h3>
+                        <p>Bookmark places while browsing to keep a shortlist for your day.</p>
+                      </div>
+                      <div className="reference-trip-empty-actions">
+                        <button className="pill-button" onClick={() => setTab("discover")}>
+                          Find places <ArrowUpRight size={15} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="citylit-adventure-callout">
                     <div className="citylit-adventure-callout-icon">

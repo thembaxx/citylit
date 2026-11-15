@@ -120,8 +120,11 @@ export default function DiscoveryHome() {
   const featuredLandmarkSource = currentFeatured.landmark;
   const featuredPhoto = featuredLandmarkSource.images[0];
 
-  // 3D spotlight (real landmark)
-  const spotlightCity = cities.find((c) => c.slug === "mbombela") || cities[0];
+  // 3D spotlight (syncs with selected city when active)
+  const spotlightCity =
+    (selectedCity === null ? null : cities[selectedCity]) ||
+    cities.find((c) => c.slug === "mbombela") ||
+    cities[0];
   const spotlightLandmarkName = spotlightCity.landmarks[0];
   const spotlightLandmark = landmarkSources.find((item) => item.name === spotlightLandmarkName);
   const spotlightPhoto = spotlightLandmark?.images[0] || cityPhoto(spotlightCity);
@@ -401,15 +404,14 @@ export default function DiscoveryHome() {
                         </div>
                         <div
                           className="citylit-featured-dots"
-                          role="tablist"
+                          role="group"
                           aria-label="Featured landmarks"
                         >
                           {featuredList.map((item, idx) => (
                             <button
                               key={item.landmark.name}
                               type="button"
-                              role="tab"
-                              aria-selected={featuredIndex === idx}
+                              aria-pressed={featuredIndex === idx}
                               className={`citylit-dot ${featuredIndex === idx ? "is-active" : ""}`}
                               onClick={() => {
                                 benchoAudio.playTap(750 + idx * 40);
@@ -551,7 +553,7 @@ export default function DiscoveryHome() {
                     <CalendarPlus size={22} weight="duotone" />
                   </div>
                   <div className="citylit-plan-copy">
-                    <h3 id="home-plan-title">Plan your day</h3>
+                    <h2 id="home-plan-title">Plan your day</h2>
                     <p>Save stops and arrange a route across South Africa.</p>
                   </div>
                   <div className="citylit-plan-actions">

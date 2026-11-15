@@ -8,6 +8,12 @@
   padding-bottom: clamp(44px, 6vw, 72px);
 }
 
+@media (max-width: 767px) {
+  .dioramas {
+    padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .dioramas-header {
   max-width: 760px;
   margin-bottom: 18px;
@@ -675,7 +681,9 @@
   }
 
   .dioramas-stage {
-    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: clamp(236px, 40svh, 310px);
+    aspect-ratio: auto;
     border-radius: 22px;
   }
 

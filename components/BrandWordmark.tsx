@@ -12,7 +12,8 @@ export default function BrandWordmark() {
       <span className="wordmark-letters" aria-hidden="true">
         c
         <span className="wordmark-i">
-          ı<span className="wordmark-spark" />
+          <span className="wordmark-i-real">i</span>
+          <span className="wordmark-spark" />
         </span>
         tylit
       </span>

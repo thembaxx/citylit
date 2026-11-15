@@ -97,7 +97,7 @@ export function DropdownSelect<T extends string = string>({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listboxId}
-        aria-label={ariaLabel}
+        aria-label={selectedOption ? `${ariaLabel}: ${selectedOption.label}` : ariaLabel}
         onClick={() => {
           benchoAudio.playTap(820);
           setOpen((prev) => !prev);

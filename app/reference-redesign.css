@@ -5511,7 +5511,7 @@
   font-variation-settings:
     "SOFT" 36,
     "WONK" 0;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.028em;
   text-wrap: balance;
 }
 
@@ -6020,7 +6020,14 @@
 }
 
 .reference-guide .atlas-directory > .atlas-section-heading {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  border: 0;
 }
 
 .reference-guide .atlas-directory-tools {
@@ -6190,11 +6197,11 @@
   margin: 6px 0 10px;
   color: #fff !important;
   font:
-    430 clamp(46px, 6.2vw, 80px)/0.96 var(--font-display),
+    430 clamp(32px, 7.2vw, 76px)/0.98 var(--font-display),
     Georgia,
     serif;
-  letter-spacing: -0.05em;
-  overflow-wrap: normal;
+  letter-spacing: -0.025em;
+  overflow-wrap: break-word;
 }
 
 .reference-guide .atlas-city-hero-redesign .atlas-title-period {
@@ -11654,7 +11661,7 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
 
 .pin-ambient-bloom {
   position: absolute;
-  top: -80px;
+  top: -36px;
   left: 50%;
   width: min(760px, 120vw);
   height: 360px;
@@ -11663,9 +11670,11 @@ html[data-theme="dark"] .bencho-liquid-toggle-label {
   z-index: 0;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 40%, rgba(124, 58, 237, 0.2), transparent 62%),
-    radial-gradient(circle at 72% 48%, rgba(255, 185, 95, 0.14), transparent 58%);
+    radial-gradient(circle at 30% 45%, rgba(124, 58, 237, 0.2), transparent 60%),
+    radial-gradient(circle at 72% 52%, rgba(255, 185, 95, 0.14), transparent 56%);
   filter: blur(48px);
+  mask-image: radial-gradient(ellipse 72% 68% at 50% 50%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 50%, #000 30%, transparent 100%);
   animation: pin-bloom-drift 16s ease-in-out infinite alternate;
 }
 

@@ -84,33 +84,23 @@ export default function CityGuide({ city }: { city: GuideCity }) {
             const image = record?.images[0];
             return (
               <TiltCard className="atlas-landmark-card" key={name} maxTilt={2.6}>
-                <Link
-                  className="atlas-landmark-link"
-                  href={landmarkPath(city, name)}
-                  aria-labelledby={`landmark-card-${city.slug}-${index}`}
-                >
-                  {image && (
-                    <div className="atlas-landmark-photo">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        sizes="(max-width:640px) 86vw, 29vw"
-                      />
-                      <span className="atlas-landmark-3d-tag" aria-hidden="true">
-                        <Cube size={13} weight="duotone" /> 3D
-                      </span>
-                    </div>
-                  )}
-                  <div>
-                    <h3 id={`landmark-card-${city.slug}-${index}`}>
-                      {name} <ArrowUpRight size={20} />
-                    </h3>
-                    <p aria-hidden="true">
-                      {city.descriptions[index] || record?.about?.split(". ")[0]}
-                    </p>
+                {image && (
+                  <div className="atlas-landmark-photo">
+                    <Image src={image.src} alt="" fill sizes="(max-width:640px) 86vw, 29vw" />
+                    <span className="atlas-landmark-3d-tag" aria-hidden="true">
+                      <Cube size={13} weight="duotone" /> 3D
+                    </span>
                   </div>
-                </Link>
+                )}
+                <div className="atlas-landmark-copy">
+                  <h3 id={`landmark-card-${city.slug}-${index}`}>
+                    <Link className="atlas-landmark-link" href={landmarkPath(city, name)}>
+                      <span>{name}</span>
+                      <ArrowUpRight size={20} aria-hidden="true" />
+                    </Link>
+                  </h3>
+                  <p>{city.descriptions[index] || record?.about?.split(". ")[0]}</p>
+                </div>
                 {image && <PhotoCredit photo={image} />}
               </TiltCard>
             );

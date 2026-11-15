@@ -36,6 +36,7 @@ export function SlideToConfirm({
   className = "",
 }: SlideToConfirmProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const didDragRef = useRef(false);
   const [maxDrag, setMaxDrag] = useState(200);
   const [confirmed, setConfirmed] = useState(isConfirmed);
   const dragX = useMotionValue(0);
@@ -133,7 +134,11 @@ export function SlideToConfirm({
       tabIndex={0}
       aria-label={confirmed ? confirmedLabel : label}
       onClick={() => {
-        if (confirmed) handleKeyboardTrigger();
+        if (didDragRef.current) {
+          didDragRef.current = false;
+          return;
+        }
+        handleKeyboardTrigger();
       }}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -162,7 +167,15 @@ export function SlideToConfirm({
           dragElastic={0.2}
           dragMomentum={false}
           style={{ x: dragX, touchAction: "pan-y" }}
-          onDragEnd={handleDragEnd}
+          onDragStart={() => {
+            didDragRef.current = true;
+          }}
+          onDragEnd={(event, info) => {
+            handleDragEnd(event, info);
+            window.setTimeout(() => {
+              didDragRef.current = false;
+            }, 80);
+          }}
           whileTap={{ scale: 0.94 }}
         >
           <ArrowRight size={18} weight="bold" />

@@ -211,11 +211,10 @@ export default function CityStage({
               </Link>
               <Link
                 href={`/dioramas?scope=landmark&city=${city.slug}&mode=${mode}&item=${encodeURIComponent(item.name)}`}
-                className="atlas-button is-icon-only"
-                aria-label="Inspect in 3D"
-                title="Inspect in 3D"
+                className="atlas-button"
               >
                 <Cube size={18} aria-hidden="true" />
+                Inspect in 3D
               </Link>
               {item.place && (
                 <MagneticButton

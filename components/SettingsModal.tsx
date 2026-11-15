@@ -180,14 +180,8 @@ export default function SettingsModal({
     };
   }, [isOpen]);
 
-  const toggleSurroundings = () => {
-    updateDiscovery((prev) => ({
-      essential: !prev.essential,
-    }));
-  };
-
   const toggleReducedMotion = () => {
-    // In our app, essential mode also suppresses animations
+    // In our app, essential mode suppresses animations
     updateDiscovery((prev) => ({
       essential: !prev.essential,
     }));
@@ -399,18 +393,6 @@ export default function SettingsModal({
 
                     <div className="citylit-setting-row">
                       <div className="citylit-setting-label">
-                        <Sun size={19} className="citylit-setting-icon" />
-                        <span>Show surroundings</span>
-                      </div>
-                      <LiquidToggle
-                        checked={!discovery.essential}
-                        onChange={toggleSurroundings}
-                        ariaLabel="Toggle surroundings"
-                      />
-                    </div>
-
-                    <div className="citylit-setting-row">
-                      <div className="citylit-setting-label">
                         <ArrowCounterClockwise size={19} className="citylit-setting-icon" />
                         <span>Reduce motion</span>
                       </div>
@@ -421,12 +403,12 @@ export default function SettingsModal({
                       />
                     </div>
 
-                    <div className="citylit-setting-row citylit-setting-select">
+                    <div className="citylit-setting-row">
                       <div className="citylit-setting-label">
                         <Globe size={19} className="citylit-setting-icon" />
                         <span>Language</span>
                       </div>
-                      <span className="citylit-setting-value">English &rsaquo;</span>
+                      <span className="citylit-setting-value">English · South Africa</span>
                     </div>
                   </div>
                 </div>

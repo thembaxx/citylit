@@ -716,13 +716,13 @@ export default function DioramaExperience() {
                     type="button"
                     className={`dioramas-control${backend === option.value ? " is-active" : ""}`}
                     aria-pressed={backend === option.value}
-                    aria-label={option.label}
+                    aria-description={option.hint}
                     title={option.hint}
                     onClick={() => setBackend(option.value)}
                   >
                     <span className="dioramas-backend-full">{option.label}</span>
                     <span className="dioramas-backend-short" aria-hidden="true">
-                      {option.value === "auto" ? "GPU" : "GL2"}
+                      {option.value === "auto" ? "GPU" : "GL 2"}
                     </span>
                   </button>
                 ))}

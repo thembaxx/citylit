@@ -3557,8 +3557,10 @@ button:disabled {
 .visit-note {
   font-size: 14px;
   line-height: 1.65;
-  border-left: 2px solid var(--accent-ink);
-  padding-left: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent) 4%);
   color: var(--muted);
 }
 .field-guide {
@@ -4401,7 +4403,7 @@ button:disabled {
 }
 .reading-nav {
   justify-content: space-between;
-  margin-bottom: clamp(48px, 7vh, 84px);
+  margin-bottom: clamp(20px, 3vh, 36px);
   gap: 24px;
 }
 .reading-nav > div,
@@ -4683,8 +4685,10 @@ button {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  border-left: 2px solid var(--accent);
-  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent) 4%);
+  padding: 12px 14px;
   margin-top: 18px;
 }
 .pwa-install-help svg {

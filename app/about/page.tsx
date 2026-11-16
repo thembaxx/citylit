@@ -12,7 +12,6 @@ export const metadata = metadataForPage(
 export default function AboutPage() {
   return (
     <ReadingPage>
-      <span className="tiny-label">CURIOUS BY DESIGN / CAREFUL WITH FACTS</span>
       <h1>Every city has a spark.</h1>
       <p className="reading-intro">
         Citylit turns discovering South Africa into a little adventure. Khwezi brings the

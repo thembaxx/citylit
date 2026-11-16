@@ -420,16 +420,13 @@ export default function DioramaExperience() {
     "--scene-sky": timeMode === "night" ? "#2b3550" : scene.sky,
   } as CSSProperties;
 
-  const shaderLanguage =
-    renderer === "WebGPU" ? "WGSL" : renderer === "WebGL 2" ? "GLSL ES 3.0" : "";
-
   return (
     <section className="dioramas" aria-labelledby="dioramas-title">
       <header className="dioramas-header">
-        <p className="dioramas-eyebrow">3D STAGE · SOUTH AFRICA</p>
         <h1 id="dioramas-title">Walk into the landscape.</h1>
         <p className="dioramas-lede">
-          Explore fourteen cutaway regional dioramas or inspect procedural city landmarks in 3D.
+          Explore fourteen cutaway South African landscapes or inspect procedural city landmarks in
+          3D.
         </p>
 
         <div className="dioramas-scope-dropdown-wrap">
@@ -613,17 +610,7 @@ export default function DioramaExperience() {
                 </div>
                 <span className={`dioramas-badge${renderer ? " is-live" : ""}`}>
                   <span className="dioramas-dot" aria-hidden="true" />
-                  {renderer ? (
-                    <>
-                      {renderer}
-                      <span className="dioramas-badge-shader" aria-hidden="true">
-                        {" "}
-                        · {shaderLanguage}
-                      </span>
-                    </>
-                  ) : (
-                    "Starting"
-                  )}
+                  {renderer ? renderer : "Starting"}
                 </span>
               </div>
               <p className="dioramas-hint" id="dioramas-instructions">
@@ -694,38 +681,13 @@ export default function DioramaExperience() {
                 </button>
                 <button
                   type="button"
-                  className="dioramas-control"
+                  className={`dioramas-control${""}`}
                   aria-label="Reset camera"
                   title="Reset camera"
                   onClick={resetView}
                 >
                   <ArrowCounterClockwise size={18} aria-hidden="true" />
                 </button>
-              </div>
-              <div
-                className="dioramas-segment dioramas-renderer-segment"
-                role="group"
-                aria-label="Renderer backend"
-              >
-                <span className="dioramas-segment-label" aria-hidden="true">
-                  Renderer
-                </span>
-                {BACKENDS.map((option) => (
-                  <button
-                    key={option.value}
-                    type="button"
-                    className={`dioramas-control${backend === option.value ? " is-active" : ""}`}
-                    aria-pressed={backend === option.value}
-                    aria-description={option.hint}
-                    title={option.hint}
-                    onClick={() => setBackend(option.value)}
-                  >
-                    <span className="dioramas-backend-full">{option.label}</span>
-                    <span className="dioramas-backend-short" aria-hidden="true">
-                      {option.value === "auto" ? "GPU" : "GL 2"}
-                    </span>
-                  </button>
-                ))}
               </div>
             </div>
 
@@ -806,6 +768,28 @@ export default function DioramaExperience() {
                 Landmark positions and terrain are an artistic interpretation, not a survey. Facts
                 follow the linked references.
               </p>
+              <details className="dioramas-advanced-details">
+                <summary>Graphics backend</summary>
+                <div
+                  className="dioramas-segment dioramas-renderer-segment"
+                  role="group"
+                  aria-label="Renderer backend"
+                >
+                  {BACKENDS.map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      className={`dioramas-control${backend === option.value ? " is-active" : ""}`}
+                      aria-pressed={backend === option.value}
+                      aria-description={option.hint}
+                      title={option.hint}
+                      onClick={() => setBackend(option.value)}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </details>
             </div>
           </aside>
         </div>

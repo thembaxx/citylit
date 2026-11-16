@@ -21,7 +21,7 @@ import useTheme from "./useTheme";
 import DiscoverySearchResults, { type DiscoveryFilter } from "./DiscoverySearchResults";
 import LivingAtlasDiscovery, { type AtlasMood } from "./LivingAtlasDiscovery";
 import WeatherWidget from "./WeatherWidget";
-import DioramaWeatherController from "./DioramaWeatherController";
+import DioramaWeatherController, { type AtmosphereState } from "./DioramaWeatherController";
 import SpotlightCard from "./ui/SpotlightCard";
 import ShimmerButton from "./ui/ShimmerButton";
 import { benchoAudio } from "../lib/bencho-audio";
@@ -57,6 +57,7 @@ export default function DiscoveryHome() {
   const [mood, setMood] = useState<AtlasMood>("explore");
   const [selectedCity, setSelectedCity] = useState<number | null>(0);
   const [mapSelectedCity, setMapSelectedCity] = useState<number | null>(null);
+  const [spotlightAtmosphere, setSpotlightAtmosphere] = useState<AtmosphereState | null>(null);
   const router = useRouter();
   const { feedback } = useKhwezi();
   const { state } = useDiscovery();
@@ -238,9 +239,6 @@ export default function DiscoveryHome() {
             className="reference-home-hero living-atlas-hero"
             aria-labelledby="reference-home-title"
           >
-            <p className="citylit-hero-eyebrow">
-              {night ? "The Nocturnal Edition · South Africa" : "A Living Atlas · South Africa"}
-            </p>
             <h1 id="reference-home-title">
               Follow your <em>curiosity.</em>
             </h1>
@@ -454,10 +452,18 @@ export default function DiscoveryHome() {
                         </Link>
                       </div>
 
-                      {/* Real-time Weather & Atmospheric Scrubber (Image 6 & Image 8) */}
-                      <DioramaWeatherController compact cityName={spotlightCity.name} />
+                      {/* Real-time Weather & Atmospheric Scrubber */}
+                      <DioramaWeatherController
+                        compact
+                        cityName={spotlightCity.name}
+                        onAtmosphereChange={setSpotlightAtmosphere}
+                      />
 
-                      <div className="citylit-3d-viewport">
+                      <div
+                        className="citylit-3d-viewport"
+                        data-period={spotlightAtmosphere?.timePeriod ?? "midday"}
+                        data-weather={spotlightAtmosphere?.weather ?? "clear"}
+                      >
                         {spotlightPhoto && (
                           <Image
                             src={spotlightPhoto.src}
@@ -468,7 +474,18 @@ export default function DiscoveryHome() {
                           />
                         )}
                         <div className="citylit-3d-viewport-overlay" aria-hidden="true" />
-                        <div className="citylit-3d-diorama-label">{spotlightLandmarkName}</div>
+                        <div className="citylit-3d-diorama-label">
+                          <span>{spotlightLandmarkName}</span>
+                          {spotlightAtmosphere && (
+                            <span className="citylit-3d-atmo-tag">
+                              {" · "}
+                              {spotlightAtmosphere.timePeriod}
+                              {spotlightAtmosphere.weather !== "clear"
+                                ? ` · ${spotlightAtmosphere.weather}`
+                                : ""}
+                            </span>
+                          )}
+                        </div>
                         <div
                           className="citylit-3d-chip-row"
                           role="group"

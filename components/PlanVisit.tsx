@@ -71,7 +71,6 @@ export default function PlanVisit({
     <section className="atlas-plan atlas-section" id="plan" aria-labelledby="visit-title">
       <div className="atlas-section-heading">
         <div>
-          <p className="atlas-eyebrow">A DAY, YOUR WAY</p>
           <h2 id="visit-title">
             Plan your <em>day.</em>
           </h2>

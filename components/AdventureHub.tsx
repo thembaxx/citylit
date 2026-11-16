@@ -266,13 +266,12 @@ export default function AdventureHub() {
   const card = (p: Place, near = false) => (
     <TiltCard className="adventure-card" maxTilt={2.2} key={p.id}>
       <Link href={placePath(p)}>
-        <span className="tiny-label">
-          {p.category} · {cities.find((item) => item.slug === p.city)?.short || p.city}
-          {near && origin ? ` · ${distanceKm(origin, p.coords).toFixed(1)} km` : ""}
-        </span>
         <h3>{p.name}</h3>
         <p>{p.description}</p>
-        <span className="address">{p.address}</span>
+        <span className="address">
+          {p.category} · {cities.find((item) => item.slug === p.city)?.short || p.city}
+          {near && origin ? ` · ${distanceKm(origin, p.coords).toFixed(1)} km` : ""} — {p.address}
+        </span>
       </Link>
       <div className="adventure-card-actions">
         <MagneticButton
@@ -348,10 +347,9 @@ export default function AdventureHub() {
         </p>
         {hasIncoming && (
           <section className="incoming-discovery" aria-label="Shared discovery">
-            <span className="tiny-label">A SPARK SHARED WITH YOU</span>
             {incoming ? (
               <>
-                <h2>{incoming.name}</h2>
+                <h2>Shared with you · {incoming.name}</h2>
                 <p>{incoming.description}</p>
                 <div className="pwa-actions">
                   <Link href={placePath(incoming)}>

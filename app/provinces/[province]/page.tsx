@@ -35,18 +35,17 @@ export default async function ProvincePage(props: Props) {
         <Link href="/destinations">City guides</Link>
         <span aria-current="page">{route.province.name}</span>
       </nav>
-      <span className="tiny-label">A PROVINCE OF POSSIBILITIES</span>
       <h1>{route.province.name}</h1>
       <p className="reading-intro">{routeDescription(route)}</p>
       <div className="destination-grid">
         {route.province.cities.map((city) => (
           <article className="destination-card" key={city.slug}>
-            <span className="tiny-label">{city.tag}</span>
             <h2>
               <Link href={`/${city.slug}`}>
                 {city.name} <UiIcon name="arrow-up-right" />
               </Link>
             </h2>
+            <p className="city-note">{city.tag}</p>
             <p>{city.intro}</p>
             <nav className="reading-links" aria-label={`Available ${city.name} categories`}>
               {categories

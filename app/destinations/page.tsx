@@ -13,8 +13,8 @@ export default function DestinationsPage() {
     <GuideShell>
       <JsonLd value={schema} />
       <header className="atlas-directory-header atlas-section">
-        <p className="atlas-eyebrow">12 CITIES · 9 PROVINCES</p>
         <h1>Find your next chapter.</h1>
+        <p className="atlas-city-intro">Twelve South African cities across all nine provinces.</p>
       </header>
       <CityDirectory />
     </GuideShell>

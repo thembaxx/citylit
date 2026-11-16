@@ -45,11 +45,10 @@ export function CityCard({ city, index }: { city: GuideCity; index: number }) {
           </span>
         </div>
         <div className="atlas-card-copy">
-          <p className="atlas-eyebrow">{city.province}</p>
           <h3 id={`city-card-${city.slug}`}>{city.name}</h3>
           <p>{city.intro}</p>
           <span className="atlas-card-meta">
-            {places.filter((place) => place.city === city.slug).length} places to discover
+            {city.province} · {places.filter((place) => place.city === city.slug).length} places
           </span>
         </div>
       </Link>
@@ -76,11 +75,11 @@ export function PlaceCard({ place }: { place: Place }) {
           </div>
         )}
         <div className="atlas-card-copy">
-          <p className="atlas-eyebrow">{place.category}</p>
           <h3 id={`place-card-${place.id}`}>{place.name}</h3>
           <p>{place.description}</p>
           <span className="atlas-card-meta">
-            <MapPin size={14} aria-hidden="true" /> {place.district || place.address}
+            <MapPin size={14} aria-hidden="true" /> {place.category} ·{" "}
+            {place.district || place.address}
           </span>
         </div>
       </Link>

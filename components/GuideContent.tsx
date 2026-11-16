@@ -29,7 +29,6 @@ export default function GuideContent({ route }: { route: DiscoveryRoute }) {
       <Link href="/" aria-label="Citylit home">
         <BrandWordmark />
       </Link>
-      <p className="tiny-label">SOUTH AFRICA / CITY GUIDES</p>
       <h1>{routeTitle(route)}</h1>
       <p className="reading-intro">{routeDescription(route)}</p>
       <nav className="reading-links" aria-label="Guide navigation">

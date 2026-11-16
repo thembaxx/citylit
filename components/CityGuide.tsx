@@ -34,7 +34,6 @@ export default function CityGuide({ city }: { city: GuideCity }) {
       </div>
       <section className="atlas-city-hero atlas-city-map-hero atlas-city-hero-redesign">
         <div className="atlas-city-hero-copy">
-          <p className="atlas-eyebrow">{city.province} · CITY GUIDE</p>
           <WeatherWidget name={city.name} longitude={city.coords[0]} latitude={city.coords[1]} />
           <h1>
             {city.name}
@@ -42,6 +41,8 @@ export default function CityGuide({ city }: { city: GuideCity }) {
           </h1>
           <p className="atlas-city-intro">{city.intro}</p>
           <p className="atlas-city-inventory">
+            <span>{city.province}</span>
+            <span aria-hidden="true">·</span>
             <span>{city.landmarks.length} landmarks</span>
             <span aria-hidden="true">·</span>
             <span>{placeCount} researched places</span>

@@ -2076,3 +2076,116 @@ textarea::placeholder {
   margin-top: 0;
   padding: 0 18px 16px;
 }
+
+/* Live atmospheric preview feedback for Home 3D spotlight card */
+.citylit-3d-viewport {
+  transition: background-color 280ms ease;
+}
+
+.citylit-3d-preview-image {
+  transition: filter 320ms ease;
+}
+
+.citylit-3d-viewport[data-period="dawn"] .citylit-3d-preview-image {
+  filter: saturate(1.12) brightness(0.96) sepia(0.14);
+}
+
+.citylit-3d-viewport[data-period="sunset"] .citylit-3d-preview-image {
+  filter: saturate(1.28) brightness(0.9) contrast(1.06) hue-rotate(-8deg);
+}
+
+.citylit-3d-viewport[data-period="night"] .citylit-3d-preview-image {
+  filter: saturate(0.84) brightness(0.58) contrast(1.14) hue-rotate(8deg);
+}
+
+.citylit-3d-viewport[data-weather="cloudy"] .citylit-3d-preview-image {
+  filter: saturate(0.75) brightness(0.86) contrast(0.96);
+}
+
+.citylit-3d-viewport[data-weather="rain"] .citylit-3d-preview-image {
+  filter: saturate(0.72) brightness(0.76) contrast(1.08);
+}
+
+.citylit-3d-viewport[data-period="sunset"] .citylit-3d-viewport-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(245, 158, 11, 0.16) 0%,
+    rgba(12, 13, 18, 0.1) 42%,
+    rgba(12, 13, 18, 0.82) 100%
+  );
+}
+
+.citylit-3d-viewport[data-period="night"] .citylit-3d-viewport-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 72, 0.35) 0%,
+    rgba(10, 12, 20, 0.25) 42%,
+    rgba(8, 10, 18, 0.88) 100%
+  );
+}
+
+.citylit-3d-atmo-tag {
+  font-weight: 500;
+  opacity: 0.78;
+  text-transform: capitalize;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .citylit-3d-viewport,
+  .citylit-3d-preview-image {
+    transition: none;
+  }
+}
+
+/* Quiet disclosure for secondary graphics backend settings on /dioramas */
+.dioramas-advanced-details {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.dioramas-advanced-details > summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.dioramas-advanced-details .dioramas-renderer-segment {
+  margin: 6px 0 0;
+  width: fit-content;
+}
+
+/* Enforce 44px interactive touch targets across navigation & pill controls */
+.easyui-tab,
+.citylit-3d-chip,
+.living-atlas-all-cities,
+.citylit-see-all-link,
+.living-atlas-primary-action,
+.living-atlas-3d-badge,
+.citylit-plan-status a,
+.reading-links a,
+.reading-footer a,
+.dioramas-landmark-guide {
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.atlas-wordmark {
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.citylit-card-meta-inline,
+.reference-guide .atlas-card-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}

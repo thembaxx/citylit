@@ -64,9 +64,8 @@ export default async function Page({ params, searchParams }: Props) {
           <Link href={`/${route.city.slug}#places`} className="atlas-text-link">
             ← Back to {route.city.name}
           </Link>
-          <p className="atlas-eyebrow">{route.city.name} / CITY GUIDE</p>
           <h1>
-            {route.category}
+            {route.city.name} · {route.category}
             <span className="atlas-title-period">.</span>
           </h1>
           <p className="atlas-city-intro">{categoryBlurbs[route.category]}</p>

@@ -69,8 +69,7 @@ export default function DiscoverySearchResults({
       <section className="reference-results" aria-live="polite">
         <div className="reference-section-heading">
           <div>
-            <p className="reference-eyebrow">Search results</p>
-            <h2>Places worth finding.</h2>
+            <h2>Search results</h2>
           </div>
           <span>{resultCount} results</span>
         </div>

@@ -1,7 +1,8 @@
 {
   "schemaVersion": 2,
+  "generatedAt": "2026-11-16T00:00:00.000Z",
   "name": "Citylit",
-  "direction": "Limestone daylight and obsidian night editorial South Africa travel atlas with forest/sage/amber surfaces and interactive 3D dioramas.",
+  "direction": "Tactile 3D South Africa travel guide and interactive diorama atlas built around limestone daylight, obsidian night, forest sage, and amber accents.",
   "principles": [
     "Real catalog data, source attribution, and coordinate-confidence labels; zero fake ratings or filler copy",
     "Phosphor icons exclusively for UI controls; KhweziMark reserved as brand map emblem",
@@ -10,7 +11,11 @@
   ],
   "tokens": {
     "colors": {
-      "bg": { "night": "#121317", "day": "#f4efe6" },
+      "primary": "#ffb95f",
+      "onPrimary": "#472a00",
+      "secondary": "#a78bfa",
+      "tertiary": "#5a8f69",
+      "background": { "night": "#121317", "day": "#f4efe6" },
       "surface": { "night": "#1a1b20", "day": "#fbf9f5" },
       "surfaceGlass": { "night": "#1a1b20e8", "day": "#fbf9f5e8" },
       "ink": { "night": "#e3e2e7", "day": "#171920" },
@@ -20,11 +25,14 @@
       "line": { "night": "#4a4455", "day": "#d6d4cd" },
       "purple": { "night": "#a78bfa", "day": "#7046c8" },
       "sage": "#5a8f69",
-      "amber": "#e59934"
+      "amber": "#e59934",
+      "danger": "#9b2c1a"
     },
     "typography": {
       "display": "Geist Serif",
+      "headline": "Geist Serif",
       "body": "Geist Sans",
+      "label": "Geist Sans",
       "mono": "Geist Mono",
       "editableControlMinSize": "16px"
     },
@@ -43,17 +51,15 @@
     "easyui": [
       "AnimatedTabs",
       "AnimatedPillGroup",
-      "DropdownSelect",
-      "DynamicIslandToast",
-      "LiquidTabs",
-      "LiquidToggle",
-      "MagneticButton",
-      "MagnifyingDock",
-      "ReaderCard",
-      "ShimmerButton",
-      "SlideToConfirm",
       "SpotlightCard",
-      "TiltCard"
+      "ShimmerButton",
+      "MagneticButton",
+      "DropdownSelect",
+      "LiquidToggle",
+      "MagnifyingDock",
+      "LiquidTabs",
+      "SlideToConfirm",
+      "DynamicIslandToast"
     ],
     "mdxcn": [
       "MdxCallout",

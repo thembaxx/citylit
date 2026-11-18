@@ -22,6 +22,7 @@ import GuideShell from "./GuideShell";
 import { useKhwezi } from "./KhweziProvider";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
+import PlaceWeatherBadge from "./PlaceWeatherBadge";
 import { benchoAudio } from "../lib/bencho-audio";
 export type StageItem = {
   name: string;
@@ -202,7 +203,14 @@ export default function CityStage({
               aria-live="polite"
               aria-atomic="true"
             >
-              <h2>{item.name}</h2>
+              <div className="atlas-stage-title-row">
+                <h2>{item.name}</h2>
+                <PlaceWeatherBadge
+                  name={item.name}
+                  longitude={item.place?.coords?.[0] ?? city.coords[0]}
+                  latitude={item.place?.coords?.[1] ?? city.coords[1]}
+                />
+              </div>
               <p className="atlas-stage-description">{item.description}</p>
             </div>
             <div className="atlas-stage-actions">

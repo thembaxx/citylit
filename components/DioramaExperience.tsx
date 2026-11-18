@@ -47,6 +47,7 @@ import CartographicLoader from "./CartographicLoader";
 import type { StageItem } from "./CityStage";
 import { benchoAudio } from "../lib/bencho-audio";
 import DropdownSelect, { type DropdownOption } from "./ui/DropdownSelect";
+import PlaceWeatherBadge from "./PlaceWeatherBadge";
 
 const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
@@ -502,7 +503,14 @@ export default function DioramaExperience() {
               </div>
               <div className="dioramas-landmark-sheet" aria-live="polite">
                 <div className="dioramas-landmark-sheet-head">
-                  <h2>{activeLandmark.name}</h2>
+                  <div className="dioramas-landmark-heading">
+                    <h2>{activeLandmark.name}</h2>
+                    <PlaceWeatherBadge
+                      name={activeLandmark.name}
+                      longitude={activeLandmark.place?.coords?.[0] ?? landmarkCity?.coords[0]}
+                      latitude={activeLandmark.place?.coords?.[1] ?? landmarkCity?.coords[1]}
+                    />
+                  </div>
                   <div className="dioramas-landmark-stepper">
                     <button
                       type="button"

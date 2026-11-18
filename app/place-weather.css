@@ -1,0 +1,187 @@
+/* Live weather glyph inside the Places 3D stage info cards. */
+
+.atlas-stage-title-row,
+.dioramas-landmark-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.place-weather-badge {
+  --pw-accent: #c6d3e4;
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: 22px;
+  block-size: 22px;
+  border: 1px solid color-mix(in srgb, var(--pw-accent) 34%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--pw-accent) 12%, transparent);
+  color: var(--pw-accent);
+  vertical-align: middle;
+}
+
+.place-weather-glyph {
+  display: block;
+  transform-origin: center;
+}
+
+.place-weather-badge.is-clear {
+  --pw-accent: #f0be7a;
+}
+.place-weather-badge.is-partly-cloudy {
+  --pw-accent: #cdd8e8;
+}
+.place-weather-badge.is-cloudy {
+  --pw-accent: #b8c5d6;
+}
+.place-weather-badge.is-fog {
+  --pw-accent: #c3c9d4;
+}
+.place-weather-badge.is-drizzle,
+.place-weather-badge.is-rain {
+  --pw-accent: #8cc6ef;
+}
+.place-weather-badge.is-snow {
+  --pw-accent: #a9d9ed;
+}
+.place-weather-badge.is-thunderstorm {
+  --pw-accent: #c8aef0;
+}
+
+:root[data-theme="day"] .place-weather-badge.is-clear {
+  --pw-accent: #9a5a0c;
+}
+:root[data-theme="day"] .place-weather-badge.is-partly-cloudy {
+  --pw-accent: #6a5a3d;
+}
+:root[data-theme="day"] .place-weather-badge.is-cloudy {
+  --pw-accent: #4c5969;
+}
+:root[data-theme="day"] .place-weather-badge.is-fog {
+  --pw-accent: #57606d;
+}
+:root[data-theme="day"] .place-weather-badge.is-drizzle,
+:root[data-theme="day"] .place-weather-badge.is-rain {
+  --pw-accent: #1c5a86;
+}
+:root[data-theme="day"] .place-weather-badge.is-snow {
+  --pw-accent: #2e6483;
+}
+:root[data-theme="day"] .place-weather-badge.is-thunderstorm {
+  --pw-accent: #684293;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .place-weather-badge {
+    animation: place-weather-appear 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .place-weather-glyph {
+    animation: place-weather-drift 3.6s ease-in-out infinite;
+  }
+  .place-weather-badge.is-clear .place-weather-glyph {
+    animation: place-weather-turn 14s linear infinite;
+  }
+  .place-weather-badge.is-drizzle .place-weather-glyph,
+  .place-weather-badge.is-rain .place-weather-glyph {
+    animation-duration: 2.4s;
+  }
+  .place-weather-badge.is-fog .place-weather-glyph {
+    animation-name: place-weather-haze;
+  }
+  .place-weather-badge.is-thunderstorm .place-weather-glyph {
+    animation: place-weather-flash 4.2s ease-in-out infinite;
+  }
+  .place-weather-badge.is-rain::after,
+  .place-weather-badge.is-drizzle::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 5px;
+    inset-block-start: 12px;
+    inline-size: 2px;
+    block-size: 3px;
+    border-radius: 2px;
+    background: var(--pw-accent);
+    opacity: 0;
+    box-shadow: 8px 1px 0 var(--pw-accent);
+    animation: place-weather-fall 2.4s ease-in infinite;
+  }
+  .place-weather-badge.is-snow::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 6px;
+    inset-block-start: 12px;
+    inline-size: 2px;
+    block-size: 2px;
+    border-radius: 50%;
+    background: var(--pw-accent);
+    opacity: 0;
+    box-shadow: 7px 2px 0 var(--pw-accent);
+    animation: place-weather-fall 3.4s ease-in-out infinite;
+  }
+}
+
+@keyframes place-weather-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes place-weather-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+@keyframes place-weather-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes place-weather-haze {
+  0%,
+  100% {
+    transform: translateX(-1px);
+    opacity: 0.82;
+  }
+  50% {
+    transform: translateX(1px);
+    opacity: 1;
+  }
+}
+@keyframes place-weather-flash {
+  0%,
+  86%,
+  100% {
+    opacity: 0.82;
+  }
+  90% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 0.5;
+  }
+}
+@keyframes place-weather-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  35% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}

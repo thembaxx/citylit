@@ -34,7 +34,7 @@ const labels: Record<PlaceWeatherCondition, string> = {
   thunderstorm: "Thunderstorm",
 };
 
-const icons: Record<PlaceWeatherCondition, typeof Sun> = {
+export const placeWeatherIcons: Record<PlaceWeatherCondition, typeof Sun> = {
   clear: Sun,
   "partly-cloudy": CloudSun,
   cloudy: Cloud,
@@ -44,6 +44,60 @@ const icons: Record<PlaceWeatherCondition, typeof Sun> = {
   snow: CloudSnow,
   thunderstorm: CloudLightning,
 };
+
+export interface PlaceWeatherLegendEntry {
+  condition: PlaceWeatherCondition;
+  label: string;
+  /** Plain-language meaning of the glyph, written for the Weather Legend dialog. */
+  description: string;
+}
+
+/**
+ * Single source of truth for the place-card glyphs and the Weather Legend that
+ * explains them. Order matters: it is the reading order inside the dialog.
+ */
+export const placeWeatherLegend: ReadonlyArray<PlaceWeatherLegendEntry> = [
+  {
+    condition: "clear",
+    label: labels.clear,
+    description: "A sun on its own — open, sunny skies with no cloud cover.",
+  },
+  {
+    condition: "partly-cloudy",
+    label: labels["partly-cloudy"],
+    description: "The sun behind a cloud — a mix of sunshine and cloud.",
+  },
+  {
+    condition: "cloudy",
+    label: labels.cloudy,
+    description: "A cloud on its own — overcast skies with little or no sunshine.",
+  },
+  {
+    condition: "fog",
+    label: labels.fog,
+    description: "A cloud with horizontal streaks — mist or fog reducing visibility.",
+  },
+  {
+    condition: "drizzle",
+    label: labels.drizzle,
+    description: "A cloud with fine drops — light, steady drizzle.",
+  },
+  {
+    condition: "rain",
+    label: labels.rain,
+    description: "A cloud with falling drops — steady rainfall.",
+  },
+  {
+    condition: "snow",
+    label: labels.snow,
+    description: "A cloud with flakes — snowfall instead of rain.",
+  },
+  {
+    condition: "thunderstorm",
+    label: labels.thunderstorm,
+    description: "A cloud with a lightning bolt — thunder and lightning.",
+  },
+];
 
 /** WMO weather codes reported by the weather route. */
 export function conditionForWeatherCode(code: number): PlaceWeatherCondition {
@@ -121,7 +175,7 @@ export default function PlaceWeatherBadge({
   if (!weather || !hasCoords) return null;
 
   const condition = conditionForWeatherCode(weather.code);
-  const Icon = icons[condition];
+  const Icon = placeWeatherIcons[condition];
   const label = `Current weather at ${name}: ${labels[condition]}, ${weather.temp}°C`;
 
   return (

@@ -48,6 +48,7 @@ import type { StageItem } from "./CityStage";
 import { benchoAudio } from "../lib/bencho-audio";
 import DropdownSelect, { type DropdownOption } from "./ui/DropdownSelect";
 import PlaceWeatherBadge from "./PlaceWeatherBadge";
+import WeatherLegend from "./WeatherLegend";
 
 const LandmarkRing = dynamic(() => import("./LandmarkRing"), {
   ssr: false,
@@ -510,6 +511,7 @@ export default function DioramaExperience() {
                       longitude={activeLandmark.place?.coords?.[0] ?? landmarkCity?.coords[0]}
                       latitude={activeLandmark.place?.coords?.[1] ?? landmarkCity?.coords[1]}
                     />
+                    <WeatherLegend />
                   </div>
                   <div className="dioramas-landmark-stepper">
                     <button

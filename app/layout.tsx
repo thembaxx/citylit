@@ -15,6 +15,7 @@ import "./unified-design-system.css";
 import "./reference-redesign.css";
 import "./ui-polish.css";
 import "./place-weather.css";
+import "./weather-legend.css";
 import PwaProvider from "../components/PwaProvider";
 import AppStatus from "../components/AppStatus";
 import SceneCanvas from "../components/SceneCanvas";

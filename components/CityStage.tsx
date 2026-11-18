@@ -23,6 +23,7 @@ import { useKhwezi } from "./KhweziProvider";
 import AnimatedPillGroup from "./ui/AnimatedPillGroup";
 import MagneticButton from "./ui/MagneticButton";
 import PlaceWeatherBadge from "./PlaceWeatherBadge";
+import WeatherLegend from "./WeatherLegend";
 import { benchoAudio } from "../lib/bencho-audio";
 export type StageItem = {
   name: string;
@@ -210,6 +211,7 @@ export default function CityStage({
                   longitude={item.place?.coords?.[0] ?? city.coords[0]}
                   latitude={item.place?.coords?.[1] ?? city.coords[1]}
                 />
+                <WeatherLegend />
               </div>
               <p className="atlas-stage-description">{item.description}</p>
             </div>
